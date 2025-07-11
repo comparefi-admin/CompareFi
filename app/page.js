@@ -1,4 +1,6 @@
 'use client';
+import Navbar from './components/navbar';
+
 
 import { useState } from 'react';
 import { 
@@ -113,29 +115,10 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
-      <nav className="bg-white border-b border-gray-100 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-blue-800 rounded-lg flex items-center justify-center">
-                <TrendingUp className="w-5 h-5 text-white" />
-              </div>
-              <span className="text-xl font-bold text-gray-900">ComparisonFi</span>
-            </div>
-            <div className="hidden md:flex items-center space-x-8">
-              <a href="#" className="text-gray-600 hover:text-blue-600 transition-colors">Products</a>
-              <a href="#" className="text-gray-600 hover:text-blue-600 transition-colors">About</a>
-              <a href="#" className="text-gray-600 hover:text-blue-600 transition-colors">Resources</a>
-              <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                Get Started
-              </button>
-            </div>
-          </div>
-        </div>
-      </nav>
+     <Navbar />
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-blue-50 via-white to-green-50 py-20">
+      <section id="home" className="bg-gradient-to-br from-blue-50 via-white to-green-50 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -191,7 +174,7 @@ export default function HomePage() {
       </section>
 
       {/* Product Categories */}
-      <section className="py-20 bg-gray-50">
+      <section id="products"className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
@@ -239,7 +222,7 @@ export default function HomePage() {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 bg-white">
+      <section  id="about" className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
@@ -268,7 +251,7 @@ export default function HomePage() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-20 bg-gradient-to-r from-blue-50 to-green-50">
+      <section id="resources" className="py-20 bg-gradient-to-r from-blue-50 to-green-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
