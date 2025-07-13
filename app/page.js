@@ -1,6 +1,6 @@
 'use client';
 import Navbar from './components/navbar';
-
+import HeroSection from './components/hero';
 
 import { useState } from 'react';
 import { 
@@ -118,60 +118,7 @@ export default function HomePage() {
      <Navbar />
 
       {/* Hero Section */}
-      <section id="home" className="bg-gradient-to-br from-blue-50 via-white to-green-50 py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                Find the Best
-                <span className="text-blue-600"> Financial </span>
-                Products
-              </h1>
-              <p className="text-xl text-gray-600 mt-6 leading-relaxed">
-                Compare thousands of financial products in seconds. From credit cards to mortgages, 
-                we help you make smarter financial decisions with confidence.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 mt-8">
-                <button className="bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-all transform hover:scale-105 flex items-center justify-center">
-                  Start Comparing
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </button>
-                <button className="border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-lg text-lg font-semibold hover:border-blue-600 hover:text-blue-600 transition-colors">
-                  Learn More
-                </button>
-              </div>
-              <div className="flex items-center space-x-6 mt-8">
-                <div className="flex items-center">
-                  <Star className="w-5 h-5 text-yellow-400 fill-current" />
-                  <Star className="w-5 h-5 text-yellow-400 fill-current" />
-                  <Star className="w-5 h-5 text-yellow-400 fill-current" />
-                  <Star className="w-5 h-5 text-yellow-400 fill-current" />
-                  <Star className="w-5 h-5 text-yellow-400 fill-current" />
-                  <span className="ml-2 text-gray-600">4.9/5 from 10,000+ reviews</span>
-                </div>
-              </div>
-            </div>
-            <div className="relative">
-              <img 
-                src="https://images.pexels.com/photos/3760263/pexels-photo-3760263.jpeg?auto=compress&cs=tinysrgb&w=800"
-                alt="Financial planning"
-                className="rounded-2xl shadow-2xl"
-              />
-              <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-xl shadow-lg">
-                <div className="flex items-center space-x-3">
-                  <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                    <DollarSign className="w-6 h-6 text-green-600" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-600">Average Savings</p>
-                    <p className="text-2xl font-bold text-gray-900">$1,200/year</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+     <HeroSection/>
 
       {/* Product Categories */}
       <section id="products"className="py-20 bg-gray-50">
