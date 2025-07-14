@@ -1,9 +1,10 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { ArrowRight, DollarSign, Star } from 'lucide-react';
-  import { Player } from '@lottiefiles/react-lottie-player';
-  
+import React from "react";
+import Link from "next/link";
+import { ArrowRight, DollarSign, Star } from "lucide-react";
+import { Player } from "@lottiefiles/react-lottie-player";
+
 const HeroSection = () => {
   return (
     <section
@@ -32,14 +33,24 @@ const HeroSection = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-all transform hover:scale-105 flex items-center justify-center">
-                Start Comparing
+              <Link
+                href="/products"
+                className="bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-semibold
+             hover:bg-blue-700 transition-all transform hover:scale-105
+             flex items-center justify-center"
+              >
+                Start Comparing
                 <ArrowRight className="ml-2 w-5 h-5" />
-              </button>
+              </Link>
 
-              <button className="border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-lg text-lg font-semibold hover:border-blue-600 hover:text-blue-600 transition-colors">
-                Learn More
-              </button>
+              <Link
+                href="/about"
+                className="border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-lg
+             text-lg font-semibold hover:border-blue-600 hover:text-blue-600
+             transition-colors inline-flex items-center justify-center"
+              >
+                Learn More
+              </Link>
             </div>
           </div>
 
