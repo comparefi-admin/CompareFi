@@ -45,6 +45,19 @@ export default function ProductPage() {
     <div className="min-h-screen bg-white">
       <Navbar />
 
+      {/* Product Hero Section */}
+      <section id="products" className="pt-32 pb-20 px-6 bg-gradient-to-br from-blue-50 to-white">
+        <div className="max-w-4xl mx-auto text-center">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Explore Our Products</h1>
+          <p className="text-lg text-gray-700 mb-4">
+            Whether you need liquidity, leverage, or investment flexibility, CompareFi has the right product for you.
+          </p>
+          <p className="text-md text-gray-600">
+            Browse through our offerings like LAS, LAMF, and MTF to find the right fit for your financial goals.
+          </p>
+        </div>
+      </section>
+
       {/* Product Sections */}
       {products.map(({ id, name, icon: Icon, description, image }) => (
         <section id={id} key={id} className="py-20 px-6 bg-gray-50 border-b">

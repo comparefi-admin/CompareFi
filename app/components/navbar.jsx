@@ -5,29 +5,29 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Home, CreditCard, Shield, Mail } from 'lucide-react';
 
-/* ------------------------------------------------------------------ */
-/* NAV ITEMS                                                          */
-/* ------------------------------------------------------------------ */
+/* ------------------------------------------------------------------
+  NAV ITEMS
+-------------------------------------------------------------------*/
 const navItems = [
   {
     baseLabel: 'Home',
-    path: '/',                 // homepage
+    path: '/',
     icon: Home,
     dropdown: [
-      { label: 'Hero',             hash: '#hero' },
-      { label: 'Featured Products',hash: '#featured' },
-      { label: 'Contact Info',     hash: '#contact' },
+      { label: 'Home', hash: '#hero' },
+      { label: 'Featured Products', hash: '#featured' },
+      { label: 'Contact Info', hash: '#contact' },
     ],
   },
   {
     baseLabel: 'Products',
-    path: '/products',         // products page
+    path: '/products',
     icon: CreditCard,
-    dropdown: [
-      { label: 'LAS',  hash: '#las' },
-      { label: 'LAMF', hash: '#lamf' },
-      { label: 'MTF',  hash: '#mtf' },
-    ],
+   dropdown: [
+    { label: 'LAS',      hash: '#las' },
+    { label: 'LAMF',     hash: '#lamf' },
+    { label: 'MTF',      hash: '#mtf' },
+  ],
   },
   {
     baseLabel: 'About',
@@ -35,7 +35,7 @@ const navItems = [
     icon: Shield,
     dropdown: [
       { label: 'Story', hash: '#story' },
-      { label: 'Team',  hash: '#team' },
+      { label: 'Team', hash: '#team' },
     ],
   },
   {
@@ -43,13 +43,15 @@ const navItems = [
     path: '/contact',
     icon: Mail,
     dropdown: [
-      { label: 'Support',   hash: '#support' },
+      { label: 'Support', hash: '#support' },
       { label: 'Locations', hash: '#locations' },
     ],
   },
 ];
 
-/* Smooth‑scroll when landing on a hash ---------------------------------- */
+/* ------------------------------------------------------------------
+  HOOKS
+-------------------------------------------------------------------*/
 function useSmoothHashScroll() {
   const pathname = usePathname();
   useEffect(() => {
@@ -64,16 +66,47 @@ function useSmoothHashScroll() {
   }, [pathname]);
 }
 
-/* ------------------------------------------------------------------ */
-/* NAVBAR COMPONENT                                                   */
-/* ------------------------------------------------------------------ */
+function useScrollSpy(sectionIds) {
+  const [activeId, setActiveId] = useState(null);
+
+  useEffect(() => {
+    if (!sectionIds.length) return;
+    const els = sectionIds.map((id) => document.getElementById(id)).filter(Boolean);
+    if (!els.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible) setActiveId(visible.target.id);
+      },
+      { rootMargin: '-40% 0px -50% 0px', threshold: 0 }
+    );
+
+    els.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, [sectionIds]);
+
+  return activeId;
+}
+
+/* ------------------------------------------------------------------
+  NAVBAR COMPONENT
+-------------------------------------------------------------------*/
 export default function Navbar() {
   const pathname = usePathname();
-  const [dynamicLabels, setDynamicLabels] = useState({});
+  const [clickLabels, setClickLabels] = useState({});
   const [isScrolled, setIsScrolled] = useState(false);
 
+  /* smooth hash landing */
   useSmoothHashScroll();
 
+  /* scroll‑spy active section */
+  const allIds = navItems.flatMap((n) => n.dropdown?.map((d) => d.hash.slice(1)) ?? []);
+  const activeSection = useScrollSpy(allIds);
+
+  /* shadow */
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 50);
     onScroll();
@@ -81,47 +114,42 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  /* helpers */
-  const resetLabel = (path) => setDynamicLabels((p) => ({ ...p, [path]: undefined }));
-  const setLabel   = (path, lbl) => setDynamicLabels((p) => ({ ...p, [path]: lbl }));
+  const setLabel = (path, lbl) => setClickLabels((p) => ({ ...p, [path]: lbl }));
+  const resetLabel = (path) => setClickLabels((p) => ({ ...p, [path]: undefined }));
 
   return (
     <nav
-      className={`fixed top-6 left-1/2 -translate-x-1/2 z-50 rounded-full border px-6 py-3
-                 transition-all duration-300
-                 ${isScrolled
-                   ? 'bg-white/70 backdrop-blur-sm shadow-md border-gray-200'
-                   : 'bg-white/60 backdrop-blur-md border-gray-100'}`}
+      className={`fixed top-6 left-1/2 -translate-x-1/2 z-50 rounded-full border px-6 py-3 transition-all duration-300 ${
+        isScrolled ? 'bg-white/70 backdrop-blur-sm shadow-md border-gray-200' : 'bg-white/60 backdrop-blur-md border-gray-100'
+      }`}
     >
       <ul className="hidden md:flex items-center space-x-2">
         {navItems.map((item) => {
           const Icon = item.icon;
-          const isActive = pathname === item.path;
-          const label = dynamicLabels[item.path] || item.baseLabel;
+          const isActivePage = pathname === item.path;
+
+          /* decide label: scrollSpy overrides click label */
+          let label = clickLabels[item.path] || item.baseLabel;
+          if (isActivePage && item.dropdown) {
+            const match = item.dropdown.find((d) => d.hash.slice(1) === activeSection);
+            if (match) label = match.label;
+          }
 
           return (
             <li key={item.baseLabel} className="relative group">
-              {/* Trigger */}
               <Link
                 href={item.path}
                 onClick={() => resetLabel(item.path)}
-                className={`px-4 py-2 rounded-full flex items-center space-x-2 transition
-                            ${isActive
-                              ? 'bg-gray-900 text-white'
-                              : 'text-gray-600 hover:bg-gray-100 hover:text-black'}`}
+                className={`px-4 py-2 rounded-full flex items-center space-x-2 transition ${
+                  isActivePage ? 'bg-gray-900 text-white' : 'text-gray-600 hover:bg-gray-100 hover:text-black'
+                }`}
               >
-                <Icon size={16} className={isActive ? 'text-white' : 'text-gray-400 group-hover:text-black'} />
+                <Icon size={16} className={isActivePage ? 'text-white' : 'text-gray-400 group-hover:text-black'} />
                 <span className="text-sm font-medium tracking-wide">{label}</span>
               </Link>
 
-              {/* Dropdown */}
               {item.dropdown && (
-                <ul
-                  className="absolute top-full left-1/2 -translate-x-1/2 mt-1
-                             hidden group-hover:block group-focus-within:block
-                             bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700
-                             rounded-xl shadow-lg p-2 space-y-1"
-                >
+                <ul className="absolute top-full left-1/2 -translate-x-1/2 mt-1 hidden group-hover:block group-focus-within:block bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 rounded-xl shadow-lg p-2 space-y-1">
                   {item.dropdown.map((sub) => {
                     const href = `${item.path}${sub.hash}`;
                     return (
@@ -130,7 +158,7 @@ export default function Navbar() {
                         href={href}
                         prefetch={false}
                         onClick={(e) => {
-                          if (pathname === item.path && typeof window !== 'undefined') {
+                          if (isActivePage && typeof window !== 'undefined') {
                             e.preventDefault();
                             setLabel(item.path, sub.label);
                             const el = document.querySelector(sub.hash);
@@ -139,13 +167,10 @@ export default function Navbar() {
                               el.scrollIntoView({ behavior: 'smooth' });
                             }
                           } else {
-                            /* navigating away; label will show after navigation */
                             setLabel(item.path, sub.label);
                           }
                         }}
-                        className="block whitespace-nowrap px-4 py-2 text-sm rounded-lg
-                                   text-gray-700 dark:text-gray-300
-                                   hover:bg-gray-100 dark:hover:bg-zinc-800"
+                        className="block whitespace-nowrap px-4 py-2 text-sm rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-zinc-800"
                       >
                         {sub.label}
                       </Link>
