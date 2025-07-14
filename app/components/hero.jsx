@@ -3,7 +3,6 @@
 import React from "react";
 import Link from "next/link";
 import { ArrowRight, DollarSign, Star } from "lucide-react";
-import { Player } from "@lottiefiles/react-lottie-player";
 
 const HeroSection = () => {
   return (
