@@ -5,9 +5,6 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Home, CreditCard, Shield, Mail } from 'lucide-react';
 
-/* ------------------------------------------------------------------
-  NAV ITEMS
--------------------------------------------------------------------*/
 const navItems = [
   {
     baseLabel: 'Home',
@@ -23,11 +20,11 @@ const navItems = [
     baseLabel: 'Products',
     path: '/products',
     icon: CreditCard,
-   dropdown: [
-    { label: 'LAS',      hash: '#las' },
-    { label: 'LAMF',     hash: '#lamf' },
-    { label: 'MTF',      hash: '#mtf' },
-  ],
+    dropdown: [
+      { label: 'LAS', hash: '#las' },
+      { label: 'LAMF', hash: '#lamf' },
+      { label: 'MTF', hash: '#mtf' },
+    ],
   },
   {
     baseLabel: 'About',
@@ -49,9 +46,6 @@ const navItems = [
   },
 ];
 
-/* ------------------------------------------------------------------
-  HOOKS
--------------------------------------------------------------------*/
 function useSmoothHashScroll() {
   const pathname = usePathname();
   useEffect(() => {
@@ -91,22 +85,17 @@ function useScrollSpy(sectionIds) {
   return activeId;
 }
 
-/* ------------------------------------------------------------------
-  NAVBAR COMPONENT
--------------------------------------------------------------------*/
 export default function Navbar() {
   const pathname = usePathname();
   const [clickLabels, setClickLabels] = useState({});
   const [isScrolled, setIsScrolled] = useState(false);
+  const isHomePage = pathname === '/';
 
-  /* smooth hash landing */
   useSmoothHashScroll();
 
-  /* scroll‑spy active section */
   const allIds = navItems.flatMap((n) => n.dropdown?.map((d) => d.hash.slice(1)) ?? []);
   const activeSection = useScrollSpy(allIds);
 
-  /* shadow */
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 50);
     onScroll();
@@ -116,6 +105,12 @@ export default function Navbar() {
 
   const setLabel = (path, lbl) => setClickLabels((p) => ({ ...p, [path]: lbl }));
   const resetLabel = (path) => setClickLabels((p) => ({ ...p, [path]: undefined }));
+
+  // 🔁 Map homepage section IDs to nav items (your main logic)
+  const homepageSectionToNavItem = {
+    featured: 'Products',
+    contact: 'Contact',
+  };
 
   return (
     <nav
@@ -127,24 +122,27 @@ export default function Navbar() {
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActivePage = pathname === item.path;
+          const labelMatch = item.dropdown?.find((d) => d.hash.slice(1) === activeSection);
+          const label = clickLabels[item.path] || (labelMatch?.label ?? item.baseLabel);
 
-          /* decide label: scrollSpy overrides click label */
-          let label = clickLabels[item.path] || item.baseLabel;
-          if (isActivePage && item.dropdown) {
-            const match = item.dropdown.find((d) => d.hash.slice(1) === activeSection);
-            if (match) label = match.label;
-          }
+          // ✅ Check if this navItem should glow based on homepage scroll
+          const shouldHighlight =
+            isHomePage && homepageSectionToNavItem[activeSection] === item.baseLabel;
 
           return (
             <li key={item.baseLabel} className="relative group">
               <Link
                 href={item.path}
                 onClick={() => resetLabel(item.path)}
-                className={`px-4 py-2 rounded-full flex items-center space-x-2 transition ${
-                  isActivePage ? 'bg-gray-900 text-white' : 'text-gray-600 hover:bg-gray-100 hover:text-black'
-                }`}
+                className={`px-4 py-2 rounded-full flex items-center space-x-2 transition
+                  ${isActivePage ? 'bg-gray-900 text-white' : 'text-gray-600 hover:bg-gray-100 hover:text-black'}
+                  ${shouldHighlight ? 'ring-2 ring-blue-300 ring-offset-2' : ''}
+                `}
               >
-                <Icon size={16} className={isActivePage ? 'text-white' : 'text-gray-400 group-hover:text-black'} />
+                <Icon
+                  size={16}
+                  className={isActivePage ? 'text-white' : 'text-gray-400 group-hover:text-black'}
+                />
                 <span className="text-sm font-medium tracking-wide">{label}</span>
               </Link>
 
