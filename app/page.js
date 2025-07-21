@@ -39,7 +39,7 @@ export default function HomePage() {
 
   return (
     <div
-      className="min-h-screen text-black"
+      className="min-h-screen text-black pt-10"
       style={{
         backgroundColor: '#ebebeb',
         backgroundImage: 'url("https://www.transparenttextures.com/patterns/az-subtle.png")',
@@ -47,7 +47,7 @@ export default function HomePage() {
     >
       <Navbar />
 
-      <section id="hero" className={`py-20 mx-4 my-10 ${glassSection}`}>
+      <section id="hero" className={`py-20 mx-4 mb-10 ${glassSection}`}>
         <HeroSection />
       </section>
 
