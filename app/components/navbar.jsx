@@ -106,7 +106,6 @@ export default function Navbar() {
   const setLabel = (path, lbl) => setClickLabels((p) => ({ ...p, [path]: lbl }));
   const resetLabel = (path) => setClickLabels((p) => ({ ...p, [path]: undefined }));
 
-  // 🔁 Map homepage section IDs to nav items (your main logic)
   const homepageSectionToNavItem = {
     featured: 'Products',
     contact: 'Contact',
@@ -115,7 +114,9 @@ export default function Navbar() {
   return (
     <nav
       className={`fixed top-6 left-1/2 -translate-x-1/2 z-50 rounded-full border px-6 py-3 transition-all duration-300 ${
-        isScrolled ? 'bg-white/70 backdrop-blur-sm shadow-md border-gray-200' : 'bg-white/60 backdrop-blur-md border-gray-100'
+        isScrolled
+          ? 'bg-white/70 backdrop-blur-sm shadow-md border-gray-200'
+          : 'bg-white/60 backdrop-blur-md border-gray-100'
       }`}
     >
       <ul className="hidden md:flex items-center space-x-2">
@@ -123,9 +124,16 @@ export default function Navbar() {
           const Icon = item.icon;
           const isActivePage = pathname === item.path;
           const labelMatch = item.dropdown?.find((d) => d.hash.slice(1) === activeSection);
-          const label = clickLabels[item.path] || (labelMatch?.label ?? item.baseLabel);
 
-          // ✅ Check if this navItem should glow based on homepage scroll
+          let label;
+
+          // 🛠 Fix: keep Home static if on Home page
+          if (item.baseLabel === 'Home' && isHomePage) {
+            label = 'Home';
+          } else {
+            label = clickLabels[item.path] || (labelMatch?.label ?? item.baseLabel);
+          }
+
           const shouldHighlight =
             isHomePage && homepageSectionToNavItem[activeSection] === item.baseLabel;
 
@@ -135,8 +143,8 @@ export default function Navbar() {
                 href={item.path}
                 onClick={() => resetLabel(item.path)}
                 className={`px-4 py-2 rounded-full flex items-center space-x-2 transition
-                  ${isActivePage ? 'bg-gray-900 text-white' : 'text-gray-600 hover:bg-gray-100 hover:text-black'}
-                  ${shouldHighlight ? 'ring-2 ring-blue-300 ring-offset-2' : ''}
+                  ${isActivePage ? 'bg-gray-900 text-white' : 'text-gray-820 hover:bg-gray-100 hover:text-black'}
+                  ${shouldHighlight ? 'ring-2 ring-blue-900 bg-gray-300 text-gray-900 ring-offset-2' : ''}
                 `}
               >
                 <Icon
