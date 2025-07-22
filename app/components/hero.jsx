@@ -1,19 +1,21 @@
 "use client";
-
 import React from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import "./HeroSection.css"
 
 const HeroSection = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
       {/* Grid layout */}
-      <div className="grid lg:grid-cols-2 gap-14 items-center">
+      <div className="grid lg:grid-cols-2 gap-14 items-center" >
         {/* ==== LEFT : Branding & CTA ==== */}
-        <div className="space-y-8">
-          <h1 className="text-5xl lg:text-6xl font-extrabold text-black leading-tight">
+        <div className="space-y-8" class="special-card">
+          <div class="special-card">
+            <h1 className="text-5xl lg:text-6xl font-extrabold text-black leading-tight">
             Compare<span className="text-blue-400">Fi</span>
           </h1>
+          </div>
 
           <p className="text-2xl lg:text-3xl font-medium text-black/90">
             Your shortcut to{" "}
@@ -50,18 +52,20 @@ const HeroSection = () => {
         </div>
 
         {/* ==== RIGHT : Animation ==== */}
-        <div className="relative">
-          <video
-            src="/hero-animation.mp4"
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="w-full rounded-2xl shadow-2xl"
-          />
-          <div className="absolute inset-0 -z-10 bg-blue-200 rounded-2xl blur-3xl opacity-20" />
+        <div className="flex justify-center items-center relative">
+          <div class="special-card">
+            </div>
+          <div class="honeycomb">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div> 
         </div>
-      </div>
+    </div>
     </div>
   );
 };

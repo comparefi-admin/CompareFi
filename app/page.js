@@ -4,7 +4,7 @@ import React from 'react';
 import Navbar from './components/navbar';
 import Footer from './components/footer';
 import HeroSection from './components/hero';
-
+import "./components/hero.css";
 import {
   Shield, TrendingUp, CreditCard,
   Briefcase, LineChart, BarChart3
@@ -35,19 +35,19 @@ export default function HomePage() {
     },
   ];
 
-  const glassSection = "backdrop-blur-lg bg-white/10 border border-white/30 shadow-xl rounded-2xl";
+  const glassSection = "backdrop-blur-lg bg-white/10 border border-white/30 shadow-xl rounded-3xl transparency-50%";
 
   return (
     <div
       className="min-h-screen text-black pt-10"
       style={{
-        backgroundColor: '#ebebeb',
-        backgroundImage: 'url("https://www.transparenttextures.com/patterns/az-subtle.png")',
+        backgroundColor: '#d4d2d2',
+        backgroundImage: 'url("https://www.transparenttextures.com/patterns/black-linen.png")',
       }}
     >
       <Navbar />
 
-      <section id="hero" className={`py-20 mx-4 mb-10 ${glassSection}`}>
+      <section id="hero" className={`py-20 mx-4 mb-10 ${glassSection}`} class="special-card">
         <HeroSection />
       </section>
 
