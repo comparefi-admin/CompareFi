@@ -1,27 +1,87 @@
-.special-card {
-  box-sizing: border-box;
-  width: auto;
-  height: auto;
-  padding: 15px;
-  background: rgba(255, 255, 255, 0.58);
-  border: 1px solid white;
-  box-shadow: 12px 17px 51px rgba(0, 0, 0, 0.22);
-  backdrop-filter: blur(6px);
-  border-radius: 17px;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.5s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  user-select: none;
-  font-weight: bolder;
-  color: black;
+/* ================================================
+   Animated Background + Glass Frost Shimmer
+================================================== */
+
+.animated-bg {
+  position: relative;
+  min-height: 100vh;
+  background: radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.15), transparent 40%),
+              radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.1), transparent 40%),
+              linear-gradient(135deg, #e6effa, #dfeaf3);
+  background-size: cover;
+  background-attachment: fixed;
+  overflow: hidden;
 }
-.special-card:hover {
-  border: 1px solid black;
-  transform: scale(1.05);
+
+.animated-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("https://www.transparenttextures.com/patterns/foggy-birds.png");
+  opacity: 0.15;
+  animation: moveNoise 20s linear infinite;
+  z-index: 0;
 }
-.special-card:active {
-  transform: scale(0.95) rotateZ(1.7deg);
+
+@keyframes moveNoise {
+  0% {
+    transform: translate(0%, 0%);
+  }
+  100% {
+    transform: translate(10%, 10%);
+  }
+}
+
+.animated-bg > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ================================================
+   Glassmorphic Card with Shimmer Animation
+================================================== */
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.glass-card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(25deg);
+  animation: shimmer 4s linear infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: rotate(25deg) translate(-100%, -100%);
+  }
+  100% {
+    transform: rotate(25deg) translate(100%, 100%);
+  }
+}
+
+nav {
+  position: fixed !important;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10000;
 }
