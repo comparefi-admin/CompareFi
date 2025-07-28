@@ -9,6 +9,8 @@ import {
   BarChart3,
   CheckCircle,
 } from 'lucide-react';
+import Link from "next/link";
+
 
 export default function ProductPage() {
   const products = [
@@ -77,12 +79,18 @@ export default function ProductPage() {
                 <h2 className="text-3xl font-bold text-gray-900">{name}</h2>
               </div>
               <p className="text-lg text-gray-700 mb-6">{description}</p>
-              <a
-                href="#"
-                className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
-              >
+              
+              <Link
+                    href="/products/LAS"
+                    className=" transition-all transform hover:scale-105 flex items-center justify-center"
+                  >
+                    
+                
                 Explore {name.split('(')[0].trim()}
-              </a>
+              
+                  </Link>
+
+              
             </div>
           </div>
         </section>
