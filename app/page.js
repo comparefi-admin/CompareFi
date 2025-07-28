@@ -57,9 +57,11 @@ export default function HomePage() {
             <div className="grid lg:grid-cols-2 gap-14 items-center">
               {/* LEFT */}
               <div className="space-y-6">
+                <div className='frosty-box'>
                 <h1 className="text-5xl lg:text-6xl font-extrabold text-black leading-tight">
                   Compare<span className="text-blue-400">Fi</span>
                 </h1>
+                </div>
                 <p className="text-2xl lg:text-3xl font-medium text-black/90">
                   Your shortcut to{' '}
                   <span className="text-green-400 font-semibold">
@@ -73,10 +75,23 @@ export default function HomePage() {
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Link
                     href="/products"
-                    className="bg-blue-600 text-black px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-all transform hover:scale-105 flex items-center justify-center"
+                    className=" transition-all transform hover:scale-105 flex items-center justify-center"
                   >
-                    Start Comparing
-                    <ArrowRight className="ml-2 w-5 h-5" />
+                    <button class="animated-button">
+                      <svg viewBox="0 0 24 24" class="arr-2" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
+                        ></path>
+                      </svg>
+                      <span class="text">Modern Button</span>
+                      <span class="circle"></span>
+                      <svg viewBox="0 0 24 24" class="arr-1" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
+                        ></path>
+                      </svg>
+                    </button>
+
                   </Link>
                   <Link
                     href="/about"
