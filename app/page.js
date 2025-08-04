@@ -5,7 +5,6 @@ import Link from 'next/link';
 import Navbar from './components/navbar';
 import Footer from './components/footer';
 import {
-  ArrowRight,
   Shield,
   TrendingUp,
   CreditCard,
@@ -57,10 +56,10 @@ export default function HomePage() {
             <div className="grid lg:grid-cols-2 gap-14 items-center">
               {/* LEFT */}
               <div className="space-y-6">
-                <div className='frosty-box'>
-                <h1 className="text-5xl lg:text-6xl font-extrabold text-black leading-tight">
-                  Compare<span className="text-blue-400">Fi</span>
-                </h1>
+                <div className="frosty-box">
+                  <h1 className="text-5xl lg:text-6xl font-extrabold text-black leading-tight">
+                    Compare<span className="text-blue-400">Fi</span>
+                  </h1>
                 </div>
                 <p className="text-2xl lg:text-3xl font-medium text-black/90">
                   Your shortcut to{' '}
@@ -75,23 +74,18 @@ export default function HomePage() {
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Link
                     href="/products"
-                    className=" transition-all transform hover:scale-105 flex items-center justify-center"
+                    className="transition-all transform hover:scale-105 flex items-center justify-center"
                   >
-                    <button class="animated-button">
-                      <svg viewBox="0 0 24 24" class="arr-2" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                          d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
-                        ></path>
+                    <button className="animated-button">
+                      <svg viewBox="0 0 24 24" className="arr-2" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
                       </svg>
-                      <span class="text">Modern Button</span>
-                      <span class="circle"></span>
-                      <svg viewBox="0 0 24 24" class="arr-1" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                          d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
-                        ></path>
+                      <span className="text">Modern Button</span>
+                      <span className="circle"></span>
+                      <svg viewBox="0 0 24 24" className="arr-1" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
                       </svg>
                     </button>
-
                   </Link>
                   <Link
                     href="/about"
@@ -102,11 +96,19 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* RIGHT */}
+              {/* RIGHT - Floating Video */}
               <div className="flex justify-center items-center relative min-h-[300px]">
-                <div className="honeycomb">
-                  <div></div><div></div><div></div>
-                  <div></div><div></div><div></div><div></div>
+                <div className="rounded-2xl overflow-hidden shadow-xl transform hover:scale-105 transition-all duration-500 w-full max-w-md">
+                  <video
+                    className="w-full h-full object-cover"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                  >
+                    <source src="/videos/Video_Generation_Without_Finance.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
                 </div>
               </div>
             </div>
