@@ -40,9 +40,12 @@ export default function HomePage() {
       {/* Subtle Grain */}
       <div className="absolute inset-0 pointer-events-none bg-[url('/textures/grain.png')] opacity-[0.15] mix-blend-overlay"></div>
 
-      {/* Floating pastel gradients */}
+      {/* Floating pastel gradients — aesthetic distribution */}
       <div className="absolute -top-40 -left-40 w-96 h-96 bg-pink-300/40 rounded-full blur-[160px]"></div>
-      <div className="absolute bottom-0 right-0 w-[30rem] h-[30rem] bg-teal-200/40 rounded-full blur-[160px]"></div>
+      <div className="absolute -top-80 -right-10 w-96 h-96 bg-pink-300/40 rounded-full blur-[160px]"></div>
+{/* Floating pastel gradients — refined balanced layout */}
+      <div className="absolute bottom-[50%] right-[4.5%] w-[24rem] h-[24rem] bg-[#FFB347]/30 rounded-full blur-[160px]"></div>
+
 
       {/* Navbar */}
       <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-[9999] w-full max-w-screen-xl px-4 pt-4">
@@ -56,21 +59,21 @@ export default function HomePage() {
             {/* LEFT */}
             <div className="space-y-8">
               <p
-                className={`${satisfy.className} text-2xl text-pink-500 opacity-0 animate-fadeInUp`}
+                className={`${satisfy.className} text-2xl text-[#FF6F91] opacity-0 animate-fadeInUp`}
                 style={{ animationDelay: '0.05s' }}
               >
                 Your story, your numbers.
               </p>
 
               <h2
-                className={`${playfair.className} text-4xl md:text-5xl text-gray-800 tracking-wide opacity-0 animate-fadeInUp`}
+                className={`${playfair.className} text-4xl md:text-5xl text-gray-800 tracking-wide leading-snug opacity-0 animate-fadeInUp`}
                 style={{ animationDelay: '0.15s' }}
               >
-                Your journey to financial clarity begins here
+                Your journey to <span className="text-[#0ABAB5]">financial clarity</span> begins here
               </h2>
 
               <h1
-                className={`${playfair.className} text-6xl lg:text-7xl font-bold leading-tight text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-teal-500 to-purple-500 opacity-0 animate-fadeInUp`}
+                className={`${playfair.className} text-6xl lg:text-7xl font-bold leading-tight text-transparent bg-clip-text bg-gradient-to-r from-[#FF6F91] via-[#0ABAB5] to-[#C3B1E1] opacity-0 animate-fadeInUp`}
                 style={{ animationDelay: '0.3s' }}
               >
                 CompareFi
@@ -81,9 +84,9 @@ export default function HomePage() {
                 style={{ animationDelay: '0.45s' }}
               >
                 Imagine a world where{' '}
-                <span className="font-semibold text-teal-600">every decision</span> you make about your money feels clear, confident, and rewarding.
+                <span className="font-semibold text-[#0ABAB5]">every decision</span> you make about your money feels clear, confident, and rewarding.
                 That’s what we bring to your screen —{' '}
-                <span className="underline decoration-pink-400">every single day</span>.
+                <span className="underline decoration-[#FF6F91]">every single day</span>.
               </p>
 
               <p
@@ -98,14 +101,14 @@ export default function HomePage() {
                 style={{ animationDelay: '0.75s' }}
               >
                 <Link href="/products" className="transition-all transform hover:scale-105 hover:shadow-lg">
-                  <button className="animated-button hover-glow bg-gradient-to-r from-pink-400 to-teal-400 text-white">
+                  <button className="animated-button hover-glow bg-gradient-to-r text-white">
                     <span className="text">Get Started</span>
                     <span className="circle"></span>
                   </button>
                 </Link>
                 <Link
                   href="/about"
-                  className="border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-lg text-lg font-semibold hover:border-pink-400 hover:text-pink-500 transition-all hover:scale-105"
+                  className="border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-lg text-lg font-semibold hover:border-[#FF6F91] hover:text-[#FF6F91] transition-all hover:scale-105"
                 >
                   Learn More
                 </Link>
@@ -136,8 +139,8 @@ export default function HomePage() {
                   key={name}
                   className="bg-white/40 backdrop-blur-md border border-white/30 rounded-xl shadow-md p-6 hover:shadow-xl hover:scale-105 transition-all duration-300 text-gray-800"
                 >
-                  <div className="w-14 h-14 bg-teal-200/40 rounded-full flex items-center justify-center mb-4 inner-glow">
-                    <Icon className="w-6 h-6 text-teal-600" />
+                  <div className="w-14 h-14 bg-[#0ABAB5]/40 rounded-full flex items-center justify-center mb-4 inner-glow">
+                    <Icon className="w-6 h-6 text-[#0ABAB5]" />
                   </div>
                   <h3 className={`${inter.className} text-xl font-semibold mb-2`}>{name}</h3>
                   <p className="text-gray-700">{description}</p>
@@ -160,8 +163,8 @@ export default function HomePage() {
                   key={title}
                   className="flex flex-col items-center text-center hover:scale-105 transition-all duration-300"
                 >
-                  <div className="w-14 h-14 bg-pink-200/50 rounded-full flex items-center justify-center mb-4 inner-glow">
-                    <Icon className="w-6 h-6 text-pink-600" />
+                  <div className="w-14 h-14 bg-[#FF6F91]/50 rounded-full flex items-center justify-center mb-4 inner-glow">
+                    <Icon className="w-6 h-6 text-[#FF6F91]" />
                   </div>
                   <h3 className={`${inter.className} text-xl font-semibold mb-2 text-gray-800`}>{title}</h3>
                   <p className="text-gray-600">{description}</p>
