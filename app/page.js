@@ -100,8 +100,8 @@ export default function HomePage() {
                 className="flex flex-col sm:flex-row gap-4 pt-4 opacity-0 animate-fadeInUp"
                 style={{ animationDelay: '0.75s' }}
               >
-                <Link href="/products" className="transition-all transform hover:scale-105 hover:shadow-lg">
-                  <button className="animated-button hover-glow bg-gradient-to-r text-white">
+                <Link href="/products">
+                  <button className="animated-button">
                     <span className="text">Get Started</span>
                     <span className="circle"></span>
                   </button>
