@@ -1,9 +1,10 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from '../../components/navbar';
 import Footer from '../../components/footer';
 import { Playfair_Display, Inter, Satisfy } from 'next/font/google';
+import { ArrowUpDown } from 'lucide-react';
 
 // Fonts
 const playfair = Playfair_Display({ weight: ['400','700'], subsets: ['latin'] });
@@ -14,10 +15,66 @@ const satisfy = Satisfy({ weight: ['400'], subsets: ['latin'] });
 import { data } from './data';
 
 export default function LASPage() {
+  const [sortField, setSortField] = useState(null);
+  const [sortOrder, setSortOrder] = useState('asc');
+
+  const handleSort = (field) => {
+    if (sortField === field) {
+      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+    } else {
+      setSortField(field);
+      setSortOrder('asc');
+    }
+  };
+
+  const sortedData = [...data].sort((a, b) => {
+    if (!sortField) return 0;
+
+    const clean = (val) => {
+      if (typeof val === 'string') {
+        return parseFloat(val.replace(/[₹,%]/g, '')) || val;
+      }
+      return val;
+    };
+
+    let valA = clean(a[sortField]);
+    let valB = clean(b[sortField]);
+
+    if (typeof valA === 'number' && typeof valB === 'number') {
+      return sortOrder === 'asc' ? valA - valB : valB - valA;
+    }
+    return sortOrder === 'asc'
+      ? String(valA).localeCompare(String(valB))
+      : String(valB).localeCompare(String(valA));
+  });
+
+  const renderHeader = (headers) => (
+    <tr className="bg-gray-100/80 text-gray-700">
+      {headers.map((h) => (
+        <th
+          key={h.key}
+          className="px-4 py-3 font-semibold select-none"
+        >
+          <div className="flex items-center gap-1">
+            {h.label}
+            <button
+              onClick={() => handleSort(h.key)}
+              className="inline-flex items-center text-gray-500 hover:text-gray-800"
+            >
+              <ArrowUpDown size={14} />
+            </button>
+            {sortField === h.key && (
+              <span className="text-xs">{sortOrder === 'asc' ? '▲' : '▼'}</span>
+            )}
+          </div>
+        </th>
+      ))}
+    </tr>
+  );
+
   return (
     <div className="relative bg-gradient-to-b from-[#fdfdfd] via-[#f8f9fa] to-[#f0f2f5] min-h-screen text-gray-900 overflow-hidden">
-      
-      {/* Background grain + pastel blobs */}
+      {/* Background */}
       <div className="absolute inset-0 bg-[url('/textures/grain.png')] opacity-10 mix-blend-overlay pointer-events-none"></div>
       <div className="absolute -top-40 left-10 w-96 h-96 bg-pink-300/30 rounded-full blur-[160px]"></div>
       <div className="absolute top-1/3 -right-20 w-96 h-96 bg-[#0ABAB5]/25 rounded-full blur-[160px]"></div>
@@ -39,15 +96,17 @@ export default function LASPage() {
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse rounded-xl overflow-hidden">
               <thead>
-                <tr className="bg-gray-100/80 text-gray-700">
-                  {['Institution','Approved Stocks','Tenure','Loan Range','Min Rate'].map((h,i)=>(
-                    <th key={i} className="px-4 py-3 font-semibold">{h}</th>
-                  ))}
-                </tr>
+                {renderHeader([
+                  { key: 'name', label: 'Institution' },
+                  { key: 'approvedStocks', label: 'Approved Stocks' },
+                  { key: 'tenure', label: 'Tenure' },
+                  { key: 'loanRange', label: 'Loan Range' },
+                  { key: 'minRate', label: 'Min Rate' },
+                ])}
               </thead>
               <tbody>
-                {data.map((item, idx)=>(
-                  <tr key={idx} className={`transition hover:bg-[#0ABAB5]/10 ${idx%2===0 ? 'bg-white/70' : 'bg-gray-50/60'}`}>
+                {sortedData.map((item, idx) => (
+                  <tr key={idx} className={`transition hover:bg-[#0ABAB5]/10 ${idx % 2 === 0 ? 'bg-white/70' : 'bg-gray-50/60'}`}>
                     <td className="px-4 py-3 font-semibold text-gray-800">{item.name}</td>
                     <td className="px-4 py-3">{item.approvedStocks}</td>
                     <td className="px-4 py-3">{item.tenure}</td>
@@ -69,15 +128,20 @@ export default function LASPage() {
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse rounded-xl overflow-hidden">
               <thead>
-                <tr className="bg-gray-100/80 text-gray-700">
-                  {['Institution','Max Rate','Median Rate','Processing Fee','Renewal Fee','Penal Charges','1st Year Cost','2nd Year Cost'].map((h,i)=>(
-                    <th key={i} className="px-4 py-3 font-semibold">{h}</th>
-                  ))}
-                </tr>
+                {renderHeader([
+                  { key: 'name', label: 'Institution' },
+                  { key: 'maxRate', label: 'Max Rate' },
+                  { key: 'medianRate', label: 'Median Rate' },
+                  { key: 'processingFee', label: 'Processing Fee' },
+                  { key: 'renewalFee', label: 'Renewal Fee' },
+                  { key: 'penalCharges', label: 'Penal Charges' },
+                  { key: 'firstYearPercent', label: '1st Year Cost' },
+                  { key: 'secondYearPercent', label: '2nd Year Cost' },
+                ])}
               </thead>
               <tbody>
-                {data.map((item, idx)=>(
-                  <tr key={idx} className={`transition hover:bg-[#FF6F91]/10 ${idx%2===0 ? 'bg-white/70' : 'bg-gray-50/60'}`}>
+                {sortedData.map((item, idx) => (
+                  <tr key={idx} className={`transition hover:bg-[#FF6F91]/10 ${idx % 2 === 0 ? 'bg-white/70' : 'bg-gray-50/60'}`}>
                     <td className="px-4 py-3 font-semibold text-gray-800">{item.name}</td>
                     <td className="px-4 py-3">{item.maxRate}</td>
                     <td className="px-4 py-3">{item.medianRate}</td>
@@ -102,15 +166,17 @@ export default function LASPage() {
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse rounded-xl overflow-hidden">
               <thead>
-                <tr className="bg-gray-100/80 text-gray-700">
-                  {['Institution','LTV Min','Turnaround','Digital Process','Rating'].map((h,i)=>(
-                    <th key={i} className="px-4 py-3 font-semibold">{h}</th>
-                  ))}
-                </tr>
+                {renderHeader([
+                  { key: 'name', label: 'Institution' },
+                  { key: 'ltvMin', label: 'LTV Min' },
+                  { key: 'turnaround', label: 'Turnaround' },
+                  { key: 'digitalProcess', label: 'Digital Process' },
+                  { key: 'rating', label: 'Rating' },
+                ])}
               </thead>
               <tbody>
-                {data.map((item, idx)=>(
-                  <tr key={idx} className={`transition hover:bg-[#C3B1E1]/10 ${idx%2===0 ? 'bg-white/70' : 'bg-gray-50/60'}`}>
+                {sortedData.map((item, idx) => (
+                  <tr key={idx} className={`transition hover:bg-[#C3B1E1]/10 ${idx % 2 === 0 ? 'bg-white/70' : 'bg-gray-50/60'}`}>
                     <td className="px-4 py-3 font-semibold text-gray-800">{item.name}</td>
                     <td className="px-4 py-3">{item.ltvMin || '—'}</td>
                     <td className="px-4 py-3">{item.turnaround}</td>
