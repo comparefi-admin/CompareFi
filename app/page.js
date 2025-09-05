@@ -16,7 +16,7 @@ import {
 import './components/hero.css';
 import './components/HeroSection.css';
 
-// Google Fonts — cinematic + human
+// Google Fonts
 import { Playfair_Display, Inter, Satisfy } from 'next/font/google';
 const playfair = Playfair_Display({ weight: ['400', '700'], subsets: ['latin'] });
 const inter = Inter({ weight: ['300', '400', '600'], subsets: ['latin'] });
@@ -36,26 +36,25 @@ export default function HomePage() {
   ];
 
   return (
-    <div className="relative bg-gradient-to-b from-[#fdfdfd] via-[#f8f9fa] to-[#f0f2f5] min-h-screen overflow-hidden text-gray-900">
+    <div className="relative min-h-screen flex flex-col bg-gradient-to-b from-[#fdfdfd] via-[#f8f9fa] to-[#f0f2f5] text-gray-900 overflow-hidden">
       {/* Subtle Grain */}
       <div className="absolute inset-0 pointer-events-none bg-[url('/textures/grain.png')] opacity-[0.15] mix-blend-overlay"></div>
 
-      {/* Floating pastel gradients — aesthetic distribution */}
+      {/* Floating pastel gradients */}
       <div className="absolute -top-40 -left-40 w-96 h-96 bg-pink-300/40 rounded-full blur-[160px]"></div>
       <div className="absolute -top-80 -right-10 w-96 h-96 bg-pink-300/40 rounded-full blur-[160px]"></div>
-{/* Floating pastel gradients — refined balanced layout */}
       <div className="absolute bottom-[50%] right-[4.5%] w-[24rem] h-[24rem] bg-[#FFB347]/30 rounded-full blur-[160px]"></div>
-
 
       {/* Navbar */}
       <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-[9999] w-full max-w-screen-xl px-4 pt-4">
         <Navbar />
       </div>
 
-      <main className="pt-28 space-y-16">
+      {/* Main Content */}
+      <main className="flex-grow pt-28 space-y-16">
         {/* HERO */}
         <section id="hero" className="glass-card py-20 mx-4 mb-10 neon-border relative overflow-hidden">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 grid lg:grid-cols-2 gap-14 items-center">
+          <div className="w-full max-w-screen-2xl mx-auto px-6 grid lg:grid-cols-2 gap-14 items-center justify-items-center">
             {/* LEFT */}
             <div className="space-y-8">
               <p
@@ -130,30 +129,140 @@ export default function HomePage() {
         </section>
 
         {/* PRODUCTS */}
-        <section id="featured" className="glass-card py-20 mx-4 my-10 neon-border">
-          <div className="max-w-7xl mx-auto px-4 text-center">
-            <h2 className={`${playfair.className} text-3xl font-bold mb-6 shimmer-text text-gray-800`}>Explore Our Top Products</h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {products.map(({ name, icon: Icon, description }) => (
-                <div
-                  key={name}
-                  className="bg-white/40 backdrop-blur-md border border-white/30 rounded-xl shadow-md p-6 hover:shadow-xl hover:scale-105 transition-all duration-300 text-gray-800"
-                >
-                  <div className="w-14 h-14 bg-[#0ABAB5]/40 rounded-full flex items-center justify-center mb-4 inner-glow">
-                    <Icon className="w-6 h-6 text-[#0ABAB5]" />
-                  </div>
-                  <h3 className={`${inter.className} text-xl font-semibold mb-2`}>{name}</h3>
-                  <p className="text-gray-700">{description}</p>
-                </div>
-              ))}
+<section id="featured" className="glass-card py-24 mx-4 my-16 neon-border">
+  <div className="w-full max-w-screen-2xl mx-auto px-6 text-center">
+    <h2 className={`${playfair.className} text-5xl font-bold mb-20 shimmer-text text-gray-800`}>
+      Explore Our Top Products
+    </h2>
+
+    <div className="flex flex-col gap-20">
+      {/* LAS */}
+      <div className="group bg-gradient-to-r from-[#e0f7f9] to-[#fdf7ff] backdrop-blur-xl rounded-3xl shadow-2xl p-12 flex flex-col md:flex-row items-start gap-12 hover:scale-[1.01] transition-all duration-500 relative overflow-hidden">
+        <div className="w-28 h-28 bg-[#0ABAB5]/20 rounded-2xl flex items-center justify-center shadow-lg shrink-0">
+          <Briefcase className="w-14 h-14 text-[#0ABAB5]" />
+        </div>
+        <div className="flex-1 text-left">
+          <h3 className={`${playfair.className} text-4xl font-bold mb-4 text-gray-800`}>
+            Loan Against Securities (LAS)
+          </h3>
+          <p className="text-lg text-gray-700 mb-6 leading-relaxed">
+            Unlock liquidity from your portfolio <span className="font-semibold text-[#0ABAB5]">without selling</span>.  
+            Access capital instantly while your investments continue to grow.
+          </p>
+          <div className="flex gap-4">
+            <Link href="/products/las">
+              <button className="animated-button">
+                <span className="text">Learn More</span>
+                <span className="circle"></span>
+              </button>
+            </Link>
+            <button className="border-2 border-[#0ABAB5] text-[#0ABAB5] px-6 py-3 rounded-lg font-semibold hover:bg-[#0ABAB5]/10 transition-all">
+              Check Eligibility
+            </button>
+          </div>
+
+          {/* Expand on Hover */}
+          <div className="max-h-0 group-hover:max-h-52 transition-all duration-500 ease-in-out overflow-hidden">
+            <div className="mt-6 pt-6 border-t border-gray-200 text-gray-600 text-base leading-relaxed space-y-2">
+              <p>💡 <span className="font-semibold">Why LAS?</span></p>
+              <ul className="list-disc list-inside space-y-1">
+                <li>Borrow up to <span className="font-semibold">70% of your securities’ value</span>.</li>
+                <li>Keep your portfolio intact while accessing funds.</li>
+                <li>Flexible repayment options tailored to you.</li>
+              </ul>
             </div>
           </div>
-        </section>
+        </div>
+      </div>
+
+      {/* LAMF */}
+      <div className="group bg-gradient-to-r from-[#fff7fa] to-[#f0faff] backdrop-blur-xl rounded-3xl shadow-2xl p-12 flex flex-col md:flex-row items-start gap-12 hover:scale-[1.01] transition-all duration-500 relative overflow-hidden">
+        <div className="w-28 h-28 bg-[#FF6F91]/20 rounded-2xl flex items-center justify-center shadow-lg shrink-0">
+          <LineChart className="w-14 h-14 text-[#FF6F91]" />
+        </div>
+        <div className="flex-1 text-left">
+          <h3 className={`${playfair.className} text-4xl font-bold mb-4 text-gray-800`}>
+            Loan Against Mutual Funds (LAMF)
+          </h3>
+          <p className="text-lg text-gray-700 mb-6 leading-relaxed">
+            Need quick liquidity? <span className="font-semibold text-[#FF6F91]">LAMF</span>  
+            lets you unlock funds from your mutual investments — without redemption or exit loads.
+          </p>
+          <div className="flex gap-4">
+            <Link href="/products/lamf">
+              <button className="animated-button">
+                <span className="text">Learn More</span>
+                <span className="circle"></span>
+              </button>
+            </Link>
+            <button className="border-2 border-[#FF6F91] text-[#FF6F91] px-6 py-3 rounded-lg font-semibold hover:bg-[#FF6F91]/10 transition-all">
+              Apply Now
+            </button>
+          </div>
+
+          {/* Expand on Hover */}
+          <div className="max-h-0 group-hover:max-h-52 transition-all duration-500 ease-in-out overflow-hidden">
+            <div className="mt-6 pt-6 border-t border-gray-200 text-gray-600 text-base leading-relaxed space-y-2">
+              <p>💡 <span className="font-semibold">Why LAMF?</span></p>
+              <ul className="list-disc list-inside space-y-1">
+                <li>Instant approval with minimal documentation.</li>
+                <li>Funds directly linked to your mutual fund portfolio.</li>
+                <li>Stay invested while accessing quick liquidity.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* MTF */}
+      <div className="group bg-gradient-to-r from-[#f3f0ff] to-[#f9f9f9] backdrop-blur-xl rounded-3xl shadow-2xl p-12 flex flex-col md:flex-row items-start gap-12 hover:scale-[1.01] transition-all duration-500 relative overflow-hidden">
+        <div className="w-28 h-28 bg-[#C3B1E1]/20 rounded-2xl flex items-center justify-center shadow-lg shrink-0">
+          <BarChart3 className="w-14 h-14 text-[#C3B1E1]" />
+        </div>
+        <div className="flex-1 text-left">
+          <h3 className={`${playfair.className} text-4xl font-bold mb-4 text-gray-800`}>
+            Margin Trading Facility (MTF)
+          </h3>
+          <p className="text-lg text-gray-700 mb-6 leading-relaxed">
+            Multiply your buying power with <span className="font-semibold text-[#C3B1E1]">MTF</span>.  
+            Trade smarter, seize more opportunities, and maximize returns with controlled leverage.
+          </p>
+          <div className="flex gap-4">
+            <Link href="/products/mtf">
+              <button className="animated-button">
+                <span className="text">Learn More</span>
+                <span className="circle"></span>
+              </button>
+            </Link>
+            <button className="border-2 border-[#C3B1E1] text-[#C3B1E1] px-6 py-3 rounded-lg font-semibold hover:bg-[#C3B1E1]/10 transition-all">
+              Start Trading
+            </button>
+          </div>
+
+          {/* Expand on Hover */}
+          <div className="max-h-0 group-hover:max-h-52 transition-all duration-500 ease-in-out overflow-hidden">
+            <div className="mt-6 pt-6 border-t border-gray-200 text-gray-600 text-base leading-relaxed space-y-2">
+              <p>💡 <span className="font-semibold">Why MTF?</span></p>
+              <ul className="list-disc list-inside space-y-1">
+                <li>Leverage up to <span className="font-semibold">4x your cash balance</span>.</li>
+                <li>Low interest rates with flexible tenure.</li>
+                <li>Boost your portfolio while staying in control.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
         {/* WHY CHOOSE US */}
         <section id="contact" className="glass-card py-20 mx-4 my-10 neon-border">
-          <div className="max-w-7xl mx-auto px-4 text-center">
-            <h2 className={`${playfair.className} text-3xl font-bold mb-6 shimmer-text text-gray-800`}>Why Choose CompareFi?</h2>
+          <div className="w-full max-w-screen-2xl mx-auto px-6 text-center">
+            <h2 className={`${playfair.className} text-3xl font-bold mb-6 shimmer-text text-gray-800`}>
+              Why Choose CompareFi?
+            </h2>
             <p className={`${inter.className} text-gray-600 mb-10 max-w-2xl mx-auto`}>
               We make financial decision-making simple, smart, and secure. Here's why millions trust us:
             </p>
@@ -173,9 +282,10 @@ export default function HomePage() {
             </div>
           </div>
         </section>
-
-        <Footer />
       </main>
+
+      {/* Footer pinned at bottom */}
+      <Footer />
 
       <style jsx global>{`
         @keyframes fadeInUp {
