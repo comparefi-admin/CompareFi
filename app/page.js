@@ -203,7 +203,9 @@ export default function HomePage() {
       icon: <Briefcase className="w-12 h-12 text-[#00E5A8]" />,
       color: '#00E5A8',
       btn1: 'Learn More',
-      btn2: 'Check Eligibility'
+      btn2: 'Check Eligibility',
+      t: 'las'
+
     }, {
       title: 'Loan Against Mutual Funds (LAMF)',
       desc: 'Need quick liquidity? LAMF lets you unlock funds from your mutual investments — without redemption or exit loads.',
@@ -215,7 +217,8 @@ export default function HomePage() {
       icon: <LineChart className="w-12 h-12 text-[#FF4D8D]" />,
       color: '#FF4D8D',
       btn1: 'Learn More',
-      btn2: 'Apply Now'
+      btn2: 'Apply Now',
+      t: 'lamf'
     }].map((p, i) => (
       <motion.div
         key={i}
@@ -251,16 +254,21 @@ export default function HomePage() {
 
           {/* Buttons */}
           <div className="flex gap-3 pt-2">
+          <Link href={`/products/${p.t}`}>
             <button className="animated-button px-6 py-2.5 rounded-lg text-base font-semibold">
               <span className="text">{p.btn1}</span>
               <span className="circle"></span>
             </button>
+            </Link>
+            {/* <Link
+                href="/about">
             <button
               className="border-2 text-gray-900 px-6 py-2.5 rounded-lg font-semibold transition-all"
               style={{ borderColor: p.color }}
             >
               {p.btn2}
             </button>
+            </Link> */}
           </div>
 
           {/* Expand on hover */}
