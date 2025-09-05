@@ -309,10 +309,13 @@ export default function HomePage() {
 
     {/* CTA Buttons */}
     <div className="flex justify-center gap-3 pt-4">
+      <Link
+        href="/products/mtf">
       <button className="animated-button px-6 py-2.5 rounded-lg text-base font-semibold">
         <span className="text">Learn More</span>
         <span className="circle"></span>
       </button>
+      </Link>
       <button
         className="border-2 text-gray-900 px-6 py-2.5 rounded-lg font-semibold transition-all"
         style={{ borderColor: "#6C63FF" }}
