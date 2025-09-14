@@ -17,7 +17,7 @@ const satisfy = Satisfy({ weight: ['400'], subsets: ['latin'] });
 export default function ProductPage() {
   const products = [
     {
-      id: 'las',
+      id: 'LAS',
       name: 'Loan Against Securities (LAS)',
       icon: Briefcase,
       description:
