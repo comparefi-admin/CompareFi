@@ -28,7 +28,7 @@ const fadeUp = {
 export default function ProductPage() {
   const products = [
     {
-      id: 'las',
+      id: 'LAS',
       name: 'Loan Against Securities (LAS)',
       icon: Briefcase,
       color: '#00E5A8',

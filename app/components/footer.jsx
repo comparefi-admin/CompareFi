@@ -14,7 +14,7 @@ export default function Footer() {
               <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-blue-800 rounded-lg flex items-center justify-center">
                 <TrendingUp className="w-5 h-5 text-white" />
               </div>
-              <span className="text-xl font-bold">ComparisonFi</span>
+              <span className="text-xl font-bold">CompareFi</span>
             </div>
             <p className="text-gray-400 leading-relaxed">
               Making financial decisions easier for millions of users worldwide.
@@ -57,7 +57,7 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-          <p>&copy; 2025 ComparisonFi. All rights reserved.</p>
+          <p>&copy; 2025 CompareFi. All rights reserved.</p>
         </div>
       </div>
     </footer>
