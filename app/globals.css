@@ -132,6 +132,8 @@
     transform: translateY(0) scale(1);
   }
 }
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 
 .animate-ctaReveal {
   animation: ctaReveal 1.4s cubic-bezier(0.19, 1, 0.22, 1) forwards;

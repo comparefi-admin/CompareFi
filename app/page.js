@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Navbar from './components/navbar';
 import Footer from './components/footer';
@@ -12,7 +12,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
-import { Tooltip, TooltipProvider } from '@/components/ui/tooltip';
+import { TooltipProvider } from '@/components/ui/tooltip';
 
 // Fonts
 import { Instrument_Serif, Outfit, Bebas_Neue } from 'next/font/google';
@@ -67,31 +67,84 @@ const PRODUCTS = [
 ];
 
 export default function HomePage() {
+  const heroRef = useRef(null);
+
+  // Create multiple copies of the three icons
+  const iconsData = [
+    Shield, CreditCard, TrendingUp
+  ];
+  const NUM_ICONS = 15; // total icons on screen
+  const parallaxIcons = Array.from({ length: NUM_ICONS }).map((_, i) => {
+    const Icon = iconsData[i % iconsData.length];
+    return {
+      Icon,
+      id: `${Icon.name}-${i}`,
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
+      size: 30 + Math.random() * 50,
+      color: ['text-emerald-300','text-pink-300','text-indigo-300'][i % 3],
+      speed: 0.1 + Math.random() * 0.4,
+      floatOffset: Math.random() * 20,
+      floatSpeed: 1 + Math.random() * 1.5
+    }
+  });
+
+  const handleMouseMove = (e) => {
+    parallaxIcons.forEach(icon => {
+      const el = document.getElementById(icon.id);
+      if (el) {
+        const moveX = (e.clientX - window.innerWidth / 2) * icon.speed;
+        const moveY = (e.clientY - window.innerHeight / 2) * icon.speed;
+        el.style.transform = `translate(${moveX}px, ${moveY + Math.sin(Date.now()/1000*icon.floatSpeed)*icon.floatOffset}px)`;
+      }
+    });
+  };
+
   return (
     <TooltipProvider>
-      <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900">
+      <div
+        className="min-h-screen flex flex-col bg-slate-50 text-slate-900 overflow-x-hidden"
+        onMouseMove={handleMouseMove}
+      >
         {/* Navbar */}
         <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-[9999] w-full max-w-screen-xl px-4 pt-4">
           <Navbar />
         </div>
 
         <main className="flex-grow pt-24 sm:pt-28">
+
           {/* HERO */}
-          <section className="max-w-7xl mx-auto px-4 py-16 md:py-20 flex flex-col gap-12 items-start text-center md:text-left">
+          <section
+            ref={heroRef}
+            className="relative max-w-7xl mx-auto px-4 py-16 md:py-20 flex flex-col gap-12 items-start text-center md:text-left overflow-hidden"
+          >
+            {parallaxIcons.map(({ Icon, id, x, y, size, color }) => (
+              <Icon
+                key={id}
+                id={id}
+                className={`${color} absolute`}
+                style={{
+                  top: y,
+                  left: x,
+                  width: size,
+                  height: size,
+                  zIndex: 0,
+                  opacity: 0.15,
+                }}
+              />
+            ))}
+
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="space-y-6 w-full"
+              transition={{ duration: 0.8, ease: 'easeOut' }}
+              className="space-y-6 w-full relative z-10"
             >
               <Badge className="text-sm sm:text-base md:text-lg px-3 py-1 rounded-full bg-gradient-to-r from-emerald-200 to-emerald-300 text-emerald-800">
                 Curated by CA Het Doshi
               </Badge>
 
-              <h1
-                className="text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-extrabold"
-                style={{ fontFamily: "'SF Pro Display', serif" }}
-              >
+              <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-extrabold" style={{ fontFamily: "'SF Pro Display', serif" }}>
                 CompareFi
               </h1>
 
@@ -142,39 +195,48 @@ export default function HomePage() {
             <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
               <h2 className="text-3xl sm:text-4xl font-bold mb-10 text-center">Product Highlights</h2>
               <div className="flex flex-wrap gap-8 justify-center">
-                {PRODUCTS.map((p) => (
-                  <Card
+                {PRODUCTS.map((p, idx) => (
+                  <motion.div
                     key={p.id}
-                    className="w-full sm:w-80 md:w-96 bg-white/90 backdrop-blur-md hover:shadow-2xl transition-shadow rounded-3xl p-6"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: idx * 0.2 }}
                   >
-                    <CardHeader className="p-0 mb-6">
-                      <CardTitle className="text-xl font-bold">{p.title}</CardTitle>
-                      <CardDescription className="text-base text-slate-600">{p.blurb}</CardDescription>
-                    </CardHeader>
-                    <CardContent className="p-0">
-                      <div className="grid grid-cols-2 gap-4">
-                        {p.metrics.map((m, idx) => (
-                          <div key={idx} className="flex flex-col">
-                            <div className="text-sm text-slate-500">{m.name}</div>
-                            <div className="h-3 w-full bg-gray-200 rounded-full mt-1 overflow-hidden">
-                              <div
-                                className="h-3 rounded-full"
-                                style={{ width: `${m.value}%`, background: m.color }}
-                              ></div>
+                    <Card
+                      className="w-full sm:w-80 md:w-96 bg-white/90 backdrop-blur-md hover:shadow-2xl transition-shadow rounded-3xl p-6"
+                    >
+                      <CardHeader className="p-0 mb-6">
+                        <CardTitle className="text-xl font-bold">{p.title}</CardTitle>
+                        <CardDescription className="text-base text-slate-600">{p.blurb}</CardDescription>
+                      </CardHeader>
+                      <CardContent className="p-0">
+                        <div className="grid grid-cols-2 gap-4">
+                          {p.metrics.map((m, idx2) => (
+                            <div key={idx2} className="flex flex-col">
+                              <div className="text-sm text-slate-500">{m.name}</div>
+                              <div className="h-3 w-full bg-gray-200 rounded-full mt-1 overflow-hidden">
+                                <motion.div
+                                  className="h-3 rounded-full"
+                                  initial={{ width: 0 }}
+                                  animate={{ width: `${m.value}%` }}
+                                  transition={{ duration: 1, delay: 0.3 }}
+                                  style={{ background: m.color }}
+                                ></motion.div>
+                              </div>
                             </div>
-                          </div>
-                        ))}
-                      </div>
-                      <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-end">
-                        <Link href={`/products/${p.id}`} >
-                          <Button className='py-3 px-5 w-full sm:w-auto'>Learn More</Button>
-                        </Link>
-                        <Link href={`/products/${p.id}#eligibility`}>
-                          <Button variant="ghost" className='py-3 px-5 w-full sm:w-auto'>Check Eligibility</Button>
-                        </Link>
-                      </div>
-                    </CardContent>
-                  </Card>
+                          ))}
+                        </div>
+                        <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-end">
+                          <Link href={`/products/${p.id}`} >
+                            <Button className='py-3 px-5 w-full sm:w-auto'>Learn More</Button>
+                          </Link>
+                          <Link href={`/products/${p.id}#eligibility`}>
+                            <Button variant="ghost" className='py-3 px-5 w-full sm:w-auto'>Check Eligibility</Button>
+                          </Link>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
                 ))}
               </div>
             </section>
@@ -184,61 +246,80 @@ export default function HomePage() {
           <Card className="bg-gray-50">
             <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
               <h2 className="text-3xl sm:text-4xl font-extrabold mb-10 text-center">Compare Products</h2>
-
               <Tabs defaultValue="las">
-                <TabsList className="flex flex-wrap justify-center mb-8 gap-3">
-                  {PRODUCTS.map((p) => (
-                    <TabsTrigger
-                      key={p.id}
-                      value={p.id}
-                      className="text-base sm:text-lg px-4 sm:px-6 py-2 sm:py-3 rounded-xl"
-                    >
-                      {p.title.split('(')[0].trim()}
-                    </TabsTrigger>
-                  ))}
-                </TabsList>
+               <TabsList
+  className="
+   mb-7
+  "
+>
+  {PRODUCTS.map((p) => (
+    <TabsTrigger
+      key={p.id}
+      value={p.id}
+      className="
+        text-base 
+        sm:text-lg 
+        px-4 
+        sm:px-6 
+        py-2 
+        sm:py-3 
+        rounded-xl
+        whitespace-nowrap
+        transition
+        font-medium
+        focus-visible:ring-2
+        focus-visible:ring-emerald-400
+      "
+    >
+      {p.title.split('(')[0].trim()}
+    </TabsTrigger>
+  ))}
+</TabsList>
+
 
                 {PRODUCTS.map((p) => (
                   <TabsContent key={p.id} value={p.id}>
-                    <div className="grid md:grid-cols-2 gap-10 items-start text-center md:text-left">
-                      {/* Left Info */}
-                      <div>
-                        <h4 className="text-2xl font-semibold">{p.title}</h4>
-                        <p className="text-lg text-slate-700 mt-3">{p.blurb}</p>
-                        <ul className="mt-6 text-base text-slate-700 space-y-3">
-                          {p.bullets.map((b, i) => (
-                            <li key={i}>• {b}</li>
-                          ))}
-                        </ul>
-                        <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                          <Link href={`/products/${p.id}`}><Button size="lg">Deep Dive</Button></Link>
-                          <Link href={`/contact`}><Button variant="outline" size="lg">Talk to Het</Button></Link>
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }}>
+                      <div className="grid md:grid-cols-2 gap-10 items-start text-center md:text-left">
+                        {/* Left Info */}
+                        <div>
+                          <h4 className="text-2xl font-semibold">{p.title}</h4>
+                          <p className="text-lg text-slate-700 mt-3">{p.blurb}</p>
+                          <ul className="mt-6 text-base text-slate-700 space-y-3">
+                            {p.bullets.map((b, i) => (
+                              <li key={i}>• {b}</li>
+                            ))}
+                          </ul>
+                          <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                            <Link href={`/products/${p.id}`}><Button size="lg">Deep Dive</Button></Link>
+                            <Link href={`/contact`}><Button variant="outline" size="lg">Talk to Het</Button></Link>
+                          </div>
                         </div>
-                      </div>
 
-                      {/* Right Metrics */}
-                      <div>
-                        <Card className="p-6 rounded-3xl shadow-lg">
-                          <CardContent className="p-4">
-                            <div className="text-sm text-slate-500 font-medium">Quick metrics</div>
-                            <div className="mt-4 grid grid-cols-2 gap-6">
-                              {p.metrics.map((m, idx) => (
-                                <div key={idx} className="text-base">
-                                  <div className="text-sm text-slate-500">{m.name}</div>
-                                  <div className="text-lg font-semibold">{m.value}%</div>
-                                </div>
-                              ))}
+                        {/* Right Metrics */}
+                        <div>
+                          <Card className="p-6 rounded-3xl shadow-lg">
+                            <CardContent className="p-4">
+                              <div className="text-sm text-slate-500 font-medium">Quick metrics</div>
+                              <div className="mt-4 grid grid-cols-2 gap-6">
+                                {p.metrics.map((m, idx) => (
+                                  <div key={idx} className="text-base">
+                                    <div className="text-sm text-slate-500">{m.name}</div>
+                                    <div className="text-lg font-semibold">{m.value}%</div>
+                                  </div>
+                                ))}
+                              </div>
+                            </CardContent>
+                          </Card>
+                          <div className="mt-6 text-base text-slate-700">
+                            <div className="font-semibold">Example</div>
+                            <div className="mt-2">
+                              Borrow ₹1,00,000 on a portfolio worth ₹2,00,000 vs alternatives — clear numbers, no surprises.
                             </div>
-                          </CardContent>
-                        </Card>
-                        <div className="mt-6 text-base text-slate-700">
-                          <div className="font-semibold">Example</div>
-                          <div className="mt-2">
-                            Borrow ₹1,00,000 on a portfolio worth ₹2,00,000 vs alternatives — clear numbers, no surprises.
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </motion.div>
                   </TabsContent>
                 ))}
               </Tabs>
@@ -277,17 +358,19 @@ export default function HomePage() {
                   ]
                 }
               ].map((f, i) => (
-                <Card key={i} className="p-8 rounded-3xl shadow-lg">
-                  <CardHeader className="p-0">
-                    <CardTitle className="text-2xl font-semibold">{f.title}</CardTitle>
-                    <CardDescription className="text-base text-slate-600 mt-1">{f.desc}</CardDescription>
-                  </CardHeader>
-                  <CardContent className="p-0 mt-6">
-                    <ul className="list-disc list-inside text-base text-slate-700 space-y-3">
-                      {f.points.map((pt, j) => <li key={j}>{pt}</li>)}
-                    </ul>
-                  </CardContent>
-                </Card>
+                <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: i*0.2 }}>
+                  <Card className="p-8 rounded-3xl shadow-lg">
+                    <CardHeader className="p-0">
+                      <CardTitle className="text-2xl font-semibold">{f.title}</CardTitle>
+                      <CardDescription className="text-base text-slate-600 mt-1">{f.desc}</CardDescription>
+                    </CardHeader>
+                    <CardContent className="p-0 mt-6">
+                      <ul className="list-disc list-inside text-base text-slate-700 space-y-3">
+                        {f.points.map((pt, j) => <li key={j}>{pt}</li>)}
+                      </ul>
+                    </CardContent>
+                  </Card>
+                </motion.div>
               ))}
             </section>
           </Card>
@@ -301,17 +384,12 @@ export default function HomePage() {
               <div className="text-center md:text-left">
                 <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold">Ready to get clarity?</h3>
                 <p className="text-base sm:text-lg md:text-xl mt-3 max-w-xl mx-auto md:mx-0">
-                  Start with a quick eligibility check or book a call with Het for tailored advice.
+                  Compare products, check eligibility, and act confidently — all in one place.
                 </p>
               </div>
-              <div className="flex flex-col sm:flex-row gap-4 mt-6 md:mt-0">
-                <Link href="/eligibility">
-                  <Button className="bg-white text-slate-900 px-8 py-4 text-base sm:text-lg font-semibold">Check Eligibility</Button>
-                </Link>
-                <Link href="/contact">
-                  <Button variant="ghost" className="border-white/30 px-8 py-4 text-base sm:text-lg font-semibold">Book a call</Button>
-                </Link>
-              </div>
+              <Link href="/contact">
+                <Button size="lg" className="px-10 py-4">Talk to Het</Button>
+              </Link>
             </motion.div>
           </section>
 

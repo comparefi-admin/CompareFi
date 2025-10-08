@@ -11,6 +11,7 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Outfit } from 'next/font/google';
 
 // Fonts
 import { Instrument_Serif, Outfit, Bebas_Neue } from 'next/font/google';
@@ -89,10 +90,8 @@ export default function ProductPage() {
             variants={fadeUp}
             className="space-y-6"
           >
-            <Badge className="px-3 py-1 text-base rounded-full bg-gradient-to-r from-emerald-200 to-emerald-300 text-emerald-800">
-              Curated by CA Het Doshi
-            </Badge>
-            <h1 className={`${instrument.className} text-5xl sm:text-6xl md:text-7xl font-extrabold`}>
+            
+            <h1 className={`${outfit.className} text-5xl sm:text-6xl md:text-7xl font-bold`}>
               CompareFi Products
             </h1>
             <p className={`${outfit.className} text-lg text-slate-600 max-w-3xl mx-auto`}>
