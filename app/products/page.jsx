@@ -10,14 +10,9 @@ import { motion } from 'framer-motion';
 // ShadCN UI
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { Outfit } from 'next/font/google';
 
-// Fonts
-import { Instrument_Serif, Outfit, Bebas_Neue } from 'next/font/google';
-const instrument = Instrument_Serif({ weight: ['400'], subsets: ['latin'] });
 const outfit = Outfit({ weight: ['300', '400', '600'], subsets: ['latin'] });
-const bebas = Bebas_Neue({ weight: ['400'], subsets: ['latin'] });
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -35,8 +30,7 @@ export default function ProductPage() {
       name: 'Loan Against Securities (LAS)',
       icon: Briefcase,
       gradient: 'from-emerald-400 to-emerald-600',
-      description:
-        'Leverage your securities portfolio without selling. Instant liquidity while your investments grow.',
+      description: 'Leverage your securities portfolio without selling. Instant liquidity while your investments grow.',
       highlights: [
         'Borrow up to 70% of your securities value',
         'Keep your portfolio intact',
@@ -48,8 +42,7 @@ export default function ProductPage() {
       name: 'Loan Against Mutual Funds (LAMF)',
       icon: LineChart,
       gradient: 'from-pink-400 to-pink-600',
-      description:
-        'Quick loans using mutual funds as collateral. Access funds instantly without disturbing long-term goals.',
+      description: 'Quick loans using mutual funds as collateral. Access funds instantly without disturbing long-term goals.',
       highlights: [
         'Minimal documentation & instant approval',
         'Funds linked to your mutual fund portfolio',
@@ -61,8 +54,7 @@ export default function ProductPage() {
       name: 'Margin Trading Facility (MTF)',
       icon: BarChart3,
       gradient: 'from-indigo-400 to-indigo-600',
-      description:
-        'Amplify your buying power in the market with controlled leverage. Ideal for experienced investors.',
+      description: 'Amplify your buying power in the market with controlled leverage. Ideal for experienced investors.',
       highlights: [
         'Leverage up to 4x your cash balance',
         'Low interest rates with flexible tenure',
@@ -76,7 +68,7 @@ export default function ProductPage() {
   return (
     <>
       {/* NAVBAR */}
-      <div className="fixed top-0 left-0 w-full bg-transparent z-50">
+      <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-[9999] w-full max-w-screen-xl px-4 pt-4">
         <Navbar />
       </div>
 
@@ -90,7 +82,6 @@ export default function ProductPage() {
             variants={fadeUp}
             className="space-y-6"
           >
-            
             <h1 className={`${outfit.className} text-5xl sm:text-6xl md:text-7xl font-bold`}>
               CompareFi Products
             </h1>
