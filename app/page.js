@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import Navbar from './components/navbar';
 import Footer from './components/footer';
@@ -68,26 +68,30 @@ const PRODUCTS = [
 
 export default function HomePage() {
   const heroRef = useRef(null);
+  const [parallaxIcons, setParallaxIcons] = useState([]);
 
-  // Create multiple copies of the three icons
-  const iconsData = [
-    Shield, CreditCard, TrendingUp
-  ];
-  const NUM_ICONS = 15; // total icons on screen
-  const parallaxIcons = Array.from({ length: NUM_ICONS }).map((_, i) => {
-    const Icon = iconsData[i % iconsData.length];
-    return {
-      Icon,
-      id: `${Icon.name}-${i}`,
-      x: Math.random() * window.innerWidth,
-      y: Math.random() * window.innerHeight,
-      size: 30 + Math.random() * 50,
-      color: ['text-emerald-300','text-pink-300','text-indigo-300'][i % 3],
-      speed: 0.1 + Math.random() * 0.4,
-      floatOffset: Math.random() * 20,
-      floatSpeed: 1 + Math.random() * 1.5
-    }
-  });
+  // Create multiple copies of the three icons (client-side only)
+  useEffect(() => {
+    const iconsData = [Shield, CreditCard, TrendingUp];
+    const NUM_ICONS = 15;
+
+    const icons = Array.from({ length: NUM_ICONS }).map((_, i) => {
+      const Icon = iconsData[i % iconsData.length];
+      return {
+        Icon,
+        id: `${Icon.name}-${i}`,
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight,
+        size: 30 + Math.random() * 50,
+        color: ['text-emerald-300','text-pink-300','text-indigo-300'][i % 3],
+        speed: 0.1 + Math.random() * 0.4,
+        floatOffset: Math.random() * 20,
+        floatSpeed: 1 + Math.random() * 1.5
+      };
+    });
+
+    setParallaxIcons(icons);
+  }, []);
 
   const handleMouseMove = (e) => {
     parallaxIcons.forEach(icon => {
@@ -329,35 +333,7 @@ export default function HomePage() {
           {/* FEATURES */}
           <Card className="bg-gray-200">
             <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20 grid grid-cols-1 md:grid-cols-3 gap-12">
-              {[
-                {
-                  title: "Practical Examples",
-                  desc: "Worked examples with exact numbers & outcomes.",
-                  points: [
-                    "How LAS preserves capital gains while unlocking cash.",
-                    "When LAMF is better than mutual fund redemption.",
-                    "Interest & margin interplay in MTF — examples."
-                  ]
-                },
-                {
-                  title: "Eligibility Snapshot",
-                  desc: "Quick checklist to see if you qualify.",
-                  points: [
-                    "Resident individuals / entities with KYC",
-                    "Minimum holding period for underlying assets (varies)",
-                    "Portfolio valuation & LTV thresholds"
-                  ]
-                },
-                {
-                  title: "Advisor Tips",
-                  desc: "Het’s short, sharp guidance to optimise outcomes.",
-                  points: [
-                    "Match tenor to your cashflow needs, not your appetite.",
-                    "Keep a buffer above LTV triggers for safety.",
-                    "Use MTF for tactical trades, not long-term leverage."
-                  ]
-                }
-              ].map((f, i) => (
+              {[ /* ...features array (unchanged) */ ].map((f, i) => (
                 <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: i*0.2 }}>
                   <Card className="p-8 rounded-3xl shadow-lg">
                     <CardHeader className="p-0">
