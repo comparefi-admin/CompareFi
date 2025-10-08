@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, CreditCard, Shield, Mail } from 'lucide-react';
+import { Home, CreditCard, Shield, Mail, Menu, X } from 'lucide-react';
 
 const navItems = [
   {
@@ -89,6 +89,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const [clickLabels, setClickLabels] = useState({});
   const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const isHomePage = pathname === '/';
 
   useSmoothHashScroll();
@@ -114,24 +115,23 @@ export default function Navbar() {
   return (
     <div className="fixed top-4 left-0 w-full z-50 flex justify-center pointer-events-none">
       <nav
-        className={`pointer-events-auto rounded-full border px-6 py-3 transition-all duration-300
+        className={`pointer-events-auto rounded-full border px-6 py-3 transition-all duration-300 w-[90%] md:w-auto
         ${isScrolled
           ? 'bg-white/70 backdrop-blur-sm shadow-md border-gray-200'
           : 'bg-white/60 backdrop-blur-md border-gray-100'
         }`}
       >
+        {/* Desktop Navbar */}
         <ul className="hidden md:flex items-center space-x-2">
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActivePage = pathname === item.path;
             const labelMatch = item.dropdown?.find((d) => d.hash.slice(1) === activeSection);
 
-            let label;
-            if (item.baseLabel === 'Home' && isHomePage) {
-              label = 'Home';
-            } else {
-              label = clickLabels[item.path] || (labelMatch?.label ?? item.baseLabel);
-            }
+            const label =
+              item.baseLabel === 'Home' && isHomePage
+                ? 'Home'
+                : clickLabels[item.path] || (labelMatch?.label ?? item.baseLabel);
 
             const shouldHighlight =
               isHomePage && homepageSectionToNavItem[activeSection] === item.baseLabel;
@@ -154,7 +154,7 @@ export default function Navbar() {
                 </Link>
 
                 {item.dropdown && (
-                  <ul className="absolute top-full left-1/2 -translate-x-1/2 mt-1 hidden group-hover:block group-focus-within:block bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 rounded-xl shadow-lg p-2 space-y-1">
+                  <ul className="absolute top-full left-1/2 -translate-x-1/2 mt-1 hidden group-hover:block bg-white border border-gray-200 rounded-xl shadow-lg p-2 space-y-1">
                     {item.dropdown.map((sub) => {
                       const href = `${item.path}${sub.hash}`;
                       return (
@@ -175,7 +175,7 @@ export default function Navbar() {
                               setLabel(item.path, sub.label);
                             }
                           }}
-                          className="block whitespace-nowrap px-4 py-2 text-sm rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-zinc-800"
+                          className="block whitespace-nowrap px-4 py-2 text-sm rounded-lg text-gray-700 hover:bg-gray-100"
                         >
                           {sub.label}
                         </Link>
@@ -187,6 +187,57 @@ export default function Navbar() {
             );
           })}
         </ul>
+
+        {/* Mobile Navbar */}
+        <div className="md:hidden flex items-center justify-between">
+          <button
+            className="p-2 rounded-md hover:bg-gray-100"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="Toggle Menu"
+          >
+            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        </div>
+
+        {mobileOpen && (
+          <div className="absolute top-16 left-0 w-full bg-white border-t border-gray-200 rounded-b-2xl shadow-md md:hidden">
+            <ul className="flex flex-col space-y-1 p-3">
+              {navItems.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <li key={item.baseLabel} className="relative">
+                    <details className="group">
+                      <summary className="flex items-center justify-between px-3 py-2 cursor-pointer rounded-lg hover:bg-gray-100">
+                        <div className="flex items-center space-x-2">
+                          <Icon size={16} />
+                          <span className="font-medium">{item.baseLabel}</span>
+                        </div>
+                      </summary>
+                      {item.dropdown && (
+                        <ul className="pl-6 py-1 space-y-1">
+                          {item.dropdown.map((sub) => {
+                            const href = `${item.path}${sub.hash}`;
+                            return (
+                              <Link
+                                key={sub.label}
+                                href={href}
+                                prefetch={false}
+                                onClick={() => setMobileOpen(false)}
+                                className="block text-sm px-3 py-1 rounded-md text-gray-700 hover:bg-gray-100"
+                              >
+                                {sub.label}
+                              </Link>
+                            );
+                          })}
+                        </ul>
+                      )}
+                    </details>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        )}
       </nav>
     </div>
   );
