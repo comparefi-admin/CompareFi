@@ -147,7 +147,7 @@ export default function HomePage() {
         <main className="flex-grow">
 
           {/* HERO SECTION */}
-          <section className="relative flex items-center justify-center min-h-[85vh] bg-gradient-to-br from-blue-200 via-indigo-200 via-indigo-400 to-slate-100 overflow-hidden px-4 sm:px-6 lg:px-10">
+          <section className="relative flex items-center justify-center min-h-[85vh] bg-gradient-to-br from-slate-300 via-indigo-200 via-indigo-400 to-violet-800 overflow-hidden px-4 sm:px-6 lg:px-10">
             {/* Background noise layer */}
             <div className="absolute inset-0 bg-[url('/noise.png')] opacity-100 mix-blend-overlay pointer-events-none"></div>
 
@@ -217,7 +217,7 @@ export default function HomePage() {
 
           {/* PRODUCT HIGHLIGHTS */}
           
-<section className="relative flex flex-col items-center justify-center py-5 bg-gradient-to-bl from-slate-100 via-indigo-400 via-indigo-200 to-blue-950 overflow-hidden px-4 sm:px-6 lg:px-10">
+<section className="relative flex flex-col items-center justify-center py-5 bg-gradient-to-bl from-violet-800 via-indigo-400 via-indigo-200 to-blue-950 overflow-hidden px-4 sm:px-6 lg:px-10">
   <h2 className="text-5xl sm:text-6xl mt--2 font-extrabold mb-16 text-center text-white drop-shadow-lg">
     Product Highlights
   </h2>
@@ -228,21 +228,17 @@ export default function HomePage() {
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 0.7 }}
-    className="w-[97%]   mb-16 flex flex-col md:flex-row items-stretch gap-12"
+    className="w-[97%]   mb-32 flex flex-col md:flex-row items-stretch gap-12"
   >
     {/* Left: Content */}
-    <div className="flex-1 flex flex-col justify-between bg-white/10 backdrop-blur-2xl border border-white/20 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300">
+    <div className="flex-1 flex flex-col justify-between bg-white/10 backdrop-blur-2xl  py-28 border border-white/20 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300">
       <h3 className="text-3xl sm:text-4xl font-bold text-white mb-4 drop-shadow-sm">
         Loan Against Securities (LAS)
       </h3>
       <p className="text-lg text-slate-200 mb-6">
         Unlock liquidity from your portfolio without selling core holdings.
       </p>
-      <ul className="list-disc list-inside text-slate-300 space-y-2 mb-6">
-        <li>Borrow up to 70% of eligible securities</li>
-        <li>Minimal documentation</li>
-        <li>Flexible repayment schedules</li>
-      </ul>
+      
       <div className="flex flex-wrap gap-4">
         <Link href="/products/las"><Button size="lg">Learn More</Button></Link>
         <Link href="/products/las#eligibility"><Button size="lg" variant="outline">Check Eligibility</Button></Link>
@@ -250,7 +246,7 @@ export default function HomePage() {
     </div>
 
     {/* Right: Metrics */}
-    <div className="flex-1 flex flex-col justify-center items-center bg-wh backdrop-blur-md border border-white/20 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300">
+    <div className="flex-1 flex flex-col justify-center items-center bg-wh backdrop-blur-md border py-28 border-white/20 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300">
       <h4 className="text-2xl font-semibold text-white mb-6">Quick Metrics</h4>
       <div className="grid grid-cols-2 gap-6 w-full">
         <div className="flex flex-col items-center">
@@ -282,10 +278,27 @@ export default function HomePage() {
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 0.7 }}
-    className="w-[97%] mb-16 flex flex-col md:flex-row-reverse items-stretch gap-10"
+    className="w-[97%] mb-32 flex flex-col md:flex-row-reverse items-stretch gap-12"
   >
     {/* Left: Metrics */}
-    <div className="flex-1 flex flex-col justify-center items-center bg-gradient-to-tr from-white/5 to-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300">
+    
+
+    {/* Right: Content */}
+    <div className="flex-1 flex flex-col justify-between bg-white/10 backdrop-blur-md border py-28 border-white/20 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300">
+      <h3 className="text-3xl sm:text-4xl font-bold text-white mb-4 drop-shadow-sm">
+        Loan Against Mutual Funds (LAMF)
+      </h3>
+      <p className="text-lg text-slate-200 mb-6">
+        Quick cash against mutual investments — no redemption required.
+      </p>
+      
+      <div className="flex flex-wrap gap-4">
+        <Link href="/products/lamf"><Button size="lg">Learn More</Button></Link>
+        <Link href="/products/lamf#eligibility"><Button size="lg" variant="outline">Check Eligibility</Button></Link>
+      </div>
+    </div>
+{/* Right: Content */}
+    <div className="flex-1 flex flex-col justify-center items-center bg-gradient-to-tr py-28 from-white/5 to-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300">
       <h4 className="text-2xl font-semibold text-white mb-6">Quick Metrics</h4>
       <div className="grid grid-cols-2 gap-6 w-full">
         <div className="flex flex-col items-center">
@@ -309,25 +322,6 @@ export default function HomePage() {
         Example: Instant cash against mutual investments without redemption.
       </div>
     </div>
-
-    {/* Right: Content */}
-    <div className="flex-1 flex flex-col justify-between bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300">
-      <h3 className="text-3xl sm:text-4xl font-bold text-white mb-4 drop-shadow-sm">
-        Loan Against Mutual Funds (LAMF)
-      </h3>
-      <p className="text-lg text-slate-200 mb-6">
-        Quick cash against mutual investments — no redemption required.
-      </p>
-      <ul className="list-disc list-inside text-slate-300 space-y-2 mb-6">
-        <li>Instant approval for qualifying funds</li>
-        <li>No exit-loads</li>
-        <li>Linked to NAVs for simplicity</li>
-      </ul>
-      <div className="flex flex-wrap gap-4">
-        <Link href="/products/lamf"><Button size="lg">Learn More</Button></Link>
-        <Link href="/products/lamf#eligibility"><Button size="lg" variant="outline">Check Eligibility</Button></Link>
-      </div>
-    </div>
   </motion.div>
 
   {/* MTF Card */}
@@ -336,21 +330,17 @@ export default function HomePage() {
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 0.7 }}
-    className="w-[97%] mb-16 flex flex-col md:flex-row items-stretch gap-20"
+    className="w-[97%] mb-32 flex flex-col md:flex-row items-stretch gap-12"
   >
     {/* Left: Content */}
-    <div className="flex-1 flex flex-col justify-between bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300">
+    <div className="flex-1 flex flex-col justify-between py-28 bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300">
       <h3 className="text-3xl sm:text-4xl font-bold text-white mb-4 drop-shadow-sm">
         Margin Trading Facility (MTF)
       </h3>
       <p className="text-lg text-slate-200 mb-6">
         Amplify buying power with controlled leverage for active traders.
       </p>
-      <ul className="list-disc list-inside text-slate-300 space-y-2 mb-6">
-        <li>Leverage up to 4x</li>
-        <li>Transparent interest & margin calls</li>
-        <li>Real-time risk monitoring</li>
-      </ul>
+      
       <div className="flex flex-wrap gap-4">
         <Link href="/products/mtf"><Button size="lg">Learn More</Button></Link>
         <Link href="/products/mtf#eligibility"><Button size="lg" variant="outline">Check Eligibility</Button></Link>
@@ -358,7 +348,7 @@ export default function HomePage() {
     </div>
 
     {/* Right: Metrics */}
-    <div className="flex-1 flex flex-col justify-center items-center bg-gradient-to-tr from-white/5 to-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300">
+    <div className="flex-1 flex flex-col justify-center items-center py-28 bg-gradient-to-tr from-white/5 to-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300">
       <h4 className="text-2xl font-semibold text-white mb-6">Quick Metrics</h4>
       <div className="grid grid-cols-2 gap-6 w-full">
         <div className="flex flex-col items-center">
@@ -391,7 +381,7 @@ export default function HomePage() {
   <div className="absolute inset-0 bg-[url('/noise.png')] opacity-10  mix-blend-overlay pointer-events-none"></div>
 
   {/* Glass card container */}
-  <SpotlightCard className="relative z-10 w-[95%] rounded-3xl bg-gradient-to-bl from-indigo-800 to-blue-950 backdrop-blur-lg border border-white/30 shadow-xl p-8 sm:p-12 md:p-16 flex flex-col"  spotlightColor="rgba(255,255,255,0.1)">
+  <SpotlightCard className="relative z-10 w-[95%] rounded-3xl bg-gradient-to-bl from-indigo-800 to-blue-950 backdrop-blur-lg  shadow-xl p-8 sm:p-12 md:p-16 flex flex-col"  spotlightColor="rgba(255,255,255,0.1)">
  <motion.div
     
     initial={{ opacity: 0, y: 40 }}
@@ -463,66 +453,8 @@ export default function HomePage() {
 </SpotlightCard>
   
 </section>
-
-
           {/* FEATURES SECTION */}
-          <Card className="bg-gray-200">
-            <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
-              <h2 className="text-3xl sm:text-4xl font-extrabold mb-12 text-center">Key Features</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                {[
-                  {
-                    icon: <Sparkles className="w-8 h-8 text-blue-500" />,
-                    title: "AI-driven Insights",
-                    desc: "Unlock powerful, AI-driven insights to grow your wealth intelligently.",
-                    points: ["Personalized portfolio recommendations","Real-time analytics","Smart alerts for opportunities and risks"],
-                    bg: "bg-blue-100"
-                  },
-                  {
-                    icon: <Briefcase className="w-8 h-8 text-emerald-500" />,
-                    title: "Flexible Investment Options",
-                    desc: "Compare and choose products that match your strategy.",
-                    points: ["Loan Against Securities (LAS)","Loan Against Mutual Funds (LAMF)","Margin Trading Facility (MTF)"],
-                    bg: "bg-emerald-100"
-                  },
-                  {
-                    icon: <CreditCard className="w-8 h-8 text-pink-500" />,
-                    title: "Clear Metrics & Analytics",
-                    desc: "Quick, transparent metrics for confident decision-making.",
-                    points: ["Liquidity, Cost, Complexity, Turnaround","Side-by-side comparisons","Easy-to-understand dashboards"],
-                    bg: "bg-pink-100"
-                  },
-                  {
-                    icon: <TrendingUp className="w-8 h-8 text-indigo-500" />,
-                    title: "Smooth & Interactive Experience",
-                    desc: "Interactive features for effortless exploration.",
-                    points: ["Animated comparison cards","Hover effects and microinteractions","Mobile-friendly UI"],
-                    bg: "bg-indigo-100"
-                  },
-                ].map((f, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.1 + i*0.1 }}
-                  >
-                    <Card className={`p-6 rounded-3xl shadow-lg bg-white/90 backdrop-blur-md`}>
-                      <div className={`flex items-center justify-center w-16 h-16 rounded-full mb-4 ${f.bg}`}>{f.icon}</div>
-                      <h3 className="text-xl font-semibold mb-2">{f.title}</h3>
-                      <p className="text-sm text-slate-600 mb-4">{f.desc}</p>
-                      <ul className="list-disc list-inside text-slate-700 space-y-2 text-sm">
-                        {f.points.map((p, idx) => <li key={idx}>{p}</li>)}
-                      </ul>
-                    </Card>
-                  </motion.div>
-                ))}
-              </div>
-            </section>
-          </Card>
-
         </main>
-
         {/* FOOTER */}
         <Footer />
       </div>
