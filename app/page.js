@@ -1,26 +1,55 @@
 'use client';
-
+import SpotlightCard from './components/SpotlightCard.jsx'; // Import the SpotlightCard component from './components/SpotlightCard';
 import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import Navbar from './components/navbar';
 import Footer from './components/footer';
 import { motion } from 'framer-motion';
-import { Briefcase, LineChart, BarChart3, Shield, CreditCard, TrendingUp } from 'lucide-react';
+import { Briefcase, LineChart, BarChart3, Shield, CreditCard, TrendingUp, Sparkles } from 'lucide-react';
+import DisplayCards from "@/components/ui/display-cards";
+import "./globals.css";
 
 // ShadCN components
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
-import { Badge } from '@/components/ui/badge';
 import { TooltipProvider } from '@/components/ui/tooltip';
 
-// Fonts
-import { Instrument_Serif, Outfit, Bebas_Neue } from 'next/font/google';
-const instrument = Instrument_Serif({ weight: ['400'], subsets: ['latin'] });
-const outfit = Outfit({ weight: ['300','400','600'], subsets: ['latin'] });
-const bebas = Bebas_Neue({ weight: ['400'], subsets: ['latin'] });
+// Hero cards
+const defaultCards = [
+  {
+    icon: <Sparkles className="size-4 text-blue-300" />,
+    title: "Featured",
+    description: "Discover amazing content",
+    date: "Just now",
+    iconClassName: "text-blue-500",
+    titleClassName: "text-blue-500",
+    className:
+      "[grid-area:stack] hover:-translate-y-10 before:absolute before:w-[100%] before:outline-1 before:rounded-xl before:outline-border before:h-[100%] before:content-[''] before:bg-blend-overlay before:bg-background/50 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration-700 hover:grayscale-0 before:left-0 before:top-0",
+  },
+  {
+    icon: <Sparkles className="size-4 text-blue-300" />,
+    title: "Popular",
+    description: "Trending this week",
+    date: "2 days ago",
+    iconClassName: "text-blue-500",
+    titleClassName: "text-blue-500",
+    className:
+      "[grid-area:stack] translate-x-12 translate-y-10 hover:-translate-y-1 before:absolute before:w-[100%] before:outline-1 before:rounded-xl before:outline-border before:h-[100%] before:content-[''] before:bg-blend-overlay before:bg-background/50 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration-700 hover:grayscale-0 before:left-0 before:top-0",
+  },
+  {
+    icon: <Sparkles className="size-4 text-blue-300" />,
+    title: "New",
+    description: "Latest updates and features",
+    date: "Today",
+    iconClassName: "text-blue-500",
+    titleClassName: "text-blue-500",
+    className:
+      "[grid-area:stack] translate-x-24 translate-y-20 hover:translate-y-10",
+  },
+];
 
-// Data
+// Products data
 const PRODUCTS = [
   {
     id: 'las',
@@ -70,7 +99,7 @@ export default function HomePage() {
   const heroRef = useRef(null);
   const [parallaxIcons, setParallaxIcons] = useState([]);
 
-  // Create multiple copies of the three icons (client-side only)
+  // Create multiple floating icons for parallax effect
   useEffect(() => {
     const iconsData = [Shield, CreditCard, TrendingUp];
     const NUM_ICONS = 15;
@@ -115,130 +144,337 @@ export default function HomePage() {
           <Navbar />
         </div>
 
-        <main className="flex-grow pt-24 sm:pt-28">
+        <main className="flex-grow">
 
-          {/* HERO */}
-          <section
-            ref={heroRef}
-            className="relative max-w-7xl mx-auto px-4 py-16 md:py-20 flex flex-col gap-12 items-start text-center md:text-left overflow-hidden"
-          >
-            {parallaxIcons.map(({ Icon, id, x, y, size, color }) => (
-              <Icon
-                key={id}
-                id={id}
-                className={`${color} absolute`}
-                style={{
-                  top: y,
-                  left: x,
-                  width: size,
-                  height: size,
-                  zIndex: 0,
-                  opacity: 0.15,
-                }}
-              />
-            ))}
+          {/* HERO SECTION */}
+          <section className="relative flex items-center justify-center min-h-[85vh] bg-gradient-to-br from-blue-200 via-indigo-200 via-indigo-400 to-slate-100 overflow-hidden px-4 sm:px-6 lg:px-10">
+            {/* Background noise layer */}
+            <div className="absolute inset-0 bg-[url('/noise.png')] opacity-100 mix-blend-overlay pointer-events-none"></div>
 
+            {/* Glass Card */}
             <motion.div
+              className="relative z-10 w-full max-w-full rounded-3xl bg-gradient-to-bl  min-h-[70vh] from-indigo-800 to-blue-950 backdrop-blur-lg border border-white/30 shadow-xl p-6 sm:p-10 md:p-14 lg:p-20 flex flex-col md:flex-row mt-[7%] mb-[7%] gap-10 md:gap-14 items-center justify-center"
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: 'easeOut' }}
-              className="space-y-6 w-full relative z-10"
+              transition={{ duration: 0.8 }}
             >
-              <Badge className="text-sm sm:text-base md:text-lg px-3 py-1 rounded-full bg-gradient-to-r from-emerald-200 to-emerald-300 text-emerald-800">
-                Curated by CA Het Doshi
-              </Badge>
+              {/* LEFT */}
+              <div className="flex-1 text-center md:text-left space-y-5 sm:space-y-6 lg:space-y-8">
+                <motion.h1
+                  className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-tight drop-shadow-[0_2px_2px_rgba(0,0,0,0.1)]"
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1, duration: 0.7, ease: 'easeOut' }}
+                >
+                  Compare<span className="text-blue-400">Fi</span>
+                </motion.h1>
 
-              <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-extrabold" style={{ fontFamily: "'SF Pro Display', serif" }}>
-                CompareFi
-              </h1>
+                <motion.h2
+                  className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-medium text-slate-300"
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3, duration: 0.7, ease: 'easeOut' }}
+                >
+                  Smart <span className="text-blue-400 font-semibold">Investing</span> Starts Here
+                </motion.h2>
 
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-slate-700">
-                Financial products, explained and compared — so you don’t have to guess.
-              </h2>
+                <motion.p
+                  className="text-sm sm:text-base md:text-lg text-slate-300 max-w-md mx-auto md:mx-0 leading-relaxed"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.45, duration: 0.6, ease: 'easeOut' }}
+                >
+                  Unlock powerful, AI-driven insights to grow your wealth intelligently. Compare, analyze, and invest with confidence.
+                </motion.p>
 
-              <p className={`${outfit.className} text-base sm:text-lg text-slate-600 max-w-4xl mx-auto md:mx-0`}>
-                CompareFi gives you a concise, trustworthy summary of lending & trading solutions — LAS, LAMF and MTF — curated by CA Het Doshi. Clear metrics, practical guidance, and eligibility checks to act with confidence.
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-4 mt-6 justify-center md:justify-start">
-                <Link href="/products"><Button className="px-8 py-4 sm:px-10 sm:py-6">Explore Products</Button></Link>
-                <Link href="/about"><Button variant="outline" className="px-8 py-4 sm:px-10 sm:py-6">About Het</Button></Link>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6, duration: 0.5, ease: 'easeOut' }}
+                >
+                  <Button
+                    size="lg"
+                    className="bg-blue-600 hover:bg-blue-700 text-white rounded-2xl px-6 sm:px-8 md:px-10 py-4 sm:py-5 md:py-6 text-base sm:text-lg shadow-lg shadow-blue-500/20 transition-transform hover:scale-105 duration-300"
+                  >
+                    Get Started
+                  </Button>
+                </motion.div>
               </div>
 
-              {/* Feature Icons */}
-              <div className="mt-12 flex flex-col sm:flex-row flex-wrap gap-8 sm:gap-12 justify-center md:justify-start">
-                <div className="flex items-center gap-4 sm:gap-6">
-                  <Shield className="w-6 h-6 sm:w-8 sm:h-8 text-slate-500" />
-                  <div>
-                    <div className="text-base sm:text-lg font-semibold">Transparent Fees</div>
-                    <div className="text-sm text-slate-500">No hidden charges</div>
-                  </div>
+              {/* RIGHT */}
+              <motion.div
+                className="flex-1 flex justify-center items-center w-full"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.5, duration: 0.7 }}
+              >
+                <div className="flex w-full max-w-2xl sm:max-w-3xl md:max-w-4xl lg:max-w-5xl items-center justify-center py-10 sm:py-14 md:py-20">
+                  <DisplayCards cards={defaultCards} />
                 </div>
-
-                <div className="flex items-center gap-4 sm:gap-6">
-                  <CreditCard className="w-6 h-6 sm:w-8 sm:h-8 text-slate-500" />
-                  <div>
-                    <div className="text-base sm:text-lg font-semibold">Fast Decisions</div>
-                    <div className="text-sm text-slate-500">Quick eligibility & turnaround</div>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-4 sm:gap-6">
-                  <TrendingUp className="w-6 h-6 sm:w-8 sm:h-8 text-slate-500" />
-                  <div>
-                    <div className="text-base sm:text-lg font-semibold">Data-first</div>
-                    <div className="text-sm text-slate-500">Metrics you can trust</div>
-                  </div>
-                </div>
-              </div>
+              </motion.div>
             </motion.div>
           </section>
 
           {/* PRODUCT HIGHLIGHTS */}
-          <Card className='bg-gray-200'>
+          
+ <section className="relative  items-center justify-center min-h-[80vh] bg-gradient-to-bl  from-slate-100 via-indigo-400 via-indigo-200 to-blue-950
+ overflow-hidden px-4 sm:px-6 lg:px-10">
+          
+            <p className="text-6xl from-neutral-700 font-bold mb-20 text-center justify-center">Product Highlights</p>
+
+  {/* LAS */}
+<motion.div
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.6, delay: 0.1 }}
+>
+  <Card className="w-[90%] h-[30rem] mx-auto flex flex-col md:flex-row bg-white bg-opacity-10 backdrop-blur-md shadow-2xl transition-shadow rounded-3xl p-6 gap-6 mb-20">
+    
+    {/* LEFT SIDE */}
+    <div className="flex-1 flex flex-col justify-center items-center">
+      <CardHeader className="p-10 mb-2">
+        <CardTitle className="text-4xl font-bold">Loan Against Securities (LAS)</CardTitle>
+      </CardHeader>
+      <CardContent className="p-0">
+        <ul className="list-disc list-inside text-slate-700 space-y-2">
+          <li>Borrow up to 70% of eligible securities</li>
+          <li>Minimal documentation</li>
+          <li>Flexible repayment schedules</li>
+        </ul>
+        <div className="mt-6 flex gap-3 justify-start md:justify-start">
+          <Link href="/products/las"><Button>Learn More</Button></Link>
+          <Link href="/products/las#eligibility"><Button variant="ghost">Check Eligibility</Button></Link>
+        </div>
+      </CardContent>
+    </div>
+
+    {/* RIGHT SIDE */}
+    <div className="flex-1 flex items-center justify-center bg-blue-50 rounded-2xl p-6">
+      <div className="text-center text-slate-700">
+        <h4 className="font-semibold text-lg">Quick Metrics</h4>
+        <p className="mt-2">Liquidity: 80%</p>
+        <p>Cost: 40%</p>
+        <p>Complexity: 30%</p>
+        <p>Turnaround: 70%</p>
+      </div>
+    </div>
+
+  </Card>
+</motion.div>
+
+{/* LAMF */}
+<motion.div
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.6, delay: 0.3 }}
+>
+  <Card className="w-[90%] h-[30rem] mx-auto flex flex-col md:flex-row bg-white bg-opacity-10 backdrop-blur-md shadow-2xl transition-shadow rounded-3xl p-6 gap-6 mb-20">
+    
+    {/* LEFT SIDE */}
+    <div className="flex-1 flex flex-col justify-center items-center">
+      <CardHeader className="p-10 mb-2">
+        <CardTitle className="text-4xl font-bold">Loan Against Mutual Funds (LAMF)</CardTitle>
+      </CardHeader>
+      <CardContent className="p-0">
+        <ul className="list-disc list-inside text-slate-700 space-y-2">
+          <li>Instant approval for qualifying funds</li>
+          <li>No exit-loads</li>
+          <li>Linked to NAVs for simplicity</li>
+        </ul>
+        <div className="mt-6 flex gap-3 justify-start md:justify-start">
+          <Link href="/products/lamf"><Button>Learn More</Button></Link>
+          <Link href="/products/lamf#eligibility"><Button variant="ghost">Check Eligibility</Button></Link>
+        </div>
+      </CardContent>
+    </div>
+
+    {/* RIGHT SIDE */}
+    <div className="flex-1 flex items-center justify-center bg-pink-50 rounded-2xl p-6">
+      <div className="text-center text-slate-700">
+        <h4 className="font-semibold text-lg">Quick Metrics</h4>
+        <p className="mt-2">Liquidity: 70%</p>
+        <p>Cost: 50%</p>
+        <p>Complexity: 35%</p>
+        <p>Turnaround: 80%</p>
+      </div>
+    </div>
+
+  </Card>
+</motion.div>
+
+{/* MTF */}
+<motion.div
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.6, delay: 0.5 }}
+>
+  <Card className="w-[90%] h-[30rem] mx-auto flex flex-col md:flex-row bg-white bg-opacity-10 backdrop-blur-md shadow-2xl transition-shadow rounded-3xl p-6 gap-6 mb-20">
+    
+    {/* LEFT SIDE */}
+    <div className="flex-1 flex flex-col justify-center items-center">
+      <CardHeader className="p-10 mb-2">
+        <CardTitle className="text-4xl font-bold">Margin Trading Facility (MTF)</CardTitle>
+      </CardHeader>
+      <CardContent className="p-0">
+        <ul className="list-disc list-inside text-slate-700 space-y-2">
+          <li>Leverage up to 4x</li>
+          <li>Transparent interest & margin calls</li>
+          <li>Real-time risk monitoring</li>
+        </ul>
+        <div className="mt-6 flex gap-3 justify-start md:justify-start">
+          <Link href="/products/mtf"><Button>Learn More</Button></Link>
+          <Link href="/products/mtf#eligibility"><Button variant="ghost">Check Eligibility</Button></Link>
+        </div>
+      </CardContent>
+    </div>
+
+    {/* RIGHT SIDE */}
+    <div className="flex-1 flex items-center justify-center bg-indigo-50 rounded-2xl p-6">
+      <div className="text-center text-slate-700">
+        <h4 className="font-semibold text-lg">Quick Metrics</h4>
+        <p className="mt-2">Liquidity: 60%</p>
+        <p>Cost: 30%</p>
+        <p>Complexity: 60%</p>
+        <p>Turnaround: 50%</p>
+      </div>
+    </div>
+
+  </Card>
+</motion.div>
+
+
+</section>
+
+           
+          {/* COMPARE PRODUCTS */}
+<section className="relative flex justify-center items-center min-h-[80vh] overflow-hidden px-4 sm:px-6 lg:px-10 bg-gradient-to-br from-blue-950 via-indigo-400 via-indigo-200 to-white">
+  {/* Background noise layer */}
+  <div className="absolute inset-0 bg-[url('/noise.png')] opacity-10  mix-blend-overlay pointer-events-none"></div>
+
+  {/* Glass card container */}
+  <SpotlightCard className="relative z-10 w-[95%] rounded-3xl bg-gradient-to-bl from-indigo-800 to-blue-950 backdrop-blur-lg border border-white/30 shadow-xl p-8 sm:p-12 md:p-16 flex flex-col"  spotlightColor="rgba(255, 255, 25, 0.3)">
+ <motion.div
+    
+    initial={{ opacity: 0, y: 40 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.8 }}
+  >
+    <h2 className="text-3xl sm:text-4xl font-extrabold mb-10 text-center text-white">Compare Products</h2>
+
+    <Tabs defaultValue="las">
+      <TabsList className="mb-7">
+        {PRODUCTS.map((p) => (
+          <TabsTrigger
+            key={p.id}
+            value={p.id}
+            className="text-base sm:text-lg px-4 sm:px-6 py-2 sm:py-3 rounded-xl whitespace-nowrap transition font-medium focus-visible:ring-2 focus-visible:ring-emerald-400"
+          >
+            {p.title.split('(')[0].trim()}
+          </TabsTrigger>
+        ))}
+      </TabsList>
+
+      {PRODUCTS.map((p) => (
+        <TabsContent key={p.id} value={p.id}>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }}>
+            <div className="grid md:grid-cols-2 gap-10 items-start text-center md:text-left">
+              {/* Left Info */}
+              <div>
+                <h4 className="text-2xl font-semibold text-white">{p.title}</h4>
+                <p className="text-lg text-slate-200 mt-3">{p.blurb}</p>
+                <ul className="mt-6 text-base text-slate-200 space-y-3">
+                  {p.bullets.map((b, i) => (
+                    <li key={i}>• {b}</li>
+                  ))}
+                </ul>
+                <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                  <Link href={`/products/${p.id}`}><Button size="lg">Deep Dive</Button></Link>
+                  <Link href={`/contact`}><Button variant="outline" size="lg">Talk to Het</Button></Link>
+                </div>
+              </div>
+
+              {/* Right Metrics */}
+              <div>
+                <Card className="p-6 rounded-3xl shadow-lg bg-white/20 backdrop-blur-md border border-white/20">
+                  <CardContent className="p-4">
+                    <div className="text-sm text-slate-200 font-medium">Quick metrics</div>
+                    <div className="mt-4 grid grid-cols-2 gap-6">
+                      {p.metrics.map((m, idx) => (
+                        <div key={idx} className="text-base">
+                          <div className="text-sm text-slate-200">{m.name}</div>
+                          <div className="text-lg font-semibold">{m.value}%</div>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+                <div className="mt-6 text-base text-slate-200">
+                  <div className="font-semibold">Example</div>
+                  <div className="mt-2">
+                    Borrow ₹1,00,000 on a portfolio worth ₹2,00,000 vs alternatives — clear numbers, no surprises.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </TabsContent>
+      ))}
+    </Tabs>
+  </motion.div>
+</SpotlightCard>
+  
+</section>
+
+
+          {/* FEATURES SECTION */}
+          <Card className="bg-gray-200">
             <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
-              <h2 className="text-3xl sm:text-4xl font-bold mb-10 text-center">Product Highlights</h2>
-              <div className="flex flex-wrap gap-8 justify-center">
-                {PRODUCTS.map((p, idx) => (
+              <h2 className="text-3xl sm:text-4xl font-extrabold mb-12 text-center">Key Features</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                {[
+                  {
+                    icon: <Sparkles className="w-8 h-8 text-blue-500" />,
+                    title: "AI-driven Insights",
+                    desc: "Unlock powerful, AI-driven insights to grow your wealth intelligently.",
+                    points: ["Personalized portfolio recommendations","Real-time analytics","Smart alerts for opportunities and risks"],
+                    bg: "bg-blue-100"
+                  },
+                  {
+                    icon: <Briefcase className="w-8 h-8 text-emerald-500" />,
+                    title: "Flexible Investment Options",
+                    desc: "Compare and choose products that match your strategy.",
+                    points: ["Loan Against Securities (LAS)","Loan Against Mutual Funds (LAMF)","Margin Trading Facility (MTF)"],
+                    bg: "bg-emerald-100"
+                  },
+                  {
+                    icon: <CreditCard className="w-8 h-8 text-pink-500" />,
+                    title: "Clear Metrics & Analytics",
+                    desc: "Quick, transparent metrics for confident decision-making.",
+                    points: ["Liquidity, Cost, Complexity, Turnaround","Side-by-side comparisons","Easy-to-understand dashboards"],
+                    bg: "bg-pink-100"
+                  },
+                  {
+                    icon: <TrendingUp className="w-8 h-8 text-indigo-500" />,
+                    title: "Smooth & Interactive Experience",
+                    desc: "Interactive features for effortless exploration.",
+                    points: ["Animated comparison cards","Hover effects and microinteractions","Mobile-friendly UI"],
+                    bg: "bg-indigo-100"
+                  },
+                ].map((f, i) => (
                   <motion.div
-                    key={p.id}
+                    key={i}
                     initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: idx * 0.2 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.1 + i*0.1 }}
                   >
-                    <Card
-                      className="w-full sm:w-80 md:w-96 bg-white/90 backdrop-blur-md hover:shadow-2xl transition-shadow rounded-3xl p-6"
-                    >
-                      <CardHeader className="p-0 mb-6">
-                        <CardTitle className="text-xl font-bold">{p.title}</CardTitle>
-                        <CardDescription className="text-base text-slate-600">{p.blurb}</CardDescription>
-                      </CardHeader>
-                      <CardContent className="p-0">
-                        <div className="grid grid-cols-2 gap-4">
-                          {p.metrics.map((m, idx2) => (
-                            <div key={idx2} className="flex flex-col">
-                              <div className="text-sm text-slate-500">{m.name}</div>
-                              <div className="h-3 w-full bg-gray-200 rounded-full mt-1 overflow-hidden">
-                                <motion.div
-                                  className="h-3 rounded-full"
-                                  initial={{ width: 0 }}
-                                  animate={{ width: `${m.value}%` }}
-                                  transition={{ duration: 1, delay: 0.3 }}
-                                  style={{ background: m.color }}
-                                ></motion.div>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                        <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-end">
-                          <Link href={`/products/${p.id}`} >
-                            <Button className='py-3 px-5 w-full sm:w-auto'>Learn More</Button>
-                          </Link>
-                          <Link href={`/products/${p.id}#eligibility`}>
-                            <Button variant="ghost" className='py-3 px-5 w-full sm:w-auto'>Check Eligibility</Button>
-                          </Link>
-                        </div>
-                      </CardContent>
+                    <Card className={`p-6 rounded-3xl shadow-lg bg-white/90 backdrop-blur-md`}>
+                      <div className={`flex items-center justify-center w-16 h-16 rounded-full mb-4 ${f.bg}`}>{f.icon}</div>
+                      <h3 className="text-xl font-semibold mb-2">{f.title}</h3>
+                      <p className="text-sm text-slate-600 mb-4">{f.desc}</p>
+                      <ul className="list-disc list-inside text-slate-700 space-y-2 text-sm">
+                        {f.points.map((p, idx) => <li key={idx}>{p}</li>)}
+                      </ul>
                     </Card>
                   </motion.div>
                 ))}
@@ -246,131 +482,9 @@ export default function HomePage() {
             </section>
           </Card>
 
-          {/* COMPARE PRODUCTS */}
-          <Card className="bg-gray-50">
-            <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
-              <h2 className="text-3xl sm:text-4xl font-extrabold mb-10 text-center">Compare Products</h2>
-              <Tabs defaultValue="las">
-               <TabsList
-  className="
-   mb-7
-  "
->
-  {PRODUCTS.map((p) => (
-    <TabsTrigger
-      key={p.id}
-      value={p.id}
-      className="
-        text-base 
-        sm:text-lg 
-        px-4 
-        sm:px-6 
-        py-2 
-        sm:py-3 
-        rounded-xl
-        whitespace-nowrap
-        transition
-        font-medium
-        focus-visible:ring-2
-        focus-visible:ring-emerald-400
-      "
-    >
-      {p.title.split('(')[0].trim()}
-    </TabsTrigger>
-  ))}
-</TabsList>
-
-
-                {PRODUCTS.map((p) => (
-                  <TabsContent key={p.id} value={p.id}>
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }}>
-                      <div className="grid md:grid-cols-2 gap-10 items-start text-center md:text-left">
-                        {/* Left Info */}
-                        <div>
-                          <h4 className="text-2xl font-semibold">{p.title}</h4>
-                          <p className="text-lg text-slate-700 mt-3">{p.blurb}</p>
-                          <ul className="mt-6 text-base text-slate-700 space-y-3">
-                            {p.bullets.map((b, i) => (
-                              <li key={i}>• {b}</li>
-                            ))}
-                          </ul>
-                          <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                            <Link href={`/products/${p.id}`}><Button size="lg">Deep Dive</Button></Link>
-                            <Link href={`/contact`}><Button variant="outline" size="lg">Talk to Het</Button></Link>
-                          </div>
-                        </div>
-
-                        {/* Right Metrics */}
-                        <div>
-                          <Card className="p-6 rounded-3xl shadow-lg">
-                            <CardContent className="p-4">
-                              <div className="text-sm text-slate-500 font-medium">Quick metrics</div>
-                              <div className="mt-4 grid grid-cols-2 gap-6">
-                                {p.metrics.map((m, idx) => (
-                                  <div key={idx} className="text-base">
-                                    <div className="text-sm text-slate-500">{m.name}</div>
-                                    <div className="text-lg font-semibold">{m.value}%</div>
-                                  </div>
-                                ))}
-                              </div>
-                            </CardContent>
-                          </Card>
-                          <div className="mt-6 text-base text-slate-700">
-                            <div className="font-semibold">Example</div>
-                            <div className="mt-2">
-                              Borrow ₹1,00,000 on a portfolio worth ₹2,00,000 vs alternatives — clear numbers, no surprises.
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </motion.div>
-                  </TabsContent>
-                ))}
-              </Tabs>
-            </section>
-          </Card>
-
-          {/* FEATURES */}
-          <Card className="bg-gray-200">
-            <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20 grid grid-cols-1 md:grid-cols-3 gap-12">
-              {[ /* ...features array (unchanged) */ ].map((f, i) => (
-                <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: i*0.2 }}>
-                  <Card className="p-8 rounded-3xl shadow-lg">
-                    <CardHeader className="p-0">
-                      <CardTitle className="text-2xl font-semibold">{f.title}</CardTitle>
-                      <CardDescription className="text-base text-slate-600 mt-1">{f.desc}</CardDescription>
-                    </CardHeader>
-                    <CardContent className="p-0 mt-6">
-                      <ul className="list-disc list-inside text-base text-slate-700 space-y-3">
-                        {f.points.map((pt, j) => <li key={j}>{pt}</li>)}
-                      </ul>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
-            </section>
-          </Card>
-
-          {/* CTA */}
-          <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
-            <motion.div
-              whileHover={{ scale: 1.03 }}
-              className="bg-gradient-to-r from-emerald-400 to-indigo-500 text-white rounded-3xl p-8 sm:p-12 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-8"
-            >
-              <div className="text-center md:text-left">
-                <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold">Ready to get clarity?</h3>
-                <p className="text-base sm:text-lg md:text-xl mt-3 max-w-xl mx-auto md:mx-0">
-                  Compare products, check eligibility, and act confidently — all in one place.
-                </p>
-              </div>
-              <Link href="/contact">
-                <Button size="lg" className="px-10 py-4">Talk to Het</Button>
-              </Link>
-            </motion.div>
-          </section>
-
         </main>
 
+        {/* FOOTER */}
         <Footer />
       </div>
     </TooltipProvider>
