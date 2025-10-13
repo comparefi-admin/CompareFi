@@ -122,14 +122,8 @@ export default function AdminLogin() {
           {error && <p className="text-sm text-red-500 text-center">{error}</p>}
         </form>
 
-        {debug && (
-          <pre className="text-xs bg-gray-100 text-gray-700 p-3 rounded-md overflow-auto max-h-48">
-            {debug}
-          </pre>
-        )}
-
         <p className="text-xs text-gray-500 text-center mt-4">
-          (Keep this route hidden — don’t link it in navigation)
+          (Keep this route hidden — don’t share the link anywhere)
         </p>
       </div>
     </div>
