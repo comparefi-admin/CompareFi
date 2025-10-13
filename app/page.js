@@ -147,7 +147,7 @@ export default function HomePage() {
         <main className="flex-grow">
 
           {/* HERO SECTION */}
-          <section className="relative flex items-center justify-center min-h-[85vh] bg-gradient-to-br from-slate-300 via-indigo-200 via-indigo-400 to-violet-800 overflow-hidden px-4 sm:px-6 lg:px-10" >
+          <section className="relative flex items-center justify-center min-h-[85vh] bg-gradient-to-br from-slate-300 via-indigo-200 via-indigo-400 to-blue-200 overflow-hidden px-4 sm:px-6 lg:px-10" >
             {/* Background noise layer */}
             <div className="absolute inset-0 bg-[url('/noise.png')] opacity-100 mix-blend-overlay pointer-events-none"></div>
 
@@ -217,7 +217,7 @@ export default function HomePage() {
 
           {/* PRODUCT HIGHLIGHTS */}
           
-<section className="relative flex flex-col items-center justify-center py-5 bg-gradient-to-bl from-violet-800 via-indigo-400 via-indigo-200 to-blue-950 overflow-hidden px-4 sm:px-6 lg:px-10">
+<section className="relative flex flex-col items-center justify-center py-5 bg-gradient-to-bl from-blue-200 via-indigo-400 via-indigo-200 to-blue-950 overflow-hidden px-4 sm:px-6 lg:px-10">
   <h2 className="text-5xl sm:text-6xl mt--2 font-extrabold mb-16 text-center text-white drop-shadow-lg">
     Product Highlights
   </h2>
