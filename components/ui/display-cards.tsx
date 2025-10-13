@@ -26,7 +26,7 @@ function DisplayCard({
   return (
     <div
       className={cn(
-        "relative flex h-[12rem] w-[22rem] -skew-y-[9deg] select-none flex-col justify-between rounded-2xl border-2 bg-muted/50 p-6 shadow-md transition-all duration-700 hover:-translate-y-4 hover:shadow-lg hover:shadow-blue-500/20 overflow-hidden after:absolute after:inset-0 after:-z-10 after:rounded-2xl after:bg-gradient-to-l after:from-background/70 after:to-transparent after:pointer-events-none after:mix-blend-overlay [&>*]:flex [&>*]:items-center [&>*]:gap-4",
+        "relative flex h-[12rem] w-[22rem] -skew-y-[9deg] select-none flex-col justify-between rounded-2xl border-2 bg-muted/50 p-6 shadow-md transition-all duration-700 hover:-translate-y-6 hover:bg-muted/100 hover:shadow-lg hover:shadow-blue-500/30 overflow-hidden after:absolute after:inset-0 after:-z-10 after:rounded-2xl after:bg-gradient-to-l after:from-background/70 after:to-transparent after:pointer-events-none after:mix-blend-overlay [&>*]:flex [&>*]:items-center [&>*]:gap-4",
         className
       )}
     >
@@ -47,23 +47,23 @@ interface DisplayCardsProps {
 }
 
 export default function DisplayCards({ cards }: DisplayCardsProps) {
-  // Default stacked cards with sequential animation and spacing
+  // Default stacked cards with rotation, translation, and depth
   const defaultCards = [
     {
-      className: "animate-hover-cycle delay-[0ms] translate-x-0 translate-y-0 z-[3]",
+      className: "translate-x-0 translate-y-0 rotate-[-2deg] z-[3] shadow-md",
     },
     {
-      className: "animate-hover-cycle delay-[1000ms] translate-x-24 translate-y-12 z-[2]",
+      className: "translate-x-20 translate-y-10 rotate-[1deg] z-[2] shadow-lg",
     },
     {
-      className: "animate-hover-cycle delay-[2000ms] translate-x-48 translate-y-24 z-[1]",
+      className: "translate-x-40 translate-y-20 rotate-[-1deg] z-[1] shadow-xl",
     },
   ];
 
   const displayCards = cards || defaultCards;
 
   return (
-    <div className="relative grid [grid-template-areas:'stack'] place-items-center gap-6">
+    <div className="relative grid [grid-template-areas:'stack'] place-items-center gap-8">
       {displayCards.map((cardProps, index) => (
         <DisplayCard key={index} {...cardProps} />
       ))}
