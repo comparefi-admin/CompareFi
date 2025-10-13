@@ -12,43 +12,73 @@ export default function AdminLogin() {
   const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [debug, setDebug] = useState('')
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)
     setError('')
+    setDebug('Starting login...')
 
-    const { data, error: signError } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    })
+    try {
+      console.log('🔹 Attempting signInWithPassword', { email })
+      const { data, error: signError } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      })
 
-    if (signError) {
-      setError(signError.message)
+      console.log('🔹 Supabase response:', { data, signError })
+      setDebug(JSON.stringify({ data, signError }, null, 2))
+
+      if (signError) {
+        console.error('❌ Sign-in error:', signError)
+        setError(signError.message)
+        setLoading(false)
+        return
+      }
+
+      const user = data?.user
+      console.log('✅ Authenticated user:', user)
+
+      if (!user) {
+        setError('No user object returned.')
+        setLoading(false)
+        return
+      }
+
+      const adminUid = process.env.NEXT_PUBLIC_ADMIN_UID
+      console.log('🔸 Admin UID check', { userId: user.id, adminUid })
+
+      // Allow admin login even if email not confirmed
+      if (user.id === adminUid) {
+        console.log('✅ Admin UID matched! Redirecting...')
+        router.push('/admin/dashboard')
+        return
+      }
+
+      // Email not confirmed
+      if (!user.email_confirmed_at) {
+        console.warn('⚠️ Email not confirmed for this account')
+        await supabase.auth.signOut()
+        setError('Email not confirmed.')
+      } else {
+        console.warn('🚫 Unauthorized account (not admin)')
+        await supabase.auth.signOut()
+        setError('Unauthorized account.')
+      }
+    } catch (err) {
+      console.error('🔥 Unexpected error:', err)
+      setError(err.message || 'Unexpected error.')
+    } finally {
       setLoading(false)
-      return
     }
-
-    const user = data.user
-
-    // Allow admin to log in even if email not confirmed
-    if (user?.id === process.env.NEXT_PUBLIC_ADMIN_UID) {
-      router.push('/admin/dashboard')
-    } else if (!user.email_confirmed_at) {
-      await supabase.auth.signOut()
-      setError('Email not confirmed.')
-    } else {
-      await supabase.auth.signOut()
-      setError('Unauthorized account.')
-    }
-
-    setLoading(false)
   }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
       <div className="w-full max-w-md bg-white shadow-lg rounded-2xl p-8 space-y-6">
         <h1 className="text-3xl font-extrabold text-gray-900 text-center">Admin Login</h1>
+
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="flex flex-col">
             <label className="text-sm font-medium text-gray-700 mb-1">Email</label>
@@ -91,6 +121,12 @@ export default function AdminLogin() {
 
           {error && <p className="text-sm text-red-500 text-center">{error}</p>}
         </form>
+
+        {debug && (
+          <pre className="text-xs bg-gray-100 text-gray-700 p-3 rounded-md overflow-auto max-h-48">
+            {debug}
+          </pre>
+        )}
 
         <p className="text-xs text-gray-500 text-center mt-4">
           (Keep this route hidden — don’t link it in navigation)
