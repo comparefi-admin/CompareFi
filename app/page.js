@@ -147,7 +147,7 @@ export default function HomePage() {
         <main className="flex-grow">
 
           {/* HERO SECTION */}
-          <section className="relative flex items-center justify-center min-h-[85vh] bg-gradient-to-br from-slate-300 via-indigo-200 via-indigo-400 to-violet-800 overflow-hidden px-4 sm:px-6 lg:px-10">
+          <section className="relative flex items-center justify-center min-h-[85vh] bg-gradient-to-br from-slate-300 via-indigo-200 via-indigo-400 to-violet-800 overflow-hidden px-4 sm:px-6 lg:px-10" >
             {/* Background noise layer */}
             <div className="absolute inset-0 bg-[url('/noise.png')] opacity-100 mix-blend-overlay pointer-events-none"></div>
 
@@ -159,7 +159,7 @@ export default function HomePage() {
               transition={{ duration: 0.8 }}
             >
               {/* LEFT */}
-              <div className="flex-1 text-center md:text-left space-y-5 sm:space-y-6 lg:space-y-8">
+              <div className="flex-1 text-center md:text-left space-y-5 sm:space-y-6 lg:space-y-8 pl-20">
                 <motion.h1
                   className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-tight drop-shadow-[0_2px_2px_rgba(0,0,0,0.1)]"
                   initial={{ opacity: 0, y: 30 }}
