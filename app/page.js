@@ -391,7 +391,7 @@ export default function HomePage() {
   <div className="absolute inset-0 bg-[url('/noise.png')] opacity-10  mix-blend-overlay pointer-events-none"></div>
 
   {/* Glass card container */}
-  <SpotlightCard className="relative z-10 w-[95%] rounded-3xl bg-gradient-to-bl from-indigo-800 to-blue-950 backdrop-blur-lg border border-white/30 shadow-xl p-8 sm:p-12 md:p-16 flex flex-col"  spotlightColor="rgba(221,160,221,03211232)">
+  <SpotlightCard className="relative z-10 w-[95%] rounded-3xl bg-gradient-to-bl from-indigo-800 to-blue-950 backdrop-blur-lg border border-white/30 shadow-xl p-8 sm:p-12 md:p-16 flex flex-col"  spotlightColor="rgba(255,255,255,0.1)">
  <motion.div
     
     initial={{ opacity: 0, y: 40 }}
