@@ -49,16 +49,17 @@ interface DisplayCardsProps {
 export default function DisplayCards({ cards }: DisplayCardsProps) {
   // Default stacked cards with rotation, translation, and depth
   const defaultCards = [
-    {
-      className: "translate-x-0 translate-y-0 rotate-[-2deg] z-[3] shadow-md",
-    },
-    {
-      className: "translate-x-20 translate-y-10 rotate-[1deg] z-[2] shadow-lg",
-    },
-    {
-      className: "translate-x-40 translate-y-20 rotate-[-1deg] z-[1] shadow-xl",
-    },
-  ];
+  {
+    className: "translate-x-[0px] translate-y-[23px] rotate-[-2deg] z-[3] shadow-md",
+  },
+  {
+    className: "translate-x-[80px] translate-y-[50px] rotate-[1deg] z-[2] shadow-lg",
+  },
+  {
+    className: "translate-x-[160px] translate-y-[70px] rotate-[-5deg] z-[1] shadow-xl",
+  },
+];
+
 
   const displayCards = cards || defaultCards;
 

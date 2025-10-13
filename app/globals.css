@@ -8,25 +8,6 @@
   box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 50px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 26px -18px inset;
 }
 
-@layer utilities {
-  @keyframes hoverCycle {
-    0%, 100% { transform: translateY(0) skewY(-9deg); }
-    50% { transform: translateY(-12px) skewY(-9deg); }
-  }
-
-  .animate-hover-cycle {
-    animation: hoverCycle 5s ease-in-out infinite;
-  }
-
-  @keyframes floating {
-    0%, 100% { transform: translateY(0) rotate(-2deg); }
-    50% { transform: translateY(-12px) rotate(-1deg); }
-  }
-
-  .animate-floating {
-    animation: floating 4s ease-in-out infinite;
-  }
-}
 
 :root {
   --foreground-rgb: 0, 0, 0;

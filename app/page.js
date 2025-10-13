@@ -217,135 +217,174 @@ export default function HomePage() {
 
           {/* PRODUCT HIGHLIGHTS */}
           
- <section className="relative  items-center justify-center min-h-[80vh] bg-gradient-to-bl  from-slate-100 via-indigo-400 via-indigo-200 to-blue-950
- overflow-hidden px-4 sm:px-6 lg:px-10">
-          
-            <p className="text-6xl from-neutral-700 font-bold mb-20 text-center justify-center">Product Highlights</p>
+<section className="relative flex flex-col items-center justify-center py-5 bg-gradient-to-bl from-slate-100 via-indigo-400 via-indigo-200 to-blue-950 overflow-hidden px-4 sm:px-6 lg:px-10">
+  <h2 className="text-5xl sm:text-6xl mt--2 font-extrabold mb-16 text-center text-white drop-shadow-lg">
+    Product Highlights
+  </h2>
 
-  {/* LAS */}
-<motion.div
-  initial={{ opacity: 0, y: 20 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.6, delay: 0.1 }}
->
-  <Card className="w-[90%] h-[30rem] mx-auto flex flex-col md:flex-row bg-white bg-opacity-10 backdrop-blur-md shadow-2xl transition-shadow rounded-3xl p-6 gap-6 mb-20">
-    
-    {/* LEFT SIDE */}
-    <div className="flex-1 flex flex-col justify-center items-center">
-      <CardHeader className="p-10 mb-2">
-        <CardTitle className="text-4xl font-bold">Loan Against Securities (LAS)</CardTitle>
-      </CardHeader>
-      <CardContent className="p-0">
-        <ul className="list-disc list-inside text-slate-700 space-y-2">
-          <li>Borrow up to 70% of eligible securities</li>
-          <li>Minimal documentation</li>
-          <li>Flexible repayment schedules</li>
-        </ul>
-        <div className="mt-6 flex gap-3 justify-start md:justify-start">
-          <Link href="/products/las"><Button>Learn More</Button></Link>
-          <Link href="/products/las#eligibility"><Button variant="ghost">Check Eligibility</Button></Link>
-        </div>
-      </CardContent>
-    </div>
-
-    {/* RIGHT SIDE */}
-    <div className="flex-1 flex items-center justify-center bg-blue-50 rounded-2xl p-6">
-      <div className="text-center text-slate-700">
-        <h4 className="font-semibold text-lg">Quick Metrics</h4>
-        <p className="mt-2">Liquidity: 80%</p>
-        <p>Cost: 40%</p>
-        <p>Complexity: 30%</p>
-        <p>Turnaround: 70%</p>
+  {/* LAS Card */}
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.7 }}
+    className="w-[97%]   mb-16 flex flex-col md:flex-row items-stretch gap-12"
+  >
+    {/* Left: Content */}
+    <div className="flex-1 flex flex-col justify-between bg-white/10 backdrop-blur-2xl border border-white/20 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300">
+      <h3 className="text-3xl sm:text-4xl font-bold text-white mb-4 drop-shadow-sm">
+        Loan Against Securities (LAS)
+      </h3>
+      <p className="text-lg text-slate-200 mb-6">
+        Unlock liquidity from your portfolio without selling core holdings.
+      </p>
+      <ul className="list-disc list-inside text-slate-300 space-y-2 mb-6">
+        <li>Borrow up to 70% of eligible securities</li>
+        <li>Minimal documentation</li>
+        <li>Flexible repayment schedules</li>
+      </ul>
+      <div className="flex flex-wrap gap-4">
+        <Link href="/products/las"><Button size="lg">Learn More</Button></Link>
+        <Link href="/products/las#eligibility"><Button size="lg" variant="outline">Check Eligibility</Button></Link>
       </div>
     </div>
 
-  </Card>
-</motion.div>
-
-{/* LAMF */}
-<motion.div
-  initial={{ opacity: 0, y: 20 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.6, delay: 0.3 }}
->
-  <Card className="w-[90%] h-[30rem] mx-auto flex flex-col md:flex-row bg-white bg-opacity-10 backdrop-blur-md shadow-2xl transition-shadow rounded-3xl p-6 gap-6 mb-20">
-    
-    {/* LEFT SIDE */}
-    <div className="flex-1 flex flex-col justify-center items-center">
-      <CardHeader className="p-10 mb-2">
-        <CardTitle className="text-4xl font-bold">Loan Against Mutual Funds (LAMF)</CardTitle>
-      </CardHeader>
-      <CardContent className="p-0">
-        <ul className="list-disc list-inside text-slate-700 space-y-2">
-          <li>Instant approval for qualifying funds</li>
-          <li>No exit-loads</li>
-          <li>Linked to NAVs for simplicity</li>
-        </ul>
-        <div className="mt-6 flex gap-3 justify-start md:justify-start">
-          <Link href="/products/lamf"><Button>Learn More</Button></Link>
-          <Link href="/products/lamf#eligibility"><Button variant="ghost">Check Eligibility</Button></Link>
+    {/* Right: Metrics */}
+    <div className="flex-1 flex flex-col justify-center items-center bg-wh backdrop-blur-md border border-white/20 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300">
+      <h4 className="text-2xl font-semibold text-white mb-6">Quick Metrics</h4>
+      <div className="grid grid-cols-2 gap-6 w-full">
+        <div className="flex flex-col items-center">
+          <div className="text-sm text-slate-300">Liquidity</div>
+          <div className="text-xl font-bold text-white">80%</div>
         </div>
-      </CardContent>
+        <div className="flex flex-col items-center">
+          <div className="text-sm text-slate-300">Cost</div>
+          <div className="text-xl font-bold text-white">40%</div>
+        </div>
+        <div className="flex flex-col items-center">
+          <div className="text-sm text-slate-300">Complexity</div>
+          <div className="text-xl font-bold text-white">30%</div>
+        </div>
+        <div className="flex flex-col items-center">
+          <div className="text-sm text-slate-300">Turnaround</div>
+          <div className="text-xl font-bold text-white">70%</div>
+        </div>
+      </div>
+      <div className="mt-6 text-center text-slate-300 text-sm sm:text-base">
+        Example: Borrow ₹1,00,000 on a portfolio worth ₹2,00,000 — clear numbers, no surprises.
+      </div>
     </div>
+  </motion.div>
 
-    {/* RIGHT SIDE */}
-    <div className="flex-1 flex items-center justify-center bg-pink-50 rounded-2xl p-6">
-      <div className="text-center text-slate-700">
-        <h4 className="font-semibold text-lg">Quick Metrics</h4>
-        <p className="mt-2">Liquidity: 70%</p>
-        <p>Cost: 50%</p>
-        <p>Complexity: 35%</p>
-        <p>Turnaround: 80%</p>
+  {/* LAMF Card */}
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.7 }}
+    className="w-[97%] mb-16 flex flex-col md:flex-row-reverse items-stretch gap-10"
+  >
+    {/* Left: Metrics */}
+    <div className="flex-1 flex flex-col justify-center items-center bg-gradient-to-tr from-white/5 to-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300">
+      <h4 className="text-2xl font-semibold text-white mb-6">Quick Metrics</h4>
+      <div className="grid grid-cols-2 gap-6 w-full">
+        <div className="flex flex-col items-center">
+          <div className="text-sm text-slate-300">Liquidity</div>
+          <div className="text-xl font-bold text-white">70%</div>
+        </div>
+        <div className="flex flex-col items-center">
+          <div className="text-sm text-slate-300">Cost</div>
+          <div className="text-xl font-bold text-white">50%</div>
+        </div>
+        <div className="flex flex-col items-center">
+          <div className="text-sm text-slate-300">Complexity</div>
+          <div className="text-xl font-bold text-white">35%</div>
+        </div>
+        <div className="flex flex-col items-center">
+          <div className="text-sm text-slate-300">Turnaround</div>
+          <div className="text-xl font-bold text-white">80%</div>
+        </div>
+      </div>
+      <div className="mt-6 text-center text-slate-300 text-sm sm:text-base">
+        Example: Instant cash against mutual investments without redemption.
       </div>
     </div>
 
-  </Card>
-</motion.div>
-
-{/* MTF */}
-<motion.div
-  initial={{ opacity: 0, y: 20 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.6, delay: 0.5 }}
->
-  <Card className="w-[90%] h-[30rem] mx-auto flex flex-col md:flex-row bg-white bg-opacity-10 backdrop-blur-md shadow-2xl transition-shadow rounded-3xl p-6 gap-6 mb-20">
-    
-    {/* LEFT SIDE */}
-    <div className="flex-1 flex flex-col justify-center items-center">
-      <CardHeader className="p-10 mb-2">
-        <CardTitle className="text-4xl font-bold">Margin Trading Facility (MTF)</CardTitle>
-      </CardHeader>
-      <CardContent className="p-0">
-        <ul className="list-disc list-inside text-slate-700 space-y-2">
-          <li>Leverage up to 4x</li>
-          <li>Transparent interest & margin calls</li>
-          <li>Real-time risk monitoring</li>
-        </ul>
-        <div className="mt-6 flex gap-3 justify-start md:justify-start">
-          <Link href="/products/mtf"><Button>Learn More</Button></Link>
-          <Link href="/products/mtf#eligibility"><Button variant="ghost">Check Eligibility</Button></Link>
-        </div>
-      </CardContent>
+    {/* Right: Content */}
+    <div className="flex-1 flex flex-col justify-between bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300">
+      <h3 className="text-3xl sm:text-4xl font-bold text-white mb-4 drop-shadow-sm">
+        Loan Against Mutual Funds (LAMF)
+      </h3>
+      <p className="text-lg text-slate-200 mb-6">
+        Quick cash against mutual investments — no redemption required.
+      </p>
+      <ul className="list-disc list-inside text-slate-300 space-y-2 mb-6">
+        <li>Instant approval for qualifying funds</li>
+        <li>No exit-loads</li>
+        <li>Linked to NAVs for simplicity</li>
+      </ul>
+      <div className="flex flex-wrap gap-4">
+        <Link href="/products/lamf"><Button size="lg">Learn More</Button></Link>
+        <Link href="/products/lamf#eligibility"><Button size="lg" variant="outline">Check Eligibility</Button></Link>
+      </div>
     </div>
+  </motion.div>
 
-    {/* RIGHT SIDE */}
-    <div className="flex-1 flex items-center justify-center bg-indigo-50 rounded-2xl p-6">
-      <div className="text-center text-slate-700">
-        <h4 className="font-semibold text-lg">Quick Metrics</h4>
-        <p className="mt-2">Liquidity: 60%</p>
-        <p>Cost: 30%</p>
-        <p>Complexity: 60%</p>
-        <p>Turnaround: 50%</p>
+  {/* MTF Card */}
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.7 }}
+    className="w-[97%] mb-16 flex flex-col md:flex-row items-stretch gap-20"
+  >
+    {/* Left: Content */}
+    <div className="flex-1 flex flex-col justify-between bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300">
+      <h3 className="text-3xl sm:text-4xl font-bold text-white mb-4 drop-shadow-sm">
+        Margin Trading Facility (MTF)
+      </h3>
+      <p className="text-lg text-slate-200 mb-6">
+        Amplify buying power with controlled leverage for active traders.
+      </p>
+      <ul className="list-disc list-inside text-slate-300 space-y-2 mb-6">
+        <li>Leverage up to 4x</li>
+        <li>Transparent interest & margin calls</li>
+        <li>Real-time risk monitoring</li>
+      </ul>
+      <div className="flex flex-wrap gap-4">
+        <Link href="/products/mtf"><Button size="lg">Learn More</Button></Link>
+        <Link href="/products/mtf#eligibility"><Button size="lg" variant="outline">Check Eligibility</Button></Link>
       </div>
     </div>
 
-  </Card>
-</motion.div>
-
-
+    {/* Right: Metrics */}
+    <div className="flex-1 flex flex-col justify-center items-center bg-gradient-to-tr from-white/5 to-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300">
+      <h4 className="text-2xl font-semibold text-white mb-6">Quick Metrics</h4>
+      <div className="grid grid-cols-2 gap-6 w-full">
+        <div className="flex flex-col items-center">
+          <div className="text-sm text-slate-300">Liquidity</div>
+          <div className="text-xl font-bold text-white">60%</div>
+        </div>
+        <div className="flex flex-col items-center">
+          <div className="text-sm text-slate-300">Cost</div>
+          <div className="text-xl font-bold text-white">30%</div>
+        </div>
+        <div className="flex flex-col items-center">
+          <div className="text-sm text-slate-300">Complexity</div>
+          <div className="text-xl font-bold text-white">60%</div>
+        </div>
+        <div className="flex flex-col items-center">
+          <div className="text-sm text-slate-300">Turnaround</div>
+          <div className="text-xl font-bold text-white">50%</div>
+        </div>
+      </div>
+      <div className="mt-6 text-center text-slate-300 text-sm sm:text-base">
+        Example: Amplify trading power while keeping risks transparent.
+      </div>
+    </div>
+  </motion.div>
 </section>
-
-           
+      
           {/* COMPARE PRODUCTS */}
 <section className="relative flex justify-center items-center min-h-[80vh] overflow-hidden px-4 sm:px-6 lg:px-10 bg-gradient-to-br from-blue-950 via-indigo-400 via-indigo-200 to-white">
   {/* Background noise layer */}
