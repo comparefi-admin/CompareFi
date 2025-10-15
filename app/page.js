@@ -221,14 +221,14 @@ export default function HomePage() {
           </section>
 
           {/* PRODUCT HIGHLIGHTS */}
-    <section className="w-full bg-[#EEF1FA] bg-opacity-0 py-20 px-6 lg:px-20 flex flex-col lg:flex-row justify-between items-center lg:items-start">
+   <section className="w-full bg-[#EEF1FA] bg-opacity-0 py-20 px-6 lg:px-20 flex flex-col lg:flex-row justify-between items-center lg:items-start">
   {/* Left Section */}
   <div className="lg:w-1/3 mb-10 lg:mb-0">
     <h2 className="text-4xl font-extrabold text-[#0A0F2C] mb-6 leading-tight">
       Product Highlights
     </h2>
     <a
-      href="#"
+      href="/products" // <-- Link to the page showing all products
       className="text-[#0A0F2C] font-medium underline underline-offset-4 hover:text-blue-600 transition"
     >
       View All
@@ -239,34 +239,34 @@ export default function HomePage() {
   <div className="lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
     
     {/* Card 1 */}
-    <div className="flex items-center space-x-5 bg-white rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 p-6">
+    <a href="/products/las" className="flex items-center space-x-5 bg-white rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 p-6">
       <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-b from-[#6D8EF4] to-[#3D66E1] shadow-md">
         <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6 2a9 9 0 11-9-9 9 9 0 019 9z" />
         </svg>
       </div>
       <span className="text-[#0A0F2C] font-medium text-lg">LAS</span>
-    </div>
+    </a>
 
     {/* Card 2 */}
-    <div className="flex items-center space-x-5 bg-white rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 p-6">
+    <a href="/products/lamf" className="flex items-center space-x-5 bg-white rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 p-6">
       <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-b from-[#6D8EF4] to-[#3D66E1] shadow-md">
         <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 12h14M12 5l7 7-7 7" />
         </svg>
       </div>
       <span className="text-[#0A0F2C] font-medium text-lg">LAMF</span>
-    </div>
+    </a>
 
     {/* Card 3 */}
-    <div className="flex items-center space-x-5 bg-white rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 p-6">
+    <a href="/products/mtf" className="flex items-center space-x-5 bg-white rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 p-6">
       <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-b from-[#6D8EF4] to-[#3D66E1] shadow-md">
         <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 10h11l4 8H7z" />
         </svg>
       </div>
       <span className="text-[#0A0F2C] font-medium text-lg">MTF</span>
-    </div>
+    </a>
 
   </div>
 </section>
