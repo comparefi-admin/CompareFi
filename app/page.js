@@ -239,7 +239,15 @@ export default function HomePage() {
   <div className="lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
     
     {/* Card 1 */}
-    <a href="/products/las" className="flex items-center space-x-5 bg-white rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 p-6">
+    <a href="/products/las" className="flex items-center space-x-5 
+           bg-white rounded-2xl shadow-sm 
+           hover:shadow-2xl 
+           hover:scale-[1.03] 
+           hover:-translate-y-0.5 
+           transition-transform transition-shadow 
+           duration-400 ease-in-out 
+           p-6 will-change-transform"
+>
       <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-b from-[#6D8EF4] to-[#3D66E1] shadow-md">
         <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6 2a9 9 0 11-9-9 9 9 0 019 9z" />
@@ -249,7 +257,14 @@ export default function HomePage() {
     </a>
 
     {/* Card 2 */}
-    <a href="/products/lamf" className="flex items-center space-x-5 bg-white rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 p-6">
+    <a href="/products/lamf"  className="flex items-center space-x-5 
+           bg-white rounded-2xl shadow-sm 
+           hover:shadow-2xl 
+           hover:scale-[1.03] 
+           hover:-translate-y-0.5 
+           transition-transform transition-shadow 
+           duration-400 ease-in-out 
+           p-6 will-change-transform">
       <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-b from-[#6D8EF4] to-[#3D66E1] shadow-md">
         <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 12h14M12 5l7 7-7 7" />
@@ -259,7 +274,14 @@ export default function HomePage() {
     </a>
 
     {/* Card 3 */}
-    <a href="/products/mtf" className="flex items-center space-x-5 bg-white rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 p-6">
+    <a href="/products/mtf"  className="flex items-center space-x-5 
+           bg-white rounded-2xl shadow-sm 
+           hover:shadow-2xl 
+           hover:scale-[1.03] 
+           hover:-translate-y-0.5 
+           transition-transform transition-shadow 
+           duration-400 ease-in-out 
+           p-6 will-change-transform">
       <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-b from-[#6D8EF4] to-[#3D66E1] shadow-md">
         <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 10h11l4 8H7z" />
@@ -336,6 +358,35 @@ export default function HomePage() {
   
 </section>
           {/* FEATURES SECTION */}
+          <section className="w-full bg-[#F9FAFB] py-20 px-6 lg:px-20 flex flex-col lg:flex-row justify-between items-center lg:items-start">
+  {/* Left Section */}
+  <div className="lg:w-1/2 mb-10 lg:mb-0">
+    <h2 className="text-4xl font-extrabold text-[#0A0F2C] mb-6 leading-tight">
+      About CompareFi
+    </h2>
+    <p className="text-[#4B5563] mb-6 text-lg leading-relaxed">
+      CompareFi is India’s most transparent financial comparison platform, helping you make smarter borrowing and investing decisions. Explore Loan Against Shares (LAS), Loan Against Mutual Funds (LAMF), or Margin Trading Facility (MTF) — all with real-time, unbiased comparisons.
+    </p>
+    <a
+      href="/about" 
+      className="text-pink-500 font-medium underline underline-offset-4 hover:text-pink-700 transition"
+    >
+      Read More
+    </a>
+  </div>
+
+  {/* Right Section (Image / Illustration) */}
+  <div className="lg:w-1/2 flex justify-center lg:justify-end">
+    <div className="w-full max-w-md lg:max-w-lg">
+      <img 
+        src="/images/comparefi-illustration.png" // replace with your uploaded image path
+        alt="CompareFi Overview"
+        className="rounded-2xl shadow-lg"
+      />
+    </div>
+  </div>
+</section>
+
         </main>
         {/* FOOTER */}
         <Footer />
