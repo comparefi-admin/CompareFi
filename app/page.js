@@ -1,4 +1,7 @@
 'use client';
+
+import TiltedCard from '@/components/TiltedCard'; 
+
 import SpotlightCard from './components/SpotlightCard.jsx'; // Import the SpotlightCard component from './components/SpotlightCard';
 import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
@@ -141,20 +144,21 @@ export default function HomePage() {
         onMouseMove={handleMouseMove}
       >
         {/* Navbar */}
-        <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-[9999] w-full max-w-screen-xl px-4 pt-4">
+        <div className="fixed top-2 left-1/2 transform -translate-x-1/2 z-[9999] w-full max-w-screen-xl px-4 pt-4">
           <Navbar />
         </div>
 
-        <main className="flex-grow">
+        <main className="flex-grow bg-gradient-to-b from-violet-100/70 to-white">
 
           {/* HERO SECTION */}
-          <section className="relative flex items-center justify-center min-h-[85vh] bg-gradient-to-br from-slate-300 via-indigo-200 via-indigo-400 to-blue-200 overflow-hidden px-4 sm:px-6 lg:px-10" >
+          <section className="relative flex items-center justify-center min-h-[85vh] bg-white bg-opacity-0 overflow-hidden px-4 sm:px-6 lg:px-10" >
             {/* Background noise layer */}
             <div className="absolute inset-0 bg-[url('/noise.png')] opacity-100 mix-blend-overlay pointer-events-none"></div>
 
             {/* Glass Card */}
             <motion.div
-              className="relative z-10 w-full max-w-full rounded-3xl bg-gradient-to-bl  min-h-[70vh] from-indigo-800 to-blue-950 backdrop-blur-lg border border-white/30 shadow-xl p-6 sm:p-10 md:p-14 lg:p-20 flex flex-col md:flex-row mt-[7%] mb-[7%] gap-10 md:gap-14 items-center justify-center"
+              className="relative z-10 w-full max-w-full rounded-3xl   min-h-[70vh] bg-gradient-to-b from-[#6D8EF4] to-[#3D66E1]
+ backdrop-blur-lg border border-white/30 shadow-xl p-6 sm:p-10 md:p-14 lg:p-20 flex flex-col md:flex-row mt-[7%] mb-[7%] gap-10 md:gap-14 items-center justify-center"
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
@@ -167,7 +171,7 @@ export default function HomePage() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1, duration: 0.7, ease: 'easeOut' }}
                 >
-                  Compare<span className="text-blue-400">Fi</span>
+                  Compare<span className="text-white">Fi</span>
                 </motion.h1>
 
                 <motion.h2
@@ -176,7 +180,7 @@ export default function HomePage() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3, duration: 0.7, ease: 'easeOut' }}
                 >
-                  Smart <span className="text-blue-400 font-semibold">Investing</span> Starts Here
+                  Smart <span className="text-blue-200 font-semibold">Investing</span> Starts Here
                 </motion.h2>
 
                 <motion.p
@@ -217,167 +221,82 @@ export default function HomePage() {
           </section>
 
           {/* PRODUCT HIGHLIGHTS */}
-          
-<section className="relative flex flex-col items-center justify-center py-5 bg-gradient-to-bl from-blue-200 via-indigo-400 via-indigo-200 to-blue-950 overflow-hidden px-4 sm:px-6 lg:px-10">
-  <h2 className="text-5xl sm:text-6xl mt--2 font-extrabold mb-16 text-center text-white drop-shadow-lg">
-    Product Highlights
-  </h2>
+   <section className="w-full bg-[#EEF1FA] bg-opacity-0 py-20 px-6 lg:px-20 flex flex-col lg:flex-row justify-between items-center lg:items-start">
+  {/* Left Section */}
+  <div className="lg:w-1/3 mb-10 lg:mb-0">
+    <h2 className="text-4xl font-extrabold text-[#0A0F2C] mb-6 leading-tight">
+      Product Highlights
+    </h2>
+    <a
+      href="/products" // <-- Link to the page showing all products
+      className="text-[#0A0F2C] font-medium underline underline-offset-4 hover:text-blue-600 transition"
+    >
+      View All
+    </a>
+  </div>
 
-  {/* LAS Card */}
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.7 }}
-    className="w-[97%]   mb-32 flex flex-col md:flex-row items-stretch gap-12"
-  >
-    {/* Left: Content */}
-    <div className="flex-1 flex flex-col justify-between bg-white/10 backdrop-blur-2xl  py-28 border border-white/20 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300">
-      <h3 className="text-3xl sm:text-4xl font-bold text-white mb-4 drop-shadow-sm">
-        Loan Against Securities (LAS)
-      </h3>
-      <p className="text-lg text-slate-200 mb-6">
-        Unlock liquidity from your portfolio without selling core holdings.
-      </p>
-      
-      <div className="flex flex-wrap gap-4">
-        <Link href="/products/las"><Button size="lg">Learn More</Button></Link>
-        <Link href="/products/las#eligibility"><Button size="lg" variant="outline">Check Eligibility</Button></Link>
-      </div>
-    </div>
-
-    {/* Right: Metrics */}
-    <div className="flex-1 flex flex-col justify-center items-center bg-wh backdrop-blur-md border py-28 border-white/20 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300">
-      <h4 className="text-2xl font-semibold text-white mb-6">Quick Metrics</h4>
-      <div className="grid grid-cols-2 gap-6 w-full">
-        <div className="flex flex-col items-center">
-          <div className="text-sm text-slate-300">Liquidity</div>
-          <div className="text-xl font-bold text-white">80%</div>
-        </div>
-        <div className="flex flex-col items-center">
-          <div className="text-sm text-slate-300">Cost</div>
-          <div className="text-xl font-bold text-white">40%</div>
-        </div>
-        <div className="flex flex-col items-center">
-          <div className="text-sm text-slate-300">Complexity</div>
-          <div className="text-xl font-bold text-white">30%</div>
-        </div>
-        <div className="flex flex-col items-center">
-          <div className="text-sm text-slate-300">Turnaround</div>
-          <div className="text-xl font-bold text-white">70%</div>
-        </div>
-      </div>
-      <div className="mt-6 text-center text-slate-300 text-sm sm:text-base">
-        Example: Borrow ₹1,00,000 on a portfolio worth ₹2,00,000 — clear numbers, no surprises.
-      </div>
-    </div>
-  </motion.div>
-
-  {/* LAMF Card */}
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.7 }}
-    className="w-[97%] mb-32 flex flex-col md:flex-row-reverse items-stretch gap-12"
-  >
-    {/* Left: Metrics */}
+  {/* Right Section (Cards Grid) */}
+  <div className="lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
     
+    {/* Card 1 */}
+    <a href="/products/las" className="flex items-center space-x-5 
+           bg-white rounded-2xl shadow-sm 
+           hover:shadow-2xl 
+           hover:scale-[1.03] 
+           hover:-translate-y-0.5 
+           transition-transform transition-shadow 
+           duration-400 ease-in-out 
+           p-6 will-change-transform"
+>
+      <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-b from-[#6D8EF4] to-[#3D66E1] shadow-md">
+        <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6 2a9 9 0 11-9-9 9 9 0 019 9z" />
+        </svg>
+      </div>
+      <span className="text-[#0A0F2C] font-medium text-lg">LAS</span>
+    </a>
 
-    {/* Right: Content */}
-    <div className="flex-1 flex flex-col justify-between bg-white/10 backdrop-blur-md border py-28 border-white/20 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300">
-      <h3 className="text-3xl sm:text-4xl font-bold text-white mb-4 drop-shadow-sm">
-        Loan Against Mutual Funds (LAMF)
-      </h3>
-      <p className="text-lg text-slate-200 mb-6">
-        Quick cash against mutual investments — no redemption required.
-      </p>
-      
-      <div className="flex flex-wrap gap-4">
-        <Link href="/products/lamf"><Button size="lg">Learn More</Button></Link>
-        <Link href="/products/lamf#eligibility"><Button size="lg" variant="outline">Check Eligibility</Button></Link>
+    {/* Card 2 */}
+    <a href="/products/lamf"  className="flex items-center space-x-5 
+           bg-white rounded-2xl shadow-sm 
+           hover:shadow-2xl 
+           hover:scale-[1.03] 
+           hover:-translate-y-0.5 
+           transition-transform transition-shadow 
+           duration-400 ease-in-out 
+           p-6 will-change-transform">
+      <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-b from-[#6D8EF4] to-[#3D66E1] shadow-md">
+        <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 12h14M12 5l7 7-7 7" />
+        </svg>
       </div>
-    </div>
-{/* Right: Content */}
-    <div className="flex-1 flex flex-col justify-center items-center bg-gradient-to-tr py-28 from-white/5 to-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300">
-      <h4 className="text-2xl font-semibold text-white mb-6">Quick Metrics</h4>
-      <div className="grid grid-cols-2 gap-6 w-full">
-        <div className="flex flex-col items-center">
-          <div className="text-sm text-slate-300">Liquidity</div>
-          <div className="text-xl font-bold text-white">70%</div>
-        </div>
-        <div className="flex flex-col items-center">
-          <div className="text-sm text-slate-300">Cost</div>
-          <div className="text-xl font-bold text-white">50%</div>
-        </div>
-        <div className="flex flex-col items-center">
-          <div className="text-sm text-slate-300">Complexity</div>
-          <div className="text-xl font-bold text-white">35%</div>
-        </div>
-        <div className="flex flex-col items-center">
-          <div className="text-sm text-slate-300">Turnaround</div>
-          <div className="text-xl font-bold text-white">80%</div>
-        </div>
-      </div>
-      <div className="mt-6 text-center text-slate-300 text-sm sm:text-base">
-        Example: Instant cash against mutual investments without redemption.
-      </div>
-    </div>
-  </motion.div>
+      <span className="text-[#0A0F2C] font-medium text-lg">LAMF</span>
+    </a>
 
-  {/* MTF Card */}
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.7 }}
-    className="w-[97%] mb-32 flex flex-col md:flex-row items-stretch gap-12"
-  >
-    {/* Left: Content */}
-    <div className="flex-1 flex flex-col justify-between py-28 bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300">
-      <h3 className="text-3xl sm:text-4xl font-bold text-white mb-4 drop-shadow-sm">
-        Margin Trading Facility (MTF)
-      </h3>
-      <p className="text-lg text-slate-200 mb-6">
-        Amplify buying power with controlled leverage for active traders.
-      </p>
-      
-      <div className="flex flex-wrap gap-4">
-        <Link href="/products/mtf"><Button size="lg">Learn More</Button></Link>
-        <Link href="/products/mtf#eligibility"><Button size="lg" variant="outline">Check Eligibility</Button></Link>
+    {/* Card 3 */}
+    <a href="/products/mtf"  className="flex items-center space-x-5 
+           bg-white rounded-2xl shadow-sm 
+           hover:shadow-2xl 
+           hover:scale-[1.03] 
+           hover:-translate-y-0.5 
+           transition-transform transition-shadow 
+           duration-400 ease-in-out 
+           p-6 will-change-transform">
+      <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-b from-[#6D8EF4] to-[#3D66E1] shadow-md">
+        <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 10h11l4 8H7z" />
+        </svg>
       </div>
-    </div>
+      <span className="text-[#0A0F2C] font-medium text-lg">MTF</span>
+    </a>
 
-    {/* Right: Metrics */}
-    <div className="flex-1 flex flex-col justify-center items-center py-28 bg-gradient-to-tr from-white/5 to-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300">
-      <h4 className="text-2xl font-semibold text-white mb-6">Quick Metrics</h4>
-      <div className="grid grid-cols-2 gap-6 w-full">
-        <div className="flex flex-col items-center">
-          <div className="text-sm text-slate-300">Liquidity</div>
-          <div className="text-xl font-bold text-white">60%</div>
-        </div>
-        <div className="flex flex-col items-center">
-          <div className="text-sm text-slate-300">Cost</div>
-          <div className="text-xl font-bold text-white">30%</div>
-        </div>
-        <div className="flex flex-col items-center">
-          <div className="text-sm text-slate-300">Complexity</div>
-          <div className="text-xl font-bold text-white">60%</div>
-        </div>
-        <div className="flex flex-col items-center">
-          <div className="text-sm text-slate-300">Turnaround</div>
-          <div className="text-xl font-bold text-white">50%</div>
-        </div>
-      </div>
-      <div className="mt-6 text-center text-slate-300 text-sm sm:text-base">
-        Example: Amplify trading power while keeping risks transparent.
-      </div>
-    </div>
-  </motion.div>
+  </div>
 </section>
-      
-          {/* COMPARE PRODUCTS */}
-<section className="relative flex justify-center items-center min-h-[80vh] overflow-hidden px-4 sm:px-6 lg:px-10 bg-gradient-to-br from-blue-950 via-indigo-400 via-indigo-200 to-white">
+
+
+
+{/* COMPARE PRODUCTS */}
+<section className="relative flex justify-center items-center min-h-[80vh] overflow-hidden px-4 sm:px-6 lg:px-10 bg-white bg-opacity-0">
   {/* Background noise layer */}
   <div className="absolute inset-0 bg-[url('/noise.png')] opacity-10  mix-blend-overlay pointer-events-none"></div>
 
@@ -439,6 +358,35 @@ export default function HomePage() {
   
 </section>
           {/* FEATURES SECTION */}
+          <section className="w-full bg-[#F9FAFB] py-20 px-6 lg:px-20 flex flex-col lg:flex-row justify-between items-center lg:items-start">
+  {/* Left Section */}
+  <div className="lg:w-1/2 mb-10 lg:mb-0">
+    <h2 className="text-4xl font-extrabold text-[#0A0F2C] mb-6 leading-tight">
+      About CompareFi
+    </h2>
+    <p className="text-[#4B5563] mb-6 text-lg leading-relaxed">
+      CompareFi is India’s most transparent financial comparison platform, helping you make smarter borrowing and investing decisions. Explore Loan Against Shares (LAS), Loan Against Mutual Funds (LAMF), or Margin Trading Facility (MTF) — all with real-time, unbiased comparisons.
+    </p>
+    <a
+      href="/about" 
+      className="text-pink-500 font-medium underline underline-offset-4 hover:text-pink-700 transition"
+    >
+      Read More
+    </a>
+  </div>
+
+  {/* Right Section (Image / Illustration) */}
+  <div className="lg:w-1/2 flex justify-center lg:justify-end">
+    <div className="w-full max-w-md lg:max-w-lg">
+      <img 
+        src="/images/comparefi-illustration.png" // replace with your uploaded image path
+        alt="CompareFi Overview"
+        className="rounded-2xl shadow-lg"
+      />
+    </div>
+  </div>
+</section>
+
         </main>
         {/* FOOTER */}
         <Footer />
