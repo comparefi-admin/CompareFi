@@ -1,5 +1,6 @@
 'use client';
-
+import Image from 'next/image';
+import globe from './images/globe.png';
 import TiltedCard from '@/components/TiltedCard'; 
 
 import SpotlightCard from './components/SpotlightCard.jsx'; // Import the SpotlightCard component from './components/SpotlightCard';
@@ -359,8 +360,9 @@ export default function HomePage() {
 </section>
           {/* FEATURES SECTION */}
           <section className="w-full bg-[#F9FAFB] py-20 px-6 lg:px-20 flex flex-col lg:flex-row justify-between items-center lg:items-start">
+  <section className="w-full bg-[#F9FAFB] py-20 px-6 lg:px-20 flex flex-col lg:flex-row justify-between items-center lg:items-start">
   {/* Left Section */}
-  <div className="lg:w-1/2 mb-10 lg:mb-0">
+  <div className="w-1/2 h-1/2 mt-28 flex flex-col justify-center">
     <h2 className="text-4xl font-extrabold text-[#0A0F2C] mb-6 leading-tight">
       About CompareFi
     </h2>
@@ -376,15 +378,17 @@ export default function HomePage() {
   </div>
 
   {/* Right Section (Image / Illustration) */}
-  <div className="lg:w-1/2 flex justify-center lg:justify-end">
-    <div className="w-full max-w-md lg:max-w-lg">
-      <img 
-        src="/images/comparefi-illustration.png" // replace with your uploaded image path
+  <div className="lg:w-1/2 flex justify-center">
+    <div className="w-[80%]">
+      <Image
+        src={globe}
         alt="CompareFi Overview"
-        className="rounded-2xl shadow-lg"
+        className=""
       />
     </div>
   </div>
+</section>
+
 </section>
 
         </main>
