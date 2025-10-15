@@ -157,7 +157,8 @@ export default function HomePage() {
 
             {/* Glass Card */}
             <motion.div
-              className="relative z-10 w-full max-w-full rounded-3xl   min-h-[70vh] bg-gradient-to-b from-indigo-400 to-blue-600 backdrop-blur-lg border border-white/30 shadow-xl p-6 sm:p-10 md:p-14 lg:p-20 flex flex-col md:flex-row mt-[7%] mb-[7%] gap-10 md:gap-14 items-center justify-center"
+              className="relative z-10 w-full max-w-full rounded-3xl   min-h-[70vh] bg-gradient-to-b from-[#6D8EF4] to-[#3D66E1]
+ backdrop-blur-lg border border-white/30 shadow-xl p-6 sm:p-10 md:p-14 lg:p-20 flex flex-col md:flex-row mt-[7%] mb-[7%] gap-10 md:gap-14 items-center justify-center"
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
@@ -170,7 +171,7 @@ export default function HomePage() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1, duration: 0.7, ease: 'easeOut' }}
                 >
-                  Compare<span className="text-blue-400">Fi</span>
+                  Compare<span className="text-white">Fi</span>
                 </motion.h1>
 
                 <motion.h2
@@ -179,7 +180,7 @@ export default function HomePage() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3, duration: 0.7, ease: 'easeOut' }}
                 >
-                  Smart <span className="text-blue-400 font-semibold">Investing</span> Starts Here
+                  Smart <span className="text-blue-200 font-semibold">Investing</span> Starts Here
                 </motion.h2>
 
                 <motion.p
@@ -220,105 +221,59 @@ export default function HomePage() {
           </section>
 
           {/* PRODUCT HIGHLIGHTS */}
-          
-<section className="relative flex items-center justify-center py-5 bg-white bg-opacity-0 overflow-hidden px-4 sm:px-6 lg:px-10">
-  <h2 className="text-5xl sm:text-6xl mt--2 font-extrabold mb-16 text-center mr-[9%] text-white drop-shadow-lg">
-    Product Highlights
-  </h2>
-  <div className='flex items-center justify-center'>
+    <section className="w-full bg-[#EEF1FA] bg-opacity-0 py-20 px-6 lg:px-20 flex flex-col lg:flex-row justify-between items-center lg:items-start">
+  {/* Left Section */}
+  <div className="lg:w-1/3 mb-10 lg:mb-0">
+    <h2 className="text-4xl font-extrabold text-[#0A0F2C] mb-6 leading-tight">
+      Product Highlights
+    </h2>
+    <a
+      href="#"
+      className="text-[#0A0F2C] font-medium underline underline-offset-4 hover:text-blue-600 transition"
+    >
+      View All
+    </a>
+  </div>
 
-  {/* LAS Card */}
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.7 }}
-    className=" mb-32 gap-12 mr-[5%]"
-  >
-   <TiltedCard
-  imageSrc="./noise.png"
-  altText="Kendrick Lamar - GNX Album Cover"
-  captionText="Kendrick Lamar - GNX"
-  containerHeight="300px"
-  containerWidth="300px"
-  imageHeight="300px"
-  imageWidth="300px"
-  rotateAmplitude={12}
-  scaleOnHover={1.2}
-  showMobileWarning={false}
-  showTooltip={true}
-  displayOverlayContent={true}
-  overlayContent={
-    <p className="tilted-card-demo-text">
-      Kendrick Lamar - GNX
-    </p>
-  }
-/>
-  
-  </motion.div>
+  {/* Right Section (Cards Grid) */}
+  <div className="lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    
+    {/* Card 1 */}
+    <div className="flex items-center space-x-5 bg-white rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 p-6">
+      <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-b from-[#6D8EF4] to-[#3D66E1] shadow-md">
+        <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6 2a9 9 0 11-9-9 9 9 0 019 9z" />
+        </svg>
+      </div>
+      <span className="text-[#0A0F2C] font-medium text-lg">LAS</span>
+    </div>
 
-  {/* LAMF Card */}
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.7 }}
-    className=" mb-32 gap-12 mr-[5%]"
-  >
-    <TiltedCard
-  imageSrc="https://i.scdn.co/image/ab67616d0000b273d9985092cd88bffd97653b58"
-  altText="Kendrick Lamar - GNX Album Cover"
-  captionText="Kendrick Lamar - GNX"
-  containerHeight="300px"
-  containerWidth="300px"
-  imageHeight="300px"
-  imageWidth="300px"
-  rotateAmplitude={12}
-  scaleOnHover={1.2}
-  showMobileWarning={false}
-  showTooltip={true}
-  displayOverlayContent={true}
-  overlayContent={
-    <p className="tilted-card-demo-text">
-      Kendrick Lamar - GNX
-    </p>
-  }
-/>
-  
-  </motion.div>
+    {/* Card 2 */}
+    <div className="flex items-center space-x-5 bg-white rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 p-6">
+      <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-b from-[#6D8EF4] to-[#3D66E1] shadow-md">
+        <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 12h14M12 5l7 7-7 7" />
+        </svg>
+      </div>
+      <span className="text-[#0A0F2C] font-medium text-lg">LAMF</span>
+    </div>
 
-  {/* MTF Card */}
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.7 }}
-    className=" mb-32 gap-12 mr-[5%]"
-  ><TiltedCard
-  imageSrc="https://i.scdn.co/image/ab67616d0000b273d9985092cd88bffd97653b58"
-  altText="Kendrick Lamar - GNX Album Cover"
-  captionText="Kendrick Lamar - GNX"
-  containerHeight="300px"
-  containerWidth="300px"
-  imageHeight="300px"
-  imageWidth="300px"
-  rotateAmplitude={12}
-  scaleOnHover={1.2}
-  showMobileWarning={false}
-  showTooltip={true}
-  displayOverlayContent={true}
-  overlayContent={
-    <p className="tilted-card-demo-text">
-      Kendrick Lamar - GNX
-    </p>
-  }
-/>
-  
-  </motion.div>
+    {/* Card 3 */}
+    <div className="flex items-center space-x-5 bg-white rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 p-6">
+      <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-b from-[#6D8EF4] to-[#3D66E1] shadow-md">
+        <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 10h11l4 8H7z" />
+        </svg>
+      </div>
+      <span className="text-[#0A0F2C] font-medium text-lg">MTF</span>
+    </div>
+
   </div>
 </section>
-      
-          {/* COMPARE PRODUCTS */}
+
+
+
+{/* COMPARE PRODUCTS */}
 <section className="relative flex justify-center items-center min-h-[80vh] overflow-hidden px-4 sm:px-6 lg:px-10 bg-white bg-opacity-0">
   {/* Background noise layer */}
   <div className="absolute inset-0 bg-[url('/noise.png')] opacity-10  mix-blend-overlay pointer-events-none"></div>
