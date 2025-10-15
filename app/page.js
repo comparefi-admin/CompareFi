@@ -1,4 +1,7 @@
 'use client';
+
+import TiltedCard from '@/components/TiltedCard'; 
+
 import SpotlightCard from './components/SpotlightCard.jsx'; // Import the SpotlightCard component from './components/SpotlightCard';
 import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
@@ -140,20 +143,20 @@ export default function HomePage() {
         onMouseMove={handleMouseMove}
       >
         {/* Navbar */}
-        <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-[9999] w-full max-w-screen-xl px-4 pt-4">
+        <div className="fixed top-2 left-1/2 transform -translate-x-1/2 z-[9999] w-full max-w-screen-xl px-4 pt-4">
           <Navbar />
         </div>
 
-        <main className="flex-grow">
+        <main className="flex-grow bg-gradient-to-b from-violet-100/70 to-white">
 
           {/* HERO SECTION */}
-          <section className="relative flex items-center justify-center min-h-[85vh] bg-gradient-to-br from-slate-300 via-indigo-200 via-indigo-400 to-blue-200 overflow-hidden px-4 sm:px-6 lg:px-10" >
+          <section className="relative flex items-center justify-center min-h-[85vh] bg-white bg-opacity-0 overflow-hidden px-4 sm:px-6 lg:px-10" >
             {/* Background noise layer */}
             <div className="absolute inset-0 bg-[url('/noise.png')] opacity-100 mix-blend-overlay pointer-events-none"></div>
 
             {/* Glass Card */}
             <motion.div
-              className="relative z-10 w-full max-w-full rounded-3xl bg-gradient-to-bl  min-h-[70vh] from-indigo-800 to-blue-950 backdrop-blur-lg border border-white/30 shadow-xl p-6 sm:p-10 md:p-14 lg:p-20 flex flex-col md:flex-row mt-[7%] mb-[7%] gap-10 md:gap-14 items-center justify-center"
+              className="relative z-10 w-full max-w-full rounded-3xl   min-h-[70vh] bg-gradient-to-b from-indigo-400 to-blue-600 backdrop-blur-lg border border-white/30 shadow-xl p-6 sm:p-10 md:p-14 lg:p-20 flex flex-col md:flex-row mt-[7%] mb-[7%] gap-10 md:gap-14 items-center justify-center"
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
@@ -217,10 +220,11 @@ export default function HomePage() {
 
           {/* PRODUCT HIGHLIGHTS */}
           
-<section className="relative flex flex-col items-center justify-center py-5 bg-gradient-to-bl from-blue-200 via-indigo-400 via-indigo-200 to-blue-950 overflow-hidden px-4 sm:px-6 lg:px-10">
-  <h2 className="text-5xl sm:text-6xl mt--2 font-extrabold mb-16 text-center text-white drop-shadow-lg">
+<section className="relative flex items-center justify-center py-5 bg-white bg-opacity-0 overflow-hidden px-4 sm:px-6 lg:px-10">
+  <h2 className="text-5xl sm:text-6xl mt--2 font-extrabold mb-16 text-center mr-[9%] text-white drop-shadow-lg">
     Product Highlights
   </h2>
+  <div className='flex items-center justify-center'>
 
   {/* LAS Card */}
   <motion.div
@@ -228,48 +232,28 @@ export default function HomePage() {
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 0.7 }}
-    className="w-[97%]   mb-32 flex flex-col md:flex-row items-stretch gap-12"
+    className=" mb-32 gap-12 mr-[5%]"
   >
-    {/* Left: Content */}
-    <div className="flex-1 flex flex-col justify-between bg-white/10 backdrop-blur-2xl  py-28 border border-white/20 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300">
-      <h3 className="text-3xl sm:text-4xl font-bold text-white mb-4 drop-shadow-sm">
-        Loan Against Securities (LAS)
-      </h3>
-      <p className="text-lg text-slate-200 mb-6">
-        Unlock liquidity from your portfolio without selling core holdings.
-      </p>
-      
-      <div className="flex flex-wrap gap-4">
-        <Link href="/products/las"><Button size="lg">Learn More</Button></Link>
-        <Link href="/products/las#eligibility"><Button size="lg" variant="outline">Check Eligibility</Button></Link>
-      </div>
-    </div>
-
-    {/* Right: Metrics */}
-    <div className="flex-1 flex flex-col justify-center items-center bg-wh backdrop-blur-md border py-28 border-white/20 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300">
-      <h4 className="text-2xl font-semibold text-white mb-6">Quick Metrics</h4>
-      <div className="grid grid-cols-2 gap-6 w-full">
-        <div className="flex flex-col items-center">
-          <div className="text-sm text-slate-300">Liquidity</div>
-          <div className="text-xl font-bold text-white">80%</div>
-        </div>
-        <div className="flex flex-col items-center">
-          <div className="text-sm text-slate-300">Cost</div>
-          <div className="text-xl font-bold text-white">40%</div>
-        </div>
-        <div className="flex flex-col items-center">
-          <div className="text-sm text-slate-300">Complexity</div>
-          <div className="text-xl font-bold text-white">30%</div>
-        </div>
-        <div className="flex flex-col items-center">
-          <div className="text-sm text-slate-300">Turnaround</div>
-          <div className="text-xl font-bold text-white">70%</div>
-        </div>
-      </div>
-      <div className="mt-6 text-center text-slate-300 text-sm sm:text-base">
-        Example: Borrow ₹1,00,000 on a portfolio worth ₹2,00,000 — clear numbers, no surprises.
-      </div>
-    </div>
+   <TiltedCard
+  imageSrc="./noise.png"
+  altText="Kendrick Lamar - GNX Album Cover"
+  captionText="Kendrick Lamar - GNX"
+  containerHeight="300px"
+  containerWidth="300px"
+  imageHeight="300px"
+  imageWidth="300px"
+  rotateAmplitude={12}
+  scaleOnHover={1.2}
+  showMobileWarning={false}
+  showTooltip={true}
+  displayOverlayContent={true}
+  overlayContent={
+    <p className="tilted-card-demo-text">
+      Kendrick Lamar - GNX
+    </p>
+  }
+/>
+  
   </motion.div>
 
   {/* LAMF Card */}
@@ -278,50 +262,28 @@ export default function HomePage() {
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 0.7 }}
-    className="w-[97%] mb-32 flex flex-col md:flex-row-reverse items-stretch gap-12"
+    className=" mb-32 gap-12 mr-[5%]"
   >
-    {/* Left: Metrics */}
-    
-
-    {/* Right: Content */}
-    <div className="flex-1 flex flex-col justify-between bg-white/10 backdrop-blur-md border py-28 border-white/20 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300">
-      <h3 className="text-3xl sm:text-4xl font-bold text-white mb-4 drop-shadow-sm">
-        Loan Against Mutual Funds (LAMF)
-      </h3>
-      <p className="text-lg text-slate-200 mb-6">
-        Quick cash against mutual investments — no redemption required.
-      </p>
-      
-      <div className="flex flex-wrap gap-4">
-        <Link href="/products/lamf"><Button size="lg">Learn More</Button></Link>
-        <Link href="/products/lamf#eligibility"><Button size="lg" variant="outline">Check Eligibility</Button></Link>
-      </div>
-    </div>
-{/* Right: Content */}
-    <div className="flex-1 flex flex-col justify-center items-center bg-gradient-to-tr py-28 from-white/5 to-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300">
-      <h4 className="text-2xl font-semibold text-white mb-6">Quick Metrics</h4>
-      <div className="grid grid-cols-2 gap-6 w-full">
-        <div className="flex flex-col items-center">
-          <div className="text-sm text-slate-300">Liquidity</div>
-          <div className="text-xl font-bold text-white">70%</div>
-        </div>
-        <div className="flex flex-col items-center">
-          <div className="text-sm text-slate-300">Cost</div>
-          <div className="text-xl font-bold text-white">50%</div>
-        </div>
-        <div className="flex flex-col items-center">
-          <div className="text-sm text-slate-300">Complexity</div>
-          <div className="text-xl font-bold text-white">35%</div>
-        </div>
-        <div className="flex flex-col items-center">
-          <div className="text-sm text-slate-300">Turnaround</div>
-          <div className="text-xl font-bold text-white">80%</div>
-        </div>
-      </div>
-      <div className="mt-6 text-center text-slate-300 text-sm sm:text-base">
-        Example: Instant cash against mutual investments without redemption.
-      </div>
-    </div>
+    <TiltedCard
+  imageSrc="https://i.scdn.co/image/ab67616d0000b273d9985092cd88bffd97653b58"
+  altText="Kendrick Lamar - GNX Album Cover"
+  captionText="Kendrick Lamar - GNX"
+  containerHeight="300px"
+  containerWidth="300px"
+  imageHeight="300px"
+  imageWidth="300px"
+  rotateAmplitude={12}
+  scaleOnHover={1.2}
+  showMobileWarning={false}
+  showTooltip={true}
+  displayOverlayContent={true}
+  overlayContent={
+    <p className="tilted-card-demo-text">
+      Kendrick Lamar - GNX
+    </p>
+  }
+/>
+  
   </motion.div>
 
   {/* MTF Card */}
@@ -330,53 +292,33 @@ export default function HomePage() {
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 0.7 }}
-    className="w-[97%] mb-32 flex flex-col md:flex-row items-stretch gap-12"
-  >
-    {/* Left: Content */}
-    <div className="flex-1 flex flex-col justify-between py-28 bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300">
-      <h3 className="text-3xl sm:text-4xl font-bold text-white mb-4 drop-shadow-sm">
-        Margin Trading Facility (MTF)
-      </h3>
-      <p className="text-lg text-slate-200 mb-6">
-        Amplify buying power with controlled leverage for active traders.
-      </p>
-      
-      <div className="flex flex-wrap gap-4">
-        <Link href="/products/mtf"><Button size="lg">Learn More</Button></Link>
-        <Link href="/products/mtf#eligibility"><Button size="lg" variant="outline">Check Eligibility</Button></Link>
-      </div>
-    </div>
-
-    {/* Right: Metrics */}
-    <div className="flex-1 flex flex-col justify-center items-center py-28 bg-gradient-to-tr from-white/5 to-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300">
-      <h4 className="text-2xl font-semibold text-white mb-6">Quick Metrics</h4>
-      <div className="grid grid-cols-2 gap-6 w-full">
-        <div className="flex flex-col items-center">
-          <div className="text-sm text-slate-300">Liquidity</div>
-          <div className="text-xl font-bold text-white">60%</div>
-        </div>
-        <div className="flex flex-col items-center">
-          <div className="text-sm text-slate-300">Cost</div>
-          <div className="text-xl font-bold text-white">30%</div>
-        </div>
-        <div className="flex flex-col items-center">
-          <div className="text-sm text-slate-300">Complexity</div>
-          <div className="text-xl font-bold text-white">60%</div>
-        </div>
-        <div className="flex flex-col items-center">
-          <div className="text-sm text-slate-300">Turnaround</div>
-          <div className="text-xl font-bold text-white">50%</div>
-        </div>
-      </div>
-      <div className="mt-6 text-center text-slate-300 text-sm sm:text-base">
-        Example: Amplify trading power while keeping risks transparent.
-      </div>
-    </div>
+    className=" mb-32 gap-12 mr-[5%]"
+  ><TiltedCard
+  imageSrc="https://i.scdn.co/image/ab67616d0000b273d9985092cd88bffd97653b58"
+  altText="Kendrick Lamar - GNX Album Cover"
+  captionText="Kendrick Lamar - GNX"
+  containerHeight="300px"
+  containerWidth="300px"
+  imageHeight="300px"
+  imageWidth="300px"
+  rotateAmplitude={12}
+  scaleOnHover={1.2}
+  showMobileWarning={false}
+  showTooltip={true}
+  displayOverlayContent={true}
+  overlayContent={
+    <p className="tilted-card-demo-text">
+      Kendrick Lamar - GNX
+    </p>
+  }
+/>
+  
   </motion.div>
+  </div>
 </section>
       
           {/* COMPARE PRODUCTS */}
-<section className="relative flex justify-center items-center min-h-[80vh] overflow-hidden px-4 sm:px-6 lg:px-10 bg-gradient-to-br from-blue-950 via-indigo-400 via-indigo-200 to-white">
+<section className="relative flex justify-center items-center min-h-[80vh] overflow-hidden px-4 sm:px-6 lg:px-10 bg-white bg-opacity-0">
   {/* Background noise layer */}
   <div className="absolute inset-0 bg-[url('/noise.png')] opacity-10  mix-blend-overlay pointer-events-none"></div>
 
