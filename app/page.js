@@ -8,6 +8,7 @@ import { motion } from 'framer-motion';
 import { Briefcase, LineChart, BarChart3, Shield, CreditCard, TrendingUp, Sparkles } from 'lucide-react';
 import DisplayCards from "@/components/ui/display-cards";
 import "./globals.css";
+import CompareProductsTable from "./components/CompareProductsTable";
 
 // ShadCN components
 import { Button } from '@/components/ui/button';
@@ -423,27 +424,11 @@ export default function HomePage() {
               </div>
 
               {/* Right Metrics */}
-              <div>
-                <Card className="p-6 rounded-3xl shadow-lg bg-white/20 backdrop-blur-md border border-white/20">
-                  <CardContent className="p-4">
-                    <div className="text-sm text-slate-200 font-medium">Quick metrics</div>
-                    <div className="mt-4 grid grid-cols-2 gap-6">
-                      {p.metrics.map((m, idx) => (
-                        <div key={idx} className="text-base">
-                          <div className="text-sm text-slate-200">{m.name}</div>
-                          <div className="text-lg font-semibold">{m.value}%</div>
-                        </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-                <div className="mt-6 text-base text-slate-200">
-                  <div className="font-semibold">Example</div>
-                  <div className="mt-2">
-                    Borrow ₹1,00,000 on a portfolio worth ₹2,00,000 vs alternatives — clear numbers, no surprises.
-                  </div>
-                </div>
-              </div>
+             {/* Right Metrics → Replaced with Firebase Table */}
+<div>
+  <CompareProductsTable productType={p.id} />
+</div>
+
             </div>
           </motion.div>
         </TabsContent>
