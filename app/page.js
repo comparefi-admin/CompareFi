@@ -390,6 +390,85 @@ export default function HomePage() {
 </section>
 
 </section>
+{/* WHY COMPAREFI SECTION */}
+<section className="w-full bg-[#EEF1FA] py-20 px-6 lg:px-20">
+  <div className="max-w-7xl mx-auto text-center mb-14">
+    <h2 className="text-4xl font-extrabold text-[#0A0F2C] mb-4">
+      Why CompareFi?
+    </h2>
+    <p className="text-[#4B5563] text-lg max-w-2xl mx-auto">
+      Discover how CompareFi helps you make confident, data-driven financial decisions
+      with transparency and speed.
+    </p>
+  </div>
+
+  {/* Cards Section */}
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
+    {/* Card 1 */}
+    <div className="bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 p-8 flex flex-col items-center text-center">
+      <div className="flex justify-center items-center w-16 h-16 rounded-xl bg-gradient-to-b from-[#6D8EF4] to-[#3D66E1] mb-5">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="w-8 h-8 text-white"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m2 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </div>
+      <h4 className="text-xl font-semibold text-[#0A0F2C] mb-3">
+        Transparent Comparisons
+      </h4>
+      <p className="text-[#4B5563] text-base leading-relaxed">
+        Interest rates, hidden charges, LTV ratios, and fees — all verified and updated regularly.
+      </p>
+    </div>
+
+    {/* Card 2 */}
+    <div className="bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 p-8 flex flex-col items-center text-center">
+      <div className="flex justify-center items-center w-16 h-16 rounded-xl bg-gradient-to-b from-[#6D8EF4] to-[#3D66E1] mb-5">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="w-8 h-8 text-white"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 17a4 4 0 100-8 4 4 0 000 8zm-7 4h14M3 4h18" />
+        </svg>
+      </div>
+      <h4 className="text-xl font-semibold text-[#0A0F2C] mb-3">
+        Data-Driven Insights
+      </h4>
+      <p className="text-[#4B5563] text-base leading-relaxed">
+        Analysis powered by top banks and brokers including SBI, HDFC, ICICI and more.
+      </p>
+    </div>
+
+    {/* Card 3 */}
+    <div className="bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 p-8 flex flex-col items-center text-center">
+      <div className="flex justify-center items-center w-16 h-16 rounded-xl bg-gradient-to-b from-[#6D8EF4] to-[#3D66E1] mb-5">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="w-8 h-8 text-white"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6 2a9 9 0 11-9-9 9 9 0 019 9z" />
+        </svg>
+      </div>
+      <h4 className="text-xl font-semibold text-[#0A0F2C] mb-3">
+        Smart Filters & Guidance
+      </h4>
+      <p className="text-[#4B5563] text-base leading-relaxed">
+       Navigate complex LAS, LAMF, and MTF choices with clarity — CompareFi simplifies data so you choose what truly fits your financial goals.
+      </p>
+    </div>
+  </div>
+</section>
+
 
         </main>
         {/* FOOTER */}
