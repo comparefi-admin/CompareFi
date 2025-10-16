@@ -2,8 +2,10 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Home, CreditCard, Shield, Mail, Menu, X } from 'lucide-react';
+import logo from '../images/logo.png';
 
 const navItems = [
   {
@@ -113,9 +115,19 @@ export default function Navbar() {
   };
 
   return (
-    <div className="fixed top-4 left-0 w-full z-50 flex justify-center pointer-events-none">
+    <div className="fixed top-4 left-0 w-full z-50 flex items-center justify-center px-4">
+
+      {/* Logo on left */}
+<div className="absolute left-4 top-1/2 -translate-y-1/2">
+  <Link href="/" className="flex-shrink-0">
+    <Image src={logo} alt="Logo" width={140} height={80} className="cursor-pointer" />
+  </Link>
+</div>
+
+
+      {/* Centered Navbar */}
       <nav
-        className={`pointer-events-auto rounded-full border px-6 py-3 transition-all duration-300 w-[90%] md:w-auto
+        className={`pointer-events-auto rounded-full border px-6 py-3 transition-all duration-300 flex justify-center
         ${isScrolled
           ? 'bg-white/70 backdrop-blur-sm shadow-md border-gray-200'
           : 'bg-white/60 backdrop-blur-md border-gray-100'
@@ -189,7 +201,7 @@ export default function Navbar() {
         </ul>
 
         {/* Mobile Navbar */}
-        <div className="md:hidden flex items-center justify-between">
+        <div className="md:hidden flex items-center justify-end">
           <button
             className="p-2 rounded-md hover:bg-gray-100"
             onClick={() => setMobileOpen(!mobileOpen)}
