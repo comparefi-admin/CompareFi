@@ -1,7 +1,14 @@
 'use client';
 import Image from 'next/image';
 import globe from './images/globe.png';
+import pc from './images/pc.png';
 import TiltedCard from '@/components/TiltedCard'; 
+import BlurText from "@/components/BlurText";
+
+const handleAnimationComplete = () => {
+  console.log('Animation completed!');
+};
+
 
 import SpotlightCard from './components/SpotlightCard.jsx'; // Import the SpotlightCard component from './components/SpotlightCard';
 import React, { useEffect, useRef, useState } from 'react';
@@ -170,13 +177,21 @@ export default function HomePage() {
               {/* LEFT */}
               <div className="flex-1 text-center md:text-left space-y-5 sm:space-y-6 lg:space-y-8 pl-20">
                 <motion.h1
-                  className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-tight drop-shadow-[0_2px_2px_rgba(0,0,0,0.1)]"
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1, duration: 0.7, ease: 'easeOut' }}
-                >
-                  Compare<span className="text-white">Fi</span>
-                </motion.h1>
+                    className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-tight drop-shadow-[0_2px_2px_rgba(0,0,0,0.1)]"
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1, duration: 0.7, ease: 'easeOut' }}
+                  >
+                    <BlurText
+                      text="CompareFi"
+                      delay={100}
+                      animateBy="words"
+                      direction="top"
+                      onAnimationComplete={handleAnimationComplete}
+                      className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-tight drop-shadow-[0_2px_2px_rgba(0,0,0,0.1)]"
+                    />
+                  </motion.h1>
+
 
                 <motion.h2
                   className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-medium text-slate-300"
@@ -184,8 +199,16 @@ export default function HomePage() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3, duration: 0.7, ease: 'easeOut' }}
                 >
-                  Smart <span className="text-blue-200 font-semibold">Investing</span> Starts Here
+                  <BlurText
+                    text="Smart Investing Starts Here"
+                    delay={150}
+                    animateBy="words"
+                    direction="top"
+                    onAnimationComplete={handleAnimationComplete}
+                    className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-medium text-slate-300"
+                  />
                 </motion.h2>
+
 
                 <motion.p
                   className="text-sm sm:text-base md:text-lg text-slate-300 max-w-md mx-auto md:mx-0 leading-relaxed"
@@ -193,8 +216,16 @@ export default function HomePage() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.45, duration: 0.6, ease: 'easeOut' }}
                 >
-                  Unlock powerful, AI-driven insights to grow your wealth intelligently. Compare, analyze, and invest with confidence.
+                  <BlurText
+                    text="Unlock powerful, AI-driven insights to grow your wealth intelligently. Compare, analyze, and invest with confidence."
+                    delay={200}
+                    animateBy="words"
+                    direction="top"
+                    onAnimationComplete={handleAnimationComplete}
+                    className="text-sm sm:text-base md:text-lg text-slate-300 max-w-md mx-auto md:mx-0 leading-relaxed"
+                  />
                 </motion.p>
+
 
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -301,12 +332,12 @@ export default function HomePage() {
 
 
 {/* COMPARE PRODUCTS */}
-<section className="relative flex justify-center items-center h-[90%] mt-[8%] overflow-hidden px-4 sm:px-6 lg:px-10 bg-white bg-opacity-0">
+<section className="relative flex justify-center items-center mt-[8%] overflow-hidden px-4 sm:px-6 lg:px-10 bg-white bg-opacity-0">
   {/* Background noise layer */}
   <div className="absolute inset-0 bg-[url('/noise.png')] opacity-10  mix-blend-overlay pointer-events-none"></div>
 
   {/* Glass card container */}
-  <SpotlightCard className="relative z-10 border-none  w-[95%] rounded-3xl bg-gradient-to-b from-[#6D8EF4] to-[#3D66E1] backdrop-blur-lg  shadow-xl p-8 sm:p-12 md:p-16 flex flex-col"  spotlightColor="rgba(255,255,255,0.1)">
+  <SpotlightCard className="relative z-10 border-none h-full  w-[95%] rounded-3xl bg-gradient-to-b from-[#6D8EF4] to-[#3D66E1] backdrop-blur-lg  shadow-xl p-8 sm:p-12 md:p-16 flex flex-col"  spotlightColor="rgba(255,255,255,0.1)">
  <motion.div
     
     initial={{ opacity: 0, y: 40 }}
@@ -331,19 +362,48 @@ export default function HomePage() {
       {PRODUCTS.map((p) => (
         <TabsContent key={p.id} value={p.id}>
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }}>
-            <div className="grid md:grid-cols-2 gap-10 items-start text-center md:text-left">
+            <div className="grid md:grid-cols-2 gap-10 items-start text-center md:text-left pt-6 pl-2">
               {/* Left Info */}
               <div>
-                <h4 className="text-2xl font-semibold text-white">{p.title}</h4>
-                <p className="text-lg text-slate-200 mt-3">{p.blurb}</p>
-                <ul className="mt-6 text-base text-slate-200 space-y-3">
-                  {p.bullets.map((b, i) => (
-                    <li key={i}>• {b}</li>
-                  ))}
-                </ul>
+                <h4 className="text-xl font-semibold text-[#0A0F2C]">
+  <BlurText
+    text={p.title}
+    delay={20}
+    animateBy="letters"
+    direction="top"
+    onAnimationComplete={handleAnimationComplete}
+    className="text-3xl font-bold text-[#0A0F2C]"
+  />
+</h4>
+               {/* Paragraph */}
+<BlurText
+  text={p.blurb}
+  delay={20}
+  animateBy="letters"
+  direction="bottom"
+  onAnimationComplete={handleAnimationComplete}
+  className="text-lg text-slate-200 mt-3"
+/>
+
+{/* Bulleted list */}
+<ul className="mt-6 text-base text-slate-200 space-y-3">
+  {p.bullets.map((b, i) => (
+    <li key={i}>
+      <BlurText
+        text={`• ${b}`}
+        delay={30 + i * 50} // staggered delay for each bullet
+        animateBy="letters"
+        direction="bottom"
+        onAnimationComplete={handleAnimationComplete}
+        className="text-base text-slate-200"
+      />
+    </li>
+  ))}
+</ul>
+
                 <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                   <Link href={`/products/${p.id}`}><Button size="lg">Deep Dive</Button></Link>
-                  <Link href={`/contact`}><Button variant="outline" size="lg">Talk to Het</Button></Link>
+                 
                 </div>
               </div>
 
@@ -363,8 +423,8 @@ export default function HomePage() {
   
 </section>
           {/* FEATURES SECTION */}
-          <section className="w-full bg-[#F9FAFB] py-20 px-6 lg:px-20 flex flex-col lg:flex-row justify-between items-center lg:items-start">
-  <section className="w-full bg-[#F9FAFB] py-20 px-6 lg:px-20 flex flex-col lg:flex-row justify-between items-center lg:items-start">
+          <section className="w-full bg-[#F9FAFB] 0bg-opacity-0 py-15 px-6 lg:px-20 flex flex-col lg:flex-row justify-between items-center lg:items-start">
+  <section className="w-full bg-[#F9FAFB]  bg-opacity-0 py-20 px-6 lg:px-20 flex flex-col lg:flex-row justify-between items-center lg:items-start">
   {/* Left Section */}
   <div className="w-1/2 h-1/2 mt-28 flex flex-col justify-center">
     <h2 className="text-4xl font-extrabold text-[#0A0F2C] mb-6 leading-tight">
@@ -394,24 +454,90 @@ export default function HomePage() {
 </section>
 
 </section>
-{/* WHY COMPAREFI */}
-          <section className="w-full bg-[#EEF1FA] py-20 px-6 lg:px-20">
+{/* WHY COMPAREFI
+          <section className="w-full bg-[#EEF1FA] bg-opacity-0 py-20 px-6 lg:px-20">
             <div className="max-w-7xl mx-auto text-center mb-14">
               <h2 className="text-4xl font-extrabold text-[#0A0F2C] mb-4">Why CompareFi?</h2>
               <p className="text-[#4B5563] text-lg max-w-2xl mx-auto">Discover how CompareFi helps you make confident, data-driven financial decisions.</p>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
-              {['Transparency', 'Speed', 'Intelligence'].map((feature, i) => (
-                <div key={i} className="bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all p-8 flex flex-col items-center text-center">
-                  <div className="flex justify-center items-center w-16 h-16 rounded-xl bg-gradient-to-b from-[#6D8EF4] to-[#3D66E1] mb-5">
-                    <Sparkles className="w-8 h-8 text-white" />
-                  </div>
-                  <h4 className="text-xl font-semibold text-[#0A0F2C]">{feature}</h4>
-                  <p className="text-[#4B5563] mt-3">We bring you clarity, speed, and smart insights to guide your investments.</p>
-                </div>
-              ))}
-            </div>
-          </section>
+            
+          </section> */}
+
+
+{/* UPDATED WHYw */}
+<section className="w-full bg-[#F9FAFB] opactity-0 py-4 px-6 lg:px-20 ">
+  {/* Top Flex Row */}
+  <SpotlightCard
+  className="flex flex-col lg:flex-row justify-between items-center gap-16 pb-[5%] 
+             rounded-3xl p-8 sm:p-12 md:p-16 
+             bg-gradient-to-br from-[#EEF1FA] to-[#e9d7ef] border-none
+             drop-shadow-2xl hover:scale-102 transition-all duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)]"
+  spotlightColor="rgba(255,255,255,0.4)"
+>
+    
+    {/* Left Section (Image) */}
+<div className="lg:w-1/2 flex justify-center items-center text-center">
+  <div className="w-[90%] max-w-xl"> {/* increased from 80%/md to 90%/xl */}
+    <Image
+      src={pc}
+      alt="CompareFi Overview"
+      className="w-full h-auto mix-blend-multiply scale-110"
+    />
+  </div>
+</div>
+
+
+    {/* Right Section (Text) */}
+    <div className="lg:w-1/2 flex flex-col pr-[10%] justify-center items-start text-start">
+      <h2 className="text-6xl font-extrabold text-[#0A0F2C] mb-6 leading-tight pl-[10%]">
+        Why CompareFi?
+      </h2>
+      <p className="text-[#4B5563] mb-6 text-lg leading-relaxed max-w-md pl-[10%]">
+        Discover how CompareFi helps you make confident, data-driven financial decisions.
+      </p>
+      <a
+        href="/about"
+        className="text-pink-500 font-medium underline underline-offset-4 hover:text-pink-700 transition pl-[10%]"
+      >
+        Read More
+      </a>
+    </div>
+  </SpotlightCard>
+
+  {/* Cards Below the Flex */}
+  <div className="mt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto mb-[5%]">
+    {['Transparency', 'Speed', 'Intelligence'].map((feature, i) => (
+      <div
+        key={i}
+        className="bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all p-8 flex flex-col items-center text-center"
+      >
+        <div className="flex justify-center items-center w-16 h-16 rounded-xl bg-gradient-to-b from-[#6D8EF4] to-[#3D66E1] mb-5">
+          <Sparkles className="w-8 h-8 text-white" />
+        </div>
+        <h4 className="text-xl font-semibold text-[#0A0F2C]">
+  <BlurText
+    text={feature}
+    delay={100}
+    animateBy="words"
+    direction="top"
+    onAnimationComplete={handleAnimationComplete}
+    className="text-xl font-semibold text-[#0A0F2C]"
+  />
+</h4>
+        <p className="text-[#4B5563] mt-3">
+  <BlurText
+    text="We bring you clarity, speed, and smart insights to guide your investments."
+    delay={150}
+    animateBy="words"
+    direction="top"
+    onAnimationComplete={handleAnimationComplete}
+    className="text-[#4B5563] mt-3"
+  />
+</p>
+      </div>
+    ))}
+  </div>
+</section>
 
         </main>
         {/* FOOTER */}
