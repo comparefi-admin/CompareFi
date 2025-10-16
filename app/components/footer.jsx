@@ -25,10 +25,21 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold mb-4">Products</h4>
             <ul className="space-y-2 text-gray-400">
-              <li><a href="#" className="hover:text-white transition-colors">Credit Cards</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Savings Accounts</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Investments</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Mortgages</a></li>
+              <li>
+                <a href="/products/LAS" className="hover:text-white transition-colors">
+                  Loan Against Shares (LAS)
+                </a>
+              </li>
+              <li>
+                <a href="/products/lamf" className="hover:text-white transition-colors">
+                  Loan Against Mutual Funds (LAMF)
+                </a>
+              </li>
+              <li>
+                <a href="/products/mtf" className="hover:text-white transition-colors">
+                  Margin Trading Facility (MTF)
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -36,10 +47,10 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold mb-4">Company</h4>
             <ul className="space-y-2 text-gray-400">
-              <li><a href="#" className="hover:text-white transition-colors">About Us</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Press</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
+              <li><a href="/about" className="hover:text-white transition-colors">About Us</a></li>
+              <li><a href="/careers" className="hover:text-white transition-colors">Careers</a></li>
+              <li><a href="/press" className="hover:text-white transition-colors">Press</a></li>
+              <li><a href="/contact" className="hover:text-white transition-colors">Contact</a></li>
             </ul>
           </div>
 
@@ -47,10 +58,10 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold mb-4">Support</h4>
             <ul className="space-y-2 text-gray-400">
-              <li><a href="#" className="hover:text-white transition-colors">Help Center</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Terms of Service</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Security</a></li>
+              <li><a href="/help" className="hover:text-white transition-colors">Help Center</a></li>
+              <li><a href="/privacy" className="hover:text-white transition-colors">Privacy Policy</a></li>
+              <li><a href="/terms" className="hover:text-white transition-colors">Terms of Service</a></li>
+              <li><a href="/security" className="hover:text-white transition-colors">Security</a></li>
             </ul>
           </div>
         </div>
