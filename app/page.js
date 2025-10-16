@@ -158,12 +158,15 @@ export default function HomePage() {
 
             {/* Glass Card */}
             <motion.div
-              className="relative z-10 w-full max-w-full rounded-3xl   min-h-[70vh] bg-gradient-to-b from-[#6D8EF4] to-[#3D66E1]
- backdrop-blur-lg border border-white/30 shadow-xl p-6 sm:p-10 md:p-14 lg:p-20 flex flex-col md:flex-row mt-[7%] mb-[7%] gap-10 md:gap-14 items-center justify-center"
+              className="w-full justify-center items-center flex flex-col"
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
+              <SpotlightCard className="relative z-10 w-[90%] max-w-full rounded-3xl   min-h-[70vh] bg-gradient-to-b from-[#6D8EF4] to-[#3D66E1]
+ backdrop-blur-xl shadow-2xl sm:p-10 md:p-14 lg:p-20 flex flex-col md:flex-row mt-[7%] mb-[7%] gap-10 md:gap-14 items-center justify-center hover:drop-shadow-2xl
+           hover:scale-102 transition-all duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)] border-none
+           p-6 will-change-transform "  spotlightColor="rgba(255,255,255,0.3)">
               {/* LEFT */}
               <div className="flex-1 text-center md:text-left space-y-5 sm:space-y-6 lg:space-y-8 pl-20">
                 <motion.h1
@@ -218,11 +221,12 @@ export default function HomePage() {
                   <DisplayCards cards={defaultCards} />
                 </div>
               </motion.div>
+              </SpotlightCard>
             </motion.div>
           </section>
 
           {/* PRODUCT HIGHLIGHTS */}
-   <section className="w-full bg-[#EEF1FA] bg-opacity-0 py-20 px-6 lg:px-20 flex flex-col lg:flex-row justify-between items-center lg:items-start">
+   <section className="w-full bg-[#EEF1FA] bg-opacity-0 py-10 mx-5 px-6 lg:px-20 flex flex-col lg:flex-row justify-between items-center lg:items-start">
   {/* Left Section */}
   <div className="lg:w-1/3 mb-10 lg:mb-0">
     <h2 className="text-4xl font-extrabold text-[#0A0F2C] mb-6 leading-tight">
@@ -237,7 +241,7 @@ export default function HomePage() {
   </div>
 
   {/* Right Section (Cards Grid) */}
-  <div className="lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+  <div className="lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mr-9">
     
     {/* Card 1 */}
     <a href="/products/las" className="flex items-center space-x-5 
@@ -297,12 +301,12 @@ export default function HomePage() {
 
 
 {/* COMPARE PRODUCTS */}
-<section className="relative flex justify-center items-center min-h-[80vh] overflow-hidden px-4 sm:px-6 lg:px-10 bg-white bg-opacity-0">
+<section className="relative flex justify-center items-center h-[90%] mt-[8%] overflow-hidden px-4 sm:px-6 lg:px-10 bg-white bg-opacity-0">
   {/* Background noise layer */}
   <div className="absolute inset-0 bg-[url('/noise.png')] opacity-10  mix-blend-overlay pointer-events-none"></div>
 
   {/* Glass card container */}
-  <SpotlightCard className="relative z-10 w-[95%] rounded-3xl bg-gradient-to-bl from-indigo-800 to-blue-950 backdrop-blur-lg  shadow-xl p-8 sm:p-12 md:p-16 flex flex-col"  spotlightColor="rgba(255,255,255,0.1)">
+  <SpotlightCard className="relative z-10 border-none  w-[95%] rounded-3xl bg-gradient-to-b from-[#6D8EF4] to-[#3D66E1] backdrop-blur-lg  shadow-xl p-8 sm:p-12 md:p-16 flex flex-col"  spotlightColor="rgba(255,255,255,0.1)">
  <motion.div
     
     initial={{ opacity: 0, y: 40 }}
