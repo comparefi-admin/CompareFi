@@ -369,8 +369,8 @@ export default function HomePage() {
                 <h4 className="text-xl font-semibold text-[#0A0F2C]">
   <BlurText
     text={p.title}
-    delay={20}
-    animateBy="letters"
+    delay={100}
+    animateBy="words"
     direction="top"
     onAnimationComplete={handleAnimationComplete}
     className="text-3xl font-bold text-[#0A0F2C]"
@@ -379,8 +379,8 @@ export default function HomePage() {
                {/* Paragraph */}
 <BlurText
   text={p.blurb}
-  delay={20}
-  animateBy="letters"
+  delay={150}
+  animateBy="words"
   direction="bottom"
   onAnimationComplete={handleAnimationComplete}
   className="text-lg text-slate-200 mt-3"
@@ -392,8 +392,8 @@ export default function HomePage() {
     <li key={i}>
       <BlurText
         text={`• ${b}`}
-        delay={30 + i * 50} // staggered delay for each bullet
-        animateBy="letters"
+        delay={200 + i * 50} // staggered delay for each bullet
+        animateBy="words"
         direction="bottom"
         onAnimationComplete={handleAnimationComplete}
         className="text-base text-slate-200"
