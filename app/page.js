@@ -472,7 +472,7 @@ export default function HomePage() {
   className="flex flex-col lg:flex-row justify-between items-center gap-16 pb-[5%] 
              rounded-3xl p-8 sm:p-12 md:p-16 
              bg-gradient-to-br from-[#EEF1FA] to-[#e9d7ef] border-none
-             drop-shadow-2xl hover:scale-102 transition-all duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)]"
+             drop-shadow-2xl hover:scale-102 transition-all duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)] border-none"
   spotlightColor="rgba(255,255,255,0.4)"
 >
     
