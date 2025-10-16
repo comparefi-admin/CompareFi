@@ -8,7 +8,7 @@ import BlurText from "@/components/BlurText";
 const handleAnimationComplete = () => {
   console.log('Animation completed!');
 };
-
+ import TextType from '@/components/TextType';
 
 import SpotlightCard from './components/SpotlightCard.jsx'; // Import the SpotlightCard component from './components/SpotlightCard';
 import React, { useEffect, useRef, useState } from 'react';
@@ -182,14 +182,15 @@ export default function HomePage() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1, duration: 0.7, ease: 'easeOut' }}
                   >
-                    <BlurText
-                      text="CompareFi"
-                      delay={100}
-                      animateBy="words"
-                      direction="top"
-                      onAnimationComplete={handleAnimationComplete}
-                      className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-tight drop-shadow-[0_2px_2px_rgba(0,0,0,0.1)]"
-                    />
+                   
+
+                  <TextType 
+                    text={["CompareFi"]}
+                    typingSpeed={75}
+                    pauseDuration={1500}
+                    showCursor={true}
+                    cursorCharacter="|"
+                  />
                   </motion.h1>
 
 
@@ -201,7 +202,7 @@ export default function HomePage() {
                 >
                   <BlurText
                     text="Smart Investing Starts Here"
-                    delay={150}
+                    delay={80}
                     animateBy="words"
                     direction="top"
                     onAnimationComplete={handleAnimationComplete}
@@ -218,8 +219,8 @@ export default function HomePage() {
                 >
                   <BlurText
                     text="Unlock powerful, AI-driven insights to grow your wealth intelligently. Compare, analyze, and invest with confidence."
-                    delay={200}
-                    animateBy="words"
+                    delay={10}
+                    animateBy="word"
                     direction="top"
                     onAnimationComplete={handleAnimationComplete}
                     className="text-sm sm:text-base md:text-lg text-slate-300 max-w-md mx-auto md:mx-0 leading-relaxed"
