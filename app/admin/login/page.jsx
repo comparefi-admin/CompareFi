@@ -56,9 +56,11 @@ export default function AdminLogin() {
         await supabase.auth.signOut()
         setError('Unauthorized account.')
       }
-    } catch (err) {
+    } 
+    catch (err) {
       setError(err.message || 'Unexpected error.')
-    } finally {
+    } 
+    finally {
       setLoading(false)
     }
   }
@@ -114,6 +116,7 @@ export default function AdminLogin() {
         <p className="text-xs text-gray-500 text-center mt-4">
           (Keep this route hidden — don’t share the link anywhere)
         </p>
+
       </div>
     </div>
   )
