@@ -108,6 +108,8 @@ export default function AdminLogin() {
             {loading ? 'Signing in…' : 'Sign in'}
           </button>
 
+          <p>Test kr rha hu</p>
+
           {error && <p className="text-sm text-red-500 text-center">{error}</p>}
         </form>
 
