@@ -24,11 +24,21 @@ export default function AdminDashboard() {
         router.replace('/admin/login')
         return
       }
-      if (data.user.id !== process.env.NEXT_PUBLIC_ADMIN_UID) {
+
+      // Server-side admin check
+      const res = await fetch('/admin/checkAdmin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ uid: data.user.id }),
+      })
+      const result = await res.json()
+
+      if (!result.isAdmin) {
         await supabase.auth.signOut()
         router.replace('/admin/login')
         return
       }
+
       setUser(data.user)
       setLoading(false)
     }
@@ -76,7 +86,6 @@ export default function AdminDashboard() {
     <div
       className={`min-h-screen bg-gray-50 flex flex-col items-center py-20 px-6 ${outfit.className}`}
     >
-      {/* Logout button */}
       <button
         onClick={handleLogout}
         className="absolute top-6 right-6 flex items-center gap-2 px-4 py-2 bg-emerald-500 text-white rounded-xl hover:bg-emerald-600 transition"
@@ -85,7 +94,6 @@ export default function AdminDashboard() {
         Logout
       </button>
 
-      {/* Title */}
       <motion.h1
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -95,12 +103,10 @@ export default function AdminDashboard() {
         Admin Dashboard
       </motion.h1>
 
-      {/* Subtext */}
       <p className="text-gray-500 mb-14 text-lg text-center">
         Welcome, Het Doshi!! Manage your CompareFi product tables below.
       </p>
 
-      {/* Product Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl items-stretch">
         {products.map(({ id, name, icon: Icon, gradient, link }, i) => (
           <motion.div
@@ -108,13 +114,12 @@ export default function AdminDashboard() {
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: i * 0.1 }}
-            className="flex" // ensures motion.div fills height
+            className="flex"
           >
             <Link href={link} className="flex-grow">
               <Card
                 className={`relative flex flex-col justify-between h-full bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-2xl hover:scale-[1.03] transition-all duration-500`}
               >
-                {/* Top Accent */}
                 <div className={`h-2 bg-gradient-to-r ${gradient}`} />
 
                 <CardHeader className="p-6 flex items-center gap-4">
