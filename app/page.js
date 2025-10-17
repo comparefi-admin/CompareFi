@@ -156,7 +156,7 @@ export default function HomePage() {
           <Navbar />
         </div>
 
-        <main className="flex-grow bg-gradient-to-b from-violet-100/70 to-white">
+        <main className="flex-grow bg-[#f6f0e4]">
 
           {/* HERO SECTION */}
           <section className="relative flex items-center justify-center min-h-[85vh] bg-white bg-opacity-0 overflow-hidden px-4 sm:px-6 lg:px-10" >
@@ -170,32 +170,47 @@ export default function HomePage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <SpotlightCard className="relative z-10 w-[90%] max-w-full rounded-3xl   min-h-[70vh] bg-gradient-to-b from-[#6D8EF4] to-[#3D66E1]
+              <SpotlightCard className="relative z-10 w-[90%] max-w-full rounded-3xl   min-h-[70vh] bg-gradient-to-b from-[#B1ED67] to-[white]
  backdrop-blur-xl shadow-2xl sm:p-10 md:p-14 lg:p-20 flex flex-col md:flex-row mt-[7%] mb-[7%] gap-10 md:gap-14 items-center justify-center hover:drop-shadow-2xl
-           hover:scale-102 transition-all duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)] border-opacity-0
+           hover:scale-102 transition-all duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)] border-none
            p-6 will-change-transform "  spotlightColor="rgba(255,255,255,0.3)">
               {/* LEFT */}
               <div className="flex-1 text-center md:text-left space-y-5 sm:space-y-6 lg:space-y-8 pl-20">
                 <motion.h1
-                    className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-tight drop-shadow-[0_2px_2px_rgba(0,0,0,0.1)]"
+                    className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-black tracking-tight leading-tight drop-shadow-[0_2px_2px_rgba(0,0,0,0.1)]"
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1, duration: 0.7, ease: 'easeOut' }}
                   >
-                   
+                   </motion.h1>
 
-                  <TextType 
+                  {/* <TextType 
                     text={["CompareFi"]}
                     typingSpeed={75}
                     pauseDuration={1500}
                     showCursor={true}
                     cursorCharacter="|"
+                    className='text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-black tracking-tight leading-tight drop-shadow-[0_2px_2px_rgba(0,0,0,0.1)]'
                   />
+                  </motion.h1> */}
+
+                  <motion.h1
+                    className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-black tracking-tight leading-tight drop-shadow-[0_2px_2px_rgba(0,0,0,0.1)]"
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1, duration: 0.7, ease: 'easeOut' }}
+                  >
+                    <BlurText
+                      text="CompareFi"
+                      delay={80}
+                      animateBy="words" 
+                      direction="top" 
+                      onAnimationComplete={handleAnimationComplete} 
+                      className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-black tracking-tight leading-tight drop-shadow-[0_2px_2px_rgba(0,0,0,0.1)]"
+                    />
                   </motion.h1>
-
-
                 <motion.h2
-                  className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-medium text-slate-300"
+                  className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-medium text-black"
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3, duration: 0.7, ease: 'easeOut' }}
@@ -206,7 +221,7 @@ export default function HomePage() {
                     animateBy="words"
                     direction="top"
                     onAnimationComplete={handleAnimationComplete}
-                    className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-medium text-slate-300"
+                    className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-medium text-black"
                   />
                 </motion.h2>
 
@@ -223,7 +238,7 @@ export default function HomePage() {
                     animateBy="word"
                     direction="top"
                     onAnimationComplete={handleAnimationComplete}
-                    className="text-sm sm:text-base md:text-lg text-slate-300 max-w-md mx-auto md:mx-0 leading-relaxed"
+                    className="text-sm sm:text-base md:text-lg text-slate-700 max-w-md mx-auto md:mx-0 leading-relaxed"
                   />
                 </motion.p>
 
@@ -235,7 +250,7 @@ export default function HomePage() {
                 >
                   <Button
                     size="lg"
-                    className="bg-blue-600 hover:bg-blue-700 text-white rounded-2xl px-6 sm:px-8 md:px-10 py-4 sm:py-5 md:py-6 text-base sm:text-lg shadow-lg shadow-blue-500/20 transition-transform hover:scale-105 duration-300"
+                    className="bg-black hover:bg-blue-700 text-white rounded-2xl px-6 sm:px-8 md:px-10 py-4 sm:py-5 md:py-6 text-base sm:text-lg shadow-lg shadow-blue-500/20 transition-transform hover:scale-105 duration-300"
                   >
                     Get Started
                   </Button>
@@ -274,60 +289,36 @@ export default function HomePage() {
 
   {/* Right Section (Cards Grid) */}
   <div className="lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mr-9">
-    
-    {/* Card 1 */}
-    <a href="/products/las" className="flex items-center space-x-5 
-           bg-white rounded-2xl shadow-sm 
-           hover:shadow-2xl 
-           hover:scale-[1.03] 
-           hover:-translate-y-0.5 
-           transition-transform transition-shadow 
-           duration-400 ease-in-out 
-           p-6 will-change-transform"
->
-      <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-b from-[#6D8EF4] to-[#3D66E1] shadow-md">
-        <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6 2a9 9 0 11-9-9 9 9 0 019 9z" />
-        </svg>
-      </div>
-      <span className="text-[#0A0F2C] font-medium text-lg">LAS</span>
-    </a>
 
-    {/* Card 2 */}
-    <a href="/products/lamf"  className="flex items-center space-x-5 
-           bg-white rounded-2xl shadow-sm 
-           hover:shadow-2xl 
-           hover:scale-[1.03] 
-           hover:-translate-y-0.5 
-           transition-transform transition-shadow 
-           duration-400 ease-in-out 
-           p-6 will-change-transform">
-      <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-b from-[#6D8EF4] to-[#3D66E1] shadow-md">
-        <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 12h14M12 5l7 7-7 7" />
-        </svg>
-      </div>
-      <span className="text-[#0A0F2C] font-medium text-lg">LAMF</span>
-    </a>
+  {/* LAS Card */}
+  <a href="/products/las" className="card4 group relative overflow-hidden rounded-2xl bg-white shadow-md hover:shadow-xl transition-all duration-300 p-6 cursor-pointer">
+    <div className="card4-details">
+      <p className="text1-title text-xl font-semibold text-[#0A0F2C] group-hover:text-black transition-colors">LAS</p>
+      <p className="text1-body text-gray-600 mt-1">Loan Against Shares</p>
+    </div>
+    <button className="card4-button mt-4 bg-[#66c011] hover:bg-black text-white font-medium py-2 px-4 rounded-xl transition-all">More Info</button>
+  </a>
 
-    {/* Card 3 */}
-    <a href="/products/mtf"  className="flex items-center space-x-5 
-           bg-white rounded-2xl shadow-sm 
-           hover:shadow-2xl 
-           hover:scale-[1.03] 
-           hover:-translate-y-0.5 
-           transition-transform transition-shadow 
-           duration-400 ease-in-out 
-           p-6 will-change-transform">
-      <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-b from-[#6D8EF4] to-[#3D66E1] shadow-md">
-        <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 10h11l4 8H7z" />
-        </svg>
-      </div>
-      <span className="text-[#0A0F2C] font-medium text-lg">MTF</span>
-    </a>
+  {/* LAMF Card */}
+  <a href="/products/lamf" className="card4 group relative overflow-hidden rounded-2xl bg-white shadow-md hover:shadow-xl transition-all duration-300 p-6 cursor-pointer">
+    <div className="card4-details">
+      <p className="text1-title text-xl font-semibold text-[#0A0F2C] group-hover:text-black transition-colors">LAMF</p>
+      <p className="text1-body text-gray-600 mt-1">Loan Against Mutual Funds</p>
+    </div>
+    <button className="card4-button mt-4 bg-[#6D8EF4] hover:bg-[#3D66E1] text-white font-medium py-2 px-4 rounded-xl transition-all">More Info</button>
+  </a>
 
-  </div>
+  {/* MTF Card */}
+  <a href="/products/mtf" className="card4 group relative overflow-hidden rounded-2xl bg-white shadow-md hover:shadow-xl transition-all duration-300 p-6 cursor-pointer">
+    <div className="card4-details">
+      <p className="text1-title text-xl font-semibold text-[#0A0F2C] group-hover:text-black transition-colors">MTF</p>
+      <p className="text1-body text-gray-600 mt-1">Margin Trading Facility</p>
+    </div>
+    <button className="card4-button mt-4 bg-[#3D66E1] hover:bg-[#6D8EF4] text-white font-medium py-2 px-4 rounded-xl transition-all">More Info</button>
+  </a>
+
+</div>
+
 </section>
 
 
@@ -338,14 +329,14 @@ export default function HomePage() {
   <div className="absolute inset-0 bg-[url('/noise.png')] opacity-10  mix-blend-overlay pointer-events-none"></div>
 
   {/* Glass card container */}
-  <SpotlightCard className="relative z-10 border-none h-full  w-[95%] rounded-3xl bg-gradient-to-b from-[#6D8EF4] to-[#3D66E1] backdrop-blur-lg  shadow-xl p-8 sm:p-12 md:p-16 flex flex-col"  spotlightColor="rgba(255,255,255,0.1)">
+  <SpotlightCard className="relative z-10 border-none h-full  w-[95%] my-[8%] rounded-3xl bg-white p-8 sm:p-12 md:p-16 flex drop-shadow-2xl shadow-2xl flex-col"  spotlightColor="rgba(255,255,255,0.1)">
  <motion.div
     
     initial={{ opacity: 0, y: 40 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.8 }}
   >
-    <h2 className="text-3xl sm:text-4xl font-extrabold mb-10 text-center text-white">Compare Products</h2>
+    <h2 className="text-3xl sm:text-4xl font-extrabold mb-10 text-center text-black">Compare Products</h2>
 
     <Tabs defaultValue="las">
       <TabsList className="mb-7">
@@ -383,7 +374,7 @@ export default function HomePage() {
   animateBy="words"
   direction="bottom"
   onAnimationComplete={handleAnimationComplete}
-  className="text-lg text-slate-200 mt-3"
+  className="text-lg text-black mt-3"
 />
 
 {/* Bulleted list */}
@@ -471,8 +462,8 @@ export default function HomePage() {
   <SpotlightCard
   className="flex flex-col lg:flex-row justify-between items-center gap-16 pb-[5%] 
              rounded-3xl p-8 sm:p-12 md:p-16 
-             bg-gradient-to-br from-[#EEF1FA] to-[#e9d7ef] border-none
-             drop-shadow-2xl hover:scale-102 transition-all duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)] border-none"
+             bg-gradient-to-br b bg-white bg-opacity-0] border-none
+            hover:scale-102 transition-all duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)] border-none"
   spotlightColor="rgba(255,255,255,0.4)"
 >
     
@@ -502,11 +493,7 @@ export default function HomePage() {
       >
         Read More
       </a>
-    </div>
-  </SpotlightCard>
-
-  {/* Cards Below the Flex */}
-  <div className="mt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto mb-[5%]">
+      <div className="mt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto mb-[5%]">
     {['Transparency', 'Speed', 'Intelligence'].map((feature, i) => (
       <div
         key={i}
@@ -538,6 +525,11 @@ export default function HomePage() {
       </div>
     ))}
   </div>
+    </div>
+  </SpotlightCard>
+
+  {/* Cards Below the Flex */}
+  
 </section>
 
         </main>

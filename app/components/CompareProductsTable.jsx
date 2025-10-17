@@ -78,10 +78,10 @@ export default function CompareProductsTable({ productType }) {
 
   return (
     <div className="bg-white/20 rounded-2xl border border-white/20 backdrop-blur-md shadow-lg p-6 overflow-x-auto">
-      <h3 className="text-xl font-bold mb-4 text-white text-center">
+      <h3 className="text-xl font-bold mb-4 text-black text-center">
         {productType.toUpperCase()} Comparison
       </h3>
-      <table className="w-full border-collapse text-slate-100 text-sm sm:text-base">
+      <table className="w-full border-collapse text-slate-800 text-sm sm:text-base">
         <thead>
           <tr className="bg-white/10">
             <th className="px-4 py-3 border-b text-left">Institution</th>

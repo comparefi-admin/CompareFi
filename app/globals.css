@@ -7,7 +7,64 @@
   border-radius: 50px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 50px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 26px -18px inset;
 }
+/* From Uiverse.io by alexruix */ 
+.card4 {
+ width: 90%;
+ height: 100%;
+ border-radius: 2rem;
+ background: linear-gradient(-80deg, #d2f3a5 0%, rgb(255, 255, 255) 100%);
+ position: relative;
+ padding: 1.8rem;
+ box-shadow: rgb(102, 102, 102) 0px 20px 30px -5px;
+ border: 2px solid #c3c6ce;
+ transition: 0.5s ease-out;
+ overflow: visible;
+}
 
+.card4-details {
+ color: black;
+ height: 100%;
+ gap: .5em;
+ display: grid;
+ place-content: center;
+}
+
+.card4-button {
+ transform: translate(-50%, 125%);
+ width: 50%;
+ border-radius: 1rem;
+ border: none;
+ background-color: #008bf8;
+ color: #fff;
+ font-size: 1rem;
+ padding: .5rem 1rem;
+ position: absolute;
+ left: 50%;
+ bottom: 0;
+ opacity: 0;
+ transition: 0.3s ease-out;
+}
+
+.text1-body {
+ color: rgb(134, 134, 134);
+}
+
+/*Text*/
+.text1-title {
+ font-size: 1.5em;
+ font-weight: bold;
+}
+
+/*Hover*/
+.card4:hover {
+ border-color: #99e33d;
+ box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
+}
+
+.card4:hover .card4-button {
+ transform: translate(-50%, 50%);
+ opacity: 1;
+}
 
 :root {
   --foreground-rgb: 0, 0, 0;
