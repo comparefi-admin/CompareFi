@@ -83,7 +83,7 @@ function DisplayCard({
         <span
           className={cn(
             "relative inline-flex items-center justify-center rounded-full",
-            "bg-gradient-to-b from-[#6D8EF4] to-[#3D66E1] p-2 shadow-md transition-transform duration-300",
+            "bg-gradient-to-b from-[#FF5732] to-[#ff785a] p-2 shadow-md transition-transform duration-300",
             iconClassName
           )}
         >
@@ -91,7 +91,7 @@ function DisplayCard({
         </span>
         <p
           className={cn(
-            "text-lg font-semibold text-[#0A254F]",
+            "text-lg font-semibold text-black",
             titleClassName
           )}
         >

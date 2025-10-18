@@ -30,32 +30,32 @@ import { TooltipProvider } from '@/components/ui/tooltip';
 // Hero cards
 const defaultCards = [
   {
-    icon: <Sparkles className="size-4 text-blue-300" />,
+    icon: <Sparkles className="size-4 text-black" />,
     title: "Featured",
     description: "Discover amazing content",
     date: "Just now",
     iconClassName: "text-blue-500",
-    titleClassName: "text-blue-500",
+    titleClassName: "text-[#FF5732]",
     className:
       "[grid-area:stack] hover:-translate-y-10 before:absolute before:w-[100%] before:outline-1 before:rounded-xl before:outline-border before:h-[100%] before:content-[''] before:bg-blend-overlay before:bg-background/50 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration-700 hover:grayscale-0 before:left-0 before:top-0",
   },
   {
-    icon: <Sparkles className="size-4 text-blue-300" />,
+    icon: <Sparkles className="size-6 text-black" />,
     title: "Popular",
     description: "Trending this week",
     date: "2 days ago",
     iconClassName: "text-blue-500",
-    titleClassName: "text-blue-500",
+    titleClassName: "text-[#FF5732]",
     className:
       "[grid-area:stack] translate-x-12 translate-y-10 hover:-translate-y-1 before:absolute before:w-[100%] before:outline-1 before:rounded-xl before:outline-border before:h-[100%] before:content-[''] before:bg-blend-overlay before:bg-background/50 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration-700 hover:grayscale-0 before:left-0 before:top-0",
   },
   {
-    icon: <Sparkles className="size-4 text-blue-300" />,
+    icon: <Sparkles className="size-4 text-black" />,
     title: "New",
     description: "Latest updates and features",
     date: "Today",
     iconClassName: "text-blue-500",
-    titleClassName: "text-blue-500",
+    titleClassName: "text-[#FF5732]",
     className:
       "[grid-area:stack] translate-x-24 translate-y-20 hover:translate-y-10",
   },
@@ -156,7 +156,7 @@ export default function HomePage() {
           <Navbar />
         </div>
 
-        <main className="flex-grow bg-[#f6f0e4]">
+        <main className="flex-grow bg-[#fcfefb]">
 
           {/* HERO SECTION */}
           <section className="relative flex items-center justify-center min-h-[85vh] bg-white bg-opacity-0 overflow-hidden px-4 sm:px-6 lg:px-10" >
@@ -250,7 +250,7 @@ export default function HomePage() {
                 >
                   <Button
                     size="lg"
-                    className="bg-black hover:bg-blue-700 text-white rounded-2xl px-6 sm:px-8 md:px-10 py-4 sm:py-5 md:py-6 text-base sm:text-lg shadow-lg shadow-blue-500/20 transition-transform hover:scale-105 duration-300"
+                    className="bg-[#fc5732] hover:bg-[#fc5732] shadow-inner-white-500 text-white rounded-2xl px-6 sm:px-8 md:px-10 py-4 sm:py-5 md:py-6 text-base sm:text-lg shadow-lg shadow-blue-500/20 transition-transform hover:scale-105 duration-300"
                   >
                     Get Started
                   </Button>
@@ -273,9 +273,9 @@ export default function HomePage() {
           </section>
 
           {/* PRODUCT HIGHLIGHTS */}
-   <section className="w-full bg-[#EEF1FA] bg-opacity-0 py-10 mx-5 px-6 lg:px-20 flex flex-col lg:flex-row justify-between items-center lg:items-start">
+   <section className="w-full bg-[#EEF1FA] bg-opacity-0 py-20 mx-5 px-10 lg:px-20 flex flex-col lg:flex-row justify-between items-center lg:items-start">
   {/* Left Section */}
-  <div className="lg:w-1/3 mb-10 lg:mb-0">
+  <div className="lg:w-1/3 mb-10 lg:mb-0 ml-10">
     <h2 className="text-4xl font-extrabold text-[#0A0F2C] mb-6 leading-tight">
       Product Highlights
     </h2>
@@ -288,138 +288,174 @@ export default function HomePage() {
   </div>
 
   {/* Right Section (Cards Grid) */}
-  <div className="lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mr-9">
-
+  <div className="lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mr-10">
   {/* LAS Card */}
-  <a href="/products/las" className="card4 group relative overflow-hidden rounded-2xl bg-white shadow-md hover:shadow-xl transition-all duration-300 p-6 cursor-pointer">
-    <div className="card4-details">
-      <p className="text1-title text-xl font-semibold text-[#0A0F2C] group-hover:text-black transition-colors">LAS</p>
-      <p className="text1-body text-gray-600 mt-1">Loan Against Shares</p>
+  <a href="/products/las" className="card4 group relative overflow-hidden rounded-2xl bg-white shadow-md transition-all duration-300 p-6 cursor-pointer">
+    <div className="flex items-center space-x-4">
+      {/* Icon on the left */}
+      <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-[#FF5732]/20 rounded-full group-hover:bg-[#FF5732]/30 transition-colors">
+        <img src="https://img.icons8.com/ios/452/loan-against-securities.png" alt="LAS Icon" className="w-6 h-6 text-[#FF5732] group-hover:text-white" />
+      </div>
+      {/* Text */}
+      <div>
+        <p className="text1-title text-xl font-semibold text-[#0A0F2C] group-hover:text-black transition-colors">LAS</p>
+        <p className="text1-body text-gray-600 mt-1">Loan Against Shares</p>
+      </div>
     </div>
-    <button className="card4-button mt-4 bg-[#66c011] hover:bg-black text-white font-medium py-2 px-4 rounded-xl transition-all">More Info</button>
+    <button className="card4-button mt-4 bg-[#FF5732] hover:bg-black text-white font-medium py-2 px-4 rounded-xl transition-all">More Info</button>
   </a>
 
   {/* LAMF Card */}
   <a href="/products/lamf" className="card4 group relative overflow-hidden rounded-2xl bg-white shadow-md hover:shadow-xl transition-all duration-300 p-6 cursor-pointer">
-    <div className="card4-details">
-      <p className="text1-title text-xl font-semibold text-[#0A0F2C] group-hover:text-black transition-colors">LAMF</p>
-      <p className="text1-body text-gray-600 mt-1">Loan Against Mutual Funds</p>
+    <div className="flex items-center space-x-4">
+      {/* Icon on the left */}
+      <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-[#FF5732]/20 rounded-full group-hover:bg-[#FF5732]/30 transition-colors">
+        <img src="https://img.icons8.com/ios/452/loan-against-securities.png" alt="LAMF Icon" className="w-6 h-6 text-[#FF5732] group-hover:text-white" />
+      </div>
+      <div>
+        <p className="text1-title text-xl font-semibold text-[#0A0F2C] group-hover:text-black transition-colors">LAMF</p>
+        <p className="text1-body text-gray-600 mt-1">Loan Against Mutual Funds</p>
+      </div>
     </div>
-    <button className="card4-button mt-4 bg-[#6D8EF4] hover:bg-[#3D66E1] text-white font-medium py-2 px-4 rounded-xl transition-all">More Info</button>
+    <button className="card4-button mt-4 bg-[#FF5732] hover:bg-black text-white font-medium py-2 px-4 rounded-xl transition-all">More Info</button>
   </a>
 
   {/* MTF Card */}
   <a href="/products/mtf" className="card4 group relative overflow-hidden rounded-2xl bg-white shadow-md hover:shadow-xl transition-all duration-300 p-6 cursor-pointer">
-    <div className="card4-details">
-      <p className="text1-title text-xl font-semibold text-[#0A0F2C] group-hover:text-black transition-colors">MTF</p>
-      <p className="text1-body text-gray-600 mt-1">Margin Trading Facility</p>
+    <div className="flex items-center space-x-4">
+      {/* Icon on the left */}
+      <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-[#FF5732]/20 rounded-full group-hover:bg-[#FF5732]/30 transition-colors">
+        <img src="https://img.icons8.com/ios/452/loan-against-securities.png" alt="MTF Icon" className="w-6 h-6 text-[#FF5732] group-hover:text-white" />
+      </div>
+      <div>
+        <p className="text1-title text-xl font-semibold text-[#0A0F2C] group-hover:text-black transition-colors">MTF</p>
+        <p className="text1-body text-gray-600 mt-1">Margin Trading Facility</p>
+      </div>
     </div>
-    <button className="card4-button mt-4 bg-[#3D66E1] hover:bg-[#6D8EF4] text-white font-medium py-2 px-4 rounded-xl transition-all">More Info</button>
+    <button className="card4-button mt-4 bg-[#FF5732] hover:bg-black text-white font-medium py-2 px-4 rounded-xl transition-all">More Info</button>
   </a>
-
 </div>
 
 </section>
-
 
 
 {/* COMPARE PRODUCTS */}
-<section className="relative flex justify-center items-center mt-[8%] overflow-hidden px-4 sm:px-6 lg:px-10 bg-white bg-opacity-0">
+{/* COMPARE PRODUCTS */}
+<section className="relative flex justify-center items-center mb-[2%] pb-[5%] mt-[2%] min-h-[80vh] overflow-hidden px-10 sm:px-6 lg:px-10 bg-white bg-opacity-0">
   {/* Background noise layer */}
-  <div className="absolute inset-0 bg-[url('/noise.png')] opacity-10  mix-blend-overlay pointer-events-none"></div>
+  <div className="absolute inset-0 bg-[url('/noise.png')] opacity-10 mix-blend-overlay pointer-events-none"></div>
 
   {/* Glass card container */}
-  <SpotlightCard className="relative z-10 border-none h-full  w-[95%] my-[8%] rounded-3xl bg-white p-8 sm:p-12 md:p-16 flex drop-shadow-2xl shadow-2xl flex-col"  spotlightColor="rgba(255,255,255,0.1)">
- <motion.div
-    
-    initial={{ opacity: 0, y: 40 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.8 }}
+  <SpotlightCard
+    className="relative z-10 border-none w-[90%]  rounded-3xl bg-white p-10 sm:p-14 flex drop-shadow-2xl shadow-2xl flex-col"
+    spotlightColor="rgba(177,237,103,0.2)"
   >
-    <h2 className="text-3xl sm:text-4xl font-extrabold mb-10 text-center text-black">Compare Products</h2>
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+    >
+      <h2 className="text-4xl sm:text-5xl font-extrabold mb-12 text-center text-black">
+        Compare Products
+      </h2>
 
-    <Tabs defaultValue="las">
-      <TabsList className="mb-7">
-        {PRODUCTS.map((p) => (
-          <TabsTrigger
-            key={p.id}
-            value={p.id}
-            className="text-base sm:text-lg px-4 sm:px-6 py-2 sm:py-3 rounded-xl whitespace-nowrap transition font-medium focus-visible:ring-2 focus-visible:ring-emerald-400"
-          >
-            {p.title.split('(')[0].trim()}
-          </TabsTrigger>
-        ))}
-      </TabsList>
+      <Tabs defaultValue="las">
+  <TabsList className="mb-10">
+    {PRODUCTS.map((p) => (
+      <TabsTrigger
+        key={p.id}
+        value={p.id}
+        className={`
+          text-lg sm:text-xl px-6 sm:px-8 py-3 sm:py-4 rounded-xl whitespace-nowrap transition font-bold
+          focus-visible:ring-4 focus-visible:ring-emerald-400
+          // hover:bg-emerald-100 hover:bg
+          data-[state=active]:bg-gradient-to-t from-white to-[#B1ED67] data-[state=active]:text-black 
+          data-[state=active]:drop-shadow-2xl
+          data-[state=active]:hover:bg-emerald-600
+        `} 
+      >
+        {p.title.split('(')[0].trim()}
+      </TabsTrigger>
+    ))}
+  </TabsList>
 
-      {PRODUCTS.map((p) => (
-        <TabsContent key={p.id} value={p.id}>
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }}>
-            <div className="grid md:grid-cols-2 gap-10 items-start text-center md:text-left pt-6 pl-2">
-              {/* Left Info */}
-              <div>
-                <h4 className="text-xl font-semibold text-[#0A0F2C]">
-  <BlurText
-    text={p.title}
-    delay={100}
-    animateBy="words"
-    direction="top"
-    onAnimationComplete={handleAnimationComplete}
-    className="text-3xl font-bold text-[#0A0F2C]"
-  />
-</h4>
-               {/* Paragraph */}
-<BlurText
-  text={p.blurb}
-  delay={150}
-  animateBy="words"
-  direction="bottom"
-  onAnimationComplete={handleAnimationComplete}
-  className="text-lg text-black mt-3"
-/>
+  {PRODUCTS.map((p) => (
+    <TabsContent key={p.id} value={p.id}>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6 }}
+      >
+        <div className="grid md:grid-cols-2 gap-12 items-start text-center md:text-left pt-8 pl-2">
+          {/* Left Info */}
+          <div>
+            <h4 className="text-2xl font-semibold text-[#0A0F2C]">
+              <BlurText
+                text={p.title}
+                delay={100}
+                animateBy="words"
+                direction="top"
+                onAnimationComplete={handleAnimationComplete}
+                className="text-4xl font-bold text-[#0A0F2C]"
+              />
+            </h4>
 
-{/* Bulleted list */}
-<ul className="mt-6 text-base text-slate-200 space-y-3">
-  {p.bullets.map((b, i) => (
-    <li key={i}>
-      <BlurText
-        text={`• ${b}`}
-        delay={200 + i * 50} // staggered delay for each bullet
-        animateBy="words"
-        direction="bottom"
-        onAnimationComplete={handleAnimationComplete}
-        className="text-base text-slate-200"
-      />
-    </li>
-  ))}
-</ul>
+            {/* Paragraph */}
+            <BlurText
+              text={p.blurb}
+              delay={150}
+              animateBy="words"
+              direction="bottom"
+              onAnimationComplete={handleAnimationComplete}
+              className="text-xl text-black mt-5 leading-relaxed"
+            />
 
-                <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                  <Link href={`/products/${p.id}`}><Button size="lg">Deep Dive</Button></Link>
-                 
-                </div>
-              </div>
+            {/* Bulleted list */}
+            <ul className="mt-8 text-lg text-slate-600 space-y-4">
+              {p.bullets.map((b, i) => (
+                <li key={i}>
+                  <BlurText
+                    text={`• ${b}`}
+                    delay={200 + i * 50}
+                    animateBy="words"
+                    direction="bottom"
+                    onAnimationComplete={handleAnimationComplete}
+                    className="text-lg text-slate-700"
+                  />
+                </li>
+              ))}
+            </ul>
 
-              {/* Right Metrics */}
-             {/* Right Metrics → Replaced with Firebase Table */}
-<div>
-  <CompareProductsTable productType={p.id} />
-</div>
-
+            <div className="mt-10 flex flex-col sm:flex-row gap-6 justify-center md:justify-start">
+              <Link href={`/products/${p.id}`}>
+                <Button size="lg" className="text-lg px-8 py-4 bg-[#FF5732] hover:bg-[#FF5732]">
+                  Deep Dive
+                </Button>
+              </Link>
             </div>
-          </motion.div>
-        </TabsContent>
-      ))}
-    </Tabs>
-  </motion.div>
-</SpotlightCard>
-  
+          </div>
+
+          {/* Right Metrics → Replaced with Firebase Table */}
+          <div>
+            <CompareProductsTable productType={p.id} />
+          </div>
+        </div>
+      </motion.div>
+    </TabsContent>
+  ))}
+</Tabs>
+
+    </motion.div>
+  </SpotlightCard>
 </section>
+
+
           {/* FEATURES SECTION */}
-          <section className="w-full bg-[#F9FAFB] 0bg-opacity-0 py-15 px-6 lg:px-20 flex flex-col lg:flex-row justify-between items-center lg:items-start">
-  <section className="w-full bg-[#F9FAFB]  bg-opacity-0 py-20 px-6 lg:px-20 flex flex-col lg:flex-row justify-between items-center lg:items-start">
+          <section className="w-full bg-[#F9FAFB] bg-opacity-0 py-15 px-6 lg:px-20 flex flex-col lg:flex-row justify-between items-center lg:items-start">
+  <section className="w-full bg-[#F9FAFB]  bg-opacity-0 py-10 px-6 lg:px-20 flex flex-col lg:flex-row justify-between items-center lg:items-start">
   {/* Left Section */}
-  <div className="w-1/2 h-1/2 mt-28 flex flex-col justify-center">
-    <h2 className="text-4xl font-extrabold text-[#0A0F2C] mb-6 leading-tight">
+  <div className="w-1/2 h-1/2 mt-20 flex flex-col justify-center ml-[5%]">
+    <h2 className="text-7xl font-extrabold text-[#0A0F2C] mb-6 mt-5 leading-tight">
       About CompareFi
     </h2>
     <p className="text-[#4B5563] mb-6 text-lg leading-relaxed">
@@ -435,7 +471,7 @@ export default function HomePage() {
 
   {/* Right Section (Image / Illustration) */}
   <div className="lg:w-1/2 flex justify-center">
-    <div className="w-[80%]">
+    <div className="w-[80%] ml-[10%]">
       <Image
         src={globe}
         alt="CompareFi Overview"
@@ -457,12 +493,12 @@ export default function HomePage() {
 
 
 {/* UPDATED WHYw */}
-<section className="w-full bg-[#F9FAFB] opactity-0 py-4 px-6 lg:px-20 ">
+<section className="w-full bg-[#f9fafb00] py-4 px-6 lg:px-20 mb-[2%]">
   {/* Top Flex Row */}
   <SpotlightCard
   className="flex flex-col lg:flex-row justify-between items-center gap-16 pb-[5%] 
              rounded-3xl p-8 sm:p-12 md:p-16 
-             bg-gradient-to-br b bg-white bg-opacity-0] border-none
+             bg-gradient-to-br b bg-white bg-opacity-0 border-none
             hover:scale-102 transition-all duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)] border-none"
   spotlightColor="rgba(255,255,255,0.4)"
 >
@@ -480,57 +516,95 @@ export default function HomePage() {
 
 
     {/* Right Section (Text) */}
-    <div className="lg:w-1/2 flex flex-col pr-[10%] justify-center items-start text-start">
-      <h2 className="text-6xl font-extrabold text-[#0A0F2C] mb-6 leading-tight pl-[10%]">
+    <div className="lg:w-1/2 flex flex-col pr-[14%] justify-center items-start text-start">
+      <h2 className="text-7xl font-extrabold text-[#0A0F2C] mb-6 leading-tight pl-[5%]">
         Why CompareFi?
       </h2>
-      <p className="text-[#4B5563] mb-6 text-lg leading-relaxed max-w-md pl-[10%]">
+      <p className="text-[#4B5563] mb-6 text-lg leading-relaxed max-w-md pl-[5%]">
         Discover how CompareFi helps you make confident, data-driven financial decisions.
       </p>
       <a
         href="/about"
-        className="text-pink-500 font-medium underline underline-offset-4 hover:text-pink-700 transition pl-[10%]"
+        className="text-[#E8098E] font-medium  underline underline-offset-4 hover:text-pink-700 transition pl-[5%]"
       >
         Read More
       </a>
-      <div className="mt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto mb-[5%]">
-    {['Transparency', 'Speed', 'Intelligence'].map((feature, i) => (
-      <div
-        key={i}
-        className="bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all p-8 flex flex-col items-center text-center"
-      >
-        <div className="flex justify-center items-center w-16 h-16 rounded-xl bg-gradient-to-b from-[#6D8EF4] to-[#3D66E1] mb-5">
-          <Sparkles className="w-8 h-8 text-white" />
+      <div className="mx-[-8%] mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl pl-[10%] mr-[-30%] mb-[5%] ">
+  {['Transparency', 'Speed', 'Intelligence'].map((feature, i) => (
+    <div
+      key={i}
+      className="rounded-2xl shadow-[0_20px_30px_-5px_rgba(102,102,102,1)] transition-all duration-500 ease-out p-8 flex flex-col items-center text-center overflow-visible bg-gradient-to-tr from-[#f9fafb00] via-[#f9fafb00] to-[#f9fafb00] border-2 border-[#c3c6ce] hover:border-[#99e33d]  hover:shadow-[0_4px_18px_0_rgba(0,0,0,0.25)]"
+
+    >
+      {/* Header Row */}
+      <div className="flex flex-row items-center justify-start gap-4 w-full mb-3 ">
+        <div className="flex justify-center items-center w-14 h-14 rounded-xl bg-[#FF5732] flex-shrink-0">
+          <Sparkles className="w-7 h-7 text-white" />
         </div>
-        <h4 className="text-xl font-semibold text-[#0A0F2C]">
-  <BlurText
-    text={feature}
-    delay={100}
-    animateBy="words"
-    direction="top"
-    onAnimationComplete={handleAnimationComplete}
-    className="text-xl font-semibold text-[#0A0F2C]"
-  />
-</h4>
-        <p className="text-[#4B5563] mt-3">
-  <BlurText
-    text="We bring you clarity, speed, and smart insights to guide your investments."
-    delay={150}
-    animateBy="words"
-    direction="top"
-    onAnimationComplete={handleAnimationComplete}
-    className="text-[#4B5563] mt-3"
-  />
-</p>
+
+        <h4 className="flex text-lg sm:text-xl font-semibold text-[#0A0F2C] items-center justify-center">
+          <BlurText
+            text={feature}
+            delay={100}
+            animateBy="words"
+            direction="top"
+            onAnimationComplete={handleAnimationComplete}
+            className="text-lg sm:text-xl font-semibold text-[#0A0F2C]"
+          />
+        </h4>
       </div>
-    ))}
-  </div>
+
+      {/* Description */}
+      <p className="text-[#4B5563] mt-2 leading-relaxed">
+        <BlurText
+          text="We bring you clarity, speed, and smart insights to guide your investments."
+          delay={150}
+          animateBy="words"
+          direction="top"
+          onAnimationComplete={handleAnimationComplete}
+          className="text-[#4B5563]"
+        />
+      </p>
+    </div>
+  ))}
+</div>
+
     </div>
   </SpotlightCard>
 
   {/* Cards Below the Flex */}
   
 </section>
+<section className="w-full flex justify-center items-center pb-20 mb-30 bg-transparent">
+  <div className="m2 w-[80%] flex flex-col p-20 relative">
+    {/* Glowing background ring */}
+    <div className="absolute z-5 inset-2 blur-[60px] opacity-80 group-hover:opacity-100 transition-all duration-500"
+         style={{
+           background: "radial-gradient(circle, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 70%)"
+         }}>
+    </div>
+
+    {/* Text + WhatsApp CTA flowing across the card */}
+    <div className="relative z-10 w-full flex flex-wrap items-center justify-between gap-6">
+      <h2 className="flex-1 text-3xl sm:text-4xl font-extrabold text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">
+        Want to compare your financial options? Reach out to CompareFi instantly on WhatsApp!
+      </h2>
+
+      <a 
+        href="https://wa.me/919999999999"  // Replace with your WhatsApp number
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center px-6 py-3 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg shadow-lg transition-all duration-300 hover:scale-105"
+      >
+        <svg className="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M20.52 3.478a11.9 11.9 0 0 0-16.84 16.84L2 22l2.84-.737a11.9 11.9 0 0 0 15.68-17.785zm-8.52 16.02c-2.72 0-5.3-0.9-7.36-2.41l-0.53-.33-4.34 1.15 1.16-4.23-0.35-.55a10.96 10.96 0 1 1 11.42 6.37zM16.06 14.11c-0.23-0.12-1.36-0.67-1.57-0.75-0.21-0.09-0.36-0.13-0.51 0.12s-0.58 0.75-0.71 0.9c-0.13 0.15-0.25 0.17-0.46 0.06-0.21-0.11-0.89-0.33-1.69-1.04-0.63-0.56-1.05-1.25-1.17-1.45-0.12-0.21-0.01-0.32 0.1-0.43 0.1-0.1 0.22-0.25 0.33-0.37 0.11-0.12 0.15-0.21 0.22-0.35 0.07-0.14 0.03-0.26-0.02-0.37-0.05-0.12-0.51-1.23-0.7-1.69-0.18-0.44-0.36-0.38-0.51-0.38s-0.27-0.01-0.41-0.01c-0.14 0-0.36 0.05-0.55 0.26s-0.72 0.7-0.72 1.71c0 1.01 0.74 1.99 0.84 2.13 0.1 0.14 1.45 2.23 3.5 3.13 2.05 0.9 2.05 0.6 2.42 0.56s1.44-0.59 1.65-1.15c0.21-0.57 0.21-1.06 0.15-1.16-0.07-0.1-0.21-0.16-0.44-0.28z"/>
+        </svg>
+        Contact on WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
 
         </main>
         {/* FOOTER */}
