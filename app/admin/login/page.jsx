@@ -21,55 +21,46 @@ export default function AdminLogin() {
     setDebug('Starting login...')
 
     try {
-      console.log('🔹 Attempting signInWithPassword', { email })
       const { data, error: signError } = await supabase.auth.signInWithPassword({
         email,
         password,
       })
 
-      console.log('🔹 Supabase response:', { data, signError })
       setDebug(JSON.stringify({ data, signError }, null, 2))
 
       if (signError) {
-        console.error('❌ Sign-in error:', signError)
         setError(signError.message)
         setLoading(false)
         return
       }
 
       const user = data?.user
-      console.log('✅ Authenticated user:', user)
-
       if (!user) {
         setError('No user object returned.')
         setLoading(false)
         return
       }
 
-      const adminUid = process.env.NEXT_PUBLIC_ADMIN_UID
-      console.log('🔸 Admin UID check', { userId: user.id, adminUid })
+      // Server-side admin check
+      const res = await fetch('/admin/checkAdmin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ uid: user.id }),
+      })
 
-      // Allow admin login even if email not confirmed
-      if (user.id === adminUid) {
-        console.log('✅ Admin UID matched! Redirecting...')
+      const result = await res.json()
+
+      if (result.isAdmin) {
         router.push('/admin/dashboard')
-        return
-      }
-
-      // Email not confirmed
-      if (!user.email_confirmed_at) {
-        console.warn('⚠️ Email not confirmed for this account')
-        await supabase.auth.signOut()
-        setError('Email not confirmed.')
       } else {
-        console.warn('🚫 Unauthorized account (not admin)')
         await supabase.auth.signOut()
         setError('Unauthorized account.')
       }
-    } catch (err) {
-      console.error('🔥 Unexpected error:', err)
+    } 
+    catch (err) {
       setError(err.message || 'Unexpected error.')
-    } finally {
+    } 
+    finally {
       setLoading(false)
     }
   }
@@ -121,10 +112,11 @@ export default function AdminLogin() {
 
           {error && <p className="text-sm text-red-500 text-center">{error}</p>}
         </form>
-
+        
         <p className="text-xs text-gray-500 text-center mt-4">
           (Keep this route hidden — don’t share the link anywhere)
         </p>
+
       </div>
     </div>
   )
