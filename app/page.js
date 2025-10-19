@@ -435,7 +435,7 @@ export default function HomePage() {
                   Compare Products
                 </h2>
 
-                <Tabs defaultValue="LAS">
+               <Tabs defaultValue={PRODUCTS[0]?.id}>
                   <TabsList className="mb-10">
                     {PRODUCTS.map((p) => (
                       <TabsTrigger
