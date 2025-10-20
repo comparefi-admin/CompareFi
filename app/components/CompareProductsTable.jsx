@@ -11,12 +11,12 @@ export default function CompareProductsTable({ productType }) {
       setLoading(true);
       try {
         // ✅ Determine which collection to fetch
-        const collectionName =
-          productType === "las"
-            ? "LAS"
-            : productType === "lamf"
-            ? "LAMF"
-            : "MTF";
+       const collectionName =
+  productType.toLowerCase() === "las"
+    ? "LAS"
+    : productType.toLowerCase() === "lamf"
+    ? "LAMF"
+    : "MTF";
 
         const querySnapshot = await getDocs(collection(db, collectionName));
 

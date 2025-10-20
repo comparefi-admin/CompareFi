@@ -26,7 +26,7 @@ export default function AdminDashboard() {
       }
 
       // Server-side admin check
-      const res = await fetch('/admin/checkAdmin', {
+      const res = await fetch('/api', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ uid: data.user.id }),
