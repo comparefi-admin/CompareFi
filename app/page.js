@@ -172,7 +172,7 @@ export default function HomePage() {
             >
               <SpotlightCard className="relative z-10 w-[90%] max-w-full rounded-3xl   min-h-[70vh] bg-gradient-to-b from-[#B1ED67] to-[white]
  backdrop-blur-xl shadow-2xl sm:p-10 md:p-14 lg:p-20 flex flex-col md:flex-row mt-[7%] mb-[7%] gap-10 md:gap-14 items-center justify-center hover:drop-shadow-2xl
-           hover:scale-102 transition-all duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)] border-none
+           hover:scale-102 transition-all duration-700 ease-&lsqb;cubic-bezier(0.25,0.1,0.25,1)&rsqb; border-none
            p-6 will-change-transform "  spotlightColor="rgba(255,255,255,0.3)">
               {/* LEFT */}
               <div className="flex-1 text-center md:text-left space-y-5 sm:space-y-6 lg:space-y-8 pl-20">
@@ -499,7 +499,7 @@ export default function HomePage() {
   className="flex flex-col lg:flex-row justify-between items-center gap-16 pb-[5%] 
              rounded-3xl p-8 sm:p-12 md:p-16 
              bg-gradient-to-br b bg-white bg-opacity-0 border-none
-            hover:scale-102 transition-all duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)] border-none"
+            hover:scale-102 transition-all duration-700 ease-&lsqb;cubic-bezier(0.25,0.1,0.25,1)&rsqb; border-none"
   spotlightColor="rgba(255,255,255,0.4)"
 >
     
