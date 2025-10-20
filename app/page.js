@@ -341,13 +341,13 @@ export default function HomePage() {
 
 
 {/* COMPARE PRODUCTS */}
-{/* COMPARE PRODUCTS */}<section className="relative flex justify-center items-center mb-[2%] pb-[5%] mt-[2%] min-h-[80vh] overflow-hidden px-6 lg:px-10 bg-white">
+{/* COMPARE PRODUCTS */}<section className="relative flex justify-center items-center mb-[2%] pb-[5%] mt-[2%] min-h-[80vh] overflow-hidden px-6 lg:px-10 bg-opacity-0">
   {/* Subtle noise/background */}
-  <div className="absolute inset-0 bg-[url('/noise.png')] opacity-5 pointer-events-none"></div>
+  <div className="absolute inset-0 bg-white bg-opacity-0 pointer-events-none"></div>
 
   {/* Glass card container */}
   <SpotlightCard
-    className="relative z-10 w-[90%] rounded-3xl bg-white/90 backdrop-blur-lg p-10 sm:p-14 flex flex-col drop-shadow-2xl shadow-2xl border-none"
+    className="relative z-10 w-[90%] rounded-3xl bg-white bg-opacity-0 backdrop-blur-lg p-10 sm:p-14 flex flex-col drop-shadow-2xl shadow-2xl border-none"
     spotlightColor="rgba(177,237,103,0.2)"
   >
     <motion.div
@@ -489,7 +489,7 @@ export default function HomePage() {
 
 
 {/* UPDATED WHYw */}
-<section className="w-full bg-[#f9fafb00] py-4 px-6 lg:px-20 mb-[2%]">
+<section className="w-full py-4 px-6 lg:px-20 mb-[2%]">
   {/* Top Flex Row */}
   <SpotlightCard
   className="flex flex-col lg:flex-row justify-between items-center gap-16 pb-[5%] 
