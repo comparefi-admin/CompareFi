@@ -341,14 +341,13 @@ export default function HomePage() {
 
 
 {/* COMPARE PRODUCTS */}
-{/* COMPARE PRODUCTS */}
-<section className="relative flex justify-center items-center mb-[2%] pb-[5%] mt-[2%] min-h-[80vh] overflow-hidden px-10 sm:px-6 lg:px-10 bg-white bg-opacity-0">
-  {/* Background noise layer */}
-  <div className="absolute inset-0 bg-[url('/noise.png')] opacity-10 mix-blend-overlay pointer-events-none"></div>
+{/* COMPARE PRODUCTS */}<section className="relative flex justify-center items-center mb-[2%] pb-[5%] mt-[2%] min-h-[80vh] overflow-hidden px-6 lg:px-10 bg-white">
+  {/* Subtle noise/background */}
+  <div className="absolute inset-0 bg-[url('/noise.png')] opacity-5 pointer-events-none"></div>
 
   {/* Glass card container */}
   <SpotlightCard
-    className="relative z-10 border-none w-[90%]  rounded-3xl bg-white p-10 sm:p-14 flex drop-shadow-2xl shadow-2xl flex-col"
+    className="relative z-10 w-[90%] rounded-3xl bg-white/90 backdrop-blur-lg p-10 sm:p-14 flex flex-col drop-shadow-2xl shadow-2xl border-none"
     spotlightColor="rgba(177,237,103,0.2)"
   >
     <motion.div
@@ -361,91 +360,87 @@ export default function HomePage() {
       </h2>
 
       <Tabs defaultValue="las">
-  <TabsList className="mb-10">
-    {PRODUCTS.map((p) => (
-      <TabsTrigger
-        key={p.id}
-        value={p.id}
-        className={`
-          text-lg sm:text-xl px-6 sm:px-8 py-3 sm:py-4 rounded-xl whitespace-nowrap transition font-bold
-          focus-visible:ring-4 focus-visible:ring-emerald-400
-          // hover:bg-emerald-100 hover:bg
-          data-[state=active]:bg-gradient-to-t from-white to-[#B1ED67] data-[state=active]:text-black 
-          data-[state=active]:drop-shadow-2xl
-          data-[state=active]:hover:bg-emerald-600
-        `} 
-      >
-        {p.title.split('(')[0].trim()}
-      </TabsTrigger>
-    ))}
-  </TabsList>
+        <TabsList className="mb-10">
+          {PRODUCTS.map((p) => (
+            <TabsTrigger
+              key={p.id}
+              value={p.id}
+              className={`
+                text-lg sm:text-xl px-6 sm:px-8 py-3 sm:py-4 rounded-xl whitespace-nowrap transition font-bold
+                focus-visible:ring-4 focus-visible:ring-emerald-400
+                data-[state=active]:bg-gradient-to-t from-white to-[#B1ED67]
+                data-[state=active]:text-black
+                data-[state=active]:drop-shadow-2xl
+              `}
+            >
+              {p.title.split('(')[0].trim()}
+            </TabsTrigger>
+          ))}
+        </TabsList>
 
-  {PRODUCTS.map((p) => (
-    <TabsContent key={p.id} value={p.id}>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6 }}
-      >
-        <div className="grid md:grid-cols-2 gap-12 items-start text-center md:text-left pt-8 pl-2">
-          {/* Left Info */}
-          <div>
-            <h4 className="text-2xl font-semibold text-[#0A0F2C]">
-              <BlurText
-                text={p.title}
-                delay={100}
-                animateBy="words"
-                direction="top"
-                onAnimationComplete={handleAnimationComplete}
-                className="text-4xl font-bold text-[#0A0F2C]"
-              />
-            </h4>
+        {PRODUCTS.map((p) => (
+          <TabsContent key={p.id} value={p.id}>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="grid md:grid-cols-2 gap-12 items-start text-center md:text-left pt-8 pl-2">
+                {/* Left Info */}
+                <div>
+                  <h4 className="text-2xl font-semibold text-[#0A0F2C]">
+                    <BlurText
+                      text={p.title}
+                      delay={100}
+                      animateBy="words"
+                      direction="top"
+                      onAnimationComplete={handleAnimationComplete}
+                      className="text-4xl font-bold text-[#0A0F2C]"
+                    />
+                  </h4>
 
-            {/* Paragraph */}
-            <BlurText
-              text={p.blurb}
-              delay={150}
-              animateBy="words"
-              direction="bottom"
-              onAnimationComplete={handleAnimationComplete}
-              className="text-xl text-black mt-5 leading-relaxed"
-            />
-
-            {/* Bulleted list */}
-            <ul className="mt-8 text-lg text-slate-600 space-y-4">
-              {p.bullets.map((b, i) => (
-                <li key={i}>
                   <BlurText
-                    text={`• ${b}`}
-                    delay={200 + i * 50}
+                    text={p.blurb}
+                    delay={150}
                     animateBy="words"
                     direction="bottom"
                     onAnimationComplete={handleAnimationComplete}
-                    className="text-lg text-slate-700"
+                    className="text-xl text-black mt-5 leading-relaxed"
                   />
-                </li>
-              ))}
-            </ul>
 
-            <div className="mt-10 flex flex-col sm:flex-row gap-6 justify-center md:justify-start">
-              <Link href={`/products/${p.id}`}>
-                <Button size="lg" className="text-lg px-8 py-4 bg-[#FF5732] hover:bg-[#FF5732]">
-                  Deep Dive
-                </Button>
-              </Link>
-            </div>
-          </div>
+                  <ul className="mt-8 text-lg text-slate-600 space-y-4">
+                    {p.bullets.map((b, i) => (
+                      <li key={i}>
+                        <BlurText
+                          text={`• ${b}`}
+                          delay={200 + i * 50}
+                          animateBy="words"
+                          direction="bottom"
+                          onAnimationComplete={handleAnimationComplete}
+                          className="text-lg text-slate-700"
+                        />
+                      </li>
+                    ))}
+                  </ul>
 
-          {/* Right Metrics → Replaced with Firebase Table */}
-          <div>
-            <CompareProductsTable productType={p.id} />
-          </div>
-        </div>
-      </motion.div>
-    </TabsContent>
-  ))}
-</Tabs>
+                  <div className="mt-10 flex flex-col sm:flex-row gap-6 justify-center md:justify-start">
+                    <Link href={`/products/${p.id}`}>
+                      <Button size="lg" className="text-lg px-8 py-4 bg-[#FF5732] hover:bg-[#FF5732]">
+                        Deep Dive
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
 
+                {/* Right Metrics → Firebase Table */}
+                <div>
+                  <CompareProductsTable productType={p.id} />
+                </div>
+              </div>
+            </motion.div>
+          </TabsContent>
+        ))}
+      </Tabs>
     </motion.div>
   </SpotlightCard>
 </section>
