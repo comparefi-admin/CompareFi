@@ -8,7 +8,6 @@ import BlurText from "@/components/BlurText";
 const handleAnimationComplete = () => {
   console.log('Animation completed!');
 };
- import TextType from '@/components/TextType';
 
 import SpotlightCard from './components/SpotlightCard.jsx'; // Import the SpotlightCard component from './components/SpotlightCard';
 import React, { useEffect, useRef, useState } from 'react';
