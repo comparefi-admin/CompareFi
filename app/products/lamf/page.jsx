@@ -6,6 +6,7 @@ import Footer from "../../components/footer";
 import { ArrowUpDown, ChevronRight } from "lucide-react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../../lib/firebaseConfig";
+import { lamfFaqData } from "./faqdata"; // adjust path as needed
 
 export default function LAMFPage() {
   const [data, setData] = useState([]);
@@ -16,7 +17,18 @@ export default function LAMFPage() {
   const [sortOrderCost, setSortOrderCost] = useState("asc");
   const [currentTable, setCurrentTable] = useState("funding");
   const [faqOpen, setFaqOpen] = useState(null);
+  const [activeCategories, setActiveCategories] = useState(["All FAQs"]); // <-- new hook
 
+  // --- FAQ data hook ---
+  const allCategories = ["All FAQs", ...Object.keys(lamfFaqData)];
+
+  
+const filteredFaqs = useMemo(() => {
+  if (activeCategories.includes("All FAQs")) {
+    return Object.values(lamfFaqData).flat();
+  }
+  return activeCategories.flatMap((cat) => lamfFaqData[cat] || []);
+}, [activeCategories]);
   // --- Helpers ---
   const extractNumberString = (val) => {
     if (!val) return "—";
@@ -211,6 +223,22 @@ export default function LAMFPage() {
 
   if (loading) return <div className="flex justify-center items-center h-screen text-xl font-semibold text-gray-600">Loading LAMF data...</div>;
 
+
+const handleCategoryClick = (cat) => {
+  setActiveCategories((prev) => {
+    if (cat === "All FAQs") return ["All FAQs"];
+
+    const isSelected = prev.includes(cat);
+    let newSelection = isSelected
+      ? prev.filter((c) => c !== cat)
+      : [...prev.filter((c) => c !== "All FAQs"), cat];
+
+    return newSelection.length === 0 ? ["All FAQs"] : newSelection;
+  });
+};
+
+
+
   return (
     <div className="bg-gradient-to-br from-slate-50 to-slate-100 min-h-screen">
       <Navbar />
@@ -333,36 +361,65 @@ export default function LAMFPage() {
         </button>
       </section>
 
-    {/* FAQ Section */}
+   {/* --- FAQ Section --- */}
 <section className="max-w-7xl mx-auto px-6 py-12">
   <h2 className="text-4xl font-bold text-center mb-8">Frequently Asked Questions about LAMF</h2>
+
+  {/* Category Buttons */}
+  <div className="flex flex-wrap justify-center gap-4 mb-8 p-6 bg-white/30 backdrop-blur-md rounded-2xl shadow-lg">
+    {allCategories.map((cat) => (
+      <button
+        key={cat}
+        onClick={() => {
+          setActiveCategories((prev) => {
+            if (cat === "All FAQs") return ["All FAQs"];
+            const isSelected = prev.includes(cat);
+            const newSelection = isSelected
+              ? prev.filter((c) => c !== cat)
+              : [...prev.filter((c) => c !== "All FAQs"), cat];
+            return newSelection.length === 0 ? ["All FAQs"] : newSelection;
+          });
+        }}
+        className={`px-8 py-3 rounded-xl shadow-lg font-medium transition-all duration-300 ${
+          activeCategories.includes(cat)
+            ? "bg-teal-600 text-white shadow-2xl"
+            : "bg-white text-gray-700 hover:bg-gray-100"
+        }`}
+      >
+        {cat}
+      </button>
+    ))}
+  </div>
+
+  {/* FAQ Cards */}
   <div className="grid md:grid-cols-2 gap-6">
-    <div className="bg-white p-6 rounded-xl shadow-md">
-      <h3 className="text-xl font-semibold mb-2">What is a Loan Against Mutual Funds (LAMF)?</h3>
-      <p className="text-gray-700">
-        LAMF is a secured loan where you can pledge your mutual fund units as collateral to get funds without selling your investments.
-      </p>
-    </div>
-    <div className="bg-white p-6 rounded-xl shadow-md">
-      <h3 className="text-xl font-semibold mb-2">Who is eligible for LAMF?</h3>
-      <p className="text-gray-700">
-        Individuals who hold mutual fund units with a registered fund house are eligible. The loan amount depends on the value of pledged units.
-      </p>
-    </div>
-    <div className="bg-white p-6 rounded-xl shadow-md">
-      <h3 className="text-xl font-semibold mb-2">What is the loan-to-value ratio (LTV)?</h3>
-      <p className="text-gray-700">
-        LTV is the maximum loan amount you can get against your mutual fund holdings. It varies across lenders and fund types.
-      </p>
-    </div>
-    <div className="bg-white p-6 rounded-xl shadow-md">
-      <h3 className="text-xl font-semibold mb-2">How is interest charged on LAMF?</h3>
-      <p className="text-gray-700">
-        Interest is charged on the borrowed amount at rates defined by the lender. Some lenders offer flexible repayment options.
-      </p>
-    </div>
+    {filteredFaqs.map((faq, idx) => (
+      <div
+        key={idx}
+        className="bg-white/30 backdrop-blur-md p-6 rounded-2xl shadow-lg transition-all duration-300"
+      >
+        <button
+          onClick={() => setFaqOpen(faqOpen === idx ? null : idx)}
+          className="w-full flex justify-between items-center font-semibold text-lg text-left focus:outline-none"
+        >
+          <span>{faq.question}</span>
+          <span
+            className={`transform transition-transform duration-300 ${
+              faqOpen === idx ? "rotate-180" : "rotate-0"
+            }`}
+          >
+            ▼
+          </span>
+        </button>
+        {faqOpen === idx && (
+          <p className="mt-4 text-gray-700">{faq.answer}</p>
+        )}
+      </div>
+    ))}
   </div>
 </section>
+
+
 
 
       {/* Enquire Now */}
