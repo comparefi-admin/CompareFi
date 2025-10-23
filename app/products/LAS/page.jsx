@@ -197,9 +197,9 @@ export default function LASPage() {
       <section className="w-[90%] mx-auto px-2 py-32 flex flex-col items-center justify-center text-center">
         <div className="w-full flex flex-col items-center justify-center mb-10">
           <SpotlightCard
-            className="relative z-10 w-[90%] max-w-3xl rounded-3xl bg-gradient-to-b from-[#B1ED67] to-white
+            className="relative z-10 w-[90%] rounded-3xl bg-gradient-to-b from-[#B1ED67] to-white
             backdrop-blur-xl shadow-2xl sm:p-10 md:p-14 lg:p-20 flex flex-col items-center justify-center 
-            mt-[7%] mb-[7%] md:gap-14 hover:drop-shadow-2xl hover:scale-102 transition-all duration-700 ease-in-out
+             mb-[7%] md:gap-14 hover:drop-shadow-2xl hover:scale-102 transition-all duration-700 ease-in-out
             border-none will-change-transform"
             spotlightColor="rgba(255,255,255,0.3)"
           >
