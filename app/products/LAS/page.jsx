@@ -7,6 +7,7 @@ import { ArrowUpDown, ChevronRight } from "lucide-react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../../lib/firebaseConfig";
 import { faqData } from "./faqdata"; // adjust the path based on where you place the file
+import SpotlightCard from '@/components/SpotlightCard.jsx';
 
 export default function LASPage() {
   const [data, setData] = useState([]);
@@ -192,9 +193,19 @@ export default function LASPage() {
       <Navbar />
 
       {/* Hero / Overview */}
-      <section className="max-w-7xl mx-auto px-6 py-32">
-        <div className="text-center mb-10">
-          <h1 className="text-5xl font-bold mb-4">Loan Against Shares</h1>
+      {/* Hero / Overview */}
+      <section className="w-[90%] mx-auto px-2 py-32 flex flex-col items-center justify-center text-center">
+        <div className="w-full flex flex-col items-center justify-center mb-10">
+          <SpotlightCard
+            className="relative z-10 w-[90%] max-w-3xl rounded-3xl bg-gradient-to-b from-[#B1ED67] to-white
+            backdrop-blur-xl shadow-2xl sm:p-10 md:p-14 lg:p-20 flex flex-col items-center justify-center 
+            mt-[7%] mb-[7%] md:gap-14 hover:drop-shadow-2xl hover:scale-102 transition-all duration-700 ease-in-out
+            border-none will-change-transform"
+            spotlightColor="rgba(255,255,255,0.3)"
+          >
+            <h1 className="text-5xl font-bold mb-4">Loan Against Shares</h1>
+          </SpotlightCard>
+
           <p className="text-gray-700 text-lg max-w-3xl mx-auto">
             Compare Interest Rates, Eligibility, Hidden Charges & More. Access
             detailed, filterable breakdowns from top lenders like Bajaj Finserv,
@@ -203,6 +214,7 @@ export default function LASPage() {
           </p>
         </div>
       </section>
+
 
       {/* Tables Section */}
       <section className="max-w-7xl mx-auto px-6 py-10 flex flex-col items-center">
