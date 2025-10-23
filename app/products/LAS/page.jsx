@@ -39,6 +39,40 @@ export default function LASPage() {
       ? Object.values(faqData).flat()
       : faqData[activeCategory] || [];
 
+  // Buttons for categories
+  const categoryButtons = [
+    { key: "fundingDetails", label: "Funding Related Details" },
+    { key: "majorCost", label: "Major Cost" },
+    { key: "defaultCharges", label: "Default Charges" },
+    { key: "otherMiscCost", label: "Other Misc Cost" },
+  ];
+
+  // Define which columns show for each category in the right table
+  const rightTableColumns = {
+    fundingDetails: [
+      { key: "approvedShares", label: "Approved List of Shares" },
+      { key: "tenure", label: "Tenure" },
+      { key: "minMaxLoan", label: "Minimum and Maximum Loan" },
+      { key: "marginPeriod", label: "Regularization / Margin Call Period" },
+      { key: "ltvMin", label: "LTV - Funding (Min)" },
+      { key: "ltvMax", label: "LTV - Funding (Max)" },
+    ],
+    majorCost: [
+      { key: "minRate", label: "Interest Rate (Min)" },
+      { key: "maxRate", label: "Interest Rate (Max)" },
+      { key: "medianRate", label: "Interest Rate (Median)" },
+      { key: "processingFee", label: "Processing Fee" },
+      { key: "prepaymentCharges", label: "Pre-payment Charges" },
+      { key: "renewalFee", label: "Annual Maintenance / Renewal Fees" },
+      { key: "penalCharges", label: "Penal Charges" },
+    ],
+    defaultCharges: [{ key: "defaultCharges", label: "Default Charges" }],
+    otherMiscCost: [
+      { key: "otherExpenses", label: "Other Expenses" }, // ← new column
+    ],
+  };
+  const [activeTableCategory, setActiveTableCategory] =
+    useState("fundingDetails");
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -75,7 +109,12 @@ export default function LASPage() {
             processingFee: d["Processing Fee"] ?? "—",
             prepaymentCharges: d["Pre-payment Charges"] ?? "—",
             renewalFee: d["Annual Maintenance Charges / Renewal Fees"] ?? "—",
-            penalCharges: d["Penal Charges"] ?? d["Default Charges"] ?? "—",
+            penalCharges: d["Penal Charges"] ?? "—",
+            defaultCharges: d["Default Charges"] ?? "—",
+            otherExpenses:
+              d["Other Expenses"] && typeof d["Other Expenses"] === "object"
+                ? d["Other Expenses"]
+                : {},
           };
         });
         setData(firebaseData);
@@ -166,216 +205,194 @@ export default function LASPage() {
       </section>
 
       {/* Tables Section */}
-      <section className="max-w-7xl mx-auto px-6 py-8 flex gap-4">
-        <div className="flex-1 bg-white rounded-xl shadow-lg overflow-x-auto">
-          {currentTable === "funding" && (
-            <table className="w-full border-collapse">
-              <thead>
-                <tr className="bg-gray-100 text-left text-gray-700">
-                  {[
-                    { key: "name", label: "Institution" },
-                    { key: "approvedShares", label: "Approved Shares" },
-                    { key: "tenure", label: "Tenure" },
-                    { key: "minMaxLoan", label: "Min & Max Loan" },
-                    { key: "marginPeriod", label: "Margin Period" },
-                    { key: "ltvMin", label: "LTV Min" },
-                    { key: "ltvMax", label: "LTV Max" },
-                  ].map((h) => (
-                    <th
-                      key={h.key}
-                      className="px-4 py-3 border-b text-sm font-semibold"
-                    >
-                      <div className="flex items-center gap-1">
-                        {h.label}
-                        <button
-                          onClick={() => handleSort(h.key, "funding")}
-                          className="text-gray-500 hover:text-gray-800"
-                        >
-                          <ArrowUpDown size={14} />
-                        </button>
-                        {sortFieldFunding === h.key && (
-                          <span className="text-xs">
-                            {sortOrderFunding === "asc" ? "▲" : "▼"}
-                          </span>
-                        )}
-                      </div>
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {sortedFundingData.map((row) => (
-                  <tr
-                    key={row.id}
-                    className="hover:bg-gray-50 transition-colors duration-150"
-                  >
-                    <td className="px-4 py-3 font-semibold">{row.name}</td>
-                    <td className="px-4 py-3">{row.approvedShares}</td>
-                    <td className="px-4 py-3">{row.tenure}</td>
-                    <td className="px-4 py-3">{row.minMaxLoan}</td>
-                    <td className="px-4 py-3">{row.marginPeriod}</td>
-                    <td className="px-4 py-3 text-center">{row.ltvMin}</td>
-                    <td className="px-4 py-3 text-center">{row.ltvMax}</td>
+      <section className="max-w-7xl mx-auto px-6 py-10 flex flex-col items-center">
+        {/* Outer glass box */}
+        <div className="w-full bg-white/20 backdrop-blur-xl border border-white/30 shadow-2xl rounded-2xl p-6 flex">
+          {/* 3-column container */}
+          <div className="flex w-full gap-4">
+            {/* Left Table — Fixed columns */}
+            <div className="w-1/3 bg-white/30 rounded-xl p-4 shadow-lg">
+              <table className="w-full border-collapse text-sm text-gray-800">
+                <thead>
+                  <tr className="text-left font-semibold text-gray-700 border-b border-white/30">
+                    <th className="px-4 py-3">Institution</th>
+                    <th className="px-4 py-3">Cost-1st Year</th>
+                    <th className="px-4 py-3">Cost-2nd Year</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
-          {currentTable === "cost" && (
-            <table className="w-full border-collapse">
-              <thead>
-                <tr className="bg-gray-100 text-left text-gray-700">
-                  {[
-                    { key: "name", label: "Institution" },
-                    { key: "minRate", label: "Min Rate" },
-                    { key: "maxRate", label: "Max Rate" },
-                    { key: "medianRate", label: "Median Rate" },
-                    { key: "processingFee", label: "Processing Fee" },
-                    { key: "prepaymentCharges", label: "Pre-payment Charges" },
-                    { key: "renewalFee", label: "Renewal Fee" },
-                    { key: "penalCharges", label: "Penal Charges" },
-                  ].map((h) => (
-                    <th
-                      key={h.key}
-                      className="px-4 py-3 border-b text-sm font-semibold"
+                </thead>
+                <tbody>
+                  {sortedCostData.map((row) => (
+                    <tr
+                      key={row.id}
+                      className="hover:bg-white/10 transition-colors duration-150"
                     >
-                      <div className="flex items-center gap-1">
-                        {h.label}
-                        <button
-                          onClick={() => handleSort(h.key, "cost")}
-                          className="text-gray-500 hover:text-gray-800"
-                        >
-                          <ArrowUpDown size={14} />
-                        </button>
-                        {sortFieldCost === h.key && (
-                          <span className="text-xs">
-                            {sortOrderCost === "asc" ? "▲" : "▼"}
-                          </span>
-                        )}
-                      </div>
-                    </th>
+                      <td className="px-4 py-3 font-medium">{row.name}</td>
+                      <td className="px-4 py-3 text-teal-600 font-medium">
+                        {row.cost1stYear}
+                      </td>
+                      <td className="px-4 py-3 text-pink-600 font-medium">
+                        {row.cost2ndYear}
+                      </td>
+                    </tr>
                   ))}
-                </tr>
-              </thead>
-              <tbody>
-                {sortedCostData.map((row) => (
-                  <tr
-                    key={row.id}
-                    className="hover:bg-gray-50 transition-colors duration-150"
-                  >
-                    <td className="px-4 py-3 font-semibold">{row.name}</td>
-                    <td className="px-4 py-3 text-teal-600 font-medium">
-                      {row.minRate}
-                    </td>
-                    <td className="px-4 py-3 text-pink-600 font-medium">
-                      {row.maxRate}
-                    </td>
-                    <td className="px-4 py-3">{row.medianRate}</td>
-                    <td className="px-4 py-3">{row.processingFee}</td>
-                    <td className="px-4 py-3">{row.prepaymentCharges}</td>
-                    <td className="px-4 py-3">{row.renewalFee}</td>
-                    <td className="px-4 py-3">{row.penalCharges}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
-        </div>
+                </tbody>
+              </table>
+            </div>
 
-        <button
-          onClick={switchTable}
-          className="bg-teal-600 hover:bg-teal-700 text-white px-4 rounded-xl shadow-lg transition-all duration-300 flex flex-col items-center justify-center gap-3 font-medium text-sm whitespace-nowrap"
-          style={{ writingMode: "vertical-rl" }}
-        >
-          <ChevronRight className="w-5 h-5 rotate-90" />
-          <span className="tracking-wide">
-            {currentTable === "funding"
-              ? "View Cost Details"
-              : "View Funding Details"}
-          </span>
-        </button>
+            {/* Middle Table — Dynamic columns */}
+            <div className="flex-1 bg-white/30 rounded-xl p-4 shadow-lg">
+              <table className="w-full border-collapse text-sm text-gray-800">
+                <thead>
+                  <tr className="text-left font-semibold text-gray-700 border-b border-white/30">
+                    {rightTableColumns[activeTableCategory].map((col) => (
+                      <th key={col.key} className="px-4 py-3">
+                        {col.label}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {sortedCostData.map((row) => (
+                    <tr
+                      key={row.id}
+                      className="hover:bg-white/10 transition-colors duration-150"
+                    >
+                      {rightTableColumns[activeTableCategory].map((col) => (
+                       <td key={col.key} className="px-4 py-3 whitespace-pre-wrap">
+  {col.key === "defaultCharges" && row[col.key] ? (
+    // format default charges string
+    row[col.key]
+      .replace(/:\s*/g, ": ")
+      .replace(/Default Charges:/g, "\nDefault Charges:")
+      .replace(/Penal Charges\s*:/g, "\nPenal Charges:")
+      .split("\n")
+      .map((line, idx) => <div key={idx}>{line.trim()}</div>)
+  ) : col.key === "otherExpenses" && row[col.key] ? (
+    // row[col.key] is an object → iterate its keys
+    Object.entries(row[col.key]).map(([key, value], idx) => (
+      <div key={idx}>
+        {key}: {value}
+      </div>
+    ))
+  ) : (
+    row[col.key] || "-"
+  )}
+</td>
+
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Right Buttons — Bigger vertical buttons */}
+            <div className="flex flex-col gap-4 h-full">
+              {categoryButtons.map((cat) => (
+                <button
+                  key={cat.key}
+                  onClick={() => setActiveTableCategory(cat.key)}
+                  className={`bg-teal-600 hover:bg-teal-700 text-white rounded-2xl shadow-lg transition-all duration-300 flex items-center justify-center font-semibold text-base whitespace-nowrap flex-1 ${
+                    activeTableCategory === cat.key ? "scale-105" : ""
+                  }`}
+                  style={{
+                    writingMode: "vertical-rl",
+                    padding: "1rem 1.25rem",
+                  }}
+                >
+                  <span className="tracking-wide">{cat.label}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* FAQ Section */}
-     <section className="relative max-w-7xl mx-auto px-6 py-20">
-  <h2 className="text-4xl font-bold text-center mb-12">
-    Frequently Asked Questions
-  </h2>
+      <section className="relative max-w-7xl mx-auto px-6 py-20">
+        <h2 className="text-4xl font-bold text-center mb-12">
+          Frequently Asked Questions
+        </h2>
 
-  {/* BUTTON BOX */}
-  <div className="bg-white/20 backdrop-blur-xl border border-white/30 shadow-2xl rounded-3xl p-8 mb-10 transition-all duration-500 hover:shadow-[0_0_30px_rgba(13,148,136,0.25)]">
-    <div className="flex flex-wrap justify-center gap-6">
-      {faqCategories.map((cat) => (
-        <button
-          key={cat}
-          onClick={() => {
-            if (cat === "All FAQs") {
-              setActiveCategory(["All FAQs"]);
-            } else {
-              setActiveCategory((prev) => {
-                const isSelected = prev.includes(cat);
-                const newSelection = isSelected
-                  ? prev.filter((c) => c !== cat)
-                  : [...prev.filter((c) => c !== "All FAQs"), cat];
-                return newSelection.length === 0 ? ["All FAQs"] : newSelection;
-              });
-            }
-          }}
-          className={`min-w-[220px] px-8 py-5 rounded-2xl text-lg font-semibold border-2 transition-all duration-300 backdrop-blur-sm
+        {/* BUTTON BOX */}
+        <div className="bg-white/20 backdrop-blur-xl border border-white/30 shadow-2xl rounded-3xl p-8 mb-10 transition-all duration-500 hover:shadow-[0_0_30px_rgba(13,148,136,0.25)]">
+          <div className="flex flex-wrap justify-center gap-6">
+            {faqCategories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => {
+                  if (cat === "All FAQs") {
+                    setActiveCategory(["All FAQs"]);
+                  } else {
+                    setActiveCategory((prev) => {
+                      const isSelected = prev.includes(cat);
+                      const newSelection = isSelected
+                        ? prev.filter((c) => c !== cat)
+                        : [...prev.filter((c) => c !== "All FAQs"), cat];
+                      return newSelection.length === 0
+                        ? ["All FAQs"]
+                        : newSelection;
+                    });
+                  }
+                }}
+                className={`min-w-[220px] px-8 py-5 rounded-2xl text-lg font-semibold border-2 transition-all duration-300 backdrop-blur-sm
             ${
               activeCategory.includes(cat)
                 ? "bg-teal-600/90 text-white border-teal-600 shadow-lg scale-105"
                 : "bg-white/40 text-gray-800 border-white/30 hover:bg-white/60 hover:shadow-lg hover:border-teal-400"
             }`}
-        >
-          {cat}
-        </button>
-      ))}
-    </div>
-  </div>
-
-  {/* QUESTIONS BOX */}
-  <div className="bg-white/20 backdrop-blur-xl border border-white/30 shadow-2xl rounded-3xl p-10 transition-all duration-500 hover:shadow-[0_0_30px_rgba(13,148,136,0.25)]">
-    <div className="space-y-4">
-      {(activeCategory.includes("All FAQs")
-        ? Object.values(faqData).flat()
-        : activeCategory.flatMap((cat) => faqData[cat] || [])
-      ).map((item, idx) => (
-        <div
-          key={idx}
-          className="bg-white/30 backdrop-blur-lg border border-white/40 rounded-2xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl"
-        >
-          <button
-            onClick={() =>
-              setOpenQuestionIndex(openQuestionIndex === idx ? null : idx)
-            }
-            className="w-full flex justify-between items-center px-6 py-4 text-left focus:outline-none"
-          >
-            <span className="font-semibold text-gray-900">{item.q}</span>
-            <svg
-              className={`w-5 h-5 text-gray-700 transform transition-transform duration-300 ${
-                openQuestionIndex === idx ? "rotate-180" : ""
-              }`}
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2}
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-            </svg>
-          </button>
-
-          {openQuestionIndex === idx && (
-            <div className="px-6 pb-4 text-gray-800 text-sm bg-white/40 rounded-b-2xl">
-              {item.a}
-            </div>
-          )}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
         </div>
-      ))}
-    </div>
-  </div>
-</section>
 
+        {/* QUESTIONS BOX */}
+        <div className="bg-white/20 backdrop-blur-xl border border-white/30 shadow-2xl rounded-3xl p-10 transition-all duration-500 hover:shadow-[0_0_30px_rgba(13,148,136,0.25)]">
+          <div className="space-y-4">
+            {(activeCategory.includes("All FAQs")
+              ? Object.values(faqData).flat()
+              : activeCategory.flatMap((cat) => faqData[cat] || [])
+            ).map((item, idx) => (
+              <div
+                key={idx}
+                className="bg-white/30 backdrop-blur-lg border border-white/40 rounded-2xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl"
+              >
+                <button
+                  onClick={() =>
+                    setOpenQuestionIndex(openQuestionIndex === idx ? null : idx)
+                  }
+                  className="w-full flex justify-between items-center px-6 py-4 text-left focus:outline-none"
+                >
+                  <span className="font-semibold text-gray-900">{item.q}</span>
+                  <svg
+                    className={`w-5 h-5 text-gray-700 transform transition-transform duration-300 ${
+                      openQuestionIndex === idx ? "rotate-180" : ""
+                    }`}
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </button>
+
+                {openQuestionIndex === idx && (
+                  <div className="px-6 pb-4 text-gray-800 text-sm bg-white/40 rounded-b-2xl">
+                    {item.a}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Enquire Now Section */}
       <section className="max-w-7xl mx-auto px-6 py-12 flex flex-col items-center">
