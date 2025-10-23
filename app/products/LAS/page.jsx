@@ -7,7 +7,7 @@ import { ArrowUpDown, ChevronRight } from "lucide-react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../../lib/firebaseConfig";
 import { faqData } from "./faqdata"; // adjust the path based on where you place the file
-import SpotlightCard from '@/components/SpotlightCard.jsx';
+import SpotlightCard from "@/components/SpotlightCard.jsx";
 
 export default function LASPage() {
   const [data, setData] = useState([]);
@@ -193,7 +193,6 @@ export default function LASPage() {
       <Navbar />
 
       {/* Hero / Overview */}
-      {/* Hero / Overview */}
       <section className="w-[90%] mx-auto px-2 py-32 flex flex-col items-center justify-center text-center">
         <div className="w-full flex flex-col items-center justify-center mb-10">
           <SpotlightCard
@@ -215,47 +214,23 @@ export default function LASPage() {
         </div>
       </section>
 
-
       {/* Tables Section */}
       <section className="max-w-7xl mx-auto px-6 py-10 flex flex-col items-center">
         {/* Outer glass box */}
         <div className="w-full bg-white/20 backdrop-blur-xl border border-white/30 shadow-2xl rounded-2xl p-6 flex">
-          {/* 3-column container */}
+          {/* Combined Table + Buttons */}
           <div className="flex w-full gap-4">
-            {/* Left Table — Fixed columns */}
-            <div className="w-1/3 bg-white/30 rounded-xl p-4 shadow-lg">
+            {/* Merged Table */}
+            <div className="flex-1 overflow-x-auto">
               <table className="w-full border-collapse text-sm text-gray-800">
                 <thead>
                   <tr className="text-left font-semibold text-gray-700 border-b border-white/30">
+                    {/* Fixed columns */}
                     <th className="px-4 py-3">Institution</th>
                     <th className="px-4 py-3">Cost-1st Year</th>
                     <th className="px-4 py-3">Cost-2nd Year</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {sortedCostData.map((row) => (
-                    <tr
-                      key={row.id}
-                      className="hover:bg-white/10 transition-colors duration-150"
-                    >
-                      <td className="px-4 py-3 font-medium">{row.name}</td>
-                      <td className="px-4 py-3 text-teal-600 font-medium">
-                        {row.cost1stYear}
-                      </td>
-                      <td className="px-4 py-3 text-pink-600 font-medium">
-                        {row.cost2ndYear}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
 
-            {/* Middle Table — Dynamic columns */}
-            <div className="flex-1 bg-white/30 rounded-xl p-4 shadow-lg">
-              <table className="w-full border-collapse text-sm text-gray-800">
-                <thead>
-                  <tr className="text-left font-semibold text-gray-700 border-b border-white/30">
+                    {/* Dynamic columns */}
                     {rightTableColumns[activeTableCategory].map((col) => (
                       <th key={col.key} className="px-4 py-3">
                         {col.label}
@@ -267,30 +242,48 @@ export default function LASPage() {
                   {sortedCostData.map((row) => (
                     <tr
                       key={row.id}
-                      className="hover:bg-white/10 transition-colors duration-150"
+                      className="transform transition-all duration-300 hover:scale-102 hover:shadow-lg hover:bg-white/30 cursor-pointer"
                     >
-                      {rightTableColumns[activeTableCategory].map((col) => (
-                       <td key={col.key} className="px-4 py-3 whitespace-pre-wrap">
-  {col.key === "defaultCharges" && row[col.key] ? (
-    // format default charges string
-    row[col.key]
-      .replace(/:\s*/g, ": ")
-      .replace(/Default Charges:/g, "\nDefault Charges:")
-      .replace(/Penal Charges\s*:/g, "\nPenal Charges:")
-      .split("\n")
-      .map((line, idx) => <div key={idx}>{line.trim()}</div>)
-  ) : col.key === "otherExpenses" && row[col.key] ? (
-    // row[col.key] is an object → iterate its keys
-    Object.entries(row[col.key]).map(([key, value], idx) => (
-      <div key={idx}>
-        {key}: {value}
-      </div>
-    ))
-  ) : (
-    row[col.key] || "-"
-  )}
-</td>
+                      {/* Fixed columns */}
+                      <td className="px-4 py-3 font-medium">{row.name}</td>
+                      <td className="px-4 py-3 text-teal-600 font-medium">
+                        {row.cost1stYear || "-"}
+                      </td>
+                      <td className="px-4 py-3 text-pink-600 font-medium">
+                        {row.cost2ndYear || "-"}
+                      </td>
 
+                      {/* Dynamic columns */}
+                      {rightTableColumns[activeTableCategory].map((col) => (
+                        <td
+                          key={col.key}
+                          className="px-4 py-3 whitespace-pre-wrap"
+                        >
+                          {col.key === "defaultCharges" && row[col.key]
+                            ? row[col.key]
+                                .replace(/:\s*/g, ": ")
+                                .replace(
+                                  /Default Charges:/g,
+                                  "\nDefault Charges:"
+                                )
+                                .replace(
+                                  /Penal Charges\s*:/g,
+                                  "\nPenal Charges:"
+                                )
+                                .split("\n")
+                                .map((line, idx) => (
+                                  <div key={idx}>{line.trim()}</div>
+                                ))
+                            : col.key === "otherExpenses" && row[col.key]
+                            ? Object.entries(row[col.key]).map(
+                                ([key, value], idx) => (
+                                  <div key={idx}>
+                                    {key}: {value}
+                                  </div>
+                                )
+                              )
+                            : row[col.key] || "-"}
+                        </td>
                       ))}
                     </tr>
                   ))}
@@ -298,8 +291,8 @@ export default function LASPage() {
               </table>
             </div>
 
-            {/* Right Buttons — Bigger vertical buttons */}
-            <div className="flex flex-col gap-4 h-full">
+            {/* Right Buttons — Vertical category buttons */}
+            <div className="flex flex-col gap-4">
               {categoryButtons.map((cat) => (
                 <button
                   key={cat.key}
