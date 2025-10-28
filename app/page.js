@@ -133,6 +133,8 @@ export default function HomePage() {
     setParallaxIcons(icons);
   }, []);
 
+  const features = ["Insight", "Speed", "Trust"];
+
   const handleMouseMove = (e) => {
     parallaxIcons.forEach(icon => {
       const el = document.getElementById(icon.id);
@@ -273,7 +275,7 @@ export default function HomePage() {
           </section>
 
           {/* PRODUCT HIGHLIGHTS */}
-   <section className="w-full bg-[#EEF1FA] bg-opacity-0 py-20 mx-5 px-10 lg:px-20 flex flex-col lg:flex-row justify-between items-center lg:items-start">
+   <section id="featured" className="w-full bg-[#EEF1FA] bg-opacity-0 py-20 mx-5 px-10 lg:px-20 flex flex-col lg:flex-row justify-between items-center lg:items-start">
   {/* Left Section */}
   <div className="lg:w-1/3 mb-10 lg:mb-0 ml-10">
     <h2 className="text-4xl font-extrabold text-[#0A0F2C] mb-6 leading-tight">
@@ -290,7 +292,7 @@ export default function HomePage() {
   {/* Right Section (Cards Grid) */}
   <div className="lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mr-10">
   {/* LAS Card */}
-  <a href="/products/las" className="card4 group relative overflow-hidden rounded-2xl bg-white shadow-md transition-all duration-300 p-6 cursor-pointer">
+  <a href="/products/LAS" className="card4 group relative overflow-hidden rounded-2xl bg-white shadow-md transition-all duration-300 p-6 cursor-pointer">
     <div className="flex items-center space-x-4">
       {/* Icon on the left */}
       <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-[#FF5732]/20 rounded-full group-hover:bg-[#FF5732]/30 transition-colors">
@@ -486,92 +488,94 @@ export default function HomePage() {
             
           </section> */}
 
-
-{/* UPDATED WHYw */}
-<section className="w-full py-4 px-6 lg:px-20 mb-[2%]">
-  {/* Top Flex Row */}
+{/* ✅ Responsive Why CompareFi Section */}{/* ✅ Responsive Why CompareFi Section */}
+<section className="w-full py-10 px-6 sm:px-10 lg:px-20 mb-[5%] overflow-hidden">
   <SpotlightCard
-  className="flex flex-col lg:flex-row justify-between items-center gap-16 pb-[5%] 
-             rounded-3xl p-8 sm:p-12 md:p-16 
-             bg-gradient-to-br b bg-white bg-opacity-0 
-            transition-all duration-700 hover:scale-102
- border-none"
-
-  spotlightColor="rgba(255,255,255,0.4)"
->
-    
+    className="flex flex-col lg:flex-row justify-between items-center gap-16 lg:gap-20 rounded-3xl p-8 sm:p-12 md:p-16 bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-xl transition-all duration-700  border-none"
+    spotlightColor="rgba(255,255,255,0.4)"
+  >
     {/* Left Section (Image) */}
-<div className="lg:w-1/2 flex justify-center items-center text-center">
-  <div className="w-[90%] max-w-xl"> {/* increased from 80%/md to 90%/xl */}
-    <Image
-      src={pc}
-      alt="CompareFi Overview"
-      className="w-full h-auto mix-blend-multiply scale-110"
-    />
-  </div>
-</div>
+    <div className="w-full lg:w-1/2 flex justify-center items-center">
+      <div className="w-[95%] max-w-xl">
+        <Image
+          src={pc}
+          alt="CompareFi Overview"
+          className="w-full h-auto mix-blend-multiply scale-105 sm:scale-110"
+        />
+      </div>
+    </div>
 
-
-    {/* Right Section (Text) */}
-    <div className="lg:w-1/2 flex flex-col pr-[14%] justify-center items-start text-start">
-      <h2 className="text-7xl font-extrabold text-[#0A0F2C] mb-6 leading-tight pl-[5%]">
+    {/* Right Section (Text + Cards) */}
+    <div className="w-full lg:w-1/2 flex flex-col justify-center items-start text-left mt-8 lg:mt-0">
+      <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-[#0A0F2C] mb-4 leading-tight break-words">
         Why CompareFi?
       </h2>
-      <p className="text-[#4B5563] mb-6 text-lg leading-relaxed max-w-md pl-[5%]">
+
+      <p className="text-[#4B5563] mb-6 sm:text-sm md:text-lg lg:text-2xl leading-relaxed m break-words">
         Discover how CompareFi helps you make confident, data-driven financial decisions.
       </p>
+
       <a
         href="/about"
-        className="text-[#E8098E] font-medium  underline underline-offset-4 hover:text-pink-700 transition pl-[5%]"
+        className="text-[#E8098E] font-medium underline underline-offset-4 hover:text-pink-700 transition"
       >
         Read More
       </a>
-      <div className="mx-[-8%] mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl pl-[10%] mr-[-30%] mb-[5%] ">
-  {['Transparency', 'Speed', 'Intelligence'].map((feature, i) => (
-    <div
-      key={i}
-      className="rounded-2xl shadow-[0_20px_30px_-5px_rgba(102,102,102,1)] transition-all duration-500 ease-out p-8 flex flex-col items-center text-center overflow-visible bg-gradient-to-tr from-[#f9fafb00] via-[#f9fafb00] to-[#f9fafb00] border-2 border-[#c3c6ce] hover:border-[#99e33d]  hover:shadow-[0_4px_18px_0_rgba(0,0,0,0.25)]"
 
-    >
-      {/* Header Row */}
-      <div className="flex flex-row items-center justify-start gap-4 w-full mb-3 ">
-        <div className="flex justify-center items-center w-14 h-14 rounded-xl bg-[#FF5732] flex-shrink-0">
-          <Sparkles className="w-7 h-7 text-white" />
-        </div>
+      {/* Feature Cards */}
+      <div
+        className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-10 w-full max-w-2xl 
+                   place-items-center auto-rows-fr"
+      >
+        {features.map((feature, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: i * 0.2, ease: 'easeOut' }}
+            viewport={{ once: true }}
+            className={`w-full sm:w-[90%] rounded-3xl shadow-[0_12px_25px_-5px_rgba(102,102,102,0.5)] 
+                       transition-all duration-500 ease-out p-8 sm:p-10 flex flex-col 
+                       items-center text-center bg-gradient-to-tr from-white/10 to-white/5 
+                       border border-[#c3c6ce] hover:border-[#99e33d] 
+                       hover:shadow-[0_4px_18px_0_rgba(0,0,0,0.25)] overflow-hidden break-words 
+                       ${i === features.length - 1 && features.length % 2 !== 0 ? "sm:col-span-2 sm:justify-self-center sm:w-[80%]" : ""}`}
+          >
+            {/* Header */}
+            <div className="flex flex-row items-center justify-center sm:justify-start gap-4 w-full mb-3">
+              <div className="flex justify-center items-center w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-[#FF5732] flex-shrink-0">
+                <Sparkles className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
+              </div>
 
-        <h4 className="flex text-lg sm:text-xl font-semibold text-[#0A0F2C] items-center justify-center">
-          <BlurText
-            text={feature}
-            delay={100}
-            animateBy="words"
-            direction="top"
-            onAnimationComplete={handleAnimationComplete}
-            className="text-lg sm:text-xl font-semibold text-[#0A0F2C]"
-          />
-        </h4>
+              <h4 className="text-lg sm:text-xl md:text-2xl font-semibold text-[#0A0F2C] break-words">
+                <BlurText
+                  text={feature}
+                  delay={100}
+                  animateBy="words"
+                  direction="top"
+                  onAnimationComplete={handleAnimationComplete}
+                />
+              </h4>
+            </div>
+
+            {/* Description */}
+            <p className="text-[#4B5563] mt-2 leading-relaxed text-sm sm:text-base break-words">
+              <BlurText
+                text="We bring you clarity, speed, and smart insights to guide your investments."
+                delay={150}
+                animateBy="words"
+                direction="top"
+                onAnimationComplete={handleAnimationComplete}
+              />
+            </p>
+          </motion.div>
+        ))}
       </div>
-
-      {/* Description */}
-      <p className="text-[#4B5563] mt-2 leading-relaxed">
-        <BlurText
-          text="We bring you clarity, speed, and smart insights to guide your investments."
-          delay={150}
-          animateBy="words"
-          direction="top"
-          onAnimationComplete={handleAnimationComplete}
-          className="text-[#4B5563]"
-        />
-      </p>
-    </div>
-  ))}
-</div>
-
     </div>
   </SpotlightCard>
-
-  {/* Cards Below the Flex */}
-  
 </section>
+
+
 <section className="w-full flex justify-center items-center pb-20 mb-30 bg-transparent">
   <div className="m2 w-[80%] flex flex-col p-20 relative">
     {/* Glowing background ring */}
