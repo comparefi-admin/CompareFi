@@ -230,7 +230,7 @@ export default function LASPage() {
 
 ``
     {/* LAS Information Section */}
-<section className="max-w-7xl mx-auto px-6 pb-12">
+<section className="max-w-[85%] mx-auto px-6 pb-12">
   <h2 className="text-4xl font-bold text-center mb-12 text-gray-900">
     Understanding Loan Against Shares (LAS)
   </h2>
@@ -307,7 +307,7 @@ export default function LASPage() {
 </section>
 
 {/* LAS Full Comparison Table Section */}
-<section className="max-w-7xl mx-auto px-6 py-10 flex flex-col items-center">
+<section className="max-w-[85%] mx-auto px-6 py-10 flex flex-col items-center">
   {/* Glass box */}
   <div className="w-full bg-white/20 backdrop-blur-xl border border-white/30 shadow-2xl rounded-2xl p-6 overflow-x-auto">
     <table className="w-full border-collapse text-sm text-gray-800">
@@ -363,7 +363,7 @@ export default function LASPage() {
 
 
       {/* Tables Section */}
-      <section className="max-w-7xl mx-auto px-6 py-10 flex flex-col items-center">
+      <section className="max-w-[85%] mx-auto px-6 py-10 flex flex-col items-center">
         {/* Outer glass box */}
         <div className="w-full bg-white/20 backdrop-blur-xl border border-white/30 shadow-2xl rounded-2xl p-6 flex">
           {/* Combined Table + Buttons */}
@@ -462,7 +462,7 @@ export default function LASPage() {
       </section>
 
       {/* FAQ Section */}
-      <section className="relative max-w-7xl mx-auto px-6 py-20">
+      <section className="relative max-w-[85%] mx-auto px-6 py-20">
         <h2 className="text-4xl font-bold text-center mb-12">
           Frequently Asked Questions
         </h2>
@@ -548,7 +548,7 @@ export default function LASPage() {
       </section>
 
       {/* Enquire Now Section */}
-      <section className="max-w-7xl mx-auto px-6 py-12 flex flex-col items-center">
+      <section className="max-w-[85%] mx-auto px-6 py-12 flex flex-col items-center">
         <h2 className="text-3xl font-bold mb-4">Enquire Now</h2>
         <p className="text-gray-700 mb-6 text-center max-w-2xl">
           Fill in your details and we will get back to you with the best LAS
