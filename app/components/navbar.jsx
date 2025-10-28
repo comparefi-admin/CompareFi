@@ -20,7 +20,7 @@ const navItems = [
   },
   {
     baseLabel: 'Products',
-    path: '/products',
+    path: '/#featured', // ✅ Clicking Products now goes to Product Highlights
     icon: CreditCard,
     dropdown: [
       { label: 'LAS', hash: '#las' },
@@ -50,17 +50,29 @@ const navItems = [
 
 function useSmoothHashScroll() {
   const pathname = usePathname();
+
   useEffect(() => {
     const { hash } = window.location;
     if (!hash) return;
+
     const id = hash.slice(1);
     const t = setTimeout(() => {
       const el = document.getElementById(id);
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
+      if (el) {
+        const yOffset = window.innerHeight / 2 - el.offsetHeight / 2; // Center the section
+        const y = el.getBoundingClientRect().top + window.scrollY - yOffset;
+
+        window.scrollTo({
+          top: y,
+          behavior: 'smooth',
+        });
+      }
     }, 100);
+
     return () => clearTimeout(t);
   }, [pathname]);
 }
+
 
 function useScrollSpy(sectionIds) {
   const [activeId, setActiveId] = useState(null);
@@ -117,15 +129,14 @@ export default function Navbar() {
   return (
     <div className="fixed top-4 left-0 w-full z-50 flex items-center justify-center px-4">
 
-      {/* Logo on left */}
-<div className="absolute left-4 top-1/2 -translate-y-1/2">
-  <Link href="/" className="flex-shrink-0">
-    <Image src={logo} alt="Logo" width={170} height={80} className="cursor-pointer" />
-  </Link>
-</div>
+      {/* Logo */}
+      <div className="absolute left-4 top-1/2 -translate-y-1/2">
+        <Link href="/" className="flex-shrink-0">
+          <Image src={logo} alt="Logo" width={170} height={80} className="cursor-pointer" />
+        </Link>
+      </div>
 
-
-      {/* Centered Navbar */}
+      {/* Navbar */}
       <nav
         className={`pointer-events-auto rounded-full border px-6 py-3 transition-all duration-300 flex justify-center
         ${isScrolled
@@ -133,13 +144,12 @@ export default function Navbar() {
           : 'bg-white/60 backdrop-blur-md border-gray-100'
         }`}
       >
-        {/* Desktop Navbar */}
+        {/* Desktop */}
         <ul className="hidden md:flex items-center space-x-2">
           {navItems.map((item) => {
             const Icon = item.icon;
-            const isActivePage = pathname === item.path;
+            const isActivePage = pathname === item.path || pathname + window.location.hash === item.path;
             const labelMatch = item.dropdown?.find((d) => d.hash.slice(1) === activeSection);
-
             const label =
               item.baseLabel === 'Home' && isHomePage
                 ? 'Home'
@@ -155,8 +165,7 @@ export default function Navbar() {
                   onClick={() => resetLabel(item.path)}
                   className={`px-4 py-2 rounded-full flex items-center space-x-2 transition
                     ${isActivePage ? 'bg-gray-900 text-white' : 'text-gray-820 hover:bg-gray-100 hover:text-black'}
-                    ${shouldHighlight ? 'ring-2 ring-blue-900 bg-gray-300 text-gray-900 ring-offset-2' : ''}
-                  `}
+                    ${shouldHighlight ? 'ring-2 ring-blue-900 bg-gray-300 text-gray-900 ring-offset-2' : ''}`}
                 >
                   <Icon
                     size={16}
@@ -168,14 +177,14 @@ export default function Navbar() {
                 {item.dropdown && (
                   <ul className="absolute top-full left-1/2 -translate-x-1/2 mt-1 hidden group-hover:block bg-white border border-gray-200 rounded-xl shadow-lg p-2 space-y-1">
                     {item.dropdown.map((sub) => {
-                      const href = `${item.path}${sub.hash}`;
+                      const href = `${item.path.includes('#') ? '/' : item.path}${sub.hash}`;
                       return (
                         <Link
                           key={sub.label}
                           href={href}
                           prefetch={false}
                           onClick={(e) => {
-                            if (isActivePage && typeof window !== 'undefined') {
+                            if (isHomePage && typeof window !== 'undefined') {
                               e.preventDefault();
                               setLabel(item.path, sub.label);
                               const el = document.querySelector(sub.hash);
@@ -200,7 +209,7 @@ export default function Navbar() {
           })}
         </ul>
 
-        {/* Mobile Navbar */}
+        {/* Mobile */}
         <div className="md:hidden flex items-center justify-end">
           <button
             className="p-2 rounded-md hover:bg-gray-100"
@@ -228,7 +237,7 @@ export default function Navbar() {
                       {item.dropdown && (
                         <ul className="pl-6 py-1 space-y-1">
                           {item.dropdown.map((sub) => {
-                            const href = `${item.path}${sub.hash}`;
+                            const href = `${item.path.includes('#') ? '/' : item.path}${sub.hash}`;
                             return (
                               <Link
                                 key={sub.label}

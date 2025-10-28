@@ -198,13 +198,22 @@ export default function LASPage() {
           <SpotlightCard
             className="relative z-10 w-[90%] rounded-3xl bg-gradient-to-b from-[#B1ED67] to-white
             backdrop-blur-xl shadow-2xl sm:p-10 md:p-14 lg:p-20 flex flex-col items-center justify-center 
-             mb-[7%] md:gap-14 hover:drop-shadow-2xl hover:scale-102 transition-all duration-700 ease-in-out
+             mb-[2%] md:gap-14 hover:drop-shadow-2xl hover:scale-102 transition-all duration-700 ease-in-out
             border-none will-change-transform"
             spotlightColor="rgba(255,255,255,0.3)"
           >
             <h1 className="text-5xl font-bold mb-4">Loan Against Shares</h1>
           </SpotlightCard>
 
+          <SpotlightCard
+            className="relative z-10 w-[80%] rounded-full bg-gradient-to-l from-[#ffffff98] to-white
+            backdrop-blur-xl shadow-2xl sm:p-10 md:p-14 lg:p-20 flex flex-col items-center justify-center 
+             mb-[2%] md:gap-14 hover:drop-shadow-2xl hover:scale-102 transition-all duration-700 ease-in-out
+            border-none will-change-transform"
+            spotlightColor="rgba(255,255,255,0.3)"
+          >
+            <h1 className="text-5xl font-bold mb-4">Loan Against Shares</h1>
+          </SpotlightCard>
           <p className="text-gray-700 text-lg max-w-3xl mx-auto">
             Compare Interest Rates, Eligibility, Hidden Charges & More. Access
             detailed, filterable breakdowns from top lenders like Bajaj Finserv,

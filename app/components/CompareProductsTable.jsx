@@ -10,17 +10,15 @@ export default function CompareProductsTable({ productType }) {
     const fetchData = async () => {
       setLoading(true);
       try {
-        // ✅ Determine which collection to fetch
-       const collectionName =
-  productType.toLowerCase() === "las"
-    ? "LAS"
-    : productType.toLowerCase() === "lamf"
-    ? "LAMF"
-    : "MTF";
+        const collectionName =
+          productType.toLowerCase() === "las"
+            ? "LAS"
+            : productType.toLowerCase() === "lamf"
+            ? "LAMF"
+            : "MTF";
 
         const querySnapshot = await getDocs(collection(db, collectionName));
 
-        // ✅ Map and extract required fields
         const firebaseData = querySnapshot.docs.map((doc) => {
           const d = doc.data();
 
@@ -36,7 +34,6 @@ export default function CompareProductsTable({ productType }) {
               d["Approved Stocks"] ||
               d["Approved List of MF"] ||
               "—",
-            // ✅ Fetch Interest Rate (Min & Max)
             interestMin:
               d["Interest Rate"]?.Min ||
               d["Interest Rate"]?.min ||
@@ -50,7 +47,6 @@ export default function CompareProductsTable({ productType }) {
           };
         });
 
-        // ✅ Optionally filter to show top 3 institutions
         const filtered = firebaseData.filter((item) =>
           ["Bajaj", "SBI", "Axis Bank"].some((key) =>
             item.name?.toLowerCase()?.includes(key.toLowerCase())
@@ -92,7 +88,10 @@ export default function CompareProductsTable({ productType }) {
         </thead>
         <tbody>
           {data.map((row) => (
-            <tr key={row.id} className="hover:bg-white/5 transition">
+            <tr
+              key={row.id}
+              className="hover:bg-orange-100 hover:shadow-lg transition-colors duration-200"
+            >
               <td className="px-4 py-3 border-b">{row.name}</td>
               <td className="px-4 py-3 border-b">{row.approvedStocks}</td>
               <td className="px-4 py-3 border-b text-center text-teal-400 font-semibold">
