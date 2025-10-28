@@ -549,7 +549,7 @@ export default function LASPage() {
 
       {/* Enquire Now Section */}
       <section className="max-w-[85%] mx-auto px-6 py-12 flex flex-col items-center">
-        <h2 className="text-3xl font-bold mb-4">Enquire Now</h2>
+        <h2 className="text-3xl font-bold mb-4">Enquire Now </h2>
         <p className="text-gray-700 mb-6 text-center max-w-2xl">
           Fill in your details and we will get back to you with the best LAS
           options available.
