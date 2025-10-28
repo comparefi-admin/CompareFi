@@ -193,7 +193,7 @@ export default function LASPage() {
       <Navbar />
 
 {/* Hero / Overview */}
-<section className="w-[90%] mx-auto px-2 py-32 flex flex-col items-center text-center">
+<section className="w-[90%] mx-auto px-2 pt-32 pb-20 flex flex-col items-center text-center">
   {/* First Card - stays centered */}
   <div className="w-full flex flex-col items-center justify-center mb-10">
     <SpotlightCard
@@ -203,27 +203,24 @@ export default function LASPage() {
       border-none will-change-transform"
       spotlightColor="rgba(255,255,255,0.3)"
     >
-      <h1 className="text-5xl font-bold mb-4">Loan Against Shares</h1>
+      <h1 className="text-6xl font-bold mb-4">Loan Against Shares</h1>
     </SpotlightCard>
   </div>
 
   {/* Second Card + Text - aligned left */}
-  <div className="w-full flex flex-col items-start justify-start text-left mb-10 px-6">
+  <div className="w-full flex flex-col items-start justify-start text-left  px-6">
     <SpotlightCard
-      className="relative z-10 w-[80%] rounded-full bg-gradient-to-l from-[#ffffff98] to-white
+      className="relative z-10 w-auto mx-[3%] rounded-full bg-gradient-to-l from-[#ffffff98] to-white
       backdrop-blur-xl shadow-2xl sm:p-10 md:p-14 lg:p-20 flex flex-col items-start justify-start 
        mb-[2%] md:gap-14 hover:drop-shadow-2xl hover:scale-102 transition-all duration-700 ease-in-out
       border-none will-change-transform"
       spotlightColor="rgba(255,255,255,0.3)"
     >
-      <h1 className="text-5xl font-bold mb-4">Loan Against Shares</h1>
+      <h1 className="text-4xl font-bold mb-4">Best Loan Against Mutual Funds 2025 – Compare Interest Rates, Eligibility, Hidden Charges & More</h1>
     </SpotlightCard>
 
-    <p className="text-gray-700 text-lg max-w-3xl mt-4">
-      Compare Interest Rates, Eligibility, Hidden Charges & More. Access
-      detailed, filterable breakdowns from top lenders like Bajaj Finserv, SBI,
-      Mirae Asset, Axis Bank, Kotak, ICICI Bank, Tata Capital, Zerodha, and
-      HDFC—updated in 2025.
+    <p className="text-gray-700 text-2xl mt-16 mx-[4%]">
+      Unlock the value of your mutual fund investments with our comprehensive Loan Against Mutual Funds (LAMF) comparison tool, designed to help you borrow smartly in 2025. Searching for “best LAMF interest rates 2025,” “LAMF hidden charges India,” or “top LAMF providers”? We’ve analyzed top lenders like Bajaj Finserv, SBI, Mirae Asset, Axis Bank, Kotak Bank, HDFC Bank, ICICI Bank, and Tata Capital, offering transparent, filterable cost breakdowns. Our page delivers detailed insights, LTV ratios, and expert guidance—updated October 2025—to save you thousands.
     </p>
   </div>
 </section>
@@ -233,15 +230,15 @@ export default function LASPage() {
 
 
     {/* LAS Information Section */}
-<section className="max-w-7xl mx-auto px-6 py-20">
+<section className="max-w-7xl mx-auto px-6 pb-12">
   <h2 className="text-4xl font-bold text-center mb-12 text-gray-900">
     Understanding Loan Against Shares (LAS)
   </h2>
 
   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
     {/* Card 1 */}
-    <div className="bg-white/30 backdrop-blur-xl border border-white/40 rounded-3xl shadow-2xl p-8 hover:shadow-[0_0_35px_rgba(13,148,136,0.25)] transition-all duration-500 hover:-translate-y-2">
-      <h3 className="text-2xl font-bold mb-4 text-teal-700">What is Loan Against Shares?</h3>
+    <div className="bg-white/30 backdrop-blur-xl border border-white/40 rounded-3xl shadow-2xl p-8 hover:shadow-[#A7F3D0] transition-all duration-500 hover:-translate-y-2">
+      <h3 className="text-2xl font-bold mb-4 text-[#FF5732]">What is Loan Against Shares?</h3>
       <p className="text-gray-800 leading-relaxed">
         Loan Against Shares (LAS) is a secured overdraft facility where you pledge your
         listed shares as collateral to borrow funds — <strong>without selling them</strong>.
@@ -251,8 +248,8 @@ export default function LASPage() {
     </div>
 
     {/* Card 2 */}
-    <div className="bg-white/30 backdrop-blur-xl border border-white/40 rounded-3xl shadow-2xl p-8 hover:shadow-[0_0_35px_rgba(13,148,136,0.25)] transition-all duration-500 hover:-translate-y-2">
-      <h3 className="text-2xl font-bold mb-4 text-teal-700">Key Benefits</h3>
+    <div className="bg-white/30 backdrop-blur-xl border border-white/40 rounded-3xl shadow-2xl p-8 hover:shadow-[#A7F3D0] transition-all duration-500 hover:-translate-y-2">
+      <h3 className="text-2xl font-bold mb-4 text-[#FF5732]">Key Benefits</h3>
       <ul className="list-disc list-inside text-gray-800 space-y-2">
         <li>Borrow at lower interest rates (8–20% p.a.) compared to personal loans.</li>
         <li>Quick liquidity without liquidating your portfolio.</li>
@@ -262,8 +259,8 @@ export default function LASPage() {
     </div>
 
     {/* Card 3 */}
-    <div className="bg-white/30 backdrop-blur-xl border border-white/40 rounded-3xl shadow-2xl p-8 hover:shadow-[0_0_35px_rgba(13,148,136,0.25)] transition-all duration-500 hover:-translate-y-2">
-      <h3 className="text-2xl font-bold mb-4 text-teal-700">LAS vs Personal Loan</h3>
+    <div className="bg-white/30 backdrop-blur-xl border border-white/40 rounded-3xl shadow-2xl p-8 hover:shadow-[#A7F3D0] transition-all duration-500 hover:-translate-y-2">
+      <h3 className="text-2xl font-bold mb-4 text-[#FF5732]">LAS vs Personal Loan</h3>
       <div className="text-gray-800">
         <ul className="space-y-2">
           <li><strong>Collateral:</strong> LAS requires pledged shares; personal loans are unsecured.</li>
@@ -275,8 +272,8 @@ export default function LASPage() {
     </div>
 
     {/* Card 4 */}
-    <div className="bg-white/30 backdrop-blur-xl border border-white/40 rounded-3xl shadow-2xl p-8 hover:shadow-[0_0_35px_rgba(13,148,136,0.25)] transition-all duration-500 hover:-translate-y-2">
-      <h3 className="text-2xl font-bold mb-4 text-teal-700">Why Choose LAS?</h3>
+    <div className="bg-white/30 backdrop-blur-xl border border-white/40 rounded-3xl shadow-2xl p-8 hover:shadow-[#A7F3D0] transition-all duration-500 hover:-translate-y-2">
+      <h3 className="text-2xl font-bold mb-4 text-[#FF5732]">Why Choose LAS?</h3>
       <p className="text-gray-800 leading-relaxed">
         Maintain your market exposure while unlocking the cash value of your portfolio. 
         LAS is ideal for investors navigating <strong>volatile markets</strong> who want liquidity 
@@ -285,24 +282,24 @@ export default function LASPage() {
     </div>
 
     {/* Card 5 */}
-    <div className="bg-white/30 backdrop-blur-xl border border-white/40 rounded-3xl shadow-2xl p-8 hover:shadow-[0_0_35px_rgba(13,148,136,0.25)] transition-all duration-500 hover:-translate-y-2 md:col-span-2 lg:col-span-3 text-center">
-      <h3 className="text-2xl font-bold mb-4 text-teal-700">Quick Snapshot</h3>
+    <div className="bg-white/30 backdrop-blur-xl border border-white/40 rounded-3xl shadow-2xl p-8 hover:shadow-[#A7F3D0] transition-all duration-500 hover:-translate-y-2 md:col-span-2 lg:col-span-3 text-center">
+      <h3 className="text-2xl font-bold mb-4 text-[#FF5732]">Quick Snapshot</h3>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
         <div className="bg-white/40 rounded-2xl p-4 shadow-inner">
           <p className="text-gray-600 text-sm">Interest Range</p>
-          <p className="text-2xl font-bold text-teal-700">8–20% p.a.</p>
+          <p className="text-2xl font-bold text-[#FF5732]">8–20% p.a.</p>
         </div>
         <div className="bg-white/40 rounded-2xl p-4 shadow-inner">
           <p className="text-gray-600 text-sm">Tenure</p>
-          <p className="text-2xl font-bold text-teal-700">Up to 36 months</p>
+          <p className="text-2xl font-bold text-[#FF5732]">Up to 36 months</p>
         </div>
         <div className="bg-white/40 rounded-2xl p-4 shadow-inner">
           <p className="text-gray-600 text-sm">Disbursal Time</p>
-          <p className="text-2xl font-bold text-teal-700">1–2 Days</p>
+          <p className="text-2xl font-bold text-[#FF5732]">1–2 Days</p>
         </div>
         <div className="bg-white/40 rounded-2xl p-4 shadow-inner">
           <p className="text-gray-600 text-sm">Collateral Type</p>
-          <p className="text-2xl font-bold text-teal-700">Listed Shares</p>
+          <p className="text-2xl font-bold text-[#FF5732]">Listed Shares</p>
         </div>
       </div>
     </div>
@@ -395,7 +392,7 @@ export default function LASPage() {
                 <button
                   key={cat.key}
                   onClick={() => setActiveTableCategory(cat.key)}
-                  className={`bg-teal-600 hover:bg-teal-700 text-white rounded-2xl shadow-lg transition-all duration-300 flex items-center justify-center font-semibold text-base whitespace-nowrap flex-1 ${
+                  className={`bg-teal-600 hover:bg-[#FF5732] text-white rounded-2xl shadow-lg transition-all duration-300 flex items-center justify-center font-semibold text-base whitespace-nowrap flex-1 ${
                     activeTableCategory === cat.key ? "scale-105" : ""
                   }`}
                   style={{
@@ -504,7 +501,7 @@ export default function LASPage() {
           Fill in your details and we will get back to you with the best LAS
           options available.
         </p>
-        <button className="bg-gradient-to-r from-teal-500 to-teal-700 hover:from-teal-600 hover:to-teal-800 text-white px-8 py-4 rounded-2xl shadow-lg transition-all duration-300 font-semibold">
+        <button className="bg-gradient-to-r from-teal-500 to-[#FF5732] hover:from-teal-600 hover:to-teal-800 text-white px-8 py-4 rounded-2xl shadow-lg transition-all duration-300 font-semibold">
           Contact Us
         </button>
       </section>
