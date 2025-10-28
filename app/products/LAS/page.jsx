@@ -306,7 +306,60 @@ export default function LASPage() {
   </div>
 </section>
 
+{/* LAS Full Comparison Table Section */}
+<section className="max-w-7xl mx-auto px-6 py-10 flex flex-col items-center">
+  {/* Glass box */}
+  <div className="w-full bg-white/20 backdrop-blur-xl border border-white/30 shadow-2xl rounded-2xl p-6 overflow-x-auto">
+    <table className="w-full border-collapse text-sm text-gray-800">
+      <thead>
+        <tr className="text-left font-semibold text-gray-700 border-b border-white/30 bg-white/10 backdrop-blur-sm">
+          <th className="px-4 py-2.5">Institution</th>
+          <th className="px-4 py-2.5">Approved List of Shares</th>
+          <th className="px-4 py-2.5">Tenure</th>
+          <th className="px-4 py-2.5">Minimum &amp; Maximum Loan</th>
+          <th className="px-4 py-2.5">Interest Rate (Min / Max / Median)</th>
+          <th className="px-4 py-2.5">Regularization / Margin Call Period</th>
+          <th className="px-4 py-2.5">Cost - 1st Year (₹1 Lakh LAS)</th>
+          <th className="px-4 py-2.5">Cost - 2nd Year (₹1 Lakh LAS)</th>
+        </tr>
+      </thead>
 
+      <tbody>
+        {data.map((row) => (
+          <tr
+            key={row.id}
+            className="transition-all duration-300 hover:bg-white/30 hover:shadow-md cursor-pointer border-b border-white/20"
+          >
+            <td className="px-4 py-2 font-medium">{row.name || "-"}</td>
+            <td className="px-4 py-2 whitespace-pre-wrap">{row.approvedShares || "-"}</td>
+            <td className="px-4 py-2 whitespace-pre-wrap">{row.tenure || "-"}</td>
+            <td className="px-4 py-2 whitespace-pre-wrap">{row.minMaxLoan || "-"}</td>
+
+            {/* Interest rate: show all three */}
+            <td className="px-4 py-2 whitespace-pre-wrap">
+              <div className="flex flex-col gap-0.5">
+                <span><strong>Min:</strong> {row.minRate || "-"}</span>
+                <span><strong>Max:</strong> {row.maxRate || "-"}</span>
+                <span><strong>Median:</strong> {row.medianRate || "-"}</span>
+              </div>
+            </td>
+
+            <td className="px-4 py-2 whitespace-pre-wrap">
+              {row.marginPeriod || "-"}
+            </td>
+            <td className="px-4 py-2 text-teal-600 font-medium">{row.cost1stYear || "-"}</td>
+            <td className="px-4 py-2 text-pink-600 font-medium">{row.cost2ndYear || "-"}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+
+    {/* Fallback for empty data */}
+    {(!data || data.length === 0) && (
+      <div className="text-gray-600 text-center py-6">No data available.</div>
+    )}
+  </div>
+</section>
 
 
       {/* Tables Section */}
