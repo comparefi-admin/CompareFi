@@ -228,7 +228,7 @@ export default function LASPage() {
 
 
 
-
+``
     {/* LAS Information Section */}
 <section className="max-w-7xl mx-auto px-6 pb-12">
   <h2 className="text-4xl font-bold text-center mb-12 text-gray-900">
