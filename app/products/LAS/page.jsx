@@ -219,7 +219,7 @@ export default function LASPage() {
       <h1 className="text-4xl font-bold mb-4">Best Loan Against Mutual Funds 2025 – Compare Interest Rates, Eligibility, Hidden Charges & More</h1>
     </SpotlightCard>
 
-    <p className="text-gray-700 text-2xl mt-16 mx-[4%]">
+    <p className="text-gray-700 text-3xl mt-16 mx-[4%] text-justify">
       Unlock the value of your mutual fund investments with our comprehensive Loan Against Mutual Funds (LAMF) comparison tool, designed to help you borrow smartly in 2025. Searching for “best LAMF interest rates 2025,” “LAMF hidden charges India,” or “top LAMF providers”? We’ve analyzed top lenders like Bajaj Finserv, SBI, Mirae Asset, Axis Bank, Kotak Bank, HDFC Bank, ICICI Bank, and Tata Capital, offering transparent, filterable cost breakdowns. Our page delivers detailed insights, LTV ratios, and expert guidance—updated October 2025—to save you thousands.
     </p>
   </div>
