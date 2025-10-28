@@ -214,6 +214,88 @@ export default function LASPage() {
         </div>
       </section>
 
+
+
+    {/* LAS Information Section */}
+<section className="max-w-7xl mx-auto px-6 py-20">
+  <h2 className="text-4xl font-bold text-center mb-12 text-gray-900">
+    Understanding Loan Against Shares (LAS)
+  </h2>
+
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    {/* Card 1 */}
+    <div className="bg-white/30 backdrop-blur-xl border border-white/40 rounded-3xl shadow-2xl p-8 hover:shadow-[0_0_35px_rgba(13,148,136,0.25)] transition-all duration-500 hover:-translate-y-2">
+      <h3 className="text-2xl font-bold mb-4 text-teal-700">What is Loan Against Shares?</h3>
+      <p className="text-gray-800 leading-relaxed">
+        Loan Against Shares (LAS) is a secured overdraft facility where you pledge your
+        listed shares as collateral to borrow funds — <strong>without selling them</strong>.
+        This allows you to retain ownership, continue earning dividends, and access liquidity 
+        when needed.
+      </p>
+    </div>
+
+    {/* Card 2 */}
+    <div className="bg-white/30 backdrop-blur-xl border border-white/40 rounded-3xl shadow-2xl p-8 hover:shadow-[0_0_35px_rgba(13,148,136,0.25)] transition-all duration-500 hover:-translate-y-2">
+      <h3 className="text-2xl font-bold mb-4 text-teal-700">Key Benefits</h3>
+      <ul className="list-disc list-inside text-gray-800 space-y-2">
+        <li>Borrow at lower interest rates (8–20% p.a.) compared to personal loans.</li>
+        <li>Quick liquidity without liquidating your portfolio.</li>
+        <li>Retain share ownership and earn dividends.</li>
+        <li>Flexible usage for business, emergencies, or investments (non-speculative).</li>
+      </ul>
+    </div>
+
+    {/* Card 3 */}
+    <div className="bg-white/30 backdrop-blur-xl border border-white/40 rounded-3xl shadow-2xl p-8 hover:shadow-[0_0_35px_rgba(13,148,136,0.25)] transition-all duration-500 hover:-translate-y-2">
+      <h3 className="text-2xl font-bold mb-4 text-teal-700">LAS vs Personal Loan</h3>
+      <div className="text-gray-800">
+        <ul className="space-y-2">
+          <li><strong>Collateral:</strong> LAS requires pledged shares; personal loans are unsecured.</li>
+          <li><strong>Interest Rates:</strong> LAS: 8–15%; Personal: 10–24%.</li>
+          <li><strong>Tenure:</strong> LAS: Up to 36 months (renewable); Personal: Fixed EMIs.</li>
+          <li><strong>Disbursal:</strong> LAS: 1–2 days with digital pledge.</li>
+        </ul>
+      </div>
+    </div>
+
+    {/* Card 4 */}
+    <div className="bg-white/30 backdrop-blur-xl border border-white/40 rounded-3xl shadow-2xl p-8 hover:shadow-[0_0_35px_rgba(13,148,136,0.25)] transition-all duration-500 hover:-translate-y-2">
+      <h3 className="text-2xl font-bold mb-4 text-teal-700">Why Choose LAS?</h3>
+      <p className="text-gray-800 leading-relaxed">
+        Maintain your market exposure while unlocking the cash value of your portfolio. 
+        LAS is ideal for investors navigating <strong>volatile markets</strong> who want liquidity 
+        without losing out on potential growth.
+      </p>
+    </div>
+
+    {/* Card 5 */}
+    <div className="bg-white/30 backdrop-blur-xl border border-white/40 rounded-3xl shadow-2xl p-8 hover:shadow-[0_0_35px_rgba(13,148,136,0.25)] transition-all duration-500 hover:-translate-y-2 md:col-span-2 lg:col-span-3 text-center">
+      <h3 className="text-2xl font-bold mb-4 text-teal-700">Quick Snapshot</h3>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="bg-white/40 rounded-2xl p-4 shadow-inner">
+          <p className="text-gray-600 text-sm">Interest Range</p>
+          <p className="text-2xl font-bold text-teal-700">8–20% p.a.</p>
+        </div>
+        <div className="bg-white/40 rounded-2xl p-4 shadow-inner">
+          <p className="text-gray-600 text-sm">Tenure</p>
+          <p className="text-2xl font-bold text-teal-700">Up to 36 months</p>
+        </div>
+        <div className="bg-white/40 rounded-2xl p-4 shadow-inner">
+          <p className="text-gray-600 text-sm">Disbursal Time</p>
+          <p className="text-2xl font-bold text-teal-700">1–2 Days</p>
+        </div>
+        <div className="bg-white/40 rounded-2xl p-4 shadow-inner">
+          <p className="text-gray-600 text-sm">Collateral Type</p>
+          <p className="text-2xl font-bold text-teal-700">Listed Shares</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
       {/* Tables Section */}
       <section className="max-w-7xl mx-auto px-6 py-10 flex flex-col items-center">
         {/* Outer glass box */}
