@@ -16,7 +16,7 @@ export default function AboutPage() {
             Our Mission is to Simplify Finance
           </h1>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            At ComparisonFi, we believe everyone deserves access to clear, unbiased financial information.
+            At CompareFi, we believe everyone deserves access to clear, unbiased financial information.
             We're here to make complex choices easier and help you save money while reaching your goals.
           </p>
         </div>

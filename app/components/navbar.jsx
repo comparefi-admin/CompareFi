@@ -52,6 +52,8 @@ function useSmoothHashScroll() {
   const pathname = usePathname();
 
   useEffect(() => {
+    if (typeof window === 'undefined' || typeof document === 'undefined') return;
+
     const { hash } = window.location;
     if (!hash) return;
 
@@ -73,12 +75,13 @@ function useSmoothHashScroll() {
   }, [pathname]);
 }
 
-
 function useScrollSpy(sectionIds) {
   const [activeId, setActiveId] = useState(null);
 
   useEffect(() => {
+    if (typeof window === 'undefined' || typeof document === 'undefined') return;
     if (!sectionIds.length) return;
+
     const els = sectionIds.map((id) => document.getElementById(id)).filter(Boolean);
     if (!els.length) return;
 
@@ -112,6 +115,7 @@ export default function Navbar() {
   const activeSection = useScrollSpy(allIds);
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
     const onScroll = () => setIsScrolled(window.scrollY > 50);
     onScroll();
     window.addEventListener('scroll', onScroll);
@@ -148,7 +152,8 @@ export default function Navbar() {
         <ul className="hidden md:flex items-center space-x-2">
           {navItems.map((item) => {
             const Icon = item.icon;
-            const isActivePage = pathname === item.path || pathname + window.location.hash === item.path;
+            const hash = typeof window !== 'undefined' ? window.location.hash : '';
+            const isActivePage = pathname === item.path || pathname + hash === item.path;
             const labelMatch = item.dropdown?.find((d) => d.hash.slice(1) === activeSection);
             const label =
               item.baseLabel === 'Home' && isHomePage
