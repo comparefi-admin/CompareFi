@@ -255,7 +255,7 @@ export default function HomePage() {
                     size="lg"
                     className="bg-[#fc5732] hover:bg-[#fc5732] shadow-inner-white-500 text-white rounded-2xl px-6 sm:px-8 md:px-10 py-4 sm:py-5 md:py-6 text-base sm:text-lg shadow-lg shadow-blue-500/20 transition-transform hover:scale-105 duration-300"
                   >
-                    Get Started
+                    Start Comparing
                   </Button>
                 </motion.div>
               </div>
