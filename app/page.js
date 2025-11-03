@@ -5,6 +5,7 @@ import pc from './images/pc.png';
 import TiltedCard from '@/components/TiltedCard'; 
 import BlurText from "@/components/BlurText";
 import { DollarSign, PieChart, BarChart } from "lucide-react";
+import { Link as ScrollLink } from 'react-scroll';
 
 const handleAnimationComplete = () => {
   console.log('Animation completed!');
@@ -255,7 +256,14 @@ export default function HomePage() {
                     size="lg"
                     className="bg-[#fc5732] hover:bg-[#fc5732] shadow-inner-white-500 text-white rounded-2xl px-6 sm:px-8 md:px-10 py-4 sm:py-5 md:py-6 text-base sm:text-lg shadow-lg shadow-blue-500/20 transition-transform hover:scale-105 duration-300"
                   >
-                    Start Comparing
+                    <ScrollLink
+                      to="compare"        // ID of the section
+                      smooth={true}        // Smooth scroll
+                      duration={600}       // Scroll duration in ms
+                      offset={-100} 
+                    >
+                      Start Comparing
+                    </ScrollLink>
                   </Button>
                 </motion.div>
               </div>
@@ -292,59 +300,58 @@ export default function HomePage() {
 
   {/* Right Section (Cards Grid) */}
   <div className="lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mr-10">
-
-  {/* LAS Card */}
-  <a href="/products/LAS" className="card4 group relative overflow-hidden rounded-2xl bg-white shadow-md hover:shadow-xl transition-all duration-300 p-6 cursor-pointer">
-    <div className="flex items-center space-x-4">
-      {/* Icon on the left */}
-      <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-[#FF5732]/20 rounded-full group-hover:bg-[#FF5732]/30 transition-colors">
-        <DollarSign className="w-6 h-6 text-[#FF5732] group-hover:text-white" />
-      </div>
-      {/* Text */}
-      <div>
-        <p className="text1-title text-xl font-semibold text-[#0A0F2C] group-hover:text-black transition-colors">LAS</p>
-        <p className="text1-body text-gray-600 mt-1">Loan Against Shares</p>
-      </div>
+{/* LAS Card */}
+<a href="/products/LAS" className="card4 group relative overflow-hidden rounded-lg bg-white shadow-md hover:shadow-lg transition-all duration-300 p-6 cursor-pointer">
+  <div className="flex items-center space-x-4">
+    {/* Icon on the left */}
+    <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-[#FF5732]/20 rounded-full group-hover:bg-[#FF5732]/30 transition-colors">
+      <DollarSign className="w-6 h-6 text-[#FF5732] group-hover:text-white" />
     </div>
-    <button className="card4-button mt-4 bg-[#FF5732] hover:bg-black text-white font-medium py-2 px-4 rounded-xl transition-all">More Info</button>
-  </a>
-
-  {/* LAMF Card */}
-  <a href="/products/lamf" className="card4 group relative overflow-hidden rounded-2xl bg-white shadow-md hover:shadow-xl transition-all duration-300 p-6 cursor-pointer">
-    <div className="flex items-center space-x-4">
-      {/* Icon on the left */}
-      <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-[#FF5732]/20 rounded-full group-hover:bg-[#FF5732]/30 transition-colors">
-        <PieChart className="w-6 h-6 text-[#FF5732] group-hover:text-white" />
-      </div>
-      <div>
-        <p className="text1-title text-xl font-semibold text-[#0A0F2C] group-hover:text-black transition-colors">LAMF</p>
-        <p className="text1-body text-gray-600 mt-1">Loan Against Mutual Funds</p>
-      </div>
+    {/* Text */}
+    <div>
+      <p className="text1-title text-xl font-semibold text-[#0A0F2C] group-hover:text-black transition-colors">LAS</p>
+      <p className="text1-body text-gray-600 mt-1">Loan Against Shares</p>
     </div>
-    <button className="card4-button mt-4 bg-[#FF5732] hover:bg-black text-white font-medium py-2 px-4 rounded-xl transition-all">More Info</button>
-  </a>
+  </div>
+  <button className="card4-button mt-4 bg-[#FF5732] hover:bg-black text-white font-medium py-2 px-4 rounded-lg transition-all">More Info</button>
+</a>
 
-  {/* MTF Card */}
-  <a href="/products/mtf" className="card4 group relative overflow-hidden rounded-2xl bg-white shadow-md hover:shadow-xl transition-all duration-300 p-6 cursor-pointer">
-    <div className="flex items-center space-x-4">
-      {/* Icon on the left */}
-      <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-[#FF5732]/20 rounded-full group-hover:bg-[#FF5732]/30 transition-colors">
-        <BarChart className="w-6 h-6 text-[#FF5732] group-hover:text-white" />
-      </div>
-      <div>
-        <p className="text1-title text-xl font-semibold text-[#0A0F2C] group-hover:text-black transition-colors">MTF</p>
-        <p className="text1-body text-gray-600 mt-1">Margin Trading Facility</p>
-      </div>
+{/* LAMF Card */}
+<a href="/products/lamf" className="card4 group relative overflow-hidden rounded-lg bg-white shadow-md hover:shadow-lg transition-all duration-300 p-6 cursor-pointer">
+  <div className="flex items-center space-x-4">
+    <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-[#FF5732]/20 rounded-full group-hover:bg-[#FF5732]/30 transition-colors">
+      <PieChart className="w-6 h-6 text-[#FF5732] group-hover:text-white" />
     </div>
-    <button className="card4-button mt-4 bg-[#FF5732] hover:bg-black text-white font-medium py-2 px-4 rounded-xl transition-all">More Info</button>
-  </a>
+    <div>
+      <p className="text1-title text-xl font-semibold text-[#0A0F2C] group-hover:text-black transition-colors">LAMF</p>
+      <p className="text1-body text-gray-600 mt-1">Loan Against Mutual Funds</p>
+    </div>
+  </div>
+  <button className="card4-button mt-4 bg-[#FF5732] hover:bg-black text-white font-medium py-2 px-4 rounded-lg transition-all">More Info</button>
+</a>
+
+{/* MTF Card */}
+<a href="/products/mtf" className="card4 group relative overflow-hidden rounded-lg bg-white shadow-md hover:shadow-lg transition-all duration-300 p-6 cursor-pointer">
+  <div className="flex items-center space-x-4">
+    <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-[#FF5732]/20 rounded-full group-hover:bg-[#FF5732]/30 transition-colors">
+      <BarChart className="w-6 h-6 text-[#FF5732] group-hover:text-white" />
+    </div>
+    <div>
+      <p className="text1-title text-xl font-semibold text-[#0A0F2C] group-hover:text-black transition-colors">MTF</p>
+      <p className="text1-body text-gray-600 mt-1">Margin Trading Facility</p>
+    </div>
+  </div>
+  <button className="card4-button mt-4 bg-[#FF5732] hover:bg-black text-white font-medium py-2 px-4 rounded-lg transition-all">More Info</button>
+</a>
 
 </div>
 </section>
 
 
 {/* COMPARE PRODUCTS */}
-{/* COMPARE PRODUCTS */}<section className="relative flex justify-center items-center mb-[2%] pb-[5%] mt-[2%] min-h-[80vh] overflow-hidden px-6 lg:px-10 bg-opacity-0">
+{/* COMPARE PRODUCTS */}
+
+<section id="compare" className="relative flex justify-center items-center mb-[2%] pb-[5%] mt-[2%] min-h-[80vh] overflow-hidden px-6 lg:px-10 bg-opacity-0">
   {/* Subtle noise/background */}
   <div className="absolute inset-0 bg-white bg-opacity-0 pointer-events-none"></div>
 
