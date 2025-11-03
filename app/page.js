@@ -4,6 +4,7 @@ import globe from './images/globe.png';
 import pc from './images/pc.png';
 import TiltedCard from '@/components/TiltedCard'; 
 import BlurText from "@/components/BlurText";
+import { DollarSign, PieChart, BarChart } from "lucide-react";
 
 const handleAnimationComplete = () => {
   console.log('Animation completed!');
@@ -291,12 +292,13 @@ export default function HomePage() {
 
   {/* Right Section (Cards Grid) */}
   <div className="lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mr-10">
+
   {/* LAS Card */}
-  <a href="/products/LAS" className="card4 group relative overflow-hidden rounded-2xl bg-white shadow-md transition-all duration-300 p-6 cursor-pointer">
+  <a href="/products/las" className="card4 group relative overflow-hidden rounded-2xl bg-white shadow-md hover:shadow-xl transition-all duration-300 p-6 cursor-pointer">
     <div className="flex items-center space-x-4">
       {/* Icon on the left */}
       <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-[#FF5732]/20 rounded-full group-hover:bg-[#FF5732]/30 transition-colors">
-        <img src="https://img.icons8.com/ios/452/loan-against-securities.png" alt="LAS Icon" className="w-6 h-6 text-[#FF5732] group-hover:text-white" />
+        <DollarSign className="w-6 h-6 text-[#FF5732] group-hover:text-white" />
       </div>
       {/* Text */}
       <div>
@@ -312,7 +314,7 @@ export default function HomePage() {
     <div className="flex items-center space-x-4">
       {/* Icon on the left */}
       <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-[#FF5732]/20 rounded-full group-hover:bg-[#FF5732]/30 transition-colors">
-        <img src="https://img.icons8.com/ios/452/loan-against-securities.png" alt="LAMF Icon" className="w-6 h-6 text-[#FF5732] group-hover:text-white" />
+        <PieChart className="w-6 h-6 text-[#FF5732] group-hover:text-white" />
       </div>
       <div>
         <p className="text1-title text-xl font-semibold text-[#0A0F2C] group-hover:text-black transition-colors">LAMF</p>
@@ -327,7 +329,7 @@ export default function HomePage() {
     <div className="flex items-center space-x-4">
       {/* Icon on the left */}
       <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-[#FF5732]/20 rounded-full group-hover:bg-[#FF5732]/30 transition-colors">
-        <img src="https://img.icons8.com/ios/452/loan-against-securities.png" alt="MTF Icon" className="w-6 h-6 text-[#FF5732] group-hover:text-white" />
+        <BarChart className="w-6 h-6 text-[#FF5732] group-hover:text-white" />
       </div>
       <div>
         <p className="text1-title text-xl font-semibold text-[#0A0F2C] group-hover:text-black transition-colors">MTF</p>
@@ -336,8 +338,8 @@ export default function HomePage() {
     </div>
     <button className="card4-button mt-4 bg-[#FF5732] hover:bg-black text-white font-medium py-2 px-4 rounded-xl transition-all">More Info</button>
   </a>
-</div>
 
+</div>
 </section>
 
 

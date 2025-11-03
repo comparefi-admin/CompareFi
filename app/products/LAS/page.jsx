@@ -230,7 +230,7 @@ export default function LASPage() {
 
 ``
     {/* LAS Information Section */}
-<section className="max-w-[85%] mx-auto px-6 pb-16">
+<section className="max-w-[90%] mx-auto px-6 pb-16">
   <h2 className="text-4xl font-bold text-center mb-14 text-gray-900">
     Understanding Loan Against Shares (LAS)
   </h2>
@@ -308,7 +308,7 @@ export default function LASPage() {
 
 {/* LAS Full Comparison Table Section */}
 
-<section className="max-w-[85%] mx-auto px-6 py-10 flex flex-col items-center">
+<section className="max-w-[90%] mx-auto px-6 py-10 flex flex-col items-center">
   <h3 className="text-4xl font-bold mb-10 text-gray-900 tracking-tight text-center">
     Cost Summary
   </h3>
@@ -432,117 +432,121 @@ export default function LASPage() {
 </section>
 
 
+{/* detailed LAS Cost Summary */}
+<section className="max-w-[90%] mx-auto px-6 py-10 flex flex-col items-center">
+  <h3 className="text-4xl font-bold mb-8 text-black pb-6">
+    Detailed LAS Cost Summary
+  </h3>
+
+  {/* Outer glass box */}
+  <div className="w-full bg-white/20 backdrop-blur-xl border border-white/30 shadow-2xl rounded-2xl p-6 flex">
+    {/* Combined Table + Buttons */}
+    <div className="flex w-full gap-4">
+      {/* Table */}
+      <div className="flex-1 overflow-x-auto">
+        <table className="w-full border-collapse text-base text-gray-900">
+          <thead>
+            <tr className="text-left font-semibold border-b border-white/30">
+              {/* Fixed columns */}
+              <th className="px-5 py-4 bg-gradient-to-br from-[#f9fafb] to-[#edf1f6] border border-gray-300">Institution</th>
+              <th className="px-5 py-4 bg-gradient-to-br from-[#f9fafb] to-[#edf1f6] border border-gray-300 text-teal-600">1st Year</th>
+              <th className="px-5 py-4 bg-gradient-to-br from-[#f9fafb] to-[#edf1f6] border border-gray-300 relative after:content-[''] after:absolute after:right-0 after:top-0 after:h-full after:w-[6px] after:shadow-[6px_0_10px_rgba(0,0,0,0.15)] after:z-[3] text-indigo-700">2nd Year</th>
+
+              {/* Dynamic columns */}
+              {rightTableColumns[activeTableCategory].map((col) => (
+                <th key={col.key} className="px-5 py-4 border border-gray-300 bg-white/60">
+                  {col.label}
+                </th>
+              ))}
+
+              {/* WhatsApp CTA */}
+              <th className="px-5 py-4 border border-gray-300 bg-white/60">Contact</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {sortedCostData.map((row, index) => (
+              <tr
+                key={row.id}
+                className={`transition-all duration-300 ${
+                  index % 2 === 0 ? "bg-white/50" : "bg-white/30"
+                } hover:bg-[#fff7f0]/80 hover:shadow-[0_4px_12px_rgba(255,115,0,0.15)]`}
+              >
+                {/* First three elevated columns */}
+                <td className="px-5 py-4 border border-gray-300 font-semibold bg-gradient-to-br from-[#f9fafb] to-[#f1fff1] shadow-[0_2px_4px_rgba(0,0,0,0.06)] text-gray-900 text-base">
+                  {row.name || "-"}
+                </td>
+                <td className="px-5 py-4 border border-gray-300 font-medium text-center text-teal-600 bg-gradient-to-br from-[#f9fafb] to-[#f1fff1] shadow-[0_2px_4px_rgba(0,0,0,0.05)] text-base">
+                  {row.cost1stYear || "-"}
+                </td>
+                <td className="px-5 py-4 border border-gray-300 font-medium text-center text-indigo-700 bg-gradient-to-br from-[#f9fafb] to-[#f1fff1] shadow-[0_2px_4px_rgba(0,0,0,0.05)] relative after:content-[''] after:absolute after:right-0 after:top-0 after:h-full after:w-[6px] after:shadow-[6px_0_10px_rgba(0,0,0,0.15)] after:z-[3] text-base">
+                  {row.cost2ndYear || "-"}
+                </td>
+
+                {/* Other dynamic columns */}
+                {rightTableColumns[activeTableCategory].map((col) => (
+                  <td key={col.key} className="px-5 py-4 border border-gray-300 whitespace-pre-wrap text-gray-900 text-base">
+                    {col.key === "defaultCharges" && row[col.key]
+                      ? row[col.key]
+                          .replace(/:\s*/g, ": ")
+                          .replace(/Default Charges:/g, "\nDefault Charges:")
+                          .replace(/Penal Charges\s*:/g, "\nPenal Charges:")
+                          .split("\n")
+                          .map((line, idx) => <div key={idx}>{line.trim()}</div>)
+                      : col.key === "otherExpenses" && row[col.key]
+                      ? Object.entries(row[col.key]).map(([key, value], idx) => (
+                          <div key={idx}>{key}: {value}</div>
+                        ))
+                      : row[col.key] || "-"}
+                  </td>
+                ))}
+
+                {/* WhatsApp CTA */}
+                <td className="px-5 py-4 border border-gray-300 text-center">
+                  <a
+                    href={`https://wa.me/919930584020?text=Hi! I’m interested in learning more about ${encodeURIComponent(row.name)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 bg-green-500 text-white px-4 py-2 rounded-lg text-base font-medium shadow-md hover:bg-green-600 hover:scale-[1.05] active:scale-[0.98] transition-all duration-200"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12.04 2.004C6.504 2.004 2 6.508 2 12.046c0 1.96.508 3.872 1.472 5.552L2 22l4.56-1.472A9.944 9.944 0 0 0 12.04 22c5.54 0 10.044-4.504 10.044-9.954 0-5.54-4.504-10.042-10.044-10.042zM12.04 20.1c-1.64 0-3.24-.43-4.64-1.25l-.33-.19-2.7.87.88-2.63-.21-.34A8.01 8.01 0 0 1 4.1 12.04c0-4.374 3.566-7.93 7.94-7.93 4.374 0 7.93 3.556 7.93 7.93s-3.556 7.93-7.93 7.93zm4.47-5.93c-.244-.122-1.44-.714-1.664-.8-.224-.084-.388-.122-.552.122-.164.244-.63.8-.772.964-.14.164-.284.184-.528.062-.244-.122-1.03-.378-1.962-1.2-.726-.646-1.216-1.444-1.36-1.688-.14-.244-.015-.376.106-.498.108-.106.244-.274.366-.412.12-.136.16-.244.24-.406.082-.164.04-.308-.02-.43-.06-.122-.552-1.33-.756-1.816-.2-.48-.4-.414-.552-.422l-.47-.008c-.16 0-.42.062-.64.308s-.84.822-.84 2.004c0 1.182.86 2.322.98 2.486.12.164 1.7 2.594 4.14 3.63.578.25 1.03.4 1.384.514.582.186 1.11.16 1.53.098.466-.07 1.44-.586 1.64-1.152.2-.57.2-1.058.14-1.16-.06-.1-.22-.162-.464-.284z"/>
+                    </svg>
+                    Enquire
+                  </a>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Right Buttons — vertical stack spanning the table height */}
+      <div className="flex flex-col justify-between gap-4 h-full w-[130px]">
+        {categoryButtons.map((cat) => (
+          <button
+            key={cat.key}
+            onClick={() => setActiveTableCategory(cat.key)}
+            className={`flex flex-row items-center justify-between bg-teal-600 hover:bg-[#FF5732] text-white rounded-2xl shadow-lg transition-all duration-300 flex-1 w-full px-4 font-semibold text-sm ${
+              activeTableCategory === cat.key ? "scale-105" : ""
+            }`}
+          >
+            <span className="text-lg font-bold">{activeTableCategory === cat.key ? "<-" : "->"}</span>
+            <span className="tracking-wide">{cat.label}</span>
+          </button>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
 
 
 
 
-      {/* Tables Section */}
+
+
       
-      <section className="max-w-[85%] mx-auto px-6 py-10 flex flex-col items-center">
-        <h3 className="text-4xl font-bold mb-8 text-black pb-6">Detailed LAS Cost Summary</h3>
-        {/* Outer glass box */}
-        <div className="w-full bg-white/20 backdrop-blur-xl border border-white/30 shadow-2xl rounded-2xl p-6 flex">
-          {/* Combined Table + Buttons */}
-          <div className="flex w-full gap-4">
-            {/* Merged Table */}
-            <div className="flex-1 overflow-x-auto">
-              <table className="w-full border-collapse text-sm text-gray-800">
-                <thead>
-                  <tr className="text-left font-semibold text-gray-700 border-b border-white/30">
-                    {/* Fixed columns */}
-                    <th className="px-4 py-3">Institution</th>
-                    <th className="px-4 py-3">Cost-1st Year</th>
-                    <th className="px-4 py-3">Cost-2nd Year</th>
 
-                    {/* Dynamic columns */}
-                    {rightTableColumns[activeTableCategory].map((col) => (
-                      <th key={col.key} className="px-4 py-3">
-                        {col.label}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {sortedCostData.map((row) => (
-                    <tr
-                      key={row.id}
-                      className="transform transition-all duration-300 hover:scale-102 hover:shadow-lg hover:bg-white/30 cursor-pointer"
-                    >
-                      {/* Fixed columns */}
-                      <td className="px-4 py-3 font-medium">{row.name}</td>
-                      <td className="px-4 py-3 text-teal-600 font-medium">
-                        {row.cost1stYear || "-"}
-                      </td>
-                      <td className="px-4 py-3 text-pink-600 font-medium">
-                        {row.cost2ndYear || "-"}
-                      </td>
-
-                      {/* Dynamic columns */}
-                      {rightTableColumns[activeTableCategory].map((col) => (
-                        <td
-                          key={col.key}
-                          className="px-4 py-3 whitespace-pre-wrap"
-                        >
-                          {col.key === "defaultCharges" && row[col.key]
-                            ? row[col.key]
-                                .replace(/:\s*/g, ": ")
-                                .replace(
-                                  /Default Charges:/g,
-                                  "\nDefault Charges:"
-                                )
-                                .replace(
-                                  /Penal Charges\s*:/g,
-                                  "\nPenal Charges:"
-                                )
-                                .split("\n")
-                                .map((line, idx) => (
-                                  <div key={idx}>{line.trim()}</div>
-                                ))
-                            : col.key === "otherExpenses" && row[col.key]
-                            ? Object.entries(row[col.key]).map(
-                                ([key, value], idx) => (
-                                  <div key={idx}>
-                                    {key}: {value}
-                                  </div>
-                                )
-                              )
-                            : row[col.key] || "-"}
-                        </td>
-                      ))}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-
-          
-    {/* Right Buttons — Vertical stack, each button horizontal inside */}
-{/* Right Buttons — Vertical stack that expands with the table */}
-<div className="flex flex-col justify-between gap-4 h-full w-[130px]">
-  {categoryButtons.map((cat) => (
-    <button
-      key={cat.key}
-      onClick={() => setActiveTableCategory(cat.key)}
-      className={`flex flex-row items-center justify-between bg-teal-600 hover:bg-[#FF5732] text-white rounded-2xl shadow-lg transition-all duration-300 flex-1 w-full px-4 font-semibold text-sm ${
-        activeTableCategory === cat.key ? "scale-105" : ""
-      }`}
-    >
-      {/* Icon on left */}
-      <span className="text-lg font-bold">
-        {activeTableCategory === cat.key ? "<-" : "->"}
-      </span>
-
-      {/* Label on right */}
-      <span className="tracking-wide">{cat.label}</span>
-    </button>
-  ))}
-</div>
-
-
-
-          </div>
-        </div>
-      </section>
 
       {/* FAQ Section */}
       <section className="relative max-w-[85%] mx-auto px-6 py-20">
