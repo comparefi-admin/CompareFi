@@ -460,7 +460,7 @@ export default function HomePage() {
     <p className="text-[#4B5563] mb-6 text-lg leading-relaxed">
       CompareFi is India’s most transparent financial comparison platform, helping you make smarter borrowing and investing decisions. Explore Loan Against Shares (LAS), Loan Against Mutual Funds (LAMF), or Margin Trading Facility (MTF) — all with real-time, unbiased comparisons.
     </p>
-    
+    <div>
 <button class="button1" href="/about">
   <span>Read More</span>
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 66 43">
@@ -475,7 +475,7 @@ export default function HomePage() {
     ></polygon>
   </svg>
 </button>
-
+</div>
   </div>
 
   {/* Right Section (Image / Illustration) */}
