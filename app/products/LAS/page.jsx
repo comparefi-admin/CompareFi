@@ -306,67 +306,133 @@ export default function LASPage() {
 </section>
 
 
-{/* LAS Full Comparison Table Section */}<section className="max-w-[85%] mx-auto px-6 py-10 flex flex-col items-center">
-  <h3 className="text-4xl font-bold mb-8 text-black">Cost Summary</h3>
-  {/* Glass box */}
-  <div className="w-full bg-white/20 backdrop-blur-xl border border-white/30 shadow-2xl rounded-2xl p-6 overflow-x-auto">
-    <table className="w-full border-collapse text-sm text-gray-800">
-      <thead>
-        <tr className="text-left font-semibold text-gray-700 border-b border-white/30 bg-white/10 backdrop-blur-sm">
-          <th className="px-4 py-2.5">Institution</th>
-          <th className="px-4 py-2.5">Cost - 1st Year (₹1 Lakh LAS)</th>
-          <th className="px-4 py-2.5">Cost - 2nd Year (₹1 Lakh LAS)</th>
-          <th className="px-4 py-2.5">Approved List of Shares</th>
-          <th className="px-4 py-2.5">Tenure</th>
-          <th className="px-4 py-2.5">Minimum &amp; Maximum Loan</th>
-          <th className="px-4 py-2.5">Interest Rate (Min / Max / Median)</th>
-          <th className="px-4 py-2.5">Regularization / Margin Call Period</th>
+{/* LAS Full Comparison Table Section */}
+
+<section className="max-w-[85%] mx-auto px-6 py-10 flex flex-col items-center">
+  <h3 className="text-4xl font-bold mb-10 text-gray-900 tracking-tight text-center">
+    Cost Summary
+  </h3>
+
+  <div className="w-full bg-white/40 backdrop-blur-2xl border border-white/40 shadow-2xl rounded-2xl overflow-x-auto">
+    <table className="w-full border-collapse text-[15px] text-gray-900">
+      <thead className="bg-white/70 backdrop-blur-sm border-b border-gray-300">
+        <tr>
+          {[
+            "Institution",
+            "1st Year (₹1L LAS)",
+            "2nd Year (₹1L LAS)",
+            "Approved Shares",
+            "Tenure",
+            "Min–Max Loan",
+            "Interest Rate (Min / Max / Median)",
+            "Margin Period",
+            "Contact",
+          ].map((heading, i) => (
+            <th
+              key={i}
+              className={`px-5 py-3 text-left font-semibold text-sm uppercase tracking-wide text-gray-700 border border-gray-300 relative ${
+                i < 3
+                  ? "bg-gradient-to-br from-[#f9fafb] to-[#edf1f6]"
+                  : "bg-white/60"
+              } ${
+                i === 2
+                  ? "after:content-[''] after:absolute after:right-0 after:top-0 after:h-full after:w-[6px] after:shadow-[6px_0_10px_rgba(0,0,0,0.15)] after:z-[3]"
+                  : ""
+              }`}
+            >
+              {heading}
+            </th>
+          ))}
         </tr>
       </thead>
 
       <tbody>
-        {data.map((row) => (
+        {data.map((row, index) => (
           <tr
             key={row.id}
-            className="transition-all duration-300 hover:bg-white/20 hover:shadow-md cursor-pointer border-b border-white/20"
+            className={`transition-all duration-300 ${
+              index % 2 === 0 ? "bg-white/50" : "bg-white/30"
+            } hover:bg-[#fff7f0]/80 hover:shadow-[0_4px_12px_rgba(255,115,0,0.15)]`}
           >
-            {/* Elevated Subcard for first 3 columns */}
-            <td colSpan={3} className="px-0 py-3">
-              <div className="bg-gradient-to-r from-[#FFFFFF] to-[#FF5732]/20
-               backdrop-blur-lg rounded-xl shadow-lg mx-2 px-4 py-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 h-[120%]transition-all duration-300 hover:shadow-[#A7F3D0] hover:-translate-y-1 ">
-                <div className="font-semibold text-gray-900 w-full sm:w-1/3">{row.name || "-"}</div>
-                <div className="text-teal-600 font-medium w-full sm:w-1/3">{row.cost1stYear || "-"}</div>
-                <div className="text-pink-600 font-medium w-full sm:w-1/3">{row.cost2ndYear || "-"}</div>
-              </div>
+            {/* Elevated first three columns */}
+            <td className="px-5 py-4 border border-gray-300 font-semibold text-gray-900 bg-gradient-to-br from-[#f9fafb] to-[#f1fff1] shadow-[0_2px_4px_rgba(0,0,0,0.06)] relative z-[2]">
+              {row.name || "-"}
+            </td>
+            <td className="px-5 py-4 border border-gray-300 text-teal-700 font-medium text-center bg-gradient-to-br from-[#f9fafb] to-[#f1fff1] shadow-[0_2px_4px_rgba(0,0,0,0.05)] relative z-[2]">
+              {row.cost1stYear || "-"}
+            </td>
+            <td
+              className="px-5 py-4 border border-gray-300 text-indigo-700 font-medium text-center
+              bg-gradient-to-br from-[#f9fafb] to-[#f1fff1] shadow-[0_2px_4px_rgba(0,0,0,0.05)] relative z-[2]
+              after:content-[''] after:absolute after:right-0 after:top-0 after:h-full after:w-[6px] after:shadow-[6px_0_10px_rgba(0,0,0,0.15)] after:z-[3]"
+            >
+              {row.cost2ndYear || "-"}
             </td>
 
-            {/* Remaining columns (normal layout) */}
-            <td className="px-4 py-2 whitespace-pre-wrap">{row.approvedShares || "-"}</td>
-            <td className="px-4 py-2 whitespace-pre-wrap">{row.tenure || "-"}</td>
-            <td className="px-4 py-2 whitespace-pre-wrap">{row.minMaxLoan || "-"}</td>
-
-            <td className="px-4 py-2 whitespace-pre-wrap">
+            {/* Remaining columns */}
+            <td className="px-5 py-4 border border-gray-300 border-l-2 border-gray-400/40 text-gray-800 whitespace-pre-wrap">
+              {row.approvedShares || "-"}
+            </td>
+            <td className="px-5 py-4 border border-gray-300 font-medium text-gray-900 text-center">
+              {row.tenure || "-"}
+            </td>
+            <td className="px-5 py-4 border border-gray-300 font-medium text-gray-900 text-center">
+              {row.minMaxLoan || "-"}
+            </td>
+            <td className="px-5 py-4 border border-gray-300 text-gray-900 text-center">
               <div className="flex flex-col gap-0.5">
-                <span><strong>Min:</strong> {row.minRate || "-"}</span>
-                <span><strong>Max:</strong> {row.maxRate || "-"}</span>
-                <span><strong>Median:</strong> {row.medianRate || "-"}</span>
+                <span>
+                  <strong>Min:</strong> {row.minRate || "-"}
+                </span>
+                <span>
+                  <strong>Max:</strong> {row.maxRate || "-"}
+                </span>
+                <span>
+                  <strong>Median:</strong> {row.medianRate || "-"}
+                </span>
               </div>
             </td>
-
-            <td className="px-4 py-2 whitespace-pre-wrap">
+            <td className="px-5 py-4 border border-gray-300 text-gray-900 text-center">
               {row.marginPeriod || "-"}
+            </td>
+
+            {/* WhatsApp CTA column */}
+            <td className="px-5 py-4 border border-gray-300 text-center">
+              <a
+                href={`https://wa.me/919930584020?text=Hi! I’m interested in learning more about ${encodeURIComponent(
+                  row.name
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 bg-green-500 text-white px-3 py-2 rounded-lg text-sm font-medium shadow-md hover:bg-green-600 hover:scale-[1.05] active:scale-[0.98] transition-all duration-200"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-4 w-4"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M12.04 2.004C6.504 2.004 2 6.508 2 12.046c0 1.96.508 3.872 1.472 5.552L2 22l4.56-1.472A9.944 9.944 0 0 0 12.04 22c5.54 0 10.044-4.504 10.044-9.954 0-5.54-4.504-10.042-10.044-10.042zM12.04 20.1c-1.64 0-3.24-.43-4.64-1.25l-.33-.19-2.7.87.88-2.63-.21-.34A8.01 8.01 0 0 1 4.1 12.04c0-4.374 3.566-7.93 7.94-7.93 4.374 0 7.93 3.556 7.93 7.93s-3.556 7.93-7.93 7.93zm4.47-5.93c-.244-.122-1.44-.714-1.664-.8-.224-.084-.388-.122-.552.122-.164.244-.63.8-.772.964-.14.164-.284.184-.528.062-.244-.122-1.03-.378-1.962-1.2-.726-.646-1.216-1.444-1.36-1.688-.14-.244-.015-.376.106-.498.108-.106.244-.274.366-.412.12-.136.16-.244.24-.406.082-.164.04-.308-.02-.43-.06-.122-.552-1.33-.756-1.816-.2-.48-.4-.414-.552-.422l-.47-.008c-.16 0-.42.062-.64.308s-.84.822-.84 2.004c0 1.182.86 2.322.98 2.486.12.164 1.7 2.594 4.14 3.63.578.25 1.03.4 1.384.514.582.186 1.11.16 1.53.098.466-.07 1.44-.586 1.64-1.152.2-.57.2-1.058.14-1.16-.06-.1-.22-.162-.464-.284z" />
+                </svg>
+                Enquire
+              </a>
             </td>
           </tr>
         ))}
       </tbody>
     </table>
 
-    {/* Fallback for empty data */}
+    {/* Empty State */}
     {(!data || data.length === 0) && (
-      <div className="text-gray-600 text-center py-6">No data available.</div>
+      <div className="text-gray-600 text-center py-8 font-medium text-[15px]">
+        No data available.
+      </div>
     )}
   </div>
 </section>
+
+
+
 
 
 
