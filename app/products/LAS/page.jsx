@@ -449,24 +449,31 @@ export default function LASPage() {
               </table>
             </div>
 
-            {/* Right Buttons — Vertical category buttons */}
-            <div className="flex flex-col gap-4">
-              {categoryButtons.map((cat) => (
-                <button
-                  key={cat.key}
-                  onClick={() => setActiveTableCategory(cat.key)}
-                  className={`bg-teal-600 hover:bg-[#FF5732] text-white rounded-2xl shadow-lg transition-all duration-300 flex items-center justify-center font-semibold text-base whitespace-nowrap flex-1 ${
-                    activeTableCategory === cat.key ? "scale-105" : ""
-                  }`}
-                  style={{
-                    writingMode: "vertical-rl",
-                    padding: "1rem 1.25rem",
-                  }}
-                >
-                  <span className="tracking-wide">{cat.label}</span>
-                </button>
-              ))}
-            </div>
+          
+    {/* Right Buttons — Vertical stack, each button horizontal inside */}
+{/* Right Buttons — Vertical stack that expands with the table */}
+<div className="flex flex-col justify-between gap-4 h-full w-[130px]">
+  {categoryButtons.map((cat) => (
+    <button
+      key={cat.key}
+      onClick={() => setActiveTableCategory(cat.key)}
+      className={`flex flex-row items-center justify-between bg-teal-600 hover:bg-[#FF5732] text-white rounded-2xl shadow-lg transition-all duration-300 flex-1 w-full px-4 font-semibold text-sm ${
+        activeTableCategory === cat.key ? "scale-105" : ""
+      }`}
+    >
+      {/* Icon on left */}
+      <span className="text-lg font-bold">
+        {activeTableCategory === cat.key ? "<-" : "->"}
+      </span>
+
+      {/* Label on right */}
+      <span className="tracking-wide">{cat.label}</span>
+    </button>
+  ))}
+</div>
+
+
+
           </div>
         </div>
       </section>
