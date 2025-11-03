@@ -1,7 +1,8 @@
 'use client';
 
 import React from 'react';
-import { TrendingUp } from 'lucide-react';
+import logo from '../images/logo (3).png';
+import Image from "next/image";
 
 export default function Footer() {
   return (
@@ -11,8 +12,15 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center space-x-2 mb-4">
-              <div className="w-8 h-8 bg-gradient-to-r from-[#B1ED67] to-[#84C95E] rounded-lg flex items-center justify-center">
-                <TrendingUp className="w-5 h-5 text-black" />
+              {/* Logo with white background */}
+              <div className="w-10 h-10 flex items-center justify-center rounded-full bg-white p-1">
+                <Image
+                  src={logo}
+                  alt="CompareFi Logo"
+                  width={32}
+                  height={32}
+                  className="object-contain"
+                />
               </div>
               <span className="text-xl font-bold text-[#B1ED67]">CompareFi</span>
             </div>
