@@ -460,12 +460,22 @@ export default function HomePage() {
     <p className="text-[#4B5563] mb-6 text-lg leading-relaxed">
       CompareFi is India’s most transparent financial comparison platform, helping you make smarter borrowing and investing decisions. Explore Loan Against Shares (LAS), Loan Against Mutual Funds (LAMF), or Margin Trading Facility (MTF) — all with real-time, unbiased comparisons.
     </p>
-    <a
-      href="/about" 
-      className="text-pink-500 font-medium underline underline-offset-4 hover:text-pink-700 transition"
-    >
-      Read More
-    </a>
+    
+<button class="button1" href="/about">
+  <span>Read More</span>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 66 43">
+    <polygon
+      points="39.58,4.46 44.11,0 66,21.5 44.11,43 39.58,38.54 56.94,21.5"
+    ></polygon>
+    <polygon
+      points="19.79,4.46 24.32,0 46.21,21.5 24.32,43 19.79,38.54 37.15,21.5"
+    ></polygon>
+    <polygon
+      points="0,4.46 4.53,0 26.42,21.5 4.53,43 0,38.54 17.36,21.5"
+    ></polygon>
+  </svg>
+</button>
+
   </div>
 
   {/* Right Section (Image / Illustration) */}
@@ -517,12 +527,20 @@ export default function HomePage() {
         Discover how CompareFi helps you make confident, data-driven financial decisions.
       </p>
 
-      <a
-        href="/about"
-        className="text-[#E8098E] font-medium underline underline-offset-4 hover:text-pink-700 transition"
-      >
-        Read More
-      </a>
+     <button class="button1" href="/about">
+        <span>Read More</span>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 66 43">
+          <polygon
+            points="39.58,4.46 44.11,0 66,21.5 44.11,43 39.58,38.54 56.94,21.5"
+          ></polygon>
+          <polygon
+            points="19.79,4.46 24.32,0 46.21,21.5 24.32,43 19.79,38.54 37.15,21.5"
+          ></polygon>
+          <polygon
+            points="0,4.46 4.53,0 26.42,21.5 4.53,43 0,38.54 17.36,21.5"
+          ></polygon>
+        </svg>
+      </button>
 
       {/* Feature Cards */}
       <div
