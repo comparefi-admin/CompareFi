@@ -4,7 +4,7 @@
 
 /* From Uiverse.io by Li-Deheng */ 
 .button1 {
-  --main-size: 2em;
+  --main-size: 1.25rem;
   --color-text: #dsadas;
   --color-background: #ffe9e9;
   --color-background-hover: #FF5732;
@@ -19,7 +19,7 @@
   border-radius: calc(var(--main-size) * 100);
   padding: 0.33em 0 0.33em 0.66em;
   font-family: "Poppins", sans-serif;
-  font-weight: 600;
+  font-weight: 500;
   font-size: var(--main-size);
   color: var(--color-text);
   background: var(--color-background);
@@ -234,63 +234,72 @@ html {
   box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 50px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 26px -18px inset;
 }
 /* From Uiverse.io by alexruix */ 
+/* --- Chic Card Styles --- */
 .card4 {
- width: 90%;
- height: 100%;
- border-radius: 2rem;
- background: linear-gradient(-80deg, #d2f3a5 0%, rgb(255, 255, 255) 100%);
- position: relative;
- padding: 1.8rem;
- box-shadow: rgb(102, 102, 102) 0px 20px 30px -5px;
- border: 2px solid #c3c6ce;
- transition: 0.5s ease-out;
- overflow: visible;
+  border-radius: 1rem; /* slightly rounded, chic */
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.04);
+  transition: all 0.4s ease;
+  overflow: visible;
+  position: relative;
 }
 
-.card4-details {
- color: black;
- height: 100%;
- gap: .5em;
- display: grid;
- place-content: center;
-}
-
-.card4-button {
- transform: translate(-50%, 125%);
- width: 50%;
- border-radius: 1rem;
- border: none;
- background-color: #FF5732;
- color: #fff;
- font-size: 1rem;
- padding: .5rem 1rem;
- position: absolute;
- left: 50%;
- bottom: 0;
- opacity: 0;
- transition: 0.3s ease-out;
-}
-
-.text1-body {
- color: rgb(134, 134, 134);
-}
-
-/*Text*/
-.text1-title {
- font-size: 1.5em;
- font-weight: bold;
-}
-
-/*Hover*/
 .card4:hover {
- border-color: #99e33d;
- box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
+  transform: translateY(-5px);
+  box-shadow: 0 18px 35px rgba(0,0,0,0.15), 0 5px 10px rgba(0,0,0,0.06);
+  border-color: #FF5732;
+}
+
+.card4 .icon-wrapper {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,87,50,0.15);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.card4:hover .icon-wrapper {
+  background: #FF5732;
+}
+
+.card4 .icon-wrapper svg {
+  transition: color 0.3s ease;
+}
+
+.card4:hover .icon-wrapper svg {
+  color: #fff;
+}
+.card4-button {
+  transform: translate(-50%, 120%);
+  width: 55%;
+  border-radius: 50px; /* pill button */
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  opacity: 0;
+  transition: all 0.4s ease;
 }
 
 .card4:hover .card4-button {
- transform: translate(-50%, 50%);
- opacity: 1;
+  transform: translate(-50%, 60%);
+  opacity: 1;
 }
+.text1-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #111827; /* darker, chic color */
+  transition: color 0.3s ease;
+}
+
+.text1-body {
+  color: #6b7280; /* soft gray */
+  margin-top: 0.25rem;
+}
+
+
 
 :root {
   --foreground-rgb: 0, 0, 0;
