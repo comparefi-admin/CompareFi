@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Home, CreditCard, Shield, Mail, Menu, X } from 'lucide-react';
-import logo from '../images/Gemini_Generated_Image_ewq1z5ewq1z5ewq1-removebg-preview.png';
+import logo from '../images/logo (3).png';
 
 const navItems = [
   {
