@@ -12,39 +12,39 @@ const navItems = [
     baseLabel: 'Home',
     path: '/',
     icon: Home,
-    dropdown: [
-      { label: 'Home', hash: '#hero' },
-      { label: 'Featured Products', hash: '#featured' },
-      { label: 'Contact Info', hash: '#contact' },
-    ],
+    // dropdown: [
+    //   { label: 'Home', hash: '#hero' },
+    //   { label: 'Featured Products', hash: '#featured' },
+    //   { label: 'Contact Info', hash: '#contact' },
+    // ],
   },
   {
     baseLabel: 'Products',
     path: '/#featured', // ✅ Clicking Products now goes to Product Highlights
     icon: CreditCard,
-    dropdown: [
-      { label: 'LAS', hash: '#las' },
-      { label: 'LAMF', hash: '#lamf' },
-      { label: 'MTF', hash: '#mtf' },
-    ],
+    // dropdown: [
+    //   { label: 'LAS', hash: '#las' },
+    //   { label: 'LAMF', hash: '#lamf' },
+    //   { label: 'MTF', hash: '#mtf' },
+    // ],
   },
   {
     baseLabel: 'About',
     path: '/about',
     icon: Shield,
-    dropdown: [
-      { label: 'Story', hash: '#story' },
-      { label: 'Team', hash: '#team' },
-    ],
+    // dropdown: [
+    //   { label: 'Story', hash: '#story' },
+    //   { label: 'Team', hash: '#team' },
+    // ],
   },
   {
     baseLabel: 'Contact',
     path: '/contact',
     icon: Mail,
-    dropdown: [
-      { label: 'Support', hash: '#support' },
-      { label: 'Locations', hash: '#locations' },
-    ],
+    // dropdown: [
+    //   { label: 'Support', hash: '#support' },
+    //   { label: 'Locations', hash: '#locations' },
+    // ],
   },
 ];
 
