@@ -189,7 +189,7 @@ export default function LASPage() {
     );
 
   return (
-    <div className="bg-gradient-to-br from-slate-50 to-slate-100 min-h-screen">
+    <div className="bg-[#fcfefb] min-h-screen">
       <Navbar />
 
 {/* Hero / Overview */}
