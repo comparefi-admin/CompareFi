@@ -220,7 +220,7 @@ export default function HomePage() {
                   transition={{ delay: 0.3, duration: 0.7, ease: 'easeOut' }}
                 >
                   <BlurText
-                    text="Smart Investing Starts Here"
+                    text="Compare Right Choose Right"
                     delay={80}
                     animateBy="words"
                     direction="top"
@@ -237,7 +237,7 @@ export default function HomePage() {
                   transition={{ delay: 0.45, duration: 0.6, ease: 'easeOut' }}
                 >
                   <BlurText
-                    text="Unlock powerful, AI-driven insights to grow your wealth intelligently. Compare, analyze, and invest with confidence."
+                    text="Compare and understand financial products across the market from investments to loans and beyond. Make informed, confident decisions backed by data and AI-driven insights. "
                     delay={10}
                     animateBy="word"
                     direction="top"
