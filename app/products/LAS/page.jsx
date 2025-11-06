@@ -601,8 +601,64 @@ export default function LASPage() {
 </section>
 
 
+{/* How to Apply & Key Factors Section */}
+<section className="max-w-[90%] mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 gap-10">
+  {/* Card 1 — How to Apply */}
+  <div className="bg-white/20 backdrop-blur-xl border border-white/40 shadow-2xl rounded-3xl p-10 transition-all duration-500 hover:shadow-[0_0_30px_rgba(255,87,50,0.25)] hover:-translate-y-2">
+    <h3 className="text-3xl font-bold mb-6 text-[#4805a0]">
+      How to Apply for LAMF in 2025: Step-by-Step Guide
+    </h3>
+    <ol className="list-decimal list-inside space-y-3 text-gray-800 leading-relaxed text-[1.05rem]">
+      <li>
+        <strong>Select Eligible Funds:</strong> Verify mutual funds on lender’s
+        approved list (via CAMS/KFintech).
+      </li>
+      <li>
+        <strong>Compare Lenders:</strong> Use our tables to shortlist based on
+        rates, LTV, and fees.
+      </li>
+      <li>
+        <strong>Apply Online:</strong> Submit application via lender portal or
+        fintech platform.
+      </li>
+      <li>
+        <strong>Complete KYC & Lien Marking:</strong> Provide PAN, Aadhaar, MF
+        statement, bank proof; pledge via CAMS/KFintech.
+      </li>
+      <li>
+        <strong>Disbursal:</strong> Funds credited in 4–24 hours for digital
+        applications.
+      </li>
+    </ol>
+  </div>
+
+  {/* Card 2 — Key Factors */}
+  <div className="bg-white/20 backdrop-blur-xl border border-white/40 shadow-2xl rounded-3xl p-10 transition-all duration-500 hover:shadow-[0_0_30px_rgba(13,148,136,0.25)] hover:-translate-y-2">
+    <h3 className="text-3xl font-bold mb-6 text-[#4805a0]">
+      Key Factors for Choosing the Best LAMF Provider
+    </h3>
+    <ul className="list-disc list-inside space-y-3 text-gray-800 leading-relaxed text-[1.05rem]">
+      <li>
+        <strong>LTV Ratio:</strong> Up to 90% for debt funds (e.g., Bajaj); 50–60% for equity.
+      </li>
+      <li>
+        <strong>Approved Funds:</strong> Broader lists (e.g., Tata Capital, HDFC ~1000+ funds)
+        offer flexibility.
+      </li>
+      <li>
+        <strong>Margin Call Period:</strong> Longer periods (7 days, Bajaj/Mirae)
+        give more time to regularize.
+      </li>
+      <li>
+        <strong>Total Costs:</strong> Low renewal fees (e.g., SBI ₹550) reduce long-term costs.
+      </li>
+    </ul>
+  </div>
+</section>
+
+
       {/* FAQ Section */}
-      <section className="relative max-w-[85%] mx-auto px-6 py-20">
+      <section className="relative max-w-[90%] mx-auto px-6 py-20">
         <h2 className="text-4xl font-bold text-center mb-12">
           Frequently Asked Questions
         </h2>
@@ -677,7 +733,7 @@ export default function LASPage() {
                 </button>
 
                 {openQuestionIndex === idx && (
-                  <div className="px-6 pb-4 text-gray-800 text-sm bg-white/40 rounded-b-2xl">
+                  <div className="px-6 pb-4 text-gray-800 text-md bg-white/40 rounded-b-2xl">
                     {item.a}
                   </div>
                 )}
