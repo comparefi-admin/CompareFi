@@ -17,29 +17,29 @@ export default function CompareProductsTable({ productType }) {
         else if (productType.toLowerCase() === "lamf") rows = await fetchLAMF();
         else rows = await fetchMTF();
 
-       const clean = rows.map((d) => ({
-  id: d.id,
-  name:
-    d["institution_name"] ||
-    d["Financial Institution"] ||
-    d["Institution Name"] ||
-    d["Name"] ||
-    "—",
+        const clean = rows.map((d) => ({
+          id: d.id,
+          name:
+            d["institution_name"] ||
+            d["Financial Institution"] ||
+            d["Institution Name"] ||
+            d["Name"] ||
+            "—",
 
-  approvedStocks:
-    d["approved_funds"] ||  // ✅ LAMF support
-    d["approved_shares"] ||
-    d["Approved List of Shares"] ||
-    d["Approved Stocks"] ||
-    d["Approved List of MF"] ||
-    "—",
+          approvedStocks:
+            d["approved_funds"] || // ✅ LAMF support
+            d["approved_shares"] ||
+            d["Approved List of Shares"] ||
+            d["Approved Stocks"] ||
+            d["Approved List of MF"] ||
+            "—",
 
-  cost_first_year: d["cost_first_year"] ?? null,
-  cost_second_year: d["cost_second_year"] ?? null,
+          cost_first_year: d["cost_first_year"] ?? null,
+          cost_second_year: d["cost_second_year"] ?? null,
 
-  interestMin: d?.interest_rate?.min ?? "—",
-  interestMax: d?.interest_rate?.max ?? "—",
-}));
+          interestMin: d?.interest_rate?.min ?? "—",
+          interestMax: d?.interest_rate?.max ?? "—",
+        }));
 
         const filtered = clean.filter((r) =>
           ["bajaj", "sbi", "mirae asset"].includes(r.name.trim().toLowerCase())
@@ -73,12 +73,21 @@ export default function CompareProductsTable({ productType }) {
       <table className="w-full border-collapse text-slate-800 text-sm sm:text-base">
         <thead>
           <tr className="bg-white/10">
-            <th className="px-4 py-3 border-b text-left">Financial Institution</th>
-            <th className="px-4 py-3 border-b text-center">Cost - 1st Year Amt</th>
-            <th className="px-4 py-3 border-b text-center">Cost - 2nd Year Amt</th>
-            <th className="px-4 py-3 border-b text-center">Min</th>
-            <th className="px-4 py-3 border-b text-center">Max</th>
-            <th className="px-4 py-3 border-b text-left">Approved List of MF</th>
+            <th className="px-4 py-3 border-b text-left">
+              Financial Institution
+            </th>
+            <th className="px-4 py-3 border-b text-center">
+              Cost - 1st Year Amt
+            </th>
+            <th className="px-4 py-3 border-b text-center">
+              Cost - 2nd Year Amt
+            </th>
+            <th className="px-4 py-3 border-b text-center">Interest Min</th>
+            <th className="px-4 py-3 border-b text-center">Interest Max</th>
+
+            <th className="px-4 py-3 border-b text-left">
+              Approved List of MF
+            </th>
           </tr>
         </thead>
 
