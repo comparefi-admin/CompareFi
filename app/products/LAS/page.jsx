@@ -164,15 +164,15 @@ export default function LASPage() {
 {/* Hero / Overview */}
 <section className="w-[90%] mx-auto px-2 pt-32 pb-20 flex flex-col items-center text-center">
   {/* First Card - stays centered */}
-  <div className="w-full flex flex-col items-center justify-center mb-10">
+  <div className="w-full flex flex-col items-center justify-center mb-2">
     <SpotlightCard
-      className="relative z-10 w-[90%] rounded-3xl bg-gradient-to-b from-[#B1ED67] to-white
+      className="relative z-10 w-[90%] rounded-3xl bg-gradient-to-b from-[#630bd5] to-[#630bd5]
       backdrop-blur-xl shadow-2xl sm:p-10 md:p-14 lg:p-20 flex flex-col items-center justify-center 
        mb-[2%] md:gap-14 hover:drop-shadow-2xl hover:scale-102 transition-all duration-700 ease-in-out
       border-none will-change-transform"
       spotlightColor="rgba(255,255,255,0.3)"
     >
-      <h1 className="text-6xl font-bold mb-4">Loan Against Shares</h1>
+      <h1 className="text-6xl font-bold mb-4 text-white">Loan Against Shares</h1>
     </SpotlightCard>
   </div>
 
@@ -200,15 +200,15 @@ export default function LASPage() {
 ``
     {/* LAS Information Section */}
 <section className="max-w-[90%] mx-auto px-6 pb-16">
-  <h2 className="text-4xl font-bold text-center mb-14 text-gray-900">
+  <h2 className="text-6xl font-bold text-center mb-14 text-gray-900">
     Understanding Loan Against Shares (LAS)
   </h2>
 
   {/* 2x2 Grid Layout */}
   <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
     {/* Card 1 */}
-    <div className="bg-white/30 backdrop-blur-xl border border-white/40 rounded-3xl shadow-2xl p-8 hover:shadow-[#A7F3D0] transition-all duration-500 hover:-translate-y-2">
-      <h3 className="text-2xl font-bold mb-4 text-[#FF5732]">What is Loan Against Shares?</h3>
+    <div className="bg-gray-100 backdrop-blur-xl border border-white/40 rounded-3xl shadow-2xl p-8 hover:shadow-[#A7F3D0] transition-all duration-500 hover:-translate-y-2">
+      <h3 className="text-2xl font-bold mb-4 text-[#4805a0]">What is Loan Against Shares?</h3>
       <p className="text-gray-800 leading-relaxed">
         Loan Against Shares (LAS) is a secured overdraft facility where you pledge your
         listed shares as collateral to borrow funds — <strong>without selling them</strong>.
@@ -218,8 +218,8 @@ export default function LASPage() {
     </div>
 
     {/* Card 2 */}
-    <div className="bg-white/30 backdrop-blur-xl border border-white/40 rounded-3xl shadow-2xl p-8 hover:shadow-[#A7F3D0] transition-all duration-500 hover:-translate-y-2">
-      <h3 className="text-2xl font-bold mb-4 text-[#FF5732]">Key Benefits</h3>
+    <div className="bg-gray-100 backdrop-blur-xl border border-white/40 rounded-3xl shadow-2xl p-8 hover:shadow-[#A7F3D0] transition-all duration-500 hover:-translate-y-2">
+      <h3 className="text-2xl font-bold mb-4 text-[#4805a0]">Key Benefits</h3>
       <ul className="list-disc list-inside text-gray-800 space-y-2">
         <li>Borrow at lower interest rates (8–20% p.a.) compared to personal loans.</li>
         <li>Quick liquidity without liquidating your portfolio.</li>
@@ -229,8 +229,8 @@ export default function LASPage() {
     </div>
 
     {/* Card 3 */}
-    <div className="bg-white/30 backdrop-blur-xl border border-white/40 rounded-3xl shadow-2xl p-8 hover:shadow-[#A7F3D0] transition-all duration-500 hover:-translate-y-2">
-      <h3 className="text-2xl font-bold mb-4 text-[#FF5732]">LAS vs Personal Loan</h3>
+    <div className="bg-gray-100 backdrop-blur-xl border border-white/40 rounded-3xl shadow-2xl p-8 hover:shadow-[#A7F3D0] transition-all duration-500 hover:-translate-y-2">
+      <h3 className="text-2xl font-bold mb-4 text-[#4805a0]">LAS vs Personal Loan</h3>
       <ul className="space-y-2 text-gray-800">
         <li><strong>Collateral:</strong> LAS requires pledged shares; personal loans are unsecured.</li>
         <li><strong>Interest Rates:</strong> LAS: 8–15%; Personal: 10–24%.</li>
@@ -240,8 +240,8 @@ export default function LASPage() {
     </div>
 
     {/* Card 4 */}
-    <div className="bg-white/30 backdrop-blur-xl border border-white/40 rounded-3xl shadow-2xl p-8 hover:shadow-[#A7F3D0] transition-all duration-500 hover:-translate-y-2">
-      <h3 className="text-2xl font-bold mb-4 text-[#FF5732]">Why Choose LAS?</h3>
+    <div className="bg-gray-100 backdrop-blur-xl border border-white/40 rounded-3xl shadow-2xl p-8 hover:shadow-[#A7F3D0] transition-all duration-500 hover:-translate-y-2">
+      <h3 className="text-2xl font-bold mb-4 text-[#4805a0]">Why Choose LAS?</h3>
       <p className="text-gray-800 leading-relaxed">
         Maintain your market exposure while unlocking the cash value of your portfolio. 
         LAS is ideal for investors navigating <strong>volatile markets</strong> who want liquidity 
