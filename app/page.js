@@ -271,11 +271,11 @@ export default function HomePage() {
               {/* RIGHT */}
               <motion.div
                 className="flex-1 flex justify-center items-center w-full"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.5, duration: 0.7 }}
+                i initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                  animate={{ opacity: 1, scale: 1, y: -20 }} // 👈 lifts it up slightly
+                  transition={{ delay: 0.5, duration: 0.7 }}
               >
-                <div className="flex w-full max-w-2xl sm:max-w-3xl md:max-w-4xl lg:max-w-5xl items-center justify-center py-10 sm:py-14 md:py-20">
+                <div className="flex w-full max-w-2xl sm:max-w-3xl md:max-w-4xl lg:max-w-5xl items-center justify-center py-10 sm:py-14 md:py-20 ">
                   <DisplayCards cards={defaultCards} />
                 </div>
               </motion.div>
