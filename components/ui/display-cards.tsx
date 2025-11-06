@@ -93,7 +93,7 @@ function DisplayCard({
    🔹 DisplayCards — Stacked Container (unchanged)
 ------------------------------------------------ */
 interface DisplayCardsProps {
-  cards?: Omit<DisplayCardProps, "isHovered" | "isDimmed" | "lift">[];
+  cards?: Omit<DisplayCardProps, "isHovered" | "isDimmed" >[];
 }
 
 export default function DisplayCards({ cards }: DisplayCardsProps) {
@@ -153,7 +153,7 @@ export default function DisplayCards({ cards }: DisplayCardsProps) {
               {...cardProps}
               isHovered={isHovered}
               isDimmed={isDimmed}
-              lift={cardProps.lift}
+              
             />
           </div>
         );
