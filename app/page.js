@@ -534,7 +534,7 @@ export default function HomePage() {
       </h2>
 
       <p className="text-[#4B5563] mb-6 sm:text-sm md:text-lg lg:text-2xl leading-relaxed break-words">
-        Discover how CompareFi helps you make confident, data-driven financial decisions.
+        Empowering you to see clearly, decide wisely, and choose confidently.
       </p>
 
       <button className="button1" href="/about">
