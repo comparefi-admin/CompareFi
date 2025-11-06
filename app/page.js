@@ -32,7 +32,7 @@ import { TooltipProvider } from '@/components/ui/tooltip';
 const defaultCards = [
   {
     icon: <Sparkles className="size-4 text-black" />,
-    title: "Featured",
+    title: "LAS",
     description: "Discover amazing content",
     date: "Just now",
     iconClassName: "text-blue-500",
@@ -42,7 +42,7 @@ const defaultCards = [
   },
   {
     icon: <Sparkles className="size-6 text-black" />,
-    title: "Popular",
+    title: "LAMF",
     description: "Trending this week",
     date: "2 days ago",
     iconClassName: "text-blue-500",
@@ -52,7 +52,7 @@ const defaultCards = [
   },
   {
     icon: <Sparkles className="size-4 text-black" />,
-    title: "New",
+    title: "MTF",
     description: "Latest updates and features",
     date: "Today",
     iconClassName: "text-blue-500",
@@ -135,7 +135,7 @@ export default function HomePage() {
     setParallaxIcons(icons);
   }, []);
 
-  const features = ["Insight", "Speed", "Trust"];
+  const features = ["Transparent Comparisons", "Independent & Unbiased", "Smart, Simple Insights"];
 
   const handleMouseMove = (e) => {
     parallaxIcons.forEach(icon => {
@@ -465,7 +465,9 @@ export default function HomePage() {
       About CompareFi
     </h2>
     <p className="text-[#4B5563] mb-6 text-lg leading-relaxed">
-      CompareFi is India’s most transparent financial comparison platform, helping you make smarter borrowing and investing decisions. Explore Loan Against Shares (LAS), Loan Against Mutual Funds (LAMF), or Margin Trading Facility (MTF) — all with real-time, unbiased comparisons.
+      CompareFi is an independent platform built to bring transparency and clarity to finance. We simplify complex financial decisions by helping you compare loans, investments, and other products side by side — so you can understand true costs, uncover hidden charges, and choose what’s genuinely right for you.
+      Our mission is to make financial decision-making clear, confident, and fair for everyone
+
     </p>
     <div>
 <button class="button1" href="/about">
@@ -507,10 +509,11 @@ export default function HomePage() {
             
           </section> */}
 
-{/* ✅ Responsive Why CompareFi Section */}{/* ✅ Responsive Why CompareFi Section */}
+
+{/* ✅ Responsive Why CompareFi Section */}
 <section className="w-full py-10 px-6 sm:px-10 lg:px-20 mb-[5%] overflow-hidden">
   <SpotlightCard
-    className="flex flex-col lg:flex-row justify-between items-center gap-16 lg:gap-20 rounded-3xl p-8 sm:p-12 md:p-16 bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-xl transition-all duration-700  border-none"
+    className="flex flex-col lg:flex-row justify-between items-center gap-16 lg:gap-20 rounded-3xl p-8 sm:p-12 md:p-16 bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-xl transition-all duration-700 border-none"
     spotlightColor="rgba(255,255,255,0.4)"
   >
     {/* Left Section (Image) */}
@@ -530,43 +533,57 @@ export default function HomePage() {
         Why CompareFi?
       </h2>
 
-      <p className="text-[#4B5563] mb-6 sm:text-sm md:text-lg lg:text-2xl leading-relaxed m break-words">
+      <p className="text-[#4B5563] mb-6 sm:text-sm md:text-lg lg:text-2xl leading-relaxed break-words">
         Discover how CompareFi helps you make confident, data-driven financial decisions.
       </p>
 
-     <button class="button1" href="/about">
+      <button className="button1" href="/about">
         <span>Read More</span>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 66 43">
-          <polygon
-            points="39.58,4.46 44.11,0 66,21.5 44.11,43 39.58,38.54 56.94,21.5"
-          ></polygon>
-          <polygon
-            points="19.79,4.46 24.32,0 46.21,21.5 24.32,43 19.79,38.54 37.15,21.5"
-          ></polygon>
-          <polygon
-            points="0,4.46 4.53,0 26.42,21.5 4.53,43 0,38.54 17.36,21.5"
-          ></polygon>
+          <polygon points="39.58,4.46 44.11,0 66,21.5 44.11,43 39.58,38.54 56.94,21.5"></polygon>
+          <polygon points="19.79,4.46 24.32,0 46.21,21.5 24.32,43 19.79,38.54 37.15,21.5"></polygon>
+          <polygon points="0,4.46 4.53,0 26.42,21.5 4.53,43 0,38.54 17.36,21.5"></polygon>
         </svg>
       </button>
 
-      {/* Feature Cards */}
+      {/* ✅ Feature Cards */}
       <div
         className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-10 w-full max-w-2xl 
                    place-items-center auto-rows-fr"
       >
-        {features.map((feature, i) => (
+        {[
+          {
+            title: "Transparent Comparisons",
+            description:
+              "We uncover the hidden costs, conditions, and fine print behind every financial product — so you see the true picture before you decide.",
+          },
+          {
+            title: "Independent & Unbiased",
+            description:
+              "CompareFi is a neutral platform with no affiliations or commissions. Every insight is objective, data-backed, and built to help you, not any brand.",
+          },
+          {
+            title: "Smart, Simple Insights",
+            description:
+              "Complex numbers made easy. Our AI-powered comparisons and clear visuals help you choose what’s truly right for you — faster and with confidence.",
+          },
+        ].map((feature, i, arr) => (
           <motion.div
             key={i}
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: i * 0.2, ease: 'easeOut' }}
+            transition={{ duration: 0.6, delay: i * 0.2, ease: "easeOut" }}
             viewport={{ once: true }}
             className={`w-full sm:w-[90%] rounded-3xl shadow-[0_12px_25px_-5px_rgba(102,102,102,0.5)] 
                        transition-all duration-500 ease-out p-8 sm:p-10 flex flex-col 
                        items-center text-center bg-gradient-to-tr from-white/10 to-white/5 
                        border border-[#c3c6ce] hover:border-[#99e33d] 
                        hover:shadow-[0_4px_18px_0_rgba(0,0,0,0.25)] overflow-hidden break-words 
-                       ${i === features.length - 1 && features.length % 2 !== 0 ? "sm:col-span-2 sm:justify-self-center sm:w-[80%]" : ""}`}
+                       ${
+                         i === arr.length - 1
+                           ? "sm:col-span-2 sm:justify-self-center sm:w-[80%]"
+                           : ""
+                       }`}
           >
             {/* Header */}
             <div className="flex flex-row items-center justify-center sm:justify-start gap-4 w-full mb-3">
@@ -576,7 +593,7 @@ export default function HomePage() {
 
               <h4 className="text-lg sm:text-xl md:text-2xl font-semibold text-[#0A0F2C] break-words">
                 <BlurText
-                  text={feature}
+                  text={feature.title}
                   delay={100}
                   animateBy="words"
                   direction="top"
@@ -588,7 +605,7 @@ export default function HomePage() {
             {/* Description */}
             <p className="text-[#4B5563] mt-2 leading-relaxed text-sm sm:text-base break-words">
               <BlurText
-                text="We bring you clarity, speed, and smart insights to guide your investments."
+                text={feature.description}
                 delay={150}
                 animateBy="words"
                 direction="top"
@@ -601,6 +618,7 @@ export default function HomePage() {
     </div>
   </SpotlightCard>
 </section>
+
 
 
 <section className="w-full flex justify-center items-center pb-20 mb-30 bg-transparent">

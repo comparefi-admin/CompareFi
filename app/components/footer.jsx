@@ -25,7 +25,7 @@ export default function Footer() {
               <span className="text-xl font-bold text-[#B1ED67]">CompareFi</span>
             </div>
             <p className="text-[#F2FFE1]/80 leading-relaxed">
-              Making financial decisions easier for millions of users worldwide.
+              Compare right Chose right
             </p>
           </div>
 
@@ -56,8 +56,6 @@ export default function Footer() {
             <h4 className="font-semibold mb-4 text-[#B1ED67]">Company</h4>
             <ul className="space-y-2 text-[#F2FFE1]/80">
               <li><a href="/about" className="hover:text-[#B1ED67] transition-colors">About Us</a></li>
-              <li><a href="/careers" className="hover:text-[#B1ED67] transition-colors">Careers</a></li>
-              <li><a href="/press" className="hover:text-[#B1ED67] transition-colors">Press</a></li>
               <li><a href="/contact" className="hover:text-[#B1ED67] transition-colors">Contact</a></li>
             </ul>
           </div>
@@ -66,10 +64,9 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold mb-4 text-[#B1ED67]">Support</h4>
             <ul className="space-y-2 text-[#F2FFE1]/80">
-              <li><a href="/help" className="hover:text-[#B1ED67] transition-colors">Help Center</a></li>
+              <li><a href="/help" className="hover:text-[#B1ED67] transition-colors">Contact Us</a></li>
               <li><a href="/privacy" className="hover:text-[#B1ED67] transition-colors">Privacy Policy</a></li>
               <li><a href="/terms" className="hover:text-[#B1ED67] transition-colors">Terms of Service</a></li>
-              <li><a href="/security" className="hover:text-[#B1ED67] transition-colors">Security</a></li>
             </ul>
           </div>
         </div>
