@@ -238,7 +238,7 @@ export default function HomePage() {
                 >
                   <BlurText
                     text="Compare and understand financial products across the market from investments to loans and beyond. Make informed, confident decisions backed by data and AI-driven insights. "
-                    delay={10}
+                    delay={5}
                     animateBy="word"
                     direction="top"
                     onAnimationComplete={handleAnimationComplete}
@@ -401,7 +401,7 @@ export default function HomePage() {
                   <h4 className="text-2xl font-semibold text-[#0A0F2C]">
                     <BlurText
                       text={p.title}
-                      delay={100}
+                      delay={50}
                       animateBy="words"
                       direction="top"
                       onAnimationComplete={handleAnimationComplete}
@@ -423,7 +423,7 @@ export default function HomePage() {
                       <li key={i}>
                         <BlurText
                           text={`• ${b}`}
-                          delay={200 + i * 50}
+                          delay={50 + i * 5}
                           animateBy="words"
                           direction="bottom"
                           onAnimationComplete={handleAnimationComplete}
@@ -594,7 +594,7 @@ export default function HomePage() {
               <h4 className="text-lg sm:text-xl md:text-2xl font-semibold text-[#0A0F2C] break-words">
                 <BlurText
                   text={feature.title}
-                  delay={100}
+                  delay={20}
                   animateBy="words"
                   direction="top"
                   onAnimationComplete={handleAnimationComplete}
@@ -606,7 +606,7 @@ export default function HomePage() {
             <p className="text-[#4B5563] mt-2 leading-relaxed text-sm sm:text-base break-words">
               <BlurText
                 text={feature.description}
-                delay={150}
+                delay={30}
                 animateBy="words"
                 direction="top"
                 onAnimationComplete={handleAnimationComplete}
