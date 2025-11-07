@@ -1,4 +1,4 @@
-export const lamfFaqData = {
+export const faqData = {
   "Basics of LAMF": [
     {
       question: "What is Loan Against Mutual Funds (LAMF)?",

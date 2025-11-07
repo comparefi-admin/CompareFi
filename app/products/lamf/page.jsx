@@ -4,9 +4,9 @@ import React, { useState, useEffect, useMemo } from "react";
 import Navbar from "../../components/navbar";
 import Footer from "../../components/footer";
 import { ArrowUpDown, ChevronRight } from "lucide-react";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../../lib/firebaseConfig";
-import { lamfFaqData } from "./faqdata"; // adjust path as needed
+import { faqData } from "./faqdata";
+import { fetchLAMF } from "@/lib/fetchData";
+import { getNullFill } from "@/lib/nullFill";
 
 export default function LAMFPage() {
   const [data, setData] = useState([]);
@@ -20,26 +20,17 @@ export default function LAMFPage() {
   const [activeCategories, setActiveCategories] = useState(["All FAQs"]); // <-- new hook
 
   // --- FAQ data hook ---
-  const allCategories = ["All FAQs", ...Object.keys(lamfFaqData)];
+  const allCategories = ["All FAQs", ...Object.keys(faqData)];
 
   
 const filteredFaqs = useMemo(() => {
   if (activeCategories.includes("All FAQs")) {
-    return Object.values(lamfFaqData).flat();
+    return Object.values(faqData).flat();
   }
-  return activeCategories.flatMap((cat) => lamfFaqData[cat] || []);
+  return activeCategories.flatMap((cat) => faqData[cat] || []);
 }, [activeCategories]);
   // --- Helpers ---
-  const extractNumberString = (val) => {
-    if (!val) return "—";
-    if (typeof val === "number") return String(val);
-    if (typeof val === "string") {
-      const match = val.match(/\d[\d,\.]*/);
-      return match ? match[0].replace(/,/g, "") : "—";
-    }
-    return "—";
-  };
-
+  
   const parseLTV = (ltv) => {
     let ltvDebt = "—";
     let ltvEquity = "—";
@@ -80,90 +71,15 @@ const filteredFaqs = useMemo(() => {
     return String(val);
   };
 
-  const getFieldValue = (obj, fieldName) => {
-    if (!obj) return "—";
-    const key = Object.keys(obj).find(
-      (k) => k.toLowerCase().trim() === fieldName.toLowerCase().trim()
-    );
-    return key ? obj[key] : "—";
-  };
-
   // --- Fetch Data ---
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const qs = await getDocs(collection(db, "LAMF"));
-        const mapped = qs.docs.map((doc) => {
-          const d = doc.data();
-
-          const approvedRaw =
-            d["Approved List of MF"] ??
-            d["Approved List of Shares"] ??
-            d["Approved MF"] ??
-            d["Approved Stocks"] ??
-            d["Approved Shares"] ??
-            "—";
-          const approvedStocks = extractNumberString(approvedRaw);
-
-          const interest = d["Interest Rate"] ?? d["InterestRates"] ?? null;
-          const minRate =
-            interest && interest.Min !== undefined
-              ? formatRateForDisplay(interest.Min)
-              : interest && interest.min !== undefined
-              ? formatRateForDisplay(interest.min)
-              : "—";
-          const maxRate =
-            interest && interest.Max !== undefined
-              ? formatRateForDisplay(interest.Max)
-              : interest && interest.max !== undefined
-              ? formatRateForDisplay(interest.max)
-              : "—";
-          const medianRate =
-            interest && (interest.Median ?? interest.median) !== undefined
-              ? formatRateForDisplay(interest.Median ?? interest.median)
-              : "—";
-
-          const ltvObj = d["LTV - Funding"] ?? d["LTV - FUNDING"] ?? null;
-          const { ltvDebt, ltvEquity } = parseLTV(ltvObj);
-
-          const debtRaw = getFieldValue(d, "Debt MF Min and Max Loan");
-          const equityRaw = getFieldValue(d, "Equity MF Min and Max Loan");
-
-          const debtLoanRange = parseLoanRange(debtRaw);
-          const equityLoanRange = parseLoanRange(equityRaw);
-
-          let penalRaw = d["Penal Charges"] ?? d["Default Charges"] ?? d["Penal Charges "];
-          let penalDisplay = "—";
-          if (penalRaw !== undefined && penalRaw !== null) {
-            if (typeof penalRaw === "number") penalDisplay = formatRateForDisplay(penalRaw);
-            else if (typeof penalRaw === "string") {
-              const m = penalRaw.match(/(\d+\.?\d*)\s*%?/);
-              penalDisplay = m ? `${m[1]}%` : penalRaw;
-            } else penalDisplay = String(penalRaw);
-          }
-
-          return {
-            id: doc.id,
-            name: d["Financial Institution"] ?? d["Name of the Institution"] ?? "—",
-            approvedStocks,
-            tenure: d["Tenure"] ?? "—",
-            marginPeriod: d["Regularization period / Margin Call Period"] ?? "—",
-            ltvDebt,
-            ltvEquity,
-            debtLoanRange,
-            equityLoanRange,
-            minRate,
-            maxRate,
-            medianRate,
-            processingFee: d["Processing Fee"] ?? "—",
-            prepaymentCharges: d["Pre-payment Charges"] ?? "—",
-            renewalFee: d["Annual Maintenance Charges / Renewal Fees"] ?? "—",
-            penalCharges: penalDisplay,
-          };
-        });
-        setData(mapped);
-      } catch (err) {
-        console.error("Error fetching LAMF collection:", err);
+        const lamf = await fetchLAMF();
+        setData(lamf || []);
+      } catch (error) {
+        console.error("❌ Supabase fetch error:", error);
+        setData([]);
       } finally {
         setLoading(false);
       }
@@ -243,126 +159,253 @@ const handleCategoryClick = (cat) => {
     <div className="bg-gradient-to-br from-slate-50 to-slate-100 min-h-screen">
       <Navbar />
 
-     {/* About LAMF */}
-<section className="max-w-7xl mx-auto px-6 py-12 text-center">
-  <div className="bg-white rounded-2xl shadow-lg p-10">
-    <h1 className="text-5xl font-bold mb-4">About Loan Against Mutual Funds (LAMF)</h1>
-    <p className="text-lg text-gray-700 max-w-2xl mx-auto">
-      Loan Against Mutual Funds (LAMF) allows investors to borrow funds using their mutual fund holdings as collateral. 
-      This type of loan provides quick liquidity while keeping your investments intact and continues earning returns.
-    </p>
-  </div>
-</section>
+    {/* About LAMF */}
+    <section className="max-w-7xl mx-auto px-6 py-12 text-center">
+      <div className="bg-white rounded-2xl shadow-lg p-10">
+        <h1 className="text-5xl font-bold mb-4">About Loan Against Mutual Funds (LAMF)</h1>
+        <p className="text-lg text-gray-700 max-w-2xl mx-auto">
+          Loan Against Mutual Funds (LAMF) allows investors to borrow funds using their mutual fund holdings as collateral. 
+          This type of loan provides quick liquidity while keeping your investments intact and continues earning returns.
+        </p>
+      </div>
+    </section>
 
 
-      {/* Table Section */}
-      <section className="max-w-7xl mx-auto px-6 py-8 flex gap-4">
-        <div className="flex-1 bg-white rounded-xl shadow-lg overflow-hidden">
-          {/* Funding Table */}
-          {currentTable === "funding" && (
-            <div className="overflow-x-auto animate-fadeIn">
-              <table className="w-full">
-                <thead className="bg-gradient-to-r from-slate-100 to-slate-50 border-b border-slate-200">
-                  <tr>
-                    {[
-                      { key: "name", label: "Institution" },
-                      { key: "approvedStocks", label: "Approved Stocks" },
-                      { key: "tenure", label: "Tenure" },
-                      { key: "marginPeriod", label: "Margin Period" },
-                      { key: "ltvDebt", label: "LTV Debt" },
-                      { key: "ltvEquity", label: "LTV Equity" },
-                      { key: "debtLoanRange", label: "Debt Loan" },
-                      { key: "equityLoanRange", label: "Equity Loan" },
-                    ].map((h) => (
-                      <th key={h.key} className="px-6 py-4 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider">
-                        <div className="flex items-center gap-1">
-                          {h.label}
-                          <button onClick={() => handleSort(h.key, "funding")} className="text-gray-500 hover:text-gray-800">
-                            <ArrowUpDown size={14} />
-                          </button>
-                          {sortFieldFunding === h.key && <span className="text-xs">{sortOrderFunding === "asc" ? "▲" : "▼"}</span>}
-                        </div>
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-100">
-                  {sortedFundingData.map((row) => (
-                    <tr key={row.id} className="hover:bg-slate-50 transition-colors duration-150">
-                      <td className="px-6 py-4 font-semibold text-slate-900">{row.name}</td>
-                      <td className="px-6 py-4 text-slate-600">{row.approvedStocks}</td>
-                      <td className="px-6 py-4 text-slate-600">{row.tenure}</td>
-                      <td className="px-6 py-4 text-slate-600">{row.marginPeriod}</td>
-                      <td className="px-6 py-4 text-center text-teal-600 font-semibold">{row.ltvDebt}</td>
-                      <td className="px-6 py-4 text-center text-teal-600 font-semibold">{row.ltvEquity}</td>
-                      <td className="px-6 py-4 text-center text-slate-600">{row.debtLoanRange}</td>
-                      <td className="px-6 py-4 text-center text-slate-600">{row.equityLoanRange}</td>
-                    </tr>
+    {/* Table Section */}
+    <section className="max-w-7xl mx-auto px-6 py-8 flex gap-4">
+      <div className="flex-1 bg-white rounded-xl shadow-lg overflow-hidden">
+        {/* Funding Table */}
+        {currentTable === "funding" && (
+          <div className="overflow-x-auto animate-fadeIn">
+            <table className="w-full">
+              <thead className="bg-gradient-to-r from-slate-100 to-slate-50 border-b border-slate-200">
+                <tr>
+                  {[
+                    { key: "institution_name", label: "Institution" },
+                    { key: "approved_funds", label: "Approved Funds" },
+                    { key: "tenure_months", label: "Tenure (Months)" },
+                    { key: "regularization_period", label: "Regularization / Margin Period" },
+                    { key: "ltv", label: "LTV (Debt / Equity)" },
+                    { key: "loan_debt", label: "Debt MF Loan" },
+                    { key: "loan_equity", label: "Equity MF Loan" },
+                  ].map((h) => (
+                    <th
+                      key={h.key}
+                      className="px-6 py-4 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider"
+                    >
+                      <div className="flex items-center gap-1">
+                        {h.label}
+                        <button
+                          onClick={() => handleSort(h.key, "funding")}
+                          className="text-gray-500 hover:text-gray-800"
+                        >
+                          <ArrowUpDown size={14} />
+                        </button>
+                        {sortFieldFunding === h.key && (
+                          <span className="text-xs">
+                            {sortOrderFunding === "asc" ? "▲" : "▼"}
+                          </span>
+                        )}
+                      </div>
+                    </th>
                   ))}
-                </tbody>
-              </table>
-            </div>
-          )}
+                </tr>
+              </thead>
 
-          {/* Cost Table */}
-          {currentTable === "cost" && (
-            <div className="overflow-x-auto animate-fadeIn">
-              <table className="w-full">
-                <thead className="bg-gradient-to-r from-slate-100 to-slate-50 border-b border-slate-200">
-                  <tr>
-                    {[
-                      { key: "name", label: "Institution" },
-                      { key: "minRate", label: "Min Rate" },
-                      { key: "maxRate", label: "Max Rate" },
-                      { key: "medianRate", label: "Median Rate" },
-                      { key: "processingFee", label: "Processing Fee" },
-                      { key: "prepaymentCharges", label: "Pre-payment" },
-                      { key: "renewalFee", label: "Renewal Fee" },
-                      { key: "penalCharges", label: "Penal Charges" },
-                    ].map((h) => (
-                      <th key={h.key} className="px-6 py-4 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider">
-                        <div className="flex items-center gap-1">
-                          {h.label}
-                          <button onClick={() => handleSort(h.key, "cost")} className="text-gray-500 hover:text-gray-800">
-                            <ArrowUpDown size={14} />
-                          </button>
-                          {sortFieldCost === h.key && <span className="text-xs">{sortOrderCost === "asc" ? "▲" : "▼"}</span>}
+              <tbody className="divide-y divide-slate-100">
+                {sortedFundingData.map((row) => (
+                  <tr
+                    key={row.id}
+                    className="hover:bg-slate-50 transition-colors duration-150"
+                  >
+                    <td className="px-6 py-4 font-semibold text-slate-900">
+                      {row.institution_name ||
+                        getNullFill("lamf", row.institution_name, "institution_name")}
+                    </td>
+
+                    <td className="px-6 py-4 text-slate-600">
+                      {row.approved_funds != null
+                        ? `~ ${row.approved_funds} funds`
+                        : getNullFill("lamf", row.institution_name, "approved_funds")}
+                    </td>
+
+                    <td className="px-6 py-4 text-slate-600">
+                      {row.tenure_months != null
+                        ? `${row.tenure_months} months`
+                        : getNullFill("lamf", row.institution_name, "tenure_months")}
+                    </td>
+
+                    <td className="px-6 py-4 text-slate-600">
+                      {row.regularization_period != null
+                        ? `${row.regularization_period} days`
+                        : getNullFill("lamf", row.institution_name, "regularization_period")}
+                    </td>
+
+                    <td className="px-6 py-4 text-center text-teal-600 font-semibold">
+                      {row.ltv && typeof row.ltv === "object" ? (
+                        <div className="flex flex-col gap-0.5">
+                          {Object.entries(row.ltv).map(([k, v], idx) => (
+                            <div key={idx}>{`${k}: ${
+                              typeof v === "object"
+                                ? `${v.min ?? "—"} - ${v.max ?? "—"}`
+                                : `${v ?? "—"}`
+                            }`}</div>
+                          ))}
                         </div>
-                      </th>
-                    ))}
+                      ) : (
+                        getNullFill("lamf", row.institution_name, "ltv")
+                      )}
+                    </td>
+
+                    <td className="px-6 py-4 text-center text-slate-600">
+                      {row.loan_debt && typeof row.loan_debt === "object" ? (
+                        <div className="flex flex-col">
+                          <div>Min: {row.loan_debt.min ?? "—"}</div>
+                          <div>Max: {row.loan_debt.max ?? "—"}</div>
+                        </div>
+                      ) : (
+                        getNullFill("lamf", row.institution_name, "loan_debt")
+                      )}
+                    </td>
+
+                    <td className="px-6 py-4 text-center text-slate-600">
+                      {row.loan_equity && typeof row.loan_equity === "object" ? (
+                        <div className="flex flex-col">
+                          <div>Min: {row.loan_equity.min ?? "—"}</div>
+                          <div>Max: {row.loan_equity.max ?? "—"}</div>
+                        </div>
+                      ) : (
+                        getNullFill("lamf", row.institution_name, "loan_equity")
+                      )}
+                    </td>
                   </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-100">
-                  {sortedCostData.map((row) => (
-                    <tr key={row.id} className="hover:bg-slate-50 transition-colors duration-150">
-                      <td className="px-6 py-4 font-semibold text-slate-900">{row.name}</td>
-                      <td className="px-6 py-4 text-center text-emerald-600 font-semibold">{row.minRate}</td>
-                      <td className="px-6 py-4 text-center text-rose-600 font-semibold">{row.maxRate}</td>
-                      <td className="px-6 py-4 text-center text-slate-600">{row.medianRate}</td>
-                      <td className="px-6 py-4 text-slate-600 text-sm">{row.processingFee}</td>
-                      <td className="px-6 py-4 text-slate-600 text-sm">{row.prepaymentCharges}</td>
-                      <td className="px-6 py-4 text-slate-600 text-sm">{row.renewalFee}</td>
-                      <td className="px-6 py-4 text-center text-rose-600 font-semibold">{row.penalCharges}</td>
-                    </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+
+        {/* Cost Table */}
+        {currentTable === "cost" && (
+          <div className="overflow-x-auto animate-fadeIn">
+            <table className="w-full">
+              <thead className="bg-gradient-to-r from-slate-100 to-slate-50 border-b border-slate-200">
+                <tr>
+                  {[
+                    { key: "institution_name", label: "Institution" },
+                    { key: "interest_rate", label: "Interest Rate (Min / Max / Median)" },
+                    { key: "processing_fee", label: "Processing Fee" },
+                    { key: "prepayment_charges", label: "Pre-payment Charges" },
+                    { key: "annual_maintenance", label: "Annual Maintenance" },
+                    { key: "penal_charges", label: "Penal Charges" },
+                    { key: "default_charges", label: "Default Charges" },
+                    { key: "other_expenses", label: "Other Expenses" },
+                  ].map((h) => (
+                    <th
+                      key={h.key}
+                      className="px-6 py-4 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider"
+                    >
+                      <div className="flex items-center gap-1">
+                        {h.label}
+                        <button
+                          onClick={() => handleSort(h.key, "cost")}
+                          className="text-gray-500 hover:text-gray-800"
+                        >
+                          <ArrowUpDown size={14} />
+                        </button>
+                        {sortFieldCost === h.key && (
+                          <span className="text-xs">
+                            {sortOrderCost === "asc" ? "▲" : "▼"}
+                          </span>
+                        )}
+                      </div>
+                    </th>
                   ))}
-                </tbody>
-              </table>
-            </div>
-          )}
-        </div>
+                </tr>
+              </thead>
 
-        <button
-          onClick={switchTable}
-          className="bg-teal-600 hover:bg-teal-700 text-white px-4 rounded-xl shadow-lg transition-all duration-300 flex flex-col items-center justify-center gap-3 font-medium text-sm whitespace-nowrap"
-          style={{ writingMode: "vertical-rl" }}
-        >
-          <ChevronRight className="w-5 h-5 rotate-90" />
-          <span className="tracking-wide">{currentTable === "funding" ? "View Cost Details" : "View Funding Details"}</span>
-        </button>
-      </section>
+              <tbody className="divide-y divide-slate-100">
+                {sortedCostData.map((row) => (
+                  <tr
+                    key={row.id}
+                    className="hover:bg-slate-50 transition-colors duration-150"
+                  >
+                    <td className="px-6 py-4 font-semibold text-slate-900">
+                      {row.institution_name ||
+                        getNullFill("lamf", row.institution_name, "institution_name")}
+                    </td>
 
-   {/* --- FAQ Section --- */}
-<section className="max-w-7xl mx-auto px-6 py-12">
+                    <td className="px-6 py-4 text-center text-slate-700">
+                      {row.interest_rate && typeof row.interest_rate === "object" ? (
+                        <div className="flex flex-col">
+                          <div>Min: {row.interest_rate.min ?? "—"}</div>
+                          <div>Max: {row.interest_rate.max ?? "—"}</div>
+                          <div>Median: {row.interest_rate.median ?? "—"}</div>
+                        </div>
+                      ) : (
+                        getNullFill("lamf", row.institution_name, "interest_rate")
+                      )}
+                    </td>
+
+                    <td className="px-6 py-4 text-slate-600 text-sm">
+                      {row.processing_fee ||
+                        getNullFill("lamf", row.institution_name, "processing_fee")}
+                    </td>
+
+                    <td className="px-6 py-4 text-slate-600 text-sm">
+                      {row.prepayment_charges ||
+                        getNullFill("lamf", row.institution_name, "prepayment_charges")}
+                    </td>
+
+                    <td className="px-6 py-4 text-slate-600 text-sm">
+                      {row.annual_maintenance ||
+                        getNullFill("lamf", row.institution_name, "annual_maintenance")}
+                    </td>
+
+                    <td className="px-6 py-4 text-center text-rose-600 font-semibold">
+                      {row.penal_charges != null
+                        ? `${row.penal_charges}%`
+                        : getNullFill("lamf", row.institution_name, "penal_charges")}
+                    </td>
+
+                    <td className="px-6 py-4 text-slate-600 text-sm">
+                      {row.default_charges && typeof row.default_charges === "object"
+                        ? Object.entries(row.default_charges).map(([k, v], idx) => (
+                            <div key={idx}>{`${k}: ${v ?? "—"}`}</div>
+                          ))
+                        : getNullFill("lamf", row.institution_name, "default_charges")}
+                    </td>
+
+                    <td className="px-6 py-4 text-slate-600 text-sm">
+                      {row.other_expenses && typeof row.other_expenses === "object"
+                        ? Object.entries(row.other_expenses).map(([k, v], idx) => (
+                            <div key={idx}>{`${k}: ${v ?? "—"}`}</div>
+                          ))
+                        : getNullFill("lamf", row.institution_name, "other_expenses")}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+
+      <button
+        onClick={switchTable}
+        className="bg-teal-600 hover:bg-teal-700 text-white px-4 rounded-xl shadow-lg transition-all duration-300 flex flex-col items-center justify-center gap-3 font-medium text-sm whitespace-nowrap"
+        style={{ writingMode: "vertical-rl" }}
+      >
+        <ChevronRight className="w-5 h-5 rotate-90" />
+        <span className="tracking-wide">
+          {currentTable === "funding" ? "View Cost Details" : "View Funding Details"}
+        </span>
+      </button>
+    </section>
+
+
+  {/* --- FAQ Section --- */}
+  <section className="max-w-7xl mx-auto px-6 py-12">
   <h2 className="text-4xl font-bold text-center mb-8">Frequently Asked Questions about LAMF</h2>
 
   {/* Category Buttons */}
@@ -419,10 +462,7 @@ const handleCategoryClick = (cat) => {
   </div>
 </section>
 
-
-
-
-      {/* Enquire Now */}
+  {/* Enquire Now */}
       <section className="max-w-7xl mx-auto px-6 py-12 flex flex-col items-center">
         <h2 className="text-3xl font-bold mb-4">Enquire Now</h2>
         <p className="text-gray-700 mb-6 text-center max-w-2xl">
@@ -432,7 +472,6 @@ const handleCategoryClick = (cat) => {
           Contact Us
         </button>
       </section>
-
       <Footer />
     </div>
   );
