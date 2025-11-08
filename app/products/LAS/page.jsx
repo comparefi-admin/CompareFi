@@ -4,9 +4,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import Navbar from "../../components/navbar";
 import Footer from "../../components/footer";
 import { ArrowUpDown, ChevronRight } from "lucide-react";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../../lib/firebaseConfig";
-import { faqData } from "./faqdata"; // adjust the path based on where you place the file
+import { faqData } from "./faqdata"; 
 import SpotlightCard from "@/components/SpotlightCard.jsx";
 import { fetchLAS } from "@/lib/fetchData";
 import { getNullFill } from "@/lib/nullFill";
@@ -80,21 +78,21 @@ export default function LASPage() {
   const [activeTableCategory, setActiveTableCategory] = useState("fundingDetails");
 
   //Table Fetch
-    useEffect(() => {
-  const fetchData = async () => {
-    try {
-      const las = await fetchLAS();
-      setData(las || []);
-    } catch (error) {
-      console.error("❌ Supabase fetch error:", error);
-      setData([]);
-    } finally {
-      setLoading(false);
-    }
-  };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const las = await fetchLAS();
+        setData(las || []);
+      } catch (error) {
+        console.error("❌ Supabase fetch error:", error);
+        setData([]);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  fetchData();
-}, []);
+    fetchData();
+  }, []);
 
 
   const clean = (val) => {
@@ -176,29 +174,9 @@ export default function LASPage() {
     </SpotlightCard>
   </div>
 
-  {/* Second Card + Text - aligned left */}
-  {/* <div className="w-full flex flex-col items-start justify-start text-left  px-6">
-    <SpotlightCard
-      className="relative z-10 w-auto mx-[3%] rounded-full bg-gradient-to-l from-[#ffffff98] to-white
-      backdrop-blur-xl shadow-2xl sm:p-10 md:p-14 lg:p-20 flex flex-col items-start justify-start 
-       mb-[2%] md:gap-14 hover:drop-shadow-2xl hover:scale-102 transition-all duration-700 ease-in-out
-      border-none will-change-transform"
-      spotlightColor="rgba(255,255,255,0.3)"
-    >
-      <h1 className="text-4xl font-bold mb-4">Best Loan Against Mutual Funds 2025 – Compare Interest Rates, Eligibility, Hidden Charges & More</h1>
-    </SpotlightCard>
-
-    <p className="text-gray-700 text-3xl mt-16 mx-[4%] text-justify">
-      Unlock the value of your mutual fund investments with our comprehensive Loan Against Mutual Funds (LAMF) comparison tool, designed to help you borrow smartly in 2025. Searching for “best LAMF interest rates 2025,” “LAMF hidden charges India,” or “top LAMF providers”? We’ve analyzed top lenders like Bajaj Finserv, SBI, Mirae Asset, Axis Bank, Kotak Bank, HDFC Bank, ICICI Bank, and Tata Capital, offering transparent, filterable cost breakdowns. Our page delivers detailed insights, LTV ratios, and expert guidance—updated October 2025—to save you thousands.
-    </p>
-  </div> */}
 </section>
 
-
-
-
-``
-    {/* LAS Information Section */}
+{/* LAS Information Section */}
 <section className="max-w-[90%] mx-auto px-6 pb-16">
   <h2 className="text-6xl font-bold text-center mb-14 text-gray-900">
     Understanding Loan Against Shares (LAS)
