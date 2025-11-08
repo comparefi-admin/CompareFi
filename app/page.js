@@ -65,7 +65,7 @@ const defaultCards = [
 // Products data
 const PRODUCTS = [
   {
-    id: 'las',
+    id: 'LAS',
     title: 'Loan Against Securities (LAS)',
     blurb: 'Unlock liquidity from your portfolio without selling core holdings.',
     bullets: ['Borrow up to 70% of eligible securities', 'Minimal documentation', 'Flexible repayment schedules'],
@@ -173,7 +173,7 @@ export default function HomePage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <SpotlightCard className="relative z-10 w-[90%] max-w-full rounded-3xl   min-h-[70vh] bg-[#56039a]
+              <SpotlightCard className="relative z-10 w-[90%] max-w-full rounded-3xl   min-h-[70vh] bg-gradient-to-b from-[#b8ff62] via-white to-[#ffffff]
  backdrop-blur-xl shadow-2xl sm:p-10 md:p-14 lg:p-20 flex flex-col md:flex-row mt-[7%] mb-[7%] gap-10 md:gap-14 items-center justify-center hover:drop-shadow-2xl
            hover:scale-102 transition-all duration-700 
  border-none
@@ -181,7 +181,7 @@ export default function HomePage() {
               {/* LEFT */}
               <div className="flex-1 text-center md:text-left space-y-5 sm:space-y-6 lg:space-y-8 pl-20">
                 <motion.h1
-                    className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-tight drop-shadow-[0_2px_2px_rgba(0,0,0,0.1)]"
+                    className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-black tracking-tight leading-tight drop-shadow-[0_2px_2px_rgba(0,0,0,0.1)]"
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1, duration: 0.7, ease: 'easeOut' }}
@@ -199,7 +199,7 @@ export default function HomePage() {
                   </motion.h1> */}
 
                   <motion.h1
-                    className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-tight drop-shadow-[0_2px_2px_rgba(0,0,0,0.1)]"
+                    className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-black tracking-tight leading-tight drop-shadow-[0_2px_2px_rgba(0,0,0,0.1)]"
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1, duration: 0.7, ease: 'easeOut' }}
@@ -210,11 +210,11 @@ export default function HomePage() {
                       animateBy="words" 
                       direction="top" 
                       onAnimationComplete={handleAnimationComplete} 
-                      className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-tight drop-shadow-[0_2px_2px_rgba(0,0,0,0.1)]"
+                      className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-black tracking-tight leading-tight drop-shadow-[0_2px_2px_rgba(0,0,0,0.1)]"
                     />
                   </motion.h1>
                 <motion.h2
-                  className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-medium text-white"
+                  className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-medium text-black"
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3, duration: 0.7, ease: 'easeOut' }}
@@ -225,13 +225,13 @@ export default function HomePage() {
                     animateBy="words"
                     direction="top"
                     onAnimationComplete={handleAnimationComplete}
-                    className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-medium text-white"
+                    className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-medium text-black"
                   />
                 </motion.h2>
 
 
                 <motion.p
-                  className="text-sm sm:text-base md:text-lg text-slate-300 max-w-md mx-auto md:mx-0 leading-relaxed"
+                  className="text-sm sm:text-base md:text-lg text-black max-w-md mx-auto md:mx-0 leading-relaxed"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.45, duration: 0.6, ease: 'easeOut' }}
@@ -242,7 +242,7 @@ export default function HomePage() {
                     animateBy="word"
                     direction="top"
                     onAnimationComplete={handleAnimationComplete}
-                    className="text-sm sm:text-base md:text-lg text-white max-w-md mx-auto md:mx-0 leading-relaxed"
+                    className="text-sm sm:text-base md:text-lg text-black max-w-md mx-auto md:mx-0 leading-relaxed"
                   />
                 </motion.p>
 
@@ -301,7 +301,7 @@ export default function HomePage() {
   {/* Right Section (Cards Grid) */}
   <div className="lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mr-10">
 {/* LAS Card */}
-<a href="/products/las" className="card4 group relative overflow-hidden rounded-lg bg-white shadow-md hover:shadow-lg transition-all duration-300 p-6 cursor-pointer">
+<a href="/products/LAS" className="card4 group relative overflow-hidden rounded-lg bg-white shadow-md hover:shadow-lg transition-all duration-300 p-6 cursor-pointer">
   <div className="flex items-center space-x-4">
     {/* Icon on the left */}
     <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-[#FF5732]/20 rounded-full group-hover:bg-[#FF5732]/30 transition-colors">
