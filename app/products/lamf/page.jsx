@@ -18,6 +18,7 @@ export default function LAMFPage() {
   const [currentTable, setCurrentTable] = useState("funding");
   const [faqOpen, setFaqOpen] = useState(null);
   const [activeCategories, setActiveCategories] = useState(["All FAQs"]); // <-- new hook
+const [activeTableCategory, setActiveTableCategory] = useState("fundingDetails");
 
   // --- FAQ data hook ---
   const allCategories = ["All FAQs", ...Object.keys(faqData)];
@@ -158,250 +159,459 @@ const handleCategoryClick = (cat) => {
   return (
     <div className="bg-gradient-to-br from-slate-50 to-slate-100 min-h-screen">
       <Navbar />
+{/* HERO SECTION */}
+<section className="w-[90%] mx-auto px-2 pt-32 pb-20 flex flex-col items-center text-center">
+  <div className="w-full flex flex-col items-center justify-center mb-2">
+    <div
+      className="relative z-10 w-[90%] rounded-3xl bg-gradient-to-b from-[#630bd5] to-[#630bd5]
+      backdrop-blur-xl shadow-2xl sm:p-10 md:p-14 lg:p-20 flex flex-col items-center justify-center 
+       mb-[2%] md:gap-14 hover:drop-shadow-2xl hover:scale-102 transition-all duration-700 ease-in-out
+      border-none will-change-transform"
+    >
+      <h1 className="text-6xl font-bold mb-4 text-white">Loan Against Mutual Funds</h1>
+    </div>
+  </div>
+</section>
 
-    {/* About LAMF */}
-    <section className="max-w-7xl mx-auto px-6 py-12 text-center">
-      <div className="bg-white rounded-2xl shadow-lg p-10">
-        <h1 className="text-5xl font-bold mb-4">About Loan Against Mutual Funds (LAMF)</h1>
-        <p className="text-lg text-gray-700 max-w-2xl mx-auto">
-          Loan Against Mutual Funds (LAMF) allows investors to borrow funds using their mutual fund holdings as collateral. 
-          This type of loan provides quick liquidity while keeping your investments intact and continues earning returns.
-        </p>
+
+{/* LAMF Information Section */}
+<section className="max-w-[90%] mx-auto px-6 pb-16">
+  <h2 className="text-6xl font-bold text-center mb-14 text-gray-900">
+    Understanding LAMF (Loan Against Mutual Funds)
+  </h2>
+
+  {/* 2x2 grid */}
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+    <div className="bg-gray-100 backdrop-blur-xl border border-white/40 rounded-3xl shadow-2xl p-8 hover:shadow-[#A7F3D0] transition-all duration-500 hover:-translate-y-2">
+      <h3 className="text-2xl font-bold mb-4 text-[#4805a0]">What is LAMF?</h3>
+      <p className="text-gray-800 leading-relaxed">
+        Loan Against Mutual Funds lets you borrow funds by pledging your Mutual Fund holdings
+        without redeeming them — so your investment stays invested & continues compounding.
+      </p>
+    </div>
+
+    <div className="bg-gray-100 backdrop-blur-xl border border-white/40 rounded-3xl shadow-2xl p-8 hover:shadow-[#A7F3D0] transition-all duration-500 hover:-translate-y-2">
+      <h3 className="text-2xl font-bold mb-4 text-[#4805a0]">Key Benefits</h3>
+      <ul className="list-disc list-inside text-gray-800 space-y-2">
+        <li>Liquidity without redeeming MF units.</li>
+        <li>Lower interest vs personal loan.</li>
+        <li>Continue earning returns on MF portfolio.</li>
+        <li>Quick approval via CAMS / KFintech digital lien.</li>
+      </ul>
+    </div>
+
+    <div className="bg-gray-100 backdrop-blur-xl border border-white/40 rounded-3xl shadow-2xl p-8 hover:shadow-[#A7F3D0] transition-all duration-500 hover:-translate-y-2">
+      <h3 className="text-2xl font-bold mb-4 text-[#4805a0]">LAMF vs Personal Loan</h3>
+      <ul className="space-y-2 text-gray-800">
+        <li><strong>Collateral:</strong> LAMF requires MF units.</li>
+        <li><strong>Interest:</strong> LAMF lower than Personal loan generally.</li>
+        <li><strong>Tenure:</strong> 12–36 months avg.</li>
+        <li><strong>Disbursal:</strong> Same day possible via digital lien.</li>
+      </ul>
+    </div>
+
+    <div className="bg-gray-100 backdrop-blur-xl border border-white/40 rounded-3xl shadow-2xl p-8 hover:shadow-[#A7F3D0] transition-all duration-500 hover:-translate-y-2">
+      <h3 className="text-2xl font-bold mb-4 text-[#4805a0]">Why choose LAMF?</h3>
+      <p className="text-gray-800 leading-relaxed">
+        LAMF is ideal when you want liquidity but don’t want to disturb your compounding — 
+        plus MF NAV volatility is lower than direct stock volatility.
+      </p>
+    </div>
+  </div>
+
+
+  {/* Snapshot */}
+  <div className="mt-16 text-center">
+    <h3 className="text-4xl font-bold mb-8 text-black">Quick Snapshot</h3>
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+      <div className="bg-white/40 rounded-2xl p-4 shadow-inner">
+        <p className="text-gray-600 text-sm">Interest Range</p>
+        <p className="text-2xl font-bold text-[#FF5732]">8–18% p.a.</p>
       </div>
-    </section>
+      <div className="bg-white/40 rounded-2xl p-4 shadow-inner">
+        <p className="text-gray-600 text-sm">Tenure</p>
+        <p className="text-2xl font-bold text-[#FF5732]">Up to 36 months</p>
+      </div>
+      <div className="bg-white/40 rounded-2xl p-4 shadow-inner">
+        <p className="text-gray-600 text-sm">Collateral Type</p>
+        <p className="text-2xl font-bold text-[#FF5732]">Mutual Funds</p>
+      </div>
+      <div className="bg-white/40 rounded-2xl p-4 shadow-inner">
+        <p className="text-gray-600 text-sm">Approval</p>
+        <p className="text-2xl font-bold text-[#FF5732]">CAMS / KFintech</p>
+      </div>
+    </div>
+  </div>
+</section>
 
 
-    {/* Table Section */}
-    <section className="max-w-7xl mx-auto px-6 py-8 flex gap-4">
-      <div className="flex-1 bg-white rounded-xl shadow-lg overflow-hidden">
-        {/* Funding Table */}
-        {currentTable === "funding" && (
-          <div className="overflow-x-auto animate-fadeIn">
-            <table className="w-full">
-              <thead className="bg-gradient-to-r from-slate-100 to-slate-50 border-b border-slate-200">
-                <tr>
-                  {[
-                    { key: "institution_name", label: "Institution" },
-                    { key: "approved_funds", label: "Approved Funds" },
-                    { key: "tenure_months", label: "Tenure (Months)" },
-                    { key: "regularization_period", label: "Regularization / Margin Period" },
-                    { key: "ltv", label: "LTV (Debt / Equity)" },
-                    { key: "loan_debt", label: "Debt MF Loan" },
-                    { key: "loan_equity", label: "Equity MF Loan" },
-                  ].map((h) => (
-                    <th
-                      key={h.key}
-                      className="px-6 py-4 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider"
-                    >
-                      <div className="flex items-center gap-1">
-                        {h.label}
-                        <button
-                          onClick={() => handleSort(h.key, "funding")}
-                          className="text-gray-500 hover:text-gray-800"
-                        >
-                          <ArrowUpDown size={14} />
-                        </button>
-                        {sortFieldFunding === h.key && (
-                          <span className="text-xs">
-                            {sortOrderFunding === "asc" ? "▲" : "▼"}
-                          </span>
-                        )}
-                      </div>
-                    </th>
-                  ))}
-                </tr>
-              </thead>
+{/* LAMF Full Comparison Table Section */}
+<section className="max-w-[90%] mx-auto px-6 py-10 flex flex-col items-center">
+  <h3 className="text-4xl font-bold mb-10 text-gray-900 tracking-tight text-center">
+    Cost Summary
+  </h3>
 
-              <tbody className="divide-y divide-slate-100">
-                {sortedFundingData.map((row) => (
-                  <tr
-                    key={row.id}
-                    className="hover:bg-slate-50 transition-colors duration-150"
-                  >
-                    <td className="px-6 py-4 font-semibold text-slate-900">
-                      {row.institution_name ||
-                        getNullFill("lamf", row.institution_name, "institution_name")}
+  <div className="w-full bg-white/40 backdrop-blur-2xl border border-white/40 shadow-2xl rounded-2xl overflow-x-auto">
+    <table className="w-full border-collapse text-[15px] text-gray-900">
+      <thead className="bg-white/70 backdrop-blur-sm border-b border-gray-300">
+        <tr>
+          {[
+            "Institution",
+            "1st Year (₹1L LAMF)",
+            "2nd Year (₹1L LAMF)",
+            "Approved Funds",
+            "Tenure",
+            "Min–Max Loan (Debt / Equity)",
+            "Interest Rate (Min / Max / Median)",
+            "Margin Period",
+            "Contact",
+          ].map((heading, i) => (
+            <th
+              key={i}
+              className={`px-5 py-3 text-left font-semibold text-sm uppercase tracking-wide text-gray-700 border border-gray-300 relative ${
+                i < 3
+                  ? "bg-gradient-to-br from-[#f9fafb] to-[#edf1f6]"
+                  : "bg-white/60"
+              } ${
+                i === 2
+                  ? "after:content-[''] after:absolute after:right-0 after:top-0 after:h-full after:w-[6px] after:shadow-[6px_0_10px_rgba(0,0,0,0.15)] after:z-[3]"
+                  : ""
+              }`}
+            >
+              {heading}
+            </th>
+          ))}
+        </tr>
+      </thead>
+
+      <tbody>
+        {data.map((row, index) => (
+          <tr
+            key={row.id}
+            className={`transition-all duration-300 ${
+              index % 2 === 0 ? "bg-white/50" : "bg-white/30"
+            } hover:bg-[#fff7f0]/80 hover:shadow-[0_4px_12px_rgba(255,115,0,0.15)]`}
+          >
+            {/* Institution */}
+            <td className="px-5 py-4 border border-gray-300 font-semibold text-gray-900 bg-gradient-to-br from-[#f9fafb] to-[#f1fff1] shadow-[0_2px_4px_rgba(0,0,0,0.06)] relative z-[2]">
+              {row.institution_name || "-"}
+            </td>
+
+            {/* 1st Year Cost */}
+            <td className="px-5 py-4 border border-gray-300 text-teal-700 font-medium text-center bg-gradient-to-br from-[#f9fafb] to-[#f1fff1] shadow-[0_2px_4px_rgba(0,0,0,0.05)] relative z-[2]">
+              {row.cost_first_year ? (
+                <div className="flex flex-col gap-0.5">
+                  <div>Percent: {row.cost_first_year.percent ?? "—"}</div>
+                  <div>Amount: ₹{row.cost_first_year.amount ?? "—"}</div>
+                </div>
+              ) : "—"}
+            </td>
+
+            {/* 2nd Year Cost */}
+            <td
+              className="px-5 py-4 border border-gray-300 text-indigo-700 font-medium text-center
+              bg-gradient-to-br from-[#f9fafb] to-[#f1fff1] shadow-[0_2px_4px_rgba(0,0,0,0.05)] relative z-[2]
+              after:content-[''] after:absolute after:right-0 after:top-0 after:h-full after:w-[6px] after:shadow-[6px_0_10px_rgba(0,0,0,0.15)] after:z-[3]"
+            >
+              {row.cost_second_year ? (
+                <div className="flex flex-col gap-0.5">
+                  <div>Percent: {row.cost_second_year.percent ?? "—"}</div>
+                  <div>Amount: ₹{row.cost_second_year.amount ?? "—"}</div>
+                </div>
+              ) : "—"}
+            </td>
+
+            {/* Approved Funds */}
+            <td className="px-5 py-4 border border-gray-300 border-l-2 border-gray-400/40 text-gray-800 whitespace-pre-wrap">
+              {row.approved_funds ? `~ ${row.approved_funds} funds` : "—"}
+            </td>
+
+            {/* Tenure */}
+            <td className="px-5 py-4 border border-gray-300 font-medium text-gray-900 text-center">
+              {row.tenure_months ? `${row.tenure_months} months` : "—"}
+            </td>
+
+            {/* Loan Debt + Equity */}
+            <td className="px-5 py-4 border border-gray-300 font-medium text-gray-900 text-center">
+              <div className="flex flex-col gap-1">
+                <div><strong>Debt:</strong> {row.loan_debt ? `${row.loan_debt.min ?? "—"} / ${row.loan_debt.max ?? "—"}` : "—"}</div>
+                <div><strong>Equity:</strong> {row.loan_equity ? `${row.loan_equity.min ?? "—"} / ${row.loan_equity.max ?? "—"}` : "—"}</div>
+              </div>
+            </td>
+
+            {/* Interest */}
+            <td className="px-5 py-4 border border-gray-300 text-gray-900 text-center">
+              {row.interest_rate ? (
+                <div className="flex flex-col gap-0.5">
+                  <span><strong>Min:</strong> {row.interest_rate.min ?? "—"}%</span>
+                  <span><strong>Max:</strong> {row.interest_rate.max ?? "—"}%</span>
+                  <span><strong>Median:</strong> {row.interest_rate.median ?? "—"}%</span>
+                </div>
+              ) : "—"}
+            </td>
+
+            {/* Margin Period */}
+            <td className="px-5 py-4 border border-gray-300 text-gray-900 text-center">
+              {row.regularization_period ? `${row.regularization_period} days` : "—"}
+            </td>
+
+            {/* Contact */}
+            <td className="px-5 py-4 border border-gray-300 text-center">
+              <a
+                href={`https://wa.me/919930584020?text=Hi! I’m interested in learning more about LAMF by ${encodeURIComponent(row.institution_name)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 bg-green-500 text-white px-3 py-2 rounded-lg text-sm font-medium shadow-md hover:bg-green-600 hover:scale-[1.05] active:scale-[0.98] transition-all duration-200"
+              >
+                Enquire
+              </a>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+{/* detailed LAMF Cost Summary */}
+<section className="max-w-[90%] mx-auto px-6 py-10 flex flex-col items-center">
+  <h3 className="text-4xl font-bold mb-8 text-black pb-6">
+    Detailed LAMF Cost Summary
+  </h3>
+
+  {/* Outer glass box */}
+  <div className="w-full bg-white/20 backdrop-blur-xl border border-white/30 shadow-2xl rounded-2xl p-6 flex">
+    {/* Combined Table + Buttons */}
+    <div className="flex w-full gap-4">
+      {/* Table */}
+      <div className="flex-1 overflow-x-auto">
+        <table className="w-full border-collapse text-base text-gray-900">
+          <thead>
+            <tr className="text-left font-semibold border-b border-white/30">
+              {/* Fixed columns */}
+              <th className="px-5 py-4 bg-gradient-to-br from-[#f9fafb] to-[#edf1f6] border border-gray-300">
+                Institution
+              </th>
+              <th className="px-5 py-4 bg-gradient-to-br from-[#f9fafb] to-[#edf1f6] border border-gray-300 text-teal-600">
+                1st Year
+              </th>
+              <th className="px-5 py-4 bg-gradient-to-br from-[#f9fafb] to-[#edf1f6] border border-gray-300 relative after:content-[''] after:absolute after:right-0 after:top-0 after:h-full after:w-[6px] after:shadow-[6px_0_10px_rgba(0,0,0,0.15)] after:z-[3] text-indigo-700">
+                2nd Year
+              </th>
+
+              {/* Dynamic columns */}
+              {activeTableCategory === "fundingDetails" && (
+                <>
+                  <th className="px-5 py-4 border border-gray-300 bg-white/60">
+                    Approved Funds
+                  </th>
+                  <th className="px-5 py-4 border border-gray-300 bg-white/60">
+                    Tenure (Months)
+                  </th>
+                  <th className="px-5 py-4 border border-gray-300 bg-white/60">
+                    Equity MF Loan (Min / Max)
+                  </th>
+                  <th className="px-5 py-4 border border-gray-300 bg-white/60">
+                    Debt MF Loan (Min / Max)
+                  </th>
+                  <th className="px-5 py-4 border border-gray-300 bg-white/60">
+                    Margin Period
+                  </th>
+                </>
+              )}
+
+              {activeTableCategory === "majorCost" && (
+                <>
+                  <th className="px-5 py-4 border border-gray-300 bg-white/60">
+                    Interest Rate (Min / Max / Median)
+                  </th>
+                  <th className="px-5 py-4 border border-gray-300 bg-white/60">
+                    Processing Fee
+                  </th>
+                  <th className="px-5 py-4 border border-gray-300 bg-white/60">
+                    Pre-payment Charges
+                  </th>
+                  <th className="px-5 py-4 border border-gray-300 bg-white/60">
+                    Annual Maintenance / Renewal Fees
+                  </th>
+                  <th className="px-5 py-4 border border-gray-300 bg-white/60">
+                    Penal Charges (%)
+                  </th>
+                </>
+              )}
+
+              {activeTableCategory === "defaultCharges" && (
+                <th className="px-5 py-4 border border-gray-300 bg-white/60">
+                  Default Charges
+                </th>
+              )}
+
+              {activeTableCategory === "otherMiscCost" && (
+                <th className="px-5 py-4 border border-gray-300 bg-white/60">
+                  Other Expenses
+                </th>
+              )}
+
+              {/* WhatsApp CTA */}
+              <th className="px-5 py-4 border border-gray-300 bg-white/60">
+                Contact
+              </th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {sortedCostData.map((row, index) => (
+              <tr
+                key={row.id}
+                className={`transition-all duration-300 ${
+                  index % 2 === 0 ? "bg-white/50" : "bg-white/30"
+                } hover:bg-[#fff7f0]/80 hover:shadow-[0_4px_12px_rgba(255,115,0,0.15)]`}
+              >
+                {/* institution */}
+                <td className="px-5 py-4 border border-gray-300 font-semibold bg-gradient-to-br from-[#f9fafb] to-[#f1fff1] shadow-[0_2px_4px_rgba(0,0,0,0.06)] text-gray-900 text-base">
+                  {row.institution_name}
+                </td>
+
+                {/* 1st year */}
+                <td className="px-5 py-4 border border-gray-300 font-medium text-center text-teal-600 bg-gradient-to-br from-[#f9fafb] to-[#f1fff1] shadow-[0_2px_4px_rgba(0,0,0,0.05)] text-base">
+                  {row.cost_first_year ? (
+                    <div className="flex flex-col gap-0.5">
+                      <div>Percent: {row.cost_first_year.percent ?? "—"}</div>
+                      <div>Amount: ₹{row.cost_first_year.amount ?? "—"}</div>
+                    </div>
+                  ) : "—"}
+                </td>
+
+                {/* 2nd year */}
+                <td className="px-5 py-4 border border-gray-300 font-medium text-center text-indigo-700 bg-gradient-to-br from-[#f9fafb] to-[#f1fff1] shadow-[0_2px_4px_rgba(0,0,0,0.05)] relative after:content-[''] after:absolute after:right-0 after:top-0 after:h-full after:w-[6px] after:shadow-[6px_0_10px_rgba(0,0,0,0.15)] after:z-[3] text-base">
+                  {row.cost_second_year ? (
+                    <div className="flex flex-col gap-0.5">
+                      <div>Percent: {row.cost_second_year.percent ?? "—"}</div>
+                      <div>Amount: ₹{row.cost_second_year.amount ?? "—"}</div>
+                    </div>
+                  ) : "—"}
+                </td>
+
+                {/* now dynamic body */}
+                {activeTableCategory === "fundingDetails" && (
+                  <>
+                    <td className="px-5 py-4 border border-gray-300 whitespace-pre-wrap text-gray-900 text-base">
+                      {row.approved_funds ? `~ ${row.approved_funds} funds` : "—"}
                     </td>
 
-                    <td className="px-6 py-4 text-slate-600">
-                      {row.approved_funds != null
-                        ? `~ ${row.approved_funds} funds`
-                        : getNullFill("lamf", row.institution_name, "approved_funds")}
+                    <td className="px-5 py-4 border border-gray-300 text-gray-900 text-center">
+                      {row.tenure_months ? `${row.tenure_months}` : "—"}
                     </td>
 
-                    <td className="px-6 py-4 text-slate-600">
-                      {row.tenure_months != null
-                        ? `${row.tenure_months} months`
-                        : getNullFill("lamf", row.institution_name, "tenure_months")}
+                    <td className="px-5 py-4 border border-gray-300 text-gray-900 text-center">
+                      {row.loan_equity ? `${row.loan_equity.min ?? "—"} / ${row.loan_equity.max ?? "—"}` : "—"}
                     </td>
 
-                    <td className="px-6 py-4 text-slate-600">
-                      {row.regularization_period != null
-                        ? `${row.regularization_period} days`
-                        : getNullFill("lamf", row.institution_name, "regularization_period")}
+                    <td className="px-5 py-4 border border-gray-300 text-gray-900 text-center">
+                      {row.loan_debt ? `${row.loan_debt.min ?? "—"} / ${row.loan_debt.max ?? "—"}` : "—"}
                     </td>
 
-                    <td className="px-6 py-4 text-center text-teal-600 font-semibold">
-                      {row.ltv && typeof row.ltv === "object" ? (
+                    <td className="px-5 py-4 border border-gray-300 text-gray-900 text-center">
+                      {row.regularization_period ? `${row.regularization_period} days` : "—"}
+                    </td>
+                  </>
+                )}
+
+                {activeTableCategory === "majorCost" && (
+                  <>
+                    <td className="px-5 py-4 border border-gray-300 text-gray-900 text-center">
+                      {row.interest_rate ? (
                         <div className="flex flex-col gap-0.5">
-                          {Object.entries(row.ltv).map(([k, v], idx) => (
-                            <div key={idx}>{`${k}: ${
-                              typeof v === "object"
-                                ? `${v.min ?? "—"} - ${v.max ?? "—"}`
-                                : `${v ?? "—"}`
-                            }`}</div>
-                          ))}
+                          <span><strong>Min:</strong> {row.interest_rate.min ?? "—"}%</span>
+                          <span><strong>Max:</strong> {row.interest_rate.max ?? "—"}%</span>
+                          <span><strong>Median:</strong> {row.interest_rate.median ?? "—"}%</span>
                         </div>
-                      ) : (
-                        getNullFill("lamf", row.institution_name, "ltv")
-                      )}
+                      ) : "—"}
                     </td>
 
-                    <td className="px-6 py-4 text-center text-slate-600">
-                      {row.loan_debt && typeof row.loan_debt === "object" ? (
-                        <div className="flex flex-col">
-                          <div>Min: {row.loan_debt.min ?? "—"}</div>
-                          <div>Max: {row.loan_debt.max ?? "—"}</div>
-                        </div>
-                      ) : (
-                        getNullFill("lamf", row.institution_name, "loan_debt")
-                      )}
+                    <td className="px-5 py-4 border border-gray-300 text-gray-900 text-center">
+                      {row.processing_fee ?? "—"}
                     </td>
 
-                    <td className="px-6 py-4 text-center text-slate-600">
-                      {row.loan_equity && typeof row.loan_equity === "object" ? (
-                        <div className="flex flex-col">
-                          <div>Min: {row.loan_equity.min ?? "—"}</div>
-                          <div>Max: {row.loan_equity.max ?? "—"}</div>
-                        </div>
-                      ) : (
-                        getNullFill("lamf", row.institution_name, "loan_equity")
-                      )}
+                    <td className="px-5 py-4 border border-gray-300 text-gray-900 text-center">
+                      {row.prepayment_charges ?? "—"}
                     </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
 
-        {/* Cost Table */}
-        {currentTable === "cost" && (
-          <div className="overflow-x-auto animate-fadeIn">
-            <table className="w-full">
-              <thead className="bg-gradient-to-r from-slate-100 to-slate-50 border-b border-slate-200">
-                <tr>
-                  {[
-                    { key: "institution_name", label: "Institution" },
-                    { key: "interest_rate", label: "Interest Rate (Min / Max / Median)" },
-                    { key: "processing_fee", label: "Processing Fee" },
-                    { key: "prepayment_charges", label: "Pre-payment Charges" },
-                    { key: "annual_maintenance", label: "Annual Maintenance" },
-                    { key: "penal_charges", label: "Penal Charges" },
-                    { key: "default_charges", label: "Default Charges" },
-                    { key: "other_expenses", label: "Other Expenses" },
-                  ].map((h) => (
-                    <th
-                      key={h.key}
-                      className="px-6 py-4 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider"
-                    >
-                      <div className="flex items-center gap-1">
-                        {h.label}
-                        <button
-                          onClick={() => handleSort(h.key, "cost")}
-                          className="text-gray-500 hover:text-gray-800"
-                        >
-                          <ArrowUpDown size={14} />
-                        </button>
-                        {sortFieldCost === h.key && (
-                          <span className="text-xs">
-                            {sortOrderCost === "asc" ? "▲" : "▼"}
-                          </span>
-                        )}
-                      </div>
-                    </th>
-                  ))}
-                </tr>
-              </thead>
+                    <td className="px-5 py-4 border border-gray-300 text-gray-900 text-center">
+                      {row.annual_maintenance ?? "—"}
+                    </td>
 
-              <tbody className="divide-y divide-slate-100">
-                {sortedCostData.map((row) => (
-                  <tr
-                    key={row.id}
-                    className="hover:bg-slate-50 transition-colors duration-150"
+                    <td className="px-5 py-4 border border-gray-300 text-gray-900 text-center">
+                      {row.penal_charges ?? "—"}
+                    </td>
+                  </>
+                )}
+
+                {activeTableCategory === "defaultCharges" && (
+                  <td className="px-5 py-4 border border-gray-300 whitespace-pre-wrap text-gray-900 text-base">
+                    {row.default_charges
+                      ? Object.entries(row.default_charges).map(([k, v], idx) => (
+                          <div key={idx}>{`${k}: ${v ?? "—"}`}</div>
+                        ))
+                      : "—"}
+                  </td>
+                )}
+
+                {activeTableCategory === "otherMiscCost" && (
+                  <td className="px-5 py-4 border border-gray-300 whitespace-pre-wrap text-gray-900 text-base">
+                    {row.other_expenses
+                      ? Object.entries(row.other_expenses).map(([k, v], idx) => (
+                          <div key={idx}>{`${k}: ${v ?? "—"}`}</div>
+                        ))
+                      : "—"}
+                  </td>
+                )}
+
+                {/* WhatsApp CTA */}
+                <td className="px-5 py-4 border border-gray-300 text-center">
+                  <a
+                    href={`https://wa.me/919930584020?text=Hi! I’m interested in learning more about LAMF by ${encodeURIComponent(
+                      row.institution_name
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 bg-green-500 text-white px-4 py-2 rounded-lg text-base font-medium shadow-md hover:bg-green-600 hover:scale-[1.05] active:scale-[0.98] transition-all duration-200"
                   >
-                    <td className="px-6 py-4 font-semibold text-slate-900">
-                      {row.institution_name ||
-                        getNullFill("lamf", row.institution_name, "institution_name")}
-                    </td>
-
-                    <td className="px-6 py-4 text-center text-slate-700">
-                      {row.interest_rate && typeof row.interest_rate === "object" ? (
-                        <div className="flex flex-col">
-                          <div>Min: {row.interest_rate.min ?? "—"}</div>
-                          <div>Max: {row.interest_rate.max ?? "—"}</div>
-                          <div>Median: {row.interest_rate.median ?? "—"}</div>
-                        </div>
-                      ) : (
-                        getNullFill("lamf", row.institution_name, "interest_rate")
-                      )}
-                    </td>
-
-                    <td className="px-6 py-4 text-slate-600 text-sm">
-                      {row.processing_fee ||
-                        getNullFill("lamf", row.institution_name, "processing_fee")}
-                    </td>
-
-                    <td className="px-6 py-4 text-slate-600 text-sm">
-                      {row.prepayment_charges ||
-                        getNullFill("lamf", row.institution_name, "prepayment_charges")}
-                    </td>
-
-                    <td className="px-6 py-4 text-slate-600 text-sm">
-                      {row.annual_maintenance ||
-                        getNullFill("lamf", row.institution_name, "annual_maintenance")}
-                    </td>
-
-                    <td className="px-6 py-4 text-center text-rose-600 font-semibold">
-                      {row.penal_charges != null
-                        ? `${row.penal_charges}%`
-                        : getNullFill("lamf", row.institution_name, "penal_charges")}
-                    </td>
-
-                    <td className="px-6 py-4 text-slate-600 text-sm">
-                      {row.default_charges && typeof row.default_charges === "object"
-                        ? Object.entries(row.default_charges).map(([k, v], idx) => (
-                            <div key={idx}>{`${k}: ${v ?? "—"}`}</div>
-                          ))
-                        : getNullFill("lamf", row.institution_name, "default_charges")}
-                    </td>
-
-                    <td className="px-6 py-4 text-slate-600 text-sm">
-                      {row.other_expenses && typeof row.other_expenses === "object"
-                        ? Object.entries(row.other_expenses).map(([k, v], idx) => (
-                            <div key={idx}>{`${k}: ${v ?? "—"}`}</div>
-                          ))
-                        : getNullFill("lamf", row.institution_name, "other_expenses")}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
+                    Enquire
+                  </a>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
 
-      <button
-        onClick={switchTable}
-        className="bg-teal-600 hover:bg-teal-700 text-white px-4 rounded-xl shadow-lg transition-all duration-300 flex flex-col items-center justify-center gap-3 font-medium text-sm whitespace-nowrap"
-        style={{ writingMode: "vertical-rl" }}
-      >
-        <ChevronRight className="w-5 h-5 rotate-90" />
-        <span className="tracking-wide">
-          {currentTable === "funding" ? "View Cost Details" : "View Funding Details"}
-        </span>
-      </button>
-    </section>
+      {/* Right Buttons — vertical stack spanning the table height */}
+      <div className="flex flex-col justify-between gap-4 h-full w-[130px]">
+        {[
+          { key: "fundingDetails", label: "Funding Related Details" },
+          { key: "majorCost", label: "Major Cost" },
+          { key: "defaultCharges", label: "Default Charges" },
+          { key: "otherMiscCost", label: "Other Miscellaneous Cost" },
+        ].map((cat) => (
+          <button
+            key={cat.key}
+            onClick={() => setActiveTableCategory(cat.key)}
+            className={`flex flex-row items-center justify-between bg-teal-600 hover:bg-[#FF5732] text-white rounded-2xl shadow-lg transition-all duration-300 flex-1 w-full px-4 font-semibold text-sm ${
+              activeTableCategory === cat.key ? "scale-105" : ""
+            }`}
+
+          >
+            <span className="text-lg font-bold">
+              {activeTableCategory === cat.key ? "<-" : "->"}
+            </span>
+            <span className="tracking-wide">{cat.label}</span>
+          </button>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
 
 
   {/* --- FAQ Section --- */}

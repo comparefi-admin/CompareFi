@@ -19,6 +19,7 @@ export default function LASPage() {
   const [sortOrder, setSortOrder] = useState('asc');
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+const [activeTableCategory, setActiveTableCategory] = useState("marginDetails");
 
   //Table Fetch
   useEffect(() => {
@@ -113,171 +114,235 @@ export default function LASPage() {
 
       <main className="pt-28 space-y-20">
 
-      {/* SECTION 1: KEY HIGHLIGHTS */}
-      <section
-        className="glass-card mx-4 p-10 rounded-3xl shadow-xl neon-border opacity-0 animate-fadeInUp"
-        style={{ animationDelay: '0.1s' }}
-      >
-        <p className={`${satisfy.className} text-xl text-[#FF6F91] text-center mb-2`}>
-          Snapshot of what brokers offer
-        </p>
-        <h2 className={`${playfair.className} text-3xl font-bold text-center mb-8 shimmer-text`}>
-          Key Highlights
-        </h2>
-        <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse rounded-xl overflow-hidden">
-            <thead>
-              {renderHeader([
-                { key: 'broker_name', label: 'Broker' },
-                { key: 'approved_stocks', label: 'Approved Stocks' },
-                { key: 'margin_requirement', label: 'Margin Requirement (%)' },
-                { key: 'subscription_fee', label: 'Subscription Fee (₹)' },
-                { key: 'interest_slabs', label: 'Interest Slabs (Loan → ROI%)' },
-              ])}
-            </thead>
-            <tbody>
-              {sortedData.map((row, idx) => (
-                <tr
-                  key={idx}
-                  className={`transition hover:bg-[#0ABAB5]/10 ${
-                    idx % 2 === 0 ? 'bg-white/70' : 'bg-gray-50/60'
-                  }`}
-                >
-                  <td className="px-4 py-3 font-semibold text-gray-800">
-                    {row.broker_name ||
-                      getNullFill("mtf", row.broker_name, "broker_name")}
-                  </td>
-                  <td className="px-4 py-3 text-gray-700">
-                    {row.approved_stocks ?? getNullFill("mtf", row.broker_name, "approved_stocks")}
-                  </td>
-                  <td className="px-4 py-3 text-gray-700">
-                    {row.margin_requirement != null
-                      ? `${row.margin_requirement}%`
-                      : getNullFill("mtf", row.broker_name, "margin_requirement")}
-                  </td>
-                  <td className="px-4 py-3 text-gray-700">
-                    {row.subscription_fee != null
-                      ? `₹${row.subscription_fee}`
-                      : getNullFill("mtf", row.broker_name, "subscription_fee")}
-                  </td>
-                  <td className="px-4 py-3 text-gray-800">
-                    {row.interest_slabs && typeof row.interest_slabs === "object"
-                      ? Object.entries(row.interest_slabs).map(([range, rate], i) => (
-                          <div key={i}>
-                            {range}: {rate}
-                          </div>
-                        ))
-                      : getNullFill("mtf", row.broker_name, "interest_slabs")}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </section>
+     {/* HERO SECTION */}
+<section className="w-[90%] mx-auto px-2 pt-32 pb-20 flex flex-col items-center text-center">
+  <div className="w-full flex flex-col items-center justify-center mb-2">
+    <div
+     className="relative z-10 w-[90%] rounded-3xl bg-gradient-to-b from-[#630bd5] to-[#630bd5] backdrop-blur-xl shadow-2xl sm:p-10 md:p-14 lg:p-20 flex flex-col items-center justify-center mb-[2%] md:gap-14 hover:drop-shadow-2xl hover:scale-102 transition-all duration-700 ease-in-out border-none will-change-transform"
+    >
+      <h1 className="text-6xl font-bold mb-4 text-white">Margin Trading Facility</h1>
+    </div>
+  </div>
+</section>
 
-      {/* SECTION 2: COST & RETURNS */}
-      <section
-        className="glass-card mx-4 p-10 rounded-3xl shadow-xl neon-border opacity-0 animate-fadeInUp"
-        style={{ animationDelay: '0.3s' }}
-      >
-        <p className={`${satisfy.className} text-xl text-[#0ABAB5] text-center mb-2`}>
-          Understand all MTF costs and effective ROI
-        </p>
-        <h2 className={`${playfair.className} text-3xl font-bold text-center mb-8 shimmer-text`}>
-          Cost & Returns
-        </h2>
-        <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse rounded-xl overflow-hidden">
-            <thead>
-              {renderHeader([
-                { key: 'broker_name', label: 'Broker' },
-                { key: 'pledge_unpledge_fee', label: 'Pledge / Unpledge Fee (₹)' },
-                { key: 'auto_square_off', label: 'Auto Square-off (₹)' },
-                { key: 'dp_charges', label: 'DP Charges (₹)' },
-                { key: 'unpaid_mtf_interest', label: 'Unpaid MTF Interest (%)' },
-                { key: 'cost_summary', label: 'Cost Summary' },
-              ])}
-            </thead>
-            <tbody>
-              {sortedData.map((row, idx) => (
-                <tr
-                  key={idx}
-                  className={`transition hover:bg-[#FF6F91]/10 ${
-                    idx % 2 === 0 ? 'bg-white/70' : 'bg-gray-50/60'
-                  }`}
-                >
-                  <td className="px-4 py-3 font-semibold text-gray-800">
-                    {row.broker_name || getNullFill("mtf", row.broker_name, "broker_name")}
-                  </td>
-                  <td className="px-4 py-3">{row.pledge_unpledge_fee ?? getNullFill("mtf", row.broker_name, "pledge_unpledge_fee")}</td>
-                  <td className="px-4 py-3">{row.auto_square_off ?? getNullFill("mtf", row.broker_name, "auto_square_off")}</td>
-                  <td className="px-4 py-3">{row.dp_charges ?? getNullFill("mtf", row.broker_name, "dp_charges")}</td>
-                  <td className="px-4 py-3">{row.unpaid_mtf_interest != null ? `${row.unpaid_mtf_interest}%` : getNullFill("mtf", row.broker_name, "unpaid_mtf_interest")}</td>
-                  <td className="px-4 py-3">
-                    {row.cost_summary && typeof row.cost_summary === "object"
-                      ? Object.entries(row.cost_summary).map(([k, v], i) => (
-                          <div key={i}>
-                            {k}: {v ?? "—"}
-                          </div>
-                        ))
-                      : getNullFill("mtf", row.broker_name, "cost_summary")}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </section>
+{/* MTF INFORMATION SECTION */}
+<section className="max-w-[90%] mx-auto px-6 pb-16">
+  <h2 className="text-6xl font-bold text-center mb-14 text-gray-900">
+    Understanding MTF (Margin Trading Facility)
+  </h2>
 
+  {/* 2x2 grid */}
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+    <div className="bg-gray-100 backdrop-blur-xl border border-white/40 rounded-3xl shadow-2xl p-8 hover:shadow-[#A7F3D0] transition-all duration-500 hover:-translate-y-2">
+      <h3 className="text-2xl font-bold mb-4 text-[#4805a0]">What is MTF?</h3>
+      <p className="text-gray-800 leading-relaxed">
+        MTF allows investors to trade more than their capital by borrowing against their holdings,
+        while SEBI regulates risk + margin rules strictly.
+      </p>
+    </div>
 
-      {/* SECTION 3: OPERATIONAL FACTORS */}
-      <section
-        className="glass-card mx-4 p-10 rounded-3xl shadow-xl neon-border opacity-0 animate-fadeInUp"
-        style={{ animationDelay: '0.5s' }}
-      >
-        <p className={`${satisfy.className} text-xl text-[#C3B1E1] text-center mb-2`}>
-          Broker platform quality & user feedback
-        </p>
-        <h2 className={`${playfair.className} text-3xl font-bold text-center mb-8 shimmer-text`}>
-          Operational & Experience Factors
-        </h2>
-        <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse rounded-xl overflow-hidden">
-            <thead>
-              {renderHeader([
-                { key: 'broker_name', label: 'Broker' },
-                { key: 'intraday_fee', label: 'Intraday Fee' },
-                { key: 'carry_fee', label: 'Carry Fee' },
-                { key: 'platform_rating', label: 'Platform Rating' },
-                { key: 'feedback_rating', label: 'User Feedback Rating' },
-              ])}
-            </thead>
-            <tbody>
-              {sortedData.map((row, idx) => (
-                <tr
-                  key={idx}
-                  className={`transition hover:bg-[#C3B1E1]/10 ${
-                    idx % 2 === 0 ? 'bg-white/70' : 'bg-gray-50/60'
-                  }`}
+    <div className="bg-gray-100 backdrop-blur-xl border border-white/40 rounded-3xl shadow-2xl p-8 hover:shadow-[#A7F3D0] transition-all duration-500 hover:-translate-y-2">
+      <h3 className="text-2xl font-bold mb-4 text-[#4805a0]">Key Benefits</h3>
+      <ul className="list-disc list-inside text-gray-800 space-y-2">
+        <li>Higher leveraged exposure in listed stocks.</li>
+        <li>Keep positions running instead of square-off intraday.</li>
+        <li>Better capital efficiency for swing / positional trades.</li>
+        <li>Monthly subscription based exposure (broker specific).</li>
+      </ul>
+    </div>
+
+    <div className="bg-gray-100 backdrop-blur-xl border border-white/40 rounded-3xl shadow-2xl p-8 hover:shadow-[#A7F3D0] transition-all duration-500 hover:-translate-y-2">
+      <h3 className="text-2xl font-bold mb-4 text-[#4805a0]">MTF vs MIS / Intraday</h3>
+      <ul className="space-y-2 text-gray-800">
+        <li><strong>MTF:</strong> Carry forward positions overnight.</li>
+        <li><strong>MIS:</strong> Has to be closed same day.</li>
+        <li><strong>Leverage:</strong> MTF enables higher exposure.</li>
+      </ul>
+    </div>
+
+    <div className="bg-gray-100 backdrop-blur-xl border border-white/40 rounded-3xl shadow-2xl p-8 hover:shadow-[#A7F3D0] transition-all duration-500 hover:-translate-y-2">
+      <h3 className="text-2xl font-bold mb-4 text-[#4805a0]">Why choose MTF?</h3>
+      <p className="text-gray-800 leading-relaxed">
+        If you have conviction in a swing trade thesis and want to hold stocks overnight —
+        MTF is the cleanest regulated leverage model in India today.
+      </p>
+    </div>
+  </div>
+
+  {/* Snapshot */}
+  <div className="mt-16 text-center">
+    <h3 className="text-4xl font-bold mb-8 text-black">Quick Snapshot</h3>
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+      <div className="bg-white/40 rounded-2xl p-4 shadow-inner">
+        <p className="text-gray-600 text-sm">Broker Type</p>
+        <p className="text-2xl font-bold text-[#FF5732]">Discount / Full-Service</p>
+      </div>
+      <div className="bg-white/40 rounded-2xl p-4 shadow-inner">
+        <p className="text-gray-600 text-sm">Margin %</p>
+        <p className="text-2xl font-bold text-[#FF5732]">Varies broker-to-broker</p>
+      </div>
+      <div className="bg-white/40 rounded-2xl p-4 shadow-inner">
+        <p className="text-gray-600 text-sm">Loan Style</p>
+        <p className="text-2xl font-bold text-[#FF5732]">Exposure based</p>
+      </div>
+      <div className="bg-white/40 rounded-2xl p-4 shadow-inner">
+        <p className="text-gray-600 text-sm">Pledge Model</p>
+        <p className="text-2xl font-bold text-[#FF5732]">SEBI Compliant</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+  {/* MTF Detailed Comparison Table */}
+<section className="max-w-[90%] mx-auto px-6 py-10 flex flex-col items-center">
+  <h3 className="text-4xl font-bold mb-8 text-black pb-6">
+    Detailed MTF Comparison
+  </h3>
+
+  <div className="w-full bg-white/20 backdrop-blur-xl border border-white/30 shadow-2xl rounded-2xl p-6 flex">
+
+    <div className="flex w-full gap-4">
+
+      {/* TABLE */}
+      <div className="flex-1 overflow-x-auto">
+        <table className="w-full border-collapse text-base text-gray-900">
+          <thead>
+            <tr className="text-left font-semibold border-b border-white/30">
+
+              {/* STATIC broker */}
+              <th className="px-5 py-4 bg-gradient-to-br from-[#f9fafb] to-[#f1fff1] border border-gray-300">
+                Broker
+              </th>
+
+              {/* STATIC cost summary */}
+              <th className="px-5 py-4 bg-gradient-to-br from-[#f9fafb] to-[#f1fff1] border border-gray-300">
+                Cost Summary
+              </th>
+
+              {/* DYNAMIC columns */}
+              {(
+                activeTableCategory === "marginDetails"
+                  ? ["margin_requirement","approved_stocks"]
+                  : activeTableCategory === "majorCost"
+                  ? ["subscription_fee","interest_slabs","intraday_fee","carry_fee","pledge_unpledge_fee","auto_square_off","dp_charges"]
+                  : activeTableCategory === "defaultCharges"
+                  ? ["unpaid_mtf_interest"]
+                  : ["platform_rating","feedback_rating"]
+              ).map((colKey) => (
+                <th
+                  key={colKey}
+                  className="px-5 py-4 border border-gray-300 bg-white/60"
                 >
-                  <td className="px-4 py-3 font-semibold text-gray-800">
-                    {row.broker_name || getNullFill("mtf", row.broker_name, "broker_name")}
-                  </td>
-                  <td className="px-4 py-3">{row.intraday_fee || getNullFill("mtf", row.broker_name, "intraday_fee")}</td>
-                  <td className="px-4 py-3">{row.carry_fee || getNullFill("mtf", row.broker_name, "carry_fee")}</td>
-                  <td className="px-4 py-3 text-[#FF6F91] font-medium">
-                    {row.platform_rating != null ? row.platform_rating.toFixed(1) : getNullFill("mtf", row.broker_name, "platform_rating")}
-                  </td>
-                  <td className="px-4 py-3 text-[#FF6F91] font-medium">
-                    {row.feedback_rating != null ? row.feedback_rating.toFixed(1) : getNullFill("mtf", row.broker_name, "feedback_rating")}
-                  </td>
-                </tr>
+                  {colKey.replace(/_/g," ").replace(/\b\w/g, c=>c.toUpperCase())}
+                </th>
               ))}
-            </tbody>
-          </table>
-        </div>
-      </section>
+
+              {/* STATIC enquire */}
+              <th className="px-5 py-4 border border-gray-300 bg-white/60">
+                Enquire
+              </th>
+
+            </tr>
+          </thead>
+
+          <tbody>
+            {data.map((row,index)=>(
+              <tr
+                key={row.id}
+                className={`transition-all duration-300 ${index % 2===0 ? "bg-white/50":"bg-white/30"} hover:bg-[#fff7f0]/80 hover:shadow-[0_4px_12px_rgba(255,115,0,0.15)]`}
+              >
+
+                {/* broker */}
+                <td className="px-5 py-4 border border-gray-300 font-semibold bg-gradient-to-br from-[#f9fafb] to-[#f1fff1]">
+                  {row.broker_name ?? "—"}
+                </td>
+
+                {/* cost summary */}
+                <td className="px-5 py-4 border border-gray-300 whitespace-pre-line">
+                  {row.cost_summary && typeof row.cost_summary==="object"
+                    ? Object.entries(row.cost_summary).map(([k,v],i)=>(
+                        <div key={i}>{`${k}: ${v ?? "—"}`}</div>
+                      ))
+                    : row.cost_summary ?? "—"}
+                </td>
+
+                {/* dynamic values */}
+                {(
+                  activeTableCategory === "marginDetails"
+                    ? ["margin_requirement","approved_stocks"]
+                    : activeTableCategory === "majorCost"
+                    ? ["subscription_fee","interest_slabs","intraday_fee","carry_fee","pledge_unpledge_fee","auto_square_off","dp_charges"]
+                    : activeTableCategory === "defaultCharges"
+                    ? ["unpaid_mtf_interest"]
+                    : ["platform_rating","feedback_rating"]
+                ).map((colKey)=>(
+                  <td key={colKey} className="px-5 py-4 border border-gray-300">
+                    {(() => {
+                      const v = row[colKey];
+                      if(!v) return "—";
+                      if(typeof v==="object"){
+                        return Object.entries(v).map(([k,val],j)=>(
+                          <div key={j}>{`${k}: ${val ?? "—"}`}</div>
+                        ));
+                      }
+                      return v;
+                    })()}
+                  </td>
+                ))}
+
+                {/* enquire */}
+                <td className="px-5 py-4 border border-gray-300 text-center">
+                  <a
+                    href={`https://wa.me/919930584020?text=Hi! I'm interested in learning more about MTF by ${encodeURIComponent(row.broker_name)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 bg-green-500 text-white px-4 py-2 rounded-lg text-base font-medium shadow-md hover:bg-green-600 hover:scale-[1.05] active:scale-[0.98] transition-all duration-200"
+                  >
+                    Enquire
+                  </a>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {/* RIGHT BUTTONS */}
+      <div className="flex flex-col justify-between gap-4 h-full w-[160px]">
+
+        <button
+          onClick={()=>setActiveTableCategory("marginDetails")}
+          className={`flex items-center justify-center bg-teal-600 hover:bg-[#FF5732] text-white rounded-2xl shadow-lg transition-all duration-300 flex-1 font-semibold text-sm ${activeTableCategory==="marginDetails"?"scale-105":""}`}
+        >
+          Margin Details
+        </button>
+
+        <button
+          onClick={()=>setActiveTableCategory("majorCost")}
+          className={`flex items-center justify-center bg-teal-600 hover:bg-[#FF5732] text-white rounded-2xl shadow-lg transition-all duration-300 flex-1 font-semibold text-sm ${activeTableCategory==="majorCost"?"scale-105":""}`}
+        >
+          Major Cost
+        </button>
+
+        <button
+          onClick={()=>setActiveTableCategory("defaultCharges")}
+          className={`flex items-center justify-center bg-teal-600 hover:bg-[#FF5732] text-white rounded-2xl shadow-lg transition-all duration-300 flex-1 font-semibold text-sm ${activeTableCategory==="defaultCharges"?"scale-105":""}`}
+        >
+          Default Charges
+        </button>
+
+        <button
+          onClick={()=>setActiveTableCategory("feedback")}
+          className={`flex items-center justify-center bg-teal-600 hover:bg-[#FF5732] text-white rounded-2xl shadow-lg transition-all duration-300 flex-1 font-semibold text-sm ${activeTableCategory==="feedback"?"scale-105":""}`}
+        >
+          Platform & User Feedback
+        </button>
+
+      </div>
+    </div>
+  </div>
+</section>
+
       
         <Footer />
       </main>
