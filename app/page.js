@@ -65,7 +65,7 @@ const defaultCards = [
 // Products data
 const PRODUCTS = [
   {
-    id: 'LAS',
+    id: 'las',
     title: 'Loan Against Securities (LAS)',
     blurb: 'Unlock liquidity from your portfolio without selling core holdings.',
     bullets: ['Borrow up to 70% of eligible securities', 'Minimal documentation', 'Flexible repayment schedules'],
@@ -301,7 +301,7 @@ export default function HomePage() {
   {/* Right Section (Cards Grid) */}
   <div className="lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mr-10">
 {/* LAS Card */}
-<a href="/products/LAS" className="card4 group relative overflow-hidden rounded-lg bg-white shadow-md hover:shadow-lg transition-all duration-300 p-6 cursor-pointer">
+<a href="/products/las" className="card4 group relative overflow-hidden rounded-lg bg-white shadow-md hover:shadow-lg transition-all duration-300 p-6 cursor-pointer">
   <div className="flex items-center space-x-4">
     {/* Icon on the left */}
     <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-[#FF5732]/20 rounded-full group-hover:bg-[#FF5732]/30 transition-colors">
