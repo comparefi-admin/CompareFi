@@ -60,25 +60,25 @@ export default function AdminDashboard() {
 
   const products = [
     {
-      id: 'laf',
-      name: 'Loan Against Fixed Deposit (LAF)',
+      id: 'las',
+      name: 'Loan Against Shares (LAS)',
       icon: Briefcase,
       gradient: 'from-emerald-400 to-emerald-600',
-      link: '/admin/laf',
+      link: './dashboard/las',
     },
     {
       id: 'lamf',
       name: 'Loan Against Mutual Funds (LAMF)',
       icon: LineChart,
       gradient: 'from-pink-400 to-pink-600',
-      link: '/admin/lamf',
+      link: './dashboard/lamf',
     },
     {
       id: 'mtf',
       name: 'Margin Trading Facility (MTF)',
       icon: BarChart3,
       gradient: 'from-indigo-400 to-indigo-600',
-      link: '/admin/mtf',
+      link: './dashboard/mtf',
     },
   ]
 

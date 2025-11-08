@@ -5,8 +5,7 @@ import Navbar from "../../components/navbar";
 import Footer from "../../components/footer";
 import { ArrowUpDown, ChevronRight } from "lucide-react";
 import { faqData } from "./faqdata";
-import { fetchLAMF } from "@/lib/fetchData";
-import { getNullFill } from "@/lib/nullFill";
+import { fetchLAMF, DEFAULT_NULL_TEXT } from "@/lib/fetchData";
 
 export default function LAMFPage() {
   const [data, setData] = useState([]);
@@ -293,53 +292,67 @@ const handleCategoryClick = (cat) => {
             } hover:bg-[#fff7f0]/80 hover:shadow-[0_4px_12px_rgba(255,115,0,0.15)]`}
           >
             {/* Institution */}
-            <td className="px-5 py-4 border border-gray-300 font-semibold text-gray-900 bg-gradient-to-br from-[#f9fafb] to-[#f1fff1] shadow-[0_2px_4px_rgba(0,0,0,0.06)] relative z-[2]">
-              {row.institution_name || "-"}
+            <td className="px-5 py-4 border border-gray-300 font-semibold text-gray-900 bg-gradient-to-br from-[#f9fafb] to-[#f1fff1]">
+              {row.institution_name ?? DEFAULT_NULL_TEXT}
             </td>
 
             {/* 1st Year Cost */}
-            <td className="px-5 py-4 border border-gray-300 text-teal-700 font-medium text-center bg-gradient-to-br from-[#f9fafb] to-[#f1fff1] shadow-[0_2px_4px_rgba(0,0,0,0.05)] relative z-[2]">
+            <td className="px-5 py-4 border border-gray-300 text-teal-700 text-center font-medium">
               {row.cost_first_year ? (
                 <div className="flex flex-col gap-0.5">
                   <div>Percent: {row.cost_first_year.percent ?? "—"}</div>
                   <div>Amount: ₹{row.cost_first_year.amount ?? "—"}</div>
                 </div>
-              ) : "—"}
+              ) : (
+                DEFAULT_NULL_TEXT
+              )}
             </td>
 
             {/* 2nd Year Cost */}
-            <td
-              className="px-5 py-4 border border-gray-300 text-indigo-700 font-medium text-center
-              bg-gradient-to-br from-[#f9fafb] to-[#f1fff1] shadow-[0_2px_4px_rgba(0,0,0,0.05)] relative z-[2]
-              after:content-[''] after:absolute after:right-0 after:top-0 after:h-full after:w-[6px] after:shadow-[6px_0_10px_rgba(0,0,0,0.15)] after:z-[3]"
-            >
+            <td className="px-5 py-4 border border-gray-300 text-indigo-700 text-center font-medium">
               {row.cost_second_year ? (
                 <div className="flex flex-col gap-0.5">
                   <div>Percent: {row.cost_second_year.percent ?? "—"}</div>
                   <div>Amount: ₹{row.cost_second_year.amount ?? "—"}</div>
                 </div>
-              ) : "—"}
+              ) : (
+                DEFAULT_NULL_TEXT
+              )}
             </td>
 
             {/* Approved Funds */}
-            <td className="px-5 py-4 border border-gray-300 border-l-2 border-gray-400/40 text-gray-800 whitespace-pre-wrap">
-              {row.approved_funds ? `~ ${row.approved_funds} funds` : "—"}
+            <td className="px-5 py-4 border border-gray-300 text-gray-800 text-center">
+              {row.approved_funds
+                ? `~ ${row.approved_funds} funds`
+                : DEFAULT_NULL_TEXT}
             </td>
 
             {/* Tenure */}
-            <td className="px-5 py-4 border border-gray-300 font-medium text-gray-900 text-center">
-              {row.tenure_months ? `${row.tenure_months} months` : "—"}
+            <td className="px-5 py-4 border border-gray-300 text-gray-900 text-center font-medium">
+              {row.tenure_months
+                ? `${row.tenure_months} months`
+                : DEFAULT_NULL_TEXT}
             </td>
 
             {/* Loan Debt + Equity */}
-            <td className="px-5 py-4 border border-gray-300 font-medium text-gray-900 text-center">
+            <td className="px-5 py-4 border border-gray-300 text-center">
               <div className="flex flex-col gap-1">
-                <div><strong>Debt:</strong> {row.loan_debt ? `${row.loan_debt.min ?? "—"} / ${row.loan_debt.max ?? "—"}` : "—"}</div>
-                <div><strong>Equity:</strong> {row.loan_equity ? `${row.loan_equity.min ?? "—"} / ${row.loan_equity.max ?? "—"}` : "—"}</div>
+                <div>
+                  <strong>Debt:</strong>{" "}
+                  {row.loan_debt
+                    ? `${row.loan_debt.min ?? "—"} / ${row.loan_debt.max ?? "—"}`
+                    : DEFAULT_NULL_TEXT}
+                </div>
+                <div>
+                  <strong>Equity:</strong>{" "}
+                  {row.loan_equity
+                    ? `${row.loan_equity.min ?? "—"} / ${row.loan_equity.max ?? "—"}`
+                    : DEFAULT_NULL_TEXT}
+                </div>
               </div>
             </td>
 
-            {/* Interest */}
+            {/* Interest Rate */}
             <td className="px-5 py-4 border border-gray-300 text-gray-900 text-center">
               {row.interest_rate ? (
                 <div className="flex flex-col gap-0.5">
@@ -347,18 +360,24 @@ const handleCategoryClick = (cat) => {
                   <span><strong>Max:</strong> {row.interest_rate.max ?? "—"}%</span>
                   <span><strong>Median:</strong> {row.interest_rate.median ?? "—"}%</span>
                 </div>
-              ) : "—"}
+              ) : (
+                DEFAULT_NULL_TEXT
+              )}
             </td>
 
             {/* Margin Period */}
             <td className="px-5 py-4 border border-gray-300 text-gray-900 text-center">
-              {row.regularization_period ? `${row.regularization_period} days` : "—"}
+              {row.regularization_period
+                ? `${row.regularization_period} days`
+                : DEFAULT_NULL_TEXT}
             </td>
 
             {/* Contact */}
             <td className="px-5 py-4 border border-gray-300 text-center">
               <a
-                href={`https://wa.me/919930584020?text=Hi! I’m interested in learning more about LAMF by ${encodeURIComponent(row.institution_name)}`}
+                href={`https://wa.me/919930584020?text=Hi! I’m interested in learning more about LAMF by ${encodeURIComponent(
+                  row.institution_name || "this institution"
+                )}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 bg-green-500 text-white px-3 py-2 rounded-lg text-sm font-medium shadow-md hover:bg-green-600 hover:scale-[1.05] active:scale-[0.98] transition-all duration-200"
@@ -373,89 +392,58 @@ const handleCategoryClick = (cat) => {
   </div>
 </section>
 
-{/* detailed LAMF Cost Summary */}
+{/* Detailed LAMF Cost Summary */}
 <section className="max-w-[90%] mx-auto px-6 py-10 flex flex-col items-center">
   <h3 className="text-4xl font-bold mb-8 text-black pb-6">
     Detailed LAMF Cost Summary
   </h3>
 
-  {/* Outer glass box */}
   <div className="w-full bg-white/20 backdrop-blur-xl border border-white/30 shadow-2xl rounded-2xl p-6 flex">
-    {/* Combined Table + Buttons */}
     <div className="flex w-full gap-4">
-      {/* Table */}
       <div className="flex-1 overflow-x-auto">
         <table className="w-full border-collapse text-base text-gray-900">
           <thead>
             <tr className="text-left font-semibold border-b border-white/30">
-              {/* Fixed columns */}
               <th className="px-5 py-4 bg-gradient-to-br from-[#f9fafb] to-[#edf1f6] border border-gray-300">
                 Institution
               </th>
               <th className="px-5 py-4 bg-gradient-to-br from-[#f9fafb] to-[#edf1f6] border border-gray-300 text-teal-600">
                 1st Year
               </th>
-              <th className="px-5 py-4 bg-gradient-to-br from-[#f9fafb] to-[#edf1f6] border border-gray-300 relative after:content-[''] after:absolute after:right-0 after:top-0 after:h-full after:w-[6px] after:shadow-[6px_0_10px_rgba(0,0,0,0.15)] after:z-[3] text-indigo-700">
+              <th className="px-5 py-4 bg-gradient-to-br from-[#f9fafb] to-[#edf1f6] border border-gray-300 text-indigo-700 relative after:content-[''] after:absolute after:right-0 after:top-0 after:h-full after:w-[6px] after:shadow-[6px_0_10px_rgba(0,0,0,0.15)] after:z-[3]">
                 2nd Year
               </th>
 
-              {/* Dynamic columns */}
+              {/* Dynamic column headers */}
               {activeTableCategory === "fundingDetails" && (
                 <>
-                  <th className="px-5 py-4 border border-gray-300 bg-white/60">
-                    Approved Funds
-                  </th>
-                  <th className="px-5 py-4 border border-gray-300 bg-white/60">
-                    Tenure (Months)
-                  </th>
-                  <th className="px-5 py-4 border border-gray-300 bg-white/60">
-                    Equity MF Loan (Min / Max)
-                  </th>
-                  <th className="px-5 py-4 border border-gray-300 bg-white/60">
-                    Debt MF Loan (Min / Max)
-                  </th>
-                  <th className="px-5 py-4 border border-gray-300 bg-white/60">
-                    Margin Period
-                  </th>
+                  <th className="px-5 py-4 border border-gray-300 bg-white/60">Approved Funds</th>
+                  <th className="px-5 py-4 border border-gray-300 bg-white/60">Tenure (Months)</th>
+                  <th className="px-5 py-4 border border-gray-300 bg-white/60">Equity MF Loan</th>
+                  <th className="px-5 py-4 border border-gray-300 bg-white/60">Debt MF Loan</th>
+                  <th className="px-5 py-4 border border-gray-300 bg-white/60">Margin Period</th>
                 </>
               )}
 
               {activeTableCategory === "majorCost" && (
                 <>
-                  <th className="px-5 py-4 border border-gray-300 bg-white/60">
-                    Interest Rate (Min / Max / Median)
-                  </th>
-                  <th className="px-5 py-4 border border-gray-300 bg-white/60">
-                    Processing Fee
-                  </th>
-                  <th className="px-5 py-4 border border-gray-300 bg-white/60">
-                    Pre-payment Charges
-                  </th>
-                  <th className="px-5 py-4 border border-gray-300 bg-white/60">
-                    Annual Maintenance / Renewal Fees
-                  </th>
-                  <th className="px-5 py-4 border border-gray-300 bg-white/60">
-                    Penal Charges (%)
-                  </th>
+                  <th className="px-5 py-4 border border-gray-300 bg-white/60">Interest Rate</th>
+                  <th className="px-5 py-4 border border-gray-300 bg-white/60">Processing Fee</th>
+                  <th className="px-5 py-4 border border-gray-300 bg-white/60">Pre-payment Charges</th>
+                  <th className="px-5 py-4 border border-gray-300 bg-white/60">Annual Maintenance / Renewal Fees</th>
+                  <th className="px-5 py-4 border border-gray-300 bg-white/60">Penal Charges</th>
                 </>
               )}
 
               {activeTableCategory === "defaultCharges" && (
-                <th className="px-5 py-4 border border-gray-300 bg-white/60">
-                  Default Charges
-                </th>
+                <th className="px-5 py-4 border border-gray-300 bg-white/60">Default Charges</th>
               )}
 
               {activeTableCategory === "otherMiscCost" && (
-                <th className="px-5 py-4 border border-gray-300 bg-white/60">
-                  Other Expenses
-                </th>
+                <th className="px-5 py-4 border border-gray-300 bg-white/60">Other Expenses</th>
               )}
 
-              {/* WhatsApp CTA */}
-              <th className="px-5 py-4 border border-gray-300 bg-white/60">
-                Contact
-              </th>
+              <th className="px-5 py-4 border border-gray-300 bg-white/60">Contact</th>
             </tr>
           </thead>
 
@@ -467,111 +455,115 @@ const handleCategoryClick = (cat) => {
                   index % 2 === 0 ? "bg-white/50" : "bg-white/30"
                 } hover:bg-[#fff7f0]/80 hover:shadow-[0_4px_12px_rgba(255,115,0,0.15)]`}
               >
-                {/* institution */}
-                <td className="px-5 py-4 border border-gray-300 font-semibold bg-gradient-to-br from-[#f9fafb] to-[#f1fff1] shadow-[0_2px_4px_rgba(0,0,0,0.06)] text-gray-900 text-base">
-                  {row.institution_name}
+                {/* Institution */}
+                <td className="px-5 py-4 border border-gray-300 font-semibold bg-gradient-to-br from-[#f9fafb] to-[#f1fff1] text-gray-900">
+                  {row.institution_name ?? DEFAULT_NULL_TEXT}
                 </td>
 
-                {/* 1st year */}
-                <td className="px-5 py-4 border border-gray-300 font-medium text-center text-teal-600 bg-gradient-to-br from-[#f9fafb] to-[#f1fff1] shadow-[0_2px_4px_rgba(0,0,0,0.05)] text-base">
+                {/* 1st Year */}
+                <td className="px-5 py-4 border border-gray-300 text-center text-teal-600">
                   {row.cost_first_year ? (
                     <div className="flex flex-col gap-0.5">
                       <div>Percent: {row.cost_first_year.percent ?? "—"}</div>
                       <div>Amount: ₹{row.cost_first_year.amount ?? "—"}</div>
                     </div>
-                  ) : "—"}
+                  ) : (
+                    DEFAULT_NULL_TEXT
+                  )}
                 </td>
 
-                {/* 2nd year */}
-                <td className="px-5 py-4 border border-gray-300 font-medium text-center text-indigo-700 bg-gradient-to-br from-[#f9fafb] to-[#f1fff1] shadow-[0_2px_4px_rgba(0,0,0,0.05)] relative after:content-[''] after:absolute after:right-0 after:top-0 after:h-full after:w-[6px] after:shadow-[6px_0_10px_rgba(0,0,0,0.15)] after:z-[3] text-base">
+                {/* 2nd Year */}
+                <td className="px-5 py-4 border border-gray-300 text-center text-indigo-700">
                   {row.cost_second_year ? (
                     <div className="flex flex-col gap-0.5">
                       <div>Percent: {row.cost_second_year.percent ?? "—"}</div>
                       <div>Amount: ₹{row.cost_second_year.amount ?? "—"}</div>
                     </div>
-                  ) : "—"}
+                  ) : (
+                    DEFAULT_NULL_TEXT
+                  )}
                 </td>
 
-                {/* now dynamic body */}
+                {/* Dynamic rows */}
                 {activeTableCategory === "fundingDetails" && (
                   <>
-                    <td className="px-5 py-4 border border-gray-300 whitespace-pre-wrap text-gray-900 text-base">
-                      {row.approved_funds ? `~ ${row.approved_funds} funds` : "—"}
+                    <td className="px-5 py-4 border border-gray-300 text-center">
+                      {row.approved_funds ?? DEFAULT_NULL_TEXT}
                     </td>
-
-                    <td className="px-5 py-4 border border-gray-300 text-gray-900 text-center">
-                      {row.tenure_months ? `${row.tenure_months}` : "—"}
+                    <td className="px-5 py-4 border border-gray-300 text-center">
+                      {row.tenure_months ?? DEFAULT_NULL_TEXT}
                     </td>
-
-                    <td className="px-5 py-4 border border-gray-300 text-gray-900 text-center">
-                      {row.loan_equity ? `${row.loan_equity.min ?? "—"} / ${row.loan_equity.max ?? "—"}` : "—"}
+                    <td className="px-5 py-4 border border-gray-300 text-center">
+                      {row.loan_equity
+                        ? `${row.loan_equity.min ?? "—"} / ${row.loan_equity.max ?? "—"}`
+                        : DEFAULT_NULL_TEXT}
                     </td>
-
-                    <td className="px-5 py-4 border border-gray-300 text-gray-900 text-center">
-                      {row.loan_debt ? `${row.loan_debt.min ?? "—"} / ${row.loan_debt.max ?? "—"}` : "—"}
+                    <td className="px-5 py-4 border border-gray-300 text-center">
+                      {row.loan_debt
+                        ? `${row.loan_debt.min ?? "—"} / ${row.loan_debt.max ?? "—"}`
+                        : DEFAULT_NULL_TEXT}
                     </td>
-
-                    <td className="px-5 py-4 border border-gray-300 text-gray-900 text-center">
-                      {row.regularization_period ? `${row.regularization_period} days` : "—"}
+                    <td className="px-5 py-4 border border-gray-300 text-center">
+                      {row.regularization_period
+                        ? `${row.regularization_period} days`
+                        : DEFAULT_NULL_TEXT}
                     </td>
                   </>
                 )}
 
                 {activeTableCategory === "majorCost" && (
                   <>
-                    <td className="px-5 py-4 border border-gray-300 text-gray-900 text-center">
+                    <td className="px-5 py-4 border border-gray-300 text-center">
                       {row.interest_rate ? (
                         <div className="flex flex-col gap-0.5">
-                          <span><strong>Min:</strong> {row.interest_rate.min ?? "—"}%</span>
-                          <span><strong>Max:</strong> {row.interest_rate.max ?? "—"}%</span>
-                          <span><strong>Median:</strong> {row.interest_rate.median ?? "—"}%</span>
+                          <span>Min: {row.interest_rate.min ?? "—"}%</span>
+                          <span>Max: {row.interest_rate.max ?? "—"}%</span>
+                          <span>Median: {row.interest_rate.median ?? "—"}%</span>
                         </div>
-                      ) : "—"}
+                      ) : (
+                        DEFAULT_NULL_TEXT
+                      )}
                     </td>
-
-                    <td className="px-5 py-4 border border-gray-300 text-gray-900 text-center">
-                      {row.processing_fee ?? "—"}
+                    <td className="px-5 py-4 border border-gray-300 text-center">
+                      {row.processing_fee ?? DEFAULT_NULL_TEXT}
                     </td>
-
-                    <td className="px-5 py-4 border border-gray-300 text-gray-900 text-center">
-                      {row.prepayment_charges ?? "—"}
+                    <td className="px-5 py-4 border border-gray-300 text-center">
+                      {row.prepayment_charges ?? DEFAULT_NULL_TEXT}
                     </td>
-
-                    <td className="px-5 py-4 border border-gray-300 text-gray-900 text-center">
-                      {row.annual_maintenance ?? "—"}
+                    <td className="px-5 py-4 border border-gray-300 text-center">
+                      {row.annual_maintenance ?? DEFAULT_NULL_TEXT}
                     </td>
-
-                    <td className="px-5 py-4 border border-gray-300 text-gray-900 text-center">
-                      {row.penal_charges ?? "—"}
+                    <td className="px-5 py-4 border border-gray-300 text-center">
+                      {row.penal_charges ?? DEFAULT_NULL_TEXT}
                     </td>
                   </>
                 )}
 
                 {activeTableCategory === "defaultCharges" && (
-                  <td className="px-5 py-4 border border-gray-300 whitespace-pre-wrap text-gray-900 text-base">
+                  <td className="px-5 py-4 border border-gray-300 whitespace-pre-wrap">
                     {row.default_charges
-                      ? Object.entries(row.default_charges).map(([k, v], idx) => (
-                          <div key={idx}>{`${k}: ${v ?? "—"}`}</div>
+                      ? Object.entries(row.default_charges).map(([k,v],i)=>(
+                          <div key={i}>{`${k}: ${v ?? "—"}`}</div>
                         ))
-                      : "—"}
+                      : DEFAULT_NULL_TEXT}
                   </td>
                 )}
 
                 {activeTableCategory === "otherMiscCost" && (
-                  <td className="px-5 py-4 border border-gray-300 whitespace-pre-wrap text-gray-900 text-base">
+                  <td className="px-5 py-4 border border-gray-300 whitespace-pre-wrap">
                     {row.other_expenses
-                      ? Object.entries(row.other_expenses).map(([k, v], idx) => (
-                          <div key={idx}>{`${k}: ${v ?? "—"}`}</div>
+                      ? Object.entries(row.other_expenses).map(([k,v],i)=>(
+                          <div key={i}>{`${k}: ${v ?? "—"}`}</div>
                         ))
-                      : "—"}
+                      : DEFAULT_NULL_TEXT}
                   </td>
                 )}
 
-                {/* WhatsApp CTA */}
+                {/* Contact */}
                 <td className="px-5 py-4 border border-gray-300 text-center">
                   <a
                     href={`https://wa.me/919930584020?text=Hi! I’m interested in learning more about LAMF by ${encodeURIComponent(
-                      row.institution_name
+                      row.institution_name || "this institution"
                     )}`}
                     target="_blank"
                     rel="noopener noreferrer"

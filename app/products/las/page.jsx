@@ -6,8 +6,7 @@ import Footer from "../../components/footer";
 import { ArrowUpDown, ChevronRight } from "lucide-react";
 import { faqData } from "./faqdata"; 
 import SpotlightCard from "@/components/SpotlightCard.jsx";
-import { fetchLAS } from "@/lib/fetchData";
-import { getNullFill } from "@/lib/nullFill";
+import { fetchLAS, DEFAULT_NULL_TEXT } from "@/lib/fetchData";
 
 
 export default function LASPage() {
@@ -90,7 +89,6 @@ export default function LASPage() {
         setLoading(false);
       }
     };
-
     fetchData();
   }, []);
 
@@ -302,94 +300,90 @@ export default function LASPage() {
           >
             {/* Institution */}
             <td className="px-5 py-4 border border-gray-300 font-semibold text-gray-900 bg-gradient-to-br from-[#f9fafb] to-[#f1fff1] shadow-[0_2px_4px_rgba(0,0,0,0.06)] relative z-[2]">
-              {row.institution_name || "-"}
+              {row.institution_name ?? DEFAULT_NULL_TEXT}
             </td>
 
             {/* 1st Year Cost */}
-            <td className="px-5 py-4 border border-gray-300 text-teal-700 font-medium text-center bg-gradient-to-br from-[#f9fafb] to-[#f1fff1] shadow-[0_2px_4px_rgba(0,0,0,0.05)] relative z-[2]">
-              {row.cost_first_year
-                ? (
-                    <div className="flex flex-col gap-0.5">
-                      <div>Percent: {row.cost_first_year.percent ?? "—"}</div>
-                      <div>Amount: ₹{row.cost_first_year.amount ?? "—"}</div>
-                    </div>
-                  )
-                : getNullFill("las", row.institution_name, "cost_first_year")}
+            <td className="px-5 py-4 border border-gray-300 text-teal-700 font-medium text-center bg-gradient-to-br from-[#f9fafb] to-[#f1fff1]">
+              {row.cost_first_year ? (
+                <div className="flex flex-col gap-0.5">
+                  <div>Percent: {row.cost_first_year.percent ?? "—"}</div>
+                  <div>Amount: ₹{row.cost_first_year.amount ?? "—"}</div>
+                </div>
+              ) : (
+                DEFAULT_NULL_TEXT
+              )}
             </td>
 
             {/* 2nd Year Cost */}
-            <td
-              className="px-5 py-4 border border-gray-300 text-indigo-700 font-medium text-center
-              bg-gradient-to-br from-[#f9fafb] to-[#f1fff1] shadow-[0_2px_4px_rgba(0,0,0,0.05)] relative z-[2]
-              after:content-[''] after:absolute after:right-0 after:top-0 after:h-full after:w-[6px] after:shadow-[6px_0_10px_rgba(0,0,0,0.15)] after:z-[3]"
-            >
-              {row.cost_second_year
-                ? (
-                    <div className="flex flex-col gap-0.5">
-                      <div>Percent: {row.cost_second_year.percent ?? "—"}</div>
-                      <div>Amount: ₹{row.cost_second_year.amount ?? "—"}</div>
-                    </div>
-                  )
-                : getNullFill("las", row.institution_name, "cost_second_year")}
+            <td className="px-5 py-4 border border-gray-300 text-indigo-700 font-medium text-center bg-gradient-to-br from-[#f9fafb] to-[#f1fff1] relative after:content-[''] after:absolute after:right-0 after:top-0 after:h-full after:w-[6px] after:shadow-[6px_0_10px_rgba(0,0,0,0.15)] after:z-[3]">
+              {row.cost_second_year ? (
+                <div className="flex flex-col gap-0.5">
+                  <div>Percent: {row.cost_second_year.percent ?? "—"}</div>
+                  <div>Amount: ₹{row.cost_second_year.amount ?? "—"}</div>
+                </div>
+              ) : (
+                DEFAULT_NULL_TEXT
+              )}
             </td>
 
             {/* Approved Shares */}
             <td className="px-5 py-4 border border-gray-300 border-l-2 border-gray-400/40 text-gray-800 whitespace-pre-wrap">
               {row.approved_shares
                 ? `~ ${row.approved_shares} shares`
-                : getNullFill("las", row.institution_name, "approved_shares")}
+                : DEFAULT_NULL_TEXT}
             </td>
 
             {/* Tenure */}
             <td className="px-5 py-4 border border-gray-300 font-medium text-gray-900 text-center">
               {row.tenure_months
                 ? `The approved tenure is ${row.tenure_months} months`
-                : getNullFill("las", row.institution_name, "tenure_months")}
+                : DEFAULT_NULL_TEXT}
             </td>
 
             {/* Loan Amount */}
             <td className="px-5 py-4 border border-gray-300 font-medium text-gray-900 text-center">
-              {row.loan_amount
-                ? (
-                    <div className="flex flex-col">
-                      <div>Min: {row.loan_amount.min ?? "—"}</div>
-                      <div>Max: {row.loan_amount.max ?? "—"}</div>
-                    </div>
-                  )
-                : getNullFill("las", row.institution_name, "loan_amount")}
+              {row.loan_amount ? (
+                <div className="flex flex-col">
+                  <div>Min: {row.loan_amount.min ?? "—"}</div>
+                  <div>Max: {row.loan_amount.max ?? "—"}</div>
+                </div>
+              ) : (
+                DEFAULT_NULL_TEXT
+              )}
             </td>
 
             {/* Interest Rate */}
             <td className="px-5 py-4 border border-gray-300 text-gray-900 text-center">
-              {row.interest_rate
-                ? (
-                    <div className="flex flex-col gap-0.5">
-                      <span>
-                        <strong>Min:</strong> {row.interest_rate.min ?? "—"}%
-                      </span>
-                      <span>
-                        <strong>Max:</strong> {row.interest_rate.max ?? "—"}%
-                      </span>
-                      <span>
-                        <strong>Median:</strong> {row.interest_rate.median ?? "—"}%
-                      </span>
-                    </div>
-                  )
-                : getNullFill("las", row.institution_name, "interest_rate")}
+              {row.interest_rate ? (
+                <div className="flex flex-col gap-0.5">
+                  <span>
+                    <strong>Min:</strong> {row.interest_rate.min ?? "—"}%
+                  </span>
+                  <span>
+                    <strong>Max:</strong> {row.interest_rate.max ?? "—"}%
+                  </span>
+                  <span>
+                    <strong>Median:</strong> {row.interest_rate.median ?? "—"}%
+                  </span>
+                </div>
+              ) : (
+                DEFAULT_NULL_TEXT
+              )}
             </td>
 
             {/* Margin Period */}
             <td className="px-5 py-4 border border-gray-300 text-gray-900 text-center">
               {row.regularization_period
                 ? `${row.regularization_period} days`
-                : getNullFill("las", row.institution_name, "regularization_period")}
+                : DEFAULT_NULL_TEXT}
             </td>
 
             {/* Contact */}
             <td className="px-5 py-4 border border-gray-300 text-center">
               <a
                 href={`https://wa.me/919930584020?text=Hi! I’m interested in learning more about Loan Against Share (LAS) by ${encodeURIComponent(
-                  row.institution_name
+                  row.institution_name || "this institution"
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -420,134 +414,83 @@ export default function LASPage() {
   </div>
 </section>
 
-
-{/* detailed LAS Cost Summary */}
+{/* Detailed LAS Cost Summary */}
 <section className="max-w-[90%] mx-auto px-6 py-10 flex flex-col items-center">
   <h3 className="text-4xl font-bold mb-8 text-black pb-6">
     Detailed LAS Cost Summary
   </h3>
 
-  {/* Outer glass box */}
   <div className="w-full bg-white/20 backdrop-blur-xl border border-white/30 shadow-2xl rounded-2xl p-6 flex">
-    {/* Combined Table + Buttons */}
     <div className="flex w-full gap-4">
-      {/* Table */}
       <div className="flex-1 overflow-x-auto">
         <table className="w-full border-collapse text-base text-gray-900">
           <thead>
             <tr className="text-left font-semibold border-b border-white/30">
-              {/* Fixed columns */}
-              <th className="px-5 py-4 bg-gradient-to-br from-[#f9fafb] to-[#edf1f6] border border-gray-300">
-                Institution
-              </th>
-              <th className="px-5 py-4 bg-gradient-to-br from-[#f9fafb] to-[#edf1f6] border border-gray-300 text-teal-600">
-                1st Year
-              </th>
-              <th className="px-5 py-4 bg-gradient-to-br from-[#f9fafb] to-[#edf1f6] border border-gray-300 relative after:content-[''] after:absolute after:right-0 after:top-0 after:h-full after:w-[6px] after:shadow-[6px_0_10px_rgba(0,0,0,0.15)] after:z-[3] text-indigo-700">
-                2nd Year
-              </th>
-
-              {/* Dynamic columns */}
+              <th className="px-5 py-4 bg-gradient-to-br from-[#f9fafb] to-[#edf1f6] border border-gray-300">Institution</th>
+              <th className="px-5 py-4 bg-gradient-to-br from-[#f9fafb] to-[#edf1f6] border border-gray-300 text-teal-600">1st Year</th>
+              <th className="px-5 py-4 bg-gradient-to-br from-[#f9fafb] to-[#edf1f6] border border-gray-300 text-indigo-700 relative after:content-[''] after:absolute after:right-0 after:top-0 after:h-full after:w-[6px] after:shadow-[6px_0_10px_rgba(0,0,0,0.15)] after:z-[3]">2nd Year</th>
               {rightTableColumns[activeTableCategory].map((col) => (
-                <th
-                  key={col.key}
-                  className="px-5 py-4 border border-gray-300 bg-white/60"
-                >
-                  {col.label}
-                </th>
+                <th key={col.key} className="px-5 py-4 border border-gray-300 bg-white/60">{col.label}</th>
               ))}
-
-              {/* WhatsApp CTA */}
-              <th className="px-5 py-4 border border-gray-300 bg-white/60">
-                Contact
-              </th>
+              <th className="px-5 py-4 border border-gray-300 bg-white/60">Contact</th>
             </tr>
           </thead>
 
           <tbody>
             {sortedCostData.map((row, index) => (
-              <tr
-                key={row.id}
-                className={`transition-all duration-300 ${
-                  index % 2 === 0 ? "bg-white/50" : "bg-white/30"
-                } hover:bg-[#fff7f0]/80 hover:shadow-[0_4px_12px_rgba(255,115,0,0.15)]`}
-              >
-                {/* Institution */}
-                <td className="px-5 py-4 border border-gray-300 font-semibold bg-gradient-to-br from-[#f9fafb] to-[#f1fff1] shadow-[0_2px_4px_rgba(0,0,0,0.06)] text-gray-900 text-base">
-                  {row.institution_name ||
-                    getNullFill("las", row.institution_name, "institution_name")}
+              <tr key={row.id} className={`transition-all duration-300 ${index % 2 === 0 ? "bg-white/50" : "bg-white/30"} hover:bg-[#fff7f0]/80 hover:shadow-[0_4px_12px_rgba(255,115,0,0.15)]`}>
+                <td className="px-5 py-4 border border-gray-300 font-semibold text-gray-900 bg-gradient-to-br from-[#f9fafb] to-[#f1fff1]">
+                  {row.institution_name ?? DEFAULT_NULL_TEXT}
                 </td>
 
-                {/* 1st Year */}
-                <td className="px-5 py-4 border border-gray-300 font-medium text-center text-teal-600 bg-gradient-to-br from-[#f9fafb] to-[#f1fff1] shadow-[0_2px_4px_rgba(0,0,0,0.05)] text-base">
-                  {row.cost_first_year && typeof row.cost_first_year === "object" ? (
+                <td className="px-5 py-4 border border-gray-300 text-center text-teal-600">
+                  {row.cost_first_year ? (
                     <div className="flex flex-col gap-0.5">
                       <div>Percent: {row.cost_first_year.percent ?? "—"}</div>
                       <div>Amount: ₹{row.cost_first_year.amount ?? "—"}</div>
                     </div>
                   ) : (
-                    getNullFill("las", row.institution_name, "cost_first_year")
+                    DEFAULT_NULL_TEXT
                   )}
                 </td>
 
-                {/* 2nd Year */}
-                <td className="px-5 py-4 border border-gray-300 font-medium text-center text-indigo-700 bg-gradient-to-br from-[#f9fafb] to-[#f1fff1] shadow-[0_2px_4px_rgba(0,0,0,0.05)] relative after:content-[''] after:absolute after:right-0 after:top-0 after:h-full after:w-[6px] after:shadow-[6px_0_10px_rgba(0,0,0,0.15)] after:z-[3] text-base">
-                  {row.cost_second_year && typeof row.cost_second_year === "object" ? (
+                <td className="px-5 py-4 border border-gray-300 text-center text-indigo-700">
+                  {row.cost_second_year ? (
                     <div className="flex flex-col gap-0.5">
                       <div>Percent: {row.cost_second_year.percent ?? "—"}</div>
                       <div>Amount: ₹{row.cost_second_year.amount ?? "—"}</div>
                     </div>
                   ) : (
-                    getNullFill("las", row.institution_name, "cost_second_year")
+                    DEFAULT_NULL_TEXT
                   )}
                 </td>
 
-                {/* Dynamic columns */}
-                {rightTableColumns[activeTableCategory].map((col) => (
-                  <td
-                    key={col.key}
-                    className="px-5 py-4 border border-gray-300 whitespace-pre-wrap text-gray-900 text-base"
-                  >
-                    {(() => {
-                      const val = row[col.key];
+                {rightTableColumns[activeTableCategory].map((col) => {
+                  const val = row[col.key];
+                  return (
+                    <td key={col.key} className="px-5 py-4 border border-gray-300 whitespace-pre-wrap text-gray-900">
+                      {val == null
+                        ? DEFAULT_NULL_TEXT
+                        : typeof val === "object"
+                        ? Object.entries(val).map(([k, v], idx) => (
+                            <div key={idx} className="text-gray-800">
+                              {`${k}: ${v ?? "—"}`}
+                            </div>
+                          ))
+                        : val}
+                    </td>
+                  );
+                })}
 
-                      // Handle null values
-                      if (val == null)
-                        return getNullFill("las", row.institution_name, col.key);
-
-                      // If it's JSON, display key: value pairs
-                      if (typeof val === "object") {
-                        return Object.entries(val).map(([k, v], idx) => (
-                          <div key={idx} className="text-gray-800">
-                            {`${k}: ${v ?? "—"}`}
-                          </div>
-                        ));
-                      }
-
-                      // If it's plain text or number
-                      return val;
-                    })()}
-                  </td>
-                ))}
-
-                {/* WhatsApp CTA */}
                 <td className="px-5 py-4 border border-gray-300 text-center">
                   <a
                     href={`https://wa.me/919930584020?text=Hi! I’m interested in learning more about Loan Against Share (LAS) by ${encodeURIComponent(
-                            row.institution_name
-                          )}`}
+                      row.institution_name || "this institution"
+                    )}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center gap-2 bg-green-500 text-white px-4 py-2 rounded-lg text-base font-medium shadow-md hover:bg-green-600 hover:scale-[1.05] active:scale-[0.98] transition-all duration-200"
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M12.04 2.004C6.504 2.004 2 6.508 2 12.046c0 1.96.508 3.872 1.472 5.552L2 22l4.56-1.472A9.944 9.944 0 0 0 12.04 22c5.54 0 10.044-4.504 10.044-9.954 0-5.54-4.504-10.042-10.044-10.042zM12.04 20.1c-1.64 0-3.24-.43-4.64-1.25l-.33-.19-2.7.87.88-2.63-.21-.34A8.01 8.01 0 0 1 4.1 12.04c0-4.374 3.566-7.93 7.94-7.93 4.374 0 7.93 3.556 7.93 7.93s-3.556 7.93-7.93 7.93zm4.47-5.93c-.244-.122-1.44-.714-1.664-.8-.224-.084-.388-.122-.552.122-.164.244-.63.8-.772.964-.14.164-.284.184-.528.062-.244-.122-1.03-.378-1.962-1.2-.726-.646-1.216-1.444-1.36-1.688-.14-.244-.015-.376.106-.498.108-.106.244-.274.366-.412.12-.136.16-.244.24-.406.082-.164.04-.308-.02-.43-.06-.122-.552-1.33-.756-1.816-.2-.48-.4-.414-.552-.422l-.47-.008c-.16 0-.42.062-.64.308s-.84.822-.84 2.004c0 1.182.86 2.322.98 2.486.12.164 1.7 2.594 4.14 3.63.578.25 1.03.4 1.384.514.582.186 1.11.16 1.53.098.466-.07 1.44-.586 1.64-1.152.2-.57.2-1.058.14-1.16-.06-.1-.22-.162-.464-.284z" />
-                    </svg>
                     Enquire
                   </a>
                 </td>

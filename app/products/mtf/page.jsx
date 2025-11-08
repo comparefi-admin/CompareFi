@@ -5,8 +5,7 @@ import Navbar from '../../components/navbar';
 import Footer from '../../components/footer';
 import { Playfair_Display, Inter, Satisfy } from 'next/font/google';
 import { ArrowUpDown } from 'lucide-react';
-import { fetchMTF } from "@/lib/fetchData";
-import { getNullFill } from "@/lib/nullFill";
+import { fetchMTF, DEFAULT_NULL_TEXT } from "@/lib/fetchData";
 
 // Fonts
 const playfair = Playfair_Display({ weight: ['400','700'], subsets: ['latin'] });
@@ -193,16 +192,14 @@ const [activeTableCategory, setActiveTableCategory] = useState("marginDetails");
   </div>
 </section>
 
-  {/* MTF Detailed Comparison Table */}
+{/* MTF Detailed Comparison Table */}
 <section className="max-w-[90%] mx-auto px-6 py-10 flex flex-col items-center">
   <h3 className="text-4xl font-bold mb-8 text-black pb-6">
     Detailed MTF Comparison
   </h3>
 
   <div className="w-full bg-white/20 backdrop-blur-xl border border-white/30 shadow-2xl rounded-2xl p-6 flex">
-
     <div className="flex w-full gap-4">
-
       {/* TABLE */}
       <div className="flex-1 overflow-x-auto">
         <table className="w-full border-collapse text-base text-gray-900">
@@ -233,7 +230,7 @@ const [activeTableCategory, setActiveTableCategory] = useState("marginDetails");
                   key={colKey}
                   className="px-5 py-4 border border-gray-300 bg-white/60"
                 >
-                  {colKey.replace(/_/g," ").replace(/\b\w/g, c=>c.toUpperCase())}
+                  {colKey.replace(/_/g," ").replace(/\b\w/g, c => c.toUpperCase())}
                 </th>
               ))}
 
@@ -241,7 +238,6 @@ const [activeTableCategory, setActiveTableCategory] = useState("marginDetails");
               <th className="px-5 py-4 border border-gray-300 bg-white/60">
                 Enquire
               </th>
-
             </tr>
           </thead>
 
@@ -249,24 +245,25 @@ const [activeTableCategory, setActiveTableCategory] = useState("marginDetails");
             {data.map((row,index)=>(
               <tr
                 key={row.id}
-                className={`transition-all duration-300 ${index % 2===0 ? "bg-white/50":"bg-white/30"} hover:bg-[#fff7f0]/80 hover:shadow-[0_4px_12px_rgba(255,115,0,0.15)]`}
+                className={`transition-all duration-300 ${
+                  index % 2 === 0 ? "bg-white/50" : "bg-white/30"
+                } hover:bg-[#fff7f0]/80 hover:shadow-[0_4px_12px_rgba(255,115,0,0.15)]`}
               >
-
-                {/* broker */}
+                {/* Broker */}
                 <td className="px-5 py-4 border border-gray-300 font-semibold bg-gradient-to-br from-[#f9fafb] to-[#f1fff1]">
-                  {row.broker_name ?? "—"}
+                  {row.broker_name ?? DEFAULT_NULL_TEXT}
                 </td>
 
-                {/* cost summary */}
+                {/* Cost Summary */}
                 <td className="px-5 py-4 border border-gray-300 whitespace-pre-line">
-                  {row.cost_summary && typeof row.cost_summary==="object"
+                  {row.cost_summary && typeof row.cost_summary === "object"
                     ? Object.entries(row.cost_summary).map(([k,v],i)=>(
                         <div key={i}>{`${k}: ${v ?? "—"}`}</div>
                       ))
-                    : row.cost_summary ?? "—"}
+                    : row.cost_summary ?? DEFAULT_NULL_TEXT}
                 </td>
 
-                {/* dynamic values */}
+                {/* Dynamic Values */}
                 {(
                   activeTableCategory === "marginDetails"
                     ? ["margin_requirement","approved_stocks"]
@@ -279,21 +276,29 @@ const [activeTableCategory, setActiveTableCategory] = useState("marginDetails");
                   <td key={colKey} className="px-5 py-4 border border-gray-300">
                     {(() => {
                       const v = row[colKey];
-                      if(!v) return "—";
-                      if(typeof v==="object"){
+
+                      // Handle null/undefined safely
+                      if (v == null || v === "") return DEFAULT_NULL_TEXT;
+
+                      // Handle JSON fields
+                      if (typeof v === "object") {
                         return Object.entries(v).map(([k,val],j)=>(
                           <div key={j}>{`${k}: ${val ?? "—"}`}</div>
                         ));
                       }
+
+                      // Fallback: show value directly
                       return v;
                     })()}
                   </td>
                 ))}
 
-                {/* enquire */}
+                {/* Enquire */}
                 <td className="px-5 py-4 border border-gray-300 text-center">
                   <a
-                    href={`https://wa.me/919930584020?text=Hi! I'm interested in learning more about MTF by ${encodeURIComponent(row.broker_name)}`}
+                    href={`https://wa.me/919930584020?text=Hi! I'm interested in learning more about MTF by ${encodeURIComponent(
+                      row.broker_name || "this broker"
+                    )}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center gap-2 bg-green-500 text-white px-4 py-2 rounded-lg text-base font-medium shadow-md hover:bg-green-600 hover:scale-[1.05] active:scale-[0.98] transition-all duration-200"
@@ -306,6 +311,7 @@ const [activeTableCategory, setActiveTableCategory] = useState("marginDetails");
           </tbody>
         </table>
       </div>
+
 
       {/* RIGHT BUTTONS */}
       <div className="flex flex-col justify-between gap-4 h-full w-[160px]">
