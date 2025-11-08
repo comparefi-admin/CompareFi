@@ -173,7 +173,7 @@ export default function HomePage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <SpotlightCard className="relative z-10 w-[90%] max-w-full rounded-3xl   min-h-[70vh] bg-gradient-to-b from-[#B1ED67] to-[white]
+              <SpotlightCard className="relative z-10 w-[90%] max-w-full rounded-3xl   min-h-[70vh] bg-[#56039a]
  backdrop-blur-xl shadow-2xl sm:p-10 md:p-14 lg:p-20 flex flex-col md:flex-row mt-[7%] mb-[7%] gap-10 md:gap-14 items-center justify-center hover:drop-shadow-2xl
            hover:scale-102 transition-all duration-700 
  border-none
@@ -181,7 +181,7 @@ export default function HomePage() {
               {/* LEFT */}
               <div className="flex-1 text-center md:text-left space-y-5 sm:space-y-6 lg:space-y-8 pl-20">
                 <motion.h1
-                    className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-black tracking-tight leading-tight drop-shadow-[0_2px_2px_rgba(0,0,0,0.1)]"
+                    className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-tight drop-shadow-[0_2px_2px_rgba(0,0,0,0.1)]"
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1, duration: 0.7, ease: 'easeOut' }}
@@ -199,7 +199,7 @@ export default function HomePage() {
                   </motion.h1> */}
 
                   <motion.h1
-                    className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-black tracking-tight leading-tight drop-shadow-[0_2px_2px_rgba(0,0,0,0.1)]"
+                    className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-tight drop-shadow-[0_2px_2px_rgba(0,0,0,0.1)]"
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1, duration: 0.7, ease: 'easeOut' }}
@@ -210,11 +210,11 @@ export default function HomePage() {
                       animateBy="words" 
                       direction="top" 
                       onAnimationComplete={handleAnimationComplete} 
-                      className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-black tracking-tight leading-tight drop-shadow-[0_2px_2px_rgba(0,0,0,0.1)]"
+                      className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-tight drop-shadow-[0_2px_2px_rgba(0,0,0,0.1)]"
                     />
                   </motion.h1>
                 <motion.h2
-                  className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-medium text-black"
+                  className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-medium text-white"
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3, duration: 0.7, ease: 'easeOut' }}
@@ -225,7 +225,7 @@ export default function HomePage() {
                     animateBy="words"
                     direction="top"
                     onAnimationComplete={handleAnimationComplete}
-                    className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-medium text-black"
+                    className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-medium text-white"
                   />
                 </motion.h2>
 
@@ -242,7 +242,7 @@ export default function HomePage() {
                     animateBy="word"
                     direction="top"
                     onAnimationComplete={handleAnimationComplete}
-                    className="text-sm sm:text-base md:text-lg text-slate-700 max-w-md mx-auto md:mx-0 leading-relaxed"
+                    className="text-sm sm:text-base md:text-lg text-white max-w-md mx-auto md:mx-0 leading-relaxed"
                   />
                 </motion.p>
 
@@ -588,7 +588,7 @@ export default function HomePage() {
             {/* Header */}
             <div className="flex flex-row items-center justify-center sm:justify-start gap-4 w-full mb-3">
               <div className="flex justify-center items-center w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-[#FF5732] flex-shrink-0">
-                <Sparkles className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
+                <DollarSign className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
               </div>
 
               <h4 className="text-lg sm:text-xl md:text-2xl font-semibold text-[#0A0F2C] break-words">
