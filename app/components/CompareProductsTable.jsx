@@ -95,7 +95,7 @@ export default function CompareProductsTable({ productType }) {
           {data.map((row) => (
             <tr
               key={row.id}
-              className="hover:bg-orange-100 hover:shadow-lg transition-colors duration-200"
+              className="hover:bg-[#B1ED67] hover:shadow-lg transition-colors duration-200"
             >
               <td className="px-4 py-3 border-b">{row.name}</td>
 

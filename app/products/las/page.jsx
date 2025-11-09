@@ -296,7 +296,7 @@ export default function LASPage() {
             key={row.id}
             className={`transition-all duration-300 ${
               index % 2 === 0 ? "bg-white/50" : "bg-white/30"
-            } hover:bg-[#fff7f0]/80 hover:shadow-[0_4px_12px_rgba(255,115,0,0.15)]`}
+            } hover:bg-[#cef0a4]/80 hover:shadow-[0_4px_12px_rgba(255,115,0,0.15)]`}
           >
             {/* Institution */}
             <td className="px-5 py-4 border border-gray-300 font-semibold text-gray-900 bg-gradient-to-br from-[#f9fafb] to-[#f1fff1] shadow-[0_2px_4px_rgba(0,0,0,0.06)] relative z-[2]">
@@ -438,7 +438,7 @@ export default function LASPage() {
 
           <tbody>
             {sortedCostData.map((row, index) => (
-              <tr key={row.id} className={`transition-all duration-300 ${index % 2 === 0 ? "bg-white/50" : "bg-white/30"} hover:bg-[#fff7f0]/80 hover:shadow-[0_4px_12px_rgba(255,115,0,0.15)]`}>
+              <tr key={row.id} className={`transition-all duration-300 ${index % 2 === 0 ? "bg-white/50" : "bg-white/30"} hover:bg-[#cef0a4] `}>
                 <td className="px-5 py-4 border border-gray-300 font-semibold text-gray-900 bg-gradient-to-br from-[#f9fafb] to-[#f1fff1]">
                   {row.institution_name ?? DEFAULT_NULL_TEXT}
                 </td>

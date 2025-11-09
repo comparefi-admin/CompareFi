@@ -49,8 +49,6 @@
     "cmdk": "^1.0.0",
     "date-fns": "^3.6.0",
     "embla-carousel-react": "^8.3.0",
-    "eslint": "8.49.0",
-    "eslint-config-next": "13.5.1",
     "framer-motion": "^12.23.24",
     "gsap": "^3.13.0",
     "input-otp": "^1.2.4",
@@ -74,5 +72,9 @@
     "typescript": "5.2.2",
     "vaul": "^0.9.9",
     "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "eslint": "^9.39.1",
+    "eslint-config-next": "^15.5.6"
   }
 }
