@@ -159,129 +159,77 @@ export default function HomePage() {
           <Navbar />
         </div>
 
-        <main className="flex-grow bg-[#fcfefb]">
+        <main className="flex-grow bg-[#f4fcf7]">
 
-          {/* HERO SECTION */}
-          <section className="relative flex items-center justify-center min-h-[85vh] bg-white bg-opacity-0 overflow-hidden px-4 sm:px-6 lg:px-10" >
-            {/* Background noise layer */}
-            <div className="absolute inset-0 bg-[url('/noise.png')] opacity-100 mix-blend-overlay pointer-events-none"></div>
+          {/* HERO SECTION (FinGrow-style FIXED) */}
+          {/* HERO SECTION — FinGrow Exact Replica */}
+          {/* HERO SECTION — FinGrow Exact Replica (Fully Working) */}
+          {/* HERO SECTION — FinGrow Fixed (Fade + Overlay) */}
+{/* HERO SECTION — Final FinGrow Blended Version */}
+<section
+  id="hero"
+  className="relative flex flex-col items-center justify-center min-h-[100vh] overflow-visible text-center text-white"
+  style={{
+    // two backgrounds: grid image on top, gradient underneath
+    backgroundImage: `url("/images/grid-new.png"), linear-gradient(to bottom, #0B1120 0%, #0E1A2B 45%, #173B38 75%, #F4FFF8 100%)`,
+    backgroundRepeat: "no-repeat, no-repeat",        // grid won't tile unless you want it to
+    backgroundPosition: "center -100px, center top",
+    // grid size smaller so it sits in middle; gradient covers whole area
+    backgroundSize: "1920px auto, cover",
+    // blend top image softly so grid lines are subtle
+    backgroundBlendMode: "overlay, normal",
+  }}
+>
 
-            {/* Glass Card */}
-            <motion.div
-              className="w-full justify-center items-center flex flex-col"
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              <SpotlightCard className="relative z-10 w-[90%] max-w-full rounded-3xl   min-h-[70vh] bg-gradient-to-b from-[#b8ff62] via-white to-[#ffffff]
- backdrop-blur-xl shadow-2xl sm:p-10 md:p-14 lg:p-20 flex flex-col md:flex-row mt-[7%] mb-[7%] gap-10 md:gap-14 items-center justify-center hover:drop-shadow-2xl
-           hover:scale-102 transition-all duration-700 
- border-none
-           p-6 will-change-transform "  spotlightColor="rgba(255,255,255,0.3)">
-              {/* LEFT */}
-              <div className="flex-1 text-center md:text-left space-y-5 sm:space-y-6 lg:space-y-8 pl-20">
-                <motion.h1
-                    className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-black tracking-tight leading-tight drop-shadow-[0_2px_2px_rgba(0,0,0,0.1)]"
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1, duration: 0.7, ease: 'easeOut' }}
-                  >
-                   </motion.h1>
+  <div
+    aria-hidden
+    className="absolute bottom-0 left-0 right-0 -z-10"
+    style={{
+      height: "280px",
+      background: "linear-gradient(to bottom, rgba(23,59,56,0) 0%, #F4FFF8 100%)",
+    }}
+  />
 
-                  {/* <TextType 
-                    text={["CompareFi"]}
-                    typingSpeed={75}
-                    pauseDuration={1500}
-                    showCursor={true}
-                    cursorCharacter="|"
-                    className='text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-black tracking-tight leading-tight drop-shadow-[0_2px_2px_rgba(0,0,0,0.1)]'
-                  />
-                  </motion.h1> */}
+<div className='mt-[-14%]'></div>
 
-                  <motion.h1
-                    className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-black tracking-tight leading-tight drop-shadow-[0_2px_2px_rgba(0,0,0,0.1)]"
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1, duration: 0.7, ease: 'easeOut' }}
-                  >
-                    <BlurText
-                      text="CompareFi"
-                      delay={80}
-                      animateBy="words" 
-                      direction="top" 
-                      onAnimationComplete={handleAnimationComplete} 
-                      className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-black tracking-tight leading-tight drop-shadow-[0_2px_2px_rgba(0,0,0,0.1)]"
-                    />
-                  </motion.h1>
-                <motion.h2
-                  className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-medium text-black"
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3, duration: 0.7, ease: 'easeOut' }}
-                >
-                  <BlurText
-                    text="Compare Right Choose Right"
-                    delay={80}
-                    animateBy="words"
-                    direction="top"
-                    onAnimationComplete={handleAnimationComplete}
-                    className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-medium text-black"
-                  />
-                </motion.h2>
+  {/* Badge */}
+  <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="flex items-center space-x-2 mb-4 relative z-10">
+    <div className="bg-[#B1ED67]/20 text-[#B1ED67] px-3 py-1 rounded-full text-sm font-medium">Backed by CompareFi</div>
+  </motion.div>
+
+  {/* Headline */}
+  <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight tracking-tight text-white max-w-3xl relative z-10">
+    Take Control of Your <span className="text-[#B1ED67]">Finances</span> with Confidence
+  </motion.h1>
+
+  {/* Subtext */}
+  <motion.p initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.7 }} className="text-slate-300 mt-6 text-lg max-w-xl relative z-10">
+    All-in-one platform to manage your savings, investments, credit, and more — backed by expert advice and cutting-edge AI tools.
+  </motion.p>
+
+  {/* CTA */}
+  <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 0.7 }} className="mt-10 relative z-10">
+    <Button size="lg" className="bg-[#B1ED67] hover:bg-[#9CDA59] text-black font-semibold px-8 py-4 rounded-full shadow-lg hover:shadow-[#B1ED67]/30 transition-all duration-300">
+      Get Started →
+    </Button>
+  </motion.div>
+
+  {/* Cards overlapping the bottom of hero */}
+  <motion.div initial={{ opacity: 0, y: 60, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ delay: 0.8, duration: 0.8 }} className="absolute  bottom-[-2rem] inset-x-0 flex justify-center z-20">
+    <div className="w-full max-w-[1200px] flex justify-center">
+      <DisplayCards/>
+    </div>
+  </motion.div>
+</section>
 
 
-                <motion.p
-                  className="text-sm sm:text-base md:text-lg text-black max-w-md mx-auto md:mx-0 leading-relaxed"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.45, duration: 0.6, ease: 'easeOut' }}
-                >
-                  <BlurText
-                    text="Compare and understand financial products across the market from investments to loans and beyond. Make informed, confident decisions backed by data and AI-driven insights. "
-                    delay={5}
-                    animateBy="word"
-                    direction="top"
-                    onAnimationComplete={handleAnimationComplete}
-                    className="text-sm sm:text-base md:text-lg text-black max-w-md mx-auto md:mx-0 leading-relaxed"
-                  />
-                </motion.p>
 
 
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.6, duration: 0.5, ease: 'easeOut' }}
-                >
-                  <Button
-                    size="lg"
-                    className="bg-[#fc5732] hover:bg-[#fc5732] shadow-inner-white-500 text-white rounded-2xl px-6 sm:px-8 md:px-10 py-4 sm:py-5 md:py-6 text-base sm:text-lg shadow-lg shadow-blue-500/20 transition-transform hover:scale-105 duration-300"
-                  >
-                    <ScrollLink
-                      to="compare"        // ID of the section
-                      smooth={true}        // Smooth scroll
-                      duration={600}       // Scroll duration in ms
-                      offset={-100} 
-                    >
-                      Start Comparing
-                    </ScrollLink>
-                  </Button>
-                </motion.div>
-              </div>
 
-              {/* RIGHT */}
-              <motion.div
-                className="flex-1 flex justify-center items-center w-full"
-                i initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                  animate={{ opacity: 1, scale: 1, y: -20 }} // 👈 lifts it up slightly
-                  transition={{ delay: 0.5, duration: 0.7 }}
-              >
-                <div className="flex w-full max-w-2xl sm:max-w-3xl md:max-w-4xl lg:max-w-5xl items-center justify-center py-10 sm:py-14 md:py-20 ">
-                  <DisplayCards cards={defaultCards} />
-                </div>
-              </motion.div>
-              </SpotlightCard>
-            </motion.div>
-          </section>
+
+
+
+
 
           {/* PRODUCT HIGHLIGHTS */}
    <section id="featured" className="w-full bg-[#EEF1FA] bg-opacity-0 py-20 mx-5 px-10 lg:px-20 flex flex-col lg:flex-row justify-between items-center lg:items-start">
@@ -510,114 +458,7 @@ export default function HomePage() {
           </section> */}
 
 
-{/* ✅ Responsive Why CompareFi Section */}
-<section className="w-full py-10 px-6 sm:px-10 lg:px-20 mb-[5%] overflow-hidden">
-  <SpotlightCard
-    className="flex flex-col lg:flex-row justify-between items-center gap-16 lg:gap-20 rounded-3xl p-8 sm:p-12 md:p-16 bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-xl transition-all duration-700 border-none"
-    spotlightColor="rgba(255,255,255,0.4)"
-  >
-    {/* Left Section (Image) */}
-    <div className="w-full lg:w-1/2 flex justify-center items-center">
-      <div className="w-[95%] max-w-xl">
-        <Image
-          src={pc}
-          alt="CompareFi Overview"
-          className="w-full h-auto mix-blend-multiply scale-105 sm:scale-110"
-        />
-      </div>
-    </div>
 
-    {/* Right Section (Text + Cards) */}
-    <div className="w-full lg:w-1/2 flex flex-col justify-center items-start text-left mt-8 lg:mt-0">
-      <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-[#0A0F2C] mb-4 leading-tight break-words">
-        Why CompareFi?
-      </h2>
-
-      <p className="text-[#4B5563] mb-6 sm:text-sm md:text-lg lg:text-2xl leading-relaxed break-words">
-        Empowering you to see clearly, decide wisely, and choose confidently.
-      </p>
-
-      <a className="button1" href="/about">
-        <span>Read More</span>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 66 43">
-          <polygon points="39.58,4.46 44.11,0 66,21.5 44.11,43 39.58,38.54 56.94,21.5"></polygon>
-          <polygon points="19.79,4.46 24.32,0 46.21,21.5 24.32,43 19.79,38.54 37.15,21.5"></polygon>
-          <polygon points="0,4.46 4.53,0 26.42,21.5 4.53,43 0,38.54 17.36,21.5"></polygon>
-        </svg>
-      </a>
-
-      {/* ✅ Feature Cards */}
-      <div
-        className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-10 w-full max-w-2xl 
-                   place-items-center auto-rows-fr"
-      >
-        {[
-          {
-            title: "Transparent Comparisons",
-            description:
-              "We uncover the hidden costs, conditions, and fine print behind every financial product — so you see the true picture before you decide.",
-          },
-          {
-            title: "Independent & Unbiased",
-            description:
-              "CompareFi is a neutral platform with no affiliations or commissions. Every insight is objective, data-backed, and built to help you, not any brand.",
-          },
-          {
-            title: "Smart, Simple Insights",
-            description:
-              "Complex numbers made easy. Our AI-powered comparisons and clear visuals help you choose what’s truly right for you — faster and with confidence.",
-          },
-        ].map((feature, i, arr) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: i * 0.2, ease: "easeOut" }}
-            viewport={{ once: true }}
-            className={`w-full sm:w-[90%] rounded-3xl shadow-[0_12px_25px_-5px_rgba(102,102,102,0.5)] 
-                       transition-all duration-500 ease-out p-8 sm:p-10 flex flex-col 
-                       items-center text-center bg-gradient-to-tr from-white/10 to-white/5 
-                       border border-[#c3c6ce] hover:border-[#99e33d] 
-                       hover:shadow-[0_4px_18px_0_rgba(0,0,0,0.25)] overflow-hidden break-words 
-                       ${
-                         i === arr.length - 1
-                           ? "sm:col-span-2 sm:justify-self-center sm:w-[80%]"
-                           : ""
-                       }`}
-          >
-            {/* Header */}
-            <div className="flex flex-row items-center justify-center sm:justify-start gap-4 w-full mb-3">
-              <div className="flex justify-center items-center w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-[#FF5732] flex-shrink-0">
-                <DollarSign className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
-              </div>
-
-              <h4 className="text-lg sm:text-xl md:text-2xl font-semibold text-[#0A0F2C] break-words">
-                <BlurText
-                  text={feature.title}
-                  delay={20}
-                  animateBy="words"
-                  direction="top"
-                  onAnimationComplete={handleAnimationComplete}
-                />
-              </h4>
-            </div>
-
-            {/* Description */}
-            <p className="text-[#4B5563] mt-2 leading-relaxed text-sm sm:text-base break-words">
-              <BlurText
-                text={feature.description}
-                delay={30}
-                animateBy="words"
-                direction="top"
-                onAnimationComplete={handleAnimationComplete}
-              />
-            </p>
-          </motion.div>
-        ))}
-      </div>
-    </div>
-  </SpotlightCard>
-</section>
 
 
 

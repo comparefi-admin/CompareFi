@@ -1,85 +1,49 @@
 "use client";
-
 import { cn } from "@/lib/utils";
 import { Sparkles } from "lucide-react";
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 
 /* -----------------------------------------------
-   🔹 DisplayCard — Title + Icon on top, 2×2 matrix below
+   🔹 Single Card Component
 ------------------------------------------------ */
-interface DataPoint {
-  label: string;
-  value: string;
-}
-
-interface DisplayCardProps {
-  className?: string;
-  icon?: React.ReactNode;
-  title?: string;
-  data?: DataPoint[]; // 👈 Array of 4 data points
-  iconClassName?: string;
-  titleClassName?: string;
-  isHovered?: boolean;
-  isDimmed?: boolean;
-  lift?: number;
-}
-
 function DisplayCard({
-  className,
-  icon = <Sparkles className="w-6 h-6 text-white" />,
-  title = "Financial Overview",
-  data = [
-    { label: "Interest Range", value: "8–20% p.a." },
-    { label: "Tenure", value: "Up to 36 months" },
-    { label: "Disbursal Time", value: "1–2 Days" },
-    { label: "Collateral Type", value: "Listed Shares" },
-  ],
-  iconClassName,
-  titleClassName,
-  isHovered = false,
+  title,
+  data,
   isDimmed = false,
-  lift = 0,
-}: DisplayCardProps) {
-  const baseCardStyles = cn(
-    "absolute flex flex-col justify-between h-[20rem] w-[24rem] -skew-y-[9deg]",
-    "select-none rounded-2xl border border-blue-100 bg-white/90 p-6 shadow-md overflow-hidden",
-    "transition-all duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)]"
-  );
-
-  const hoverStyles = isHovered ? `-translate-y-[${lift}px] scale-[1.05] shadow-2xl` : "";
-  const dimmedStyles = isDimmed ? "opacity-0 scale-[0.97]" : "";
-  const combinedClass = cn(baseCardStyles, hoverStyles, dimmedStyles, className);
-
-  const inlineTransform = {
-    transform: isHovered ? `translateY(-${lift}px) scale(1.05)` : undefined,
-  };
-
+}: {
+  title: string;
+  data: { label: string; value: string }[];
+  isDimmed?: boolean;
+}) {
   return (
-    <div className={combinedClass} style={inlineTransform}>
-      {/* 🔵 Header (Icon + Title) */}
-      <div className="flex items-center gap-4 mb-5">
-        <span
-          className={cn(
-            "inline-flex items-center justify-center rounded-full bg-gradient-to-b from-[#FF5732] to-[#ff785a] p-2 shadow-md",
-            iconClassName
-          )}
-        >
-          {icon}
+    <div
+      className={cn(
+        "flex flex-col justify-between h-[17rem] w-[25rem] rounded-2xl border border-gray-100 bg-white/95 backdrop-blur-md p-5 shadow-lg transition-all duration-500 hover:-translate-y-[4px]",
+        isDimmed ? "opacity-50 scale-[0.97]" : "opacity-100"
+      )}
+    >
+      {/* Header */}
+      <div className="flex items-center gap-2 mb-3">
+        <span className="inline-flex items-center justify-center rounded-full bg-gradient-to-b from-[#FF5732] to-[#ff785a] p-2 shadow-md">
+          <Sparkles className="w-5 h-5 text-white" />
         </span>
-        <p className={cn("text-xl font-semibold text-[#0A0F2C]", titleClassName)}>
+        <p className="text-lg font-semibold text-[#0A0F2C] leading-tight">
           {title}
         </p>
       </div>
 
-      {/* 🧩 2×2 Data Grid */}
-      <div className="grid grid-cols-2 gap-4 w-full">
+      {/* 2×2 Grid */}
+      <div className="grid grid-cols-2 gap-3 w-full">
         {data.map((item, idx) => (
           <div
             key={idx}
-            className="flex flex-col items-center justify-center rounded-2xl bg-[#f9fafb] py-4 shadow-sm border border-gray-100"
+            className="flex flex-col items-center justify-center rounded-xl bg-[#f9fafb] py-3 shadow-sm border border-gray-100"
           >
-            <span className="text-gray-500 text-sm">{item.label}</span>
-            <span className="text-[#FF5732] font-semibold text-lg mt-1">
+            <span className="text-gray-500 text-xs sm:text-sm">
+              {item.label}
+            </span>
+            <span className="text-[#FF5732] font-semibold text-sm sm:text-base mt-1">
               {item.value}
             </span>
           </div>
@@ -90,18 +54,13 @@ function DisplayCard({
 }
 
 /* -----------------------------------------------
-   🔹 DisplayCards — Stacked Container (unchanged)
+   🔹 DisplayCards — perfectly balanced row
 ------------------------------------------------ */
-interface DisplayCardsProps {
-  cards?: Omit<DisplayCardProps, "isHovered" | "isDimmed" >[];
-}
-
-export default function DisplayCards({ cards }: DisplayCardsProps) {
+export default function DisplayCards() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
-  const defaultCards = [
+  const cards = [
     {
-      className: "z-[3] translate-x-[0px] translate-y-[0px] rotate-[-2deg]",
       title: "Loan Against Shares",
       data: [
         { label: "Interest Range", value: "8–20% p.a." },
@@ -109,10 +68,8 @@ export default function DisplayCards({ cards }: DisplayCardsProps) {
         { label: "Disbursal Time", value: "1–2 Days" },
         { label: "Collateral Type", value: "Listed Shares" },
       ],
-      lift: 40,
     },
     {
-      className: "z-[2] translate-x-[60px] translate-y-[30px] rotate-[1deg]",
       title: "Loan Against Mutual Funds",
       data: [
         { label: "Interest Range", value: "9–18% p.a." },
@@ -120,10 +77,8 @@ export default function DisplayCards({ cards }: DisplayCardsProps) {
         { label: "Disbursal Time", value: "1–3 Days" },
         { label: "Collateral Type", value: "Mutual Fund Units" },
       ],
-      lift: 60,
     },
     {
-      className: "z-[1] translate-x-[120px] translate-y-[60px] rotate-[-4deg]",
       title: "Loan Against Bonds",
       data: [
         { label: "Interest Range", value: "10–15% p.a." },
@@ -131,33 +86,48 @@ export default function DisplayCards({ cards }: DisplayCardsProps) {
         { label: "Disbursal Time", value: "2–4 Days" },
         { label: "Collateral Type", value: "Corporate Bonds" },
       ],
-      lift: 80,
     },
   ];
 
-  const displayCards = cards || defaultCards;
-
   return (
-    <div className="relative w-[32rem] h-[22rem] mx-auto mt-10">
-      {displayCards.map((cardProps, index) => {
-        const isHovered = hoveredIndex === index;
-        const isDimmed = hoveredIndex !== null && hoveredIndex !== index;
+    <div
+      className="
+        relative w-full flex justify-center
+        mt-[-6rem] mb-[6rem]
+        pointer-events-none
+      "
+    >
+      
 
-        return (
-          <div
-            key={index}
-            onMouseEnter={() => setHoveredIndex(index)}
+      {/* Cards Row */}
+      <div
+        className="
+          flex justify-center items-center gap-14
+          w-[85%] 
+          relative z-10 pointer-events-auto
+        "
+      >
+        {cards.map((card, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.3 + i * 0.2, duration: 0.6, ease: 'easeOut' }}
+            onMouseEnter={() => setHoveredIndex(i)}
             onMouseLeave={() => setHoveredIndex(null)}
+            whileHover={{
+              scale: 1.05,
+              transition: { duration: 0.25, ease: 'easeOut' },
+            }}
+            className="transition-all duration-300"
           >
             <DisplayCard
-              {...cardProps}
-              isHovered={isHovered}
-              isDimmed={isDimmed}
-              
+              {...card}
+              isDimmed={hoveredIndex !== null && hoveredIndex !== i}
             />
-          </div>
-        );
-      })}
+          </motion.div>
+        ))}
+      </div>
     </div>
   );
 }
