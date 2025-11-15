@@ -154,7 +154,7 @@ export default function LASPage() {
     );
 
   return (
-    <div className="bg-[#fcfefb] min-h-screen">
+    <div className="bg-[#EFF3F6] min-h-screen">
       <Navbar />
 
 {/* Hero / Overview */}

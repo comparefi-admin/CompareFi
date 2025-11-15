@@ -289,7 +289,7 @@ export default function HomePage() {
       <p className="text1-body text-gray-600 mt-1">Margin Trading Facility</p>
     </div>
   </div>
-  <button className="card4-button mt-4 bg-[#FF5732] hover:bg-black text-white font-medium py-2 px-4 rounded-lg transition-all">More Info</button>
+  <button className="card4-button mt-4 bg-[#B1ED67] hover:bg-black text-white font-medium py-2 px-4 rounded-lg transition-all">More Info</button>
 </a>
 
 </div>
