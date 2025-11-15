@@ -326,8 +326,8 @@ export default function HomePage() {
               className={`
                 text-lg sm:text-xl px-6 sm:px-8 py-3 sm:py-4 rounded-xl whitespace-nowrap transition font-bold
                 focus-visible:ring-4 focus-visible:ring-emerald-400
-                data-[state=active]:bg-gradient-to-t from-white to-[#B1ED67]
-                data-[state=active]:text-black
+                data-[state=active]:bg-[#2E494D]
+                data-[state=active]:text-white
                 data-[state=active]:drop-shadow-2xl
               `}
             >
