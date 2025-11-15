@@ -237,7 +237,7 @@ html {
 /* --- Chic Card Styles --- */
 .card4 {
   border-radius: 1rem; /* slightly rounded, chic */
-  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  
   box-shadow: 0 6px 15px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.04);
   transition: all 0.4s ease;
   overflow: visible;
@@ -290,12 +290,11 @@ html {
 .text1-title {
   font-size: 1.25rem;
   font-weight: 600;
-  color: #111827; /* darker, chic color */
   transition: color 0.3s ease;
 }
-
+  
 .text1-body {
-  color: #6b7280; /* soft gray */
+ /* soft gray */
   margin-top: 0.25rem;
 }
 

@@ -249,43 +249,43 @@ export default function HomePage() {
   {/* Right Section (Cards Grid) */}
   <div className="lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mr-10">
 {/* LAS Card */}
-<a href="/products/las" className="card4 group relative overflow-hidden rounded-lg bg-white shadow-md hover:shadow-lg transition-all duration-300 p-6 cursor-pointer">
+<a href="/products/las" className="card4 group relative overflow-hidden rounded-lg bg-[#141F2B] shadow-md hover:shadow-lg transition-all duration-300 p-6 cursor-pointer">
   <div className="flex items-center space-x-4">
     {/* Icon on the left */}
-    <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-[#FF5732]/20 rounded-full group-hover:bg-[#FF5732]/30 transition-colors">
-      <DollarSign className="w-6 h-6 text-[#FF5732] group-hover:text-white" />
+    <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-[#B1ED67]/20 rounded-full group-hover:bg-[#B1ED67]/30 transition-colors">
+      <DollarSign className="w-6 h-6 text-[#B1ED67] group-hover:text-white" />
     </div>
     {/* Text */}
     <div>
-      <p className="text1-title text-xl font-semibold text-[#0A0F2C] group-hover:text-black transition-colors">LAS</p>
-      <p className="text1-body text-gray-600 mt-1">Loan Against Shares</p>
+      <p className="text1-title text-xl font-semibold text-[#FFFFFF]  transition-colors">LAS</p>
+      <p className="text1-body text-white mt-1">Loan Against Shares</p>
     </div>
   </div>
-  <button className="card4-button mt-4 bg-[#FF5732] hover:bg-black text-white font-medium py-2 px-4 rounded-lg transition-all">More Info</button>
+  <button className="card4-button mt-4 bg-[#B1ED67] hover:bg-black text-white font-medium py-2 px-4 rounded-lg transition-all">More Info</button>
 </a>
 
 {/* LAMF Card */}
-<a href="/products/lamf" className="card4 group relative overflow-hidden rounded-lg bg-white shadow-md hover:shadow-lg transition-all duration-300 p-6 cursor-pointer">
+<a href="/products/lamf" className="card4 group relative overflow-hidden rounded-lg bg-[#2E494D] shadow-md hover:shadow-lg transition-all duration-300 p-6 cursor-pointer">
   <div className="flex items-center space-x-4">
-    <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-[#FF5732]/20 rounded-full group-hover:bg-[#FF5732]/30 transition-colors">
-      <PieChart className="w-6 h-6 text-[#FF5732] group-hover:text-white" />
+    <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-[#B1ED67]/20 rounded-full group-hover:bg-[#B1ED67]/30 transition-colors">
+      <PieChart className="w-6 h-6 text-[#B1ED67] group-hover:text-white" />
     </div>
     <div>
-      <p className="text1-title text-xl font-semibold text-[#0A0F2C] group-hover:text-black transition-colors">LAMF</p>
-      <p className="text1-body text-gray-600 mt-1">Loan Against Mutual Funds</p>
+      <p className="text1-title text-xl font-semibold text-[#FFFFFF]  transition-colors">LAMF</p>
+      <p className="text1-body text-white mt-1">Loan Against Mutual Funds</p>
     </div>
   </div>
-  <button className="card4-button mt-4 bg-[#FF5732] hover:bg-black text-white font-medium py-2 px-4 rounded-lg transition-all">More Info</button>
+  <button className="card4-button mt-4 bg-[#B1ED67] hover:bg-black text-white font-medium py-2 px-4 rounded-lg transition-all">More Info</button>
 </a>
 
 {/* MTF Card */}
 <a href="/products/mtf" className="card4 group relative overflow-hidden rounded-lg bg-white shadow-md hover:shadow-lg transition-all duration-300 p-6 cursor-pointer">
   <div className="flex items-center space-x-4">
-    <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-[#FF5732]/20 rounded-full group-hover:bg-[#FF5732]/30 transition-colors">
-      <BarChart className="w-6 h-6 text-[#FF5732] group-hover:text-white" />
+    <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-[#B1ED67]/20 rounded-full group-hover:bg-[#B1ED67]/30 transition-colors">
+      <BarChart className="w-6 h-6 text-[#B1ED67] " />
     </div>
     <div>
-      <p className="text1-title text-xl font-semibold text-[#0A0F2C] group-hover:text-black transition-colors">MTF</p>
+      <p className="text1-title text-xl font-semibold text-[#0A0F2C]  transition-colors">MTF</p>
       <p className="text1-body text-gray-600 mt-1">Margin Trading Facility</p>
     </div>
   </div>
