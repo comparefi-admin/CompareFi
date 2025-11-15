@@ -159,7 +159,7 @@ export default function HomePage() {
           <Navbar />
         </div>
 
-        <main className="flex-grow bg-[#f4fcf7]">
+        <main className="flex-grow bg-[#EFF3F6]">
 
           {/* HERO SECTION (FinGrow-style FIXED) */}
           {/* HERO SECTION — FinGrow Exact Replica */}
@@ -171,7 +171,7 @@ export default function HomePage() {
   className="relative flex flex-col items-center justify-center min-h-[100vh] overflow-visible text-center text-white"
   style={{
     // two backgrounds: grid image on top, gradient underneath
-    backgroundImage: `url("/images/grid-new.png"), linear-gradient(to bottom, #0B1120 0%, #0E1A2B 45%, #173B38 75%, #F4FFF8 100%)`,
+    backgroundImage: `url("/images/grid-new.png"), linear-gradient(to bottom, #0B1120 0%, #0E1A2B 45%, #173B38 75%, #EFF3F6 100%)`,
     backgroundRepeat: "no-repeat, no-repeat",        // grid won't tile unless you want it to
     backgroundPosition: "center -100px, center top",
     // grid size smaller so it sits in middle; gradient covers whole area
@@ -190,7 +190,7 @@ export default function HomePage() {
     }}
   />
 
-<div className='mt-[-14%]'></div>
+<div className='mt-[-18%]'></div>
 
   {/* Badge */}
   <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="flex items-center space-x-2 mb-4 relative z-10">
@@ -215,8 +215,8 @@ export default function HomePage() {
   </motion.div>
 
   {/* Cards overlapping the bottom of hero */}
-  <motion.div initial={{ opacity: 0, y: 60, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ delay: 0.8, duration: 0.8 }} className="absolute  bottom-[-2rem] inset-x-0 flex justify-center z-20">
-    <div className="w-full max-w-[1200px] flex justify-center">
+  <motion.div initial={{ opacity: 0, y: 60, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ delay: 0.8, duration: 0.8 }} className="absolute  bottom-[-2rem] inset-x-0 flex justify-center z-20 mt-20">
+    <div className="w-full max-w-[1200px] flex justify-center ">
       <DisplayCards/>
     </div>
   </motion.div>
@@ -461,36 +461,64 @@ export default function HomePage() {
 
 
 
+<section className="w-full flex justify-center items-center py-20 px-4">
+  <div className="w-[85%] rounded-3xl px-6 sm:px-16 py-20 relative overflow-hidden bg-[#124434]">
 
-<section className="w-full flex justify-center items-center pb-20 mb-30 bg-transparent">
-  <div className="m2 w-[80%] flex flex-col p-20 relative">
-    {/* Glowing background ring */}
-    <div className="absolute z-5 inset-2 blur-[60px] opacity-80 group-hover:opacity-100 transition-all duration-500"
-         style={{
-           background: "radial-gradient(circle, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 70%)"
-         }}>
-    </div>
+    {/* GRID BACKGROUND (Behind everything, but above bg color) */}
+    <div
+      className="absolute inset-0 opacity-20 -z-20"
+      style={{
+        backgroundImage: `url("/images/grid-new.png")`,
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+        backgroundSize: "1600px auto",
+        mixBlendMode: "overlay",
+      }}
+    />
 
-    {/* Text + WhatsApp CTA flowing across the card */}
-    <div className="relative z-10 w-full flex flex-wrap items-center justify-between gap-6">
-      <h2 className="flex-1 text-3xl sm:text-4xl font-extrabold text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">
-        Want to compare your financial options? Reach out to CompareFi instantly on WhatsApp!
+    {/* DARK OVERLAY (transparent enough to see grid) */}
+    <div className="absolute inset-0 bg-[#124434]/80 -z-10"></div>
+
+    {/* CTA CONTENT */}
+    <div className="relative z-10 text-center flex flex-col items-center gap-6">
+
+      <h2 className="text-3xl sm:text-5xl font-bold text-white leading-tight">
+        Ready to Take the Next Step in<br />Your Financial Journey?
       </h2>
 
-      <a 
-        href="https://wa.me/919999999999"  // Replace with your WhatsApp number
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-flex items-center px-6 py-3 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg shadow-lg transition-all duration-300 hover:scale-105"
+      <p className="text-gray-200 text-lg max-w-2xl">
+        Join thousands who trust FinGrow to manage<br />and grow their finances.
+      </p>
+
+      <a
+        href="#"
+        className="mt-4 inline-flex items-center gap-2 bg-[#B5FF4A] hover:bg-[#a4ff2e] 
+        text-[#0d1c11] font-semibold px-8 py-4 rounded-full transition-all duration-300 
+        shadow-lg"
       >
-        <svg className="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M12.04 2.004C6.504 2.004 2 6.508 2 12.046c0 1.96.508 3.872 1.472 5.552L2 22l4.56-1.472A9.944 9.944 0 0 0 12.04 22c5.54 0 10.044-4.504 10.044-9.954 0-5.54-4.504-10.042-10.044-10.042zM12.04 20.1c-1.64 0-3.24-.43-4.64-1.25l-.33-.19-2.7.87.88-2.63-.21-.34A8.01 8.01 0 0 1 4.1 12.04c0-4.374 3.566-7.93 7.94-7.93 4.374 0 7.93 3.556 7.93 7.93s-3.556 7.93-7.93 7.93zm4.47-5.93c-.244-.122-1.44-.714-1.664-.8-.224-.084-.388-.122-.552.122-.164.244-.63.8-.772.964-.14.164-.284.184-.528.062-.244-.122-1.03-.378-1.962-1.2-.726-.646-1.216-1.444-1.36-1.688-.14-.244-.015-.376.106-.498.108-.106.244-.274.366-.412.12-.136.16-.244.24-.406.082-.164.04-.308-.02-.43-.06-.122-.552-1.33-.756-1.816-.2-.48-.4-.414-.552-.422l-.47-.008c-.16 0-.42.062-.64.308s-.84.822-.84 2.004c0 1.182.86 2.322.98 2.486.12.164 1.7 2.594 4.14 3.63.578.25 1.03.4 1.384.514.582.186 1.11.16 1.53.098.466-.07 1.44-.586 1.64-1.152.2-.57.2-1.058.14-1.16-.06-.1-.22-.162-.464-.284z"/>
+        Create My Free Account
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="w-5 h-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth="2"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M13 7l5 5m0 0l-5 5m5-5H6"
+          />
         </svg>
-        Contact on WhatsApp
       </a>
+
     </div>
   </div>
 </section>
+
+
+
 
 
         </main>
