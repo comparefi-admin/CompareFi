@@ -305,7 +305,7 @@ export default function HomePage() {
 
   {/* Glass card container */}
   <SpotlightCard
-    className="relative z-10 w-[90%] rounded-3xl bg-white backdrop-blur-lg p-10 sm:p-14 flex flex-col drop-shadow-2xl shadow-2xl border-none "
+    className="relative z-10 w-[90%] rounded-3xl bg-white backdrop-blur-lg p-10 sm:p-14 flex flex-col drop-shadow-2xl shadow-2xl border-none bg-opacity-100"
     spotlightColor="rgba(177,237,103,0)"
   >
     <motion.div
