@@ -572,14 +572,15 @@ export default function HomePage() {
 
 
 
-<section className="w-full flex justify-center items-center py-20 px-4">
+<section className="w-full flex justify-center items-center py-20 px-4"
+>
   <div className="w-[85%] rounded-3xl px-6 sm:px-16 py-20 relative overflow-hidden bg-[#124434]">
 
     {/* GRID BACKGROUND (Behind everything, but above bg color) */}
     <div
       className="absolute inset-0 opacity-20 -z-20"
       style={{
-        backgroundImage: `url("/images/grid-new.png")`,
+        backgroundImage: `url("./public/images/grid-new.png")`,
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
         backgroundSize: "1600px auto",
