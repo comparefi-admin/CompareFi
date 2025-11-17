@@ -4,37 +4,46 @@ import { Sparkles } from "lucide-react";
 import React, { useState } from "react";
 
 /* -----------------------------------------------
-   🔹 Single Card Component (Now with fade bottom)
+   🔹 Single Card Component — Fi-style Glass Cards
 ------------------------------------------------ */
 function DisplayCard({
   title,
   data,
+  isMasked = true,
   isDimmed = false,
   className,
 }: {
   title: string;
   data: { label: string; value: string }[];
+  isMasked?: boolean;
   isDimmed?: boolean;
   className?: string;
 }) {
   return (
     <div
       className={cn(
-        // Card baseline styles
-        "flex flex-col justify-between h-[22rem] w-[15rem] rounded-2xl border border-gray-100 bg-gradient-to-b from-[#f0fdf4] via-white to-[#ecfeff] backdrop-blur-md p-5 shadow-lg transition-all duration-500 hover:-translate-y-[4px]",
-        // 🔥 Gradient fade added here
-        "mask-gradient",
-        // Dim effect
-        isDimmed ? "opacity-50 scale-[0.97]" : "opacity-100",
+        "relative flex flex-col justify-between h-[22rem] w-[15rem] rounded-2xl p-5",
+        // Glass acrylic effect
+        "backdrop-blur-xl border border-white/30 shadow-[0_8px_32px_rgba(0,0,0,0.15)]",
+        // Fi chrome gradient
+        "bg-[linear-gradient(145deg,rgba(255,255,255,0.65)_0%,rgba(240,240,240,0.35)_45%,rgba(220,220,220,0.15)_100%)]",
+        // Mask fade (removes on hover)
+        isMasked ? "mask-gradient" : "mask-none",
+        // Dimmed side cards
+        isDimmed ? "opacity-50 scale-[0.96]" : "opacity-100",
+        "transition-all duration-700 ease-out",
         className
       )}
     >
+      {/* Glossy top highlight */}
+      <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-b from-white/40 to-transparent" />
+
       {/* Header */}
       <div className="flex items-center gap-2 mb-3">
         <span className="inline-flex items-center justify-center rounded-full bg-gradient-to-b from-[#FF5732] to-[#ff785a] p-2 shadow-md">
           <Sparkles className="w-5 h-5 text-white" />
         </span>
-        <p className="text-lg font-semibold text-[#0A0F2C] leading-tight">
+        <p className="text-lg font-medium tracking-tight text-[#0A0F2C] leading-tight">
           {title}
         </p>
       </div>
@@ -44,12 +53,12 @@ function DisplayCard({
         {data.map((item, idx) => (
           <div
             key={idx}
-            className="flex flex-col justify-start rounded-xl bg-[#f9fafb] py-3 px-4 shadow-sm border border-gray-100"
+            className="flex flex-col justify-start rounded-xl bg-white/60 backdrop-blur-sm py-3 px-4 shadow-sm border border-white/40"
           >
-            <span className="text-gray-500 text-xs sm:text-sm">
+            <span className="text-gray-600 text-xs sm:text-sm">
               {item.label}
             </span>
-            <span className="text-[#FF5732] font-semibold text-sm sm:text-base mt-1">
+            <span className="text-[#FF5732] font-medium tracking-tight text-sm sm:text-base mt-1">
               {item.value}
             </span>
           </div>
@@ -92,12 +101,11 @@ export default function DisplayCards() {
     },
   ];
 
-  // Card tilt & overlay stacking
   const cardLayoutClasses = [
-  "z-10 rotate-[-10deg] translate-x-[25px] translate-y-[20px] opacity-50",  // Left → DOWN
-  "z-30 rotate-0 translate-y-[-20px]",                                      // Middle → UP
-  "z-20 rotate-[10deg] translate-x-[-25px] translate-y-[20px] opacity-50", // Right → DOWN
-];
+    "z-10 rotate-[-10deg] translate-x-[25px] translate-y-[20px] opacity-50",
+    "z-30 rotate-0 translate-y-[-20px]",
+    "z-20 rotate-[10deg] translate-x-[-25px] translate-y-[20px] opacity-50",
+  ];
 
   return (
     <div className="flex justify-center items-center py-20">
@@ -105,24 +113,24 @@ export default function DisplayCards() {
         {cards.map((card, i) => {
           const layoutClass = cardLayoutClasses[i];
 
+          const isHovered = hoveredIndex === i;
+          const isDimmed = hoveredIndex !== null && hoveredIndex !== i;
+
           return (
             <div
               key={i}
               className={cn(
                 "transition-all duration-700 ease-out",
                 layoutClass,
-                // Hover effect: bring card forward
-                hoveredIndex === i
-                  ? "z-40 rotate-0 translate-x-0 scale-[1.05] opacity-100"
-                  : ""
+                isHovered && "z-40 rotate-0 translate-x-0 scale-[1.08] opacity-100"
               )}
               onMouseEnter={() => setHoveredIndex(i)}
               onMouseLeave={() => setHoveredIndex(null)}
             >
               <DisplayCard
                 {...card}
-                // Only dim if a card IS hovered, and the current card IS NOT the hovered one.
-                isDimmed={hoveredIndex !== null && hoveredIndex !== i}
+                isDimmed={isDimmed}
+                isMasked={!isHovered}
               />
             </div>
           );
