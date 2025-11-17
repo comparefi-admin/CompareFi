@@ -606,6 +606,10 @@ const handleCategoryClick = (cat) => {
 </section>
 
 
+
+
+
+
   {/* --- FAQ Section --- */}
   <section className="max-w-7xl mx-auto px-6 py-12">
   <h2 className="text-4xl font-bold text-center mb-8">Frequently Asked Questions about LAMF</h2>
