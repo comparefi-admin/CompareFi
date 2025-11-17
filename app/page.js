@@ -572,61 +572,66 @@ export default function HomePage() {
 
 
 
-<section className="w-full flex justify-center items-center py-20 px-4">
-  <div className="w-[85%] rounded-3xl px-6 sm:px-16 py-20 relative overflow-hidden bg-[#124434]">
+          <section className="w-full flex justify-center items-center py-20 px-4">
+            <div className="w-[85%] rounded-3xl px-6 sm:px-16 py-20 relative overflow-hidden bg-[#124434]">
+              {/* GRID BACKGROUND */}
+                 
+              <div
+                className="absolute inset-0 z-0"
+                style={{
+                  backgroundImage:
+                    "linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px)",
+                  backgroundSize: "80px 80px", // grid spacing // 👇 MODIFIED: Mask Image for stronger horizontal fading
+                  maskImage:
+                    "linear-gradient(to bottom, white 0%, white 70%, transparent 100%), linear-gradient(to right, transparent 0%, white 25%, white 75%, transparent 100%)",
+                  maskComposite: "intersect",
+                  WebkitMaskImage:
+                    "-webkit-linear-gradient(top, white 0%, white 70%, transparent 100%), -webkit-linear-gradient(left, transparent 0%, white 25%, white 75%, transparent 100%)",
+                  WebkitMaskComposite: "source-in",
+                }}
+              />
+              {/* DARK OVERLAY (soft, lets grid show through) */}
+              <div className="absolute inset-0 bg-[#124434]/40 z-0"></div>
+              {/* CTA CONTENT */}
+              <div className="relative z-10 text-center flex flex-col items-center gap-6">
+                <h2 className="text-3xl sm:text-5xl font-bold text-white leading-tight">
+                  Ready to Take the Next Step in
+                  <br />
+                  Your Financial Journey?
+                </h2>
 
-    {/* GRID BACKGROUND (Behind everything, but above bg color) */}
-    <div
-      className="absolute inset-0 opacity-20 -z-20"
-      style={{
-        backgroundImage: `url("/images/grid-new.png")`,
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center",
-        backgroundSize: "1600px auto",
-        mixBlendMode: "overlay",
-      }}
-    />
+                <p className="text-gray-200 text-lg max-w-2xl">
+                  Join thousands who trust FinGrow to manage
+                  <br />
+                  and grow their finances.
+                </p>
 
-    {/* DARK OVERLAY (transparent enough to see grid) */}
-    <div className="absolute inset-0 bg-[#124434]/80 -z-10"></div>
-
-    {/* CTA CONTENT */}
-    <div className="relative z-10 text-center flex flex-col items-center gap-6">
-
-      <h2 className="text-3xl sm:text-5xl font-bold text-white leading-tight">
-        Ready to Take the Next Step in<br />Your Financial Journey?
-      </h2>
-
-      <p className="text-gray-200 text-lg max-w-2xl">
-        Join thousands who trust FinGrow to manage<br />and grow their finances.
-      </p>
-
-      <a
-        href="#"
-        className="mt-4 inline-flex items-center gap-2 bg-[#B5FF4A] hover:bg-[#a4ff2e] 
+                <a
+                  href="#"
+                  className="mt-4 inline-flex items-center gap-2 bg-[#B5FF4A] hover:bg-[#a4ff2e] 
         text-[#0d1c11] font-semibold px-8 py-4 rounded-full transition-all duration-300 
         shadow-lg"
-      >
-        Create My Free Account
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-5 h-5"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth="2"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M13 7l5 5m0 0l-5 5m5-5H6"
-          />
-        </svg>
-      </a>
+                >
+                  Create My Free Account
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-5 h-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M13 7l5 5m0 0l-5 5m5-5H6"
+                    />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </section>
 
-    </div>
-  </div>
-</section>
 
 
 
