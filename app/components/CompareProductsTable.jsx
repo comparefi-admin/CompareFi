@@ -89,57 +89,54 @@ export default function CompareProductsTable({ productType }) {
 
   return (
     <div className="bg-[#aff3c9] bg-opacity-40 rounded-2xl border border-white/20 backdrop-blur-md shadow-lg p-6 overflow-x-auto">
-      <h3 className="text-xl font-bold mb-4 text-black text-center">
-        {productType.toUpperCase()} Comparison
-      </h3>
+   <div className="w-full flex justify-center mb-6">
+  <div className="px-6 py-2 rounded-full bg-white text-black font-semibold text-lg shadow-sm">
+    {productType.toUpperCase()} Comparison
+  </div>
+</div>
+
 
       <table className="w-full border-collapse text-black text-sm sm:text-base">
-        <thead>
-          <tr className="bg-white/10">
+       <thead>
+  <tr className="bg-[#2B7146] text-white">
+    {/* always persistent: name */}
+    <th className="px-4 py-3 border-b text-left">
+      {productType.toLowerCase() === "mtf"
+        ? "Broker"
+        : "Financial Institution"}
+    </th>
 
-            {/* always persistent: name */}
-            <th className="px-4 py-3 border-b text-left">
-              {productType.toLowerCase() === "mtf"
-                ? "Broker"
-                : "Financial Institution"}
-            </th>
+    {/* normal LAS / LAMF columns */}
+    {productType.toLowerCase() !== "mtf" && (
+      <>
+        <th className="px-4 py-3 border-b text-center">Cost - 1st Year Amt</th>
+        <th className="px-4 py-3 border-b text-center">Cost - 2nd Year Amt</th>
+        <th className="px-4 py-3 border-b text-center">Interest Min</th>
+        <th className="px-4 py-3 border-b text-center">Interest Max</th>
+      </>
+    )}
 
-            {/* normal LAS / LAMF columns */}
-            {productType.toLowerCase() !== "mtf" && (
-              <>
-                <th className="px-4 py-3 border-b text-center">
-                  Cost - 1st Year Amt
-                </th>
-                <th className="px-4 py-3 border-b text-center">
-                  Cost - 2nd Year Amt
-                </th>
-                <th className="px-4 py-3 border-b text-center">Interest Min</th>
-                <th className="px-4 py-3 border-b text-center">Interest Max</th>
-              </>
-            )}
+    {/* MTF only columns */}
+    {productType.toLowerCase() === "mtf" && (
+      <>
+        <th className="px-4 py-3 border-b text-left">Cost Summary</th>
+        <th className="px-4 py-3 border-b text-left">Margin Requirement</th>
+      </>
+    )}
 
-            {/* MTF only columns */}
-            {productType.toLowerCase() === "mtf" && (
-              <>
-                <th className="px-4 py-3 border-b text-left">Cost Summary</th>
-                <th className="px-4 py-3 border-b text-left">
-                  Margin Requirement
-                </th>
-              </>
-            )}
+    {/* Approved stocks stays common */}
+    <th className="px-4 py-3 border-b text-left">Approved Stocks</th>
+  </tr>
+</thead>
 
-            {/* Approved stocks stays common */}
-            <th className="px-4 py-3 border-b text-left">Approved Stocks</th>
-          </tr>
-        </thead>
 
-        <tbody>
-          {data.map((row) => (
-            <tr
-              key={row.id}
-              className="hover:bg-[#B1ED67]/40 hover:shadow-lg transition-colors duration-200"
-            >
-              <td className="px-4 py-3 border-b">{row.name}</td>
+      <tbody>
+  {data.map((row) => (
+    <tr
+      key={row.id}
+      className="hover:bg-[#B1ED67]/40 hover:shadow-lg transition-colors duration-200"
+    >
+      <td className="px-4 py-3 border-b">{row.name}</td>
 
               {productType.toLowerCase() !== "mtf" && (
                 <>
