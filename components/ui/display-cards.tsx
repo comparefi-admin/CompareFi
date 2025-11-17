@@ -21,7 +21,7 @@ function DisplayCard({
     <div
       className={cn(
         // Card baseline styles
-        "flex flex-col justify-between h-[22rem] w-[15rem] rounded-2xl border border-gray-100 bg-white/95 backdrop-blur-md p-5 shadow-lg transition-all duration-500 hover:-translate-y-[4px]",
+        "flex flex-col justify-between h-[22rem] w-[15rem] rounded-2xl border border-gray-100 bg-gradient-to-b from-[#f0fdf4] via-white to-[#ecfeff] backdrop-blur-md p-5 shadow-lg transition-all duration-500 hover:-translate-y-[4px]",
         // 🔥 Gradient fade added here
         "mask-gradient",
         // Dim effect
