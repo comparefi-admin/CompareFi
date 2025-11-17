@@ -11,6 +11,9 @@ const handleAnimationComplete = () => {
   console.log('Animation completed!');
 };
 
+import { Quicksand, Inter } from "next/font/google";
+
+
 import SpotlightCard from './components/SpotlightCard.jsx'; // Import the SpotlightCard component from './components/SpotlightCard';
 import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
@@ -27,6 +30,21 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { TooltipProvider } from '@/components/ui/tooltip';
+
+const quicksand = Quicksand({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+  variable: "--font-quicksand",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+  variable: "--font-inter",
+});
+
 
 // Hero cards
 const defaultCards = [
@@ -151,7 +169,7 @@ export default function HomePage() {
   return (
     <TooltipProvider>
       <div
-        className="min-h-screen flex flex-col bg-slate-50 text-slate-900 overflow-x-hidden"
+        className={`${quicksand.variable} ${inter.variable} font-sans min-h-screen flex flex-col bg-slate-50 text-slate-900 overflow-x-hidden`}
         onMouseMove={handleMouseMove}
       >
         {/* Navbar */}

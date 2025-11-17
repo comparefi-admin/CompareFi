@@ -233,6 +233,42 @@ html {
   border-radius: 50px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 50px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 26px -18px inset;
 }
+
+
+
+:root {
+  --font-body: var(--font-inter);
+  --font-heading: var(--font-plus-jakarta);
+  --font-mono: var(--font-space-grotesk);
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading), sans-serif;
+  letter-spacing: -0.02em;
+}
+
+/* Body text */
+body, p, span, div, li {
+  font-family: var(--font-body), sans-serif;
+}
+
+/* Button & UI text */
+button, .button, .badge, .tag, .nav-link, .TabsTrigger {
+  font-family: var(--font-heading), sans-serif;
+  font-weight: 600;
+}
+
+/* Numeric emphasis */
+.metric-value, .stats-text, td, th {
+  font-family: var(--font-mono), monospace;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+
+
+
 /* From Uiverse.io by alexruix */ 
 /* --- Chic Card Styles --- */
 .card4 {
