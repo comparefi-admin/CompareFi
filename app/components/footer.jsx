@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#141F2B] text-[#F2FFE1] py-12 border-t border-[#B1ED67]/20">
+    <footer className="bg-[#EFF3F6] text-[#1e2e2b] py-12 border-t border-[#B1ED67]/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-4 gap-8">
           {/* Brand */}
@@ -23,7 +23,7 @@ export default function Footer() {
     />
   </Link>
 
-  <p className="text-[#F2FFE1]/80 leading-relaxed mt-3">
+  <p className="text-[#1e2e2b]/80 leading-relaxed mt-3">
     Compare right Chose right
   </p>
 </div>
@@ -31,20 +31,20 @@ export default function Footer() {
 
           {/* Products */}
           <div>
-            <h4 className="font-semibold mb-4 text-[#B1ED67]">Products</h4>
-            <ul className="space-y-2 text-[#F2FFE1]/80">
+            <h4 className="font-semibold mb-4 text-[#1e2e2b]">Products</h4>
+            <ul className="space-y-2 text-[#1e2e2b]/80">
               <li>
-                <a href="/products/LAS" className="hover:text-[#B1ED67] transition-colors">
+                <a href="/products/LAS" className="hover:text-[#1e2e2b] transition-colors">
                   Loan Against Shares (LAS)
                 </a>
               </li>
               <li>
-                <a href="/products/lamf" className="hover:text-[#B1ED67] transition-colors">
+                <a href="/products/lamf" className="hover:text-[#1e2e2b] transition-colors">
                   Loan Against Mutual Funds (LAMF)
                 </a>
               </li>
               <li>
-                <a href="/products/mtf" className="hover:text-[#B1ED67] transition-colors">
+                <a href="/products/mtf" className="hover:text-[#1e2e2b] transition-colors">
                   Margin Trading Facility (MTF)
                 </a>
               </li>
@@ -53,26 +53,26 @@ export default function Footer() {
 
           {/* Company */}
           <div>
-            <h4 className="font-semibold mb-4 text-[#B1ED67]">Company</h4>
-            <ul className="space-y-2 text-[#F2FFE1]/80">
-              <li><a href="/about" className="hover:text-[#B1ED67] transition-colors">About Us</a></li>
-              <li><a href="/contact" className="hover:text-[#B1ED67] transition-colors">Contact</a></li>
+            <h4 className="font-semibold mb-4 text-[#131f1c]">Company</h4>
+            <ul className="space-y-2 text-[#1e2e2b]/80">
+              <li><a href="/about" className="hover:text-[#1e2e2b] transition-colors">About Us</a></li>
+              <li><a href="/contact" className="hover:text-[#1e2e2b] transition-colors">Contact</a></li>
             </ul>
           </div>
 
           {/* Support */}
           <div>
-            <h4 className="font-semibold mb-4 text-[#B1ED67]">Support</h4>
-            <ul className="space-y-2 text-[#F2FFE1]/80">
-              <li><a href="/help" className="hover:text-[#B1ED67] transition-colors">Contact Us</a></li>
-              <li><a href="/privacy" className="hover:text-[#B1ED67] transition-colors">Privacy Policy</a></li>
-              <li><a href="/terms" className="hover:text-[#B1ED67] transition-colors">Terms of Service</a></li>
+            <h4 className="font-semibold mb-4 text-[#1e2e2b]">Support</h4>
+            <ul className="space-y-2 text-[#1e2e2b]/80">
+              <li><a href="/help" className="hover:text-[#1e2e2b] transition-colors">Contact Us</a></li>
+              <li><a href="/privacy" className="hover:text-[#1e2e2b] transition-colors">Privacy Policy</a></li>
+              <li><a href="/terms" className="hover:text-[#1e2e2b] transition-colors">Terms of Service</a></li>
             </ul>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-[#B1ED67]/20 mt-8 pt-8 text-center text-[#F2FFE1]/70">
+        <div className="border-t border-[#1e2e2b]/20 mt-8 pt-8 text-center text-[#1e2e2b]/70">
           <p>&copy; 2025 CompareFi. All rights reserved.</p>
         </div>
       </div>
