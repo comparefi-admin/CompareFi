@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import logo from '../images/Black.png';
+import logo from '../images/white 1.png';
 import Image from "next/image";
 
 export default function Footer() {
@@ -10,24 +10,22 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-4 gap-8">
           {/* Brand */}
-          <div>
-            <div className="flex items-center space-x-2 mb-4">
-              {/* Logo with white background */}
-              <div className="w-10 h-10 flex items-center justify-center rounded-full bg-white p-1">
-                <Image
-                  src={logo}
-                  alt="CompareFi Logo"
-                  width={32}
-                  height={32}
-                  className="object-contain"
-                />
-              </div>
-              <span className="text-xl font-bold text-[#B1ED67]">CompareFi</span>
-            </div>
-            <p className="text-[#F2FFE1]/80 leading-relaxed">
-              Compare right Chose right
-            </p>
-          </div>
+    <div>
+ <div className="-mt-6"> 
+  <Image
+    src={logo}
+    alt="CompareFi Logo"
+    width={160}
+    height={160}
+    className="object-contain w-28 h-28"
+  />
+
+  <p className="text-[#F2FFE1]/80 leading-relaxed mt-3">
+    Compare right Chose right
+  </p>
+</div>
+
+</div>
 
           {/* Products */}
           <div>
