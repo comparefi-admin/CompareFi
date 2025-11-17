@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Home, CreditCard, Shield, Mail, Menu, X } from 'lucide-react';
-import logo from '../images/logo (3).png';
+import logo from '../images/Black.png';
 
 const navItems = [
   {
@@ -136,7 +136,7 @@ export default function Navbar() {
       {/* Logo */}
       <div className="absolute left-4 top-1/2 -translate-y-1/2">
         <Link href="/" className="flex-shrink-0">
-          <Image src={logo} alt="Logo" width={170} height={80} className="cursor-pointer" />
+          <Image src={logo} width={170} height={80} className="cursor-pointer" />
         </Link>
       </div>
 

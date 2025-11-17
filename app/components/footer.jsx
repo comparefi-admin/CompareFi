@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import logo from '../images/logo (3).png';
+import logo from '../images/Black.png';
 import Image from "next/image";
 
 export default function Footer() {

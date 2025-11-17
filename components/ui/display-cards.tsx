@@ -6,7 +6,7 @@ import React, { useState } from "react";
 // import { motion } from "framer-motion"; 
 
 /* -----------------------------------------------
-   🔹 Single Card Component (No functional change needed)
+    🔹 Single Card Component 
 ------------------------------------------------ */
 function DisplayCard({
   title,
@@ -22,8 +22,9 @@ function DisplayCard({
   return (
     <div
       className={cn(
-        // Card size: Taller (h-[22rem]) and narrower (w-[15rem])
+        // Card size and base styling
         "flex flex-col justify-between h-[22rem] w-[15rem] rounded-2xl border border-gray-100 bg-white/95 backdrop-blur-md p-5 shadow-lg transition-all duration-500 hover:-translate-y-[4px]",
+        // Dimming effect for non-hovered cards
         isDimmed ? "opacity-50 scale-[0.97]" : "opacity-100",
         className // Apply additional classes for rotation/translation
       )}
@@ -59,7 +60,7 @@ function DisplayCard({
 }
 
 /* -----------------------------------------------
-   🔹 3D Tilt Layout Display (Revised for Equal Dimming)
+    🔹 3D Tilt Layout Display with Vertical Offset
 ------------------------------------------------ */
 export default function DisplayCards() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -93,21 +94,23 @@ export default function DisplayCards() {
 
   // Define z-index and transform classes for the desired stacking/tilt
   const cardLayoutClasses = [
-    // Card 1 (Left): Opacity set to 50%
+    // Card 1 (Left): Rotated Left, Translated Right, Dimmed, Low z-index
     "z-10 rotate-[-10deg] translate-x-[25px] opacity-50", 
-    // Card 2 (Center): Opacity 100%
-    "z-30 rotate-0", 
-    // Card 3 (Right): Opacity set to 50%
+    
+    // Card 2 (Center): Elevated Up (translate-y-[-10px]), Highest z-index for stacking
+    // translate-y-[-10px] is roughly translate-y-2.5 in Tailwind's default spacing.
+    "z-30 rotate-0 translate-y-[-10px]", 
+    
+    // Card 3 (Right): Rotated Right, Translated Left, Dimmed, Medium z-index
     "z-20 rotate-[10deg] translate-x-[-25px] opacity-50", 
   ];
 
   return (
     // The main container for centering and context
     <div className="flex justify-center items-center py-20"> 
-      {/* Negative margin adjusted to -space-x-20 for thinner cards */}
+      {/* Container to handle the overlapping effect */}
       <div className="flex justify-center items-center -space-x-20 pointer-events-auto">
         {cards.map((card, i) => {
-          // Determine the class based on the card index
           const layoutClass = cardLayoutClasses[i];
           
           return (
@@ -116,14 +119,16 @@ export default function DisplayCards() {
               className={cn(
                 "transition-all duration-700 ease-out", 
                 layoutClass, 
-                // Hover brings the card to the front and centers it
-                hoveredIndex === i ? "z-40 rotate-0 translate-x-0 scale-[1.05] opacity-100" : ""
+                // Hover effect: bring to front (z-40), center (rotate-0 translate-x-0), 
+                // reset vertical offset (translate-y-0), and slightly enlarge
+                hoveredIndex === i ? "z-40 rotate-0 translate-x-0 scale-[1.05] opacity-100 translate-y-0" : ""
               )}
               onMouseEnter={() => setHoveredIndex(i)}
               onMouseLeave={() => setHoveredIndex(null)}
             >
               <DisplayCard
                 {...card}
+                // Only dim if a card IS hovered, and the current card IS NOT the hovered one.
                 isDimmed={hoveredIndex !== null && hoveredIndex !== i}
               />
             </div>
