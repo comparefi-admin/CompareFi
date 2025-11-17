@@ -3,6 +3,7 @@
 import React from 'react';
 import logo from '../images/white 1.png';
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Footer() {
   return (
@@ -11,20 +12,21 @@ export default function Footer() {
         <div className="grid md:grid-cols-4 gap-8">
           {/* Brand */}
     <div>
- <div className="-mt-6"> 
-  <Image
-    src={logo}
-    alt="CompareFi Logo"
-    width={160}
-    height={160}
-    className="object-contain w-28 h-28"
-  />
+ <div className="-mt-6">
+  <Link href="/">
+    <Image
+      src={logo}
+      alt="CompareFi Logo"
+      width={160}
+      height={160}
+      className="object-contain w-28 h-28 cursor-pointer"
+    />
+  </Link>
 
   <p className="text-[#F2FFE1]/80 leading-relaxed mt-3">
     Compare right Chose right
   </p>
 </div>
-
 </div>
 
           {/* Products */}
