@@ -180,7 +180,7 @@ export default function HomePage() {
 
   {/* ==== DOTTED PATCHES (BOTTOM LEFT + RIGHT) ==== */}
   <svg
-    className="absolute bottom-[8rem] inset-x-0 w-full h-[220px] pointer-events-none z-0"
+    className="absolute bottom-[8rem] inset-x-0 w-full h-[220px] pointer-events-none z--10"
     viewBox="0 0 1440 220"
     xmlns="http://www.w3.org/2000/svg"
   >
@@ -200,10 +200,12 @@ export default function HomePage() {
     </g>
 
     {/* RIGHT */}
-    <g opacity="0.55" transform="translate(1020,40) rotate(16)">
+    <g opacity="0.55" transform="translate(1120,-50) rotate(16)">
       <rect width="190" height="150" fill="url(#dots)" />
     </g>
+    
   </svg>
+  
 
   {/* ==== LIGHT DOTTED ACCENTS STILL UP TOP ==== */}
   <Image
@@ -211,7 +213,7 @@ export default function HomePage() {
     alt=""
     width={240}
     height={200}
-    className="absolute left-[12%] top-[4rem] opacity-[0.15] pointer-events-none scale-[0.75]"
+    className="absolute left-[12%] top-[4rem] opacity-[85%] pointer-events-none scale-[0.75]"
   />
 
   <Image
@@ -417,7 +419,7 @@ export default function HomePage() {
               className={`
                 text-lg sm:text-xl px-6 sm:px-8 py-3 sm:py-4 rounded-xl whitespace-nowrap transition font-bold
                 focus-visible:ring-4 focus-visible:ring-emerald-400
-                data-[state=active]:bg-[#2E494D]
+                data-[state=active]:bg-[#2b7146]
                 data-[state=active]:text-white
                 data-[state=active]:drop-shadow-2xl
               `}

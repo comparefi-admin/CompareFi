@@ -88,7 +88,7 @@ export default function CompareProductsTable({ productType }) {
   }
 
   return (
-    <div className="bg-[#2E494D] rounded-2xl border border-white/20 backdrop-blur-md shadow-lg p-6 overflow-x-auto">
+    <div className="bg-[#2b7146] rounded-2xl border border-white/20 backdrop-blur-md shadow-lg p-6 overflow-x-auto">
       <h3 className="text-xl font-bold mb-4 text-white text-center">
         {productType.toUpperCase()} Comparison
       </h3>
