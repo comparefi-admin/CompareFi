@@ -523,58 +523,51 @@ export default function LASPage() {
 
 
 {/* How to Apply & Key Factors Section */}
-<section className="max-w-[90%] mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 gap-10">
-  {/* Card 1 — How to Apply */}
-  <div className="bg-white/20 backdrop-blur-xl border border-white/40 shadow-2xl rounded-3xl p-10 transition-all duration-500 hover:shadow-[0_0_30px_rgba(255,87,50,0.25)] hover:-translate-y-2">
-    <h3 className="text-3xl font-bold mb-6 text-[#4805a0]">
-      How to Apply for LAMF in 2025: Step-by-Step Guide
-    </h3>
-    <ol className="list-decimal list-inside space-y-3 text-gray-800 leading-relaxed text-[1.05rem]">
-      <li>
-        <strong>Select Eligible Funds:</strong> Verify mutual funds on lender’s
-        approved list (via CAMS/KFintech).
-      </li>
-      <li>
-        <strong>Compare Lenders:</strong> Use our tables to shortlist based on
-        rates, LTV, and fees.
-      </li>
-      <li>
-        <strong>Apply Online:</strong> Submit application via lender portal or
-        fintech platform.
-      </li>
-      <li>
-        <strong>Complete KYC & Lien Marking:</strong> Provide PAN, Aadhaar, MF
-        statement, bank proof; pledge via CAMS/KFintech.
-      </li>
-      <li>
-        <strong>Disbursal:</strong> Funds credited in 4–24 hours for digital
-        applications.
-      </li>
-    </ol>
-  </div>
+<section className="max-w-[90%] mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-3 gap-10">
+{/* Card 1 — Step-by-Step Guide */}
+<div className="bg-white/20 backdrop-blur-xl border border-white/40 shadow-2xl rounded-3xl p-10 transition-all duration-500 hover:shadow-[0_0_30px_rgba(255,87,50,0.25)] hover:-translate-y-2">
+<h3 className="text-2xl font-bold mb-6 text-[#4805a0]">How to Apply for LAS in 2025</h3>
 
-  {/* Card 2 — Key Factors */}
-  <div className="bg-white/20 backdrop-blur-xl border border-white/40 shadow-2xl rounded-3xl p-10 transition-all duration-500 hover:shadow-[0_0_30px_rgba(13,148,136,0.25)] hover:-translate-y-2">
-    <h3 className="text-3xl font-bold mb-6 text-[#4805a0]">
-      Key Factors for Choosing the Best LAMF Provider
-    </h3>
-    <ul className="list-disc list-inside space-y-3 text-gray-800 leading-relaxed text-[1.05rem]">
-      <li>
-        <strong>LTV Ratio:</strong> Up to 90% for debt funds (e.g., Bajaj); 50–60% for equity.
-      </li>
-      <li>
-        <strong>Approved Funds:</strong> Broader lists (e.g., Tata Capital, HDFC ~1000+ funds)
-        offer flexibility.
-      </li>
-      <li>
-        <strong>Margin Call Period:</strong> Longer periods (7 days, Bajaj/Mirae)
-        give more time to regularize.
-      </li>
-      <li>
-        <strong>Total Costs:</strong> Low renewal fees (e.g., SBI ₹550) reduce long-term costs.
-      </li>
-    </ul>
-  </div>
+
+<ol className="list-decimal list-inside space-y-3 text-gray-800 leading-relaxed text-[1.05rem] mb-6">
+<li><strong>Assess Eligibility:</strong> Ages 18–70, Indian resident/NRI, decent credit score, approved shares in demat.</li>
+<li><strong>Compare & Shortlist:</strong> Use our tables/filters for interest rate, LTV (HDFC up to 80%).</li>
+<li><strong>Gather Documents:</strong> PAN, Aadhaar, demat statement, pledge form, photo, bank proof.</li>
+<li><strong>Apply Online:</strong> Apply via lender; pledge via NSDL/CDSL.</li>
+<li><strong>Disbursal & Monitoring:</strong> Funds in 1–2 days; monitor for margin calls.</li>
+</ol>
+
+
+<p className="text-sm text-gray-700"><strong>Tip:</strong> 100% digital apps can disburse within 24 hours.</p>
+</div>
+
+
+{/* Card 2 — Why We Rank #1 */}
+<div className="bg-white/20 backdrop-blur-xl border border-white/40 shadow-2xl rounded-3xl p-10 transition-all duration-500 hover:shadow-[0_0_30px_rgba(120,50,255,0.25)] hover:-translate-y-2">
+<h3 className="text-2xl font-bold mb-6 text-[#4805a0]">Why Our LAS Comparison Ranks #1</h3>
+
+
+<ul className="list-disc list-inside space-y-3 text-gray-800 leading-relaxed text-[1.05rem]">
+<li><strong>SEO-Optimized Depth:</strong> Fully keyword-tuned for "best LAS providers 2025".</li>
+<li><strong>User-First Design:</strong> Filterable tables, responsive charts, mobile-first UX.</li>
+<li><strong>Accurate Data:</strong> Updated Oct 2025 using verified lender sources.</li>
+<li><strong>Better Than Competitors:</strong> Shows hidden charges that PolicyBazaar and others skip.</li>
+</ul>
+</div>
+
+
+{/* Card 3 — Key Factors */}
+<div className="bg-white/20 backdrop-blur-xl border border-white/40 shadow-2xl rounded-3xl p-10 transition-all duration-500 hover:shadow-[0_0_30px_rgba(13,148,136,0.25)] hover:-translate-y-2">
+<h3 className="text-2xl font-bold mb-6 text-[#4805a0]">Key Factors: Best LAS Provider 2025</h3>
+
+
+<ul className="list-disc list-inside space-y-3 text-gray-800 leading-relaxed text-[1.05rem]">
+<li><strong>LTV Ratio:</strong> Higher LTV (HDFC 65–80%) → more borrowing power.</li>
+<li><strong>Approved Shares:</strong> Broader lists (Tata Capital ~1004+) give flexibility.</li>
+<li><strong>Margin Call Period:</strong> Longer (7 days — Bajaj/Mirae) = more buffer time.</li>
+<li><strong>Total Costs:</strong> Consider renewal & penal charges (BoB ~10.23% Yr 2).</li>
+</ul>
+</div>
 </section>
 
 
