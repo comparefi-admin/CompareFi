@@ -372,7 +372,7 @@ export default function HomePage() {
 </a>
 
 {/* MTF Card */}
-<a href="/products/mtf" className="card4 group relative overflow-hidden rounded-lg bg-#141F2B shadow-md hover:shadow-lg transition-all duration-300 p-6 cursor-pointer">
+<a href="/products/mtf" className="card4 group relative overflow-hidden rounded-lg bg-[#141F2B] shadow-md hover:shadow-lg transition-all duration-300 p-6 cursor-pointer">
   <div className="flex items-center space-x-4">
     <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-[#B1ED67]/20 rounded-full group-hover:bg-[#B1ED67]/30 transition-colors">
       <BarChart className="w-6 h-6 text-[#B1ED67] " />
