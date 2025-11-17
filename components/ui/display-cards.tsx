@@ -94,10 +94,10 @@ export default function DisplayCards() {
 
   // Card tilt & overlay stacking
   const cardLayoutClasses = [
-    "z-10 rotate-[-10deg] translate-x-[25px] opacity-50",
-    "z-30 rotate-0",
-    "z-20 rotate-[10deg] translate-x-[-25px] opacity-50",
-  ];
+  "z-10 rotate-[-10deg] translate-x-[25px] translate-y-[20px] opacity-50",  // Left → DOWN
+  "z-30 rotate-0 translate-y-[-20px]",                                      // Middle → UP
+  "z-20 rotate-[10deg] translate-x-[-25px] translate-y-[20px] opacity-50", // Right → DOWN
+];
 
   return (
     <div className="flex justify-center items-center py-20">
