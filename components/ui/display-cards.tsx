@@ -2,30 +2,31 @@
 import { cn } from "@/lib/utils";
 import { Sparkles } from "lucide-react";
 import React, { useState } from "react";
-// Removed 'motion' import for a simpler, non-hovered stacking effect
-// import { motion } from "framer-motion"; 
 
 /* -----------------------------------------------
-   🔹 Single Card Component (No functional change needed)
+   🔹 Single Card Component (Now with fade bottom)
 ------------------------------------------------ */
 function DisplayCard({
   title,
   data,
   isDimmed = false,
-  className, 
+  className,
 }: {
   title: string;
   data: { label: string; value: string }[];
   isDimmed?: boolean;
-  className?: string; 
+  className?: string;
 }) {
   return (
     <div
       className={cn(
-        // Card size: Taller (h-[22rem]) and narrower (w-[15rem])
+        // Card baseline styles
         "flex flex-col justify-between h-[22rem] w-[15rem] rounded-2xl border border-gray-100 bg-white/95 backdrop-blur-md p-5 shadow-lg transition-all duration-500 hover:-translate-y-[4px]",
+        // 🔥 Gradient fade added here
+        "mask-gradient",
+        // Dim effect
         isDimmed ? "opacity-50 scale-[0.97]" : "opacity-100",
-        className // Apply additional classes for rotation/translation
+        className
       )}
     >
       {/* Header */}
@@ -39,7 +40,7 @@ function DisplayCard({
       </div>
 
       {/* Vertical Data List */}
-      <div className="flex flex-col gap-4 w-full"> 
+      <div className="flex flex-col gap-4 w-full">
         {data.map((item, idx) => (
           <div
             key={idx}
@@ -59,7 +60,7 @@ function DisplayCard({
 }
 
 /* -----------------------------------------------
-   🔹 3D Tilt Layout Display (Revised for Equal Dimming)
+   🔹 3D Tilt Layout Display
 ------------------------------------------------ */
 export default function DisplayCards() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -91,33 +92,29 @@ export default function DisplayCards() {
     },
   ];
 
-  // Define z-index and transform classes for the desired stacking/tilt
+  // Card tilt & overlay stacking
   const cardLayoutClasses = [
-    // Card 1 (Left): Opacity set to 50%
-    "z-10 rotate-[-10deg] translate-x-[25px] opacity-50", 
-    // Card 2 (Center): Opacity 100%
-    "z-30 rotate-0", 
-    // Card 3 (Right): Opacity set to 50%
-    "z-20 rotate-[10deg] translate-x-[-25px] opacity-50", 
+    "z-10 rotate-[-10deg] translate-x-[25px] opacity-50",
+    "z-30 rotate-0",
+    "z-20 rotate-[10deg] translate-x-[-25px] opacity-50",
   ];
 
   return (
-    // The main container for centering and context
-    <div className="flex justify-center items-center py-20"> 
-      {/* Negative margin adjusted to -space-x-20 for thinner cards */}
+    <div className="flex justify-center items-center py-20">
       <div className="flex justify-center items-center -space-x-20 pointer-events-auto">
         {cards.map((card, i) => {
-          // Determine the class based on the card index
           const layoutClass = cardLayoutClasses[i];
-          
+
           return (
             <div
               key={i}
               className={cn(
-                "transition-all duration-700 ease-out", 
-                layoutClass, 
-                // Hover brings the card to the front and centers it
-                hoveredIndex === i ? "z-40 rotate-0 translate-x-0 scale-[1.05] opacity-100" : ""
+                "transition-all duration-700 ease-out",
+                layoutClass,
+                // Hover effect: bring card forward
+                hoveredIndex === i
+                  ? "z-40 rotate-0 translate-x-0 scale-[1.05] opacity-100"
+                  : ""
               )}
               onMouseEnter={() => setHoveredIndex(i)}
               onMouseLeave={() => setHoveredIndex(null)}
