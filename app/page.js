@@ -11,7 +11,21 @@ const handleAnimationComplete = () => {
   console.log('Animation completed!');
 };
 
-import { Quicksand, Inter } from "next/font/google";
+import { Work_Sans, Inter } from "next/font/google";
+
+const workSans = Work_Sans({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+  variable: "--font-work-sans",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["300", "400", "500"],
+  display: "swap",
+  variable: "--font-inter",
+});
 
 
 import SpotlightCard from './components/SpotlightCard.jsx'; // Import the SpotlightCard component from './components/SpotlightCard';
@@ -31,19 +45,6 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { TooltipProvider } from '@/components/ui/tooltip';
 
-const quicksand = Quicksand({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-  variable: "--font-quicksand",
-});
-
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-  variable: "--font-inter",
-});
 
 
 // Hero cards
@@ -169,7 +170,7 @@ export default function HomePage() {
   return (
     <TooltipProvider>
       <div
-        className={`${quicksand.variable} ${inter.variable} font-sans min-h-screen flex flex-col bg-slate-50 text-slate-900 overflow-x-hidden`}
+        className={`${workSans.variable} ${inter.variable} font-sans min-h-screen flex flex-col bg-slate-50 text-slate-900 overflow-x-hidden`}
         onMouseMove={handleMouseMove}
       >
         {/* Navbar */}
@@ -297,7 +298,7 @@ export default function HomePage() {
     initial={{ opacity: 0, y: 30 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.8 }}
-    className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight tracking-tight text-white max-w-3xl relative z-10"
+    className="text-4xl sm:text-5xl md:text-6xl  leading-tight tracking-tight text-white max-w-3xl relative z-10"
   >
     Take Control of Your <span className="text-[#B1ED67]">Finances</span> with Confidence
   </motion.h1>
@@ -346,7 +347,7 @@ export default function HomePage() {
    <section id="featured" className="w-full bg-[#EEF1FA] bg-opacity-0 py-20 mx-5 px-10 lg:px-20 flex flex-col lg:flex-row justify-between items-center lg:items-start">
   {/* Left Section */}
   <div className="lg:w-1/3 mb-10 lg:mb-0 ml-10">
-    <h2 className="text-4xl font-extrabold text-[#0A0F2C] mb-6 leading-tight">
+    <h2 className="text-4xl  text-[#0A0F2C] mb-6 leading-tight">
       Product Highlights
     </h2>
     <a
@@ -396,7 +397,7 @@ export default function HomePage() {
       <BarChart className="w-6 h-6 text-[#B1ED67] " />
     </div>
     <div>
-      <p className="text1-title text-xl font-semibold text-[#0A0F2C]  transition-colors">MTF</p>
+      <p className="text1-title text-xl font-semibold text-[#FFFFFF]  transition-colors">MTF</p>
       <p className="text1-body text-gray-600 mt-1">Margin Trading Facility</p>
     </div>
   </div>
@@ -424,7 +425,7 @@ export default function HomePage() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
     >
-      <h2 className="text-4xl sm:text-5xl font-extrabold mb-12 text-center text-black">
+      <h2 className="text-4xl sm:text-5xl  mb-12 text-center text-black">
         Compare Products
       </h2>
 
@@ -435,7 +436,7 @@ export default function HomePage() {
               key={p.id}
               value={p.id}
               className={`
-                text-lg sm:text-xl px-6 sm:px-8 py-3 sm:py-4 rounded-xl whitespace-nowrap transition font-bold
+                text-lg sm:text-xl px-6 sm:px-8 py-3 sm:py-4 rounded-xl whitespace-nowrap transition 
                 focus-visible:ring-4 focus-visible:ring-emerald-400
                 data-[state=active]:bg-[#2b7146]
                 data-[state=active]:text-white
@@ -464,7 +465,7 @@ export default function HomePage() {
                       animateBy="words"
                       direction="top"
                       onAnimationComplete={handleAnimationComplete}
-                      className="text-4xl font-bold text-[#0A0F2C]"
+                      className="text-4xl  text-[#0A0F2C]"
                     />
                   </h4>
 
@@ -520,7 +521,7 @@ export default function HomePage() {
   <section className="w-full bg-[#F9FAFB]  bg-opacity-0 py-10 px-6 lg:px-20 flex flex-col lg:flex-row justify-between items-center lg:items-start">
   {/* Left Section */}
   <div className="w-1/2 h-1/2 mt-20 flex flex-col justify-center ml-[5%]">
-    <h2 className="text-7xl font-extrabold text-[#0A0F2C] mb-6 mt-5 leading-tight">
+    <h2 className="text-7xl  text-[#0A0F2C] mb-6 mt-5 leading-tight">
       About CompareFi
     </h2>
     <p className="text-[#4B5563] mb-6 text-lg leading-relaxed">
