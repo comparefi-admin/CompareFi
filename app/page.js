@@ -170,64 +170,155 @@ export default function HomePage() {
   id="hero"
   className="relative flex flex-col items-center justify-center min-h-[100vh] overflow-visible text-center text-white"
   style={{
-    // two backgrounds: grid image on top, gradient underneath
     backgroundImage: `url("/images/grid-new.png"), linear-gradient(to bottom, #0B1120 0%, #0E1A2B 45%, #173B38 75%, #EFF3F6 100%)`,
-    backgroundRepeat: "no-repeat, no-repeat",        // grid won't tile unless you want it to
+    backgroundRepeat: "no-repeat, no-repeat",
     backgroundPosition: "center -100px, center top",
-    // grid size smaller so it sits in middle; gradient covers whole area
     backgroundSize: "1920px auto, cover",
-    // blend top image softly so grid lines are subtle
     backgroundBlendMode: "overlay, normal",
   }}
 >
 
-  <div
-    aria-hidden
-    className="absolute bottom-0 left-0 right-0 -z-10"
-    style={{
-      height: "280px",
-      background: "linear-gradient(to bottom, rgba(23,59,56,0) 0%, #F4FFF8 100%)",
-    }}
+  {/* ==== DOTTED PATCHES (BOTTOM LEFT + RIGHT) ==== */}
+  <svg
+    className="absolute bottom-[8rem] inset-x-0 w-full h-[220px] pointer-events-none z-0"
+    viewBox="0 0 1440 220"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <defs>
+      <pattern id="dots" x="0" y="0" width="14" height="14" patternUnits="userSpaceOnUse">
+        <circle cx="3" cy="3" r="2" fill="white" />
+      </pattern>
+    </defs>
+
+    {/* LEFT */}
+    <g opacity="0.55" transform="translate(-20,40) rotate(-18)">
+      <rect width="190" height="150" fill="url(#dots)" />
+    </g>
+
+    <g opacity="0.55" transform="translate(240,100) rotate(20)">
+      <rect width="190" height="150" fill="url(#dots)" />
+    </g>
+
+    {/* RIGHT */}
+    <g opacity="0.55" transform="translate(1020,40) rotate(16)">
+      <rect width="190" height="150" fill="url(#dots)" />
+    </g>
+  </svg>
+
+  {/* ==== LIGHT DOTTED ACCENTS STILL UP TOP ==== */}
+  <Image
+    src="/icons/dot-fade.svg"
+    alt=""
+    width={240}
+    height={200}
+    className="absolute left-[12%] top-[4rem] opacity-[0.15] pointer-events-none scale-[0.75]"
   />
 
-<div className='mt-[-18%]'></div>
+  <Image
+    src="/icons/dot-fade.svg"
+    alt=""
+    width={260}
+    height={220}
+    className="absolute right-[10%] top-[6rem] opacity-[0.18] pointer-events-none scale-[0.85]"
+  />
+
+  {/* ==== CIRCULAR RADAR-LIKE MESH ==== */}
+  <svg
+    className="absolute top-[8rem] left-[14rem] z-0 opacity-25 pointer-events-none"
+    width="200"
+    height="200"
+    viewBox="0 0 140 140"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g opacity="0.2">
+      <circle cx="70" cy="70" r="65" stroke="white" strokeWidth="0.45" strokeDasharray="3 4"/>
+      <circle cx="70" cy="70" r="50" stroke="white" strokeWidth="0.45" strokeDasharray="2 6"/>
+      <circle cx="70" cy="70" r="35" stroke="white" strokeWidth="0.7" strokeDasharray="1.5 7"/>
+      <circle cx="70" cy="70" r="20" stroke="white" strokeWidth="0.8" opacity="0.35"/>
+      <circle cx="70" cy="70" r="4" fill="white" opacity="0.4"/>
+    </g>
+  </svg>
+
+  {/* ==== SUBTLE STAR BURST SHAPE ==== */}
+  <svg
+    className="absolute top-[16rem] right-[6rem] z-0 opacity-30 pointer-events-none"
+    width="200"
+    height="80"
+    viewBox="0 0 160 60"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <circle cx="10" cy="30" r="4" fill="white" opacity="0.4"/>
+    <circle cx="30" cy="15" r="3" fill="white" opacity="0.4"/>
+    <circle cx="55" cy="8" r="2" fill="white" opacity="0.3"/>
+    <circle cx="80" cy="12" r="3" fill="white" opacity="0.45"/>
+    <circle cx="110" cy="25" r="4" fill="white" opacity="0.5"/>
+    <circle cx="135" cy="40" r="3" fill="white" opacity="0.4"/>
+    <circle cx="150" cy="52" r="2" fill="white" opacity="0.3"/>
+    <path d="M5 30 Q80 0 155 52" stroke="white" strokeWidth="0.8" strokeDasharray="4 2" opacity="0.25"/>
+  </svg>
+
+  {/* ==== SMALL UPWARD NUDGE (keep spacing) ==== */}
+  <div className="mt-[-18%]"></div>
 
   {/* Badge */}
-  <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="flex items-center space-x-2 mb-4 relative z-10">
-    <div className="bg-[#B1ED67]/20 text-[#B1ED67] px-3 py-1 rounded-full text-sm font-medium">Backed by CompareFi</div>
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6 }}
+    className="flex items-center space-x-2 mb-4 relative z-10"
+  >
+    <div className="bg-[#B1ED67]/20 text-[#B1ED67] px-3 py-1 rounded-full text-sm font-medium">
+      Backed by CompareFi
+    </div>
   </motion.div>
 
-  {/* Headline */}
-  <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight tracking-tight text-white max-w-3xl relative z-10">
+  {/* Title */}
+  <motion.h1
+    initial={{ opacity: 0, y: 30 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.8 }}
+    className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight tracking-tight text-white max-w-3xl relative z-10"
+  >
     Take Control of Your <span className="text-[#B1ED67]">Finances</span> with Confidence
   </motion.h1>
 
   {/* Subtext */}
-  <motion.p initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.7 }} className="text-slate-300 mt-6 text-lg max-w-xl relative z-10">
+  <motion.p
+    initial={{ opacity: 0, y: 30 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: 0.3, duration: 0.7 }}
+    className="text-slate-300 mt-6 text-lg max-w-xl relative z-10"
+  >
     All-in-one platform to manage your savings, investments, credit, and more — backed by expert advice and cutting-edge AI tools.
   </motion.p>
 
   {/* CTA */}
-  <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 0.7 }} className="mt-10 relative z-10">
-    <Button size="lg" className="bg-[#B1ED67] hover:bg-[#9CDA59] text-black font-semibold px-8 py-4 rounded-full shadow-lg hover:shadow-[#B1ED67]/30 transition-all duration-300">
+  <motion.div
+    initial={{ opacity: 0, y: 30 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: 0.5, duration: 0.7 }}
+    className="mt-10 relative z-10"
+  >
+    <Button
+      size="lg"
+      className="bg-[#B1ED67] hover:bg-[#9CDA59] text-black font-semibold px-8 py-4 rounded-full shadow-lg hover:shadow-[#B1ED67]/30 transition-all duration-300"
+    >
       Get Started →
     </Button>
   </motion.div>
 
-  {/* Cards overlapping the bottom of hero */}
-  <motion.div initial={{ opacity: 0, y: 60, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ delay: 0.8, duration: 0.8 }} className="absolute  bottom-[-2rem] inset-x-0 flex justify-center z-20 mt-20">
-    <div className="w-full max-w-[1200px] flex justify-center ">
-      <DisplayCards/>
+  {/* Cards */}
+  <motion.div
+    initial={{ opacity: 0, y: 60, scale: 0.95 }}
+    animate={{ opacity: 1, y: 0, scale: 1 }}
+    transition={{ delay: 0.8, duration: 0.8 }}
+    className="absolute bottom-[-2rem] inset-x-0 flex justify-center z-20 mt-20"
+  >
+    <div className="w-full max-w-[1200px] flex justify-center">
+      <DisplayCards />
     </div>
   </motion.div>
 </section>
-
-
-
-
-
-
-
 
 
 
