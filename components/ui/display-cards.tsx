@@ -60,7 +60,11 @@ function DisplayCard({
 }
 
 /* -----------------------------------------------
+<<<<<<< HEAD
    🔹 3D Tilt Layout Display
+=======
+    🔹 3D Tilt Layout Display with Vertical Offset
+>>>>>>> 480add26468ea9192dd8f62d5db4d368d96c4369
 ------------------------------------------------ */
 export default function DisplayCards() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -121,6 +125,7 @@ export default function DisplayCards() {
             >
               <DisplayCard
                 {...card}
+                // Only dim if a card IS hovered, and the current card IS NOT the hovered one.
                 isDimmed={hoveredIndex !== null && hoveredIndex !== i}
               />
             </div>

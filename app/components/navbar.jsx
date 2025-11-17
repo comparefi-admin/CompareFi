@@ -5,7 +5,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Home, CreditCard, Shield, Mail, Menu, X } from 'lucide-react';
-import logo from '../images/logo (3).png';
+import blackLogo from '../images/Black.png';
+import whiteLogo from '../images/white.png'; // <-- add white logo
+
 
 const navItems = [
   {
@@ -136,18 +138,26 @@ export default function Navbar() {
       {/* Logo */}
       <div className="absolute left-4 top-1/2 -translate-y-1/2">
         <Link href="/" className="flex-shrink-0">
-          <Image src={logo} alt="Logo" width={170} height={80} className="cursor-pointer" />
+       <Image
+  src={isHomePage && !isScrolled ? whiteLogo : blackLogo}
+  width={170}
+  height={80}
+  className="cursor-pointer transition-opacity duration-300"
+/>
+
+
         </Link>
       </div>
 
       {/* Navbar */}
       <nav
-        className={`pointer-events-auto rounded-full border px-6 py-3 transition-all duration-300 flex justify-center
-        ${isScrolled
-          ? 'bg-white/70 backdrop-blur-sm shadow-md border-gray-200'
-          : 'bg-white/60 backdrop-blur-md border-gray-100'
-        }`}
-      >
+  className={`h-16 pointer-events-auto rounded-full border px-6 py-3 transition-all duration-300 flex justify-center
+    ${isScrolled
+      ? 'bg-white/70 backdrop-blur-sm shadow-md border-gray-200'
+      : 'bg-white/60 backdrop-blur-md border-gray-100'
+    }`}
+>
+
         {/* Desktop */}
         <ul className="hidden md:flex items-center space-x-2">
           {navItems.map((item) => {
