@@ -357,19 +357,15 @@ button, .button, .badge, .tag, .nav-link, .TabsTrigger {
 
 
 .mask-gradient {
-  -webkit-mask-image: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 1) 60%,
-    rgba(0, 0, 0, 0.5) 80%,
-    rgba(0, 0, 0, 0) 100%
-  );
   mask-image: linear-gradient(
     to bottom,
-    rgba(0, 0, 0, 1) 60%,
-    rgba(0, 0, 0, 0.5) 80%,
-    rgba(0, 0, 0, 0) 100%
+    rgba(0, 0, 0, 1) 88%,      /* Almost whole card fully solid */
+    rgba(0, 0, 0, 0.8) 100%,    /* Very soft fade begins late */
+    rgba(0, 0, 0, 0.4) 98%,    /* Thin fade zone */
+    transparent 100%          /* Very end transparent */
   );
 }
+
 
 
 

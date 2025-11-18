@@ -11,6 +11,7 @@ function DisplayCard({
   data,
   isMasked = true,
   isDimmed = false,
+  isCenter = false, 
   className,
 }: {
   title: string;
@@ -26,7 +27,10 @@ function DisplayCard({
         // Glass acrylic effect
         "backdrop-blur-xl border border-white/30 shadow-[0_8px_32px_rgba(0,0,0,0.15)]",
         // Fi chrome gradient
-        "bg-[linear-gradient(145deg,rgba(255,255,255,0.65)_0%,rgba(240,240,240,0.35)_45%,rgba(220,220,220,0.15)_100%)]",
+       isCenter
+  ? "bg-[linear-gradient(145deg,rgba(255,255,255,0.90)_0%,rgba(240,240,240,0.75)_45%,rgba(220,220,220,0.55)_100%)]"
+  : "bg-[linear-gradient(145deg,rgba(255,255,255,0.65)_0%,rgba(240,240,240,0.35)_45%,rgba(220,220,220,0.15)_100%)]",
+
         // Mask fade (removes on hover)
         isMasked ? "mask-gradient" : "mask-none",
         // Dimmed side cards
@@ -64,6 +68,7 @@ function DisplayCard({
           </div>
         ))}
       </div>
+
     </div>
   );
 }
@@ -131,6 +136,7 @@ export default function DisplayCards() {
                 {...card}
                 isDimmed={isDimmed}
                 isMasked={!isHovered}
+                  isCenter={i === 1}
               />
             </div>
           );
