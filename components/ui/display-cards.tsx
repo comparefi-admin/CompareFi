@@ -11,15 +11,17 @@ function DisplayCard({
   data,
   isMasked = true,
   isDimmed = false,
-  isCenter = false, 
+  isCenter = false,
   className,
 }: {
   title: string;
   data: { label: string; value: string }[];
   isMasked?: boolean;
   isDimmed?: boolean;
+  isCenter?: boolean;
   className?: string;
 }) {
+
   return (
     <div
       className={cn(
@@ -27,9 +29,9 @@ function DisplayCard({
         // Glass acrylic effect
         "backdrop-blur-xl border border-white/30 shadow-[0_8px_32px_rgba(0,0,0,0.15)]",
         // Fi chrome gradient
-       isCenter
-  ? "bg-[linear-gradient(145deg,rgba(255,255,255,0.90)_0%,rgba(240,240,240,0.75)_45%,rgba(220,220,220,0.55)_100%)]"
-  : "bg-[linear-gradient(145deg,rgba(255,255,255,0.65)_0%,rgba(240,240,240,0.35)_45%,rgba(220,220,220,0.15)_100%)]",
+        isCenter
+          ? "bg-[linear-gradient(145deg,rgba(255,255,255,0.90)_0%,rgba(240,240,240,0.75)_45%,rgba(220,220,220,0.55)_100%)]"
+          : "bg-[linear-gradient(145deg,rgba(255,255,255,0.85)_0%,rgba(240,240,240,0.65)_45%,rgba(220,220,220,0.40)_100%)]",
 
         // Mask fade (removes on hover)
         isMasked ? "mask-gradient" : "mask-none",
@@ -68,7 +70,6 @@ function DisplayCard({
           </div>
         ))}
       </div>
-
     </div>
   );
 }
@@ -127,7 +128,8 @@ export default function DisplayCards() {
               className={cn(
                 "transition-all duration-700 ease-out",
                 layoutClass,
-                isHovered && "z-40 rotate-0 translate-x-0 scale-[1.08] opacity-100"
+                isHovered &&
+                "z-40 rotate-0 translate-x-0 scale-[1.08] opacity-100"
               )}
               onMouseEnter={() => setHoveredIndex(i)}
               onMouseLeave={() => setHoveredIndex(null)}
@@ -136,7 +138,7 @@ export default function DisplayCards() {
                 {...card}
                 isDimmed={isDimmed}
                 isMasked={!isHovered}
-                  isCenter={i === 1}
+                isCenter={i === 1}
               />
             </div>
           );

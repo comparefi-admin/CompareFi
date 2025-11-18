@@ -181,10 +181,7 @@ export default function HomePage() {
         <main className="flex-grow bg-[#EFF3F6]">
 
           {/* HERO SECTION (FinGrow-style FIXED) */}
-          {/* HERO SECTION — FinGrow Exact Replica */}
-          {/* HERO SECTION — FinGrow Exact Replica (Fully Working) */}
-          {/* HERO SECTION — FinGrow Fixed (Fade + Overlay) */}
-{/* HERO SECTION — Final FinGrow Blended Version */}
+
 <section
   id="hero"
   className="relative flex flex-col items-center justify-center min-h-[100vh] overflow-visible text-center text-white"
@@ -196,69 +193,72 @@ export default function HomePage() {
     backgroundBlendMode: "overlay, normal",
   }}
 >
+{/* ==== DOTTED STAR SQUARES (LEFT + RIGHT) ==== */}
+{/* LEFT DOT STAR */}
+<svg
+  className="absolute bottom-[3rem] left-[18%] w-[420px] h-[420px] pointer-events-none rotate-[-14deg] opacity-[0.55] z-[3]"
+  viewBox="0 0 200 200"
+>
+  <defs>
+    <pattern id="starDotsLeft" width="12" height="12" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="2" fill="white" />
+    </pattern>
 
-  {/* ==== DOTTED PATCHES (BOTTOM LEFT + RIGHT) ==== */}
-  <svg
-    className="absolute bottom-[8rem] inset-x-0 w-full h-[220px] pointer-events-none z--10"
-    viewBox="0 0 1440 220"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <defs>
-      <pattern id="dots" x="0" y="0" width="14" height="14" patternUnits="userSpaceOnUse">
-        <circle cx="3" cy="3" r="2" fill="white" />
-      </pattern>
-    </defs>
+    <linearGradient id="starFadeLeft" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stopColor="white" stopOpacity="1" />
+      <stop offset="60%" stopColor="white" stopOpacity="0.35" />
+      <stop offset="100%" stopColor="white" stopOpacity="0" />
+    </linearGradient>
 
-    {/* LEFT */}
-    <g opacity="0.55" transform="translate(-20,40) rotate(-18)">
-      <rect width="190" height="150" fill="url(#dots)" />
-    </g>
+    <mask id="starFadeMaskLeft">
+      <rect width="200" height="200" fill="url(#starFadeLeft)" />
+    </mask>
+  </defs>
 
-    <g opacity="0.55" transform="translate(240,100) rotate(20)">
-      <rect width="190" height="150" fill="url(#dots)" />
-    </g>
-
-    {/* RIGHT */}
-    <g opacity="0.55" transform="translate(1120,-50) rotate(16)">
-      <rect width="190" height="150" fill="url(#dots)" />
-    </g>
-    
-  </svg>
-  
-
-  {/* ==== LIGHT DOTTED ACCENTS STILL UP TOP ==== */}
-  <Image
-    src="/icons/dot-fade.svg"
-    alt=""
-    width={240}
-    height={200}
-    className="absolute left-[12%] top-[4rem] opacity-[85%] pointer-events-none scale-[0.75]"
+  <polygon
+    points="100,10 140,75 195,85 155,135 165,195 100,165 35,195 45,135 5,85 60,75"
+    fill="url(#starDotsLeft)"
+    mask="url(#starFadeMaskLeft)"
   />
+</svg>
+{/* RIGHT DOT STAR */}
+<svg
+  className="absolute bottom-[3rem] right-[18%] w-[420px] h-[420px] pointer-events-none rotate-[14deg] opacity-[0.55] z-[3]"
+  viewBox="0 0 200 200"
+>
+  <defs>
+    <pattern id="starDotsRight" width="12" height="12" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="2" fill="white" />
+    </pattern>
 
-  <Image
-    src="/icons/dot-fade.svg"
-    alt=""
-    width={260}
-    height={220}
-    className="absolute right-[10%] top-[6rem] opacity-[0.18] pointer-events-none scale-[0.85]"
+    <linearGradient id="starFadeRight" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stopColor="white" stopOpacity="1" />
+      <stop offset="60%" stopColor="white" stopOpacity="0.35" />
+      <stop offset="100%" stopColor="white" stopOpacity="0" />
+    </linearGradient>
+
+    <mask id="starFadeMaskRight">
+      <rect width="200" height="200" fill="url(#starFadeRight)" />
+    </mask>
+  </defs>
+
+  <polygon
+    points="100,10 140,75 195,85 155,135 165,195 100,165 35,195 45,135 5,85 60,75"
+    fill="url(#starDotsRight)"
+    mask="url(#starFadeMaskRight)"
   />
+</svg>
+{/* MASK that hides stars behind the cards */}
+<div
+  className="absolute inset-0 pointer-events-none z-[15]"
+  style={{
+    WebkitMaskImage:
+      "radial-gradient(circle at center 60%, transparent 25%, black 55%)",
+    maskImage:
+      "radial-gradient(circle at center 60%, transparent 25%, black 55%)",
+  }}
+/>
 
-  {/* ==== CIRCULAR RADAR-LIKE MESH ==== */}
-  <svg
-    className="absolute top-[8rem] left-[14rem] z-0 opacity-25 pointer-events-none"
-    width="200"
-    height="200"
-    viewBox="0 0 140 140"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <g opacity="0.2">
-      <circle cx="70" cy="70" r="65" stroke="white" strokeWidth="0.45" strokeDasharray="3 4"/>
-      <circle cx="70" cy="70" r="50" stroke="white" strokeWidth="0.45" strokeDasharray="2 6"/>
-      <circle cx="70" cy="70" r="35" stroke="white" strokeWidth="0.7" strokeDasharray="1.5 7"/>
-      <circle cx="70" cy="70" r="20" stroke="white" strokeWidth="0.8" opacity="0.35"/>
-      <circle cx="70" cy="70" r="4" fill="white" opacity="0.4"/>
-    </g>
-  </svg>
 
   {/* ==== SUBTLE STAR BURST SHAPE ==== */}
   <svg
