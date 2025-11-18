@@ -420,106 +420,123 @@ export default function LASPage() {
     Detailed LAS Cost Summary
   </h3>
 
-  <div className="w-full bg-white/20 backdrop-blur-xl border border-white/30 shadow-2xl rounded-2xl p-6 flex">
-    <div className="flex w-full gap-4">
-      <div className="flex-1 overflow-x-auto">
-        <table className="w-full border-collapse text-base text-gray-900">
-          <thead>
-            <tr className="text-left font-semibold border-b border-white/30">
-              <th className="px-5 py-4 bg-gradient-to-br from-[#f9fafb] to-[#edf1f6] border border-gray-300">Institution</th>
-              <th className="px-5 py-4 bg-gradient-to-br from-[#f9fafb] to-[#edf1f6] border border-gray-300 text-teal-600">1st Year</th>
-              <th className="px-5 py-4 bg-gradient-to-br from-[#f9fafb] to-[#edf1f6] border border-gray-300 text-indigo-700 relative after:content-[''] after:absolute after:right-0 after:top-0 after:h-full after:w-[6px] after:shadow-[6px_0_10px_rgba(0,0,0,0.15)] after:z-[3]">2nd Year</th>
-              {rightTableColumns[activeTableCategory].map((col) => (
-                <th key={col.key} className="px-5 py-4 border border-gray-300 bg-white/60">{col.label}</th>
-              ))}
-              <th className="px-5 py-4 border border-gray-300 bg-white/60">Contact</th>
-            </tr>
-          </thead>
+  <div className="w-full bg-white/20 backdrop-blur-xl border border-white/30 shadow-2xl rounded-2xl p-6">
 
-          <tbody>
-            {sortedCostData.map((row, index) => (
-              <tr key={row.id} className={`transition-all duration-300 ${index % 2 === 0 ? "bg-white/50" : "bg-white/30"} hover:bg-[#cef0a4] `}>
-                <td className="px-5 py-4 border border-gray-300 font-semibold text-gray-900 bg-gradient-to-br from-[#f9fafb] to-[#f1fff1]">
-                  {row.institution_name ?? DEFAULT_NULL_TEXT}
-                </td>
-
-                <td className="px-5 py-4 border border-gray-300 text-center text-teal-600">
-                  {row.cost_first_year ? (
-                    <div className="flex flex-col gap-0.5">
-                      <div>Percent: {row.cost_first_year.percent ?? "—"}</div>
-                      <div>Amount: ₹{row.cost_first_year.amount ?? "—"}</div>
-                    </div>
-                  ) : (
-                    DEFAULT_NULL_TEXT
-                  )}
-                </td>
-
-                <td className="px-5 py-4 border border-gray-300 text-center text-indigo-700">
-                  {row.cost_second_year ? (
-                    <div className="flex flex-col gap-0.5">
-                      <div>Percent: {row.cost_second_year.percent ?? "—"}</div>
-                      <div>Amount: ₹{row.cost_second_year.amount ?? "—"}</div>
-                    </div>
-                  ) : (
-                    DEFAULT_NULL_TEXT
-                  )}
-                </td>
-
-                {rightTableColumns[activeTableCategory].map((col) => {
-                  const val = row[col.key];
-                  return (
-                    <td key={col.key} className="px-5 py-4 border border-gray-300 whitespace-pre-wrap text-gray-900">
-                      {val == null
-                        ? DEFAULT_NULL_TEXT
-                        : typeof val === "object"
-                        ? Object.entries(val).map(([k, v], idx) => (
-                            <div key={idx} className="text-gray-800">
-                              {`${k}: ${v ?? "—"}`}
-                            </div>
-                          ))
-                        : val}
-                    </td>
-                  );
-                })}
-
-                <td className="px-5 py-4 border border-gray-300 text-center">
-                  <a
-                    href={`https://wa.me/919930584020?text=Hi! I’m interested in learning more about Loan Against Share (LAS) by ${encodeURIComponent(
-                      row.institution_name || "this institution"
-                    )}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 bg-green-500 text-white px-4 py-2 rounded-lg text-base font-medium shadow-md hover:bg-green-600 hover:scale-[1.05] active:scale-[0.98] transition-all duration-200"
-                  >
-                    Enquire
-                  </a>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      {/* Right Buttons — vertical stack spanning the table height */}
-      <div className="flex flex-col justify-between gap-4 h-full w-[130px]">
-        {categoryButtons.map((cat) => (
-          <button
-            key={cat.key}
-            onClick={() => setActiveTableCategory(cat.key)}
-            className={`flex flex-row items-center justify-between bg-teal-600 hover:bg-[#FF5732] text-white rounded-2xl shadow-lg transition-all duration-300 flex-1 w-full px-4 font-semibold text-sm ${
-              activeTableCategory === cat.key ? "scale-105" : ""
+    {/* 🔘 BUTTONS ON TOP (HORIZONTAL) */}
+    <div className="flex flex-wrap justify-center gap-4 mb-6">
+      {categoryButtons.map((cat) => (
+        <button
+          key={cat.key}
+          onClick={() => setActiveTableCategory(cat.key)}
+          className={`px-5 py-3 rounded-xl font-semibold text-sm transition-all duration-300 shadow-md
+            ${
+              activeTableCategory === cat.key
+                ? "bg-teal-600 text-white scale-105 shadow-lg"
+                : "bg-white/60 text-gray-800 hover:bg-white hover:shadow-lg"
             }`}
-          >
-            <span className="text-lg font-bold">
-              {activeTableCategory === cat.key ? "<-" : "->"}
-            </span>
-            <span className="tracking-wide">{cat.label}</span>
-          </button>
-        ))}
-      </div>
+        >
+          {cat.label}
+        </button>
+      ))}
+    </div>
+
+    {/* 📊 TABLE BELOW */}
+    <div className="overflow-x-auto">
+      <table className="w-full border-collapse text-base text-gray-900">
+        <thead>
+          <tr className="text-left font-semibold border-b border-white/30">
+
+            {/* 1st 3 columns — unchanged */}
+            <th className="px-5 py-4 bg-gradient-to-br from-[#f9fafb] to-[#edf1f6] border border-gray-300 relative z-[5] shadow-[0_2px_6px_rgba(0,0,0,0.12)] rounded-md">
+              Institution
+            </th>
+            <th className="px-5 py-4 bg-gradient-to-br from-[#f9fafb] to-[#edf1f6] border border-gray-300 text-teal-600 relative z-[5] shadow-[0_2px_6px_rgba(0,0,0,0.12)] rounded-md">
+              1st Year
+            </th>
+            <th className="px-5 py-4 bg-gradient-to-br from-[#f9fafb] to-[#edf1f6] border border-gray-300 text-indigo-700 relative z-[5] shadow-[0_2px_6px_rgba(0,0,0,0.12)] rounded-md after:content-[''] after:absolute after:right-0 after:top-0 after:h-full after:w-[6px] after:shadow-[6px_0_10px_rgba(0,0,0,0.15)] after:z-[8]">
+              2nd Year
+            </th>
+
+            {rightTableColumns[activeTableCategory].map((col) => (
+              <th key={col.key} className="px-5 py-4 border border-gray-300 bg-white/60">
+                {col.label}
+              </th>
+            ))}
+
+            <th className="px-5 py-4 border border-gray-300 bg-white/60">Contact</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {sortedCostData.map((row, index) => (
+            <tr
+              key={row.id}
+              className={`transition-all duration-300 ${
+                index % 2 === 0 ? "bg-white/50" : "bg-white/30"
+              } hover:bg-[#cef0a4]`}
+            >
+              {/* Row cells (unchanged) */}
+              <td className="px-5 py-4 border border-gray-300 font-semibold text-gray-900 bg-gradient-to-br from-[#f9fafb] to-[#f1fff1] relative z-[5] shadow-[0_2px_6px_rgba(0,0,0,0.12)] rounded-md">
+                {row.institution_name ?? DEFAULT_NULL_TEXT}
+              </td>
+
+              <td className="px-5 py-4 border border-gray-300 text-center text-teal-600 bg-gradient-to-br from-[#f9fafb] to-[#f1fff1] relative z-[5] shadow-[0_2px_6px_rgba(0,0,0,0.12)] rounded-md">
+                {row.cost_first_year ? (
+                  <div className="flex flex-col gap-0.5">
+                    <div>Percent: {row.cost_first_year.percent ?? "—"}</div>
+                    <div>Amount: ₹{row.cost_first_year.amount ?? "—"}</div>
+                  </div>
+                ) : (
+                  DEFAULT_NULL_TEXT
+                )}
+              </td>
+
+              <td className="px-5 py-4 border border-gray-300 text-center text-indigo-700 bg-gradient-to-br from-[#f9fafb] to-[#f1fff1] relative z-[5] shadow-[0_2px_6px_rgba(0,0,0,0.12)] rounded-md after:content-[''] after:absolute after:right-0 after:top-0 after:h-full after:w-[6px] after:shadow-[6px_0_10px_rgba(0,0,0,0.15)] after:z-[8]">
+                {row.cost_second_year ? (
+                  <div className="flex flex-col gap-0.5">
+                    <div>Percent: {row.cost_second_year.percent ?? "—"}</div>
+                    <div>Amount: ₹{row.cost_second_year.amount ?? "—"}</div>
+                  </div>
+                ) : (
+                  DEFAULT_NULL_TEXT
+                )}
+              </td>
+
+              {rightTableColumns[activeTableCategory].map((col) => {
+                const val = row[col.key];
+                return (
+                  <td key={col.key} className="px-5 py-4 border border-gray-300 whitespace-pre-wrap text-gray-900">
+                    {val == null
+                      ? DEFAULT_NULL_TEXT
+                      : typeof val === "object"
+                      ? Object.entries(val).map(([k, v], idx) => (
+                          <div key={idx} className="text-gray-800">{`${k}: ${v ?? "—"}`}</div>
+                        ))
+                      : val}
+                  </td>
+                );
+              })}
+
+              <td className="px-5 py-4 border border-gray-300 text-center">
+                <a
+                  href={`https://wa.me/919930584020?text=Hi! I’m interested in learning more about Loan Against Share (LAS) by ${encodeURIComponent(
+                    row.institution_name || "this institution"
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 bg-green-500 text-white px-4 py-2 rounded-lg text-base font-medium shadow-md hover:bg-green-600 hover:scale-[1.05] active:scale-[0.98] transition-all duration-200"
+                >
+                  Enquire
+                </a>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   </div>
 </section>
+
 
 
 {/* How to Apply & Key Factors Section */}
