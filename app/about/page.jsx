@@ -5,119 +5,146 @@ import Footer from '../components/footer';
 import Image from 'next/image';
 import Het from '../images/het.jpg';
 
+// Import same fonts as home page
+import { Work_Sans, Inter } from "next/font/google";
+
+const workSans = Work_Sans({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+  variable: "--font-work-sans",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+  display: "swap",
+  variable: "--font-inter",
+});
+
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-[#fcfefb] text-[#0A0F2C] font-sans">
-      <Navbar />
+    <div className={`${workSans.variable} ${inter.variable} font-sans min-h-screen bg-[#EFF3F6] text-[#0A0F2C]`}>
 
-      {/* Hero Section */}
-      <section className="pt-32 pb-20 flex justify-center relative overflow-hidden">
-        <div className="w-[94%] max-w-7xl mx-auto px-10 text-center bg-gradient-to-b from-[#B1ED67]/30 to-white rounded-3xl p-14 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.15)] border border-[#e5e7eb] transition-all duration-700 hover:scale-[1.01] hover:shadow-[0_45px_80px_-20px_rgba(0,0,0,0.25)]">
-          <h1 className="text-4xl sm:text-5xl font-extrabold mb-6">
-            Your Trusted Financial Comparison Platform
+      {/* NAVBAR */}
+      <div className="fixed top-2 left-1/2 transform -translate-x-1/2 z-[9999] w-full max-w-screen-xl px-4 pt-4">
+        <Navbar />
+      </div>
+
+      {/* SOFT DARK HERO (NOT AS DARK AS HOME) */}
+      <section className="pt-48 pb-28 flex justify-center text-center bg-[#0E1A2B]">
+        <div className="w-[94%] max-w-5xl mx-auto px-10">
+
+          {/* Badge */}
+          <div className="bg-[#B1ED67]/25 text-[#B1ED67] px-4 py-1 rounded-full text-sm font-medium inline-block mb-6">
+            About CompareFi
+          </div>
+
+          {/* Title */}
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-tight">
+            The Story Behind <span className="text-[#B1ED67]">CompareFi</span>
           </h1>
-          <p className="text-lg sm:text-xl text-[#4B5563] max-w-3xl mx-auto">
-            CompareFi is India’s most transparent financial comparison platform, designed to help you make smarter borrowing and investing decisions.
-            We simplify the complex world of finance by offering real-time, unbiased comparisons for Loan Against Shares (LAS), Loan Against Mutual Funds (LAMF), and Margin Trading Facility (MTF).
+
+          {/* Subtext */}
+          <p className="text-slate-300 mt-6 text-lg max-w-2xl mx-auto">
+            A mission-driven platform built to bring transparency and clarity to India’s financial world.
           </p>
         </div>
       </section>
 
-      {/* ABOUT SECTION */}
+      {/* MAIN ABOUT SECTION */}
       <section className="py-20 flex justify-center">
-        <div className="w-[94%] max-w-7xl mx-auto px-10 bg-gradient-to-b from-[#B1ED67]/20 to-white rounded-3xl p-14 shadow-[0_45px_80px_-20px_rgba(0,0,0,0.25)] border border-[#e5e7eb] transition-all duration-700">
-          
-          {/* Founder row */}
-          <div className="grid md:grid-cols-2 gap-14 items-center mb-12 animate-slideUp">
+        <div className="w-[94%] max-w-7xl mx-auto px-10 
+          bg-white rounded-3xl p-16 shadow-[0_15px_40px_-10px_rgba(0,0,0,0.2)]">
 
-            <div className="relative w-full rounded-2xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.25)] overflow-hidden">
+          {/* Founder Row */}
+          <div className="grid md:grid-cols-2 gap-16 items-center mb-14">
+
+            {/* Founder Image */}
+            <div className="rounded-2xl overflow-hidden shadow-xl">
               <Image
                 // src={Het}
                 alt="Founder"
-                className="rounded-2xl object-cover w-full h-[400px]"
+                className="w-full h-[420px] object-cover"
               />
             </div>
 
+            {/* Founder Text */}
             <div>
-              <h2 className="text-3xl sm:text-4xl font-bold mb-4">About Het Doshi</h2>
+              <h2 className="text-4xl font-bold mb-4">About Het Doshi</h2>
+
               <p className="text-[#4B5563] text-lg leading-relaxed">
-                I’m Het Doshi, a Chartered Accountant by qualification and an auditor by experience.
-                I’ve worked across NBFCs, stock brokers, wealth managers & mutual funds — giving me a real view of how the financial industry works from inside.
+                I’m Het Doshi, a Chartered Accountant with professional experience across NBFCs,
+                stock brokers, wealth managers, and mutual funds — giving me a deep understanding of how
+                the financial industry really works.
               </p>
 
-              <p className="text-right text-2xl mt-6 font-[cursive] text-[#0A0F2C]/90">
+              <p className="text-right text-2xl mt-6 italic text-[#0A0F2C]/90">
                 – Het Doshi
               </p>
             </div>
           </div>
 
-          {/* Long narrative paragraphs */}
-          <h2 className="text-3xl sm:text-4xl font-bold mb-6">About CompareFi</h2>
+          {/* Narrative */}
+          <h2 className="text-4xl font-bold mb-6">About CompareFi</h2>
 
-          <div className="space-y-6 text-[#4B5563] text-lg leading-relaxed animate-fadeIn">
+          <div className="space-y-6 text-[#4B5563] text-lg leading-relaxed">
             <p>
-              At CompareFi, our mission is simple: to help everyday people make smarter financial decisions. This platform is born from a personal commitment to financial literacy and transparency — not from a profit driven agenda.
+              CompareFi was created to give everyday people unbiased, clear, and honest financial comparisons.
             </p>
             <p>
-              Through CompareFi, I want to bridge the gap between financial products and the people they’re meant to serve. Whether it’s understanding a loan’s true cost, finding the right bank account, or comparing brokerage fees, my goal is to empower you with clear, unbiased information so you can make the best choice for your needs.
+              Whether it’s LAS, LAMF, MTF, or any other financial product, our goal is to bring transparency
+              to real costs, risks, and benefits — without hidden agendas.
             </p>
             <p>
-              This platform is completely bootstrapped — built with time, effort, and a desire to make a difference. There’s no funding, no flashy team, and no corporate agenda behind CompareFi. It’s just me, trying to make a small impact in a system that often feels stacked against the average consumer.
+              The platform is fully bootstrapped, built with a mission rather than investors. No pressure,
+              no bias — just simple clarity.
             </p>
             <p>
-              If this helps even one person save money, avoid a bad decision, or feel more confident about their finances, it’s all been worth it.
+              If CompareFi helps even one person avoid a bad financial decision, the mission is successful.
             </p>
           </div>
 
         </div>
       </section>
 
-     {/* VISION / MISSION */}
-<section className="pb-28 flex justify-center">
-  <div className="w-[94%] max-w-7xl mx-auto px-10 bg-gradient-to-b from-[#B1ED67]/20 to-white rounded-3xl p-14 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.3)] border border-[#e5e7eb] transition-all duration-700 animate-slideUp">
-    
-    <h2 className="text-3xl sm:text-4xl font-bold mb-8">Vision & Mission</h2>
+      {/* VISION + MISSION */}
+      <section className="pb-28 flex justify-center">
+        <div className="w-[94%] max-w-7xl mx-auto px-10
+          bg-white rounded-3xl p-16 shadow-[0_15px_40px_-10px_rgba(0,0,0,0.2)]">
 
-    {/* Vision */}
-    <h3 className="text-2xl font-semibold mb-3">Our Vision</h3>
-    <p className="text-[#4B5563] text-lg leading-relaxed mb-12">
-      To create a more financially literate and empowered society by providing clear, unbiased comparisons of financial products and services.
-    </p>
+          <h2 className="text-4xl font-bold mb-10">Vision & Mission</h2>
 
-  {/* Mission */}
-<h3 className="text-2xl font-semibold mb-6">Our Mission</h3>
+          {/* Vision */}
+          <h3 className="text-2xl font-semibold text-[#0A0F2C] mb-3">Our Vision</h3>
+          <p className="text-[#4B5563] text-lg leading-relaxed mb-10">
+            A financially confident India driven by clarity and transparency.
+          </p>
 
-<div className="grid sm:grid-cols-2 gap-8">
-  {[
-    "To simplify the world of loans, bank accounts, and financial products for everyday consumers.",
-    "To help individuals make informed financial choices that align with their goals and needs.",
-    "To build trust through transparency, clarity, and honest insights.",
-    "To make financial literacy accessible to everyone, not just a privileged few."
-  ].map((item, idx) => (
-    <div
-      key={idx}
-      className="group relative overflow-hidden bg-white p-7 rounded-2xl border border-[#e5e7eb]
-                 shadow-[0_15px_35px_-10px_rgba(0,0,0,0.12)] transition-all duration-500
-                 hover:-translate-y-2 hover:shadow-[0_25px_55px_-12px_rgba(0,0,0,0.22)] hover:border-[#B1ED67]"
-    >
-      {/* subtle green glow */}
-      <div className="absolute inset-0 opacity-0 group-hover:opacity-40 transition-opacity duration-500
-                      bg-gradient-to-br from-[#B1ED67]/40 to-transparent blur-2xl"></div>
+          {/* Mission */}
+          <h3 className="text-2xl font-semibold text-[#0A0F2C] mb-6">Our Mission</h3>
 
-      {/* text content */}
-      <div className="relative z-10 flex gap-3 items-start">
-        <div className="mt-1 w-3 h-3 rounded-full bg-[#FF5732] flex-shrink-0"></div>
-        <p className="text-[#4B5563] text-lg leading-relaxed">
-          {item}
-        </p>
-      </div>
-    </div>
-  ))}
-</div>
+          <div className="grid sm:grid-cols-2 gap-8">
+            {[
+              "To simplify complex financial products.",
+              "To help individuals make educated financial decisions.",
+              "To bring full transparency to charges, risks, and benefits.",
+              "To make financial literacy accessible to every Indian."
+            ].map((item, idx) => (
+              <div
+                key={idx}
+                className="bg-[#F9FAFB] p-7 rounded-2xl border border-[#e5e7eb]
+                shadow-[0_10px_30px_-10px_rgba(0,0,0,0.12)]"
+              >
+                <p className="text-[#4B5563] text-lg leading-relaxed">
+                  {item}
+                </p>
+              </div>
+            ))}
+          </div>
 
-  </div>
-</section>
-
+        </div>
+      </section>
 
       <Footer />
     </div>
