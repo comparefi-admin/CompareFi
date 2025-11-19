@@ -12,6 +12,41 @@ p {
   line-height: 1.55;
 }
 
+/* Make 1st three columns look elevated + important */
+.table-highlight th:nth-child(-n+3),
+.table-highlight td:nth-child(-n+3) {
+  background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(246,255,246,0.85));
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.5);
+  position: relative;
+  z-index: 10;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+/* Thin green accent strip on left */
+.table-highlight th:nth-child(-n+3)::before,
+.table-highlight td:nth-child(-n+3)::before {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 10px;
+  bottom: 10px;
+  width: 4px;
+  border-radius: 6px;
+  background: linear-gradient(180deg, #B1ED67, #1F5E3C);
+  box-shadow: 0 4px 12px rgba(177,237,103,0.2);
+}
+
+/* Hover lift for important columns */
+.table-highlight tbody tr:hover td:nth-child(-n+3) {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+}
+
+/* Slight dimming of all other columns when hovering */
+.table-highlight tbody tr:hover td:nth-child(n+4) {
+  opacity: 0.85;
+}
 
 
 /* From Uiverse.io by Li-Deheng */ 

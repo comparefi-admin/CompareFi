@@ -398,7 +398,7 @@ export default function HomePage() {
     </div>
     <div>
       <p className="text1-title text-xl font-semibold text-[#FFFFFF]  transition-colors">MTF</p>
-      <p className="text1-body text-gray-600 mt-1">Margin Trading Facility</p>
+      <p className="text1-body text-white mt-1">Margin Trading Facility</p>
     </div>
   </div>
   <button className="card4-button mt-4 bg-[#B1ED67] hover:bg-black text-white font-medium py-2 px-4 rounded-lg transition-all">More Info</button>

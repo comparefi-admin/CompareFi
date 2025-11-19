@@ -25,7 +25,7 @@ function DisplayCard({
   return (
     <div
       className={cn(
-        "relative flex flex-col justify-between h-[22rem] w-[15rem] rounded-2xl p-5",
+        "relative flex flex-col justify-between h-[25rem] w-[18rem] rounded-2xl p-5",
         // Glass acrylic effect
         "backdrop-blur-xl border border-white/30 shadow-[0_8px_32px_rgba(0,0,0,0.15)]",
         // Fi chrome gradient
@@ -59,7 +59,7 @@ function DisplayCard({
         {data.map((item, idx) => (
           <div
             key={idx}
-            className="flex flex-col justify-start rounded-xl bg-white/60 backdrop-blur-sm py-3 px-4 shadow-sm border border-white/40"
+            className="flex flex-col justify-start rounded-xl bg-white/60 backdrop-blur-sm py-5 px-4 shadow-sm border border-white/40"
           >
             <span className="text-gray-600 text-xs sm:text-sm">
               {item.label}

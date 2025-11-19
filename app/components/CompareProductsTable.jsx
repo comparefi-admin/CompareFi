@@ -18,7 +18,6 @@ export default function CompareProductsTable({ productType }) {
         else rows = await fetchMTF();
 
         const clean = rows.map((d) => {
-          // ---------------------- MTF MAPPING ----------------------
           if (productType.toLowerCase() === "mtf") {
             return {
               id: d.id,
@@ -29,7 +28,6 @@ export default function CompareProductsTable({ productType }) {
             };
           }
 
-          // ---------------------- LAS & LAMF (original) ----------------------
           return {
             id: d.id,
             name:
@@ -55,18 +53,16 @@ export default function CompareProductsTable({ productType }) {
           };
         });
 
-        // still filter to Bajaj / SBI / Mirae asset
-      const filtered = clean.filter((r) =>
-  [
-    "bajaj",
-    "sbi",
-    "mirae asset",
-    "kotak - trade free youth plan",
-    "hdfc sky",
-    "dhan"
-  ].includes((r.name || "").trim().toLowerCase())
-);
-
+        const filtered = clean.filter((r) =>
+          [
+            "bajaj",
+            "sbi",
+            "mirae asset",
+            "kotak - trade free youth plan",
+            "hdfc sky",
+            "dhan"
+          ].includes((r.name || "").trim().toLowerCase())
+        );
 
         setData(filtered);
       } catch (err) {
@@ -88,63 +84,72 @@ export default function CompareProductsTable({ productType }) {
   }
 
   return (
-    <div className="bg-[#aff3c9] bg-opacity-40 rounded-2xl border border-white/20 backdrop-blur-md shadow-lg p-6 overflow-x-auto">
-   <div className="w-full flex justify-center mb-6">
-  <div className="px-6 py-2 rounded-full bg-white text-black font-semibold text-lg shadow-sm">
-    {productType.toUpperCase()} Comparison
-  </div>
-</div>
+    <div className="bg-[#aff3c9] bg-opacity-40 rounded-2xl border backdrop-blur-md shadow-lg p-6 overflow-x-auto border-[rgb(10,75,0.2,0.2)]">
 
+      <div className="w-full flex justify-center mb-6">
+        <div className="px-6 py-2 rounded-full bg-white text-black font-semibold text-lg shadow-sm">
+          {productType.toUpperCase()} Comparison
+        </div>
+      </div>
 
       <table className="w-full border-collapse text-black text-sm sm:text-base">
-       <thead>
-  <tr className="bg-[#2B7146] text-white">
-    {/* always persistent: name */}
-    <th className="px-4 py-3 border-b text-left">
-      {productType.toLowerCase() === "mtf"
-        ? "Broker"
-        : "Financial Institution"}
-    </th>
+        <thead>
+          <tr className="bg-[#2B7146] text-white">
+            <th className="px-4 py-3 border-b text-left">
+              {productType.toLowerCase() === "mtf"
+                ? "Broker"
+                : "Financial Institution"}
+            </th>
 
-    {/* normal LAS / LAMF columns */}
-    {productType.toLowerCase() !== "mtf" && (
-      <>
-        <th className="px-4 py-3 border-b text-center">Cost - 1st Year Amt</th>
-        <th className="px-4 py-3 border-b text-center">Cost - 2nd Year Amt</th>
-        <th className="px-4 py-3 border-b text-center">Interest Min</th>
-        <th className="px-4 py-3 border-b text-center">Interest Max</th>
-      </>
-    )}
+            {productType.toLowerCase() !== "mtf" && (
+              <>
+                <th className="px-4 py-3 border-b text-center">
+                  Cost - 1st Year Amt
+                </th>
+                <th className="px-4 py-3 border-b text-center">
+                  Cost - 2nd Year Amt
+                </th>
+                <th className="px-4 py-3 border-b text-center">
+                  Interest Min
+                </th>
+                <th className="px-4 py-3 border-b text-center">
+                  Interest Max
+                </th>
+              </>
+            )}
 
-    {/* MTF only columns */}
-    {productType.toLowerCase() === "mtf" && (
-      <>
-        <th className="px-4 py-3 border-b text-left">Cost Summary</th>
-        <th className="px-4 py-3 border-b text-left">Margin Requirement</th>
-      </>
-    )}
+            {productType.toLowerCase() === "mtf" && (
+              <>
+                <th className="px-4 py-3 border-b text-left">Cost Summary</th>
+                <th className="px-4 py-3 border-b text-left">
+                  Margin Requirement
+                </th>
+              </>
+            )}
 
-    {/* Approved stocks stays common */}
-    <th className="px-4 py-3 border-b text-left">Approved Stocks</th>
-  </tr>
-</thead>
+            <th className="px-4 py-3 border-b text-left">Approved Stocks</th>
+          </tr>
+        </thead>
 
-
-      <tbody>
-  {data.map((row) => (
-    <tr
-      key={row.id}
-      className="hover:bg-[#B1ED67]/40 hover:shadow-lg transition-colors duration-200"
-    >
-      <td className="px-4 py-3 border-b">{row.name}</td>
+        <tbody>
+          {data.map((row) => (
+            <tr
+              key={row.id}
+              className="hover:bg-[#B1ED67]/40 hover:shadow-lg transition-colors duration-200"
+            >
+              <td className="px-4 py-3 border-b">{row.name}</td>
 
               {productType.toLowerCase() !== "mtf" && (
                 <>
                   <td className="px-4 py-3 border-b text-center">
                     {row.cost_first_year ? (
                       <div className="flex flex-col gap-0.5">
-                        <div>Percent: {row.cost_first_year.percent ?? "—"}</div>
-                        <div>Amount: ₹{row.cost_first_year.amount ?? "—"}</div>
+                        <div>
+                          Percent: {row.cost_first_year.percent ?? "—"}
+                        </div>
+                        <div>
+                          Amount: ₹{row.cost_first_year.amount ?? "—"}
+                        </div>
                       </div>
                     ) : (
                       "—"
@@ -157,7 +162,9 @@ export default function CompareProductsTable({ productType }) {
                         <div>
                           Percent: {row.cost_second_year.percent ?? "—"}
                         </div>
-                        <div>Amount: ₹{row.cost_second_year.amount ?? "—"}</div>
+                        <div>
+                          Amount: ₹{row.cost_second_year.amount ?? "—"}
+                        </div>
                       </div>
                     ) : (
                       "—"
@@ -195,6 +202,17 @@ export default function CompareProductsTable({ productType }) {
           ))}
         </tbody>
       </table>
+
+      {/* ⭐ Read More Button ⭐ */}
+      <div className="w-full flex justify-center mt-6">
+        <a
+          href={`/products/${productType.toLowerCase()}`}
+          className="px-6 py-2 bg-[#2B7146] hover:bg-[#245d3b] text-white font-semibold rounded-full shadow-md transition-colors"
+        >
+          Read More
+        </a>
+      </div>
+
     </div>
   );
 }
