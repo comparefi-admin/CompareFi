@@ -4,7 +4,7 @@ import { Sparkles } from "lucide-react";
 import React, { useState } from "react";
 
 /* -----------------------------------------------
-   🔹 Single Card Component — Fi-style Glass Cards
+   🔹 Single Card Component — Fully Opaque Version
 ------------------------------------------------ */
 function DisplayCard({
   title,
@@ -21,32 +21,34 @@ function DisplayCard({
   isCenter?: boolean;
   className?: string;
 }) {
-
   return (
     <div
       className={cn(
         "relative flex flex-col justify-between h-[25rem] w-[18rem] rounded-2xl p-5",
-        // Glass acrylic effect
-        "backdrop-blur-xl border border-white/30 shadow-[0_8px_32px_rgba(0,0,0,0.15)]",
-        // Fi chrome gradient
+        // Opaque luxury card
         isCenter
-          ? "bg-[linear-gradient(145deg,rgba(255,255,255,0.90)_0%,rgba(240,240,240,0.75)_45%,rgba(220,220,220,0.55)_100%)]"
-          : "bg-[linear-gradient(145deg,rgba(255,255,255,0.85)_0%,rgba(240,240,240,0.65)_45%,rgba(220,220,220,0.40)_100%)]",
+          ? "bg-gradient-to-br from-[#ffffff] via-[#f4f4f4] to-[#ebebeb]"
+          : "bg-gradient-to-br from-[#fefefe] via-[#f2f2f2] to-[#e9e9e9]",
 
-        // Mask fade (removes on hover)
+        // Strong premium shadows
+        "shadow-[0_12px_32px_rgba(0,0,0,0.22),0_4px_12px_rgba(0,0,0,0.10)] border border-[#e5e5e5]",
+
+        // Mask fade for side cards
         isMasked ? "mask-gradient" : "mask-none",
-        // Dimmed side cards
-        isDimmed ? "opacity-50 scale-[0.96]" : "opacity-100",
+
+        // Dim effect on side cards
+        isDimmed ? "opacity-60 scale-[0.96]" : "opacity-100",
+
         "transition-all duration-700 ease-out",
         className
       )}
     >
-      {/* Glossy top highlight */}
-      <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-b from-white/40 to-transparent" />
+      {/* Gloss highlight (now subtle + opaque) */}
+      <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-b from-white/90 to-transparent" />
 
       {/* Header */}
-      <div className="flex items-center gap-2 mb-3">
-        <span className="inline-flex items-center justify-center rounded-full bg-gradient-to-b from-[#FF5732] to-[#ff785a] p-2 shadow-md">
+      <div className="flex items-center gap-2 mb-3 relative z-10">
+        <span className="inline-flex items-center justify-center rounded-full bg-gradient-to-b from-[#FF5732] to-[#ff6a50] p-2 shadow-md">
           <Sparkles className="w-5 h-5 text-white" />
         </span>
         <p className="text-lg font-medium tracking-tight text-[#0A0F2C] leading-tight">
@@ -54,17 +56,17 @@ function DisplayCard({
         </p>
       </div>
 
-      {/* Vertical Data List */}
-      <div className="flex flex-col gap-4 w-full">
+      {/* Data List */}
+      <div className="flex flex-col gap-4 w-full relative z-10">
         {data.map((item, idx) => (
           <div
             key={idx}
-            className="flex flex-col justify-start rounded-xl bg-white/60 backdrop-blur-sm py-5 px-4 shadow-sm border border-white/40"
+            className="flex flex-col justify-start rounded-xl bg-[#ffffff] py-4 px-4 shadow-sm border border-[#e2e2e2]"
           >
             <span className="text-gray-600 text-xs sm:text-sm">
               {item.label}
             </span>
-            <span className="text-[#FF5732] font-medium tracking-tight text-sm sm:text-base mt-1">
+            <span className="text-[#FF5732] font-semibold tracking-tight text-sm sm:text-base mt-1">
               {item.value}
             </span>
           </div>
@@ -107,18 +109,19 @@ export default function DisplayCards() {
     },
   ];
 
+  // Layout positions
   const cardLayoutClasses = [
-    "z-10 rotate-[-10deg] translate-x-[25px] translate-y-[20px] opacity-50",
+    "z-10 rotate-[-10deg] translate-x-[25px] translate-y-[20px]",
     "z-30 rotate-0 translate-y-[-20px]",
-    "z-20 rotate-[10deg] translate-x-[-25px] translate-y-[20px] opacity-50",
+    "z-20 rotate-[10deg] translate-x-[-25px] translate-y-[20px]",
   ];
 
   return (
-    <div className="flex justify-center items-center py-20">
+    // Increased responsive top margin to ensure spacing from buttons above
+    <div className="flex justify-center items-center py-20 mt-2 scale-[1.20] origin-top">
       <div className="flex justify-center items-center -space-x-20 pointer-events-auto">
         {cards.map((card, i) => {
           const layoutClass = cardLayoutClasses[i];
-
           const isHovered = hoveredIndex === i;
           const isDimmed = hoveredIndex !== null && hoveredIndex !== i;
 
@@ -129,7 +132,7 @@ export default function DisplayCards() {
                 "transition-all duration-700 ease-out",
                 layoutClass,
                 isHovered &&
-                "z-40 rotate-0 translate-x-0 scale-[1.08] opacity-100"
+                  "z-40 rotate-0 translate-x-0 scale-[1.10] opacity-100"
               )}
               onMouseEnter={() => setHoveredIndex(i)}
               onMouseLeave={() => setHoveredIndex(null)}
