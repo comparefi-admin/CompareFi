@@ -60,7 +60,7 @@ export default function CompareProductsTable({ productType }) {
             "mirae asset",
             "kotak - trade free youth plan",
             "hdfc sky",
-            "dhan"
+            "dhan",
           ].includes((r.name || "").trim().toLowerCase())
         );
 
@@ -77,142 +77,146 @@ export default function CompareProductsTable({ productType }) {
 
   if (loading) {
     return (
-      <div className="p-6 text-center text-slate-200 bg-white/10 rounded-2xl">
+      <div className="p-6 text-center text-slate-800 bg-white/40 backdrop-blur-xl rounded-2xl border border-[#2B7146]/30 shadow-md">
         Loading data...
       </div>
     );
   }
 
   return (
-    <div className="bg-[#aff3c9] bg-opacity-40 rounded-2xl border backdrop-blur-md shadow-lg p-6 overflow-x-auto border-[rgb(10,75,0.2,0.2)]">
-
+    <div className="bg-[#aff3c9]/40 bg-opacity-60 rounded-2xl border border-[#2B7146]/25 backdrop-blur-md shadow-xl p-6 overflow-x-auto">
+      
+      {/* Title */}
       <div className="w-full flex justify-center mb-6">
-        <div className="px-6 py-2 rounded-full bg-white text-black font-semibold text-lg shadow-sm">
+        <div className="px-7 py-2 rounded-full bg-white shadow border border-[#2B7146]/40 font-semibold text-lg text-black
+        bg-gradient-to-b from-white to-[#f2fff4]">
           {productType.toUpperCase()} Comparison
         </div>
       </div>
 
-      <table className="w-full border-collapse text-black text-sm sm:text-base">
-        <thead>
-          <tr className="bg-[#2B7146] text-white">
-            <th className="px-4 py-3 border-b text-left">
-              {productType.toLowerCase() === "mtf"
-                ? "Broker"
-                : "Financial Institution"}
-            </th>
-
-            {productType.toLowerCase() !== "mtf" && (
-              <>
-                <th className="px-4 py-3 border-b text-center">
-                  Cost - 1st Year Amt
-                </th>
-                <th className="px-4 py-3 border-b text-center">
-                  Cost - 2nd Year Amt
-                </th>
-                <th className="px-4 py-3 border-b text-center">
-                  Interest Min
-                </th>
-                <th className="px-4 py-3 border-b text-center">
-                  Interest Max
-                </th>
-              </>
-            )}
-
-            {productType.toLowerCase() === "mtf" && (
-              <>
-                <th className="px-4 py-3 border-b text-left">Cost Summary</th>
-                <th className="px-4 py-3 border-b text-left">
-                  Margin Requirement
-                </th>
-              </>
-            )}
-
-            <th className="px-4 py-3 border-b text-left">Approved Stocks</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {data.map((row) => (
-            <tr
-              key={row.id}
-              className="hover:bg-[#B1ED67]/40 hover:shadow-lg transition-colors duration-200"
-            >
-              <td className="px-4 py-3 border-b">{row.name}</td>
+      {/* Table */}
+      <div className="overflow-x-auto max-h-[500px]">
+        <table className="w-full text-[15px] sm:text-[16px] border border-[#2B7146]/40 rounded-xl bg-white shadow-[0_0_10px_rgba(0,0,0,0.05)]">
+          
+          {/* HEADER */}
+          <thead className="sticky top-0 z-10">
+            <tr className="bg-[#2B7146] text-white bg-gradient-to-b from-[#2B7146] to-[#255e3d]">
+              <th className="px-5 py-3 text-left border-r border-[#ffffff25]">
+                {productType.toLowerCase() === "mtf"
+                  ? "Broker"
+                  : "Financial Institution"}
+              </th>
 
               {productType.toLowerCase() !== "mtf" && (
                 <>
-                  <td className="px-4 py-3 border-b text-center">
-                    {row.cost_first_year ? (
-                      <div className="flex flex-col gap-0.5">
-                        <div>
-                          Percent: {row.cost_first_year.percent ?? "—"}
-                        </div>
-                        <div>
-                          Amount: ₹{row.cost_first_year.amount ?? "—"}
-                        </div>
-                      </div>
-                    ) : (
-                      "—"
-                    )}
-                  </td>
-
-                  <td className="px-4 py-3 border-b text-center">
-                    {row.cost_second_year ? (
-                      <div className="flex flex-col gap-0.5">
-                        <div>
-                          Percent: {row.cost_second_year.percent ?? "—"}
-                        </div>
-                        <div>
-                          Amount: ₹{row.cost_second_year.amount ?? "—"}
-                        </div>
-                      </div>
-                    ) : (
-                      "—"
-                    )}
-                  </td>
-
-                  <td className="px-4 py-3 border-b text-center text-teal-400 font-semibold">
-                    {row.interestMin}
-                  </td>
-
-                  <td className="px-4 py-3 border-b text-center text-pink-400 font-semibold">
-                    {row.interestMax}
-                  </td>
+                  <th className="px-5 py-3 text-center border-r border-[#ffffff25]">1st Year Cost</th>
+                  <th className="px-5 py-3 text-center border-r border-[#ffffff25]">2nd Year Cost</th>
+                  <th className="px-5 py-3 text-center border-r border-[#ffffff25]">Interest Min</th>
+                  <th className="px-5 py-3 text-center border-r border-[#ffffff25]">Interest Max</th>
                 </>
               )}
 
               {productType.toLowerCase() === "mtf" && (
                 <>
-                  <td className="px-4 py-3 border-b">
-                    {row.CostSummary
-                      ? Object.entries(row.CostSummary).map(([k, v], i) => (
-                          <div key={i}>{`${k}: ${v ?? "—"}`}</div>
-                        ))
-                      : "—"}
-                  </td>
-
-                  <td className="px-4 py-3 border-b">
-                    {row.marginRequirement}
-                  </td>
+                  <th className="px-5 py-3 text-left border-r border-[#ffffff25]">Cost Summary</th>
+                  <th className="px-5 py-3 text-left border-r border-[#ffffff25]">Margin Requirement</th>
                 </>
               )}
 
-              <td className="px-4 py-3 border-b">{row.approvedStocks}</td>
+              <th className="px-5 py-3 text-center">Approved Stocks</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
 
-      {/* ⭐ Read More Button ⭐ */}
+          {/* BODY */}
+          <tbody>
+            {data.map((row) => (
+              <tr
+                key={row.id}
+                className="transition-all hover:bg-[#f3ffef] border-t border-[#2B7146]/10 hover:shadow-sm"
+              >
+                <td className="px-5 py-4 font-semibold text-[#124326] border-r border-[#2B7146]/10">
+                  {row.name}
+                </td>
+
+                {productType.toLowerCase() !== "mtf" && (
+                  <>
+                    {/* 1st Year */}
+                    <td className="px-5 py-4 text-center font-medium border-r border-[#2B7146]/10">
+                      {row.cost_first_year ? (
+                        <div className="space-y-1">
+                          <span className="font-semibold text-[#34724A] text-[16px]">
+                            {row.cost_first_year.percent ?? "—"}%
+                          </span>
+                          <div className="text-xs text-gray-600">
+                            ₹{row.cost_first_year.amount}
+                          </div>
+                        </div>
+                      ) : (
+                        "—"
+                      )}
+                    </td>
+
+                    {/* 2nd Year */}
+                    <td className="px-5 py-4 text-center font-medium border-r border-[#2B7146]/10">
+                      {row.cost_second_year ? (
+                        <div className="space-y-1">
+                          <span className="font-semibold text-[#34724A] text-[16px]">
+                            {row.cost_second_year.percent ?? "—"}%
+                          </span>
+                          <div className="text-xs text-gray-600">
+                            ₹{row.cost_second_year.amount}
+                          </div>
+                        </div>
+                      ) : (
+                        "—"
+                      )}
+                    </td>
+
+                    <td className="px-5 py-4 text-center font-semibold text-[#0C8066] text-[16px] border-r border-[#2B7146]/10">
+                      {row.interestMin}
+                    </td>
+
+                    <td className="px-5 py-4 text-center font-semibold text-[#D3558C] text-[16px] border-r border-[#2B7146]/10">
+                      {row.interestMax}
+                    </td>
+                  </>
+                )}
+
+                {/* MTF */}
+                {productType.toLowerCase() === "mtf" && (
+                  <>
+                    <td className="px-5 py-4 text-[15px] border-r border-[#2B7146]/10">
+                      {row.CostSummary
+                        ? Object.entries(row.CostSummary).map(([k, v], i) => (
+                            <div key={i} className="font-medium">{`${k}: ${v ?? "—"}`}</div>
+                          ))
+                        : "—"}
+                    </td>
+
+                    <td className="px-5 py-4 text-[15px] border-r border-[#2B7146]/10">
+                      {row.marginRequirement}
+                    </td>
+                  </>
+                )}
+
+                <td className="px-5 py-4 text-center font-medium text-[16px]">
+                  {row.approvedStocks}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Read More */}
       <div className="w-full flex justify-center mt-6">
         <a
           href={`/products/${productType.toLowerCase()}`}
-          className="px-6 py-2 bg-[#2B7146] hover:bg-[#245d3b] text-white font-semibold rounded-full shadow-md transition-colors"
+          className="px-6 py-2 bg-[#2B7146] hover:bg-[#245d3b] border border-[#2B7146]/40 text-white font-semibold rounded-full shadow-md transition-all"
         >
           Read More
         </a>
       </div>
-
     </div>
   );
 }
