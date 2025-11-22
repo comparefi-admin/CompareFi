@@ -23,28 +23,26 @@ function DisplayCard({
 }) {
   return (
     <div
-  className={cn(
-    "relative flex flex-col justify-between h-[25rem] w-[18rem] rounded-2xl p-5",
+      className={cn(
+        "relative flex flex-col justify-between h-[25rem] w-[18rem] rounded-2xl p-5",
+        // Opaque luxury card
+        isCenter
+          ? "bg-gradient-to-br from-[#ffffff] via-[#f4f4f4] to-[#ebebeb]"
+          : "bg-gradient-to-br from-[#fefefe] via-[#f2f2f2] to-[#e9e9e9]",
 
-    // Frosted glass gradient
-    "bg-[linear-gradient(145deg,#d3dadf_0%,#c4ccd1_40%,#e5eaec_75%,#eef1f2_100%)]"
+        // Strong premium shadows
+        "shadow-[0_12px_32px_rgba(0,0,0,0.22),0_4px_12px_rgba(0,0,0,0.10)] border border-[#e5e5e5]",
 
-,
+        // Mask fade for side cards
+        isMasked ? "mask-gradient" : "mask-none",
 
-    // Shadows & border
-    "shadow-[0_12px_32px_rgba(0,0,0,0.22),0_4px_12px_rgba(0,0,0,0.10)] border border-[#e5e5e5]",
+        // Dim effect on side cards
+        isDimmed ? "opacity-60 scale-[0.96]" : "opacity-100",
 
-    // Side fade
-    isMasked ? "mask-gradient" : "mask-none",
-
-    // Hover dim
-    isDimmed ? "opacity-60 scale-[0.96]" : "opacity-100",
-
-    "transition-all duration-700 ease-out",
-    className
-  )}
->
-
+        "transition-all duration-700 ease-out",
+        className
+      )}
+    >
       {/* Gloss highlight (now subtle + opaque) */}
       <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-b from-white/90 to-transparent" />
 

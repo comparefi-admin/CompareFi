@@ -184,7 +184,7 @@ export default function HomePage() {
 
 <section
   id="hero"
-  className="relative flex flex-col items-center justify-center min-h-[100vh] overflow-visible text-center text-white"
+  className="relative flex flex-col items-center justify-center min-h-[100vh] overflow-visible text-center text-white pointer-events-none"
   style={{
     backgroundImage: `url("/images/grid-new.png"), linear-gradient(to bottom, #0B1120 0%, #0E1A2B 45%, #173B38 75%, #EFF3F6 100%)`,
     backgroundRepeat: "no-repeat, no-repeat",
@@ -298,19 +298,19 @@ export default function HomePage() {
   initial={{ opacity: 0, y: 60, scale: 0.95 }}
   animate={{ opacity: 1, y: 0, scale: 1 }}
   transition={{ delay: 0.8, duration: 0.8 }}
-  className="absolute bottom-[-22rem] inset-x-0 flex justify-center z-20"
+  className="absolute bottom-[-14rem] inset-x-0 flex justify-center z-20 pointer-events-none"
 >
   <div
-    className="relative flex justify-center w-full max-w-[1200px]"
+    className="relative flex justify-center w-full max-w-[1200px] pointer-events-none"
     style={{
-      height: "1000px",  // ⭐️ make the wrapper tall enough
+      height: "750px",  // ⭐️ make the wrapper tall enough
       WebkitMaskImage:
         "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 66%)",
       maskImage:
         "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 66%)",
     }}
   >
-    <div className="relative z-10 mt-[-32%] flex justify-center w-full">
+    <div className="relative z-10 mt-[-32%] flex justify-center w-full pointer-events-auto">
       <DisplayCards />
     </div>
   </div>
@@ -340,7 +340,14 @@ export default function HomePage() {
   {/* Right Section (Cards Grid) */}
   <div className="lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mr-10">
 {/* LAS Card */}
-<a href="/products/las" className="card4 group relative overflow-hidden rounded-lg bg-[#141F2B] shadow-md hover:shadow-lg transition-all duration-300 p-6 cursor-pointer">
+<a href="/products/las" 
+   className="
+     card4 group relative overflow-hidden rounded-lg bg-[#141F2B] shadow-md hover:shadow-lg 
+     transition-all duration-300 p-6 cursor-pointer
+     before:pointer-events-none
+   "
+>
+
   <div className="flex items-center space-x-4">
     {/* Icon on the left */}
     <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-[#B1ED67]/20 rounded-full group-hover:bg-[#B1ED67]/30 transition-colors">
@@ -356,7 +363,14 @@ export default function HomePage() {
 </a>
 
 {/* LAMF Card */}
-<a href="/products/lamf" className="card4 group relative overflow-hidden rounded-lg bg-[#2E494D] shadow-md hover:shadow-lg transition-all duration-300 p-6 cursor-pointer">
+<a href="/products/lamf" 
+   className="
+     card4 group relative overflow-hidden rounded-lg bg-[#2E494D] shadow-md hover:shadow-lg 
+     transition-all duration-300 p-6 cursor-pointer
+     before:pointer-events-none
+   "
+>
+
   <div className="flex items-center space-x-4">
     <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-[#B1ED67]/20 rounded-full group-hover:bg-[#B1ED67]/30 transition-colors">
       <PieChart className="w-6 h-6 text-[#B1ED67] group-hover:text-white" />
