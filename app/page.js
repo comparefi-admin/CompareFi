@@ -193,61 +193,43 @@ export default function HomePage() {
     backgroundBlendMode: "overlay, normal",
   }}
 >
-{/* ==== DOTTED STAR SQUARES (LEFT + RIGHT) ==== */}
-{/* LEFT DOT STAR */}
-<svg
-  className="absolute bottom-[3rem] left-[18%] w-[420px] h-[420px] pointer-events-none rotate-[-14deg] opacity-[0.55] z-[3]"
-  viewBox="0 0 200 200"
->
-  <defs>
-    <pattern id="starDotsLeft" width="12" height="12" patternUnits="userSpaceOnUse">
-      <circle cx="2" cy="2" r="2" fill="white" />
-    </pattern>
+{/* ==== DOTTED BACKGROUND (LEFT + RIGHT) ==== */}
 
-    <linearGradient id="starFadeLeft" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stopColor="white" stopOpacity="1" />
-      <stop offset="60%" stopColor="white" stopOpacity="0.35" />
-      <stop offset="100%" stopColor="white" stopOpacity="0" />
-    </linearGradient>
+{/* LEFT SHAPE */}
+<img
+  src="/icons/Group 23 (2).svg"
+  alt=""
+  className="
+    absolute 
+    bottom-[-1rem] 
+    left-[18%] 
+    w-[500px] 
+    opacity-[1] 
+    pointer-events-none 
+    rotate-[-10deg] 
+    scale-x-[-1]
+    z-[3]
+  "
+/>
 
-    <mask id="starFadeMaskLeft">
-      <rect width="200" height="200" fill="url(#starFadeLeft)" />
-    </mask>
-  </defs>
+{/* RIGHT SHAPE (mirrored) */}
+<img
+  src="/icons/Group 23 (2).svg"
+  alt=""
+  className="
+    absolute 
+    bottom-[-1rem] 
+    right-[18%] 
+    w-[500px] 
+    opacity-[1] 
+    pointer-events-none 
+    rotate-[10deg] 
+    scale-x-[-1]
+    z-[3]
+  "
+/>
 
-  <polygon
-    points="100,10 140,75 195,85 155,135 165,195 100,165 35,195 45,135 5,85 60,75"
-    fill="url(#starDotsLeft)"
-    mask="url(#starFadeMaskLeft)"
-  />
-</svg>
-{/* RIGHT DOT STAR */}
-<svg
-  className="absolute bottom-[3rem] right-[18%] w-[420px] h-[420px] pointer-events-none rotate-[14deg] opacity-[0.55] z-[3]"
-  viewBox="0 0 200 200"
->
-  <defs>
-    <pattern id="starDotsRight" width="12" height="12" patternUnits="userSpaceOnUse">
-      <circle cx="2" cy="2" r="2" fill="white" />
-    </pattern>
 
-    <linearGradient id="starFadeRight" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stopColor="white" stopOpacity="1" />
-      <stop offset="60%" stopColor="white" stopOpacity="0.35" />
-      <stop offset="100%" stopColor="white" stopOpacity="0" />
-    </linearGradient>
-
-    <mask id="starFadeMaskRight">
-      <rect width="200" height="200" fill="url(#starFadeRight)" />
-    </mask>
-  </defs>
-
-  <polygon
-    points="100,10 140,75 195,85 155,135 165,195 100,165 35,195 45,135 5,85 60,75"
-    fill="url(#starDotsRight)"
-    mask="url(#starFadeMaskRight)"
-  />
-</svg>
 {/* MASK that hides stars behind the cards */}
 <div
   className="absolute inset-0 pointer-events-none z-[15]"
@@ -260,23 +242,7 @@ export default function HomePage() {
 />
 
 
-  {/* ==== SUBTLE STAR BURST SHAPE ==== */}
-  <svg
-    className="absolute top-[16rem] right-[6rem] z-0 opacity-30 pointer-events-none"
-    width="200"
-    height="80"
-    viewBox="0 0 160 60"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <circle cx="10" cy="30" r="4" fill="white" opacity="0.4"/>
-    <circle cx="30" cy="15" r="3" fill="white" opacity="0.4"/>
-    <circle cx="55" cy="8" r="2" fill="white" opacity="0.3"/>
-    <circle cx="80" cy="12" r="3" fill="white" opacity="0.45"/>
-    <circle cx="110" cy="25" r="4" fill="white" opacity="0.5"/>
-    <circle cx="135" cy="40" r="3" fill="white" opacity="0.4"/>
-    <circle cx="150" cy="52" r="2" fill="white" opacity="0.3"/>
-    <path d="M5 30 Q80 0 155 52" stroke="white" strokeWidth="0.8" strokeDasharray="4 2" opacity="0.25"/>
-  </svg>
+  
 
   {/* ==== SMALL UPWARD NUDGE (keep spacing) ==== */}
   <div className="mt-[-18%]"></div>
@@ -288,7 +254,7 @@ export default function HomePage() {
     transition={{ duration: 0.6 }}
     className="flex items-center space-x-2 mb-4 relative z-10"
   >
-    <div className="bg-[#B1ED67]/20 text-[#B1ED67] px-3 py-1 rounded-full text-sm font-medium">
+    <div className="bg-[#B1ED67]/20 text-[#B1ED67] px-3 py-1 rounded-full text-md font-medium">
       Backed by CompareFi
     </div>
   </motion.div>
@@ -298,7 +264,7 @@ export default function HomePage() {
     initial={{ opacity: 0, y: 30 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.8 }}
-    className="text-4xl sm:text-5xl md:text-6xl  leading-tight tracking-tight text-white max-w-3xl relative z-10"
+    className="text-6xl sm:text-6xl md:text-7xl  leading-tight tracking-tight text-white max-w-5xl relative z-10"
   >
     Take Control of Your <span className="text-[#B1ED67]">Finances</span> with Confidence
   </motion.h1>
@@ -328,17 +294,30 @@ export default function HomePage() {
     </Button>
   </motion.div>
 
-  {/* Cards */}
-  <motion.div
-    initial={{ opacity: 0, y: 60, scale: 0.95 }}
-    animate={{ opacity: 1, y: 0, scale: 1 }}
-    transition={{ delay: 0.8, duration: 0.8 }}
-    className="absolute bottom-[-2rem] inset-x-0 flex justify-center z-20 mt-20"
+<motion.div
+  initial={{ opacity: 0, y: 60, scale: 0.95 }}
+  animate={{ opacity: 1, y: 0, scale: 1 }}
+  transition={{ delay: 0.8, duration: 0.8 }}
+  className="absolute bottom-[-22rem] inset-x-0 flex justify-center z-20"
+>
+  <div
+    className="relative flex justify-center w-full max-w-[1200px]"
+    style={{
+      height: "1000px",  // ⭐️ make the wrapper tall enough
+      WebkitMaskImage:
+        "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 66%)",
+      maskImage:
+        "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 66%)",
+    }}
   >
-    <div className="w-full max-w-[1200px] flex justify-center">
+    <div className="relative z-10 mt-[-32%] flex justify-center w-full">
       <DisplayCards />
     </div>
-  </motion.div>
+  </div>
+</motion.div>
+
+
+
 </section>
 
 

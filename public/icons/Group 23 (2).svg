@@ -1,0 +1,26 @@
+<svg width="1904" height="1499" viewBox="0 0 1904 1499" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<mask id="mask0_106_50" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="1904" height="1499">
+<rect width="1904" height="1499" fill="url(#paint0_linear_106_50)"/>
+</mask>
+<g mask="url(#mask0_106_50)">
+<rect y="548" width="1904" height="951" fill="url(#pattern0_106_50)"/>
+<path d="M961.5 0L1351.64 557.25H571.356L961.5 0Z" fill="url(#pattern1_106_50)"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_106_50" x1="952" y1="0" x2="952" y2="1499" gradientUnits="userSpaceOnUse">
+<stop stop-color="#737373"/>
+<stop offset="1" stop-color="#D9D9D9" stop-opacity="0"/>
+</linearGradient>
+<pattern id="pattern0_106_50" patternUnits="userSpaceOnUse" patternTransform="matrix(21.08 0 0 21.08 1899.04 548)" preserveAspectRatio="none" viewBox="0 0 17 17" width="1" height="1">
+<g id="pattern0_106_50_inner">
+<circle cx="2" cy="2" r="2" fill="#D9D9D9"/>
+</g>
+</pattern><pattern id="pattern1_106_50" patternUnits="userSpaceOnUse" patternTransform="matrix(42.16 0 0 21.08 571.356 0)" preserveAspectRatio="none" viewBox="0 0 34 17" width="1" height="1">
+<use xlink:href="#pattern1_106_50_inner" transform="translate(0 -17)"/>
+<use xlink:href="#pattern1_106_50_inner" transform="translate(17 -8.5)"/>
+<g id="pattern1_106_50_inner">
+<circle cx="2" cy="2" r="2" fill="#D9D9D9"/>
+</g>
+<use xlink:href="#pattern1_106_50_inner" transform="translate(17 8.5)"/>
+</pattern></defs>
+</svg>
