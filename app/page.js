@@ -503,9 +503,9 @@ export default function HomePage() {
                 </div>
 
                 {/* Right Metrics → Firebase Table */}
-                <div>
-                  <CompareProductsTable productType={p.id} />
-                </div>
+               <div className="p-4 border border-gray-300 rounded-lg">
+    <CompareProductsTable productType={p.id} />
+</div>
               </div>
             </motion.div>
           </TabsContent>
