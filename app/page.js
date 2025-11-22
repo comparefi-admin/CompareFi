@@ -298,7 +298,7 @@ export default function HomePage() {
   initial={{ opacity: 0, y: 60, scale: 0.95 }}
   animate={{ opacity: 1, y: 0, scale: 1 }}
   transition={{ delay: 0.8, duration: 0.8 }}
-  className="absolute bottom-[-14rem] inset-x-0 flex justify-center z-20 pointer-events-none"
+  className="absolute bottom-[-16rem] inset-x-0 flex justify-center z-20 pointer-events-none"
 >
   <div
     className="relative flex justify-center w-full max-w-[1200px] pointer-events-none"
