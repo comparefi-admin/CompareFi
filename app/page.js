@@ -323,7 +323,11 @@ export default function HomePage() {
 
 
           {/* PRODUCT HIGHLIGHTS */}
-   <section id="featured" className="w-full bg-[#EEF1FA] bg-opacity-0 py-20 mx-5 px-10 lg:px-20 flex flex-col lg:flex-row justify-between items-center lg:items-start">
+<section
+  id="featured"
+  className="relative z-[40] w-full bg-[#EEF1FA] bg-opacity-0 py-20 mx-5 px-10 lg:px-20 flex flex-col lg:flex-row justify-between items-center lg:items-start"
+>
+
   {/* Left Section */}
   <div className="lg:w-1/3 mb-10 lg:mb-0 ml-10">
     <h2 className="text-4xl  text-[#0A0F2C] mb-6 leading-tight">
