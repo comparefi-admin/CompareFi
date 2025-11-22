@@ -1,7 +1,18 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { fetchLAS, fetchLAMF, fetchMTF } from "../../lib/fetchData";
+import { fetchLAS, fetchLAMF, fetchMTF } from "../../lib/fetchData"; // Assuming this path is correct
+
+/**
+ * Utility function to render a dash for null/empty values.
+ * @param {any} value - The value to check.
+ * @returns {string} - The value or '—'.
+ */
+const renderValue = (value) => (value === null || value === undefined || value === "") ? "—" : value;
+
+// Define a consistent, professional accent color
+const ACCENT_COLOR = 'text-green-700'; 
+const ACCENT_BG = 'bg-green-600 hover:bg-green-700';
 
 export default function CompareProductsTable({ productType }) {
   const [data, setData] = useState([]);
@@ -77,31 +88,32 @@ export default function CompareProductsTable({ productType }) {
 
   if (loading) {
     return (
-      <div className="p-6 text-center text-slate-800 bg-white/40 backdrop-blur-xl rounded-2xl border border-[#2B7146]/30 shadow-md">
-        Loading data...
+      <div className="p-8 text-center text-gray-700 bg-white shadow-lg rounded-xl border border-gray-100">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-500 mx-auto mb-3"></div>
+        <p>Loading comparison data...</p>
       </div>
     );
   }
 
   return (
-    <div className="bg-[#aff3c9]/40 bg-opacity-60 rounded-2xl border border-[#2B7146]/25 backdrop-blur-md shadow-xl p-6 overflow-x-auto">
+    // Outer Container: Clean white card with subtle shadow
+    <div className="bg-white rounded-xl shadow-lg shadow-gray-200/50 shadow-inner p-6 md:p-8 max-w-full mx-auto">
       
       {/* Title */}
       <div className="w-full flex justify-center mb-6">
-        <div className="px-7 py-2 rounded-full bg-white shadow border border-[#2B7146]/40 font-semibold text-lg text-black
-        bg-gradient-to-b from-white to-[#f2fff4]">
+        <h2 className="text-xl md:text-2xl font-bold text-gray-900 tracking-tight">
           {productType.toUpperCase()} Comparison
-        </div>
+        </h2>
       </div>
 
-      {/* Table */}
-      <div className="overflow-x-auto max-h-[500px]">
-        <table className="w-full text-[15px] sm:text-[16px] border border-[#2B7146]/40 rounded-xl bg-white shadow-[0_0_10px_rgba(0,0,0,0.05)]">
+      {/* Table Container: Added a stronger border and rounded corners */}
+      <div className="overflow-x-auto max-h-[600px] border border-gray-300 rounded-lg">
+        <table className="min-w-full divide-y divide-gray-200 text-sm sm:text-base">
           
           {/* HEADER */}
-          <thead className="sticky top-0 z-10">
-            <tr className="bg-[#2B7146] text-white bg-gradient-to-b from-[#2B7146] to-[#255e3d]">
-              <th className="px-5 py-3 text-left border-r border-[#ffffff25]">
+          <thead className="bg-gray-50 sticky top-0 z-10">
+            <tr>
+              <th className="px-5 py-3 text-left font-semibold text-gray-700 uppercase tracking-wider w-1/5 min-w-[150px] border-r border-gray-200">
                 {productType.toLowerCase() === "mtf"
                   ? "Broker"
                   : "Financial Institution"}
@@ -109,46 +121,50 @@ export default function CompareProductsTable({ productType }) {
 
               {productType.toLowerCase() !== "mtf" && (
                 <>
-                  <th className="px-5 py-3 text-center border-r border-[#ffffff25]">1st Year Cost</th>
-                  <th className="px-5 py-3 text-center border-r border-[#ffffff25]">2nd Year Cost</th>
-                  <th className="px-5 py-3 text-center border-r border-[#ffffff25]">Interest Min</th>
-                  <th className="px-5 py-3 text-center border-r border-[#ffffff25]">Interest Max</th>
+                  <th className="px-5 py-3 text-center font-semibold text-gray-700 uppercase tracking-wider border-r border-gray-200">1st Year Cost</th>
+                  <th className="px-5 py-3 text-center font-semibold text-gray-700 uppercase tracking-wider border-r border-gray-200">2nd Year Cost</th>
+                  <th className="px-5 py-3 text-center font-semibold text-gray-700 uppercase tracking-wider border-r border-gray-200">Min Interest</th>
+                  <th className="px-5 py-3 text-center font-semibold text-gray-700 uppercase tracking-wider">Max Interest</th>
                 </>
               )}
 
               {productType.toLowerCase() === "mtf" && (
                 <>
-                  <th className="px-5 py-3 text-left border-r border-[#ffffff25]">Cost Summary</th>
-                  <th className="px-5 py-3 text-left border-r border-[#ffffff25]">Margin Requirement</th>
+                  <th className="px-5 py-3 text-left font-semibold text-gray-700 uppercase tracking-wider w-1/3 border-r border-gray-200">Cost Summary</th>
+                  <th className="px-5 py-3 text-left font-semibold text-gray-700 uppercase tracking-wider w-1/4 border-r border-gray-200">Margin Requirement</th>
                 </>
               )}
 
-              <th className="px-5 py-3 text-center">Approved Stocks</th>
+              <th className="px-5 py-3 text-center font-semibold text-gray-700 uppercase tracking-wider">
+                Approved Assets
+              </th>
             </tr>
           </thead>
 
           {/* BODY */}
-          <tbody>
+          <tbody className="bg-white divide-y divide-gray-100">
             {data.map((row) => (
               <tr
                 key={row.id}
-                className="transition-all hover:bg-[#f3ffef] border-t border-[#2B7146]/10 hover:shadow-sm"
+                // UPDATED HOVER EFFECT: More noticeable background, subtle lift, and active press state
+                className="hover:bg-gray-100 transition duration-150 ease-in-out cursor-pointer hover:shadow-md hover:z-20 transform hover:scale-[1.005] active:bg-gray-200"
               >
-                <td className="px-5 py-4 font-semibold text-[#124326] border-r border-[#2B7146]/10">
-                  {row.name}
+                {/* Institution Name */}
+                <td className="px-5 py-4 whitespace-nowrap font-medium text-gray-800 border-r border-gray-100">
+                  {renderValue(row.name)}
                 </td>
 
                 {productType.toLowerCase() !== "mtf" && (
                   <>
-                    {/* 1st Year */}
-                    <td className="px-5 py-4 text-center font-medium border-r border-[#2B7146]/10">
+                    {/* 1st Year Cost */}
+                    <td className="px-5 py-4 text-center border-r border-gray-100">
                       {row.cost_first_year ? (
-                        <div className="space-y-1">
-                          <span className="font-semibold text-[#34724A] text-[16px]">
-                            {row.cost_first_year.percent ?? "—"}%
+                        <div className="space-y-0.5">
+                          <span className={`font-bold text-lg ${ACCENT_COLOR}`}>
+                            {renderValue(row.cost_first_year.percent)}%
                           </span>
-                          <div className="text-xs text-gray-600">
-                            ₹{row.cost_first_year.amount}
+                          <div className="text-xs text-gray-500">
+                            ₹{renderValue(row.cost_first_year.amount)}
                           </div>
                         </div>
                       ) : (
@@ -156,15 +172,15 @@ export default function CompareProductsTable({ productType }) {
                       )}
                     </td>
 
-                    {/* 2nd Year */}
-                    <td className="px-5 py-4 text-center font-medium border-r border-[#2B7146]/10">
+                    {/* 2nd Year Cost */}
+                    <td className="px-5 py-4 text-center border-r border-gray-100">
                       {row.cost_second_year ? (
-                        <div className="space-y-1">
-                          <span className="font-semibold text-[#34724A] text-[16px]">
-                            {row.cost_second_year.percent ?? "—"}%
+                        <div className="space-y-0.5">
+                          <span className={`font-bold text-lg ${ACCENT_COLOR}`}>
+                            {renderValue(row.cost_second_year.percent)}%
                           </span>
-                          <div className="text-xs text-gray-600">
-                            ₹{row.cost_second_year.amount}
+                          <div className="text-xs text-gray-500">
+                            ₹{renderValue(row.cost_second_year.amount)}
                           </div>
                         </div>
                       ) : (
@@ -172,35 +188,42 @@ export default function CompareProductsTable({ productType }) {
                       )}
                     </td>
 
-                    <td className="px-5 py-4 text-center font-semibold text-[#0C8066] text-[16px] border-r border-[#2B7146]/10">
-                      {row.interestMin}
+                    {/* Interest Min */}
+                    <td className="px-5 py-4 text-center font-bold text-lg text-green-600 border-r border-gray-100">
+                      {renderValue(row.interestMin)}
                     </td>
 
-                    <td className="px-5 py-4 text-center font-semibold text-[#D3558C] text-[16px] border-r border-[#2B7146]/10">
-                      {row.interestMax}
+                    {/* Interest Max */}
+                    <td className="px-5 py-4 text-center font-bold text-lg text-gray-600">
+                      {renderValue(row.interestMax)}
                     </td>
                   </>
                 )}
 
-                {/* MTF */}
+                {/* MTF Fields */}
                 {productType.toLowerCase() === "mtf" && (
                   <>
-                    <td className="px-5 py-4 text-[15px] border-r border-[#2B7146]/10">
+                    {/* Cost Summary */}
+                    <td className="px-5 py-4 text-sm text-gray-600 border-r border-gray-100">
                       {row.CostSummary
                         ? Object.entries(row.CostSummary).map(([k, v], i) => (
-                            <div key={i} className="font-medium">{`${k}: ${v ?? "—"}`}</div>
+                              <div key={i} className="font-regular">
+                                <span className="text-gray-900 font-semibold">{k}:</span> {renderValue(v)}
+                              </div>
                           ))
                         : "—"}
                     </td>
 
-                    <td className="px-5 py-4 text-[15px] border-r border-[#2B7146]/10">
-                      {row.marginRequirement}
+                    {/* Margin Requirement */}
+                    <td className="px-5 py-4 text-sm text-gray-600 border-r border-gray-100">
+                      <span className="font-medium text-gray-900">{renderValue(row.marginRequirement)}</span>
                     </td>
                   </>
                 )}
 
-                <td className="px-5 py-4 text-center font-medium text-[16px]">
-                  {row.approvedStocks}
+                {/* Approved Stocks/Funds */}
+                <td className="px-5 py-4 text-center font-medium text-gray-700">
+                  {renderValue(row.approvedStocks)}
                 </td>
               </tr>
             ))}
@@ -208,13 +231,13 @@ export default function CompareProductsTable({ productType }) {
         </table>
       </div>
 
-      {/* Read More */}
-      <div className="w-full flex justify-center mt-6">
+      {/* Read More Button: Simple, professional fill */}
+      <div className="w-full flex justify-center mt-8">
         <a
           href={`/products/${productType.toLowerCase()}`}
-          className="px-6 py-2 bg-[#2B7146] hover:bg-[#245d3b] border border-[#2B7146]/40 text-white font-semibold rounded-full shadow-md transition-all"
+          className={`px-8 py-3 ${ACCENT_BG} text-white font-semibold rounded-full shadow-md transition duration-200 text-sm uppercase tracking-wider`}
         >
-          Read More
+          View All {productType.toUpperCase()}
         </a>
       </div>
     </div>
