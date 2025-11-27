@@ -159,7 +159,7 @@ export default function LASPage() {
           {[
             {
               title: "What is Loan Against Shares?",
-              text: `Loan Against Shares (LAS) is a secured overdraft facility where you pledge your listed shares as collateral to borrow funds — without selling them. This allows you to retain ownership, continue earning dividends, and access liquidity when needed.`,
+              text: `Loan Against Shares (LAS), a type of Loan Against Securities, is a secured overdraft facility where you pledge listed shares as collateral to borrow funds without selling them.Retain ownership, earn dividends, and access liquidity at lower rates (8-20% p.a.) than personal loans. Ideal for emergencies, business needs, or investments excluding speculative trading.`,
             },
             {
               title: "Key Benefits",
@@ -701,16 +701,24 @@ export default function LASPage() {
         </p>
 
         <button
-          className="
-            bg-gradient-to-b from-[#1F5E3C] to-[#124434]
-            hover:from-[#124434] hover:to-[#0D3A27]
-            text-white px-8 py-4 rounded-2xl shadow-[0_16px_38px_rgba(0,0,0,0.26)]
-            transition-all duration-300 font-semibold
-            transform hover:-translate-y-1
-          "
-        >
-          Contact Us
-        </button>
+  onClick={() =>
+    window.open(
+      "https://wa.me/919930584020?text=Hi! I want help choosing the best LAS provider.",
+      "_blank"
+    )
+  }
+  className="
+    bg-gradient-to-b from-[#1F5E3C] to-[#124434]
+    hover:from-[#124434] hover:to-[#0D3A27]
+    text-white px-8 py-4 rounded-2xl
+    shadow-[0_16px_38px_rgba(0,0,0,0.26)]
+    transition-all duration-300 font-semibold
+    transform hover:-translate-y-1
+  "
+>
+  Contact Us
+</button>
+
       </section>
 
       <Footer />

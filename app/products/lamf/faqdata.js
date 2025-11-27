@@ -6,11 +6,12 @@ export const faqData = {
         "LAMF is a secured loan where you pledge your mutual fund units as collateral to borrow money without selling your investments."
     },
     {
-      question: "How is LAMF different from other loans like LAS or term loans?",
+      question: "How is LAMF different from other loans like Loan Against Shares (LAS) or term loans?",
       answer:
-        "LAMF uses mutual fund units as collateral, while LAS uses shares or other securities. Most LAMF loans are offered as overdrafts with flexible draws and interest only on the amount used."
+        "LAMF uses mutual fund units as collateral, while LAS uses shares or other securities. Most LAMF loans are offered as overdrafts with flexible draws and interest only on the amount used. Some lenders also offer term loans or hybrid products."
     }
   ],
+
   "Eligibility & Application": [
     {
       question: "Who can apply for LAMF?",
@@ -28,6 +29,7 @@ export const faqData = {
         "Most digital platforms require single-holder mutual fund folios. Joint holdings usually require branch assistance."
     }
   ],
+
   "Loan Terms & Charges": [
     {
       question: "What is the maximum loan amount I can get?",
@@ -37,7 +39,7 @@ export const faqData = {
     {
       question: "What are the interest rates and fees?",
       answer:
-        "Interest rates typically range from 8% to 20% per annum, varying by lender, fund type, and credit profile."
+        "Interest rates typically range from 8% to 20% per annum, varying by lender, fund type, and credit profile. Some lenders charge fees for lien marking, pledge confirmation, or foreclosure, but many allow foreclosure without charges."
     },
     {
       question: "How is interest calculated and billed?",
@@ -45,7 +47,8 @@ export const faqData = {
         "Interest is calculated daily on the outstanding loan amount and billed monthly."
     }
   ],
-  "Pledging & Collateral": [
+
+  "Pledging & Collateral Management": [
     {
       question: "What is lien marking?",
       answer:
@@ -67,6 +70,7 @@ export const faqData = {
         "This varies by lender but is usually between 4 to 7 working days."
     }
   ],
+
   "Risks, Taxation & Usage": [
     {
       question: "Is the loan amount taxable?",
@@ -81,10 +85,11 @@ export const faqData = {
     {
       question: "Should I borrow to reinvest in the same mutual fund?",
       answer:
-        "This is risky due to market volatility, interest costs, and potential margin calls. Diversified investment strategies are usually safer."
+        "This is risky due to market volatility, interest costs, and potential margin calls. Diversified investment strategies are usually safer than leveraging your portfolio."
     }
   ],
-  "Additional Info": [
+
+  "Additional Information": [
     {
       question: "Are Non-Resident Indians (NRIs) eligible for LAMF?",
       answer:

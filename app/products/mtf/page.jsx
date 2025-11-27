@@ -1,366 +1,473 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import Navbar from '../../components/navbar';
-import Footer from '../../components/footer';
-import { Playfair_Display, Inter, Satisfy } from 'next/font/google';
-import { ArrowUpDown } from 'lucide-react';
+import React, { useState, useEffect, useMemo } from "react";
+import Navbar from "../../components/navbar";
+import Footer from "../../components/footer";
+import SpotlightCard from "@/components/SpotlightCard.jsx";
+import { MessageCircle, FileText } from "lucide-react";
 import { fetchMTF, DEFAULT_NULL_TEXT } from "@/lib/fetchData";
-
-// Fonts
-const playfair = Playfair_Display({ weight: ['400','700'], subsets: ['latin'] });
-const inter = Inter({ weight: ['300','400','600'], subsets: ['latin'] });
-const satisfy = Satisfy({ weight: ['400'], subsets: ['latin'] });
+import { faqData } from "./faqdata"; // ← correct path for your MTF page
 
 
-export default function LASPage() {
+export default function MTFPage() {
   const [sortField, setSortField] = useState(null);
-  const [sortOrder, setSortOrder] = useState('asc');
+  const [sortOrder, setSortOrder] = useState("asc");
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-const [activeTableCategory, setActiveTableCategory] = useState("marginDetails");
+  const [activeTableCategory, setActiveTableCategory] = useState("marginDetails");
+const faqCategories = ["All FAQs", ...Object.keys(faqData)];
+const [activeCategory, setActiveCategory] = useState(["All FAQs"]);
+const [openQuestionIndex, setOpenQuestionIndex] = useState(null);
 
-  //Table Fetch
+  // fetch
   useEffect(() => {
-    const fetchData = async () => {
+    const load = async () => {
       try {
         const mtf = await fetchMTF();
         setData(mtf || []);
-      } catch (error) {
-        console.error("❌ Supabase fetch error:", error);
+      } catch (err) {
+        console.error("fetchMTF error:", err);
         setData([]);
       } finally {
         setLoading(false);
       }
     };
-    fetchData();
+    load();
   }, []);
 
-  const handleSort = (field) => {
-    if (sortField === field) {
-      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
-    } else {
-      setSortField(field);
-      setSortOrder('asc');
-    }
+  const clean = (val) => {
+    if (typeof val === "string") return parseFloat(val.replace(/[₹,%]/g, "")) || val;
+    return val;
   };
 
-  const sortedData = [...data].sort((a, b) => {
-    if (!sortField) return 0;
+  const sortedData = useMemo(() => {
+    if (!sortField) return [...data];
+    return [...data].sort((a, b) => {
+      let valA = clean(a[sortField]);
+      let valB = clean(b[sortField]);
 
-    const clean = (val) => {
-      if (typeof val === 'string') {
-        return parseFloat(val.replace(/[₹,%]/g, '')) || val;
+      if (typeof valA === "number" && typeof valB === "number") {
+        return sortOrder === "asc" ? valA - valB : valB - valA;
       }
-      return val;
-    };
-
-    let valA = clean(a[sortField]);
-    let valB = clean(b[sortField]);
-
-    if (typeof valA === 'number' && typeof valB === 'number') {
-      return sortOrder === 'asc' ? valA - valB : valB - valA;
-    }
-    return sortOrder === 'asc'
-      ? String(valA).localeCompare(String(valB))
-      : String(valB).localeCompare(String(valA));
-  });
-
-  const renderHeader = (headers) => (
-    <tr className="bg-gray-100/80 text-gray-700">
-      {headers.map((h) => (
-        <th
-          key={h.key}
-          className="px-4 py-3 font-semibold select-none"
-        >
-          <div className="flex items-center gap-1">
-            {h.label}
-            <button
-              onClick={() => handleSort(h.key)}
-              className="inline-flex items-center text-gray-500 hover:text-gray-800"
-            >
-              <ArrowUpDown size={14} />
-            </button>
-            {sortField === h.key && (
-              <span className="text-xs">{sortOrder === 'asc' ? '▲' : '▼'}</span>
-            )}
-          </div>
-        </th>
-      ))}
-    </tr>
-  );
+      return sortOrder === "asc"
+        ? String(valA).localeCompare(String(valB))
+        : String(valB).localeCompare(String(valA));
+    });
+  }, [data, sortField, sortOrder]);
 
   if (loading)
+    return (
+      <div className="flex justify-center items-center h-screen text-xl text-gray-600">
+        Loading data...
+      </div>
+    );
+
+  const getActiveColumns = () => {
+    if (activeTableCategory === "marginDetails")
+      return ["margin_requirement", "approved_stocks"];
+    if (activeTableCategory === "majorCost")
+      return [
+        "subscription_fee",
+        "interest_slabs",
+        "intraday_fee",
+        "carry_fee",
+        "pledge_unpledge_fee",
+        "auto_square_off",
+        "dp_charges",
+      ];
+    if (activeTableCategory === "defaultCharges") return ["unpaid_mtf_interest"];
+    return ["platform_rating", "feedback_rating"];
+  };
+
+  const activeCols = getActiveColumns();
+
   return (
-    <div className="flex justify-center items-center h-screen text-xl font-semibold text-gray-600">
-      Loading data...
-    </div>
-  );
+    <div className="bg-[#EFF3F6] min-h-screen text-[#0A0F2C]">
+      <Navbar />
 
+      {/* HERO */}
+      <section className="w-[90%] mx-auto px-2 pt-32 pb-20 flex flex-col items-center">
+        <SpotlightCard
+          className="
+            relative z-10 w-[90%] rounded-3xl
+            bg-gradient-to-b from-[#1F5E3C] to-[#124434]
+            backdrop-blur-xl
+            shadow-[0_12px_32px_rgba(0,0,0,0.22),0_4px_10px_rgba(0,0,0,0.08)]
+            sm:p-10 md:p-14 lg:p-20
+            flex flex-col items-center justify-center mb-6
+            hover:shadow-[0_16px_38px_rgba(0,0,0,0.26),0_6px_14px_rgba(0,0,0,0.10)]
+            hover:translate-y-[-2px] transition-all duration-700
+            border border-[rgba(255,255,255,0.08)]
+          "
+          spotlightColor="rgba(177,237,103,0.22)"
+        >
+          <h1 className="text-6xl font-bold text-white tracking-tight">
+            Margin Trading Facility
+          </h1>
+        </SpotlightCard>
+      </section>
 
-  return (
-    <div className="relative bg-gradient-to-b from-[#fdfdfd] via-[#f8f9fa] to-[#f0f2f5] min-h-screen text-gray-900 overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-[url('/textures/grain.png')] opacity-10 mix-blend-overlay pointer-events-none"></div>
-      <div className="absolute -top-40 left-10 w-96 h-96 bg-pink-300/30 rounded-full blur-[160px]"></div>
-      <div className="absolute top-1/3 -right-20 w-96 h-96 bg-[#0ABAB5]/25 rounded-full blur-[160px]"></div>
-      <div className="absolute bottom-10 left-1/3 w-80 h-80 bg-[#C3B1E1]/30 rounded-full blur-[140px]"></div>
+      {/* ===== INFO CARDS (unchanged) ===== */}
+      <section className="max-w-[90%] mx-auto px-6 pb-16">
+        <h2 className="text-4xl font-bold text-center mb-14 text-[#0A0F2C]">
+          Understanding Margin Trading Facility (MTF)
+        </h2>
 
-      {/* Navbar */}
-      <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-screen-xl px-4 pt-4">
-        <Navbar />
-      </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          {[
+            {
+              title: "What is MTF?",
+              text: `MTF allows investors to trade with borrowed capital against holdings
+keeping positions overnight while following SEBI-regulated margin rules.`,
+            },
+            {
+              title: "Key Benefits",
+              text: (
+                <ul className="list-disc list-inside space-y-2">
+                  <li>Higher leveraged exposure for positional trades</li>
+                  <li>Efficient margin usage</li>
+                  <li>Subscription/carry based pricing</li>
+                </ul>
+              ),
+            },
+            {
+              title: "MTF vs MIS / Intraday",
+              text: (
+                <ul className="space-y-2">
+                  <li><strong>MTF:</strong> Carry overnight positions</li>
+                  <li><strong>MIS:</strong> Intraday only</li>
+                  <li><strong>Exposure:</strong> Higher under MTF</li>
+                </ul>
+              ),
+            },
+            {
+              title: "Why choose MTF?",
+              text: `For traders with strong conviction, MTF provides regulated leverage with structured costs.`,
+            },
+          ].map((card, i) => (
+            <div
+              key={i}
+              className="
+                bg-white/18 backdrop-blur-xl border border-[rgba(35,104,126,0.2)]
+                rounded-3xl
+                p-8
+                bg-[#e8feff3f]
+                shadow-[0_16px_38px_rgba(0,0,0,0.12)]
+                transition-all duration-500
+                hover:-translate-y-3
+                hover:shadow-[0_16px_38px_rgba(0,0,0,0.26),0_6px_18px_rgba(0,0,0,0.08)]
+                will-change-transform
+              "
+            >
+              <h3 className="text-2xl font-bold mb-4 text-[#0D3A27]">
+                {card.title}
+              </h3>
+              <p className="text-gray-800 leading-relaxed text-lg">{card.text}</p>
+            </div>
+          ))}
+        </div>
+      </section>
 
-      <main className="pt-28 space-y-20">
+      {/* ===== DETAILED TABLE (LAS STYLE) ===== */}
+      <section className="max-w-[90%] mx-auto px-6 py-10 flex flex-col items-center">
+        <h3 className="text-4xl font-bold mb-8 text-[#0A0F2C]">Detailed MTF Comparison</h3>
 
-     {/* HERO SECTION */}
-<section className="w-[90%] mx-auto px-2 pt-32 pb-20 flex flex-col items-center text-center">
-  <div className="w-full flex flex-col items-center justify-center mb-2">
-    <div
-     className="relative z-10 w-[90%] rounded-3xl bg-gradient-to-b from-[#630bd5] to-[#630bd5] backdrop-blur-xl shadow-2xl sm:p-10 md:p-14 lg:p-20 flex flex-col items-center justify-center mb-[2%] md:gap-14 hover:drop-shadow-2xl hover:scale-102 transition-all duration-700 ease-in-out border-none will-change-transform"
-    >
-      <h1 className="text-6xl font-bold mb-4 text-white">Margin Trading Facility</h1>
-    </div>
-  </div>
-</section>
+        {/* CATEGORY BUTTONS MOVED TO TOP — MATCHES LAS */}
+        <div className="flex flex-wrap justify-center gap-4 mb-6">
+          {[
+            { key: "marginDetails", label: "Margin Details" },
+            { key: "majorCost", label: "Major Cost" },
+            { key: "defaultCharges", label: "Default Charges" },
+            { key: "feedback", label: "Platform & User Feedback" },
+          ].map((cat) => (
+            <button
+              key={cat.key}
+              onClick={() => setActiveTableCategory(cat.key)}
+              className={`
+                px-5 py-3 rounded-xl font-semibold text-sm transition-all duration-300
+                ${
+                  activeTableCategory === cat.key
+                    ? "bg-[#124434] text-white scale-105 shadow-[0_18px_40px_rgba(0,0,0,0.22)]"
+                    : "bg-white/60 text-gray-800 hover:bg-white hover:shadow-md"
+                }
+              `}
+            >
+              {cat.label}
+            </button>
+          ))}
+        </div>
 
-{/* MTF INFORMATION SECTION */}
-<section className="max-w-[90%] mx-auto px-6 pb-16">
-  <h2 className="text-6xl font-bold text-center mb-14 text-gray-900">
-    Understanding MTF (Margin Trading Facility)
-  </h2>
-
-  {/* 2x2 grid */}
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-    <div className="bg-gray-100 backdrop-blur-xl border border-white/40 rounded-3xl shadow-2xl p-8 hover:shadow-[#A7F3D0] transition-all duration-500 hover:-translate-y-2">
-      <h3 className="text-2xl font-bold mb-4 text-[#4805a0]">What is MTF?</h3>
-      <p className="text-gray-800 leading-relaxed">
-        MTF allows investors to trade more than their capital by borrowing against their holdings,
-        while SEBI regulates risk + margin rules strictly.
-      </p>
-    </div>
-
-    <div className="bg-gray-100 backdrop-blur-xl border border-white/40 rounded-3xl shadow-2xl p-8 hover:shadow-[#A7F3D0] transition-all duration-500 hover:-translate-y-2">
-      <h3 className="text-2xl font-bold mb-4 text-[#4805a0]">Key Benefits</h3>
-      <ul className="list-disc list-inside text-gray-800 space-y-2">
-        <li>Higher leveraged exposure in listed stocks.</li>
-        <li>Keep positions running instead of square-off intraday.</li>
-        <li>Better capital efficiency for swing / positional trades.</li>
-        <li>Monthly subscription based exposure (broker specific).</li>
-      </ul>
-    </div>
-
-    <div className="bg-gray-100 backdrop-blur-xl border border-white/40 rounded-3xl shadow-2xl p-8 hover:shadow-[#A7F3D0] transition-all duration-500 hover:-translate-y-2">
-      <h3 className="text-2xl font-bold mb-4 text-[#4805a0]">MTF vs MIS / Intraday</h3>
-      <ul className="space-y-2 text-gray-800">
-        <li><strong>MTF:</strong> Carry forward positions overnight.</li>
-        <li><strong>MIS:</strong> Has to be closed same day.</li>
-        <li><strong>Leverage:</strong> MTF enables higher exposure.</li>
-      </ul>
-    </div>
-
-    <div className="bg-gray-100 backdrop-blur-xl border border-white/40 rounded-3xl shadow-2xl p-8 hover:shadow-[#A7F3D0] transition-all duration-500 hover:-translate-y-2">
-      <h3 className="text-2xl font-bold mb-4 text-[#4805a0]">Why choose MTF?</h3>
-      <p className="text-gray-800 leading-relaxed">
-        If you have conviction in a swing trade thesis and want to hold stocks overnight —
-        MTF is the cleanest regulated leverage model in India today.
-      </p>
-    </div>
-  </div>
-
-  {/* Snapshot */}
-  <div className="mt-16 text-center">
-    <h3 className="text-4xl font-bold mb-8 text-black">Quick Snapshot</h3>
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-      <div className="bg-white/40 rounded-2xl p-4 shadow-inner">
-        <p className="text-gray-600 text-sm">Broker Type</p>
-        <p className="text-2xl font-bold text-[#FF5732]">Discount / Full-Service</p>
-      </div>
-      <div className="bg-white/40 rounded-2xl p-4 shadow-inner">
-        <p className="text-gray-600 text-sm">Margin %</p>
-        <p className="text-2xl font-bold text-[#FF5732]">Varies broker-to-broker</p>
-      </div>
-      <div className="bg-white/40 rounded-2xl p-4 shadow-inner">
-        <p className="text-gray-600 text-sm">Loan Style</p>
-        <p className="text-2xl font-bold text-[#FF5732]">Exposure based</p>
-      </div>
-      <div className="bg-white/40 rounded-2xl p-4 shadow-inner">
-        <p className="text-gray-600 text-sm">Pledge Model</p>
-        <p className="text-2xl font-bold text-[#FF5732]">SEBI Compliant</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-{/* MTF Detailed Comparison Table */}
-<section className="max-w-[90%] mx-auto px-6 py-10 flex flex-col items-center">
-  <h3 className="text-4xl font-bold mb-8 text-black pb-6">
-    Detailed MTF Comparison
-  </h3>
-
-  <div className="w-full bg-white/20 backdrop-blur-xl border border-white/30 shadow-2xl rounded-2xl p-6 flex">
-    <div className="flex w-full gap-4">
-      {/* TABLE */}
-      <div className="flex-1 overflow-x-auto">
-        <table className="w-full border-collapse text-base text-gray-900">
-          <thead>
-            <tr className="text-left font-semibold border-b border-white/30">
-
-              {/* STATIC broker */}
-              <th className="px-5 py-4 bg-gradient-to-br from-[#f9fafb] to-[#f1fff1] border border-gray-300">
-                Broker
-              </th>
-
-              {/* STATIC cost summary */}
-              <th className="px-5 py-4 bg-gradient-to-br from-[#f9fafb] to-[#f1fff1] border border-gray-300">
-                Cost Summary
-              </th>
-
-              {/* DYNAMIC columns */}
-              {(
-                activeTableCategory === "marginDetails"
-                  ? ["margin_requirement","approved_stocks"]
-                  : activeTableCategory === "majorCost"
-                  ? ["subscription_fee","interest_slabs","intraday_fee","carry_fee","pledge_unpledge_fee","auto_square_off","dp_charges"]
-                  : activeTableCategory === "defaultCharges"
-                  ? ["unpaid_mtf_interest"]
-                  : ["platform_rating","feedback_rating"]
-              ).map((colKey) => (
-                <th
-                  key={colKey}
-                  className="px-5 py-4 border border-gray-300 bg-white/60"
-                >
-                  {colKey.replace(/_/g," ").replace(/\b\w/g, c => c.toUpperCase())}
+        {/* TABLE */}
+        <div className="w-full bg-white backdrop-blur-xl border border-[rgba(255,255,255,0.06)] shadow-[0_12px_32px_rgba(0,0,0,0.22)] rounded-2xl overflow-x-auto p-6">
+          <table className="w-full border-collapse text-gray-800 text-[16px] leading-[1.35] table-highlight">
+            <thead className="bg-white/80 border-b border-gray-300">
+              <tr>
+                <th className="px-5 py-3 font-semibold border border-gray-300 uppercase text-sm tracking-wide bg-gradient-to-br from-[#FBFCFD] to-[#EFF7F1]">
+                  Broker
                 </th>
-              ))}
 
-              {/* STATIC enquire */}
-              <th className="px-5 py-4 border border-gray-300 bg-white/60">
-                Enquire
-              </th>
-            </tr>
-          </thead>
+                <th className="px-5 py-3 font-semibold border border-gray-300 uppercase text-sm tracking-wide bg-white/70">
+                  Cost Summary
+                </th>
 
-          <tbody>
-            {data.map((row,index)=>(
-              <tr
-                key={row.id}
-                className={`transition-all duration-300 ${
-                  index % 2 === 0 ? "bg-white/50" : "bg-white/30"
-                } hover:bg-[#fff7f0]/80 hover:shadow-[0_4px_12px_rgba(255,115,0,0.15)]`}
-              >
-                {/* Broker */}
-                <td className="px-5 py-4 border border-gray-300 font-semibold bg-gradient-to-br from-[#f9fafb] to-[#f1fff1]">
-                  {row.broker_name ?? DEFAULT_NULL_TEXT}
-                </td>
-
-                {/* Cost Summary */}
-                <td className="px-5 py-4 border border-gray-300 whitespace-pre-line">
-                  {row.cost_summary && typeof row.cost_summary === "object"
-                    ? Object.entries(row.cost_summary).map(([k,v],i)=>(
-                        <div key={i}>{`${k}: ${v ?? "—"}`}</div>
-                      ))
-                    : row.cost_summary ?? DEFAULT_NULL_TEXT}
-                </td>
-
-                {/* Dynamic Values */}
-                {(
-                  activeTableCategory === "marginDetails"
-                    ? ["margin_requirement","approved_stocks"]
-                    : activeTableCategory === "majorCost"
-                    ? ["subscription_fee","interest_slabs","intraday_fee","carry_fee","pledge_unpledge_fee","auto_square_off","dp_charges"]
-                    : activeTableCategory === "defaultCharges"
-                    ? ["unpaid_mtf_interest"]
-                    : ["platform_rating","feedback_rating"]
-                ).map((colKey)=>(
-                  <td key={colKey} className="px-5 py-4 border border-gray-300">
-                    {(() => {
-                      const v = row[colKey];
-
-                      // Handle null/undefined safely
-                      if (v == null || v === "") return DEFAULT_NULL_TEXT;
-
-                      // Handle JSON fields
-                      if (typeof v === "object") {
-                        return Object.entries(v).map(([k,val],j)=>(
-                          <div key={j}>{`${k}: ${val ?? "—"}`}</div>
-                        ));
-                      }
-
-                      // Fallback: show value directly
-                      return v;
-                    })()}
-                  </td>
+                {activeCols.map((colKey) => (
+                  <th
+                    key={colKey}
+                    className="px-5 py-3 font-semibold border border-gray-300 uppercase text-sm tracking-wide bg-white/70"
+                  >
+                    {colKey.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}
+                  </th>
                 ))}
 
-                {/* Enquire */}
-                <td className="px-5 py-4 border border-gray-300 text-center">
-                  <a
-                    href={`https://wa.me/919930584020?text=Hi! I'm interested in learning more about MTF by ${encodeURIComponent(
-                      row.broker_name || "this broker"
-                    )}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 bg-green-500 text-white px-4 py-2 rounded-lg text-base font-medium shadow-md hover:bg-green-600 hover:scale-[1.05] active:scale-[0.98] transition-all duration-200"
-                  >
-                    Enquire
-                  </a>
-                </td>
+                <th className="px-5 py-3 font-semibold border border-gray-300 uppercase text-sm tracking-wide bg-white/70">
+                  Contact
+                </th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
 
+            <tbody>
+              {sortedData.map((row, index) => (
+                <tr
+                  key={row.id ?? index}
+                  className={`transition-all duration-300 ${
+                    index % 2 === 0 ? "bg-white/55" : "bg-white/36"
+                  } hover:bg-[#B1ED67]/22 hover:shadow-[0_14px_36px_rgba(0,0,0,0.22)]`}
+                >
+                  <td className="px-5 py-4 border border-gray-300 font-semibold text-[#0A0F2C] bg-gradient-to-br from-[#FBFCFD] to-[#F3FFF5]">
+                    {row.broker_name ?? DEFAULT_NULL_TEXT}
+                  </td>
 
-      {/* RIGHT BUTTONS */}
-      <div className="flex flex-col justify-between gap-4 h-full w-[160px]">
+                  <td className="px-5 py-4 border border-gray-300 whitespace-pre-line">
+                    {row.cost_summary && typeof row.cost_summary === "object"
+                      ? Object.entries(row.cost_summary).map(([k, v], i) => (
+                          <div key={i}>
+                            {k}: {v ?? "—"}
+                          </div>
+                        ))
+                      : row.cost_summary ?? DEFAULT_NULL_TEXT}
+                  </td>
 
+                  {activeCols.map((colKey) => (
+                    <td key={colKey} className="px-5 py-4 border border-gray-300 whitespace-pre-wrap">
+                      {(() => {
+                        const v = row[colKey];
+                        if (v == null || v === "") return DEFAULT_NULL_TEXT;
+                        if (typeof v === "object") {
+                          return Object.entries(v).map(([k, val], j) => (
+                            <div key={j}>
+                              {k}: {val ?? "—"}
+                            </div>
+                          ));
+                        }
+                        return v;
+                      })()}
+                    </td>
+                  ))}
+
+                  <td className="px-5 py-4 border border-gray-300 text-center">
+                    <a
+                      href={`https://wa.me/919930584020?text=Hi! I’m interested in learning more about MTF by ${encodeURIComponent(
+                        row.broker_name || "this broker"
+                      )}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="
+                        inline-flex items-center justify-center gap-2
+                        bg-gradient-to-b from-[#1F5E3C] to-[#124434]
+                        text-white px-4 py-2 rounded-lg
+                        shadow-[0_10px_30px_rgba(0,0,0,0.20)]
+                        hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
+                        transition-all duration-300 transform hover:-translate-y-0.5
+                      "
+                    >
+                      <MessageCircle className="w-4 h-4" /> Enquire
+                    </a>
+
+                    <div className="mt-3">
+                      <a
+                        href={row.google_form_link || "https://forms.gle/yourfallback"}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="
+                          inline-flex items-center justify-center gap-2
+                          bg-gradient-to-b from-[#5e009c] to-[#c401ff]
+                          text-white px-4 py-2 rounded-lg
+                          shadow-[0_10px_30px_rgba(0,0,0,0.20)]
+                          hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
+                          transition-all duration-300 transform hover:-translate-y-0.5
+                        "
+                      >
+                        <FileText className="w-4 h-4" /> Fill Enquiry
+                      </a>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+          {(!data || data.length === 0) && (
+            <div className="text-gray-600 text-center py-8 font-medium text-[15px]">
+              No MTF data available.
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* EXTRA SECTIONS (unchanged) */}
+      <section className="max-w-[90%] mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div className="backdrop-blur-xl border bg-[#e8feff3f]
+                shadow-[0_16px_38px_rgba(0,0,0,0.05)] border-[rgba(35,104,126,0.2)] rounded-3xl p-10 transition-all duration-500 hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)] hover:-translate-y-2">
+          <h3 className="text-2xl font-bold mb-6 text-[#0D3A27]">How to Apply for MTF</h3>
+          <ol className="list-decimal list-inside space-y-3 leading-relaxed text-[1.05rem] mb-6">
+            <li><strong>Check eligibility</strong> with your broker</li>
+            <li><strong>Compare subscription & carry fees</strong></li>
+            <li><strong>Submit pledge</strong> for approved stocks</li>
+            <li><strong>Monitor margins</strong> to avoid auto square-off</li>
+          </ol>
+        </div>
+
+        <div className="bg-[#C0CDCF]
+                shadow-[0_16px_38px_rgba(0,0,0,0.05)] backdrop-blur-xl border border-[rgba(35,104,126,0.2)] rounded-3xl p-10 transition-all duration-500 hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)] hover:-translate-y-2">
+          <h3 className="text-2xl font-bold mb-6 text-[#0D3A27]">Why Our MTF Comparison</h3>
+          <ul className="list-disc list-inside space-y-3 text-gray-800 leading-relaxed text-[1.05rem]">
+            <li>Accurate verified data</li>
+            <li>Mobile-first UI/UX</li>
+            <li>Transparent cost comparison</li>
+          </ul>
+        </div>
+
+        <div className="bg-[#2E494D]
+                shadow-[0_16px_38px_rgba(0,0,0,0.05)] backdrop-blur-xl border border-[rgba(255,255,255,0.2)] rounded-3xl p-10 transition-all duration-500 hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)] hover:-translate-y-2">
+          <h3 className="text-2xl font-bold mb-6 text-white">Key Factors</h3>
+          <ul className="list-disc list-inside space-y-3 text-white leading-relaxed text-[1.05rem]">
+            <li>Approved stock list</li>
+            <li>Subscription & carry fees</li>
+            <li>Margin rules & auto-square-off policies</li>
+          </ul>
+        </div>
+      </section>
+
+      {/* ========================= MTF FAQ SECTION ========================= */}
+<section className="relative max-w-[90%] mx-auto px-6 py-20">
+  <h2 className="text-4xl font-bold text-center mb-12">
+    Frequently Asked Questions (MTF)
+  </h2>
+
+  {/* CATEGORY BUTTONS */}
+  <div className="bg-white/20 backdrop-blur-xl border border-[rgba(255,255,255,0.06)] 
+                  shadow-[0_12px_32px_rgba(0,0,0,0.22)] rounded-3xl p-8 mb-10">
+    <div className="flex flex-wrap justify-center gap-6">
+
+      {faqCategories.map((cat) => (
         <button
-          onClick={()=>setActiveTableCategory("marginDetails")}
-          className={`flex items-center justify-center bg-teal-600 hover:bg-[#FF5732] text-white rounded-2xl shadow-lg transition-all duration-300 flex-1 font-semibold text-sm ${activeTableCategory==="marginDetails"?"scale-105":""}`}
-        >
-          Margin Details
-        </button>
+          key={cat}
+          onClick={() => {
+            if (cat === "All FAQs") {
+              setActiveCategory(["All FAQs"]);
+            } else {
+              setActiveCategory((prev) => {
+                const selected = prev.includes(cat);
+                const newSel = selected
+                  ? prev.filter((c) => c !== cat)
+                  : [...prev.filter((c) => c !== "All FAQs"), cat];
 
-        <button
-          onClick={()=>setActiveTableCategory("majorCost")}
-          className={`flex items-center justify-center bg-teal-600 hover:bg-[#FF5732] text-white rounded-2xl shadow-lg transition-all duration-300 flex-1 font-semibold text-sm ${activeTableCategory==="majorCost"?"scale-105":""}`}
+                return newSel.length === 0 ? ["All FAQs"] : newSel;
+              });
+            }
+          }}
+          className={`
+            min-w-[220px] px-8 py-5 rounded-2xl text-lg font-semibold 
+            border-2 transition-all duration-300
+            ${
+              activeCategory.includes(cat)
+                ? "bg-[#124434] text-white border-[#124434] shadow-[0_18px_40px_rgba(0,0,0,0.22)] scale-105"
+                : "bg-white/40 text-gray-800 border-white/30 hover:bg-white/60 hover:shadow-md"
+            }
+          `}
         >
-          Major Cost
+          {cat}
         </button>
+      ))}
 
-        <button
-          onClick={()=>setActiveTableCategory("defaultCharges")}
-          className={`flex items-center justify-center bg-teal-600 hover:bg-[#FF5732] text-white rounded-2xl shadow-lg transition-all duration-300 flex-1 font-semibold text-sm ${activeTableCategory==="defaultCharges"?"scale-105":""}`}
+    </div>
+  </div>
+
+  {/* FAQ LIST */}
+  <div className="bg-white/20 backdrop-blur-xl border border-[rgba(255,255,255,0.06)] 
+                  shadow-[0_12px_32px_rgba(0,0,0,0.22)] rounded-3xl p-10">
+    <div className="space-y-4">
+
+      {(activeCategory.includes("All FAQs")
+        ? Object.values(faqData).flat()
+        : activeCategory.flatMap((cat) => faqData[cat] || [])
+      ).map((item, idx) => (
+        <div
+          key={idx}
+          className="
+            bg-white/30 backdrop-blur-lg border border-[rgba(255,255,255,0.06)]
+            rounded-2xl shadow-md overflow-hidden transition-all duration-300
+            hover:shadow-[0_14px_36px_rgba(0,0,0,0.22)]
+          "
         >
-          Default Charges
-        </button>
+          <button
+            onClick={() =>
+              setOpenQuestionIndex(openQuestionIndex === idx ? null : idx)
+            }
+            className="w-full flex justify-between items-center px-6 py-4 text-left"
+          >
+            <span className="font-semibold text-gray-900">{item.q}</span>
 
-        <button
-          onClick={()=>setActiveTableCategory("feedback")}
-          className={`flex items-center justify-center bg-teal-600 hover:bg-[#FF5732] text-white rounded-2xl shadow-lg transition-all duration-300 flex-1 font-semibold text-sm ${activeTableCategory==="feedback"?"scale-105":""}`}
-        >
-          Platform & User Feedback
-        </button>
+            <svg
+              className={`w-5 h-5 text-gray-700 transition-transform ${
+                openQuestionIndex === idx ? "rotate-180" : ""
+              }`}
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+            >
+              <path d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
 
-      </div>
+          {openQuestionIndex === idx && (
+            <div className="px-6 pb-4 text-gray-800 bg-white/40 rounded-b-2xl">
+              {item.a}
+            </div>
+          )}
+        </div>
+      ))}
+
     </div>
   </div>
 </section>
 
-      
-        <Footer />
-      </main>
 
-      {/* Fade-in animation */}
-      <style jsx global>{`
-        @keyframes fadeInUp {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fadeInUp { animation: fadeInUp 1s ease forwards; }
-      `}</style>
+      {/* ENQUIRE */}
+      <section className="max-w-[85%] mx-auto px-6 py-12 flex flex-col items-center">
+        <h2 className="text-3xl font-bold mb-4 text-[#0A0F2C]">Enquire Now</h2>
+        <p className="text-gray-700 mb-6 text-center max-w-2xl">
+          Fill in your details and we'll connect you with the best MTF options.
+        </p>
+
+        <a
+          href="https://wa.me/919930584020?text=Hi!%20I%20am%20interested%20in%20MTF%20options"
+          target="_blank"
+          rel="noreferrer"
+          className="
+            bg-gradient-to-b from-[#1F5E3C] to-[#124434]
+            hover:from-[#124434] hover:to-[#0D3A27]
+            text-white px-8 py-4 rounded-2xl shadow-[0_16px_38px_rgba(0,0,0,0.26)]
+            transition-all duration-300 font-semibold
+            transform hover:-translate-y-1
+          "
+        >
+          Contact Us
+        </a>
+      </section>
+
+      <Footer />
     </div>
   );
 }
