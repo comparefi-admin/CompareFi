@@ -245,7 +245,7 @@ export default function HomePage() {
   
 
   {/* ==== SMALL UPWARD NUDGE (keep spacing) ==== */}
-  <div className="mt-[-18%]"></div>
+  <div className="mt-[-20%]"></div>
 
   {/* Badge */}
   <motion.div
@@ -298,12 +298,12 @@ export default function HomePage() {
   initial={{ opacity: 0, y: 60, scale: 0.95 }}
   animate={{ opacity: 1, y: 0, scale: 1 }}
   transition={{ delay: 0.8, duration: 0.8 }}
-  className="absolute bottom-[-16rem] inset-x-0 flex justify-center z-20 pointer-events-none"
+  className="absolute bottom-[-18rem] inset-x-0 flex justify-center z-20 pointer-events-none"
 >
   <div
     className="relative flex justify-center w-full max-w-[1200px] pointer-events-none"
     style={{
-      height: "750px",  // ⭐️ make the wrapper tall enough
+      height: "900px",  // ⭐️ make the wrapper tall enough
       WebkitMaskImage:
         "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 66%)",
       maskImage:
@@ -405,7 +405,7 @@ export default function HomePage() {
 </section>
 
 
-{/* COMPARE PRODUCTS */}
+
 {/* COMPARE PRODUCTS */}
 
 <section id="compare" className="relative flex justify-center items-center mb-[2%] pb-[5%] mt-[2%] min-h-[80vh] overflow-hidden px-6 lg:px-10 bg-opacity-0">
@@ -500,7 +500,7 @@ export default function HomePage() {
                 </div>
 
                 {/* Right Metrics → Firebase Table */}
-               <div className="p-4 border border-gray-300 rounded-lg">
+               <div className="p-4  rounded-lg">
     <CompareProductsTable productType={p.id} />
 </div>
               </div>
@@ -517,11 +517,11 @@ export default function HomePage() {
           <section className="w-full bg-[#F9FAFB] bg-opacity-0 py-15 px-6 lg:px-20 flex flex-col lg:flex-row justify-between items-center lg:items-start">
   <section className="w-full bg-[#F9FAFB]  bg-opacity-0 py-10 px-6 lg:px-20 flex flex-col lg:flex-row justify-between items-center lg:items-start">
   {/* Left Section */}
-  <div className="w-1/2 h-1/2 mt-20 flex flex-col justify-center ml-[5%]">
-    <h2 className="text-7xl  text-[#0A0F2C] mb-6 mt-5 leading-tight">
+  <div className="w-1/2 h-1/2 mt-20 flex flex-col justify-center ml-[2%]">
+    <h2 className="text-7xl  text-[#0A0F2C] mb-6 mt-5 leading-tight font-bold">
       About CompareFi
     </h2>
-    <p className="text-[#4B5563] mb-6 text-lg leading-relaxed">
+    <p className="text-[#4B5563] mb-6 text-2xl leading-relaxed font-normal">
       CompareFi is an independent platform built to bring transparency and clarity to finance. We simplify complex financial decisions by helping you compare loans, investments, and other products side by side — so you can understand true costs, uncover hidden charges, and choose what’s genuinely right for you.
       Our mission is to make financial decision-making clear, confident, and fair for everyone
 

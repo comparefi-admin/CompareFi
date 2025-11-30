@@ -4,7 +4,7 @@ import { Sparkles } from "lucide-react";
 import React, { useState } from "react";
 
 /* -----------------------------------------------
-   🔹 Single Card Component — Fully Opaque Version
+   Single Card Component — Card Look Matched
 ------------------------------------------------ */
 function DisplayCard({
   title,
@@ -24,27 +24,31 @@ function DisplayCard({
   return (
     <div
       className={cn(
-        "relative flex flex-col justify-between h-[25rem] w-[18rem] rounded-2xl p-5",
-        // Opaque luxury card
+        "relative flex flex-col justify-between h-[25rem] w-[18rem] rounded-[1.8rem] p-5",
+
+        // Card surface: close to flat white/grey like the reference
         isCenter
-          ? "bg-gradient-to-br from-[#ffffff] via-[#f4f4f4] to-[#ebebeb]"
-          : "bg-gradient-to-br from-[#fefefe] via-[#f2f2f2] to-[#e9e9e9]",
+          ? "bg-gradient-to-b from-[#fdfefe] via-[#f4f5f8] to-[#e8ebf2]" // center
+          : "bg-gradient-to-b from-[#f7f8fb] via-[#eceff4] to-[#e0e4ee]", // sides
 
-        // Strong premium shadows
-        "shadow-[0_12px_32px_rgba(0,0,0,0.22),0_4px_12px_rgba(0,0,0,0.10)] border border-[#e5e5e5]",
+        // Very soft border + strong but smooth drop shadow
+        "border border-[#f5f6fb] shadow-[0_18px_45px_rgba(0,0,0,0.30)]",
 
-        // Mask fade for side cards
+        // Side-card fade
         isMasked ? "mask-gradient" : "mask-none",
 
-        // Dim effect on side cards
-        isDimmed ? "opacity-60 scale-[0.96]" : "opacity-100",
+        // Side-card dim
+        isDimmed ? "opacity-55 scale-[0.96]" : "opacity-100",
 
         "transition-all duration-700 ease-out",
         className
       )}
     >
-      {/* Gloss highlight (now subtle + opaque) */}
-      <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-b from-white/90 to-transparent" />
+      {/* Subtle bottom glow (like the central light in the sample image) */}
+      <div className="pointer-events-none absolute inset-x-6 bottom-[-18px] h-16 rounded-full bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.85),transparent)]" />
+
+      {/* Very light top sheen */}
+      <div className="pointer-events-none absolute inset-0 rounded-[1.8rem] bg-gradient-to-b from-white/28 via-transparent to-transparent" />
 
       {/* Header */}
       <div className="flex items-center gap-2 mb-3 relative z-10">
@@ -61,7 +65,7 @@ function DisplayCard({
         {data.map((item, idx) => (
           <div
             key={idx}
-            className="flex flex-col justify-start rounded-xl bg-[#ffffff] py-4 px-4 shadow-sm border border-[#e2e2e2]"
+            className="flex flex-col justify-start rounded-xl bg-white/95 py-4 px-4 shadow-sm border border-[#e1e5f0]"
           >
             <span className="text-gray-600 text-xs sm:text-sm">
               {item.label}
@@ -77,7 +81,7 @@ function DisplayCard({
 }
 
 /* -----------------------------------------------
-   🔹 3D Tilt Layout Display
+   3D Tilt Layout Display
 ------------------------------------------------ */
 export default function DisplayCards() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -111,13 +115,12 @@ export default function DisplayCards() {
 
   // Layout positions
   const cardLayoutClasses = [
-    "z-10 rotate-[-10deg] translate-x-[25px] translate-y-[20px]",
-    "z-30 rotate-0 translate-y-[-20px]",
-    "z-20 rotate-[10deg] translate-x-[-25px] translate-y-[20px]",
+    "z-10 rotate-[-12deg] translate-x-[30px] translate-y-[24px]",
+    "z-30 rotate-0 translate-y-[-24px]",
+    "z-20 rotate-[12deg] translate-x-[-30px] translate-y-[24px]",
   ];
 
   return (
-    // Increased responsive top margin to ensure spacing from buttons above
     <div className="flex justify-center items-center py-20 mt-2 scale-[1.20] origin-top">
       <div className="flex justify-center items-center -space-x-20 pointer-events-auto">
         {cards.map((card, i) => {
@@ -131,8 +134,9 @@ export default function DisplayCards() {
               className={cn(
                 "transition-all duration-700 ease-out",
                 layoutClass,
+                // float + straighten + zoom on hover for ALL cards
                 isHovered &&
-                  "z-40 rotate-0 translate-x-0 scale-[1.10] opacity-100"
+                  "z-40 rotate-0 translate-y-[-70px] translate-x-0 scale-[1.14] opacity-100"
               )}
               onMouseEnter={() => setHoveredIndex(i)}
               onMouseLeave={() => setHoveredIndex(null)}

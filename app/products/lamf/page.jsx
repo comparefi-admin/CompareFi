@@ -657,7 +657,7 @@ export default function LAMFPage() {
 
 
           {/* HOW TO APPLY & KEY FACTORS */}
-<section className="max-w-[90%] mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-3 gap-10">
+<section className="max-w-[90%] mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 gap-10">
   {/* Card 1 */}
   <div className="backdrop-blur-xl border bg-[#e8feff3f]
           shadow-[0_16px_38px_rgba(0,0,0,0.05)] border-[rgba(35,104,126,0.2)] rounded-3xl p-10 transition-all duration-500 hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)] hover:-translate-y-2">
@@ -672,23 +672,12 @@ export default function LAMFPage() {
     <p className="text-sm text-gray-700"><strong>Tip:</strong> Digital-first lenders and fintechs typically deliver the fastest disbursal.</p>
   </div>
 
-  {/* Card 2 */}
-  <div className="bg-[#C0CDCF]
-          shadow-[0_16px_38px_rgba(0,0,0,0.05)] backdrop-blur-xl border border-[rgba(35,104,126,0.2)] rounded-3xl p-10 transition-all duration-500 hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)] hover:-translate-y-2">
-    <h3 className="text-2xl font-bold mb-6 text-[#0D3A27]">Why Our LAMF Comparison Tool Stands Out</h3>
-    <ul className="list-disc list-inside space-y-3 text-gray-800 leading-relaxed text-[1.05rem]">
-      <li><strong>Transparent Breakdowns:</strong> Filterable tables reveal hidden fees that other overviews often omit.</li>
-      <li><strong>Real-Time Tools:</strong> Adjust loan amount and tenure using our interactive LAMF comparison controls.</li>
-      <li><strong>Fresh Data:</strong> Sourced directly from lender sites (data refreshed October 2025).</li>
-      <li><strong>Comprehensive FAQs:</strong> Grouped answers covering LAMF, LAS, and MTF so you get context-specific guidance.</li>
-    </ul>
-  </div>
 
   {/* Card 3 */}
-  <div className="bg-[#2E494D]
+  <div className="bg-[#C0CDCF]
           shadow-[0_16px_38px_rgba(0,0,0,0.05) backdrop-blur-xl border border-[rgba(255,255,255,0.2)] rounded-3xl p-10 transition-all duration-500 hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)] hover:-translate-y-2">
-    <h3 className="text-2xl font-bold mb-6 text-[#FFFFFF]">Key Factors: Choosing the Best LAMF Provider</h3>
-    <ul className="list-disc list-inside space-y-3 text-white leading-relaxed text-[1.05rem]">
+    <h3 className="text-2xl font-bold mb-6 text-black">Key Factors: Choosing the Best LAMF Provider</h3>
+    <ul className="list-disc list-inside space-y-3 text-black leading-relaxed text-[1.05rem]">
       <li><strong>LTV Ratio:</strong> Up to <strong>90%</strong> for debt funds (example: some lenders); ~50–60% for equity-oriented funds.</li>
       <li><strong>Approved Funds:</strong> Broader approved lists (e.g., Tata Capital, HDFC ~1000+ funds) give greater flexibility.</li>
       <li><strong>Margin Call Period:</strong> Longer periods (e.g., 7 days with certain lenders) provide more time to regularize positions.</li>

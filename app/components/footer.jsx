@@ -9,33 +9,32 @@ import { Layers, Building2, LifeBuoy } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#EFF3F6] text-[#1e2e2b] py-10 border-t border-[#B1ED67]/20">
-      <div className="max-w-7xl mx-auto px-6">
-
+    <footer className="w-full bg-[#EFF3F6] text-[#1e2e2b] py-10 border-t border-[#B1ED67]/20">
+      
+      {/* CONTENT WIDTH CONTAINER */}
+      <div className=" mx-auto px-6">
+        
         {/* GRID */}
         <div className="grid md:grid-cols-4 gap-8">
 
-          {/* BRAND — Logo positioning fine, MOVING TAGLINE UP */}
-          {/* Adjusted negative margin slightly to compensate for the smaller tagline gap */}
-          <div className="md:-mt-10"> 
+          {/* BRAND */}
+          <div className="md:-mt-10 pl-20" >
             <Link href="/">
               <Image
                 src={logo}
                 alt="CompareFi Logo"
                 width={260}
                 height={260}
-                // Kept w-40 h-40 for size
-                className="object-contain w-40 h-40 cursor-pointer" 
+                className="object-contain w-40 h-40 cursor-pointer"
               />
             </Link>
 
-            {/* REDUCED top margin (mt-16 -> mt-2) to bring the tagline up closer to the logo. */}
             <p className="text-[#1e2e2b] font-bold text-base leading-snug mt-2">
               Compare right, Choose right.
             </p>
           </div>
 
-          {/* PRODUCTS — Negative margin removed since the previous image indicated column headers were fine */}
+          {/* PRODUCTS */}
           <div>
             <h4 className="font-bold text-lg mb-4 flex items-center gap-2 text-[#1e2e2b]">
               <Layers size={18} />
@@ -75,11 +74,10 @@ export default function Footer() {
 
         </div>
 
-        {/* Horizontal Line */}
-        <div className="border-t border-[#1e2e2b]/20 mt-8"></div>
+        {/* LINE */}
+        <div className="border-t border-[#1e2e2b]/20 mt-8" />
 
-
-        {/* BOTTOM */}
+        {/* BOTTOM COPYRIGHT */}
         <div className="mt-2 pt-6 text-center text-[#1e2e2b]/70 text-sm">
           <p>&copy; 2025 CompareFi. All rights reserved.</p>
         </div>

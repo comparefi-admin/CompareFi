@@ -568,7 +568,7 @@ export default function LASPage() {
       </section>
 
       {/* HOW TO APPLY & KEY FACTORS */}
-      <section className="max-w-[90%] mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-3 gap-10">
+      <section className="max-w-[90%] mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 gap-10">
         {/* Card 1 */}
         <div className=" backdrop-blur-xl border bg-[#e8feff3f]
                 shadow-[0_16px_38px_rgba(0,0,0,0.05)] border-[rgba(35,104,126,0.2)] rounded-3xl p-10 transition-all duration-500 hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)] hover:-translate-y-2">
@@ -583,23 +583,13 @@ export default function LASPage() {
           <p className="text-sm text-gray-700"><strong>Tip:</strong> 100% digital apps can disburse within 24 hours.</p>
         </div>
 
-        {/* Card 2 */}
-        <div className="bg-[#C0CDCF]
-                shadow-[0_16px_38px_rgba(0,0,0,0.05)] backdrop-blur-xl border border-[rgba(35,104,126,0.2)] rounded-3xl p-10 transition-all duration-500 hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)] hover:-translate-y-2">
-          <h3 className="text-2xl font-bold mb-6 text-[#0D3A27]">Why Our LAS Comparison Ranks #1</h3>
-          <ul className="list-disc list-inside space-y-3 text-gray-800 leading-relaxed text-[1.05rem]">
-            <li><strong>SEO-Optimized Depth:</strong> Fully keyword-tuned for "best LAS providers 2025".</li>
-            <li><strong>User-First Design:</strong> Filterable tables, responsive charts, mobile-first UX.</li>
-            <li><strong>Accurate Data:</strong> Updated Oct 2025 using verified lender sources.</li>
-            <li><strong>Better Than Competitors:</strong> Shows hidden charges that PolicyBazaar and others skip.</li>
-          </ul>
-        </div>
+        
 
         {/* Card 3 */}
-        <div className="bg-[#2E494D]
+        <div className="bg-[#C0CDCF]
                 shadow-[0_16px_38px_rgba(0,0,0,0.05) backdrop-blur-xl border border-[rgba(255,255,255,0.2)] rounded-3xl p-10 transition-all duration-500 hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)] hover:-translate-y-2">
-          <h3 className="text-2xl font-bold mb-6 text-[#FFFFFF]">Key Factors: Best LAS Provider 2025</h3>
-          <ul className="list-disc list-inside space-y-3 text-white leading-relaxed text-[1.05rem]">
+          <h3 className="text-2xl font-bold mb-6 text-black">Key Factors: Best LAS Provider 2025</h3>
+          <ul className="list-disc list-inside space-y-3 text-black leading-relaxed text-[1.05rem]">
             <li><strong>LTV Ratio:</strong> Higher LTV (HDFC 65–80%) → more borrowing power.</li>
             <li><strong>Approved Shares:</strong> Broader lists (Tata Capital ~1004+) give flexibility.</li>
             <li><strong>Margin Call Period:</strong> Longer (7 days — Bajaj/Mirae) = more buffer time.</li>

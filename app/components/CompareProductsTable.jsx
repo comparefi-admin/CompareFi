@@ -97,8 +97,9 @@ export default function CompareProductsTable({ productType }) {
 
   return (
     // Outer Container: Clean white card with subtle shadow
-    <div className="bg-white rounded-xl shadow-lg shadow-gray-200/50 shadow-inner p-6 md:p-8 max-w-full mx-auto">
-      
+    <div className="bg-white rounded-xl shadow-lg shadow-gray-200/20 p-6 md:p-8 max-w-full transition-all duration-500 mx-auto border-2 border-[#2b7146] hover:shadow-[0_16px_38px_rgba(0,0,0,0.26),0_6px_18px_rgba(0,0,0,0.08)]">
+
+       
       {/* Title */}
       <div className="w-full flex justify-center mb-6">
         <h2 className="text-xl md:text-2xl font-bold text-gray-900 tracking-tight">
