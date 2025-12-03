@@ -31,7 +31,8 @@ export default function LAMFPage() {
   const [currentTable, setCurrentTable] = useState("funding");
   const [faqOpen, setFaqOpen] = useState(null);
   const [activeCategories, setActiveCategories] = useState(["All FAQs"]);
-  const [activeTableCategory, setActiveTableCategory] = useState("fundingDetails");
+  const [activeTableCategory, setActiveTableCategory] =
+    useState("fundingDetails");
 
   const allCategories = ["All FAQs", ...Object.keys(faqData)];
 
@@ -201,48 +202,56 @@ export default function LAMFPage() {
             </SpotlightCard>
           </section>
 
-         {/* ========== INFO CARDS (LAS-THEME EXACT) ========== */}
-<section className="max-w-[90%] mx-auto px-6 pb-16">
-  <h2 className="text-4xl font-bold text-center mb-14 text-[#0A0F2C]">
-    Understanding Loan Against Mutual Funds (LAMF)
-  </h2>
+          {/* ========== INFO CARDS (LAS-THEME EXACT) ========== */}
+          <section className="max-w-[90%] mx-auto px-6 pb-16">
+            <h2 className="text-4xl font-bold text-center mb-14 text-[#0A0F2C]">
+              Understanding Loan Against Mutual Funds (LAMF)
+            </h2>
 
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-    {[
-      {
-        title: "What is LAMF?",
-        text: `Loan Against Mutual Funds lets you borrow funds by pledging your MF units while your investments continue compounding.`,
-      },
-      {
-        title: "Key Benefits",
-        text: (
-          <ul className="list-disc list-inside space-y-2">
-            <li>Liquidity without redeeming MF units.</li>
-            <li>Lower interest vs personal loan.</li>
-            <li>Continue earning returns on portfolio.</li>
-            <li>Fast approval via CAMS / KFintech.</li>
-          </ul>
-        ),
-      },
-      {
-        title: "LAMF vs Personal Loan",
-        text: (
-          <ul className="space-y-2">
-            <li><strong>Collateral:</strong> MF units.</li>
-            <li><strong>Interest:</strong> Lower than personal loans.</li>
-            <li><strong>Tenure:</strong> 12–36 months.</li>
-            <li><strong>Disbursal:</strong> Same-day possible.</li>
-          </ul>
-        ),
-      },
-      {
-        title: "Why Choose LAMF?",
-        text: `Ideal when you want liquidity without interrupting compounding—MF NAV volatility is lower than stocks.`,
-      },
-    ].map((card, i) => (
-      <div
-        key={i}
-        className="
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+              {[
+                {
+                  title: "What is LAMF?",
+                  text: `Loan Against Mutual Funds lets you borrow funds by pledging your MF units while your investments continue compounding.`,
+                },
+                {
+                  title: "Key Benefits",
+                  text: (
+                    <ul className="list-disc list-inside space-y-2">
+                      <li>Liquidity without redeeming MF units.</li>
+                      <li>Lower interest vs personal loan.</li>
+                      <li>Continue earning returns on portfolio.</li>
+                      <li>Fast approval via CAMS / KFintech.</li>
+                    </ul>
+                  ),
+                },
+                {
+                  title: "LAMF vs Personal Loan",
+                  text: (
+                    <ul className="space-y-2">
+                      <li>
+                        <strong>Collateral:</strong> MF units.
+                      </li>
+                      <li>
+                        <strong>Interest:</strong> Lower than personal loans.
+                      </li>
+                      <li>
+                        <strong>Tenure:</strong> 12–36 months.
+                      </li>
+                      <li>
+                        <strong>Disbursal:</strong> Same-day possible.
+                      </li>
+                    </ul>
+                  ),
+                },
+                {
+                  title: "Why Choose LAMF?",
+                  text: `Ideal when you want liquidity without interrupting compounding—MF NAV volatility is lower than stocks.`,
+                },
+              ].map((card, i) => (
+                <div
+                  key={i}
+                  className="
           bg-white/18 backdrop-blur-xl border border-[rgba(35,104,126,0.2)]
           rounded-3xl p-8
           bg-[#e8feff3f]
@@ -252,29 +261,33 @@ export default function LAMFPage() {
           hover:shadow-[0_16px_38px_rgba(0,0,0,0.26),0_6px_18px_rgba(0,0,0,0.08)]
           will-change-transform
         "
-      >
-        <h3 className="text-2xl font-bold mb-4 text-[#0D3A27]">
-          {card.title}
-        </h3>
-        <p className="text-gray-800 leading-relaxed text-lg">{card.text}</p>
-      </div>
-    ))}
-  </div>
+                >
+                  <h3 className="text-2xl font-bold mb-4 text-[#0D3A27]">
+                    {card.title}
+                  </h3>
+                  <p className="text-gray-800 leading-relaxed text-lg">
+                    {card.text}
+                  </p>
+                </div>
+              ))}
+            </div>
 
-  {/* SNAPSHOT — EXACT LAS VERSION */}
-  <div className="mt-16 text-center">
-    <h3 className="text-4xl font-bold mb-8 text-[#0A0F2C]">Quick Snapshot</h3>
+            {/* SNAPSHOT — EXACT LAS VERSION */}
+            <div className="mt-16 text-center">
+              <h3 className="text-4xl font-bold mb-8 text-[#0A0F2C]">
+                Quick Snapshot
+              </h3>
 
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-      {[
-        ["Interest Range", "8–18% p.a."],
-        ["Tenure", "Up to 36 months"],
-        ["Collateral Type", "Mutual Funds"],
-        ["Approval", "CAMS / KFintech"],
-      ].map(([label, value], i) => (
-        <div
-          key={i}
-          className="
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+                {[
+                  ["Interest Range", "8–18% p.a."],
+                  ["Tenure", "Up to 36 months"],
+                  ["Collateral Type", "Mutual Funds"],
+                  ["Approval", "CAMS / KFintech"],
+                ].map(([label, value], i) => (
+                  <div
+                    key={i}
+                    className="
             bg-white/22 backdrop-blur-md border border-[rgba(255,255,255,0.06)]
             rounded-2xl p-4
             transition-all
@@ -283,44 +296,46 @@ export default function LAMFPage() {
             hover:-translate-y-2
             hover:shadow-[0_14px_36px_rgba(0,0,0,0.22),inset_0_0_18px_rgba(255,255,255,0.06)]
           "
-        >
-          <p className="text-gray-100 text-sm">{label}</p>
-          <p className="text-2xl font-bold text-[#AFE619]">{value}</p>
-        </div>
-      ))}
-    </div>
-  </div>
-</section>
+                  >
+                    <p className="text-gray-100 text-sm">{label}</p>
+                    <p className="text-2xl font-bold text-[#AFE619]">{value}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
 
+          {/* =============== COST SUMMARY TABLE (LAMF — EXACT LAS THEME) =============== */}
+          <section className="max-w-[90%] mx-auto px-6 py-10 flex flex-col items-center">
+            <h3 className="text-4xl font-bold mb-10 text-[#0A0F2C]">
+              Cost Summary
+            </h3>
 
-         {/* =============== COST SUMMARY TABLE (LAMF — EXACT LAS THEME) =============== */}
-<section className="max-w-[90%] mx-auto px-6 py-10 flex flex-col items-center">
-  <h3 className="text-4xl font-bold mb-10 text-[#0A0F2C]">Cost Summary</h3>
-
-  <div className="
+            <div
+              className="
     w-full bg-white backdrop-blur-2xl 
     border border-[rgba(255,255,255,0.06)]
     shadow-[0_12px_32px_rgba(0,0,0,0.22)]
     rounded-2xl overflow-x-auto
-  ">
-    <table className="w-full border-collapse text-gray-800 text-[16px] leading-[1.35] table-highlight">
-
-      <thead className="bg-white/80 border-b border-gray-300">
-        <tr>
-          {[
-            "Institution",
-            "1st Year (₹1L LAMF)",
-            "2nd Year (₹1L LAMF)",
-            "Approved Funds",
-            "Tenure",
-            "Min–Max Loan (Debt/Equity)",
-            "Interest Rate (Min/Max/Median)",
-            "Margin Period",
-            "Contact",
-          ].map((h, i) => (
-            <th
-              key={i}
-              className={`
+  "
+            >
+              <table className="w-full border-collapse text-gray-800 text-[16px] leading-[1.35] table-highlight">
+                <thead className="bg-white/80 border-b border-gray-300">
+                  <tr>
+                    {[
+                      "Institution",
+                      "1st Year (₹1L LAMF)",
+                      "2nd Year (₹1L LAMF)",
+                      "Approved Funds",
+                      "Tenure",
+                      "Min–Max Loan (Debt/Equity)",
+                      "Interest Rate (Min/Max/Median)",
+                      "Margin Period",
+                      "Contact",
+                    ].map((h, i) => (
+                      <th
+                        key={i}
+                        className={`
                 px-5 py-3 font-semibold border border-gray-300 uppercase text-sm tracking-wide
                 ${
                   i < 3
@@ -328,115 +343,123 @@ export default function LAMFPage() {
                     : "bg-white/70"
                 }
               `}
-            >
-              {h}
-            </th>
-          ))}
-        </tr>
-      </thead>
+                      >
+                        {h}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
 
-      <tbody>
-        {data.map((row, index) => (
-          <tr
-            key={row.id}
-            className={`
+                <tbody>
+                  {data.map((row, index) => (
+                    <tr
+                      key={row.id}
+                      className={`
               transition-all duration-300
               ${index % 2 === 0 ? "bg-white/55" : "bg-white/36"}
               hover:bg-[#B1ED67]/22
               hover:shadow-[0_14px_36px_rgba(0,0,0,0.22)]
             `}
-          >
-            {/* Institution */}
-            <td className="
+                    >
+                      {/* Institution */}
+                      <td
+                        className="
               px-5 py-4 border border-gray-300 font-semibold text-[#0A0F2C]
               bg-gradient-to-br from-[#FBFCFD] to-[#F3FFF5]
-            ">
-              {row.institution_name ?? DEFAULT_NULL_TEXT}
-            </td>
+            "
+                      >
+                        {row.institution_name ?? DEFAULT_NULL_TEXT}
+                      </td>
 
-            {/* 1st Year */}
-            <td className="px-5 py-4 border border-gray-300 text-[#1F5E3C] font-medium text-center">
-              {row.cost_first_year ? (
-                <>
-                  <div>Percent: {row.cost_first_year.percent ?? "—"}</div>
-                  <div>₹{row.cost_first_year.amount ?? "—"}</div>
-                </>
-              ) : (
-                DEFAULT_NULL_TEXT
-              )}
-            </td>
+                      {/* 1st Year */}
+                      <td className="px-5 py-4 border border-gray-300 text-[#1F5E3C] font-medium text-center">
+                        {row.cost_first_year ? (
+                          <>
+                            <div>
+                              Percent: {row.cost_first_year.percent ?? "—"}
+                            </div>
+                            <div>₹{row.cost_first_year.amount ?? "—"}</div>
+                          </>
+                        ) : (
+                          DEFAULT_NULL_TEXT
+                        )}
+                      </td>
 
-            {/* 2nd Year */}
-            <td className="px-5 py-4 border border-gray-300 text-[#124434] font-medium text-center">
-              {row.cost_second_year ? (
-                <>
-                  <div>Percent: {row.cost_second_year.percent ?? "—"}</div>
-                  <div>₹{row.cost_second_year.amount ?? "—"}</div>
-                </>
-              ) : (
-                DEFAULT_NULL_TEXT
-              )}
-            </td>
+                      {/* 2nd Year */}
+                      <td className="px-5 py-4 border border-gray-300 text-[#124434] font-medium text-center">
+                        {row.cost_second_year ? (
+                          <>
+                            <div>
+                              Percent: {row.cost_second_year.percent ?? "—"}
+                            </div>
+                            <div>₹{row.cost_second_year.amount ?? "—"}</div>
+                          </>
+                        ) : (
+                          DEFAULT_NULL_TEXT
+                        )}
+                      </td>
 
-            {/* Approved Funds */}
-            <td className="px-5 py-4 border border-gray-300 text-gray-800 whitespace-pre-wrap text-center">
-              {row.approved_funds
-                ? `~ ${row.approved_funds} funds`
-                : DEFAULT_NULL_TEXT}
-            </td>
+                      {/* Approved Funds */}
+                      <td className="px-5 py-4 border border-gray-300 text-gray-800 whitespace-pre-wrap text-center">
+                        {row.approved_funds
+                          ? `~ ${row.approved_funds} funds`
+                          : DEFAULT_NULL_TEXT}
+                      </td>
 
-            {/* Tenure */}
-            <td className="px-5 py-4 border border-gray-300 text-center">
-              {row.tenure_months ?? DEFAULT_NULL_TEXT}
-            </td>
+                      {/* Tenure */}
+                      <td className="px-5 py-4 border border-gray-300 text-center">
+                        {row.tenure_months ?? DEFAULT_NULL_TEXT}
+                      </td>
 
-            {/* Loan Debt/Equity */}
-            <td className="px-5 py-4 border border-gray-300 text-center">
-              <div>
-                <strong>Debt:</strong>{" "}
-                {row.loan_debt
-                  ? `${row.loan_debt.min ?? "—"} / ${
-                      row.loan_debt.max ?? "—"
-                    }`
-                  : DEFAULT_NULL_TEXT}
-              </div>
-              <div>
-                <strong>Equity:</strong>{" "}
-                {row.loan_equity
-                  ? `${row.loan_equity.min ?? "—"} / ${
-                      row.loan_equity.max ?? "—"
-                    }`
-                  : DEFAULT_NULL_TEXT}
-              </div>
-            </td>
+                      {/* Loan Debt/Equity */}
+                      <td className="px-5 py-4 border border-gray-300 text-center">
+                        <div>
+                          <strong>Debt:</strong>{" "}
+                          {row.loan_debt
+                            ? `${row.loan_debt.min ?? "—"} / ${
+                                row.loan_debt.max ?? "—"
+                              }`
+                            : DEFAULT_NULL_TEXT}
+                        </div>
+                        <div>
+                          <strong>Equity:</strong>{" "}
+                          {row.loan_equity
+                            ? `${row.loan_equity.min ?? "—"} / ${
+                                row.loan_equity.max ?? "—"
+                              }`
+                            : DEFAULT_NULL_TEXT}
+                        </div>
+                      </td>
 
-            {/* Interest */}
-            <td className="px-5 py-4 border border-gray-300 text-center">
-              {row.interest_rate ? (
-                <>
-                  <div>Min: {row.interest_rate.min ?? "—"}%</div>
-                  <div>Max: {row.interest_rate.max ?? "—"}%</div>
-                  <div>Median: {row.interest_rate.median ?? "—"}%</div>
-                </>
-              ) : (
-                DEFAULT_NULL_TEXT
-              )}
-            </td>
+                      {/* Interest */}
+                      <td className="px-5 py-4 border border-gray-300 text-center">
+                        {row.interest_rate ? (
+                          <>
+                            <div>Min: {row.interest_rate.min ?? "—"}%</div>
+                            <div>Max: {row.interest_rate.max ?? "—"}%</div>
+                            <div>
+                              Median: {row.interest_rate.median ?? "—"}%
+                            </div>
+                          </>
+                        ) : (
+                          DEFAULT_NULL_TEXT
+                        )}
+                      </td>
 
-            {/* Margin */}
-            <td className="px-5 py-4 border border-gray-300 text-center">
-              {row.regularization_period ?? DEFAULT_NULL_TEXT}
-            </td>
+                      {/* Margin */}
+                      <td className="px-5 py-4 border border-gray-300 text-center">
+                        {row.regularization_period ?? DEFAULT_NULL_TEXT}
+                      </td>
 
-            {/* Contact Buttons */}
-            <td className="px-5 py-4 border border-gray-300 text-center">
-              <a
-                href={`https://wa.me/919930584020?text=Hi! I’m interested in LAMF by ${encodeURIComponent(
-                  row.institution_name || "this institution"
-                )}`}
-                target="_blank"
-                rel="noreferrer"
-                className="
+                      {/* Contact Buttons */}
+                      <td className="px-5 py-4 border border-gray-300 text-center">
+                        <a
+                          href={`https://wa.me/919930584020?text=Hi! I’m interested in LAMF by ${encodeURIComponent(
+                            row.institution_name || "this institution"
+                          )}`}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="
                   inline-flex items-center justify-center gap-2
                   bg-gradient-to-b from-[#1F5E3C] to-[#124434]
                   text-white px-4 py-2 rounded-lg
@@ -444,16 +467,24 @@ export default function LAMFPage() {
                   hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
                   transition-all duration-300 transform hover:-translate-y-0.5
                 "
-              >
-                <MessageCircle className="w-4 h-4" /> Enquire
-              </a>
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 32 32"
+                            fill="currentColor"
+                            className="w-4 h-4"
+                          >
+                            <path d="M16 .8C7.6.8.8 7.6.8 16c0 2.8.8 5.6 2.4 8L0 32l8.4-3.2c2.4 1.2 4.8 1.6 7.6 1.6 8.4 0 15.2-6.8 15.2-15.2S24.4.8 16 .8zm0 27.6c-2.4 0-4.8-.8-6.8-1.6l-.4-.4-5.2 2 2-5.2-.4-.4c-1.6-2-2.4-4.4-2.4-6.8 0-7.2 5.6-12.8 12.8-12.8s12.8 5.6 12.8 12.8S23.2 28.4 16 28.4zm7.2-9.2c-.4-.4-2-1.2-2.4-1.2-.4 0-.8 0-1.2.4-.4.4-.8 1.2-1.2 1.6-.4.4-.8.4-1.2.2-1.2-.6-2.4-1.4-3.4-2.6-.8-.8-1.4-1.8-2-3-.2-.4 0-.8.2-1.2.2-.2.4-.6.6-.8.2-.2.2-.4.4-.8 0-.4 0-.8-.2-1.2-.2-.4-1.2-2.2-1.6-3s-.8-.6-1.2-.6h-1c-.4 0-.8.2-1.2.6-.4.6-1.6 1.6-1.6 4s1.6 4.6 1.8 5c.2.4 3 4.8 7.2 6.8 4.2 2.2 4.8 1.6 5.6 1.6.8 0 2.8-1 3.2-2 .4-.8.4-1.6.2-2-.2-.4-.4-.6-.8-.8z" />
+                          </svg>
+                          Enquire
+                        </a>
 
-              <div className="mt-3">
-                <a
-                  href={row.google_form_link || "#"}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="
+                        <div className="mt-3">
+                          <a
+                            href={row.google_form_link || "#"}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="
                     inline-flex items-center justify-center gap-2
                     bg-gradient-to-b from-[#5e009c] to-[#c401ff]
                     text-white px-4 py-2 rounded-lg
@@ -461,48 +492,48 @@ export default function LAMFPage() {
                     hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
                     transition-all duration-300 transform hover:-translate-y-0.5
                   "
-                >
-                  <FileText className="w-4 h-4" /> Fill Enquiry
-                </a>
-              </div>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+                          >
+                            <FileText className="w-4 h-4" /> Fill Enquiry
+                          </a>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
 
-    {/* Empty state */}
-    {(!data || data.length === 0) && (
-      <div className="text-gray-600 text-center py-8 font-medium text-[15px]">
-        No data available.
-      </div>
-    )}
-  </div>
-</section>
+              {/* Empty state */}
+              {(!data || data.length === 0) && (
+                <div className="text-gray-600 text-center py-8 font-medium text-[15px]">
+                  No data available.
+                </div>
+              )}
+            </div>
+          </section>
 
-{/* =====================================================
- *  DETAILED LAMF COST SUMMARY — EXACT LAS THEME
- * ===================================================== */}
-<section className="max-w-[90%] mx-auto px-6 py-10 flex flex-col items-center">
-  <h3 className="text-4xl font-bold mb-8 text-[#0A0F2C]">
-    Detailed LAMF Cost Summary
-  </h3>
+          {/* =====================================================
+           *  DETAILED LAMF COST SUMMARY — EXACT LAS THEME
+           * ===================================================== */}
+          <section className="max-w-[90%] mx-auto px-6 py-10 flex flex-col items-center">
+            <h3 className="text-4xl font-bold mb-8 text-[#0A0F2C]">
+              Detailed LAMF Cost Summary
+            </h3>
 
-  <div
-    className="
+            <div
+              className="
       w-full bg-white backdrop-blur-xl 
       border border-[rgba(255,255,255,0.06)]
       shadow-[0_12px_32px_rgba(0,0,0,0.22)]
       rounded-2xl p-6
     "
-  >
-    {/* CATEGORY BUTTONS (Exact LAS style) */}
-    <div className="flex flex-wrap justify-center gap-4 mb-6">
-      {categoryButtons.map((b) => (
-        <button
-          key={b.key}
-          onClick={() => setActiveTableCategory(b.key)}
-          className={`
+            >
+              {/* CATEGORY BUTTONS (Exact LAS style) */}
+              <div className="flex flex-wrap justify-center gap-4 mb-6">
+                {categoryButtons.map((b) => (
+                  <button
+                    key={b.key}
+                    onClick={() => setActiveTableCategory(b.key)}
+                    className={`
             px-5 py-3 rounded-xl font-semibold text-sm transition-all duration-300
             ${
               activeTableCategory === b.key
@@ -510,114 +541,118 @@ export default function LAMFPage() {
                 : "bg-white/60 text-gray-800 hover:bg-white hover:shadow-md"
             }
           `}
-        >
-          {b.label}
-        </button>
-      ))}
-    </div>
+                  >
+                    {b.label}
+                  </button>
+                ))}
+              </div>
 
-    {/* TABLE */}
-    <div className="overflow-x-auto">
-      <table className="w-full border-collapse text-base text-gray-900 table-highlight">
-        <thead>
-          <tr className="text-left font-semibold border-b border-white/30">
-            {/* First 3 columns: gradient identical to LAS */}
-            <th className="px-5 py-4 bg-gradient-to-br from-[#FBFCFD] to-[#EFF7F1] border border-gray-300 rounded-md">
-              Institution
-            </th>
-            <th className="px-5 py-4 bg-gradient-to-br from-[#FBFCFD] to-[#EFF7F1] border border-gray-300 text-[#1F5E3C] rounded-md">
-              1st Year
-            </th>
-            <th className="px-5 py-4 bg-gradient-to-br from-[#FBFCFD] to-[#EFF7F1] border border-gray-300 text-[#124434] rounded-md">
-              2nd Year
-            </th>
+              {/* TABLE */}
+              <div className="overflow-x-auto">
+                <table className="w-full border-collapse text-base text-gray-900 table-highlight">
+                  <thead>
+                    <tr className="text-left font-semibold border-b border-white/30">
+                      {/* First 3 columns: gradient identical to LAS */}
+                      <th className="px-5 py-4 bg-gradient-to-br from-[#FBFCFD] to-[#EFF7F1] border border-gray-300 rounded-md">
+                        Institution
+                      </th>
+                      <th className="px-5 py-4 bg-gradient-to-br from-[#FBFCFD] to-[#EFF7F1] border border-gray-300 text-[#1F5E3C] rounded-md">
+                        1st Year
+                      </th>
+                      <th className="px-5 py-4 bg-gradient-to-br from-[#FBFCFD] to-[#EFF7F1] border border-gray-300 text-[#124434] rounded-md">
+                        2nd Year
+                      </th>
 
-            {/* Dynamic columns */}
-            {rightTableColumns[activeTableCategory].map((col) => (
-              <th
-                key={col.key}
-                className="px-5 py-4 border border-gray-300 bg-white/60"
-              >
-                {col.label}
-              </th>
-            ))}
+                      {/* Dynamic columns */}
+                      {rightTableColumns[activeTableCategory].map((col) => (
+                        <th
+                          key={col.key}
+                          className="px-5 py-4 border border-gray-300 bg-white/60"
+                        >
+                          {col.label}
+                        </th>
+                      ))}
 
-            <th className="px-5 py-4 border border-gray-300 bg-white/60">
-              Contact
-            </th>
-          </tr>
-        </thead>
+                      <th className="px-5 py-4 border border-gray-300 bg-white/60">
+                        Contact
+                      </th>
+                    </tr>
+                  </thead>
 
-        <tbody>
-          {sortedCostData.map((row, index) => (
-            <tr
-              key={row.id}
-              className={`
+                  <tbody>
+                    {sortedCostData.map((row, index) => (
+                      <tr
+                        key={row.id}
+                        className={`
                 transition-all duration-300 
                 ${index % 2 === 0 ? "bg-white/55" : "bg-white/36"}
                 hover:bg-[#B1ED67]/22 
                 hover:shadow-[0_14px_36px_rgba(0,0,0,0.22)]
               `}
-            >
-              {/* Institution */}
-              <td className="px-5 py-4 border border-gray-300 font-semibold text-[#0A0F2C] bg-gradient-to-br from-[#FBFCFD] to-[#F3FFF5] rounded-md">
-                {row.institution_name ?? DEFAULT_NULL_TEXT}
-              </td>
+                      >
+                        {/* Institution */}
+                        <td className="px-5 py-4 border border-gray-300 font-semibold text-[#0A0F2C] bg-gradient-to-br from-[#FBFCFD] to-[#F3FFF5] rounded-md">
+                          {row.institution_name ?? DEFAULT_NULL_TEXT}
+                        </td>
 
-              {/* 1st Year */}
-              <td className="px-5 py-4 border border-gray-300 text-center text-[#1F5E3C] bg-gradient-to-br from-[#FBFCFD] to-[#F3FFF5] rounded-md">
-                {row.cost_first_year ? (
-                  <>
-                    <div>Percent: {row.cost_first_year.percent ?? "—"}</div>
-                    <div>₹{row.cost_first_year.amount ?? "—"}</div>
-                  </>
-                ) : (
-                  DEFAULT_NULL_TEXT
-                )}
-              </td>
+                        {/* 1st Year */}
+                        <td className="px-5 py-4 border border-gray-300 text-center text-[#1F5E3C] bg-gradient-to-br from-[#FBFCFD] to-[#F3FFF5] rounded-md">
+                          {row.cost_first_year ? (
+                            <>
+                              <div>
+                                Percent: {row.cost_first_year.percent ?? "—"}
+                              </div>
+                              <div>₹{row.cost_first_year.amount ?? "—"}</div>
+                            </>
+                          ) : (
+                            DEFAULT_NULL_TEXT
+                          )}
+                        </td>
 
-              {/* 2nd Year */}
-              <td className="px-5 py-4 border border-gray-300 text-center text-[#124434] bg-gradient-to-br from-[#FBFCFD] to-[#F3FFF5] rounded-md">
-                {row.cost_second_year ? (
-                  <>
-                    <div>Percent: {row.cost_second_year.percent ?? "—"}</div>
-                    <div>₹{row.cost_second_year.amount ?? "—"}</div>
-                  </>
-                ) : (
-                  DEFAULT_NULL_TEXT
-                )}
-              </td>
+                        {/* 2nd Year */}
+                        <td className="px-5 py-4 border border-gray-300 text-center text-[#124434] bg-gradient-to-br from-[#FBFCFD] to-[#F3FFF5] rounded-md">
+                          {row.cost_second_year ? (
+                            <>
+                              <div>
+                                Percent: {row.cost_second_year.percent ?? "—"}
+                              </div>
+                              <div>₹{row.cost_second_year.amount ?? "—"}</div>
+                            </>
+                          ) : (
+                            DEFAULT_NULL_TEXT
+                          )}
+                        </td>
 
-              {/* Dynamic Fields */}
-              {rightTableColumns[activeTableCategory].map((c) => {
-                const v = row[c.key];
-                return (
-                  <td
-                    key={c.key}
-                    className="px-5 py-4 border border-gray-300 whitespace-pre-wrap"
-                  >
-                    {v == null
-                      ? DEFAULT_NULL_TEXT
-                      : typeof v === "object"
-                      ? Object.entries(v).map(([k, val], i) => (
-                          <div key={i}>
-                            {k}: {val ?? "—"}
-                          </div>
-                        ))
-                      : v}
-                  </td>
-                );
-              })}
+                        {/* Dynamic Fields */}
+                        {rightTableColumns[activeTableCategory].map((c) => {
+                          const v = row[c.key];
+                          return (
+                            <td
+                              key={c.key}
+                              className="px-5 py-4 border border-gray-300 whitespace-pre-wrap"
+                            >
+                              {v == null
+                                ? DEFAULT_NULL_TEXT
+                                : typeof v === "object"
+                                ? Object.entries(v).map(([k, val], i) => (
+                                    <div key={i}>
+                                      {k}: {val ?? "—"}
+                                    </div>
+                                  ))
+                                : v}
+                            </td>
+                          );
+                        })}
 
-              {/* Contact */}
-              <td className="px-5 py-4 border border-gray-300 text-center">
-                <a
-                  href={`https://wa.me/919930584020?text=Hi! I'm interested in LAMF by ${encodeURIComponent(
-                    row.institution_name || "this institution"
-                  )}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="
+                        {/* Contact */}
+                        <td className="px-5 py-4 border border-gray-300 text-center">
+                          <a
+                            href={`https://wa.me/919930584020?text=Hi! I'm interested in LAMF by ${encodeURIComponent(
+                              row.institution_name || "this institution"
+                            )}`}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="
                     inline-flex items-center justify-center gap-2
                     bg-gradient-to-b from-[#1F5E3C] to-[#124434]
                     text-white px-4 py-2 rounded-lg
@@ -625,16 +660,24 @@ export default function LAMFPage() {
                     hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
                     transition-all duration-300 transform hover:-translate-y-0.5
                   "
-                >
-                  <MessageCircle className="w-4 h-4" /> Enquire
-                </a>
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 32 32"
+                              fill="currentColor"
+                              className="w-4 h-4"
+                            >
+                              <path d="M16 .8C7.6.8.8 7.6.8 16c0 2.8.8 5.6 2.4 8L0 32l8.4-3.2c2.4 1.2 4.8 1.6 7.6 1.6 8.4 0 15.2-6.8 15.2-15.2S24.4.8 16 .8zm0 27.6c-2.4 0-4.8-.8-6.8-1.6l-.4-.4-5.2 2 2-5.2-.4-.4c-1.6-2-2.4-4.4-2.4-6.8 0-7.2 5.6-12.8 12.8-12.8s12.8 5.6 12.8 12.8S23.2 28.4 16 28.4zm7.2-9.2c-.4-.4-2-1.2-2.4-1.2-.4 0-.8 0-1.2.4-.4.4-.8 1.2-1.2 1.6-.4.4-.8.4-1.2.2-1.2-.6-2.4-1.4-3.4-2.6-.8-.8-1.4-1.8-2-3-.2-.4 0-.8.2-1.2.2-.2.4-.6.6-.8.2-.2.2-.4.4-.8 0-.4 0-.8-.2-1.2-.2-.4-1.2-2.2-1.6-3s-.8-.6-1.2-.6h-1c-.4 0-.8.2-1.2.6-.4.6-1.6 1.6-1.6 4s1.6 4.6 1.8 5c.2.4 3 4.8 7.2 6.8 4.2 2.2 4.8 1.6 5.6 1.6.8 0 2.8-1 3.2-2 .4-.8.4-1.6.2-2-.2-.4-.4-.6-.8-.8z" />
+                            </svg>
+                            Enquire
+                          </a>
 
-                <div className="mt-3">
-                  <a
-                    href={row.google_form_link || "#"}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="
+                          <div className="mt-3">
+                            <a
+                              href={row.google_form_link || "#"}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="
                       inline-flex items-center justify-center gap-2
                       bg-gradient-to-b from-[#5e009c] to-[#c401ff]
                       text-white px-4 py-2 rounded-lg
@@ -642,50 +685,87 @@ export default function LAMFPage() {
                       hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
                       transition-all duration-300 transform hover:-translate-y-0.5
                     "
-                  >
-                    <FileText className="w-4 h-4" /> Fill Enquiry
-                  </a>
-                </div>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
-
+                            >
+                              <FileText className="w-4 h-4" /> Fill Enquiry
+                            </a>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
 
           {/* HOW TO APPLY & KEY FACTORS */}
-<section className="max-w-[90%] mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 gap-10">
-  {/* Card 1 */}
-  <div className="backdrop-blur-xl border bg-[#e8feff3f]
-          shadow-[0_16px_38px_rgba(0,0,0,0.05)] border-[rgba(35,104,126,0.2)] rounded-3xl p-10 transition-all duration-500 hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)] hover:-translate-y-2">
-    <h3 className="text-2xl font-bold mb-6 text-[#0D3A27]">How to Apply for LAMF in 2025: Step-by-Step Guide</h3>
-    <ol className="list-decimal list-inside space-y-3 leading-relaxed text-[1.05rem] mb-6 text-gray-800">
-      <li><strong>Select Eligible Funds:</strong> Verify mutual funds are on the lender’s approved list (via CAMS / KFintech).</li>
-      <li><strong>Compare Lenders:</strong> Use our tables to shortlist based on rates, LTV, and fees.</li>
-      <li><strong>Apply Online:</strong> Submit application via lender portal or fintech platform.</li>
-      <li><strong>Complete KYC & Lien Marking:</strong> Provide PAN, Aadhaar, MF statement, bank proof; pledge via CAMS / KFintech.</li>
-      <li><strong>Disbursal:</strong> Funds credited in <strong>4–24 hours</strong> for digital applications.</li>
-    </ol>
-    <p className="text-sm text-gray-700"><strong>Tip:</strong> Digital-first lenders and fintechs typically deliver the fastest disbursal.</p>
-  </div>
+          <section className="max-w-[90%] mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 gap-10">
+            {/* Card 1 */}
+            <div
+              className="backdrop-blur-xl border bg-[#e8feff3f]
+          shadow-[0_16px_38px_rgba(0,0,0,0.05)] border-[rgba(35,104,126,0.2)] rounded-3xl p-10 transition-all duration-500 hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)] hover:-translate-y-2"
+            >
+              <h3 className="text-2xl font-bold mb-6 text-[#0D3A27]">
+                How to Apply for LAMF in 2025: Step-by-Step Guide
+              </h3>
+              <ol className="list-decimal list-inside space-y-3 leading-relaxed text-[1.05rem] mb-6 text-gray-800">
+                <li>
+                  <strong>Select Eligible Funds:</strong> Verify mutual funds
+                  are on the lender’s approved list (via CAMS / KFintech).
+                </li>
+                <li>
+                  <strong>Compare Lenders:</strong> Use our tables to shortlist
+                  based on rates, LTV, and fees.
+                </li>
+                <li>
+                  <strong>Apply Online:</strong> Submit application via lender
+                  portal or fintech platform.
+                </li>
+                <li>
+                  <strong>Complete KYC & Lien Marking:</strong> Provide PAN,
+                  Aadhaar, MF statement, bank proof; pledge via CAMS / KFintech.
+                </li>
+                <li>
+                  <strong>Disbursal:</strong> Funds credited in{" "}
+                  <strong>4–24 hours</strong> for digital applications.
+                </li>
+              </ol>
+              <p className="text-sm text-gray-700">
+                <strong>Tip:</strong> Digital-first lenders and fintechs
+                typically deliver the fastest disbursal.
+              </p>
+            </div>
 
-
-  {/* Card 3 */}
-  <div className="bg-[#C0CDCF]
-          shadow-[0_16px_38px_rgba(0,0,0,0.05) backdrop-blur-xl border border-[rgba(255,255,255,0.2)] rounded-3xl p-10 transition-all duration-500 hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)] hover:-translate-y-2">
-    <h3 className="text-2xl font-bold mb-6 text-black">Key Factors: Choosing the Best LAMF Provider</h3>
-    <ul className="list-disc list-inside space-y-3 text-black leading-relaxed text-[1.05rem]">
-      <li><strong>LTV Ratio:</strong> Up to <strong>90%</strong> for debt funds (example: some lenders); ~50–60% for equity-oriented funds.</li>
-      <li><strong>Approved Funds:</strong> Broader approved lists (e.g., Tata Capital, HDFC ~1000+ funds) give greater flexibility.</li>
-      <li><strong>Margin Call Period:</strong> Longer periods (e.g., 7 days with certain lenders) provide more time to regularize positions.</li>
-      <li><strong>Total Costs:</strong> Watch renewal & penal fees — low renewal fees (e.g., SBI ~₹550) reduce long-term expense.</li>
-    </ul>
-  </div>
-</section>
-
+            {/* Card 3 */}
+            <div
+              className="bg-[#C0CDCF]
+          shadow-[0_16px_38px_rgba(0,0,0,0.05) backdrop-blur-xl border border-[rgba(255,255,255,0.2)] rounded-3xl p-10 transition-all duration-500 hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)] hover:-translate-y-2"
+            >
+              <h3 className="text-2xl font-bold mb-6 text-black">
+                Key Factors: Choosing the Best LAMF Provider
+              </h3>
+              <ul className="list-disc list-inside space-y-3 text-black leading-relaxed text-[1.05rem]">
+                <li>
+                  <strong>LTV Ratio:</strong> Up to <strong>90%</strong> for
+                  debt funds (example: some lenders); ~50–60% for
+                  equity-oriented funds.
+                </li>
+                <li>
+                  <strong>Approved Funds:</strong> Broader approved lists (e.g.,
+                  Tata Capital, HDFC ~1000+ funds) give greater flexibility.
+                </li>
+                <li>
+                  <strong>Margin Call Period:</strong> Longer periods (e.g., 7
+                  days with certain lenders) provide more time to regularize
+                  positions.
+                </li>
+                <li>
+                  <strong>Total Costs:</strong> Watch renewal & penal fees — low
+                  renewal fees (e.g., SBI ~₹550) reduce long-term expense.
+                </li>
+              </ul>
+            </div>
+          </section>
 
           {/* ================ FAQ SECTION ================ */}
           <section className="relative max-w-[90%] mx-auto px-6 py-20">
@@ -757,27 +837,29 @@ export default function LAMFPage() {
 
           {/* ================ ENQUIRE NOW ================ */}
           <section className="max-w-[85%] mx-auto px-6 py-12 text-center">
-            <h2 className="text-3xl font-bold mb-4 text-[#0A0F2C]">Enquire Now</h2>
+            <h2 className="text-3xl font-bold mb-4 text-[#0A0F2C]">
+              Enquire Now
+            </h2>
             <p className="text-gray-700 mb-6 max-w-2xl mx-auto">
-              Fill in your details and we will get back to you with the best LAMF options.
+              Fill in your details and we will get back to you with the best
+              LAMF options.
             </p>
 
-           <button
-  onClick={() =>
-    window.open(
-      "https://wa.me/919930584020?text=Hi! I’m interested in learning more about LAMF options.",
-      "_blank"
-    )
-  }
-  className="
+            <button
+              onClick={() =>
+                window.open(
+                  "https://wa.me/919930584020?text=Hi! I’m interested in learning more about LAMF options.",
+                  "_blank"
+                )
+              }
+              className="
     bg-gradient-to-b from-[#1F5E3C] to-[#124434]
     text-white px-8 py-4 rounded-2xl shadow-xl
     hover:-translate-y-1 transition
   "
->
-  Contact Us
-</button>
-
+            >
+              Contact Us
+            </button>
           </section>
         </>
       )}
