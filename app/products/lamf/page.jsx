@@ -479,23 +479,25 @@ export default function LAMFPage() {
                           Enquire
                         </a>
 
-                        <div className="mt-3">
-                          <a
-                            href={row.google_form_link || "#"}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="
-                    inline-flex items-center justify-center gap-2
-                    bg-gradient-to-b from-[#5e009c] to-[#c401ff]
-                    text-white px-4 py-2 rounded-lg
-                    shadow-[0_10px_30px_rgba(0,0,0,0.20)]
-                    hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
-                    transition-all duration-300 transform hover:-translate-y-0.5
-                  "
-                          >
-                            <FileText className="w-4 h-4" /> Fill Enquiry
-                          </a>
-                        </div>
+                     <div className="mt-3">
+  <a
+    href={row.google_form_link || "#"}
+    target="_blank"
+    rel="noreferrer"
+    className="
+      inline-flex items-center justify-center gap-2
+      bg-gradient-to-b from-[#5e009c] to-[#c401ff]
+      text-white px-4 py-2 rounded-lg
+      shadow-[0_10px_30px_rgba(0,0,0,0.20)]
+      hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
+      transition-all duration-300 transform hover:-translate-y-0.5
+      whitespace-nowrap
+    "
+  >
+    <FileText className="w-4 h-4" /> Fill Enquiry
+  </a>
+</div>
+
                       </td>
                     </tr>
                   ))}
@@ -672,23 +674,25 @@ export default function LAMFPage() {
                             Enquire
                           </a>
 
-                          <div className="mt-3">
-                            <a
-                              href={row.google_form_link || "#"}
-                              target="_blank"
-                              rel="noreferrer"
-                              className="
-                      inline-flex items-center justify-center gap-2
-                      bg-gradient-to-b from-[#5e009c] to-[#c401ff]
-                      text-white px-4 py-2 rounded-lg
-                      shadow-[0_10px_30px_rgba(0,0,0,0.20)]
-                      hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
-                      transition-all duration-300 transform hover:-translate-y-0.5
-                    "
-                            >
-                              <FileText className="w-4 h-4" /> Fill Enquiry
-                            </a>
-                          </div>
+                         <div className="mt-3">
+  <a
+    href={row.google_form_link || "#"}
+    target="_blank"
+    rel="noreferrer"
+    className="
+      inline-flex items-center justify-center gap-2
+      bg-gradient-to-b from-[#5e009c] to-[#c401ff]
+      text-white px-4 py-2 rounded-lg
+      shadow-[0_10px_30px_rgba(0,0,0,0.20)]
+      hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
+      transition-all duration-300 transform hover:-translate-y-0.5
+      whitespace-nowrap
+    "
+  >
+    <FileText className="w-4 h-4" /> Fill Enquiry
+  </a>
+</div>
+
                         </td>
                       </tr>
                     ))}
