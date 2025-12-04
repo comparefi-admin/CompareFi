@@ -1,18 +1,14 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { fetchLAS, fetchLAMF, fetchMTF } from "../../lib/fetchData"; // Assuming this path is correct
+import { fetchLAS, fetchLAMF, fetchMTF } from "../../lib/fetchData";
 
-/**
- * Utility function to render a dash for null/empty values.
- * @param {any} value - The value to check.
- * @returns {string} - The value or '—'.
- */
-const renderValue = (value) => (value === null || value === undefined || value === "") ? "—" : value;
+/* Utility: Handle null/undefined values */
+const renderValue = (value) =>
+  value === null || value === undefined || value === "" ? "—" : value;
 
-// Define a consistent, professional accent color
-const ACCENT_COLOR = 'text-green-700'; 
-const ACCENT_BG = 'bg-green-600 hover:bg-green-700';
+const ACCENT_COLOR = "text-green-700";
+const ACCENT_BG = "bg-green-600 hover:bg-green-700";
 
 export default function CompareProductsTable({ productType }) {
   const [data, setData] = useState([]);
@@ -96,10 +92,7 @@ export default function CompareProductsTable({ productType }) {
   }
 
   return (
-    // Outer Container: Clean white card with subtle shadow
     <div className="bg-white rounded-xl shadow-lg shadow-gray-200/20 p-6 md:p-8 max-w-full transition-all duration-500 mx-auto border-2 border-[#2b7146] hover:shadow-[0_16px_38px_rgba(0,0,0,0.26),0_6px_18px_rgba(0,0,0,0.08)]">
-
-       
       {/* Title */}
       <div className="w-full flex justify-center mb-6">
         <h2 className="text-xl md:text-2xl font-bold text-gray-900 tracking-tight">
@@ -107,14 +100,12 @@ export default function CompareProductsTable({ productType }) {
         </h2>
       </div>
 
-      {/* Table Container: Added a stronger border and rounded corners */}
-      <div className="overflow-x-auto max-h-[600px] border border-gray-300 rounded-lg">
-        <table className="min-w-full divide-y divide-gray-200 text-sm sm:text-base">
-          
-          {/* HEADER */}
+      {/* Table (NO SCROLL ANYMORE) */}
+      <div className="border border-gray-300 rounded-lg overflow-hidden">
+        <table className="w-full table-fixed divide-y divide-gray-200 text-sm sm:text-base">
           <thead className="bg-gray-50 sticky top-0 z-10">
             <tr>
-              <th className="px-5 py-3 text-left font-semibold text-gray-700 uppercase tracking-wider w-1/5 min-w-[150px] border-r border-gray-200">
+              <th className="px-4 py-3 text-left font-semibold text-gray-700 uppercase tracking-wider border-r border-gray-200">
                 {productType.toLowerCase() === "mtf"
                   ? "Broker"
                   : "Financial Institution"}
@@ -122,43 +113,51 @@ export default function CompareProductsTable({ productType }) {
 
               {productType.toLowerCase() !== "mtf" && (
                 <>
-                  <th className="px-5 py-3 text-center font-semibold text-gray-700 uppercase tracking-wider border-r border-gray-200">1st Year Cost</th>
-                  <th className="px-5 py-3 text-center font-semibold text-gray-700 uppercase tracking-wider border-r border-gray-200">2nd Year Cost</th>
-                  <th className="px-5 py-3 text-center font-semibold text-gray-700 uppercase tracking-wider border-r border-gray-200">Min Interest</th>
-                  <th className="px-5 py-3 text-center font-semibold text-gray-700 uppercase tracking-wider">Max Interest</th>
+                  <th className="px-4 py-3 text-center font-semibold text-gray-700 uppercase tracking-wider border-r border-gray-200">
+                    1st Year Cost
+                  </th>
+                  <th className="px-4 py-3 text-center font-semibold text-gray-700 uppercase tracking-wider border-r border-gray-200">
+                    2nd Year Cost
+                  </th>
+                  <th className="px-4 py-3 text-center font-semibold text-gray-700 uppercase tracking-wider border-r border-gray-200">
+                    Min Interest
+                  </th>
+                  <th className="px-4 py-3 text-center font-semibold text-gray-700 uppercase tracking-wider">
+                    Max Interest
+                  </th>
                 </>
               )}
 
               {productType.toLowerCase() === "mtf" && (
                 <>
-                  <th className="px-5 py-3 text-left font-semibold text-gray-700 uppercase tracking-wider w-1/3 border-r border-gray-200">Cost Summary</th>
-                  <th className="px-5 py-3 text-left font-semibold text-gray-700 uppercase tracking-wider w-1/4 border-r border-gray-200">Margin Requirement</th>
+                  <th className="px-4 py-3 text-left font-semibold text-gray-700 uppercase tracking-wider border-r border-gray-200">
+                    Cost Summary
+                  </th>
+                  <th className="px-4 py-3 text-left font-semibold text-gray-700 uppercase tracking-wider border-r border-gray-200">
+                    Margin Requirement
+                  </th>
                 </>
               )}
 
-              <th className="px-5 py-3 text-center font-semibold text-gray-700 uppercase tracking-wider">
+              <th className="px-4 py-3 text-center font-semibold text-gray-700 uppercase tracking-wider">
                 Approved Assets
               </th>
             </tr>
           </thead>
 
-          {/* BODY */}
           <tbody className="bg-white divide-y divide-gray-100">
             {data.map((row) => (
               <tr
                 key={row.id}
-                // UPDATED HOVER EFFECT: More noticeable background, subtle lift, and active press state
                 className="hover:bg-gray-100 transition duration-150 ease-in-out cursor-pointer hover:shadow-md hover:z-20 transform hover:scale-[1.005] active:bg-gray-200"
               >
-                {/* Institution Name */}
-                <td className="px-5 py-4 whitespace-nowrap font-medium text-gray-800 border-r border-gray-100">
+                <td className="px-4 py-4 font-medium text-gray-800 border-r border-gray-100">
                   {renderValue(row.name)}
                 </td>
 
                 {productType.toLowerCase() !== "mtf" && (
                   <>
-                    {/* 1st Year Cost */}
-                    <td className="px-5 py-4 text-center border-r border-gray-100">
+                    <td className="px-4 py-4 text-center border-r border-gray-100">
                       {row.cost_first_year ? (
                         <div className="space-y-0.5">
                           <span className={`font-bold text-lg ${ACCENT_COLOR}`}>
@@ -173,8 +172,7 @@ export default function CompareProductsTable({ productType }) {
                       )}
                     </td>
 
-                    {/* 2nd Year Cost */}
-                    <td className="px-5 py-4 text-center border-r border-gray-100">
+                    <td className="px-4 py-4 text-center border-r border-gray-100">
                       {row.cost_second_year ? (
                         <div className="space-y-0.5">
                           <span className={`font-bold text-lg ${ACCENT_COLOR}`}>
@@ -189,41 +187,38 @@ export default function CompareProductsTable({ productType }) {
                       )}
                     </td>
 
-                    {/* Interest Min */}
-                    <td className="px-5 py-4 text-center font-bold text-lg text-green-600 border-r border-gray-100">
+                    <td className="px-4 py-4 text-center font-bold text-lg text-green-600 border-r border-gray-100">
                       {renderValue(row.interestMin)}
                     </td>
 
-                    {/* Interest Max */}
-                    <td className="px-5 py-4 text-center font-bold text-lg text-gray-600">
+                    <td className="px-4 py-4 text-center font-bold text-lg text-gray-600">
                       {renderValue(row.interestMax)}
                     </td>
                   </>
                 )}
 
-                {/* MTF Fields */}
                 {productType.toLowerCase() === "mtf" && (
                   <>
-                    {/* Cost Summary */}
-                    <td className="px-5 py-4 text-sm text-gray-600 border-r border-gray-100">
+                    <td className="px-4 py-4 text-sm text-gray-600 border-r border-gray-100">
                       {row.CostSummary
                         ? Object.entries(row.CostSummary).map(([k, v], i) => (
-                              <div key={i} className="font-regular">
-                                <span className="text-gray-900 font-semibold">{k}:</span> {renderValue(v)}
-                              </div>
+                            <div key={i}>
+                              <span className="text-gray-900 font-semibold">
+                                {k}:
+                              </span>{" "}
+                              {renderValue(v)}
+                            </div>
                           ))
                         : "—"}
                     </td>
 
-                    {/* Margin Requirement */}
-                    <td className="px-5 py-4 text-sm text-gray-600 border-r border-gray-100">
-                      <span className="font-medium text-gray-900">{renderValue(row.marginRequirement)}</span>
+                    <td className="px-4 py-4 text-sm text-gray-600 border-r border-gray-100">
+                      {renderValue(row.marginRequirement)}
                     </td>
                   </>
                 )}
 
-                {/* Approved Stocks/Funds */}
-                <td className="px-5 py-4 text-center font-medium text-gray-700">
+                <td className="px-4 py-4 text-center font-medium text-gray-700">
                   {renderValue(row.approvedStocks)}
                 </td>
               </tr>
@@ -232,7 +227,7 @@ export default function CompareProductsTable({ productType }) {
         </table>
       </div>
 
-      {/* Read More Button: Simple, professional fill */}
+      {/* Button */}
       <div className="w-full flex justify-center mt-8">
         <a
           href={`/products/${productType.toLowerCase()}`}
