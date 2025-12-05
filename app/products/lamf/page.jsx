@@ -553,15 +553,18 @@ export default function LAMFPage() {
               <div className="overflow-x-auto">
                 <table className="w-full border-collapse text-base text-gray-900 table-highlight">
                   <thead>
-                    <tr className="text-left font-semibold border-b border-white/30">
-                      {/* First 3 columns: gradient identical to LAS */}
-                      <th className="px-5 py-4 bg-gradient-to-br from-[#FBFCFD] to-[#EFF7F1] border border-gray-300 rounded-md">
+                    <tr className="text-left font-semibold border-b border-white/30 bg-[#124434] text-[#FBFCFD]">
+
+                      {/* First 3 columns */}
+                      <th className="px-5 py-4 border border-gray-300 rounded-md">
                         Institution
                       </th>
-                      <th className="px-5 py-4 bg-gradient-to-br from-[#FBFCFD] to-[#EFF7F1] border border-gray-300 text-[#1F5E3C] rounded-md">
+
+                      <th className="px-5 py-4 border border-gray-300 rounded-md">
                         1st Year
                       </th>
-                      <th className="px-5 py-4 bg-gradient-to-br from-[#FBFCFD] to-[#EFF7F1] border border-gray-300 text-[#124434] rounded-md">
+
+                      <th className="px-5 py-4 border border-gray-300 rounded-md">
                         2nd Year
                       </th>
 
@@ -569,17 +572,19 @@ export default function LAMFPage() {
                       {rightTableColumns[activeTableCategory].map((col) => (
                         <th
                           key={col.key}
-                          className="px-5 py-4 border border-gray-300 bg-white/60"
+                          className="px-5 py-4 border border-gray-300 rounded-md"
                         >
                           {col.label}
                         </th>
                       ))}
 
-                      <th className="px-5 py-4 border border-gray-300 bg-white/60">
+                      <th className="px-5 py-4 border border-gray-300 rounded-md">
                         Contact
                       </th>
+
                     </tr>
                   </thead>
+
 
                   <tbody>
                     {sortedCostData.map((row, index) => (

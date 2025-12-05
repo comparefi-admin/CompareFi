@@ -458,7 +458,7 @@ export default function HomePage() {
                   <h4 className="text-2xl font-semibold text-[#0A0F2C]">
                     <BlurText
                       text={p.title}
-                      delay={50}
+                      delay={10}
                       animateBy="words"
                       direction="top"
                       onAnimationComplete={handleAnimationComplete}
@@ -468,7 +468,7 @@ export default function HomePage() {
 
                   <BlurText
                     text={p.blurb}
-                    delay={150}
+                    delay={10}
                     animateBy="words"
                     direction="bottom"
                     onAnimationComplete={handleAnimationComplete}
@@ -480,7 +480,7 @@ export default function HomePage() {
                       <li key={i}>
                         <BlurText
                           text={`• ${b}`}
-                          delay={50 + i * 5}
+                          delay={10 + i * 2}
                           animateBy="words"
                           direction="bottom"
                           onAnimationComplete={handleAnimationComplete}
