@@ -184,7 +184,7 @@ export default function HomePage() {
 
 <section
   id="hero"
-  className="relative flex flex-col items-center justify-center min-h-[100vh] overflow-visible text-center text-white pointer-events-none"
+   className="relative flex flex-col items-center justify-center min-h-[100vh] overflow-visible text-center text-white"
   style={{
     backgroundImage: `url("/images/grid-new.png"), linear-gradient(to bottom, #0B1120 0%, #0E1A2B 45%, #173B38 75%, #EFF3F6 100%)`,
     backgroundRepeat: "no-repeat, no-repeat",
@@ -260,45 +260,56 @@ export default function HomePage() {
   </motion.div>
 
   {/* Title */}
-  <motion.h1
-    initial={{ opacity: 0, y: 30 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.8 }}
-    className="text-6xl sm:text-6xl md:text-7xl  leading-tight tracking-tight text-white max-w-5xl relative z-10"
-  >
-    Take Control of Your <span className="text-[#B1ED67]">Finances</span> with Confidence
-  </motion.h1>
+<motion.h1
+  initial={{ opacity: 0, y: 30 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.8 }}
+  className="text-6xl sm:text-6xl md:text-7xl leading-tight tracking-tight text-white max-w-5xl relative z-10"
+>
+  Compare Right → <span className="text-[#B1ED67]">Choose Right.</span>
+</motion.h1>
 
-  {/* Subtext */}
-  <motion.p
-    initial={{ opacity: 0, y: 30 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ delay: 0.3, duration: 0.7 }}
-    className="text-slate-300 mt-6 text-lg max-w-xl relative z-10"
-  >
-    All-in-one platform to manage your savings, investments, credit, and more — backed by expert advice and cutting-edge AI tools.
-  </motion.p>
+{/* Subtext */}
+<motion.p
+  initial={{ opacity: 0, y: 30 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ delay: 0.3, duration: 0.7 }}
+  className="text-slate-300 mt-6 text-lg max-w-xl relative z-10"
+>
+  No hidden charges. No jargon. No biased recommendations.
+  <br />
+  Just clear, side-by-side comparisons of financial products so you make confident decisions every time.
+</motion.p>
+
 
   {/* CTA */}
   <motion.div
-    initial={{ opacity: 0, y: 30 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ delay: 0.5, duration: 0.7 }}
-    className="mt-10 relative z-10"
+  initial={{ opacity: 0, y: 30 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ delay: 0.5, duration: 0.7 }}
+  className="mt-10 relative z-10"
+>
+  <Button
+    size="lg"
+    onClick={() => {
+      const el = document.getElementById("featured");
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+        window.history.pushState(null, "", "/#featured"); // Update URL same as clicking Products
+      }
+    }}
+    className="bg-[#B1ED67] hover:bg-[#9CDA59] text-black font-semibold px-8 py-4 rounded-full shadow-lg hover:shadow-[#B1ED67]/30 transition-all duration-300"
   >
-    <Button
-      size="lg"
-      className="bg-[#B1ED67] hover:bg-[#9CDA59] text-black font-semibold px-8 py-4 rounded-full shadow-lg hover:shadow-[#B1ED67]/30 transition-all duration-300"
-    >
-      Get Started →
-    </Button>
-  </motion.div>
+    Get Started →
+  </Button>
+</motion.div>
+
 
 <motion.div
   initial={{ opacity: 0, y: 60, scale: 0.95 }}
   animate={{ opacity: 1, y: 0, scale: 1 }}
   transition={{ delay: 0.8, duration: 0.8 }}
-  className="absolute bottom-[-18rem] inset-x-0 flex justify-center z-20 pointer-events-none"
+  className="absolute bottom-[-18rem] inset-x-0 flex justify-center z-20"
 >
   <div
     className="relative flex justify-center w-full max-w-[1200px] pointer-events-none"
@@ -354,9 +365,38 @@ export default function HomePage() {
 
   <div className="flex items-center space-x-4">
     {/* Icon on the left */}
-    <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-[#B1ED67]/20 rounded-full group-hover:bg-[#B1ED67]/30 transition-colors">
-      <DollarSign className="w-6 h-6 text-[#B1ED67] group-hover:text-white" />
-    </div>
+ <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-[#B1ED67]/20 rounded-full group-hover:bg-[#B1ED67]/30 transition-colors">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 48 48"
+    className="w-7 h-7 text-[#B1ED67] group-hover:text-white transition-colors"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="3"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    {/* Hand */}
+    <path d="M11 29c-2 7 4 13 11 13h8c5 0 9-4 9-8v-4" />
+
+    {/* Document */}
+    <rect x="18" y="6" width="15" height="18" rx="2" />
+    <path d="M26 6v4h5" />
+
+    {/* Bar chart */}
+    <line x1="21" y1="21" x2="21" y2="15" />
+    <line x1="24" y1="21" x2="24" y2="13" />
+    <line x1="27" y1="21" x2="27" y2="17" />
+
+    {/* Circular arrow with Rupee */}
+    <path d="M20 36a7 7 0 1 1 6 7" />
+    <polyline points="30 39 26 39 26 35" />
+    <path d="M23 35h4M23 32h4" />
+  </svg>
+</div>
+
+
+
     {/* Text */}
     <div>
       <p className="text1-title text-xl font-semibold text-[#FFFFFF]  transition-colors">LAS</p>
@@ -570,65 +610,69 @@ export default function HomePage() {
 
 
 
-          <section className="w-full flex justify-center items-center py-20 px-4">
-            <div className="w-[85%] rounded-3xl px-6 sm:px-16 py-20 relative overflow-hidden bg-[#124434]">
-              {/* GRID BACKGROUND */}
-                 
-              <div
-                className="absolute inset-0 z-0"
-                style={{
-                  backgroundImage:
-                    "linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px)",
-                  backgroundSize: "80px 80px", // grid spacing // 👇 MODIFIED: Mask Image for stronger horizontal fading
-                  maskImage:
-                    "linear-gradient(to bottom, white 0%, white 70%, transparent 100%), linear-gradient(to right, transparent 0%, white 25%, white 75%, transparent 100%)",
-                  maskComposite: "intersect",
-                  WebkitMaskImage:
-                    "-webkit-linear-gradient(top, white 0%, white 70%, transparent 100%), -webkit-linear-gradient(left, transparent 0%, white 25%, white 75%, transparent 100%)",
-                  WebkitMaskComposite: "source-in",
-                }}
-              />
-              {/* DARK OVERLAY (soft, lets grid show through) */}
-              <div className="absolute inset-0 bg-[#124434]/40 z-0"></div>
-              {/* CTA CONTENT */}
-              <div className="relative z-10 text-center flex flex-col items-center gap-6">
-                <h2 className="text-3xl sm:text-5xl font-bold text-white leading-tight">
-                  Ready to Take the Next Step in
-                  <br />
-                  Your Financial Journey?
-                </h2>
+       <section className="w-full flex justify-center items-center py-20 px-4">
+  <div className="w-[85%] rounded-3xl px-6 sm:px-16 py-20 relative overflow-hidden bg-[#124434]">
+    
+    {/* GRID BACKGROUND */}
+    <div
+      className="absolute inset-0 z-0"
+      style={{
+        backgroundImage:
+          "linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px)",
+        backgroundSize: "80px 80px",
+        maskImage:
+          "linear-gradient(to bottom, white 0%, white 70%, transparent 100%), linear-gradient(to right, transparent 0%, white 25%, white 75%, transparent 100%)",
+        maskComposite: "intersect",
+        WebkitMaskImage:
+          "-webkit-linear-gradient(top, white 0%, white 70%, transparent 100%), -webkit-linear-gradient(left, transparent 0%, white 25%, white 75%, transparent 100%)",
+        WebkitMaskComposite: "source-in",
+      }}
+    />
 
-                <p className="text-gray-200 text-lg max-w-2xl">
-                  Join thousands who trust FinGrow to manage
-                  <br />
-                  and grow their finances.
-                </p>
+    {/* DARK OVERLAY */}
+    <div className="absolute inset-0 bg-[#124434]/40 z-0"></div>
 
-                <a
-                  href="#"
-                  className="mt-4 inline-flex items-center gap-2 bg-[#B5FF4A] hover:bg-[#a4ff2e] 
-        text-[#0d1c11] font-semibold px-8 py-4 rounded-full transition-all duration-300 
+    {/* CTA CONTENT */}
+    <div className="relative z-10 text-center flex flex-col items-center gap-6">
+      <h2 className="text-3xl sm:text-5xl font-bold text-white leading-tight">
+        Still unsure which financial product is
+        <br />
+        right for you?
+      </h2>
+
+      <p className="text-gray-200 text-lg max-w-2xl">
+        Talk to us — we will help you compare options
+        <br />
+        and choose what saves you the most.
+      </p>
+
+      <button
+        onClick={() => {
+          window.open(
+            "https://wa.me/919930584020?text=Hi! I would like to know more about your financial products and get help choosing the best option.",
+            "_blank"
+          );
+        }}
+        className="mt-4 inline-flex items-center gap-2 bg-[#B5FF4A] hover:bg-[#a4ff2e]
+        text-[#0d1c11] font-semibold px-8 py-4 rounded-full transition-all duration-300
         shadow-lg"
-                >
-                  Create My Free Account
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="w-5 h-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M13 7l5 5m0 0l-5 5m5-5H6"
-                    />
-                  </svg>
-                </a>
-              </div>
-            </div>
-          </section>
+      >
+        Contact Us
+
+        {/* WhatsApp Icon */}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="w-6 h-6"
+          viewBox="0 0 32 32"
+          fill="currentColor"
+        >
+          <path d="M16 3C9.37 3 4 8.37 4 15c0 2.64.86 5.09 2.3 7.06L4 29l7.18-2.24A11.9 11.9 0 0016 27c6.63 0 12-5.37 12-12S22.63 3 16 3zm6.48 17.31c-.27.76-1.55 1.49-2.15 1.59-.57.1-1.28.14-2.07-.13-.48-.16-1.1-.35-1.88-.69-3.31-1.43-5.46-4.66-5.62-4.88-.16-.22-1.34-1.78-1.34-3.4 0-1.62.85-2.42 1.15-2.74.3-.32.65-.4.87-.4.22 0 .44.01.63.01.2 0 .47-.07.74.57.27.64.92 2.23 1 2.39.08.16.13.35.02.57-.11.22-.17.35-.34.54-.17.19-.36.42-.52.56-.17.17-.35.35-.15.69.19.33.84 1.39 1.8 2.26 1.24 1.1 2.27 1.45 2.61 1.61.34.16.54.14.74-.08.2-.22.85-.98 1.08-1.32.22-.34.46-.28.77-.17.32.11 2.03.96 2.38 1.14.35.18.58.26.67.4.08.14.08.81-.19 1.58z" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>
+
 
 
 

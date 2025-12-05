@@ -87,31 +87,32 @@ export default function DisplayCards() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   const cards = [
-    {
-      title: "Loan Against Shares",
-      data: [
-        { label: "Interest Range", value: "8–20% p.a." },
-        { label: "Tenure", value: "Up to 36 months" },
-        { label: "Disbursal Time", value: "1–2 Days" },
-      ],
-    },
-    {
-      title: "Loan Against Mutual Funds",
-      data: [
-        { label: "Interest Range", value: "9–18% p.a." },
-        { label: "Tenure", value: "Up to 24 months" },
-        { label: "Disbursal Time", value: "1–3 Days" },
-      ],
-    },
-    {
-      title: "Loan Against Bonds",
-      data: [
-        { label: "Interest Range", value: "10–15% p.a." },
-        { label: "Tenure", value: "Up to 48 months" },
-        { label: "Disbursal Time", value: "2–4 Days" },
-      ],
-    },
-  ];
+  {
+    title: "Margin Trading Facility (MTF)",
+    data: [
+      { label: "Interest Range", value: "7–19% p.a." },
+      { label: "Type of Collateral", value: "Cash + Stocks" },
+      { label: "Holding Period", value: "365 Days / Unlimited" },
+    ],
+  },
+  {
+    title: "Loan Against Mutual ",
+    data: [
+      { label: "Interest Range", value: "8–20% p.a." },
+      { label: "LTV Maintenance", value: "20–80%" },
+      { label: "Tenure", value: "12–36 Months" },
+    ],
+  },
+  {
+    title: "Loan Against Securities (LAS)",
+    data: [
+      { label: "Interest Range", value: "8–20% p.a." },
+      { label: "LTV Maintenance", value: "45–80%" },
+      { label: "Tenure", value: "12–36 Months" },
+    ],
+  },
+];
+
 
   // Layout positions
   const cardLayoutClasses = [
