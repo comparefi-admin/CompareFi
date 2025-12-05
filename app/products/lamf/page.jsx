@@ -320,35 +320,59 @@ export default function LAMFPage() {
   "
             >
               <table className="w-full border-collapse text-gray-800 text-[16px] leading-[1.35] table-highlight">
-                <thead className="bg-white/80 border-b border-gray-300">
-                  <tr>
-                    {[
-                      "Institution",
-                      "1st Year (₹1L LAMF)",
-                      "2nd Year (₹1L LAMF)",
-                      "Approved Funds",
-                      "Tenure",
-                      "Min–Max Loan (Debt/Equity)",
-                      "Interest Rate (Min/Max/Median)",
-                      "Margin Period",
-                      "Contact",
-                    ].map((h, i) => (
-                      <th
-                        key={i}
-                        className={`
-                px-5 py-3 font-semibold border border-gray-300 uppercase text-sm tracking-wide
-                ${
-                  i < 3
-                    ? "bg-gradient-to-br from-[#FBFCFD] to-[#EFF7F1]"
-                    : "bg-white/70"
-                }
-              `}
-                      >
-                        {h}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
+              <thead>
+  <tr className="text-left font-semibold border-b border-gray-300">
+
+    {/* Institution */}
+    <th
+      style={{ background: "#124434", color: "#FFFFFF" }}
+      className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+    >
+      Institution
+    </th>
+
+    {/* 1st Year */}
+    <th
+      style={{ background: "#124434", color: "#FFFFFF" }}
+      className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+    >
+      1st Year
+    </th>
+
+    {/* 2nd Year */}
+    <th
+      style={{ background: "#124434", color: "#FFFFFF" }}
+      className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+    >
+      2nd Year
+    </th>
+
+    {/* Dynamic columns */}
+    {rightTableColumns[activeTableCategory].map((col) => (
+      <th
+        key={col.key}
+        style={{ background: "#124434", color: "#FFFFFF" }}
+        className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+      >
+        {col.label}
+      </th>
+    ))}
+
+    {/* Contact */}
+    <th
+      style={{ background: "#124434", color: "#FFFFFF" }}
+      className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+    >
+      Contact
+    </th>
+
+  </tr>
+</thead>
+
+
+
+
+
 
                 <tbody>
                   {data.map((row, index) => (
@@ -552,38 +576,59 @@ export default function LAMFPage() {
               {/* TABLE */}
               <div className="overflow-x-auto">
                 <table className="w-full border-collapse text-base text-gray-900 table-highlight">
-                  <thead>
-                    <tr className="text-left font-semibold border-b border-white/30 bg-[#124434] text-[#FBFCFD]">
+             <thead>
+  <tr className="text-left font-semibold border-b border-gray-300">
 
-                      {/* First 3 columns */}
-                      <th className="px-5 py-4 border border-gray-300 rounded-md">
-                        Institution
-                      </th>
+    {/* Institution */}
+    <th
+      style={{ background: "#124434", color: "#FFFFFF" }}
+      className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+    >
+      Institution
+    </th>
 
-                      <th className="px-5 py-4 border border-gray-300 rounded-md">
-                        1st Year
-                      </th>
+    {/* 1st Year */}
+    <th
+      style={{ background: "#124434", color: "#FFFFFF" }}
+      className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+    >
+      1st Year
+    </th>
 
-                      <th className="px-5 py-4 border border-gray-300 rounded-md">
-                        2nd Year
-                      </th>
+    {/* 2nd Year */}
+    <th
+      style={{ background: "#124434", color: "#FFFFFF" }}
+      className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+    >
+      2nd Year
+    </th>
 
-                      {/* Dynamic columns */}
-                      {rightTableColumns[activeTableCategory].map((col) => (
-                        <th
-                          key={col.key}
-                          className="px-5 py-4 border border-gray-300 rounded-md"
-                        >
-                          {col.label}
-                        </th>
-                      ))}
+    {/* Dynamic columns */}
+    {rightTableColumns[activeTableCategory].map((col) => (
+      <th
+        key={col.key}
+        style={{ background: "#124434", color: "#FFFFFF" }}
+        className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+      >
+        {col.label}
+      </th>
+    ))}
 
-                      <th className="px-5 py-4 border border-gray-300 rounded-md">
-                        Contact
-                      </th>
+    {/* Contact */}
+    <th
+      style={{ background: "#124434", color: "#FFFFFF" }}
+      className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+    >
+      Contact
+    </th>
 
-                    </tr>
-                  </thead>
+  </tr>
+</thead>
+
+
+
+
+
 
 
                   <tbody>
