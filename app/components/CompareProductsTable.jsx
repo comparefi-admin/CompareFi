@@ -95,7 +95,7 @@ export default function CompareProductsTable({ productType }) {
     <div className="bg-white rounded-xl shadow-lg shadow-gray-200/20 p-6 md:p-8 max-w-full transition-all duration-500 mx-auto border-2 border-[#2b7146] hover:shadow-[0_16px_38px_rgba(0,0,0,0.26),0_6px_18px_rgba(0,0,0,0.08)]">
       {/* Title */}
       <div className="w-full flex justify-center mb-6">
-        <h2 className="text-xl md:text-2xl font-bold text-gray-900 tracking-tight">
+        <h2 className="text-lg md:text-xl font-bold text-gray-900 tracking-tight">
           {productType.toUpperCase()} Comparison
         </h2>
       </div>
@@ -103,47 +103,81 @@ export default function CompareProductsTable({ productType }) {
       {/* Table (NO SCROLL ANYMORE) */}
       <div className="border border-gray-300 rounded-lg overflow-hidden">
         <table className="w-full table-fixed divide-y divide-gray-200 text-sm sm:text-base">
-          <thead className="bg-gray-50 sticky top-0 z-10">
-            <tr>
-              <th className="px-4 py-3 text-left font-semibold text-gray-700 uppercase tracking-wider border-r border-gray-200">
-                {productType.toLowerCase() === "mtf"
-                  ? "Broker"
-                  : "Financial Institution"}
-              </th>
+          <thead>
+  <tr>
 
-              {productType.toLowerCase() !== "mtf" && (
-                <>
-                  <th className="px-4 py-3 text-center font-semibold text-gray-700 uppercase tracking-wider border-r border-gray-200">
-                    1st Year Cost
-                  </th>
-                  <th className="px-4 py-3 text-center font-semibold text-gray-700 uppercase tracking-wider border-r border-gray-200">
-                    2nd Year Cost
-                  </th>
-                  <th className="px-4 py-3 text-center font-semibold text-gray-700 uppercase tracking-wider border-r border-gray-200">
-                    Min Interest
-                  </th>
-                  <th className="px-4 py-3 text-center font-semibold text-gray-700 uppercase tracking-wider">
-                    Max Interest
-                  </th>
-                </>
-              )}
+    {/* Column 1 */}
+    <th
+      style={{ background: "#124434", color: "#FFFFFF" }}
+      className="px-4 py-3 text-left font-semibold text-sm uppercase tracking-wider border-r border-gray-200"
+    >
+      {productType.toLowerCase() === "mtf"
+        ? "Broker"
+        : "Financial Institution"}
+    </th>
 
-              {productType.toLowerCase() === "mtf" && (
-                <>
-                  <th className="px-4 py-3 text-left font-semibold text-gray-700 uppercase tracking-wider border-r border-gray-200">
-                    Cost Summary
-                  </th>
-                  <th className="px-4 py-3 text-left font-semibold text-gray-700 uppercase tracking-wider border-r border-gray-200">
-                    Margin Requirement
-                  </th>
-                </>
-              )}
+    {/* Non-MTF Columns */}
+    {productType.toLowerCase() !== "mtf" && (
+      <>
+        <th
+          style={{ background: "#124434", color: "#FFFFFF" }}
+          className="px-4 py-3 text-sm text-center font-semibold uppercase tracking-wider border-r border-gray-200"
+        >
+          1st Year Cost
+        </th>
 
-              <th className="px-4 py-3 text-center font-semibold text-gray-700 uppercase tracking-wider">
-                Approved Assets
-              </th>
-            </tr>
-          </thead>
+        <th
+          style={{ background: "#124434", color: "#FFFFFF" }}
+          className="px-4 py-3 text-sm text-center font-semibold uppercase tracking-wider border-r border-gray-200"
+        >
+          2nd Year Cost
+        </th>
+
+        <th
+          style={{ background: "#124434", color: "#FFFFFF" }}
+          className="px-4 py-3 text-sm text-center font-semibold uppercase tracking-wider border-r border-gray-200"
+        >
+          Min Interest
+        </th>
+
+        <th
+          style={{ background: "#124434", color: "#FFFFFF" }}
+          className="px-4 py-3 text-sm text-center font-semibold uppercase tracking-wider"
+        >
+          Max Interest
+        </th>
+      </>
+    )}
+
+    {/* MTF Columns */}
+    {productType.toLowerCase() === "mtf" && (
+      <>
+        <th
+          style={{ background: "#124434", color: "#FFFFFF" }}
+          className="px-4 py-3 text-left font-semibold uppercase tracking-wider border-r border-gray-200"
+        >
+          Cost Summary
+        </th>
+        <th
+          style={{ background: "#124434", color: "#FFFFFF" }}
+          className="px-4 py-3 text-left font-semibold uppercase tracking-wider border-r border-gray-200"
+        >
+          Margin Requirement
+        </th>
+      </>
+    )}
+
+    {/* Approved Assets */}
+    <th
+      style={{ background: "#124434", color: "#FFFFFF" }}
+      className="px-4 py-3 text-center font-semibold uppercase tracking-wider text-sm"
+    >
+      Approved Assets
+    </th>
+
+  </tr>
+</thead>
+
 
           <tbody className="bg-white divide-y divide-gray-100">
             {data.map((row) => (
