@@ -3,269 +3,277 @@
 import React, { useEffect, useState } from "react";
 import { fetchLAS, fetchLAMF, fetchMTF } from "../../lib/fetchData";
 
-/* Utility: Handle null/undefined values */
 const renderValue = (value) =>
   value === null || value === undefined || value === "" ? "—" : value;
-
-const ACCENT_COLOR = "text-green-700";
-const ACCENT_BG = "bg-green-600 hover:bg-green-700";
 
 export default function CompareProductsTable({ productType }) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const type = productType.toLowerCase();
+
   useEffect(() => {
     const load = async () => {
       setLoading(true);
       try {
-        let rows;
-
-        if (productType.toLowerCase() === "las") rows = await fetchLAS();
-        else if (productType.toLowerCase() === "lamf") rows = await fetchLAMF();
-        else rows = await fetchMTF();
+        let rows =
+          type === "las"
+            ? await fetchLAS()
+            : type === "lamf"
+            ? await fetchLAMF()
+            : await fetchMTF();
 
         const clean = rows.map((d) => {
-          if (productType.toLowerCase() === "mtf") {
+          
+          if (type === "mtf") {
             return {
               id: d.id,
-              name: d.broker_name || "—",
-              CostSummary: d.cost_summary || null,
-              marginRequirement: d.margin_requirement || "—",
-              approvedStocks: d.approved_stocks || "—",
+              name: d.broker_name ?? "—",
+              cost_summary: d.cost_summary ?? null,
+              margin_requirement: d.margin_requirement ?? "—",
+              approved_assets: d.approved_stocks ?? "—",
+            };
+          }
+
+          if (type === "lamf") {
+            return {
+              id: d.id,
+              name: d.institution_name ?? "—",
+              cost_first_year: d.cost_first_year ?? null,
+              cost_second_year: d.cost_second_year ?? null,
+              approved_assets: d.approved_funds ?? "—",
+              regularization_period: d.regularization_period ?? "—",
+              loan_debt: d.loan_debt ?? null,
+              loan_equity: d.loan_equity ?? null,
             };
           }
 
           return {
             id: d.id,
-            name:
-              d["institution_name"] ||
-              d["Financial Institution"] ||
-              d["Institution Name"] ||
-              d["Name"] ||
-              "—",
-
-            approvedStocks:
-              d["approved_funds"] ||
-              d["approved_shares"] ||
-              d["Approved List of Shares"] ||
-              d["Approved Stocks"] ||
-              d["Approved List of MF"] ||
-              "—",
-
-            cost_first_year: d["cost_first_year"] ?? null,
-            cost_second_year: d["cost_second_year"] ?? null,
-
-            interestMin: d?.interest_rate?.min ?? "—",
-            interestMax: d?.interest_rate?.max ?? "—",
+            name: d.institution_name ?? "—",
+            cost_first_year: d.cost_first_year ?? null,
+            cost_second_year: d.cost_second_year ?? null,
+            approved_assets: d.approved_shares ?? "—",
+            regularization_period: d.regularization_period ?? "—",
+            ltv: d.ltv ?? null,
           };
         });
 
+        const filterNames =
+          type === "las"
+            ? ["mirae asset", "zerodha", "kotak", "bajaj"]
+            : type === "lamf"
+            ? ["bank of baroda", "mirae asset", "kotak", "sbi"]
+            : ["kotak", "kotak - trade free youth plan", "hdfc sky", "dhan"];
+
         const filtered = clean.filter((r) =>
-          [
-            "bajaj",
-            "sbi",
-            "mirae asset",
-            "kotak - trade free youth plan",
-            "hdfc sky",
-            "dhan",
-          ].includes((r.name || "").trim().toLowerCase())
+          filterNames.includes((r.name || "").trim().toLowerCase())
         );
 
         setData(filtered);
       } catch (err) {
-        console.error("compare table supabase error:", err);
+        console.error("Comparison Table Error:", err);
       } finally {
         setLoading(false);
       }
     };
 
     load();
-  }, [productType]);
+  }, [type]);
 
   if (loading) {
     return (
-      <div className="p-8 text-center text-gray-700 bg-white shadow-lg rounded-xl border border-gray-100">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-500 mx-auto mb-3"></div>
-        <p>Loading comparison data...</p>
+      <div className="p-6 text-center text-gray-700 bg-white rounded-xl shadow">
+        Loading...
       </div>
     );
   }
 
   return (
-    <div className="bg-white rounded-xl shadow-lg shadow-gray-200/20 p-6 md:p-8 max-w-full transition-all duration-500 mx-auto border-2 border-[#2b7146] hover:shadow-[0_16px_38px_rgba(0,0,0,0.26),0_6px_18px_rgba(0,0,0,0.08)]">
-      {/* Title */}
-      <div className="w-full flex justify-center mb-6">
-        <h2 className="text-lg md:text-xl font-bold text-gray-900 tracking-tight">
+    <div className="bg-white rounded-xl shadow-lg p-6 md:p-8 mx-auto border-2 border-[#2b7146]">
+      <div className="text-center mb-6">
+        <h2 className="text-xl font-bold text-gray-900">
           {productType.toUpperCase()} Comparison
         </h2>
       </div>
 
-      {/* Table (NO SCROLL ANYMORE) */}
-      <div className="border border-gray-300 rounded-lg overflow-hidden">
-        <table className="w-full table-fixed divide-y divide-gray-200 text-sm sm:text-base">
+      <div className="border border-gray-300 rounded-lg overflow-x-auto">
+        <table className="w-full divide-y divide-gray-200 text-sm text-center">
           <thead>
-  <tr>
-
-    {/* Column 1 */}
-    <th
-      style={{ background: "#124434", color: "#FFFFFF" }}
-      className="px-4 py-3 text-left font-semibold text-sm uppercase tracking-wider border-r border-gray-200"
-    >
-      {productType.toLowerCase() === "mtf"
-        ? "Broker"
-        : "Financial Institution"}
-    </th>
-
-    {/* Non-MTF Columns */}
-    {productType.toLowerCase() !== "mtf" && (
-      <>
-        <th
-          style={{ background: "#124434", color: "#FFFFFF" }}
-          className="px-4 py-3 text-sm text-center font-semibold uppercase tracking-wider border-r border-gray-200"
-        >
-          1st Year Cost
-        </th>
-
-        <th
-          style={{ background: "#124434", color: "#FFFFFF" }}
-          className="px-4 py-3 text-sm text-center font-semibold uppercase tracking-wider border-r border-gray-200"
-        >
-          2nd Year Cost
-        </th>
-
-        <th
-          style={{ background: "#124434", color: "#FFFFFF" }}
-          className="px-4 py-3 text-sm text-center font-semibold uppercase tracking-wider border-r border-gray-200"
-        >
-          Min Interest
-        </th>
-
-        <th
-          style={{ background: "#124434", color: "#FFFFFF" }}
-          className="px-4 py-3 text-sm text-center font-semibold uppercase tracking-wider"
-        >
-          Max Interest
-        </th>
-      </>
-    )}
-
-    {/* MTF Columns */}
-    {productType.toLowerCase() === "mtf" && (
-      <>
-        <th
-          style={{ background: "#124434", color: "#FFFFFF" }}
-          className="px-4 py-3 text-left font-semibold uppercase tracking-wider border-r border-gray-200"
-        >
-          Cost Summary
-        </th>
-        <th
-          style={{ background: "#124434", color: "#FFFFFF" }}
-          className="px-4 py-3 text-left font-semibold uppercase tracking-wider border-r border-gray-200"
-        >
-          Margin Requirement
-        </th>
-      </>
-    )}
-
-    {/* Approved Assets */}
-    <th
-      style={{ background: "#124434", color: "#FFFFFF" }}
-      className="px-4 py-3 text-center font-semibold uppercase tracking-wider text-sm"
-    >
-      Approved Assets
-    </th>
-
-  </tr>
-</thead>
-
-
-          <tbody className="bg-white divide-y divide-gray-100">
-            {data.map((row) => (
-              <tr
-                key={row.id}
-                className="hover:bg-gray-100 transition duration-150 ease-in-out cursor-pointer hover:shadow-md hover:z-20 transform hover:scale-[1.005] active:bg-gray-200"
+            <tr>
+              <th
+                style={{ background: "#124434", color: "#FFF" }}
+                className="px-4 py-3 border-r"
               >
-                <td className="px-4 py-4 font-medium text-gray-800 border-r border-gray-100">
+                {type === "mtf" ? "Broker" : "Institution"}
+              </th>
+
+              {(type === "las" || type === "lamf") && (
+                <>
+                  <th
+                    style={{ background: "#124434", color: "#FFF" }}
+                    className="px-4 py-3 border-r"
+                  >
+                    1st Year Cost
+                  </th>
+                  <th
+                    style={{ background: "#124434", color: "#FFF" }}
+                    className="px-4 py-3 border-r"
+                  >
+                    2nd Year Cost
+                  </th>
+                  <th
+                    style={{ background: "#124434", color: "#FFF" }}
+                    className="px-4 py-3 border-r"
+                  >
+                    Approved Assets
+                  </th>
+                  <th
+                    style={{ background: "#124434", color: "#FFF" }}
+                    className="px-4 py-3 border-r"
+                  >
+                    Regularization Period
+                  </th>
+
+                  {type === "las" && (
+                    <th
+                      style={{ background: "#124434", color: "#FFF" }}
+                      className="px-4 py-3"
+                    >
+                      LTV
+                    </th>
+                  )}
+
+                  {type === "lamf" && (
+                    <>
+                      <th
+                        style={{ background: "#124434", color: "#FFF" }}
+                        className="px-4 py-3 border-r"
+                      >
+                        LTV – Debt
+                      </th>
+                      <th
+                        style={{ background: "#124434", color: "#FFF" }}
+                        className="px-4 py-3"
+                      >
+                        LTV – Equity
+                      </th>
+                    </>
+                  )}
+                </>
+              )}
+
+              {type === "mtf" && (
+                <>
+                  <th
+                    style={{ background: "#124434", color: "#FFF" }}
+                    className="px-4 py-3 border-r"
+                  >
+                    Cost Summary
+                  </th>
+                  <th
+                    style={{ background: "#124434", color: "#FFF" }}
+                    className="px-4 py-3 border-r"
+                  >
+                    Margin Requirement
+                  </th>
+                  <th
+                    style={{ background: "#124434", color: "#FFF" }}
+                    className="px-4 py-3"
+                  >
+                    Approved Stocks
+                  </th>
+                </>
+              )}
+            </tr>
+          </thead>
+
+          <tbody className="divide-y divide-gray-200">
+            {data.map((row) => (
+              <tr key={row.id} className="hover:bg-gray-100">
+                <td className="px-4 py-4 border-r font-medium">
                   {renderValue(row.name)}
                 </td>
 
-                {productType.toLowerCase() !== "mtf" && (
+                {(type === "las" || type === "lamf") && (
                   <>
-                    <td className="px-4 py-4 text-center border-r border-gray-100">
-                      {row.cost_first_year ? (
-                        <div className="space-y-0.5">
-                          <span className={`font-bold text-lg ${ACCENT_COLOR}`}>
-                            {renderValue(row.cost_first_year.percent)}%
-                          </span>
-                          <div className="text-xs text-gray-500">
-                            ₹{renderValue(row.cost_first_year.amount)}
-                          </div>
-                        </div>
-                      ) : (
-                        "—"
-                      )}
+                    <td className="px-4 py-4 border-r">
+                      {row.cost_first_year
+                        ? renderValue(row.cost_first_year.percent)
+                        : "—"}
+                    </td>
+                    <td className="px-4 py-4 border-r">
+                      {row.cost_second_year
+                        ? renderValue(row.cost_second_year.percent)
+                        : "—"}
+                    </td>
+                    <td className="px-4 py-4 border-r">
+                      {renderValue(row.approved_assets)}
+                    </td>
+                    <td className="px-4 py-4 border-r">
+                      {renderValue(row.regularization_period)}
                     </td>
 
-                    <td className="px-4 py-4 text-center border-r border-gray-100">
-                      {row.cost_second_year ? (
-                        <div className="space-y-0.5">
-                          <span className={`font-bold text-lg ${ACCENT_COLOR}`}>
-                            {renderValue(row.cost_second_year.percent)}%
-                          </span>
-                          <div className="text-xs text-gray-500">
-                            ₹{renderValue(row.cost_second_year.amount)}
-                          </div>
-                        </div>
-                      ) : (
-                        "—"
-                      )}
-                    </td>
+                    {type === "las" && (
+                      <td className="px-4 py-4">
+  {row.ltv
+    ? `${renderValue(row.ltv.min)}–${renderValue(row.ltv.max)}%`
+    : "—"}
+</td>
 
-                    <td className="px-4 py-4 text-center font-bold text-lg text-green-600 border-r border-gray-100">
-                      {renderValue(row.interestMin)}
-                    </td>
+                    )}
 
-                    <td className="px-4 py-4 text-center font-bold text-lg text-gray-600">
-                      {renderValue(row.interestMax)}
-                    </td>
+                    {type === "lamf" && (
+                      <>
+                        {/* LTV - Debt */}
+<td className="px-4 py-4 border-r">
+  {row.ltv?.debt
+    ? row.ltv.debt.replace("/", "–")
+    : "—"}
+</td>
+
+{/* LTV - Equity */}
+<td className="px-4 py-4">
+  {row.ltv?.equity
+    ? row.ltv.equity.replace("/", "–")
+    : "—"}
+</td>
+
+                      </>
+                    )}
                   </>
                 )}
 
-                {productType.toLowerCase() === "mtf" && (
+                {type === "mtf" && (
                   <>
-                    <td className="px-4 py-4 text-sm text-gray-600 border-r border-gray-100">
-                      {row.CostSummary
-                        ? Object.entries(row.CostSummary).map(([k, v], i) => (
+                    <td className="px-4 py-4 border-r text-left">
+                      {row.cost_summary
+                        ? Object.entries(row.cost_summary).map(([k, v], i) => (
                             <div key={i}>
-                              <span className="text-gray-900 font-semibold">
-                                {k}:
-                              </span>{" "}
+                              <span className="font-semibold">{k}:</span>{" "}
                               {renderValue(v)}
                             </div>
                           ))
                         : "—"}
                     </td>
-
-                    <td className="px-4 py-4 text-sm text-gray-600 border-r border-gray-100">
-                      {renderValue(row.marginRequirement)}
+                    <td className="px-4 py-4 border-r">
+                      {renderValue(row.margin_requirement)}
+                    </td>
+                    <td className="px-4 py-4">
+                      {renderValue(row.approved_assets)}
                     </td>
                   </>
                 )}
-
-                <td className="px-4 py-4 text-center font-medium text-gray-700">
-                  {renderValue(row.approvedStocks)}
-                </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
 
-      {/* Button */}
-      <div className="w-full flex justify-center mt-8">
+      <div className="text-center mt-6">
         <a
-          href={`/products/${productType.toLowerCase()}`}
-          className={`px-8 py-3 ${ACCENT_BG} text-white font-semibold rounded-full shadow-md transition duration-200 text-sm uppercase tracking-wider`}
+          href={`/products/${type}`}
+          className="px-6 py-2 bg-green-600 hover:bg-green-700 text-white rounded-full font-semibold text-sm tracking-wide"
         >
           View All {productType.toUpperCase()}
         </a>
