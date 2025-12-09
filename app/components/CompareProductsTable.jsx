@@ -270,7 +270,7 @@ export default function CompareProductsTable({ productType }) {
           </tbody>
         </table>
       </div>
-
+// No changes
       <div className="text-center mt-6">
         <a
           href={`/products/${type}`}
