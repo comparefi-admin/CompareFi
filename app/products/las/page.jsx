@@ -297,7 +297,7 @@ export default function LASPage() {
                     {row.cost_first_year ? (
                       <>
                         <div>Percent: {row.cost_first_year.percent ?? "—"}</div>
-                        <div>₹{row.cost_first_year.amount ?? "—"}</div>
+                        <div>{row.cost_first_year.amount ?? "—"}</div>
                       </>
                     ) : (
                       DEFAULT_NULL_TEXT
@@ -309,7 +309,7 @@ export default function LASPage() {
                     {row.cost_second_year ? (
                       <>
                         <div>Percent: {row.cost_second_year.percent ?? "—"}</div>
-                        <div>₹{row.cost_second_year.amount ?? "—"}</div>
+                        <div>{row.cost_second_year.amount ?? "—"}</div>
                       </>
                     ) : (
                       DEFAULT_NULL_TEXT
@@ -319,7 +319,7 @@ export default function LASPage() {
                   {/* Approved Shares */}
                   <td className="px-5 py-4 border border-gray-300 text-gray-800 whitespace-pre-wrap">
                     {row.approved_shares
-                      ? `~ ${row.approved_shares} shares`
+                      ? `~ ${row.approved_shares}`
                       : DEFAULT_NULL_TEXT}
                   </td>
 
@@ -344,9 +344,9 @@ export default function LASPage() {
                   <td className="px-5 py-4 border border-gray-300 text-center">
                     {row.interest_rate ? (
                       <div>
-                        <div>Min: {row.interest_rate.min ?? "—"}%</div>
-                        <div>Max: {row.interest_rate.max ?? "—"}%</div>
-                        <div>Median: {row.interest_rate.median ?? "—"}%</div>
+                        <div>Min: {row.interest_rate.min ?? "—"}</div>
+                        <div>Max: {row.interest_rate.max ?? "—"}</div>
+                        <div>Median: {row.interest_rate.median ?? "—"}</div>
                       </div>
                     ) : (
                       DEFAULT_NULL_TEXT
@@ -490,7 +490,7 @@ Enquire
                       {row.cost_first_year ? (
                         <>
                           <div>Percent: {row.cost_first_year.percent ?? "—"}</div>
-                          <div>₹{row.cost_first_year.amount ?? "—"}</div>
+                          <div>{row.cost_first_year.amount ?? "—"}</div>
                         </>
                       ) : (
                         DEFAULT_NULL_TEXT
@@ -502,7 +502,7 @@ Enquire
                       {row.cost_second_year ? (
                         <>
                           <div>Percent: {row.cost_second_year.percent ?? "—"}</div>
-                          <div>₹{row.cost_second_year.amount ?? "—"}</div>
+                          <div>{row.cost_second_year.amount ?? "—"}</div>
                         </>
                       ) : (
                         DEFAULT_NULL_TEXT
