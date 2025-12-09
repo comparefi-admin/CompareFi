@@ -359,13 +359,7 @@ export default function LAMFPage() {
       </th>
     ))}
 
-    {/* Contact */}
-    <th
-      style={{ background: "#124434", color: "#FFFFFF" }}
-      className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
-    >
-      Contact
-    </th>
+    
 
   </tr>
 </thead>
