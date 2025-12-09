@@ -45,6 +45,7 @@ export default function CompareProductsTable({ productType }) {
               regularization_period: d.regularization_period ?? "—",
               loan_debt: d.loan_debt ?? null,
               loan_equity: d.loan_equity ?? null,
+              ltv: d.ltv ?? null
             };
           }
 
