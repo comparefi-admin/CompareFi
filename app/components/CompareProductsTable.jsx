@@ -195,7 +195,7 @@ export default function CompareProductsTable({ productType }) {
                       {row.cost_first_year ? (
                         <div className="space-y-0.5">
                           <span className={`font-bold text-lg ${ACCENT_COLOR}`}>
-                            {renderValue(row.cost_first_year.percent)}%
+                            {renderValue(row.cost_first_year.percent)}
                           </span>
                           <div className="text-xs text-gray-500">
                             ₹{renderValue(row.cost_first_year.amount)}
@@ -210,7 +210,9 @@ export default function CompareProductsTable({ productType }) {
                       {row.cost_second_year ? (
                         <div className="space-y-0.5">
                           <span className={`font-bold text-lg ${ACCENT_COLOR}`}>
-                            {renderValue(row.cost_second_year.percent)}%
+                            {renderValue(row.cost_second_year.percent)}
+
+
                           </span>
                           <div className="text-xs text-gray-500">
                             ₹{renderValue(row.cost_second_year.amount)}
