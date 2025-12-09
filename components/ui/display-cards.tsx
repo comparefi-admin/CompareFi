@@ -90,28 +90,29 @@ export default function DisplayCards() {
   {
     title: "Margin Trading Facility (MTF)",
     data: [
-      { label: "Interest Range", value: "7–19% p.a." },
+      { label: "Interest", value: "7–19%" },
       { label: "Type of Collateral", value: "Cash + Stocks" },
       { label: "Holding Period", value: "365 Days / Unlimited" },
     ],
   },
   {
-    title: "Loan Against Mutual ",
+    title: "Loan Against Securities (LAS)",
     data: [
-      { label: "Interest Range", value: "8–20% p.a." },
-      { label: "LTV Maintenance", value: "20–80%" },
+      { label: "Interest Rate", value: "8–20%" },
+      { label: "Funding Amount", value: "20–80%" },
       { label: "Tenure", value: "12–36 Months" },
     ],
   },
   {
-    title: "Loan Against Securities (LAS)",
+    title: "Loan Against Mutual Funds (LAMF)",
     data: [
-      { label: "Interest Range", value: "8–20% p.a." },
-      { label: "LTV Maintenance", value: "45–80%" },
+      { label: "Interest Rate", value: "8–20%" },
+      { label: "Funding Amount", value: "45–80%" },
       { label: "Tenure", value: "12–36 Months" },
     ],
   },
 ];
+
 
 
   // Layout positions
