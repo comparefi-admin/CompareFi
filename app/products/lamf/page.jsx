@@ -359,13 +359,7 @@ export default function LAMFPage() {
       </th>
     ))}
 
-    {/* Contact */}
-    <th
-      style={{ background: "#124434", color: "#FFFFFF" }}
-      className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
-    >
-      Contact
-    </th>
+    
 
   </tr>
 </thead>
@@ -519,7 +513,7 @@ export default function LAMFPage() {
       whitespace-nowrap
     "
   >
-    <FileText className="w-4 h-4" /> Fill Enquiry
+    <FileText className="w-10 h-4" /> Fill Enquiry
   </a>
 </div>
 
@@ -740,7 +734,7 @@ export default function LAMFPage() {
       whitespace-nowrap
     "
   >
-    <FileText className="w-4 h-4" /> Fill Enquiry
+    <FileText className="w-10 h-4" /> Fill Enquiry
   </a>
 </div>
 
