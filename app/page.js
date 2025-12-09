@@ -274,7 +274,7 @@ export default function HomePage() {
   initial={{ opacity: 0, y: 30 }}
   animate={{ opacity: 1, y: 0 }}
   transition={{ delay: 0.3, duration: 0.7 }}
-  className="text-slate-300 mt-6 text-lg max-w-xl relative z-10"
+  className="text-slate-300 mt-10 text-xl max-w-7xl relative z-10"
 >
   No hidden charges. No jargon. No biased recommendations.
   <br />

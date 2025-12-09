@@ -248,34 +248,80 @@ export default function LASPage() {
         <div className="w-full bg-white backdrop-blur-2xl border border-[rgba(255,255,255,0.06)] shadow-[0_12px_32px_rgba(0,0,0,0.22)] rounded-2xl overflow-x-auto">
           <table className="w-full border-collapse text-gray-800 text-[16px] leading-[1.35] table-highlight">
 
-            <thead className="bg-white/80 border-b border-gray-300">
-              <tr>
-                {[
-                  "Institution",
-                  "1st Year (₹1L LAS)",
-                  "2nd Year (₹1L LAS)",
-                  "Approved Shares",
-                  "Tenure",
-                  "Min–Max Loan",
-                  "Interest (Min/Max/Median)",
-                  "Margin Period",
-                  "Contact",
-                ].map((heading, i) => (
-                  <th
-                    key={i}
-                    className={`px-5 py-3 font-semibold border border-gray-300 uppercase text-sm tracking-wide 
-                      ${
-                        i < 3
-                          ? "bg-gradient-to-br from-[#FBFCFD] to-[#EFF7F1]"
-                          : "bg-white/70"
-                      }
-                    `}
-                  >
-                    {heading}
-                  </th>
-                ))}
-              </tr>
-            </thead>
+            <thead>
+  <tr className="text-left font-semibold border-b border-gray-300">
+
+    {/* Institution */}
+    <th
+      style={{ background: "#124434", color: "#FFFFFF" }}
+      className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+    >
+      Institution
+    </th>
+
+    {/* 1st Year */}
+    <th
+      style={{ background: "#124434", color: "#FFFFFF" }}
+      className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+    >
+      1st Year (₹1L LAS)
+    </th>
+
+    {/* 2nd Year */}
+    <th
+      style={{ background: "#124434", color: "#FFFFFF" }}
+      className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+    >
+      2nd Year (₹1L LAS)
+    </th>
+
+    {/* Dynamic main columns */}
+    <th
+      style={{ background: "#124434", color: "#FFFFFF" }}
+      className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+    >
+      Approved Shares
+    </th>
+
+    <th
+      style={{ background: "#124434", color: "#FFFFFF" }}
+      className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+    >
+      Tenure
+    </th>
+
+    <th
+      style={{ background: "#124434", color: "#FFFFFF" }}
+      className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+    >
+      Min–Max Loan
+    </th>
+
+    <th
+      style={{ background: "#124434", color: "#FFFFFF" }}
+      className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+    >
+      Interest Rate
+    </th>
+
+    <th
+      style={{ background: "#124434", color: "#FFFFFF" }}
+      className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+    >
+      Margin Period
+    </th>
+
+    {/* Contact */}
+    <th
+      style={{ background: "#124434", color: "#FFFFFF" }}
+      className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+    >
+      Contact
+    </th>
+
+  </tr>
+</thead>
+
 
             <tbody>
               {data.map((row, index) => (
@@ -452,26 +498,55 @@ Enquire
           <div className="overflow-x-auto">
             <table className="w-full border-collapse text-base text-gray-900 table-highlight">
               <thead>
-                <tr className="text-left font-semibold border-b border-white/30">
-                  <th className="px-5 py-4 bg-gradient-to-br from-[#FBFCFD] to-[#EFF7F1] border border-gray-300 rounded-md">
-                    Institution
-                  </th>
-                  <th className="px-5 py-4 bg-gradient-to-br from-[#FBFCFD] to-[#EFF7F1] border border-gray-300 text-[#1F5E3C] rounded-md">
-                    1st Year
-                  </th>
-                  <th className="px-5 py-4 bg-gradient-to-br from-[#FBFCFD] to-[#EFF7F1] border border-gray-300 text-[#124434] rounded-md">
-                    2nd Year
-                  </th>
+  <tr className="text-left font-semibold border-b border-gray-300">
 
-                  {rightTableColumns[activeTableCategory].map((col) => (
-                    <th key={col.key} className="px-5 py-4 border border-gray-300 bg-white/60">
-                      {col.label}
-                    </th>
-                  ))}
+    {/* Institution */}
+    <th
+      style={{ background: "#124434", color: "#FFFFFF" }}
+      className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+    >
+      Institution
+    </th>
 
-                  <th className="px-5 py-4 border border-gray-300 bg-white/60">Contact</th>
-                </tr>
-              </thead>
+    {/* 1st Year */}
+    <th
+      style={{ background: "#124434", color: "#FFFFFF" }}
+      className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+    >
+      1st Year
+    </th>
+
+    {/* 2nd Year */}
+    <th
+      style={{ background: "#124434", color: "#FFFFFF" }}
+      className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+    >
+      2nd Year
+    </th>
+
+    {/* Dynamic Columns */}
+    {rightTableColumns[activeTableCategory].map((col) => (
+      <th
+        key={col.key}
+        style={{ background: "#124434", color: "#FFFFFF" }}
+        className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+      >
+        {col.label}
+      </th>
+    ))}
+
+    {/* Contact */}
+    <th
+      style={{ background: "#124434", color: "#FFFFFF" }}
+      className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+    >
+      Contact
+    </th>
+
+  </tr>
+</thead>
+
+
 
               <tbody>
                 {sortedCostData.map((row, index) => (

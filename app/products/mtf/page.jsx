@@ -200,30 +200,45 @@ keeping positions overnight while following SEBI-regulated margin rules.`,
         {/* TABLE */}
         <div className="w-full bg-white backdrop-blur-xl border border-[rgba(255,255,255,0.06)] shadow-[0_12px_32px_rgba(0,0,0,0.22)] rounded-2xl overflow-x-auto p-6">
           <table className="w-full border-collapse text-gray-800 text-[16px] leading-[1.35] table-highlight">
-            <thead className="bg-white/80 border-b border-gray-300">
-              <tr>
-                <th className="px-5 py-3 font-semibold border border-gray-300 uppercase text-sm tracking-wide bg-gradient-to-br from-[#FBFCFD] to-[#EFF7F1]">
+            <thead>
+              <tr className="text-left font-semibold border-b border-gray-300">
+                {/* Broker */}
+                <th
+                  style={{ background: "#124434", color: "#FFFFFF" }}
+                  className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+                >
                   Broker
                 </th>
 
-                <th className="px-5 py-3 font-semibold border border-gray-300 uppercase text-sm tracking-wide bg-white/70">
+                {/* Cost Summary */}
+                <th
+                  style={{ background: "#124434", color: "#FFFFFF" }}
+                  className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+                >
                   Cost Summary
                 </th>
 
+                {/* Dynamic MTF Columns */}
                 {activeCols.map((colKey) => (
                   <th
                     key={colKey}
-                    className="px-5 py-3 font-semibold border border-gray-300 uppercase text-sm tracking-wide bg-white/70"
+                    style={{ background: "#124434", color: "#FFFFFF" }}
+                    className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
                   >
                     {colKey.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}
                   </th>
                 ))}
 
-                <th className="px-5 py-3 font-semibold border border-gray-300 uppercase text-sm tracking-wide bg-white/70">
+                {/* Contact */}
+                <th
+                  style={{ background: "#124434", color: "#FFFFFF" }}
+                  className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+                >
                   Contact
                 </th>
               </tr>
             </thead>
+
 
             <tbody>
               {sortedData.map((row, index) => (
