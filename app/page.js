@@ -376,24 +376,11 @@ export default function HomePage() {
     strokeLinecap="round"
     strokeLinejoin="round"
   >
-    {/* Hand */}
-    <path d="M11 29c-2 7 4 13 11 13h8c5 0 9-4 9-8v-4" />
-
-    {/* Document */}
-    <rect x="18" y="6" width="15" height="18" rx="2" />
-    <path d="M26 6v4h5" />
-
-    {/* Bar chart */}
-    <line x1="21" y1="21" x2="21" y2="15" />
-    <line x1="24" y1="21" x2="24" y2="13" />
-    <line x1="27" y1="21" x2="27" y2="17" />
-
-    {/* Circular arrow with Rupee */}
-    <path d="M20 36a7 7 0 1 1 6 7" />
-    <polyline points="30 39 26 39 26 35" />
-    <path d="M23 35h4M23 32h4" />
+    {/* ₹ Rupee Symbol — Hindi/Devanagari style */}
+    <path d="M15 10h18M15 18h18M27 10c0 8-4 14-12 14l15 14" />
   </svg>
 </div>
+
 
 
 
