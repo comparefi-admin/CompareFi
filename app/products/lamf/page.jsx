@@ -148,6 +148,7 @@ export default function LAMFPage() {
       { key: "tenure_months", label: "Tenure (Months)" },
       { key: "loan_equity", label: "Equity MF Loan" },
       { key: "loan_debt", label: "Debt MF Loan" },
+      { key: "ltv", label: "LTV - Funding (Debt/Equity %)" },
       { key: "regularization_period", label: "Margin Call Period (Days)" },
     ],
     majorCost: [
@@ -358,13 +359,7 @@ export default function LAMFPage() {
       </th>
     ))}
 
-    {/* Contact */}
-    <th
-      style={{ background: "#124434", color: "#FFFFFF" }}
-      className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
-    >
-      Contact
-    </th>
+    
 
   </tr>
 </thead>
@@ -402,7 +397,7 @@ export default function LAMFPage() {
                             <div>
                               Percent: {row.cost_first_year.percent ?? "—"}
                             </div>
-                            <div>₹{row.cost_first_year.amount ?? "—"}</div>
+                            <div>{row.cost_first_year.amount ?? "—"}</div>
                           </>
                         ) : (
                           DEFAULT_NULL_TEXT
@@ -416,7 +411,7 @@ export default function LAMFPage() {
                             <div>
                               Percent: {row.cost_second_year.percent ?? "—"}
                             </div>
-                            <div>₹{row.cost_second_year.amount ?? "—"}</div>
+                            <div>{row.cost_second_year.amount ?? "—"}</div>
                           </>
                         ) : (
                           DEFAULT_NULL_TEXT
@@ -426,7 +421,7 @@ export default function LAMFPage() {
                       {/* Approved Funds */}
                       <td className="px-5 py-4 border border-gray-300 text-gray-800 whitespace-pre-wrap text-center">
                         {row.approved_funds
-                          ? `~ ${row.approved_funds} funds`
+                          ? `~ ${row.approved_funds}`
                           : DEFAULT_NULL_TEXT}
                       </td>
 
@@ -459,10 +454,10 @@ export default function LAMFPage() {
                       <td className="px-5 py-4 border border-gray-300 text-center">
                         {row.interest_rate ? (
                           <>
-                            <div>Min: {row.interest_rate.min ?? "—"}%</div>
-                            <div>Max: {row.interest_rate.max ?? "—"}%</div>
+                            <div>Min: {row.interest_rate.min ?? "—"}</div>
+                            <div>Max: {row.interest_rate.max ?? "—"}</div>
                             <div>
-                              Median: {row.interest_rate.median ?? "—"}%
+                              Median: {row.interest_rate.median ?? "—"}
                             </div>
                           </>
                         ) : (
@@ -518,7 +513,7 @@ export default function LAMFPage() {
       whitespace-nowrap
     "
   >
-    <FileText className="w-4 h-4" /> Fill Enquiry
+    <FileText className="w-10 h-4" /> Fill Enquiry
   </a>
 </div>
 
@@ -654,7 +649,7 @@ export default function LAMFPage() {
                               <div>
                                 Percent: {row.cost_first_year.percent ?? "—"}
                               </div>
-                              <div>₹{row.cost_first_year.amount ?? "—"}</div>
+                              <div>{row.cost_first_year.amount ?? "—"}</div>
                             </>
                           ) : (
                             DEFAULT_NULL_TEXT
@@ -668,7 +663,7 @@ export default function LAMFPage() {
                               <div>
                                 Percent: {row.cost_second_year.percent ?? "—"}
                               </div>
-                              <div>₹{row.cost_second_year.amount ?? "—"}</div>
+                              <div>{row.cost_second_year.amount ?? "—"}</div>
                             </>
                           ) : (
                             DEFAULT_NULL_TEXT
@@ -739,7 +734,7 @@ export default function LAMFPage() {
       whitespace-nowrap
     "
   >
-    <FileText className="w-4 h-4" /> Fill Enquiry
+    <FileText className="w-10 h-4" /> Fill Enquiry
   </a>
 </div>
 

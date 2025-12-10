@@ -297,7 +297,7 @@ export default function LASPage() {
                     {row.cost_first_year ? (
                       <>
                         <div>Percent: {row.cost_first_year.percent ?? "—"}</div>
-                        <div>₹{row.cost_first_year.amount ?? "—"}</div>
+                        <div>{row.cost_first_year.amount ?? "—"}</div>
                       </>
                     ) : (
                       DEFAULT_NULL_TEXT
@@ -309,7 +309,7 @@ export default function LASPage() {
                     {row.cost_second_year ? (
                       <>
                         <div>Percent: {row.cost_second_year.percent ?? "—"}</div>
-                        <div>₹{row.cost_second_year.amount ?? "—"}</div>
+                        <div>{row.cost_second_year.amount ?? "—"}</div>
                       </>
                     ) : (
                       DEFAULT_NULL_TEXT
@@ -319,7 +319,7 @@ export default function LASPage() {
                   {/* Approved Shares */}
                   <td className="px-5 py-4 border border-gray-300 text-gray-800 whitespace-pre-wrap">
                     {row.approved_shares
-                      ? `~ ${row.approved_shares} shares`
+                      ? `~ ${row.approved_shares}`
                       : DEFAULT_NULL_TEXT}
                   </td>
 
@@ -344,9 +344,9 @@ export default function LASPage() {
                   <td className="px-5 py-4 border border-gray-300 text-center">
                     {row.interest_rate ? (
                       <div>
-                        <div>Min: {row.interest_rate.min ?? "—"}%</div>
-                        <div>Max: {row.interest_rate.max ?? "—"}%</div>
-                        <div>Median: {row.interest_rate.median ?? "—"}%</div>
+                        <div>Min: {row.interest_rate.min ?? "—"}</div>
+                        <div>Max: {row.interest_rate.max ?? "—"}</div>
+                        <div>Median: {row.interest_rate.median ?? "—"}</div>
                       </div>
                     ) : (
                       DEFAULT_NULL_TEXT
@@ -380,9 +380,9 @@ export default function LASPage() {
   xmlns="http://www.w3.org/2000/svg"
   viewBox="0 0 32 32"
   fill="currentColor"
-  className="w-4 h-4"
+  className="w-10 h-4"
 >
-  <path d="M16 .8C7.6.8.8 7.6.8 16c0 2.8.8 5.6 2.4 8L0 32l8.4-3.2c2.4 1.2 4.8 1.6 7.6 1.6 8.4 0 15.2-6.8 15.2-15.2S24.4.8 16 .8zm0 27.6c-2.4 0-4.8-.8-6.8-1.6l-.4-.4-5.2 2 2-5.2-.4-.4c-1.6-2-2.4-4.4-2.4-6.8 0-7.2 5.6-12.8 12.8-12.8s12.8 5.6 12.8 12.8S23.2 28.4 16 28.4zm7.2-9.2c-.4-.4-2-1.2-2.4-1.2-.4 0-.8 0-1.2.4-.4.4-.8 1.2-1.2 1.6-.4.4-.8.4-1.2.2-1.2-.6-2.4-1.4-3.4-2.6-.8-.8-1.4-1.8-2-3-.2-.4 0-.8.2-1.2.2-.2.4-.6.6-.8.2-.2.2-.4.4-.8 0-.4 0-.8-.2-1.2-.2-.4-1.2-2.2-1.6-3s-.8-.6-1.2-.6h-1c-.4 0-.8.2-1.2.6-.4.6-1.6 1.6-1.6 4s1.6 4.6 1.8 5c.2.4 3 4.8 7.2 6.8 4.2 2.2 4.8 1.6 5.6 1.6.8 0 2.8-1 3.2-2 .4-.8.4-1.6.2-2-.2-.4-.4-.6-.8-.8z"/>
+  <path d="M16 .8C7.6.8.8 7.6.8 16c0 2.8.8 5.6 2.4 8L0 32l8.4-3.2c2.4 1.2 4.8 1.6 7.6 1.6 8.4 0 15.2-6.8 15.2-15.2S24.4.8 16 .8zm0 27.6c-2.4 0-4.8-.8-6.8-1.6l-.4-.4-5.2 2 2-5.2-.4-.4c-1.6-2-2.4-4.4-2.4-6.8 0-7.2 5.6-12.8 12.8-12.8s12.8 5.6 12.8 12.8S23.2 28.4 16 28.4zm7.2-9.2c-.4-.4-2-1.2-2.4-1.2-.4 0-.8 0-1.2.4-.4.4-.8 1.2-1.2 1.6-.4.4-.8.4-1.2.2-1.2-.6-2.4-1.4-3.4-2.6-.8-.8-1.4-1.8-2-3-.2-.4 0-.8.2-1.2.2-.2.4-.6.6-.8.2-.2.2-.4.4-.8 0-.4 0-.8-.2-1.2-.2-.4-1.2-2.2-1.6-3s-.8-.6-1.2-.6h-1c-.4 0-.8.2-1.2.6-.4.6-1.6 1.6-1.6 4s1.6 4.6 1.8 5c.2.4 3 4.8 7.2 6.8 4.2 2.2 4.8 1.6 5.6 1.6.8 0 2.8-1 3.2-2 .4-.8.4-1.6.2-2-.2-.4-.4-.6-.8-.8z" className="mr-[-20%]"/>
 </svg>
 Enquire
 </>
@@ -490,7 +490,7 @@ Enquire
                       {row.cost_first_year ? (
                         <>
                           <div>Percent: {row.cost_first_year.percent ?? "—"}</div>
-                          <div>₹{row.cost_first_year.amount ?? "—"}</div>
+                          <div>{row.cost_first_year.amount ?? "—"}</div>
                         </>
                       ) : (
                         DEFAULT_NULL_TEXT
@@ -502,7 +502,7 @@ Enquire
                       {row.cost_second_year ? (
                         <>
                           <div>Percent: {row.cost_second_year.percent ?? "—"}</div>
-                          <div>₹{row.cost_second_year.amount ?? "—"}</div>
+                          <div>{row.cost_second_year.amount ?? "—"}</div>
                         </>
                       ) : (
                         DEFAULT_NULL_TEXT
