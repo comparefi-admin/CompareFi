@@ -345,7 +345,7 @@ export default function HomePage() {
       Product Highlights
     </h2>
     <a
-      href="/products" // <-- Link to the page showing all products
+      href="#compare" 
       className="text-[#0A0F2C] font-medium underline underline-offset-4 hover:text-blue-600 transition"
     >
       View All
