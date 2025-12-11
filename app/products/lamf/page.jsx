@@ -267,8 +267,7 @@ export default function LAMFPage() {
           hover:-translate-y-3
           hover:shadow-[0_16px_38px_rgba(0,0,0,0.26),0_6px_18px_rgba(0,0,0,0.08)]
           will-change-transform
-        "
-                >
+        ">
                   <h3 className="text-2xl font-bold mb-4 text-[#0D3A27]">
                     {card.title}
                   </h3>
@@ -434,6 +433,13 @@ export default function LAMFPage() {
       </th>
     ))}
 
+    {/* Contact */}
+          <th
+            style={{ background: "#124434", color: "#FFFFFF" }}
+            className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+          >
+            Contact
+          </th>
     
 
   </tr>
@@ -505,24 +511,28 @@ export default function LAMFPage() {
                         {row.tenure_months ?? DEFAULT_NULL_TEXT}
                       </td>
 
-                      {/* Loan Debt/Equity */}
+                      {/* Loan Equity */}
                       <td className="px-5 py-4 border border-gray-300 text-center">
-                        <div>
-                          <strong>Debt:</strong>{" "}
-                          {row.loan_debt
-                            ? `${row.loan_debt.min ?? "—"} / ${
-                                row.loan_debt.max ?? "—"
-                              }`
-                            : DEFAULT_NULL_TEXT}
-                        </div>
-                        <div>
-                          <strong>Equity:</strong>{" "}
-                          {row.loan_equity
-                            ? `${row.loan_equity.min ?? "—"} / ${
-                                row.loan_equity.max ?? "—"
-                              }`
-                            : DEFAULT_NULL_TEXT}
-                        </div>
+                        {row.loan_equity ? (
+                          <>
+                            <div>Min: {row.loan_equity.min ?? "—"}</div>
+                            <div>Max: {row.loan_equity.max ?? "—"}</div>
+                          </>
+                        ) : (
+                          DEFAULT_NULL_TEXT
+                        )}
+                      </td>
+                      
+                      {/* Loan Debt */}
+                      <td className="px-5 py-4 border border-gray-300 text-center">
+                        {row.loan_debt ? (
+                          <>
+                            <div>Min: {row.loan_debt.min ?? "—"}</div>
+                            <div>Max: {row.loan_debt.max ?? "—"}</div>
+                          </>
+                        ) : (
+                          DEFAULT_NULL_TEXT
+                        )}
                       </td>
 
                       {/* Interest */}
@@ -566,7 +576,7 @@ export default function LAMFPage() {
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 32 32"
                             fill="currentColor"
-                            className="w-4 h-4"
+                            className="w-10 h-4"
                           >
                             <path d="M16 .8C7.6.8.8 7.6.8 16c0 2.8.8 5.6 2.4 8L0 32l8.4-3.2c2.4 1.2 4.8 1.6 7.6 1.6 8.4 0 15.2-6.8 15.2-15.2S24.4.8 16 .8zm0 27.6c-2.4 0-4.8-.8-6.8-1.6l-.4-.4-5.2 2 2-5.2-.4-.4c-1.6-2-2.4-4.4-2.4-6.8 0-7.2 5.6-12.8 12.8-12.8s12.8 5.6 12.8 12.8S23.2 28.4 16 28.4zm7.2-9.2c-.4-.4-2-1.2-2.4-1.2-.4 0-.8 0-1.2.4-.4.4-.8 1.2-1.2 1.6-.4.4-.8.4-1.2.2-1.2-.6-2.4-1.4-3.4-2.6-.8-.8-1.4-1.8-2-3-.2-.4 0-.8.2-1.2.2-.2.4-.6.6-.8.2-.2.2-.4.4-.8 0-.4 0-.8-.2-1.2-.2-.4-1.2-2.2-1.6-3s-.8-.6-1.2-.6h-1c-.4 0-.8.2-1.2.6-.4.6-1.6 1.6-1.6 4s1.6 4.6 1.8 5c.2.4 3 4.8 7.2 6.8 4.2 2.2 4.8 1.6 5.6 1.6.8 0 2.8-1 3.2-2 .4-.8.4-1.6.2-2-.2-.4-.4-.6-.8-.8z" />
                           </svg>
@@ -585,10 +595,9 @@ export default function LAMFPage() {
       shadow-[0_10px_30px_rgba(0,0,0,0.20)]
       hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
       transition-all duration-300 transform hover:-translate-y-0.5
-      whitespace-nowrap
     "
   >
-    <FileText className="w-10 h-4" /> Fill Enquiry
+    <FileText className="w-4 h-4" /> Fill Enquiry
   </a>
 </div>
 
@@ -852,7 +861,7 @@ export default function LAMFPage() {
                               xmlns="http://www.w3.org/2000/svg"
                               viewBox="0 0 32 32"
                               fill="currentColor"
-                              className="w-12 h-4"
+                              className="w-10 h-4"
                             >
                               <path d="M16 .8C7.6.8.8 7.6.8 16c0 2.8.8 5.6 2.4 8L0 32l8.4-3.2c2.4 1.2 4.8 1.6 7.6 1.6 8.4 0 15.2-6.8 15.2-15.2S24.4.8 16 .8zm0 27.6c-2.4 0-4.8-.8-6.8-1.6l-.4-.4-5.2 2 2-5.2-.4-.4c-1.6-2-2.4-4.4-2.4-6.8 0-7.2 5.6-12.8 12.8-12.8s12.8 5.6 12.8 12.8S23.2 28.4 16 28.4zm7.2-9.2c-.4-.4-2-1.2-2.4-1.2-.4 0-.8 0-1.2.4-.4.4-.8 1.2-1.2 1.6-.4.4-.8.4-1.2.2-1.2-.6-2.4-1.4-3.4-2.6-.8-.8-1.4-1.8-2-3-.2-.4 0-.8.2-1.2.2-.2.4-.6.6-.8.2-.2.2-.4.4-.8 0-.4 0-.8-.2-1.2-.2-.4-1.2-2.2-1.6-3s-.8-.6-1.2-.6h-1c-.4 0-.8.2-1.2.6-.4.6-1.6 1.6-1.6 4s1.6 4.6 1.8 5c.2.4 3 4.8 7.2 6.8 4.2 2.2 4.8 1.6 5.6 1.6.8 0 2.8-1 3.2-2 .4-.8.4-1.6.2-2-.2-.4-.4-.6-.8-.8z" />
                             </svg>
@@ -874,7 +883,7 @@ export default function LAMFPage() {
       whitespace-nowrap
     "
   >
-    <FileText className="w-10 h-4" /> Fill Enquiry
+    <FileText className="w-4 h-4" /> Fill Enquiry
   </a>
 </div>
 

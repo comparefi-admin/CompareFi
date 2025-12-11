@@ -286,7 +286,7 @@ export default function CompareProductsTable({ productType }) {
                         {row.ltv
                           ? `${renderValue(row.ltv.min)}–${renderValue(
                               row.ltv.max
-                            )}%`
+                            )}`
                           : "—"}
                       </td>
                     )}

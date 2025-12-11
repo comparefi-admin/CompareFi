@@ -503,7 +503,7 @@ Enquire
                     </a>
                     <div className="mt-3">
   <a
-    href={row.google_form_link || "https://forms.gle/yourfallback"}
+    href={row.google_form_link || "#"}
     target="_blank"
     rel="noreferrer"
     className="
