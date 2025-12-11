@@ -241,6 +241,66 @@ export default function LASPage() {
         </div>
       </section>
 
+
+      {/* PRE–COST SUMMARY INFO CARDS */}
+<section className="max-w-[90%] mx-auto px-6 mt-10 mb-4">
+  <h3 className="text-4xl font-bold text-center mb-10 text-[#0A0F2C]">
+    Before You Compare Costs
+  </h3>
+
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+    {/* Card 1 */}
+    <div className="
+      bg-white/18 backdrop-blur-xl 
+      border border-[rgba(35,104,126,0.2)]
+      rounded-3xl p-8 shadow-[0_16px_38px_rgba(0,0,0,0.12)]
+      transition-all duration-500 hover:-translate-y-3
+      hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
+    ">
+      <h4 className="text-2xl font-bold mb-4 text-[#0D3A27]">
+        How This Summary Works
+      </h4>
+      <p className="text-gray-800 leading-relaxed text-lg">
+        The table below shows calculations for a <strong>₹1,00,000 LAS over 12 months</strong>.
+        Collateral given is <strong>₹2,00,000</strong> and an assumed 
+        <strong> 50% funding ratio</strong> across all financial institutions — including
+        interest + all associated charges.
+      </p>
+      <p className="mt-3 text-gray-700 text-[1rem]">
+        You don’t have to calculate APR year-wise — the <strong>“Overall Cost” already includes it</strong>.
+      </p>
+    </div>
+
+    {/* Card 2 */}
+    <div className="
+      bg-white/18 backdrop-blur-xl 
+      border border-[rgba(35,104,126,0.2)]
+      rounded-3xl p-8 shadow-[0_16px_38px_rgba(0,0,0,0.12)]
+      transition-all duration-500 hover:-translate-y-3
+      hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
+    ">
+      <h4 className="text-2xl font-bold mb-4 text-[#0D3A27]">
+        What You Can Quickly Identify
+      </h4>
+
+      <ul className="list-disc list-inside space-y-2 text-gray-800 text-lg">
+        <li>Which institution is <strong>cheapest overall</strong></li>
+        <li>Which one offers the <strong>best LTV</strong></li>
+        <li>Who has the <strong>broadest approved stock list</strong></li>
+        <li>Which lender gives the <strong>maximum margin-call buffer</strong> (lowest selling risk)</li>
+      </ul>
+
+      <p className="mt-3 text-gray-700 text-[1rem]">
+        Most users can rely on this short summary to choose the most 
+        <strong> cost-efficient and safest LAS provider</strong>.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
       {/* COST SUMMARY */}
       <section className="max-w-[90%] mx-auto px-6 py-10 flex flex-col items-center">
         <h3 className="text-4xl font-bold mb-10 text-[#0A0F2C]">Cost Summary</h3>
@@ -469,6 +529,82 @@ Enquire
         </div>
       </section>
 
+
+      {/* PRE–DETAILED COST SUMMARY INFO CARDS */}
+<section className="max-w-[90%] mx-auto px-6 mt-10 mb-4">
+  <h3 className="text-4xl font-bold text-center mb-10 text-[#0A0F2C]">
+    Understanding the Full LAS Cost Breakdown
+  </h3>
+
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+    {/* Card 1 */}
+    <div
+      className="
+        bg-white/18 backdrop-blur-xl 
+        border border-[rgba(35,104,126,0.2)]
+        rounded-3xl p-8 
+        shadow-[0_16px_38px_rgba(0,0,0,0.12)]
+        transition-all duration-500 hover:-translate-y-3
+        hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
+      "
+    >
+      <h4 className="text-2xl font-bold mb-4 text-[#0D3A27]">
+        What This Section Shows
+      </h4>
+
+      <p className="text-gray-800 leading-relaxed text-lg">
+        This section breaks down every cost component of a Loan Against Shares across different lenders.
+        Unlike the summary table (which shows the final overall cost), this view lets you see 
+        <strong> exactly how each lender structures its pricing.</strong>
+      </p>
+
+      <p className="mt-3 text-gray-700 text-[1rem]">
+        If you're comparing providers at a deeper level or validating how the summary cost was calculated,
+        this is the most detailed view available.
+      </p>
+    </div>
+
+    {/* Card 2 */}
+    <div
+      className="
+        bg-white/18 backdrop-blur-xl 
+        border border-[rgba(35,104,126,0.2)]
+        rounded-3xl p-8 
+        shadow-[0_16px_38px_rgba(0,0,0,0.12)]
+        transition-all duration-500 hover:-translate-y-3
+        hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
+      "
+    >
+      <h4 className="text-2xl font-bold mb-4 text-[#0D3A27]">
+        How to Use the Tabs Above
+      </h4>
+
+      <ul className="list-disc list-inside space-y-2 text-gray-800 text-lg">
+        <li>
+          <strong>Funding-Related Details</strong>: LTV, approved shares list, loan limits, margin-call buffer
+        </li>
+        <li>
+          <strong>Major Cost</strong>: Processing fee, renewal/annual fee, interest structure
+        </li>
+        <li>
+          <strong>Default Charges</strong>: Penal interest, overdue interest, margin shortfall penalties
+        </li>
+        <li>
+          <strong>Other Miscellaneous Cost</strong>: DP charges, pledge/unpledge fees, brokerage, stamp duty
+        </li>
+      </ul>
+
+      <p className="mt-3 text-gray-700 text-[1rem]">
+        Most users do not need this level of detail, but if you want full transparency across lenders,
+        this table gives a complete side-by-side cost breakdown.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
       {/* DETAILED LAS COST SUMMARY */}
       <section className="max-w-[90%] mx-auto px-6 py-10 flex flex-col items-center">
         <h3 className="text-4xl font-bold mb-8 text-[#0A0F2C]">Detailed LAS Cost Summary</h3>
@@ -657,6 +793,8 @@ Enquire
           </div>
         </div>
       </section>
+
+
 
       {/* HOW TO APPLY & KEY FACTORS */}
       <section className="max-w-[90%] mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 gap-10">

@@ -168,174 +168,491 @@ keeping positions overnight while following SEBI-regulated margin rules.`,
         </div>
       </section>
 
-      {/* ===== DETAILED TABLE (LAS STYLE) ===== */}
-      <section className="max-w-[90%] mx-auto px-6 py-10 flex flex-col items-center">
-        <h3 className="text-4xl font-bold mb-8 text-[#0A0F2C]">Detailed MTF Comparison</h3>
+{/* PRE–COST SUMMARY INFO CARDS (MTF) */}
+<section className="max-w-[90%] mx-auto px-6 mt-10 mb-4">
+  <h3 className="text-4xl font-bold text-center mb-10 text-[#0A0F2C]">
+    Before You Compare MTF Costs
+  </h3>
 
-        {/* CATEGORY BUTTONS MOVED TO TOP — MATCHES LAS */}
-        <div className="flex flex-wrap justify-center gap-4 mb-6">
-          {[
-            { key: "marginDetails", label: "Margin Details" },
-            { key: "majorCost", label: "Major Cost" },
-            { key: "defaultCharges", label: "Default Charges" },
-            { key: "feedback", label: "Platform & User Feedback" },
-          ].map((cat) => (
-            <button
-              key={cat.key}
-              onClick={() => setActiveTableCategory(cat.key)}
-              className={`
-                px-5 py-3 rounded-xl font-semibold text-sm transition-all duration-300
-                ${
-                  activeTableCategory === cat.key
-                    ? "bg-[#124434] text-white scale-105 shadow-[0_18px_40px_rgba(0,0,0,0.22)]"
-                    : "bg-white/60 text-gray-800 hover:bg-white hover:shadow-md"
-                }
-              `}
-            >
-              {cat.label}
-            </button>
-          ))}
-        </div>
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 
-        {/* TABLE */}
-        <div className="w-full bg-white backdrop-blur-xl border border-[rgba(255,255,255,0.06)] shadow-[0_12px_32px_rgba(0,0,0,0.22)] rounded-2xl overflow-x-auto p-6">
-          <table className="w-full border-collapse text-gray-800 text-[16px] leading-[1.35] table-highlight">
-            <thead>
-              <tr className="text-left font-semibold border-b border-gray-300">
-                {/* Broker */}
-                <th
-                  style={{ background: "#124434", color: "#FFFFFF" }}
-                  className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
-                >
-                  Broker
-                </th>
+    {/* Card 1 */}
+    <div className="
+      bg-white/18 backdrop-blur-xl 
+      border border-[rgba(35,104,126,0.2)]
+      rounded-3xl p-8 shadow-[0_16px_38px_rgba(0,0,0,0.12)]
+      transition-all duration-500 hover:-translate-y-3
+      hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
+    ">
+      <h4 className="text-2xl font-bold mb-4 text-[#0D3A27]">
+        Understanding MTF Cost Summary
+      </h4>
 
-                {/* Cost Summary */}
-                <th
-                  style={{ background: "#124434", color: "#FFFFFF" }}
-                  className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
-                >
-                  Cost Summary
-                </th>
+      <p className="text-gray-800 leading-relaxed text-lg">
+        The table below shows the total annual cost of using Margin Trading Facility (MTF) across different brokers.
+        Unlike intraday, MTF allows you to carry positions overnight, which makes the funding cost the most important factor.
+      </p>
 
-                {/* Dynamic MTF Columns */}
-                {activeCols.map((colKey) => (
-                  <th
-                    key={colKey}
-                    style={{ background: "#124434", color: "#FFFFFF" }}
-                    className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
-                  >
-                    {colKey.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}
-                  </th>
-                ))}
+      <p className="mt-3 text-gray-700 text-[1rem] leading-relaxed">
+        The summary table converts each broker’s <strong>subscription fee + interest + daily/annual carry charges +
+        platform-specific components</strong> into one comparable cost figure. This lets you instantly see:
+      </p>
 
-                {/* Contact */}
-                <th
-                  style={{ background: "#124434", color: "#FFFFFF" }}
-                  className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
-                >
-                  Contact
-                </th>
-              </tr>
-            </thead>
+      <ul className="list-disc list-inside space-y-2 text-gray-800 text-lg mt-4">
+        <li>Which broker is cheapest overall</li>
+        <li>How much you would pay yearly for the same funded exposure</li>
+        <li>Differences in approved stocks</li>
+        <li>Margin requirement variations that affect usable leverage</li>
+      </ul>
+
+      <p className="mt-4 text-gray-700 text-[1rem] leading-relaxed">
+        This helps you compare MTF pricing <strong>without manually calculating interest</strong> or needing to
+        understand individual broker policies.
+      </p>
+    </div>
+
+    {/* Card 2 */}
+    <div className="
+      bg-white/18 backdrop-blur-xl 
+      border border-[rgba(35,104,126,0.2)]
+      rounded-3xl p-8 shadow-[0_16px_38px_rgba(0,0,0,0.12)]
+      transition-all duration-500 hover:-translate-y-3
+      hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
+    ">
+      <h4 className="text-2xl font-bold mb-4 text-[#0D3A27]">
+        What You Can Quickly Understand
+      </h4>
+
+      <ul className="list-disc list-inside space-y-2 text-gray-800 text-lg">
+        <li>Overall yearly MTF cost</li>
+        <li>Which broker offers the best leverage at the lowest cost</li>
+        <li>Stock eligibility differences for leveraged positions</li>
+        <li>Margin requirement differences across brokers</li>
+      </ul>
+
+      <p className="mt-4 text-gray-700 text-[1rem] leading-relaxed">
+        Most users rely on this summary to identify the most cost-efficient and flexible MTF provider.
+      </p>
+    </div>
+
+  </div>
+</section>
 
 
-            <tbody>
-              {sortedData.map((row, index) => (
-                <tr
-                  key={row.id ?? index}
-                  className={`transition-all duration-300 ${
-                    index % 2 === 0 ? "bg-white/55" : "bg-white/36"
-                  } hover:bg-[#B1ED67]/22 hover:shadow-[0_14px_36px_rgba(0,0,0,0.22)]`}
-                >
-                  <td className="px-5 py-4 border border-gray-300 font-semibold text-[#0A0F2C] bg-gradient-to-br from-[#FBFCFD] to-[#F3FFF5]">
-                    {row.broker_name ?? DEFAULT_NULL_TEXT}
-                  </td>
+    {/* MTF COST SUMMARY */}
+<section className="max-w-[90%] mx-auto px-6 py-8 flex flex-col items-center">
+  <h3 className="text-4xl font-bold mb-8 text-[#0A0F2C]">Cost Summary</h3>
 
-                  <td className="px-5 py-4 border border-gray-300 whitespace-pre-line">
-                    {row.cost_summary && typeof row.cost_summary === "object"
-                      ? Object.entries(row.cost_summary).map(([k, v], i) => (
-                          <div key={i}>
-                            {k}: {v ?? "—"}
-                          </div>
-                        ))
-                      : row.cost_summary ?? DEFAULT_NULL_TEXT}
-                  </td>
+  <div className="w-full bg-white backdrop-blur-2xl border border-[rgba(255,255,255,0.06)] shadow-[0_12px_32px_rgba(0,0,0,0.22)] rounded-2xl overflow-x-auto">
+    <table className="w-full border-collapse text-gray-800 text-[16px] leading-[1.35] table-highlight">
+      <thead>
+        <tr className="text-left font-semibold border-b border-gray-300">
+          {/* Broker */}
+          <th
+            style={{ background: "#124434", color: "#FFFFFF" }}
+            className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+          >
+            Broker
+          </th>
 
-                  {activeCols.map((colKey) => (
-                    <td key={colKey} className="px-5 py-4 border border-gray-300 whitespace-pre-wrap">
-                      {(() => {
-                        const v = row[colKey];
-                        if (v == null || v === "") return DEFAULT_NULL_TEXT;
-                        if (typeof v === "object") {
-                          return Object.entries(v).map(([k, val], j) => (
-                            <div key={j}>
-                              {k}: {val ?? "—"}
-                            </div>
-                          ));
-                        }
-                        return v;
-                      })()}
-                    </td>
-                  ))}
+          {/* Cost Summary */}
+          <th
+            style={{ background: "#124434", color: "#FFFFFF" }}
+            className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+          >
+            Cost Summary
+          </th>
 
-                  <td className="px-5 py-4 border border-gray-300 text-center">
-                    <a
-                      href={`https://wa.me/919930584020?text=Hi! I’m interested in learning more about MTF by ${encodeURIComponent(
-                        row.broker_name || "this broker"
-                      )}`}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="
-                        inline-flex items-center justify-center gap-2
-                        bg-gradient-to-b from-[#1F5E3C] to-[#124434]
-                        text-white px-4 py-2 rounded-lg
-                        shadow-[0_10px_30px_rgba(0,0,0,0.20)]
-                        hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
-                        transition-all duration-300 transform hover:-translate-y-0.5
-                      "
-                    >
-<svg
-  xmlns="http://www.w3.org/2000/svg"
-  viewBox="0 0 32 32"
-  fill="currentColor"
-  className="w-10npm install react@18.2.0 react-dom@18.2.0 h-4"
->
-  <path d="M16 .8C7.6.8.8 7.6.8 16c0 2.8.8 5.6 2.4 8L0 32l8.4-3.2c2.4 1.2 4.8 1.6 7.6 1.6 8.4 0 15.2-6.8 15.2-15.2S24.4.8 16 .8zm0 27.6c-2.4 0-4.8-.8-6.8-1.6l-.4-.4-5.2 2 2-5.2-.4-.4c-1.6-2-2.4-4.4-2.4-6.8 0-7.2 5.6-12.8 12.8-12.8s12.8 5.6 12.8 12.8S23.2 28.4 16 28.4zm7.2-9.2c-.4-.4-2-1.2-2.4-1.2-.4 0-.8 0-1.2.4-.4.4-.8 1.2-1.2 1.6-.4.4-.8.4-1.2.2-1.2-.6-2.4-1.4-3.4-2.6-.8-.8-1.4-1.8-2-3-.2-.4 0-.8.2-1.2.2-.2.4-.6.6-.8.2-.2.2-.4.4-.8 0-.4 0-.8-.2-1.2-.2-.4-1.2-2.2-1.6-3s-.8-.6-1.2-.6h-1c-.4 0-.8.2-1.2.6-.4.6-1.6 1.6-1.6 4s1.6 4.6 1.8 5c.2.4 3 4.8 7.2 6.8 4.2 2.2 4.8 1.6 5.6 1.6.8 0 2.8-1 3.2-2 .4-.8.4-1.6.2-2-.2-.4-.4-.6-.8-.8z"/>
-</svg>
-Enquire
-                    </a>
+          {/* Margin Requirement */}
+          <th
+            style={{ background: "#124434", color: "#FFFFFF" }}
+            className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+          >
+            Margin Requirement
+          </th>
 
-                    <div className="mt-3">
-                      <a
-                        href={row.google_form_link || "https://forms.gle/yourfallback"}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="
-                          inline-flex items-center justify-center gap-2
-                          bg-gradient-to-b from-[#5e009c] to-[#c401ff]
-                          text-white px-4 py-2 rounded-lg
-                          shadow-[0_10px_30px_rgba(0,0,0,0.20)]
-                          hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
-                          transition-all duration-300 transform hover:-translate-y-0.5
-                        "
-                      >
-                        <FileText className="w-4 h-4" /> Fill Enquiry
-                      </a>
+          {/* Approved Stocks */}
+          <th
+            style={{ background: "#124434", color: "#FFFFFF" }}
+            className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+          >
+            Approved Stocks
+          </th>
+
+          {/* Interest Slabs (UPDATED) */}
+          <th
+            style={{ background: "#124434", color: "#FFFFFF" }}
+            className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+          >
+            Interest Slabs
+          </th>
+
+          {/* Contact */}
+          <th
+            style={{ background: "#124434", color: "#FFFFFF" }}
+            className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+          >
+            Contact
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {sortedData.map((row, index) => (
+          <tr
+            key={row.id ?? index}
+            className={`transition-all duration-300 ${
+              index % 2 === 0 ? "bg-white/55" : "bg-white/36"
+            } hover:bg-[#B1ED67]/22 hover:shadow-[0_14px_36px_rgba(0,0,0,0.22)]`}
+          >
+            {/* Broker */}
+            <td className="px-5 py-4 border border-gray-300 font-semibold text-[#0A0F2C] bg-gradient-to-br from-[#FBFCFD] to-[#F3FFF5]">
+              {row.broker_name ?? DEFAULT_NULL_TEXT}
+            </td>
+
+            {/* Cost Summary */}
+            <td className="px-5 py-4 border border-gray-300 whitespace-pre-line">
+              {row.cost_summary && typeof row.cost_summary === "object"
+                ? Object.entries(row.cost_summary).map(([k, v], i) => (
+                    <div key={i}>
+                      {k}: {v ?? "—"}
                     </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                  ))
+                : row.cost_summary ?? DEFAULT_NULL_TEXT}
+            </td>
 
-          {(!data || data.length === 0) && (
-            <div className="text-gray-600 text-center py-8 font-medium text-[15px]">
-              No MTF data available.
-            </div>
-          )}
-        </div>
-      </section>
+            {/* Margin Requirement */}
+<td className="px-5 py-4 border border-gray-300">
+  {row.margin_requirement ?? DEFAULT_NULL_TEXT}
+</td>
+
+
+            {/* Approved Stocks */}
+            <td className="px-5 py-4 border border-gray-300 whitespace-pre-wrap">
+              {row.approved_stocks ? `~ ${row.approved_stocks}` : DEFAULT_NULL_TEXT}
+            </td>
+
+            {/* Interest Slabs (UPDATED) */}
+            <td className="px-5 py-4 border border-gray-300 whitespace-pre-line">
+              {row.interest_slabs
+                ? typeof row.interest_slabs === "object"
+                  ? Object.entries(row.interest_slabs).map(([k, v], i) => (
+                      <div key={i}>{k}: {v ?? "—"}</div>
+                    ))
+                  : row.interest_slabs
+                : DEFAULT_NULL_TEXT}
+            </td>
+
+            {/* Contact */}
+            <td className="px-5 py-4 border border-gray-300 text-center">
+             <a
+  href={`https://wa.me/919930584020?text=Hi! I’m interested in MTF by ${encodeURIComponent(
+    row.broker_name || "this broker"
+  )}`}
+  target="_blank"
+  rel="noreferrer"
+  className="
+    inline-flex items-center justify-center gap-2
+    bg-gradient-to-b from-[#1F5E3C] to-[#124434]
+    text-white px-4 py-2 rounded-lg
+    shadow-[0_10px_30px_rgba(0,0,0,0.20)]
+    hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
+    transition-all duration-300 transform hover:-translate-y-0.5
+  "
+>
+  <>
+    {/* WhatsApp Icon */}
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 32 32"
+      fill="currentColor"
+      className="w-4 h-4"
+    >
+      <path d="M16 .8C7.6.8.8 7.6.8 16c0 2.8.8 5.6 2.4 8L0 32l8.4-3.2c2.4 1.2 4.8 1.6 7.6 1.6 8.4 0 15.2-6.8 15.2-15.2S24.4.8 16 .8zm0 27.6c-2.4 0-4.8-.8-6.8-1.6l-.4-.4-5.2 2 2-5.2-.4-.4c-1.6-2-2.4-4.4-2.4-6.8 0-7.2 5.6-12.8 12.8-12.8s12.8 5.6 12.8 12.8S23.2 28.4 16 28.4zm7.2-9.2c-.4-.4-2-1.2-2.4-1.2-.4 0-.8 0-1.2.4-.4.4-.8 1.2-1.2 1.6-.4.4-.8.4-1.2.2-1.2-.6-2.4-1.4-3.4-2.6-.8-.8-1.4-1.8-2-3-.2-.4 0-.8.2-1.2.2-.2.4-.6.6-.8.2-.2.2-.4.4-.8 0-.4 0-.8-.2-1.2-.2-.4-1.2-2.2-1.6-3s-.8-.6-1.2-.6h-1c-.4 0-.8.2-1.2.6-.4.6-1.6 1.6-1.6 4s1.6 4.6 1.8 5c.2.4 3 4.8 7.2 6.8 4.2 2.2 4.8 1.6 5.6 1.6.8 0 2.8-1 3.2-2 .4-.8.4-1.6.2-2-.2-.4-.4-.6-.8-.8z" />
+    </svg>
+
+    Enquire
+  </>
+</a>
+
+
+              <div className="mt-3">
+                <a
+                  href={row.google_form_link || "https://forms.gle/yourfallback"}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="
+                    inline-flex items-center justify-center gap-2
+                    bg-gradient-to-b from-[#5e009c] to-[#c401ff]
+                    text-white px-4 py-2 rounded-lg
+                    shadow-[0_10px_30px_rgba(0,0,0,0.20)]
+                    hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
+                    transition-all duration-300 transform hover:-translate-y-0.5
+                  "
+                >
+                  <FileText className="w-4 h-4" /> Fill Enquiry
+                </a>
+              </div>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+{/* PRE–DETAILED MTF COST SUMMARY INFO CARDS */}
+<section className="max-w-[90%] mx-auto px-6 mt-10 mb-6">
+  <h3 className="text-4xl font-bold text-center mb-10 text-[#0A0F2C]">
+    Understanding the Full MTF Cost Breakdown
+  </h3>
+
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+    {/* Card 1 */}
+    <div className="
+      bg-white/18 backdrop-blur-xl 
+      border border-[rgba(35,104,126,0.2)]
+      rounded-3xl p-8 
+      shadow-[0_16px_38px_rgba(0,0,0,0.12)]
+      transition-all duration-500 hover:-translate-y-3
+      hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
+    ">
+      <h4 className="text-2xl font-bold mb-4 text-[#0D3A27]">
+        What This Section Shows
+      </h4>
+
+      <p className="text-gray-800 leading-relaxed text-lg">
+        The detailed comparison below shows the complete structure behind each broker’s MTF pricing and policies.
+        While the cost summary gives you the total cost, this section explains exactly <strong>how that cost is built.</strong>
+      </p>
+
+      <p className="mt-3 text-gray-700 text-[1rem]">
+        It helps traders understand margin rules, carry-cost mechanics, penalties, and operational policies that
+        influence real trading experience.
+      </p>
+    </div>
+
+    {/* Card 2 */}
+    <div className="
+      bg-white/18 backdrop-blur-xl 
+      border border-[rgba(35,104,126,0.2)]
+      rounded-3xl p-8 
+      shadow-[0_16px_38px_rgba(0,0,0,0.12)]
+      transition-all duration-500 hover:-translate-y-3
+      hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
+    ">
+      <h4 className="text-2xl font-bold mb-4 text-[#0D3A27]">
+        How to Use the Tabs Above
+      </h4>
+
+      <ul className="list-disc list-inside space-y-2 text-gray-800 text-lg">
+        <li><strong>Margin Details:</strong> Initial margin, maintenance margin, approved stock list, pledge rules</li>
+        <li><strong>Major Cost:</strong> Subscription charges, daily/annual carry cost, funding interest</li>
+        <li><strong>Default Charges:</strong> Penalties, delayed payment interest, auto square-off rules</li>
+        <li><strong>Platform & User Feedback:</strong> Platform reliability, pledge experience, settlement flow, user reviews</li>
+      </ul>
+
+      <p className="mt-4 text-gray-700 text-[1rem]">
+        This section lets advanced traders compare risk rules, operational experiences, and hidden cost components —
+        offering full transparency into how each MTF provider operates.
+      </p>
+
+      <p className="mt-3 text-gray-700 text-[1rem]">
+        While most users rely on the summary table alone, this detailed breakdown is essential for professional or
+        high-value MTF traders.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+      {/* ===== DETAILED TABLE (LAS STYLE) ===== */}
+<section className="max-w-[90%] mx-auto px-6 py-10 flex flex-col items-center">
+  <h3 className="text-4xl font-bold mb-8 text-[#0A0F2C]">
+    Detailed MTF Cost Summary
+  </h3>
+
+  {/* MAIN WHITE CONTAINER */}
+  <div className="
+    w-full 
+    bg-white backdrop-blur-xl 
+    border border-[rgba(255,255,255,0.06)]
+    shadow-[0_12px_32px_rgba(0,0,0,0.22)]
+    rounded-2xl 
+    overflow-x-auto 
+    p-6
+  ">
+
+    {/* CATEGORY BUTTONS INSIDE CARD NOW */}
+    <div className="flex flex-wrap justify-center gap-4 mb-6">
+      {[
+        { key: "marginDetails", label: "Margin Details" },
+        { key: "majorCost", label: "Major Cost" },
+        { key: "defaultCharges", label: "Default Charges" },
+        { key: "feedback", label: "Platform & User Feedback" },
+      ].map((cat) => (
+        <button
+          key={cat.key}
+          onClick={() => setActiveTableCategory(cat.key)}
+          className={`
+            px-5 py-3 rounded-xl font-semibold text-sm transition-all duration-300
+            ${
+              activeTableCategory === cat.key
+                ? "bg-[#124434] text-white scale-105 shadow-[0_18px_40px_rgba(0,0,0,0.22)]"
+                : "bg-white/60 text-gray-800 hover:bg-white hover:shadow-md"
+            }
+          `}
+        >
+          {cat.label}
+        </button>
+      ))}
+    </div>
+
+    {/* TABLE */}
+    <table className="w-full border-collapse text-gray-800 text-[16px] leading-[1.35] table-highlight">
+      <thead>
+        <tr className="text-left font-semibold border-b border-gray-300">
+
+          {/* Broker */}
+          <th
+            style={{ background: "#124434", color: "#FFFFFF" }}
+            className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+          >
+            Broker
+          </th>
+
+          {/* Cost Summary */}
+          <th
+            style={{ background: "#124434", color: "#FFFFFF" }}
+            className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+          >
+            Cost Summary
+          </th>
+
+          {/* Dynamic Columns */}
+          {activeCols.map((colKey) => (
+            <th
+              key={colKey}
+              style={{ background: "#124434", color: "#FFFFFF" }}
+              className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+            >
+              {colKey.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}
+            </th>
+          ))}
+
+          {/* Contact */}
+          <th
+            style={{ background: "#124434", color: "#FFFFFF" }}
+            className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+          >
+            Contact
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {sortedData.map((row, index) => (
+          <tr
+            key={row.id ?? index}
+            className={`transition-all duration-300 ${
+              index % 2 === 0 ? "bg-white/55" : "bg-white/36"
+            } hover:bg-[#B1ED67]/22 hover:shadow-[0_14px_36px_rgba(0,0,0,0.22)]`}
+          >
+            {/* Broker */}
+            <td className="px-5 py-4 border border-gray-300 font-semibold text-[#0A0F2C]
+              bg-gradient-to-br from-[#FBFCFD] to-[#F3FFF5]">
+              {row.broker_name ?? DEFAULT_NULL_TEXT}
+            </td>
+
+            {/* Cost Summary */}
+            <td className="px-5 py-4 border border-gray-300 whitespace-pre-line">
+              {row.cost_summary && typeof row.cost_summary === "object"
+                ? Object.entries(row.cost_summary).map(([k, v], i) => (
+                    <div key={i}>{k}: {v ?? "—"}</div>
+                  ))
+                : row.cost_summary ?? DEFAULT_NULL_TEXT}
+            </td>
+
+            {/* Dynamic Columns */}
+            {activeCols.map((colKey) => (
+              <td key={colKey} className="px-5 py-4 border border-gray-300 whitespace-pre-wrap">
+                {(() => {
+                  const v = row[colKey];
+                  if (v == null || v === "") return DEFAULT_NULL_TEXT;
+                  if (typeof v === "object") {
+                    return Object.entries(v).map(([k, val], j) => (
+                      <div key={j}>{k}: {val ?? "—"}</div>
+                    ));
+                  }
+                  return v;
+                })()}
+              </td>
+            ))}
+
+            {/* Contact */}
+            <td className="px-5 py-4 border border-gray-300 text-center">
+  <a
+    href={`https://wa.me/919930584020?text=Hi! I’m interested in learning more about MTF by ${encodeURIComponent(
+      row.broker_name || "this broker"
+    )}`}
+    target="_blank"
+    rel="noreferrer"
+    className="
+      inline-flex items-center justify-center gap-2
+      bg-gradient-to-b from-[#1F5E3C] to-[#124434]
+      text-white px-4 py-2 rounded-lg
+      shadow-[0_10px_30px_rgba(0,0,0,0.20)]
+      hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
+      transition-all duration-300 transform hover:-translate-y-0.5
+    "
+  >
+    {/* WhatsApp icon */}
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 32 32"
+      fill="currentColor"
+      className="w-4 h-4"
+    >
+      <path d="M16 .8C7.6.8.8 7.6.8 16c0 2.8.8 5.6 2.4 8L0 32l8.4-3.2c2.4 1.2 4.8 1.6 7.6 1.6 8.4 0 15.2-6.8 15.2-15.2S24.4.8 16 .8zm0 27.6c-2.4 0-4.8-.8-6.8-1.6l-.4-.4-5.2 2 2-5.2-.4-.4c-1.6-2-2.4-4.4-2.4-6.8 0-7.2 5.6-12.8 12.8-12.8s12.8 5.6 12.8 12.8S23.2 28.4 16 28.4zm7.2-9.2c-.4-.4-2-1.2-2.4-1.2-.4 0-.8 0-1.2.4-.4.4-.8 1.2-1.2 1.6-.4.4-.8.4-1.2.2-1.2-.6-2.4-1.4-3.4-2.6-.8-.8-1.4-1.8-2-3-.2-.4 0-.8.2-1.2.2-.2.4-.6.6-.8.2-.2.2-.4.4-.8 0-.4 0-.8-.2-1.2-.2-.4-1.2-2.2-1.6-3s-.8-.6-1.2-.6h-1c-.4 0-.8.2-1.2.6-.4.6-1.6 1.6-1.6 4s1.6 4.6 1.8 5c.2.4 3 4.8 7.2 6.8 4.2 2.2 4.8 1.6 5.6 1.6.8 0 2.8-1 3.2-2 .4-.8.4-1.6.2-2-.2-.4-.4-.6-.8-.8z"/>
+    </svg>
+
+    Enquire
+  </a>
+
+  <div className="mt-3">
+    <a
+      href={row.google_form_link || "https://forms.gle/yourfallback"}
+      target="_blank"
+      rel="noreferrer"
+      className="
+        inline-flex items-center justify-center gap-2
+        bg-gradient-to-b from-[#5e009c] to-[#c401ff]
+        text-white px-4 py-2 rounded-lg
+        shadow-[0_10px_30px_rgba(0,0,0,0.20)]
+        hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
+        transition-all duration-300 transform hover:-translate-y-0.5
+      "
+    >
+      <FileText className="w-4 h-4" /> Fill Enquiry
+    </a>
+  </div>
+</td>
+
+          </tr>
+        ))}
+      </tbody>
+    </table>
+
+    {(!sortedData || sortedData.length === 0) && (
+      <div className="text-gray-600 text-center py-8 font-medium text-[15px]">
+        No MTF data available.
+      </div>
+    )}
+  </div>
+</section>
+
 
       {/* EXTRA SECTIONS (unchanged) */}
       <section className="max-w-[90%] mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-3 gap-10">
