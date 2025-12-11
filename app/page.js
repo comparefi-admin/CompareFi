@@ -190,10 +190,9 @@ export default function HomePage() {
       if (el) {
         const moveX = (e.clientX - window.innerWidth / 2) * icon.speed;
         const moveY = (e.clientY - window.innerHeight / 2) * icon.speed;
-        el.style.transform = `translate(${moveX}px, ${
-          moveY +
+        el.style.transform = `translate(${moveX}px, ${moveY +
           Math.sin((Date.now() / 1000) * icon.floatSpeed) * icon.floatOffset
-        }px)`;
+          }px)`;
       }
     });
   };
@@ -598,62 +597,57 @@ export default function HomePage() {
           </section>
 
           {/* FEATURES SECTION */}
-          <section className="w-full bg-[#F9FAFB] bg-opacity-0 py-10 px-4 sm:px-6 lg:px-20 flex flex-col lg:flex-row justify-between items-center lg:items-start gap-10 lg:gap-20">
-            {/* Left Section - Content */}
-            <div
-              // Full width on mobile, 1/2 width on large screens. Removed fixed ml-[2%]
-              className="w-full lg:w-1/2 mt-10 lg:mt-20 flex flex-col justify-center text-center lg:text-left"
-            >
-              {/* Responsive Title Size */}
-              <h2 className="text-4xl sm:text-5xl lg:text-7xl text-[#0A0F2C] mb-6 mt-5 leading-tight font-bold">
-                About CompareFi
-              </h2>
-              {/* Responsive Paragraph Size */}
-              <p className="text-[#4B5563] mb-6 text-lg sm:text-xl lg:text-2xl leading-relaxed font-normal">
-                CompareFi is an independent platform built to bring transparency
-                and clarity to finance. We simplify complex financial decisions
-                by helping you compare loans, investments, and other products
-                side by side — so you can understand true costs, uncover hidden
-                charges, and choose what’s genuinely right for you. Our mission
-                is to make financial decision-making clear, confident, and fair
-                for everyone
-              </p>
+          <section className="w-full bg-[#F9FAFB] bg-opacity-0 py-15 px-6 lg:px-20 flex flex-col lg:flex-row justify-between items-center lg:items-start">
+            <section className="w-full bg-[#F9FAFB]  bg-opacity-0 py-10 px-6 lg:px-20 flex flex-col lg:flex-row justify-between items-center lg:items-start">
+              {/* Left Section */}
+              <div className="w-1/2 h-1/2 mt-20 flex flex-col justify-center ml-[2%]">
+                <h2 className="text-7xl  text-[#0A0F2C] mb-6 mt-5 leading-tight font-bold">
+                  About CompareFi
+                </h2>
+                <p className="text-[#4B5563] mb-6 text-2xl leading-relaxed font-normal">
+                  CompareFi is an independent platform built to bring transparency and clarity to finance. We simplify complex financial decisions by helping you compare loans, investments, and other products side by side — so you can understand true costs, uncover hidden charges, and choose what’s genuinely right for you.
+                  Our mission is to make financial decision-making clear, confident, and fair for everyone
 
-              {/* Button Wrapper: Ensure button is centered on mobile, left-aligned on desktop */}
-              <div className="flex justify-center lg:justify-start">
-                <a className="button1" href="/about">
-                  <span>Read More</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 66 43">
-                    <polygon points="39.58,4.46 44.11,0 66,21.5 44.11,43 39.58,38.54 56.94,21.5"></polygon>
-                    <polygon points="19.79,4.46 24.32,0 46.21,21.5 24.32,43 19.79,38.54 37.15,21.5"></polygon>
-                    <polygon points="0,4.46 4.53,0 26.42,21.5 4.53,43 0,38.54 17.36,21.5"></polygon>
-                  </svg>
-                </a>
+                </p>
+                <div>
+                  <a class="button1" href="/about">
+                    <span>Read More</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 66 43">
+                      <polygon
+                        points="39.58,4.46 44.11,0 66,21.5 44.11,43 39.58,38.54 56.94,21.5"
+                      ></polygon>
+                      <polygon
+                        points="19.79,4.46 24.32,0 46.21,21.5 24.32,43 19.79,38.54 37.15,21.5"
+                      ></polygon>
+                      <polygon
+                        points="0,4.46 4.53,0 26.42,21.5 4.53,43 0,38.54 17.36,21.5"
+                      ></polygon>
+                    </svg>
+                  </a>
+                </div>
               </div>
-            </div>
 
-            {/* Right Section (Image / Illustration) */}
-            <div
-              // Full width on mobile, 1/2 width on large screens. Centered globally.
-              className="w-full lg:w-1/2 flex justify-center mt-10 lg:mt-0"
-            >
-              {/* Image Container: Uses relative sizing for flexibility. Removed fixed ml-[10%] */}
-              <div className="w-full max-w-lg">
-                <Image
-                  src={globe}
-                  alt="CompareFi Overview"
-                  className="w-full h-auto object-contain"
-                />
+              {/* Right Section (Image / Illustration) */}
+              <div className="lg:w-1/2 flex justify-center">
+                <div className="w-[80%] ml-[10%]">
+                  <Image
+                    src={globe}
+                    alt="CompareFi Overview"
+                    className=""
+                  />
+                </div>
               </div>
-            </div>
+            </section>
+
           </section>
 
+
+
           {/* CTA SECTION */}
-          <section className="w-full flex justify-center items-center py-16 sm:py-20 px-4">
-            {/* Inner Container: Changed w-[85%] to use max-w-6xl for better full-screen display, 
-      while still ensuring it's w-full on smaller screens. Increased mobile padding (px-6/py-16). */}
-            <div className="w-full max-w-6xl rounded-3xl px-6 sm:px-16 py-16 sm:py-20 relative overflow-hidden bg-[#124434]">
-              {/* GRID BACKGROUND (No changes needed, handles background styling) */}
+          <section className="w-full flex justify-center items-center py-20 px-4">
+            <div className="w-[85%] rounded-3xl px-6 sm:px-16 py-20 relative overflow-hidden bg-[#124434]">
+
+              {/* GRID BACKGROUND */}
               <div
                 className="absolute inset-0 z-0"
                 style={{
@@ -669,23 +663,20 @@ export default function HomePage() {
                 }}
               />
 
-              {/* DARK OVERLAY (No changes needed) */}
+              {/* DARK OVERLAY */}
               <div className="absolute inset-0 bg-[#124434]/40 z-0"></div>
 
               {/* CTA CONTENT */}
               <div className="relative z-10 text-center flex flex-col items-center gap-6">
-                {/* Responsive Title Size: Adjusted for smaller screens (text-3xl) and larger screens (md:text-5xl) */}
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight">
-                  Still unsure which financial product is{" "}
-                  {/* Added hidden/block classes to manage line breaks gracefully */}
-                  <br className="hidden sm:block" />
+                <h2 className="text-3xl sm:text-5xl font-bold text-white leading-tight">
+                  Still unsure which financial product is
+                  <br />
                   right for you?
                 </h2>
 
-                {/* Responsive Paragraph Size: Added text-base for small screens */}
-                <p className="text-gray-200 text-base sm:text-lg max-w-2xl px-2">
+                <p className="text-gray-200 text-lg max-w-2xl">
                   Talk to us — we will help you compare options
-                  <br className="hidden sm:block" />
+                  <br />
                   and choose what saves you the most.
                 </p>
 
@@ -697,14 +688,15 @@ export default function HomePage() {
                     );
                   }}
                   className="mt-4 inline-flex items-center gap-2 bg-[#B5FF4A] hover:bg-[#a4ff2e]
-          text-[#0d1c11] font-semibold px-6 sm:px-8 py-4 rounded-full transition-all duration-300
-          shadow-lg text-sm sm:text-base"
+        text-[#0d1c11] font-semibold px-8 py-4 rounded-full transition-all duration-300
+        shadow-lg"
                 >
                   Contact Us
-                  {/* WhatsApp Icon: Added responsive size classes */}
+
+                  {/* WhatsApp Icon */}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="w-5 h-5 sm:w-6 sm:h-6"
+                    className="w-6 h-6"
                     viewBox="0 0 32 32"
                     fill="currentColor"
                   >
