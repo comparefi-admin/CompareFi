@@ -20,8 +20,8 @@ export default function CompareProductsTable({ productType }) {
           type === "las"
             ? await fetchLAS()
             : type === "lamf"
-            ? await fetchLAMF()
-            : await fetchMTF();
+              ? await fetchLAMF()
+              : await fetchMTF();
 
         const clean = rows.map((d) => {
           if (type === "mtf") {
@@ -63,8 +63,8 @@ export default function CompareProductsTable({ productType }) {
           type === "las"
             ? ["mirae asset", "zerodha", "kotak", "bajaj"]
             : type === "lamf"
-            ? ["bank of baroda", "mirae asset", "kotak", "sbi"]
-            : ["kotak", "kotak - trade free youth plan", "hdfc sky", "dhan"];
+              ? ["bank of baroda", "mirae asset", "kotak", "sbi"]
+              : ["kotak", "kotak - trade free youth plan", "hdfc sky", "dhan"];
 
         const filtered = clean.filter((r) =>
           filterNames.includes((r.name || "").trim().toLowerCase())
@@ -91,6 +91,59 @@ export default function CompareProductsTable({ productType }) {
 
   return (
     <div className="bg-white rounded-xl shadow-lg p-6 md:p-8 mx-auto border-2 border-[#2b7146]">
+
+      {/* ---------------- HIGHLIGHT STYLE BLOCK ---------------- */}
+      <style jsx>{`
+  .highlight-col {
+    position: relative;
+    background: linear-gradient(
+      180deg,
+      rgba(242, 255, 245, 0.92),
+      rgba(225, 245, 230, 0.85)
+    );
+    border-radius: 14px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.06);
+    transition: 0.25s ease;
+  }
+
+  .highlight-col:hover {
+    background: rgba(210, 240, 215, 0.9);
+    transform: translateY(-2px);
+  }
+
+  /* REMOVE DECORATIVE LEFT LINE */
+  .highlight-col::before,
+  .highlight-head::before {
+    content: none !important;
+  }
+
+  .highlight-head {
+    border-radius: 14px;
+  }
+
+  .row-hover:hover td {
+    background: rgba(230, 245, 235, 0.55) !important;
+    transform: scale(1.01);
+    transition: 0.25s ease;
+  }
+
+  .row-hover:hover .highlight-col {
+    background: rgba(210, 240, 215, 0.9) !important;
+  }
+
+  .wide-table {
+    width: 1500px;
+  }
+
+  @media (max-width: 768px) {
+    .wide-table {
+      width: 1200px;
+    }
+  }
+`}</style>
+
+
+
       <div className="text-center mb-6">
         <h2 className="text-xl font-bold text-gray-900">
           {productType.toUpperCase()} Comparison
@@ -103,20 +156,18 @@ export default function CompareProductsTable({ productType }) {
             <tr>
               <th
                 style={{ background: "#124434", color: "#FFF" }}
-                className="px-4 py-3 border-r"
+                className="px-4 py-3 border-r highlight-head"
               >
                 {type === "mtf" ? "Broker" : "Institution"}
               </th>
 
               {(type === "las" || type === "lamf") && (
                 <>
-                  {/* LAS headings */}
                   {type === "las" && (
                     <>
                       <th
                         style={{ background: "#124434", color: "#FFF" }}
-                      className="px-4 py-3 border-r leading-tight whitespace-normal min-w-[150px]"
-
+                        className="px-4 py-3 border-r leading-tight min-w-[150px] highlight-head"
                       >
                         <div>~Overall Cost</div>
                         <div>over 1 lakh LAS</div>
@@ -125,8 +176,7 @@ export default function CompareProductsTable({ productType }) {
 
                       <th
                         style={{ background: "#124434", color: "#FFF" }}
-                       className="px-4 py-3 border-r leading-tight whitespace-normal min-w-[150px]"
-
+                        className="px-4 py-3 border-r leading-tight min-w-[150px] highlight-head"
                       >
                         <div>~Overall Cost</div>
                         <div>over 1 lakh LAS</div>
@@ -135,12 +185,11 @@ export default function CompareProductsTable({ productType }) {
                     </>
                   )}
 
-                  {/* LAMF headings */}
                   {type === "lamf" && (
                     <>
                       <th
                         style={{ background: "#124434", color: "#FFF" }}
-                        className="px-4 py-3 border-r leading-tight whitespace-normal"
+                        className="px-4 py-3 border-r leading-tight highlight-head"
                       >
                         <div>~Overall Cost</div>
                         <div>over 1 lakh LAMF**</div>
@@ -149,7 +198,7 @@ export default function CompareProductsTable({ productType }) {
 
                       <th
                         style={{ background: "#124434", color: "#FFF" }}
-                        className="px-4 py-3 border-r leading-tight whitespace-normal"
+                        className="px-4 py-3 border-r leading-tight highlight-head"
                       >
                         <div>~Overall Cost</div>
                         <div>over 1 lakh LAMF**</div>
@@ -175,7 +224,7 @@ export default function CompareProductsTable({ productType }) {
                   {type === "las" && (
                     <th
                       style={{ background: "#124434", color: "#FFF" }}
-                      className="px-4 py-3 whitespace-nowrap min-w-[110px]"
+                      className="px-4 py-3 min-w-[110px]"
                     >
                       LTV
                     </th>
@@ -185,14 +234,14 @@ export default function CompareProductsTable({ productType }) {
                     <>
                       <th
                         style={{ background: "#124434", color: "#FFF" }}
-                        className="px-4 py-3 border-r whitespace-nowrap min-w-[110px]"
+                        className="px-4 py-3 min-w-[110px] border-r"
                       >
                         LTV – Debt
                       </th>
 
                       <th
                         style={{ background: "#124434", color: "#FFF" }}
-                        className="px-4 py-3 whitespace-nowrap min-w-[110px]"
+                        className="px-4 py-3 min-w-[110px]"
                       >
                         LTV – Equity
                       </th>
@@ -205,7 +254,7 @@ export default function CompareProductsTable({ productType }) {
                 <>
                   <th
                     style={{ background: "#124434", color: "#FFF" }}
-                    className="px-4 py-3 border-r leading-tight whitespace-normal"
+                    className="px-4 py-3 border-r leading-tight highlight-head"
                   >
                     <div>~Overall MTF Cost of</div>
                     <div className="font-semibold">5 lakh</div>
@@ -230,112 +279,194 @@ export default function CompareProductsTable({ productType }) {
             </tr>
           </thead>
 
+          {/* ------------------- TABLE BODY ------------------- */}
           <tbody className="divide-y divide-gray-200">
             {data.map((row) => (
-              <tr key={row.id} className="hover:bg-gray-100">
-                <td className="px-4 py-4 border-r font-medium">
-                  {renderValue(row.name)}
-                </td>
+              <tr key={row.id} className="row-hover transition">
 
-                {(type === "las" || type === "lamf") && (
-                  <>
-                    {/* Cost First Year */}
-                    <td className="px-4 py-4 border-r text-center">
-                      {row.cost_first_year ? (
-                        <div className="flex flex-col items-center gap-1">
-                          <div className="font-bold text-green-600 text-base">
-                            {row.cost_first_year.percent ?? "—"}
-                          </div>
-                          <div className="w-full border-t border-gray-300 my-1"></div>
-                          <div className="text-sm text-gray-700">
-                            {row.cost_first_year.amount
-                              ? ` ${row.cost_first_year.amount.toLocaleString()}`
-                              : "—"}
-                          </div>
-                        </div>
-                      ) : "—"}
+                {(() => {
+                  let col = 0;
+                  const cells = [];
+                  const highlightLAS_LAMF = [0, 1, 2];
+                  const highlightMTF = [0, 1];
+
+                  // ---------- COL 1: Name ----------
+                  cells.push(
+                    <td
+                      key={col}
+                      className={`px-4 py-4 border-r font-medium ${type !== "mtf"
+                          ? "highlight-col"
+                          : "highlight-col"
+                        }`}
+                    >
+                      {renderValue(row.name)}
                     </td>
+                  );
+                  col++;
 
-                    {/* Cost Second Year */}
-                    <td className="px-4 py-4 border-r text-center">
-                      {row.cost_second_year ? (
-                        <div className="flex flex-col items-center gap-1">
-                          <div className="font-bold text-green-600 text-base">
-                            {row.cost_second_year.percent ?? "—"}
+                  // ---------- LAS / LAMF ----------
+                  if (type === "las" || type === "lamf") {
+                    const important = highlightLAS_LAMF;
+
+                    // Cost 1st year
+                    cells.push(
+                      <td
+                        key={col}
+                        className={`px-4 py-4 border-r text-center ${important.includes(col) ? "highlight-col" : ""
+                          }`}
+                      >
+                        {row.cost_first_year ? (
+                          <div className="flex flex-col items-center gap-1">
+                            <div className="font-bold text-green-600 text-base">
+                              {row.cost_first_year.percent ?? "—"}
+                            </div>
+                            <div className="w-full border-t border-gray-300 my-1"></div>
+                            <div className="text-sm text-gray-700">
+                              {row.cost_first_year.amount
+                                ? ` ${row.cost_first_year.amount.toLocaleString()}`
+                                : "—"}
+                            </div>
                           </div>
-                          <div className="w-full border-t border-gray-300 my-1"></div>
-                          <div className="text-sm text-gray-700">
-                            {row.cost_second_year.amount
-                              ? ` ${row.cost_second_year.amount.toLocaleString()}`
-                              : "—"}
+                        ) : (
+                          "—"
+                        )}
+                      </td>
+                    );
+                    col++;
+
+                    // Cost 2nd year
+                    cells.push(
+                      <td
+                        key={col}
+                        className={`px-4 py-4 border-r text-center ${important.includes(col) ? "highlight-col" : ""
+                          }`}
+                      >
+                        {row.cost_second_year ? (
+                          <div className="flex flex-col items-center gap-1">
+                            <div className="font-bold text-green-600 text-base">
+                              {row.cost_second_year.percent ?? "—"}
+                            </div>
+                            <div className="w-full border-t border-gray-300 my-1"></div>
+                            <div className="text-sm text-gray-700">
+                              {row.cost_second_year.amount
+                                ? ` ${row.cost_second_year.amount.toLocaleString()}`
+                                : "—"}
+                            </div>
                           </div>
-                        </div>
-                      ) : "—"}
-                    </td>
+                        ) : (
+                          "—"
+                        )}
+                      </td>
+                    );
+                    col++;
 
-                    <td className="px-4 py-4 border-r">
-                      {renderValue(row.approved_assets)}
-                    </td>
+                    // Approved assets
+                    cells.push(
+                      <td key={col} className="px-4 py-4 border-r">
+                        {renderValue(row.approved_assets)}
+                      </td>
+                    );
+                    col++;
 
-                    <td className="px-4 py-4 border-r">
-                      {renderValue(row.regularization_period)}
-                    </td>
+                    // Regularization period
+                    cells.push(
+                      <td key={col} className="px-4 py-4 border-r">
+                        {renderValue(row.regularization_period)}
+                      </td>
+                    );
+                    col++;
 
-                    {type === "las" && (
-                      <td className="px-4 py-4 whitespace-nowrap min-w-[110px]">
-                        {row.ltv
-                          ? `${renderValue(row.ltv.min)}–${renderValue(
+                    // LTV (LAS)
+                    if (type === "las") {
+                      cells.push(
+                        <td key={col} className="px-4 py-4 whitespace-nowrap">
+                          {row.ltv
+                            ? `${renderValue(row.ltv.min)}–${renderValue(
                               row.ltv.max
                             )}`
-                          : "—"}
-                      </td>
-                    )}
+                            : "—"}
+                        </td>
+                      );
+                      col++;
+                    }
 
-                    {type === "lamf" && (
-                      <>
-                        <td className="px-4 py-4 border-r whitespace-nowrap min-w-[110px]">
+                    // LTV (LAMF)
+                    if (type === "lamf") {
+                      cells.push(
+                        <td key={col} className="px-4 py-4 border-r">
                           {row.ltv?.debt
                             ? row.ltv.debt.replace("/", "–")
                             : "—"}
                         </td>
+                      );
+                      col++;
 
-                        <td className="px-4 py-4 whitespace-nowrap min-w-[110px]">
+                      cells.push(
+                        <td key={col} className="px-4 py-4">
                           {row.ltv?.equity
                             ? row.ltv.equity.replace("/", "–")
                             : "—"}
                         </td>
-                      </>
-                    )}
-                  </>
-                )}
+                      );
+                      col++;
+                    }
 
-                {type === "mtf" && (
-                  <>
-                    <td className="px-4 py-4 border-r text-center">
-                      {row.cost_summary ? (
-                        <div className="flex flex-col items-center gap-1">
-                          <div className="font-bold text-green-600 text-base">
-                            {row.cost_summary.percent ?? "—"}
+                    return cells;
+                  }
+
+                  // ---------- MTF ----------
+                  if (type === "mtf") {
+                    const important = highlightMTF;
+
+                    // Cost summary
+                    cells.push(
+                      <td
+                        key={col}
+                        className={`px-4 py-4 border-r text-center ${important.includes(col) ? "highlight-col" : ""
+                          }`}
+                      >
+                        {row.cost_summary ? (
+                          <div className="flex flex-col items-center gap-1">
+                            <div className="font-bold text-green-600 text-base">
+                              {row.cost_summary.percent ?? "—"}
+                            </div>
+                            <div className="w-full border-t border-gray-300 my-1"></div>
+                            <div className="text-sm text-gray-700">
+                              {row.cost_summary.amount
+                                ? ` ${row.cost_summary.amount.toLocaleString()}`
+                                : "—"}
+                            </div>
                           </div>
-                          <div className="w-full border-t border-gray-300 my-1"></div>
-                          <div className="text-sm text-gray-700">
-                            {row.cost_summary.amount
-                              ? ` ${row.cost_summary.amount.toLocaleString()}`
-                              : "—"}
-                          </div>
-                        </div>
-                      ) : "—"}
-                    </td>
+                        ) : (
+                          "—"
+                        )}
+                      </td>
+                    );
+                    col++;
 
-                    <td className="px-4 py-4 border-r">
-                      {renderValue(row.margin_requirement)}
-                    </td>
+                    // Margin Requirement
+                    cells.push(
+                      <td
+                        key={col}
+                        className={`px-4 py-4 border-r ${important.includes(col) ? "highlight-col" : ""
+                          }`}
+                      >
+                        {renderValue(row.margin_requirement)}
+                      </td>
+                    );
+                    col++;
 
-                    <td className="px-4 py-4">
-                      {renderValue(row.approved_assets)}
-                    </td>
-                  </>
-                )}
+                    // Approved stocks
+                    cells.push(
+                      <td key={col} className="px-4 py-4">
+                        {renderValue(row.approved_assets)}
+                      </td>
+                    );
+                    col++;
+
+                    return cells;
+                  }
+                })()}
               </tr>
             ))}
           </tbody>

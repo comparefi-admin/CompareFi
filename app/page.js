@@ -190,9 +190,10 @@ export default function HomePage() {
       if (el) {
         const moveX = (e.clientX - window.innerWidth / 2) * icon.speed;
         const moveY = (e.clientY - window.innerHeight / 2) * icon.speed;
-        el.style.transform = `translate(${moveX}px, ${moveY +
+        el.style.transform = `translate(${moveX}px, ${
+          moveY +
           Math.sin((Date.now() / 1000) * icon.floatSpeed) * icon.floatOffset
-          }px)`;
+        }px)`;
       }
     });
   };
@@ -529,7 +530,7 @@ export default function HomePage() {
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.6 }}
                       >
-                        <div className="grid md:grid-cols-2 gap-12 items-start text-center md:text-left pt-8 pl-2">
+                        <div className="grid md:grid-cols-[38%_60%] gap-12 items-start text-center md:text-left pt-8 pl-2">
                           {/* Left Info */}
 
                           <div>
@@ -605,23 +606,21 @@ export default function HomePage() {
                   About CompareFi
                 </h2>
                 <p className="text-[#4B5563] mb-6 text-2xl leading-relaxed font-normal">
-                  CompareFi is an independent platform built to bring transparency and clarity to finance. We simplify complex financial decisions by helping you compare loans, investments, and other products side by side — so you can understand true costs, uncover hidden charges, and choose what’s genuinely right for you.
-                  Our mission is to make financial decision-making clear, confident, and fair for everyone
-
+                  CompareFi is an independent platform built to bring
+                  transparency and clarity to finance. We simplify complex
+                  financial decisions by helping you compare loans, investments,
+                  and other products side by side — so you can understand true
+                  costs, uncover hidden charges, and choose what’s genuinely
+                  right for you. Our mission is to make financial
+                  decision-making clear, confident, and fair for everyone
                 </p>
                 <div>
                   <a class="button1" href="/about">
                     <span>Read More</span>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 66 43">
-                      <polygon
-                        points="39.58,4.46 44.11,0 66,21.5 44.11,43 39.58,38.54 56.94,21.5"
-                      ></polygon>
-                      <polygon
-                        points="19.79,4.46 24.32,0 46.21,21.5 24.32,43 19.79,38.54 37.15,21.5"
-                      ></polygon>
-                      <polygon
-                        points="0,4.46 4.53,0 26.42,21.5 4.53,43 0,38.54 17.36,21.5"
-                      ></polygon>
+                      <polygon points="39.58,4.46 44.11,0 66,21.5 44.11,43 39.58,38.54 56.94,21.5"></polygon>
+                      <polygon points="19.79,4.46 24.32,0 46.21,21.5 24.32,43 19.79,38.54 37.15,21.5"></polygon>
+                      <polygon points="0,4.46 4.53,0 26.42,21.5 4.53,43 0,38.54 17.36,21.5"></polygon>
                     </svg>
                   </a>
                 </div>
@@ -630,23 +629,15 @@ export default function HomePage() {
               {/* Right Section (Image / Illustration) */}
               <div className="lg:w-1/2 flex justify-center">
                 <div className="w-[80%] ml-[10%]">
-                  <Image
-                    src={globe}
-                    alt="CompareFi Overview"
-                    className=""
-                  />
+                  <Image src={globe} alt="CompareFi Overview" className="" />
                 </div>
               </div>
             </section>
-
           </section>
-
-
 
           {/* CTA SECTION */}
           <section className="w-full flex justify-center items-center py-20 px-4">
             <div className="w-[85%] rounded-3xl px-6 sm:px-16 py-20 relative overflow-hidden bg-[#124434]">
-
               {/* GRID BACKGROUND */}
               <div
                 className="absolute inset-0 z-0"
@@ -692,7 +683,6 @@ export default function HomePage() {
         shadow-lg"
                 >
                   Contact Us
-
                   {/* WhatsApp Icon */}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
