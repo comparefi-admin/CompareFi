@@ -101,9 +101,15 @@ const [openQuestionIndex, setOpenQuestionIndex] = useState(null);
           "
           spotlightColor="rgba(177,237,103,0.22)"
         >
-          <h1 className="text-6xl font-bold text-white tracking-tight">
-            Margin Trading Facility
-          </h1>
+          <h1 className="text-5xl md:text-6xl font-bold text-white tracking-tight text-center">
+  Margin Trading Facility (MTF)
+</h1>
+
+<p className="mt-6 text-lg md:text-xl text-gray-100 text-center max-w-2xl leading-relaxed">
+  Compare margin requirements, approved stocks, interest slabs and the true overall 
+  annual MTF cost — explained simply with transparent, unbiased data.
+</p>
+
         </SpotlightCard>
       </section>
 
@@ -652,6 +658,103 @@ keeping positions overnight while following SEBI-regulated margin rules.`,
     )}
   </div>
 </section>
+
+{/* MTF Summary — Before FAQ */}
+<section className="max-w-[90%] mx-auto px-6 py-16">
+  <h2 className="text-4xl font-bold text-center mb-10 text-[#0A0F2C]">
+    Key Takeaways to Guide Your MTF Decision
+  </h2>
+
+  <div
+    className="
+      bg-white/20 backdrop-blur-xl
+      border border-[rgba(255,255,255,0.10)]
+      shadow-[0_16px_38px_rgba(0,0,0,0.15)]
+      rounded-3xl p-10
+      leading-relaxed text-gray-900
+    "
+  >
+    <p className="text-[1.15rem] mb-6">
+      <strong>Margin Trading Facility (MTF)</strong> allows traders to take leveraged equity positions 
+      overnight by using funded exposure provided by brokers. Instead of paying everything upfront, you 
+      pay a combination of <strong>margin + subscription fee + interest/carry cost</strong> depending on 
+      the broker’s pricing model.
+    </p>
+
+    <p className="text-[1.15rem] mb-6">
+      CompareFi simplifies this complexity by converting all charges — subscription, interest slabs, 
+      carry fees, pledging charges and operational costs — into one <strong>single comparable yearly 
+      cost</strong> for the same notional funded exposure. This allows you to understand instantly which 
+      broker is most cost-efficient for your trading style.
+    </p>
+
+    <p className="text-[1.15rem] mb-6">
+      Brokers also differ significantly in <strong>margin requirements</strong> (affecting usable leverage), 
+      <strong>approved stocks lists</strong>, auto square-off policies, and penalty structures. These 
+      differences influence not just cost but also risk and convenience — especially for active positional traders.
+    </p>
+
+    <p className="text-[1.15rem]">
+      Before choosing an MTF provider, evaluate the true total cost, margin flexibility, approved stocks 
+      coverage, pledge experience, and operational reliability. CompareFi brings all these insights 
+      together in one transparent view.
+    </p>
+  </div>
+
+  {/* CTA Block */}
+  <div className="mt-12 flex flex-col items-center text-center">
+    <h3 className="text-3xl font-bold text-[#0A0F2C] mb-4">
+      Enquire Now — Get a Personalised MTF Suggestion
+    </h3>
+
+    <p className="text-gray-700 max-w-2xl mb-8">
+      Chat with us on WhatsApp or fill out a quick form. We'll help you identify the 
+      <strong> lowest-cost and most flexible MTF provider</strong> based on your trading needs.
+    </p>
+
+    <div className="flex flex-wrap justify-center gap-6">
+
+      {/* WhatsApp Button */}
+      <a
+        href="https://wa.me/919930584020?text=Hi! I need help choosing the best MTF provider."
+        target="_blank"
+        rel="noreferrer"
+        className="
+          inline-flex items-center justify-center gap-2
+          bg-gradient-to-b from-[#1F5E3C] to-[#124434]
+          text-white px-8 py-4 rounded-2xl text-lg font-semibold
+          shadow-[0_16px_38px_rgba(0,0,0,0.26)]
+          hover:shadow-[0_18px_42px_rgba(0,0,0,0.30)]
+          transition-all duration-300 hover:-translate-y-1
+        "
+      >
+        <MessageCircle className="w-5 h-5" /> Chat on WhatsApp
+      </a>
+
+      {/* Google Form Button */}
+      <a
+        href="https://forms.gle/yourformlink"
+        target="_blank"
+        rel="noreferrer"
+        className="
+          inline-flex items-center justify-center gap-2
+          bg-gradient-to-b from-[#5e009c] to-[#c401ff]
+          text-white px-8 py-4 rounded-2xl text-lg font-semibold
+          shadow-[0_16px_38px_rgba(0,0,0,0.26)]
+          hover:shadow-[0_18px_42px_rgba(0,0,0,0.30)]
+          transition-all duration-300 hover:-translate-y-1
+        "
+      >
+        <FileText className="w-5 h-5" /> Submit Form
+      </a>
+    </div>
+
+    <p className="mt-4 text-gray-600 text-sm">
+      Free & unbiased comparison • No data sharing • No obligation to apply
+    </p>
+  </div>
+</section>
+
 
 
       {/* EXTRA SECTIONS (unchanged) */}

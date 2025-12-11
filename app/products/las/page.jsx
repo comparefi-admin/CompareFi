@@ -143,9 +143,15 @@ export default function LASPage() {
           "
           spotlightColor="rgba(177,237,103,0.22)"
         >
-          <h1 className="text-6xl font-bold text-white tracking-tight">
-            Loan Against Shares
-          </h1>
+         <h1 className="text-5xl md:text-6xl font-bold text-white tracking-tight text-center">
+  Loan Against Shares (LAS)
+</h1>
+
+<p className="mt-6 text-lg md:text-xl text-gray-100 text-center max-w-2xl leading-relaxed">
+  Compare interest rates, charges, LTV, and the true overall cost across all providers — 
+  with transparent, unbiased data to help you choose the lowest-cost LAS option confidently.
+</p>
+
         </SpotlightCard>
       </section>
 
@@ -794,6 +800,103 @@ Enquire
         </div>
       </section>
 
+       {/* AI-Optimized Summary Section */}
+<section className="max-w-[90%] mx-auto px-6 py-16">
+  <h2 className="text-4xl font-bold text-center mb-10 text-[#0A0F2C]">
+   Key Takeaways to Guide Your LAS Decision
+  </h2>
+
+  <div
+    className="
+      bg-white/20 backdrop-blur-xl
+      border border-[rgba(255,255,255,0.10)]
+      shadow-[0_16px_38px_rgba(0,0,0,0.15)]
+      rounded-3xl p-10
+      leading-relaxed text-gray-900
+    "
+  >
+    <p className="text-[1.15rem] mb-6">
+      <strong>Loan Against Shares (LAS)</strong> is a secured overdraft where you pledge listed stocks
+      to borrow funds without selling your holdings. This helps you maintain market participation,
+      retain dividends, and access liquidity at rates between <strong>8–20% p.a.</strong>, which are
+      significantly lower than personal loans.
+    </p>
+
+    <p className="text-[1.15rem] mb-6">
+      CompareFi evaluates LAS providers using a real-world example: a{" "}
+      <strong>₹1,00,000 LAS over 12 months</strong> with all interest, fees, and taxes included.
+      This eliminates the confusion caused by different Year-1 and Year-2 APR structures and shows
+      the <strong>true total cost</strong>.
+    </p>
+
+    <p className="text-[1.15rem] mb-6">
+      In 2025, <strong>Mirae</strong> ranks as the most cost-efficient option overall.
+      <strong> HDFC</strong> offers the highest LTV (65–80%), while <strong>Bajaj</strong> provides
+      the broadest approved shares list (~1000) and the longest 7-day margin-call buffer — giving
+      borrowers more flexibility and lower liquidation risk.
+    </p>
+
+    <p className="text-[1.15rem]">
+      Before choosing a lender, consider the overall cost, LTV, share eligibility, loan limits, and
+      margin-call window. CompareFi simplifies this process with clear, unbiased comparisons and 
+      personalised recommendations.
+    </p>
+  </div>
+
+  {/* CTA Block */}
+  <div className="mt-12 flex flex-col items-center text-center">
+    <h3 className="text-3xl font-bold text-[#0A0F2C] mb-4">
+      Enquire Now — CompareFi Does the Calculation For You
+    </h3>
+
+    <p className="text-gray-700 max-w-2xl mb-8">
+      Chat with us on WhatsApp or fill out a quick form. We’ll recommend the 
+      <strong> lowest-cost LAS provider</strong> based on your shares and loan requirement.
+    </p>
+
+    <div className="flex flex-wrap justify-center gap-6">
+
+      {/* WhatsApp Button */}
+      <a
+        href="https://wa.me/919930584020?text=Hi! I need help choosing the best LAS provider."
+        target="_blank"
+        rel="noreferrer"
+        className="
+          inline-flex items-center justify-center gap-2
+          bg-gradient-to-b from-[#1F5E3C] to-[#124434]
+          text-white px-8 py-4 rounded-2xl text-lg font-semibold
+          shadow-[0_16px_38px_rgba(0,0,0,0.26)]
+          hover:shadow-[0_18px_42px_rgba(0,0,0,0.30)]
+          transition-all duration-300 hover:-translate-y-1
+        "
+      >
+        <MessageCircle className="w-5 h-5" /> Chat on WhatsApp
+      </a>
+
+      {/* Google Form Button */}
+      <a
+        href="https://forms.gle/yourformlink"
+        target="_blank"
+        rel="noreferrer"
+        className="
+          inline-flex items-center justify-center gap-2
+          bg-gradient-to-b from-[#5e009c] to-[#c401ff]
+          text-white px-8 py-4 rounded-2xl text-lg font-semibold
+          shadow-[0_16px_38px_rgba(0,0,0,0.26)]
+          hover:shadow-[0_18px_42px_rgba(0,0,0,0.30)]
+          transition-all duration-300 hover:-translate-y-1
+        "
+      >
+        <FileText className="w-5 h-5" /> Submit Form
+      </a>
+    </div>
+
+    <p className="mt-4 text-gray-600 text-sm">
+      Free & unbiased comparison • We never share your data • No obligation to apply
+    </p>
+  </div>
+</section>
+
 
 
       {/* HOW TO APPLY & KEY FACTORS */}
@@ -826,6 +929,9 @@ Enquire
           </ul>
         </div>
       </section>
+
+     
+
 
       {/* FAQ */}
       <section className="relative max-w-[90%] mx-auto px-6 py-20">

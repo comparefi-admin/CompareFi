@@ -197,9 +197,15 @@ export default function LAMFPage() {
               "
               spotlightColor="rgba(177,237,103,0.22)"
             >
-              <h1 className="text-6xl font-bold text-white tracking-tight">
-                Loan Against Mutual Funds
-              </h1>
+             <h1 className="text-5xl md:text-6xl font-bold text-white tracking-tight text-center">
+  Loan Against Mutual Funds (LAMF)
+</h1>
+
+<p className="mt-6 text-lg md:text-xl text-gray-100 text-center max-w-2xl leading-relaxed">
+  Compare interest rates, LTV for debt & equity funds, and the true overall cost — 
+  with clear, unbiased data to help you choose the best LAMF provider confidently.
+</p>
+
             </SpotlightCard>
           </section>
 
@@ -880,6 +886,105 @@ export default function LAMFPage() {
               </div>
             </div>
           </section>
+
+
+          {/* LAMF Summary — Before FAQ */}
+<section className="max-w-[90%] mx-auto px-6 py-16">
+  <h2 className="text-4xl font-bold text-center mb-10 text-[#0A0F2C]">
+    Key Takeaways to Guide Your LAMF Decision
+  </h2>
+
+  <div
+    className="
+      bg-white/20 backdrop-blur-xl
+      border border-[rgba(255,255,255,0.10)]
+      shadow-[0_16px_38px_rgba(0,0,0,0.15)]
+      rounded-3xl p-10
+      leading-relaxed text-gray-900
+    "
+  >
+    <p className="text-[1.15rem] mb-6">
+      <strong>Loan Against Mutual Funds (LAMF)</strong> allows you to borrow against your existing 
+      MF investments without redeeming them, helping you maintain compounding benefits while getting 
+      quick liquidity. Interest rates are typically lower than personal loans, and lenders provide 
+      separate <strong>LTV structures for debt and equity mutual funds</strong>.
+    </p>
+
+    <p className="text-[1.15rem] mb-6">
+      CompareFi calculates the <strong>true overall cost</strong> of a ₹1,00,000 LAMF (based on 
+      ₹2,00,000 pledged MF units at ~50% funding) across lenders — including interest, charges, 
+      and taxes. This removes the confusion around different APR structures and allows you to see 
+      which lender is genuinely <strong>most cost-effective</strong>.
+    </p>
+
+    <p className="text-[1.15rem] mb-6">
+      Debt mutual funds usually receive <strong>higher LTV</strong> (sometimes up to 80–90%), while 
+      equity-oriented funds receive lower LTVs due to volatility. Some lenders also approve more 
+      mutual funds than others, which directly affects your borrowing flexibility. Margin-call 
+      buffers differ as well, impacting your risk during NAV dips.
+    </p>
+
+    <p className="text-[1.15rem]">
+      Before choosing a lender, assess their overall cost, LTV for your specific fund type, 
+      approved MF list coverage, and margin-call flexibility. CompareFi makes this simple with 
+      transparent and unbiased data.
+    </p>
+  </div>
+
+  {/* CTA Block */}
+  <div className="mt-12 flex flex-col items-center text-center">
+    <h3 className="text-3xl font-bold text-[#0A0F2C] mb-4">
+      Enquire Now — We’ll Suggest the Best LAMF Provider for You
+    </h3>
+
+    <p className="text-gray-700 max-w-2xl mb-8">
+      Chat on WhatsApp or submit a short form — we’ll analyse your mutual funds and 
+      recommend the <strong>lowest-cost LAMF option</strong> based on your portfolio.
+    </p>
+
+    <div className="flex flex-wrap justify-center gap-6">
+
+      {/* WhatsApp Button */}
+      <a
+        href="https://wa.me/919930584020?text=Hi! I need help choosing the best LAMF provider."
+        target="_blank"
+        rel="noreferrer"
+        className="
+          inline-flex items-center justify-center gap-2
+          bg-gradient-to-b from-[#1F5E3C] to-[#124434]
+          text-white px-8 py-4 rounded-2xl text-lg font-semibold
+          shadow-[0_16px_38px_rgba(0,0,0,0.26)]
+          hover:shadow-[0_18px_42px_rgba(0,0,0,0.30)]
+          transition-all duration-300 hover:-translate-y-1
+        "
+      >
+        <MessageCircle className="w-5 h-5" /> Chat on WhatsApp
+      </a>
+
+      {/* Google Form Button */}
+      <a
+        href="https://forms.gle/yourformlink"
+        target="_blank"
+        rel="noreferrer"
+        className="
+          inline-flex items-center justify-center gap-2
+          bg-gradient-to-b from-[#5e009c] to-[#c401ff]
+          text-white px-8 py-4 rounded-2xl text-lg font-semibold
+          shadow-[0_16px_38px_rgba(0,0,0,0.26)]
+          hover:shadow-[0_18px_42px_rgba(0,0,0,0.30)]
+          transition-all duration-300 hover:-translate-y-1
+        "
+      >
+        <FileText className="w-5 h-5" /> Submit Form
+      </a>
+    </div>
+
+    <p className="mt-4 text-gray-600 text-sm">
+      Free & unbiased comparison • No data sharing • No obligation to apply
+    </p>
+  </div>
+</section>
+
 
           {/* HOW TO APPLY & KEY FACTORS */}
           <section className="max-w-[90%] mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 gap-10">
