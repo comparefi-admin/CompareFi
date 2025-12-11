@@ -27,7 +27,7 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-import SpotlightCard from "./components/SpotlightCard.jsx"; // Import the SpotlightCard component from './components/SpotlightCard';
+import SpotlightCard from "./components/SpotlightCard.jsx";
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Navbar from "./components/navbar";
@@ -46,7 +46,6 @@ import DisplayCards from "@/components/ui/display-cards";
 import "./globals.css";
 import CompareProductsTable from "./components/CompareProductsTable";
 
-// ShadCN components
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -58,7 +57,6 @@ import {
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
-// Hero cards
 const defaultCards = [
   {
     icon: <Sparkles className="size-4 text-black" />,
@@ -92,7 +90,6 @@ const defaultCards = [
   },
 ];
 
-// Products data
 const PRODUCTS = [
   {
     id: "las",
@@ -155,7 +152,6 @@ export default function HomePage() {
   const heroRef = useRef(null);
   const [parallaxIcons, setParallaxIcons] = useState([]);
 
-  // Create multiple floating icons for parallax effect
   useEffect(() => {
     const iconsData = [Shield, CreditCard, TrendingUp];
     const NUM_ICONS = 15;
@@ -204,14 +200,12 @@ export default function HomePage() {
         className={`${workSans.variable} ${inter.variable} font-sans min-h-screen flex flex-col bg-slate-50 text-slate-900 overflow-x-hidden`}
         onMouseMove={handleMouseMove}
       >
-        {/* Navbar */}
         <div className="fixed top-2 left-1/2 transform -translate-x-1/2 z-[9999] w-full max-w-screen-xl px-4 pt-4">
           <Navbar />
         </div>
 
         <main className="flex-grow bg-[#EFF3F6]">
-          {/* HERO SECTION (FinGrow-style FIXED) */}
-
+          {/* HERO SECTION */}
           <section
             id="hero"
             className="relative flex flex-col items-center justify-center min-h-[100vh] overflow-visible text-center text-white"
@@ -223,43 +217,40 @@ export default function HomePage() {
               backgroundBlendMode: "overlay, normal",
             }}
           >
-            {/* ==== DOTTED BACKGROUND (LEFT + RIGHT) ==== */}
-
-            {/* LEFT SHAPE */}
+            {/* DOTTED BACKGROUND (LEFT + RIGHT) */}
             <img
               src="/icons/Group 23 (2).svg"
               alt=""
               className="
-    absolute 
-    bottom-[-1rem] 
-    left-[18%] 
-    w-[500px] 
-    opacity-[1] 
-    pointer-events-none 
-    rotate-[-10deg] 
-    scale-x-[-1]
-    z-[3]
-  "
+                absolute 
+                bottom-[-1rem] 
+                left-[18%] 
+                w-[500px] 
+                opacity-[1] 
+                pointer-events-none 
+                rotate-[-10deg] 
+                scale-x-[-1]
+                z-[3]
+              "
             />
 
-            {/* RIGHT SHAPE (mirrored) */}
             <img
               src="/icons/Group 23 (2).svg"
               alt=""
               className="
-    absolute 
-    bottom-[-1rem] 
-    right-[18%] 
-    w-[500px] 
-    opacity-[1] 
-    pointer-events-none 
-    rotate-[10deg] 
-    scale-x-[-1]
-    z-[3]
-  "
+                absolute 
+                bottom-[-1rem] 
+                right-[18%] 
+                w-[500px] 
+                opacity-[1] 
+                pointer-events-none 
+                rotate-[10deg] 
+                scale-x-[-1]
+                z-[3]
+              "
             />
 
-            {/* MASK that hides stars behind the cards */}
+            {/* MASK */}
             <div
               className="absolute inset-0 pointer-events-none z-[15]"
               style={{
@@ -270,7 +261,6 @@ export default function HomePage() {
               }}
             />
 
-            {/* ==== SMALL UPWARD NUDGE (keep spacing) ==== */}
             <div className="mt-[-20%]"></div>
 
             {/* Badge */}
@@ -322,7 +312,7 @@ export default function HomePage() {
                   const el = document.getElementById("featured");
                   if (el) {
                     el.scrollIntoView({ behavior: "smooth" });
-                    window.history.pushState(null, "", "/#featured"); // Update URL same as clicking Products
+                    window.history.pushState(null, "", "/#featured");
                   }
                 }}
                 className="bg-[#B1ED67] hover:bg-[#9CDA59] text-black font-semibold px-8 py-4 rounded-full shadow-lg hover:shadow-[#B1ED67]/30 transition-all duration-300"
@@ -340,7 +330,7 @@ export default function HomePage() {
               <div
                 className="relative flex justify-center w-full max-w-[1200px] pointer-events-none"
                 style={{
-                  height: "900px", // ⭐️ make the wrapper tall enough
+                  height: "900px",
                   WebkitMaskImage:
                     "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 66%)",
                   maskImage:
@@ -360,7 +350,6 @@ export default function HomePage() {
             className="relative z-[40] w-full bg-[#EEF1FA] bg-opacity-0 py-20 px-4 sm:px-6 lg:px-20 flex flex-col lg:flex-row justify-between items-center lg:items-start gap-10 lg:gap-0"
           >
             {/* Left Section - Title */}
-            {/* Added text-center for mobile, text-left for desktop. Removed hardcoded ml-10 */}
             <div className="w-full lg:w-1/3 flex flex-col items-center lg:items-start text-center lg:text-left lg:pr-10">
               <h2 className="text-3xl sm:text-4xl text-[#0A0F2C] mb-6 leading-tight font-bold">
                 Product Highlights
@@ -374,19 +363,17 @@ export default function HomePage() {
             </div>
 
             {/* Right Section - Cards Grid */}
-            {/* Removed mr-10. Added w-full. Adjusted grid columns for mobile/tablet/desktop */}
             <div className="w-full lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {/* LAS Card */}
               <a
                 href="/products/las"
                 className="
-         card4 group relative overflow-hidden rounded-lg bg-[#141F2B] shadow-md hover:shadow-lg 
-         transition-all duration-300 p-6 cursor-pointer w-full
-         before:pointer-events-none
-       "
+                  card4 group relative overflow-hidden rounded-lg bg-[#141F2B] shadow-md hover:shadow-lg 
+                  transition-all duration-300 p-6 cursor-pointer w-full
+                  before:pointer-events-none
+                "
               >
                 <div className="flex items-center space-x-4">
-                  {/* Icon on the left */}
                   <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-[#B1ED67]/20 rounded-full group-hover:bg-[#B1ED67]/30 transition-colors">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -398,12 +385,10 @@ export default function HomePage() {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     >
-                      {/* ₹ Rupee Symbol */}
                       <path d="M15 10h18M15 18h18M27 10c0 8-4 14-12 14l15 14" />
                     </svg>
                   </div>
 
-                  {/* Text */}
                   <div>
                     <p className="text1-title text-xl font-semibold text-[#FFFFFF] transition-colors">
                       LAS
@@ -422,10 +407,10 @@ export default function HomePage() {
               <a
                 href="/products/lamf"
                 className="
-         card4 group relative overflow-hidden rounded-lg bg-[#2E494D] shadow-md hover:shadow-lg 
-         transition-all duration-300 p-6 cursor-pointer w-full
-         before:pointer-events-none
-       "
+                  card4 group relative overflow-hidden rounded-lg bg-[#2E494D] shadow-md hover:shadow-lg 
+                  transition-all duration-300 p-6 cursor-pointer w-full
+                  before:pointer-events-none
+                "
               >
                 <div className="flex items-center space-x-4">
                   <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-[#B1ED67]/20 rounded-full group-hover:bg-[#B1ED67]/30 transition-colors">
@@ -449,9 +434,9 @@ export default function HomePage() {
               <a
                 href="/products/mtf"
                 className="
-         card4 group relative overflow-hidden rounded-lg bg-[#141F2B] shadow-md hover:shadow-lg 
-         transition-all duration-300 p-6 cursor-pointer w-full
-       "
+                  card4 group relative overflow-hidden rounded-lg bg-[#141F2B] shadow-md hover:shadow-lg 
+                  transition-all duration-300 p-6 cursor-pointer w-full
+                "
               >
                 <div className="flex items-center space-x-4">
                   <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-[#B1ED67]/20 rounded-full group-hover:bg-[#B1ED67]/30 transition-colors">
@@ -474,19 +459,16 @@ export default function HomePage() {
           </section>
 
           {/* COMPARE PRODUCTS */}
-
           <section
             id="compare"
-            className="relative flex justify-center items-center mb-[2%] pb-[5%] mt-[2%] min-h-[80vh] overflow-hidden px-6 lg:px-10 bg-opacity-0"
+            className="relative flex justify-center items-center mb-[2%] pb-[5%] mt-[2%] min-h-[80vh] overflow-hidden px-4 sm:px-6 lg:px-10"
           >
-            {/* Subtle noise/background */}
-
             <div className="absolute inset-0 bg-white bg-opacity-0 pointer-events-none"></div>
 
-            {/* Glass card container */}
-
             <SpotlightCard
-              className="relative z-10 w-[90%] rounded-3xl bg-white backdrop-blur-lg p-10 sm:p-14 flex flex-col drop-shadow-2xl shadow-2xl border-none bg-opacity-100"
+              className="relative z-10 w-[90%] rounded-3xl bg-white backdrop-blur-lg 
+                p-6 sm:p-10 md:p-14 flex flex-col drop-shadow-2xl shadow-2xl 
+                border-none bg-opacity-100"
               spotlightColor="rgba(177,237,103,0)"
             >
               <motion.div
@@ -494,35 +476,40 @@ export default function HomePage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
               >
-                <h2 className="text-4xl sm:text-5xl  mb-12 text-center text-black">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl mb-10 sm:mb-12 text-center text-black">
                   Compare Products
                 </h2>
 
                 <Tabs defaultValue="las">
-                  <TabsList className="mb-10">
+                  <TabsList
+                    className="
+                      mb-10 
+                      flex flex-col justify-start gap-2 sm:gap-3 
+                      sm:flex-row sm:flex-wrap bg-transparent shadow-none border-none
+                      -mx-6 px-6 
+                      sm:-mx-10 sm:px-10 w-full 
+                    "
+                  >
                     {PRODUCTS.map((p) => (
                       <TabsTrigger
                         key={p.id}
                         value={p.id}
-                        className={`
-
-                text-lg sm:text-xl px-6 sm:px-8 py-3 sm:py-4 rounded-xl whitespace-nowrap transition
-
-                focus-visible:ring-4 focus-visible:ring-emerald-400
-
-                data-[state=active]:bg-[#2b7146]
-
-                data-[state=active]:text-white
-
-                data-[state=active]:drop-shadow-2xl
-
-              `}
+                        className="
+                          text-sm sm:text-base md:text-lg
+                          px-3 sm:px-5 md:px-6
+                          py-2.5 sm:py-3 md:py-3 
+                          rounded-xl transition 
+                          focus-visible:ring-4 focus-visible:ring-emerald-400
+                          data-[state=active]:bg-[#2b7146]
+                          data-[state=active]:text-white
+                          data-[state=active]:drop-shadow-2xl
+                          w-full justify-start
+                          sm:w-auto sm:justify-center"
                       >
                         {p.title.split("(")[0].trim()}
                       </TabsTrigger>
                     ))}
                   </TabsList>
-
                   {PRODUCTS.map((p) => (
                     <TabsContent key={p.id} value={p.id}>
                       <motion.div
@@ -530,18 +517,26 @@ export default function HomePage() {
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.6 }}
                       >
-                        <div className="grid md:grid-cols-[38%_60%] gap-12 items-start text-center md:text-left pt-8 pl-2">
-                          {/* Left Info */}
-
+                        <div
+                          className="
+                            grid 
+                            grid-cols-1 
+                            md:grid-cols-[38%_60%] 
+                            gap-10 md:gap-12 
+                            items-start 
+                            text-center md:text-left 
+                            pt-6 sm:pt-8
+                          "
+                        >
+                          {/* LEFT CONTENT */}
                           <div>
-                            <h4 className="text-2xl font-semibold text-[#0A0F2C]">
+                            <h4 className="text-2xl sm:text-3xl font-semibold text-[#0A0F2C]">
                               <BlurText
                                 text={p.title}
                                 delay={10}
                                 animateBy="words"
                                 direction="top"
-                                onAnimationComplete={handleAnimationComplete}
-                                className="text-4xl  text-[#0A0F2C]"
+                                className="text-3xl sm:text-4xl text-[#0A0F2C]"
                               />
                             </h4>
 
@@ -550,32 +545,28 @@ export default function HomePage() {
                               delay={10}
                               animateBy="words"
                               direction="bottom"
-                              onAnimationComplete={handleAnimationComplete}
-                              className="text-xl text-black mt-5 leading-relaxed"
+                              className="text-lg sm:text-xl text-black mt-4 sm:mt-5 leading-relaxed"
                             />
 
-                            <ul className="mt-8 text-lg text-slate-600 space-y-4">
+                            <ul className="mt-6 sm:mt-8 text-base sm:text-lg text-slate-600 space-y-3 sm:space-y-4 list-none p-0">
                               {p.bullets.map((b, i) => (
-                                <li key={i}>
+                                <li key={i} className="text-left">
                                   <BlurText
                                     text={`• ${b}`}
                                     delay={10 + i * 2}
                                     animateBy="words"
+                                    className="text-base sm:text-lg text-slate-700"
                                     direction="bottom"
-                                    onAnimationComplete={
-                                      handleAnimationComplete
-                                    }
-                                    className="text-lg text-slate-700"
                                   />
                                 </li>
                               ))}
                             </ul>
 
-                            <div className="mt-10 flex flex-col sm:flex-row gap-6 justify-center md:justify-start">
+                            <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row gap-4 sm:gap-6 justify-start">
                               <Link href={`/products/${p.id}`}>
                                 <Button
                                   size="lg"
-                                  className="text-lg px-8 py-4 bg-[#FF5732] hover:bg-[#FF5732]"
+                                  className="text-lg px-8 py-4 bg-[#FF5732] hover:bg-[#FF5732] w-full sm:w-auto"
                                 >
                                   Deep Dive
                                 </Button>
@@ -583,9 +574,16 @@ export default function HomePage() {
                             </div>
                           </div>
 
-                          {/* Right Metrics → Firebase Table */}
-
-                          <div className="p-4  rounded-lg">
+                          {/* RIGHT SIDE TABLE */}
+                          <div
+                            className="
+                              p-3 sm:p-4 rounded-lg
+                              md:ml-[-20px] 
+                              lg:ml-[-30px]
+                              overflow-x-auto md:overflow-visible
+                              w-full
+                            "
+                          >
                             <CompareProductsTable productType={p.id} />
                           </div>
                         </div>
@@ -598,24 +596,50 @@ export default function HomePage() {
           </section>
 
           {/* FEATURES SECTION */}
-          <section className="w-full bg-[#F9FAFB] bg-opacity-0 py-15 px-6 lg:px-20 flex flex-col lg:flex-row justify-between items-center lg:items-start">
-            <section className="w-full bg-[#F9FAFB]  bg-opacity-0 py-10 px-6 lg:px-20 flex flex-col lg:flex-row justify-between items-center lg:items-start">
-              {/* Left Section */}
-              <div className="w-1/2 h-1/2 mt-20 flex flex-col justify-center ml-[2%]">
-                <h2 className="text-7xl  text-[#0A0F2C] mb-6 mt-5 leading-tight font-bold">
+          <section className="w-full bg-[#F9FAFB] bg-opacity-0 py-15 px-6 lg:px-20">
+            <div
+              className="
+              w-full 
+              flex flex-col lg:flex-row 
+              justify-between 
+              items-center lg:items-start 
+              gap-12 lg:gap-20
+              "
+            >
+              {/* LEFT SECTION */}
+              <div className="w-full lg:w-1/2 flex flex-col justify-center mt-10 lg:mt-20 ml-[2%]">
+                <h2
+                  className="
+                    text-4xl sm:text-5xl md:text-6xl lg:text-7xl 
+                    text-[#0A0F2C] 
+                    mb-6 mt-5
+                    leading-tight 
+                    font-bold
+                  "
+                >
                   About CompareFi
                 </h2>
-                <p className="text-[#4B5563] mb-6 text-2xl leading-relaxed font-normal">
+
+                <p
+                  className="
+                    text-[#4B5563] 
+                    mb-6 
+                    text-base sm:text-lg md:text-xl lg:text-2xl 
+                    leading-relaxed 
+                    font-normal
+                  "
+                >
                   CompareFi is an independent platform built to bring
                   transparency and clarity to finance. We simplify complex
                   financial decisions by helping you compare loans, investments,
                   and other products side by side — so you can understand true
                   costs, uncover hidden charges, and choose what’s genuinely
                   right for you. Our mission is to make financial
-                  decision-making clear, confident, and fair for everyone
+                  decision-making clear, confident, and fair for everyone.
                 </p>
+
                 <div>
-                  <a class="button1" href="/about">
+                  <a className="button1" href="/about">
                     <span>Read More</span>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 66 43">
                       <polygon points="39.58,4.46 44.11,0 66,21.5 44.11,43 39.58,38.54 56.94,21.5"></polygon>
@@ -626,25 +650,39 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* Right Section (Image / Illustration) */}
-              <div className="lg:w-1/2 flex justify-center">
-                <div className="w-[80%] ml-[10%]">
-                  <Image src={globe} alt="CompareFi Overview" className="" />
+              {/* RIGHT SECTION */}
+              <div className="w-full lg:w-1/2 flex justify-center">
+                <div className="w-[80%] sm:w-[70%] md:w-[60%] lg:w-[80%]">
+                  <Image
+                    src={globe}
+                    alt="CompareFi Overview"
+                    className="w-full h-auto object-contain"
+                  />
                 </div>
               </div>
-            </section>
+            </div>
           </section>
 
           {/* CTA SECTION */}
-          <section className="w-full flex justify-center items-center py-20 px-4">
-            <div className="w-[85%] rounded-3xl px-6 sm:px-16 py-20 relative overflow-hidden bg-[#124434]">
+          <section className="w-full flex justify-center items-center py-16 px-4 sm:px-6 md:px-10">
+            <div
+              className="
+                w-full sm:w-[90%] lg:w-[85%]
+                rounded-3xl 
+                px-4 sm:px-10 md:px-16 
+                py-14 sm:py-16 md:py-20 
+                relative 
+                overflow-hidden 
+                bg-[#124434]
+              "
+            >
               {/* GRID BACKGROUND */}
               <div
                 className="absolute inset-0 z-0"
                 style={{
                   backgroundImage:
                     "linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px)",
-                  backgroundSize: "80px 80px",
+                  backgroundSize: "60px 60px",
                   maskImage:
                     "linear-gradient(to bottom, white 0%, white 70%, transparent 100%), linear-gradient(to right, transparent 0%, white 25%, white 75%, transparent 100%)",
                   maskComposite: "intersect",
@@ -658,19 +696,37 @@ export default function HomePage() {
               <div className="absolute inset-0 bg-[#124434]/40 z-0"></div>
 
               {/* CTA CONTENT */}
-              <div className="relative z-10 text-center flex flex-col items-center gap-6">
-                <h2 className="text-3xl sm:text-5xl font-bold text-white leading-tight">
+              <div className="relative z-10 text-center flex flex-col items-center gap-4 sm:gap-6">
+                
+                {/* Responsive Heading */}
+                <h2
+                  className="
+                    text-2xl sm:text-4xl md:text-5xl 
+                    font-bold 
+                    text-white 
+                    leading-snug sm:leading-tight
+                  "
+                >
                   Still unsure which financial product is
-                  <br />
+                  <br className="hidden sm:block" />
                   right for you?
                 </h2>
 
-                <p className="text-gray-200 text-lg max-w-2xl">
+                {/* Responsive Paragraph */}
+                <p
+                  className="
+                    text-gray-200 
+                    text-sm sm:text-base md:text-lg 
+                    max-w-xl sm:max-w-2xl 
+                    leading-relaxed
+                  "
+                >
                   Talk to us — we will help you compare options
-                  <br />
+                  <br className="hidden sm:block" />
                   and choose what saves you the most.
                 </p>
 
+                {/* WhatsApp Button */}
                 <button
                   onClick={() => {
                     window.open(
@@ -678,15 +734,23 @@ export default function HomePage() {
                       "_blank"
                     );
                   }}
-                  className="mt-4 inline-flex items-center gap-2 bg-[#B5FF4A] hover:bg-[#a4ff2e]
-        text-[#0d1c11] font-semibold px-8 py-4 rounded-full transition-all duration-300
-        shadow-lg"
+                  className="
+                    mt-4 
+                    inline-flex items-center gap-2 
+                    bg-[#B5FF4A] hover:bg-[#a4ff2e]
+                    text-[#0d1c11] font-semibold 
+                    px-6 sm:px-8 md:px-10 
+                    py-3 sm:py-4 
+                    rounded-full 
+                    transition-all duration-300
+                    shadow-lg
+                    text-sm sm:text-base md:text-lg
+                  "
                 >
                   Contact Us
-                  {/* WhatsApp Icon */}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="w-6 h-6"
+                    className="w-5 h-5 sm:w-6 sm:h-6"
                     viewBox="0 0 32 32"
                     fill="currentColor"
                   >
@@ -696,6 +760,7 @@ export default function HomePage() {
               </div>
             </div>
           </section>
+
         </main>
         {/* FOOTER */}
         <Footer />

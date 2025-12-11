@@ -49,6 +49,14 @@ p {
 }
 
 
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
 /* From Uiverse.io by Li-Deheng */ 
 .button1 {
   --main-size: 1.25rem;
