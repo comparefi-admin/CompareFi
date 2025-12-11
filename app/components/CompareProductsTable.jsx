@@ -24,7 +24,6 @@ export default function CompareProductsTable({ productType }) {
             : await fetchMTF();
 
         const clean = rows.map((d) => {
-          
           if (type === "mtf") {
             return {
               id: d.id,
@@ -45,7 +44,7 @@ export default function CompareProductsTable({ productType }) {
               regularization_period: d.regularization_period ?? "—",
               loan_debt: d.loan_debt ?? null,
               loan_equity: d.loan_equity ?? null,
-              ltv: d.ltv ?? null
+              ltv: d.ltv ?? null,
             };
           }
 
@@ -111,24 +110,61 @@ export default function CompareProductsTable({ productType }) {
 
               {(type === "las" || type === "lamf") && (
                 <>
-                  <th
-                    style={{ background: "#124434", color: "#FFF" }}
-                    className="px-4 py-3 border-r"
-                  >
-                    1st Year Cost
-                  </th>
-                  <th
-                    style={{ background: "#124434", color: "#FFF" }}
-                    className="px-4 py-3 border-r"
-                  >
-                    2nd Year Cost
-                  </th>
+                  {/* LAS headings */}
+                  {type === "las" && (
+                    <>
+                      <th
+                        style={{ background: "#124434", color: "#FFF" }}
+                      className="px-4 py-3 border-r leading-tight whitespace-normal min-w-[150px]"
+
+                      >
+                        <div>~Overall Cost</div>
+                        <div>over 1 lakh LAS</div>
+                        <div className="text-xs mt-1">(1st Year Cost)</div>
+                      </th>
+
+                      <th
+                        style={{ background: "#124434", color: "#FFF" }}
+                       className="px-4 py-3 border-r leading-tight whitespace-normal min-w-[150px]"
+
+                      >
+                        <div>~Overall Cost</div>
+                        <div>over 1 lakh LAS</div>
+                        <div className="text-xs mt-1">(2nd Year Cost)</div>
+                      </th>
+                    </>
+                  )}
+
+                  {/* LAMF headings */}
+                  {type === "lamf" && (
+                    <>
+                      <th
+                        style={{ background: "#124434", color: "#FFF" }}
+                        className="px-4 py-3 border-r leading-tight whitespace-normal"
+                      >
+                        <div>~Overall Cost</div>
+                        <div>over 1 lakh LAMF**</div>
+                        <div className="text-xs mt-1">(1st Year Cost)</div>
+                      </th>
+
+                      <th
+                        style={{ background: "#124434", color: "#FFF" }}
+                        className="px-4 py-3 border-r leading-tight whitespace-normal"
+                      >
+                        <div>~Overall Cost</div>
+                        <div>over 1 lakh LAMF**</div>
+                        <div className="text-xs mt-1">(2nd Year Cost)</div>
+                      </th>
+                    </>
+                  )}
+
                   <th
                     style={{ background: "#124434", color: "#FFF" }}
                     className="px-4 py-3 border-r"
                   >
                     Approved Assets
                   </th>
+
                   <th
                     style={{ background: "#124434", color: "#FFF" }}
                     className="px-4 py-3 border-r"
@@ -139,7 +175,7 @@ export default function CompareProductsTable({ productType }) {
                   {type === "las" && (
                     <th
                       style={{ background: "#124434", color: "#FFF" }}
-                      className="px-4 py-3"
+                      className="px-4 py-3 whitespace-nowrap min-w-[110px]"
                     >
                       LTV
                     </th>
@@ -149,13 +185,14 @@ export default function CompareProductsTable({ productType }) {
                     <>
                       <th
                         style={{ background: "#124434", color: "#FFF" }}
-                        className="px-4 py-3 border-r"
+                        className="px-4 py-3 border-r whitespace-nowrap min-w-[110px]"
                       >
                         LTV – Debt
                       </th>
+
                       <th
                         style={{ background: "#124434", color: "#FFF" }}
-                        className="px-4 py-3"
+                        className="px-4 py-3 whitespace-nowrap min-w-[110px]"
                       >
                         LTV – Equity
                       </th>
@@ -168,16 +205,20 @@ export default function CompareProductsTable({ productType }) {
                 <>
                   <th
                     style={{ background: "#124434", color: "#FFF" }}
-                    className="px-4 py-3 border-r"
+                    className="px-4 py-3 border-r leading-tight whitespace-normal"
                   >
-                    Cost Summary
+                    <div>~Overall MTF Cost of</div>
+                    <div className="font-semibold">5 lakh</div>
+                    <div className="text-xs">(1st Year Cost)***</div>
                   </th>
+
                   <th
                     style={{ background: "#124434", color: "#FFF" }}
                     className="px-4 py-3 border-r"
                   >
                     Margin Requirement
                   </th>
+
                   <th
                     style={{ background: "#124434", color: "#FFF" }}
                     className="px-4 py-3"
@@ -198,48 +239,71 @@ export default function CompareProductsTable({ productType }) {
 
                 {(type === "las" || type === "lamf") && (
                   <>
-                    <td className="px-4 py-4 border-r">
-                      {row.cost_first_year
-                        ? renderValue(row.cost_first_year.percent)
-                        : "—"}
+                    {/* Cost First Year */}
+                    <td className="px-4 py-4 border-r text-center">
+                      {row.cost_first_year ? (
+                        <div className="flex flex-col items-center gap-1">
+                          <div className="font-bold text-green-600 text-base">
+                            {row.cost_first_year.percent ?? "—"}
+                          </div>
+                          <div className="w-full border-t border-gray-300 my-1"></div>
+                          <div className="text-sm text-gray-700">
+                            {row.cost_first_year.amount
+                              ? ` ${row.cost_first_year.amount.toLocaleString()}`
+                              : "—"}
+                          </div>
+                        </div>
+                      ) : "—"}
                     </td>
-                    <td className="px-4 py-4 border-r">
-                      {row.cost_second_year
-                        ? renderValue(row.cost_second_year.percent)
-                        : "—"}
+
+                    {/* Cost Second Year */}
+                    <td className="px-4 py-4 border-r text-center">
+                      {row.cost_second_year ? (
+                        <div className="flex flex-col items-center gap-1">
+                          <div className="font-bold text-green-600 text-base">
+                            {row.cost_second_year.percent ?? "—"}
+                          </div>
+                          <div className="w-full border-t border-gray-300 my-1"></div>
+                          <div className="text-sm text-gray-700">
+                            {row.cost_second_year.amount
+                              ? ` ${row.cost_second_year.amount.toLocaleString()}`
+                              : "—"}
+                          </div>
+                        </div>
+                      ) : "—"}
                     </td>
+
                     <td className="px-4 py-4 border-r">
                       {renderValue(row.approved_assets)}
                     </td>
+
                     <td className="px-4 py-4 border-r">
                       {renderValue(row.regularization_period)}
                     </td>
 
                     {type === "las" && (
-                      <td className="px-4 py-4">
-  {row.ltv
-    ? `${renderValue(row.ltv.min)}–${renderValue(row.ltv.max)}%`
-    : "—"}
-</td>
-
+                      <td className="px-4 py-4 whitespace-nowrap min-w-[110px]">
+                        {row.ltv
+                          ? `${renderValue(row.ltv.min)}–${renderValue(
+                              row.ltv.max
+                            )}%`
+                          : "—"}
+                      </td>
                     )}
 
                     {type === "lamf" && (
                       <>
-                        {/* LTV - Debt */}
-<td className="px-4 py-4 border-r">
-  {row.ltv?.debt
-    ? row.ltv.debt.replace("/", "–")
-    : "—"}
-</td>
+                        <td className="px-4 py-4 border-r whitespace-nowrap min-w-[110px]">
+                          {row.ltv?.debt
+                            ? row.ltv.debt.replace("/", "–")
+                            : "—"}
+                        </td>
 
-{/* LTV - Equity */}
-<td className="px-4 py-4">
-  {row.ltv?.equity
-    ? row.ltv.equity.replace("/", "–")
-    : "—"}
-</td>
-
+                        <td className="px-4 py-4 whitespace-nowrap min-w-[110px]">
+                          {row.ltv?.equity
+                            ? row.ltv.equity.replace("/", "–")
+                            : "—"}
+                        </td>
                       </>
                     )}
                   </>
@@ -247,19 +311,26 @@ export default function CompareProductsTable({ productType }) {
 
                 {type === "mtf" && (
                   <>
-                    <td className="px-4 py-4 border-r text-left">
-                      {row.cost_summary
-                        ? Object.entries(row.cost_summary).map(([k, v], i) => (
-                            <div key={i}>
-                              <span className="font-semibold">{k}:</span>{" "}
-                              {renderValue(v)}
-                            </div>
-                          ))
-                        : "—"}
+                    <td className="px-4 py-4 border-r text-center">
+                      {row.cost_summary ? (
+                        <div className="flex flex-col items-center gap-1">
+                          <div className="font-bold text-green-600 text-base">
+                            {row.cost_summary.percent ?? "—"}
+                          </div>
+                          <div className="w-full border-t border-gray-300 my-1"></div>
+                          <div className="text-sm text-gray-700">
+                            {row.cost_summary.amount
+                              ? ` ${row.cost_summary.amount.toLocaleString()}`
+                              : "—"}
+                          </div>
+                        </div>
+                      ) : "—"}
                     </td>
+
                     <td className="px-4 py-4 border-r">
                       {renderValue(row.margin_requirement)}
                     </td>
+
                     <td className="px-4 py-4">
                       {renderValue(row.approved_assets)}
                     </td>
