@@ -333,15 +333,16 @@ export default function HomePage() {
 
 
 
-          {/* PRODUCT HIGHLIGHTS */}
+      {/* PRODUCT HIGHLIGHTS */}
 <section
   id="featured"
-  className="relative z-[40] w-full bg-[#EEF1FA] bg-opacity-0 py-20 mx-5 px-10 lg:px-20 flex flex-col lg:flex-row justify-between items-center lg:items-start"
+  className="relative z-[40] w-full bg-[#EEF1FA] bg-opacity-0 py-20 px-4 sm:px-6 lg:px-20 flex flex-col lg:flex-row justify-between items-center lg:items-start gap-10 lg:gap-0"
 >
 
-  {/* Left Section */}
-  <div className="lg:w-1/3 mb-10 lg:mb-0 ml-10">
-    <h2 className="text-4xl  text-[#0A0F2C] mb-6 leading-tight">
+  {/* Left Section - Title */}
+  {/* Added text-center for mobile, text-left for desktop. Removed hardcoded ml-10 */}
+  <div className="w-full lg:w-1/3 flex flex-col items-center lg:items-start text-center lg:text-left lg:pr-10">
+    <h2 className="text-3xl sm:text-4xl text-[#0A0F2C] mb-6 leading-tight font-bold">
       Product Highlights
     </h2>
     <a
@@ -352,96 +353,103 @@ export default function HomePage() {
     </a>
   </div>
 
-  {/* Right Section (Cards Grid) */}
-  <div className="lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mr-10">
-{/* LAS Card */}
-<a href="/products/las" 
-   className="
-     card4 group relative overflow-hidden rounded-lg bg-[#141F2B] shadow-md hover:shadow-lg 
-     transition-all duration-300 p-6 cursor-pointer
-     before:pointer-events-none
-   "
->
+  {/* Right Section - Cards Grid */}
+  {/* Removed mr-10. Added w-full. Adjusted grid columns for mobile/tablet/desktop */}
+  <div className="w-full lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    
+    {/* LAS Card */}
+    <a href="/products/las" 
+       className="
+         card4 group relative overflow-hidden rounded-lg bg-[#141F2B] shadow-md hover:shadow-lg 
+         transition-all duration-300 p-6 cursor-pointer w-full
+         before:pointer-events-none
+       "
+    >
+      <div className="flex items-center space-x-4">
+        {/* Icon on the left */}
+        <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-[#B1ED67]/20 rounded-full group-hover:bg-[#B1ED67]/30 transition-colors">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 48 48"
+            className="w-7 h-7 text-[#B1ED67] group-hover:text-white transition-colors"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="3"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            {/* ₹ Rupee Symbol */}
+            <path d="M15 10h18M15 18h18M27 10c0 8-4 14-12 14l15 14" />
+          </svg>
+        </div>
 
-  <div className="flex items-center space-x-4">
-    {/* Icon on the left */}
- <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-[#B1ED67]/20 rounded-full group-hover:bg-[#B1ED67]/30 transition-colors">
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 48 48"
-    className="w-7 h-7 text-[#B1ED67] group-hover:text-white transition-colors"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="3"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    {/* ₹ Rupee Symbol — Hindi/Devanagari style */}
-    <path d="M15 10h18M15 18h18M27 10c0 8-4 14-12 14l15 14" />
-  </svg>
-</div>
+        {/* Text */}
+        <div>
+          <p className="text1-title text-xl font-semibold text-[#FFFFFF] transition-colors">LAS</p>
+          <p className="text1-body text-white mt-1">Loan Against Shares</p>
+        </div>
+      </div>
+      <button className="card4-button mt-4 bg-[#B1ED67] hover:bg-black text-white font-medium py-2 px-4 rounded-lg transition-all w-full sm:w-auto">More Info</button>
+    </a>
 
+    {/* LAMF Card */}
+    <a href="/products/lamf" 
+       className="
+         card4 group relative overflow-hidden rounded-lg bg-[#2E494D] shadow-md hover:shadow-lg 
+         transition-all duration-300 p-6 cursor-pointer w-full
+         before:pointer-events-none
+       "
+    >
+      <div className="flex items-center space-x-4">
+        <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-[#B1ED67]/20 rounded-full group-hover:bg-[#B1ED67]/30 transition-colors">
+          <PieChart className="w-6 h-6 text-[#B1ED67] group-hover:text-white" />
+        </div>
+        <div>
+          <p className="text1-title text-xl font-semibold text-[#FFFFFF] transition-colors">LAMF</p>
+          <p className="text1-body text-white mt-1">Loan Against Mutual Funds</p>
+        </div>
+      </div>
+      <button className="card4-button mt-4 bg-[#B1ED67] hover:bg-black text-white font-medium py-2 px-4 rounded-lg transition-all w-full sm:w-auto">More Info</button>
+    </a>
 
+    {/* MTF Card */}
+    <a href="/products/mtf" 
+       className="
+         card4 group relative overflow-hidden rounded-lg bg-[#141F2B] shadow-md hover:shadow-lg 
+         transition-all duration-300 p-6 cursor-pointer w-full
+       "
+    >
+      <div className="flex items-center space-x-4">
+        <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-[#B1ED67]/20 rounded-full group-hover:bg-[#B1ED67]/30 transition-colors">
+          <BarChart className="w-6 h-6 text-[#B1ED67]" />
+        </div>
+        <div>
+          <p className="text1-title text-xl font-semibold text-[#FFFFFF] transition-colors">MTF</p>
+          <p className="text1-body text-white mt-1">Margin Trading Facility</p>
+        </div>
+      </div>
+      <button className="card4-button mt-4 bg-[#B1ED67] hover:bg-black text-white font-medium py-2 px-4 rounded-lg transition-all w-full sm:w-auto">More Info</button>
+    </a>
 
-
-    {/* Text */}
-    <div>
-      <p className="text1-title text-xl font-semibold text-[#FFFFFF]  transition-colors">LAS</p>
-      <p className="text1-body text-white mt-1">Loan Against Shares</p>
-    </div>
   </div>
-  <button className="card4-button mt-4 bg-[#B1ED67] hover:bg-black text-white font-medium py-2 px-4 rounded-lg transition-all">More Info</button>
-</a>
-
-{/* LAMF Card */}
-<a href="/products/lamf" 
-   className="
-     card4 group relative overflow-hidden rounded-lg bg-[#2E494D] shadow-md hover:shadow-lg 
-     transition-all duration-300 p-6 cursor-pointer
-     before:pointer-events-none
-   "
->
-
-  <div className="flex items-center space-x-4">
-    <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-[#B1ED67]/20 rounded-full group-hover:bg-[#B1ED67]/30 transition-colors">
-      <PieChart className="w-6 h-6 text-[#B1ED67] group-hover:text-white" />
-    </div>
-    <div>
-      <p className="text1-title text-xl font-semibold text-[#FFFFFF]  transition-colors">LAMF</p>
-      <p className="text1-body text-white mt-1">Loan Against Mutual Funds</p>
-    </div>
-  </div>
-  <button className="card4-button mt-4 bg-[#B1ED67] hover:bg-black text-white font-medium py-2 px-4 rounded-lg transition-all">More Info</button>
-</a>
-
-{/* MTF Card */}
-<a href="/products/mtf" className="card4 group relative overflow-hidden rounded-lg bg-[#141F2B] shadow-md hover:shadow-lg transition-all duration-300 p-6 cursor-pointer">
-  <div className="flex items-center space-x-4">
-    <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-[#B1ED67]/20 rounded-full group-hover:bg-[#B1ED67]/30 transition-colors">
-      <BarChart className="w-6 h-6 text-[#B1ED67] " />
-    </div>
-    <div>
-      <p className="text1-title text-xl font-semibold text-[#FFFFFF]  transition-colors">MTF</p>
-      <p className="text1-body text-white mt-1">Margin Trading Facility</p>
-    </div>
-  </div>
-  <button className="card4-button mt-4 bg-[#B1ED67] hover:bg-black text-white font-medium py-2 px-4 rounded-lg transition-all">More Info</button>
-</a>
-
-</div>
 </section>
 
 
 
 {/* COMPARE PRODUCTS */}
-
-<section id="compare" className="relative flex justify-center items-center mb-[2%] pb-[5%] mt-[2%] min-h-[80vh] overflow-hidden px-6 lg:px-10 bg-opacity-0">
-  {/* Subtle noise/background */}
+<section 
+  id="compare" 
+  // Standardized padding for better mobile viewing. Adjusted min-h and margins.
+  className="relative flex justify-center items-center py-16 sm:py-20 min-h-[80vh] overflow-hidden px-4 sm:px-6 lg:px-10 bg-opacity-0"
+>
+  {/* Subtle noise/background (no changes needed) */}
   <div className="absolute inset-0 bg-white bg-opacity-0 pointer-events-none"></div>
 
   {/* Glass card container */}
   <SpotlightCard
-    className="relative z-10 w-[90%] rounded-3xl bg-white backdrop-blur-lg p-10 sm:p-14 flex flex-col drop-shadow-2xl shadow-2xl border-none bg-opacity-100"
+    // Increased max-width to look good on wide screens, ensured it takes full width on mobile.
+    // Adjusted padding for smaller screens (p-6/p-8).
+    className="relative z-10 w-full max-w-7xl rounded-3xl bg-white backdrop-blur-lg p-6 sm:p-8 lg:p-14 flex flex-col drop-shadow-2xl shadow-2xl border-none bg-opacity-100"
     spotlightColor="rgba(177,237,103,0)"
   >
     <motion.div
@@ -449,18 +457,21 @@ export default function HomePage() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
     >
-      <h2 className="text-4xl sm:text-5xl  mb-12 text-center text-black">
+      {/* Responsive Title Size */}
+      <h2 className="text-3xl sm:text-4xl md:text-5xl mb-8 sm:mb-12 text-center text-black">
         Compare Products
       </h2>
 
-      <Tabs defaultValue="las">
-        <TabsList className="mb-10">
+      <Tabs defaultValue="las" className="w-full">
+        {/* Tab List Styling */}
+        <TabsList className="mb-10 w-full flex flex-wrap justify-center h-auto gap-2 bg-transparent">
           {PRODUCTS.map((p) => (
             <TabsTrigger
               key={p.id}
               value={p.id}
+              // Ensured text size adapts and padding is flexible
               className={`
-                text-lg sm:text-xl px-6 sm:px-8 py-3 sm:py-4 rounded-xl whitespace-nowrap transition 
+                text-base sm:text-lg md:text-xl px-4 sm:px-6 md:px-8 py-2 sm:py-3 md:py-4 rounded-xl whitespace-nowrap transition 
                 focus-visible:ring-4 focus-visible:ring-emerald-400
                 data-[state=active]:bg-[#2b7146]
                 data-[state=active]:text-white
@@ -479,9 +490,11 @@ export default function HomePage() {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6 }}
             >
-              <div className="grid md:grid-cols-2 gap-12 items-start text-center md:text-left pt-8 pl-2">
+              {/* Layout: Stacks vertically on mobile (default), uses two columns on medium screens (md:grid-cols-2) */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 items-start text-center md:text-left pt-4 md:pt-8">
+                
                 {/* Left Info */}
-                <div>
+                <div className="order-2 md:order-1"> {/* Ensures table/chart shows first on mobile */}
                   <h4 className="text-2xl font-semibold text-[#0A0F2C]">
                     <BlurText
                       text={p.title}
@@ -489,7 +502,8 @@ export default function HomePage() {
                       animateBy="words"
                       direction="top"
                       onAnimationComplete={handleAnimationComplete}
-                      className="text-4xl  text-[#0A0F2C]"
+                      // Responsive header text size
+                      className="text-2xl sm:text-3xl md:text-4xl text-[#0A0F2C]"
                     />
                   </h4>
 
@@ -499,10 +513,11 @@ export default function HomePage() {
                     animateBy="words"
                     direction="bottom"
                     onAnimationComplete={handleAnimationComplete}
-                    className="text-xl text-black mt-5 leading-relaxed"
+                    className="text-lg sm:text-xl text-black mt-5 leading-relaxed"
                   />
 
-                  <ul className="mt-8 text-lg text-slate-600 space-y-4">
+                  {/* Bullet List: Aligned left within its container */}
+                  <ul className="mt-8 text-lg text-slate-600 space-y-4 text-left inline-block">
                     {p.bullets.map((b, i) => (
                       <li key={i}>
                         <BlurText
@@ -511,15 +526,16 @@ export default function HomePage() {
                           animateBy="words"
                           direction="bottom"
                           onAnimationComplete={handleAnimationComplete}
-                          className="text-lg text-slate-700"
+                          className="text-base sm:text-lg text-slate-700"
                         />
                       </li>
                     ))}
                   </ul>
 
+                  {/* CTA Buttons: Stack on small screens, align side-by-side otherwise */}
                   <div className="mt-10 flex flex-col sm:flex-row gap-6 justify-center md:justify-start">
-                    <Link href={`/products/${p.id}`}>
-                      <Button size="lg" className="text-lg px-8 py-4 bg-[#FF5732] hover:bg-[#FF5732]">
+                    <Link href={`/products/${p.id}`} className="w-full sm:w-auto">
+                      <Button size="lg" className="w-full sm:w-auto text-lg px-8 py-4 bg-[#FF5732] hover:bg-[#FF5732]">
                         Deep Dive
                       </Button>
                     </Link>
@@ -527,9 +543,10 @@ export default function HomePage() {
                 </div>
 
                 {/* Right Metrics → Firebase Table */}
-               <div className="p-4  rounded-lg">
-    <CompareProductsTable productType={p.id} />
-</div>
+                {/* Wrapped table container in overflow-x-auto to ensure horizontal scrolling on small screens */}
+                <div className="order-1 md:order-2 p-0 rounded-lg w-full overflow-x-auto">
+                  <CompareProductsTable productType={p.id} />
+                </div>
               </div>
             </motion.div>
           </TabsContent>
@@ -540,67 +557,71 @@ export default function HomePage() {
 </section>
 
 
-          {/* FEATURES SECTION */}
-          <section className="w-full bg-[#F9FAFB] bg-opacity-0 py-15 px-6 lg:px-20 flex flex-col lg:flex-row justify-between items-center lg:items-start">
-  <section className="w-full bg-[#F9FAFB]  bg-opacity-0 py-10 px-6 lg:px-20 flex flex-col lg:flex-row justify-between items-center lg:items-start">
-  {/* Left Section */}
-  <div className="w-1/2 h-1/2 mt-20 flex flex-col justify-center ml-[2%]">
-    <h2 className="text-7xl  text-[#0A0F2C] mb-6 mt-5 leading-tight font-bold">
+        {/* FEATURES SECTION */}
+<section className="w-full bg-[#F9FAFB] bg-opacity-0 py-10 px-4 sm:px-6 lg:px-20 flex flex-col lg:flex-row justify-between items-center lg:items-start gap-10 lg:gap-20">
+
+  {/* Left Section - Content */}
+  <div 
+    // Full width on mobile, 1/2 width on large screens. Removed fixed ml-[2%]
+    className="w-full lg:w-1/2 mt-10 lg:mt-20 flex flex-col justify-center text-center lg:text-left"
+  >
+    {/* Responsive Title Size */}
+    <h2 className="text-4xl sm:text-5xl lg:text-7xl text-[#0A0F2C] mb-6 mt-5 leading-tight font-bold">
       About CompareFi
     </h2>
-    <p className="text-[#4B5563] mb-6 text-2xl leading-relaxed font-normal">
+    {/* Responsive Paragraph Size */}
+    <p className="text-[#4B5563] mb-6 text-lg sm:text-xl lg:text-2xl leading-relaxed font-normal">
       CompareFi is an independent platform built to bring transparency and clarity to finance. We simplify complex financial decisions by helping you compare loans, investments, and other products side by side — so you can understand true costs, uncover hidden charges, and choose what’s genuinely right for you.
       Our mission is to make financial decision-making clear, confident, and fair for everyone
-
     </p>
-    <div>
-<a class="button1" href="/about">
-  <span>Read More</span>
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 66 43">
-    <polygon
-      points="39.58,4.46 44.11,0 66,21.5 44.11,43 39.58,38.54 56.94,21.5"
-    ></polygon>
-    <polygon
-      points="19.79,4.46 24.32,0 46.21,21.5 24.32,43 19.79,38.54 37.15,21.5"
-    ></polygon>
-    <polygon
-      points="0,4.46 4.53,0 26.42,21.5 4.53,43 0,38.54 17.36,21.5"
-    ></polygon>
-  </svg>
-</a>
-</div>
+    
+    {/* Button Wrapper: Ensure button is centered on mobile, left-aligned on desktop */}
+    <div className="flex justify-center lg:justify-start">
+      <a className="button1" href="/about">
+        <span>Read More</span>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 66 43">
+          <polygon
+            points="39.58,4.46 44.11,0 66,21.5 44.11,43 39.58,38.54 56.94,21.5"
+          ></polygon>
+          <polygon
+            points="19.79,4.46 24.32,0 46.21,21.5 24.32,43 19.79,38.54 37.15,21.5"
+          ></polygon>
+          <polygon
+            points="0,4.46 4.53,0 26.42,21.5 4.53,43 0,38.54 17.36,21.5"
+          ></polygon>
+        </svg>
+      </a>
+    </div>
   </div>
 
   {/* Right Section (Image / Illustration) */}
-  <div className="lg:w-1/2 flex justify-center">
-    <div className="w-[80%] ml-[10%]">
+  <div 
+    // Full width on mobile, 1/2 width on large screens. Centered globally.
+    className="w-full lg:w-1/2 flex justify-center mt-10 lg:mt-0"
+  >
+    {/* Image Container: Uses relative sizing for flexibility. Removed fixed ml-[10%] */}
+    <div className="w-full max-w-lg"> 
       <Image
         src={globe}
         alt="CompareFi Overview"
-        className=""
+        className="w-full h-auto object-contain"
       />
     </div>
   </div>
 </section>
 
-</section>
-{/* WHY COMPAREFI
-          <section className="w-full bg-[#EEF1FA] bg-opacity-0 py-20 px-6 lg:px-20">
-            <div className="max-w-7xl mx-auto text-center mb-14">
-              <h2 className="text-4xl font-extrabold text-[#0A0F2C] mb-4">Why CompareFi?</h2>
-              <p className="text-[#4B5563] text-lg max-w-2xl mx-auto">Discover how CompareFi helps you make confident, data-driven financial decisions.</p>
-            </div>
-            
-          </section> */}
 
 
 
 
 
-       <section className="w-full flex justify-center items-center py-20 px-4">
-  <div className="w-[85%] rounded-3xl px-6 sm:px-16 py-20 relative overflow-hidden bg-[#124434]">
+       {/* CTA SECTION */}
+<section className="w-full flex justify-center items-center py-16 sm:py-20 px-4">
+  {/* Inner Container: Changed w-[85%] to use max-w-6xl for better full-screen display, 
+      while still ensuring it's w-full on smaller screens. Increased mobile padding (px-6/py-16). */}
+  <div className="w-full max-w-6xl rounded-3xl px-6 sm:px-16 py-16 sm:py-20 relative overflow-hidden bg-[#124434]">
     
-    {/* GRID BACKGROUND */}
+    {/* GRID BACKGROUND (No changes needed, handles background styling) */}
     <div
       className="absolute inset-0 z-0"
       style={{
@@ -616,20 +637,23 @@ export default function HomePage() {
       }}
     />
 
-    {/* DARK OVERLAY */}
+    {/* DARK OVERLAY (No changes needed) */}
     <div className="absolute inset-0 bg-[#124434]/40 z-0"></div>
 
     {/* CTA CONTENT */}
     <div className="relative z-10 text-center flex flex-col items-center gap-6">
-      <h2 className="text-3xl sm:text-5xl font-bold text-white leading-tight">
-        Still unsure which financial product is
-        <br />
-        right for you?
+      {/* Responsive Title Size: Adjusted for smaller screens (text-3xl) and larger screens (md:text-5xl) */}
+      <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight">
+        Still unsure which financial product is{' '}
+        {/* Added hidden/block classes to manage line breaks gracefully */}
+        <br className="hidden sm:block" />
+         right for you?
       </h2>
 
-      <p className="text-gray-200 text-lg max-w-2xl">
+      {/* Responsive Paragraph Size: Added text-base for small screens */}
+      <p className="text-gray-200 text-base sm:text-lg max-w-2xl px-2">
         Talk to us — we will help you compare options
-        <br />
+        <br className="hidden sm:block" />
         and choose what saves you the most.
       </p>
 
@@ -641,15 +665,15 @@ export default function HomePage() {
           );
         }}
         className="mt-4 inline-flex items-center gap-2 bg-[#B5FF4A] hover:bg-[#a4ff2e]
-        text-[#0d1c11] font-semibold px-8 py-4 rounded-full transition-all duration-300
-        shadow-lg"
+          text-[#0d1c11] font-semibold px-6 sm:px-8 py-4 rounded-full transition-all duration-300
+          shadow-lg text-sm sm:text-base"
       >
         Contact Us
 
-        {/* WhatsApp Icon */}
+        {/* WhatsApp Icon: Added responsive size classes */}
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="w-6 h-6"
+          className="w-5 h-5 sm:w-6 sm:h-6"
           viewBox="0 0 32 32"
           fill="currentColor"
         >
