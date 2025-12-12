@@ -41,11 +41,11 @@ export default function Navbar() {
   }, [pathname]);
 
   return (
-    <div className="fixed top-4 left-0 w-full z-50 flex justify-center px-4">
+    <div className="fixed top-4 left-0 w-full z-50 flex justify-center px-4 pt-2">
 
       {/* LEFT: MOBILE HAMBURGER */}
       <button
-        className="absolute left-4 top-1/2 -translate-y-1/2 md:hidden p-2 bg-white rounded-full shadow hover:bg-gray-100 transition"
+        className="absolute left-4 top-[60%] -translate-y-1/2 md:hidden p-2 bg-white rounded-full shadow hover:bg-gray-100 transition"
         onClick={() => setMobileOpen(!mobileOpen)}
       >
         {mobileOpen ? <X size={22} /> : <Menu size={22} />}
