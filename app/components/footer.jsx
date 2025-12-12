@@ -12,20 +12,20 @@ export default function Footer() {
     <footer className="w-full bg-[#EFF3F6] text-[#1e2e2b] py-10 border-t border-[#B1ED67]/20">
       
       {/* CONTENT WIDTH CONTAINER */}
-      <div className=" mx-auto px-6">
+      <div className="mx-auto px-6">
         
         {/* GRID */}
-        <div className="grid md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
 
           {/* BRAND */}
-          <div className="md:-mt-10 pl-20" >
+          <div className="md:-mt-10 pl-0 md:pl-20 flex flex-col items-center md:items-start text-center md:text-left">
             <Link href="/">
               <Image
                 src={logo}
                 alt="CompareFi Logo"
                 width={260}
                 height={260}
-                className="object-contain w-40 h-40 cursor-pointer"
+                className="object-contain w-28 sm:w-32 md:w-40 h-auto cursor-pointer"
               />
             </Link>
 
@@ -35,8 +35,8 @@ export default function Footer() {
           </div>
 
           {/* PRODUCTS */}
-          <div>
-            <h4 className="font-bold text-lg mb-4 flex items-center gap-2 text-[#1e2e2b]">
+          <div className="text-center sm:text-left">
+            <h4 className="font-bold text-lg mb-4 flex items-center justify-center sm:justify-start gap-2 text-[#1e2e2b]">
               <Layers size={18} />
               Products
             </h4>
@@ -48,8 +48,8 @@ export default function Footer() {
           </div>
 
           {/* COMPANY */}
-          <div>
-            <h4 className="font-bold text-lg mb-4 flex items-center gap-2 text-[#1e2e2b]">
+          <div className="text-center sm:text-left">
+            <h4 className="font-bold text-lg mb-4 flex items-center justify-center sm:justify-start gap-2 text-[#1e2e2b]">
               <Building2 size={18} />
               Company
             </h4>
@@ -60,8 +60,8 @@ export default function Footer() {
           </div>
 
           {/* SUPPORT */}
-          <div>
-            <h4 className="font-bold text-lg mb-4 flex items-center gap-2 text-[#1e2e2b]">
+          <div className="text-center sm:text-left">
+            <h4 className="font-bold text-lg mb-4 flex items-center justify-center sm:justify-start gap-2 text-[#1e2e2b]">
               <LifeBuoy size={18} />
               Support
             </h4>
