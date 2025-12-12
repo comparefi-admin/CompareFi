@@ -41,7 +41,7 @@ export default function Footer() {
               Products
             </h4>
             <ul className="space-y-2 text-[#1e2e2b]/80">
-              <li><a href="/products/LAS" className="hover:text-[#1e2e2b]">Loan Against Shares (LAS)</a></li>
+              <li><a href="/products/las" className="hover:text-[#1e2e2b]">Loan Against Shares (LAS)</a></li>
               <li><a href="/products/lamf" className="hover:text-[#1e2e2b]">Loan Against Mutual Funds (LAMF)</a></li>
               <li><a href="/products/mtf" className="hover:text-[#1e2e2b]">Margin Trading Facility (MTF)</a></li>
             </ul>
