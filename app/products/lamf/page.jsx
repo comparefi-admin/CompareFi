@@ -149,10 +149,11 @@ export default function LAMFPage() {
       { key: "loan_equity", label: "Equity MF Loan" },
       { key: "loan_debt", label: "Debt MF Loan" },
       { key: "ltv", label: "LTV - Funding (Debt/Equity %)" },
-      { key: "regularization_period", label: "Margin Call Period (Days)" },
+      { key: "interest_rate", label: "Interest Rate (Min / Max / Median %)" },
+      
     ],
     majorCost: [
-      { key: "interest_rate", label: "Interest Rate (Min / Max / Median %)" },
+      { key: "regularization_period", label: "Margin Call Period (Days)" },
       { key: "processing_fee", label: "Processing Fee" },
       { key: "prepayment_charges", label: "Pre-payment Charges" },
       { key: "annual_maintenance", label: "Annual Maintenance / Renewal Fees" },
@@ -556,6 +557,18 @@ export default function LAMFPage() {
                         )}
                       </td>
 
+                      {/* LTV Funding */}
+                      <td className="px-5 py-4 border border-gray-300 text-center">
+                        {row.ltv ? (
+                          <>
+                            <div>Debt: {row.ltv.debt ?? "—"}</div>
+                            <div>Equity: {row.ltv.equity ?? "—"}</div>
+                          </>
+                        ) : (
+                          DEFAULT_NULL_TEXT
+                        )}
+                      </td>
+
                       {/* Interest */}
                       <td className="px-5 py-4 border border-gray-300 text-center">
                         {row.interest_rate ? (
@@ -567,11 +580,6 @@ export default function LAMFPage() {
                         ) : (
                           DEFAULT_NULL_TEXT
                         )}
-                      </td>
-
-                      {/* Margin */}
-                      <td className="px-5 py-4 border border-gray-300 text-center">
-                        {row.regularization_period ?? DEFAULT_NULL_TEXT}
                       </td>
 
                       {/* Contact Buttons */}
