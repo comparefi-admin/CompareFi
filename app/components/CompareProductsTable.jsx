@@ -20,8 +20,8 @@ export default function CompareProductsTable({ productType }) {
           type === "las"
             ? await fetchLAS()
             : type === "lamf"
-              ? await fetchLAMF()
-              : await fetchMTF();
+            ? await fetchLAMF()
+            : await fetchMTF();
 
         const clean = rows.map((d) => {
           if (type === "mtf") {
@@ -63,8 +63,8 @@ export default function CompareProductsTable({ productType }) {
           type === "las"
             ? ["mirae asset", "zerodha", "kotak", "bajaj"]
             : type === "lamf"
-              ? ["bank of baroda", "mirae asset", "kotak", "sbi"]
-              : ["kotak", "kotak - trade free youth plan", "hdfc sky", "dhan"];
+            ? ["bank of baroda", "mirae asset", "kotak", "sbi"]
+            : ["kotak", "kotak - trade free youth plan", "hdfc sky", "dhan"];
 
         const filtered = clean.filter((r) =>
           filterNames.includes((r.name || "").trim().toLowerCase())
@@ -91,58 +91,79 @@ export default function CompareProductsTable({ productType }) {
 
   return (
     <div className="bg-white rounded-xl shadow-lg p-6 md:p-8 mx-auto border-2 border-[#2b7146]">
-
       {/* ---------------- HIGHLIGHT STYLE BLOCK ---------------- */}
       <style jsx>{`
-  .highlight-col {
-    position: relative;
-    background: linear-gradient(
-      180deg,
-      rgba(242, 255, 245, 0.92),
-      rgba(225, 245, 230, 0.85)
-    );
-    border-radius: 14px;
-    box-shadow: 0 0 6px rgba(0, 0, 0, 0.06);
-    transition: 0.25s ease;
-  }
+        .highlight-col {
+          position: relative;
+          background: linear-gradient(
+            180deg,
+            rgba(242, 255, 245, 0.92),
+            rgba(225, 245, 230, 0.85)
+          );
+          border-radius: 14px;
+          box-shadow: 0 0 6px rgba(0, 0, 0, 0.06);
+          transition: 0.25s ease;
+        }
 
-  .highlight-col:hover {
-    background: rgba(210, 240, 215, 0.9);
-    transform: translateY(-2px);
-  }
+        .highlight-col:hover {
+          background: rgba(210, 240, 215, 0.9);
+          transform: translateY(-2px);
+        }
 
-  /* REMOVE DECORATIVE LEFT LINE */
-  .highlight-col::before,
-  .highlight-head::before {
-    content: none !important;
-  }
+        /* REMOVE DECORATIVE LEFT LINE */
+        .highlight-col::before,
+        .highlight-head::before {
+          content: none !important;
+        }
 
-  .highlight-head {
-    border-radius: 14px;
-  }
+        .highlight-head {
+          border-radius: 14px;
+        }
 
-  .row-hover:hover td {
-    background: rgba(230, 245, 235, 0.55) !important;
-    transform: scale(1.01);
-    transition: 0.25s ease;
-  }
+        .row-hover:hover td {
+          background: rgba(230, 245, 235, 0.55) !important;
+          transform: scale(1.01);
+          transition: 0.25s ease;
+        }
 
-  .row-hover:hover .highlight-col {
-    background: rgba(210, 240, 215, 0.9) !important;
-  }
+        .row-hover:hover .highlight-col {
+          background: rgba(210, 240, 215, 0.9) !important;
+        }
 
-  .wide-table {
-    width: 1500px;
-  }
+        .wide-table {
+          width: 1500px;
+        }
 
-  @media (max-width: 768px) {
-    .wide-table {
-      width: 1200px;
-    }
-  }
-`}</style>
+        /* Remove inner vertical borders for first 3 columns */
+        table th:nth-child(-n + 3),
+        table td:nth-child(-n + 3) {
+          border-right: none !important;
+          border-left: none !important;
+        }
 
+        /* Also remove the top/bottom line inside these cells */
+        table th:nth-child(-n + 3),
+        table td:nth-child(-n + 3) {
+          border-top: none !important;
+          border-bottom: none !important;
+        }
+        /* Add light vertical divider between first 3 columns */
+        table td:nth-child(1),
+        table th:nth-child(1) {
+          border-right: 1px solid rgba(0, 0, 0, 0.12) !important;
+        }
 
+        table td:nth-child(2),
+        table th:nth-child(2) {
+          border-right: 1px solid rgba(0, 0, 0, 0.12) !important;
+        }
+
+        @media (max-width: 768px) {
+          .wide-table {
+            width: 1200px;
+          }
+        }
+      `}</style>
 
       <div className="text-center mb-6">
         <h2 className="text-xl font-bold text-gray-900">
@@ -150,7 +171,7 @@ export default function CompareProductsTable({ productType }) {
         </h2>
       </div>
 
-      <div className="border border-gray-300 rounded-lg overflow-x-auto">
+      <div className=" rounded-lg overflow-x-auto">
         <table className="w-full divide-y divide-gray-200 text-sm text-center">
           <thead>
             <tr>
@@ -283,7 +304,6 @@ export default function CompareProductsTable({ productType }) {
           <tbody className="divide-y divide-gray-200">
             {data.map((row) => (
               <tr key={row.id} className="row-hover transition">
-
                 {(() => {
                   let col = 0;
                   const cells = [];
@@ -294,10 +314,9 @@ export default function CompareProductsTable({ productType }) {
                   cells.push(
                     <td
                       key={col}
-                      className={`px-4 py-4 border-r font-medium ${type !== "mtf"
-                          ? "highlight-col"
-                          : "highlight-col"
-                        }`}
+                      className={`px-4 py-4 border-r font-medium ${
+                        type !== "mtf" ? "highlight-col" : "highlight-col"
+                      }`}
                     >
                       {renderValue(row.name)}
                     </td>
@@ -312,8 +331,9 @@ export default function CompareProductsTable({ productType }) {
                     cells.push(
                       <td
                         key={col}
-                        className={`px-4 py-4 border-r text-center ${important.includes(col) ? "highlight-col" : ""
-                          }`}
+                        className={`px-4 py-4 border-r text-center ${
+                          important.includes(col) ? "highlight-col" : ""
+                        }`}
                       >
                         {row.cost_first_year ? (
                           <div className="flex flex-col items-center gap-1">
@@ -338,8 +358,9 @@ export default function CompareProductsTable({ productType }) {
                     cells.push(
                       <td
                         key={col}
-                        className={`px-4 py-4 border-r text-center ${important.includes(col) ? "highlight-col" : ""
-                          }`}
+                        className={`px-4 py-4 border-r text-center ${
+                          important.includes(col) ? "highlight-col" : ""
+                        }`}
                       >
                         {row.cost_second_year ? (
                           <div className="flex flex-col items-center gap-1">
@@ -382,8 +403,8 @@ export default function CompareProductsTable({ productType }) {
                         <td key={col} className="px-4 py-4 whitespace-nowrap">
                           {row.ltv
                             ? `${renderValue(row.ltv.min)}–${renderValue(
-                              row.ltv.max
-                            )}`
+                                row.ltv.max
+                              )}`
                             : "—"}
                         </td>
                       );
@@ -394,9 +415,7 @@ export default function CompareProductsTable({ productType }) {
                     if (type === "lamf") {
                       cells.push(
                         <td key={col} className="px-4 py-4 border-r">
-                          {row.ltv?.debt
-                            ? row.ltv.debt.replace("/", "–")
-                            : "—"}
+                          {row.ltv?.debt ? row.ltv.debt.replace("/", "–") : "—"}
                         </td>
                       );
                       col++;
@@ -422,8 +441,9 @@ export default function CompareProductsTable({ productType }) {
                     cells.push(
                       <td
                         key={col}
-                        className={`px-4 py-4 border-r text-center ${important.includes(col) ? "highlight-col" : ""
-                          }`}
+                        className={`px-4 py-4 border-r text-center ${
+                          important.includes(col) ? "highlight-col" : ""
+                        }`}
                       >
                         {row.cost_summary ? (
                           <div className="flex flex-col items-center gap-1">
@@ -448,8 +468,9 @@ export default function CompareProductsTable({ productType }) {
                     cells.push(
                       <td
                         key={col}
-                        className={`px-4 py-4 border-r ${important.includes(col) ? "highlight-col" : ""
-                          }`}
+                        className={`px-4 py-4 border-r ${
+                          important.includes(col) ? "highlight-col" : ""
+                        }`}
                       >
                         {renderValue(row.margin_requirement)}
                       </td>
