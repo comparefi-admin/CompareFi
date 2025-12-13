@@ -4,11 +4,16 @@ import React, { useState, useEffect, useMemo } from "react";
 import Navbar from "../../components/navbar";
 import Footer from "../../components/footer";
 import SpotlightCard from "@/components/SpotlightCard.jsx";
+import EnquiryModal from "../../components/EnquiryModal.jsx";
 import { MessageCircle, FileText } from "lucide-react";
 import { fetchMTF, DEFAULT_NULL_TEXT } from "@/lib/fetchData";
 import { faqData } from "./faqdata"; // ← correct path for your MTF page
 
 export default function MTFPage() {
+  // For enquiry form
+  const [enquiryOpen, setEnquiryOpen] = useState(false);
+  const [enquiryInstitution, setEnquiryInstitution] = useState(null);
+
   const [sortField, setSortField] = useState(null);
   const [sortOrder, setSortOrder] = useState("asc");
   const [data, setData] = useState([]);
@@ -422,25 +427,21 @@ keeping positions overnight while following SEBI-regulated margin rules.`,
                     </a>
 
                     <div className="mt-3">
-                      <a
-                        href={
-                          row.google_form_link ||
-                          "https://forms.gle/yourfallback"
-                        }
-                        target="_blank"
-                        rel="noreferrer"
-                        className="
-                    inline-flex items-center justify-center gap-2
-                    bg-gradient-to-b from-[#5e009c] to-[#c401ff]
-                    text-white px-4 py-2 rounded-lg
-                    shadow-[0_10px_30px_rgba(0,0,0,0.20)]
-                    hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
-                    transition-all duration-300 transform hover:-translate-y-0.5
-                  "
-                      >
-                        <FileText className="w-4 h-4" /> Fill Enquiry
-                      </a>
-                    </div>
+                                          <button
+                                            onClick={() => {
+                                              setEnquiryInstitution(row.broker_name);
+                                              setEnquiryOpen(true);
+                                            }}
+                                            className="inline-flex items-center justify-center gap-2
+                                              bg-gradient-to-b from-[#5e009c] to-[#c401ff]
+                                              text-white px-4 py-2 rounded-lg
+                                              shadow-[0_10px_30px_rgba(0,0,0,0.20)]
+                                              hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
+                                              transition-all duration-300 transform hover:-translate-y-0.5"
+                                          >
+                                            <FileText className="w-4 h-4" /> Fill Enquiry
+                                          </button>
+                                        </div>
                   </td>
                 </tr>
               ))}
@@ -711,25 +712,21 @@ keeping positions overnight while following SEBI-regulated margin rules.`,
                     </a>
 
                     <div className="mt-3">
-                      <a
-                        href={
-                          row.google_form_link ||
-                          "https://forms.gle/yourfallback"
-                        }
-                        target="_blank"
-                        rel="noreferrer"
-                        className="
-        inline-flex items-center justify-center gap-2
-        bg-gradient-to-b from-[#5e009c] to-[#c401ff]
-        text-white px-4 py-2 rounded-lg
-        shadow-[0_10px_30px_rgba(0,0,0,0.20)]
-        hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
-        transition-all duration-300 transform hover:-translate-y-0.5
-      "
-                      >
-                        <FileText className="w-4 h-4" /> Fill Enquiry
-                      </a>
-                    </div>
+                                          <button
+                                            onClick={() => {
+                                              setEnquiryInstitution(row.broker_name);
+                                              setEnquiryOpen(true);
+                                            }}
+                                            className="inline-flex items-center justify-center gap-2
+                                              bg-gradient-to-b from-[#5e009c] to-[#c401ff]
+                                              text-white px-4 py-2 rounded-lg
+                                              shadow-[0_10px_30px_rgba(0,0,0,0.20)]
+                                              hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
+                                              transition-all duration-300 transform hover:-translate-y-0.5"
+                                          >
+                                            <FileText className="w-4 h-4" /> Fill Enquiry
+                                          </button>
+                                        </div>
                   </td>
                 </tr>
               ))}
@@ -823,23 +820,6 @@ keeping positions overnight while following SEBI-regulated margin rules.`,
         "
             >
               <MessageCircle className="w-5 h-5" /> Chat on WhatsApp
-            </a>
-
-            {/* Google Form Button */}
-            <a
-              href="https://forms.gle/yourformlink"
-              target="_blank"
-              rel="noreferrer"
-              className="
-          inline-flex items-center justify-center gap-2
-          bg-gradient-to-b from-[#5e009c] to-[#c401ff]
-          text-white px-8 py-4 rounded-2xl text-lg font-semibold
-          shadow-[0_16px_38px_rgba(0,0,0,0.26)]
-          hover:shadow-[0_18px_42px_rgba(0,0,0,0.30)]
-          transition-all duration-300 hover:-translate-y-1
-        "
-            >
-              <FileText className="w-5 h-5" /> Submit Form
             </a>
           </div>
 
@@ -1019,6 +999,13 @@ keeping positions overnight while following SEBI-regulated margin rules.`,
           Contact Us
         </a>
       </section>
+
+      <EnquiryModal
+        open={enquiryOpen}
+        onClose={() => setEnquiryOpen(false)}
+        product="Margin Trading Facility (MTF)"
+        institution={enquiryInstitution}
+      />
 
       <Footer />
     </div>

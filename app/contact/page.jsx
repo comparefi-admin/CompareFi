@@ -14,32 +14,77 @@ export default function ContactPage() {
     mobile: "",
     email: "",
     product: "",
+    pan: "",
     message: "",
   });
 
+  const [submitting, setSubmitting] = useState(false);
+
   const handleAnimationComplete = () => console.log("Animation completed!");
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setSubmitting(true);
+
+    try {
+      const payload = {
+        name: formData.name.trim(),
+        mobile: formData.mobile.trim(),
+        email: formData.email.trim().toLowerCase(),
+        product: formData.product,
+        pan: formData.pan.trim() || null,
+        message: formData.message.trim(),
+        source: "contact-page",
+      };
+
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const result = await res.json();
+
+      if (!res.ok) {
+        throw new Error(result?.error || "Failed to send message");
+      }
+
+      alert("✅ Your message has been sent successfully!");
+      setFormData({
+        name: "",
+        mobile: "",
+        email: "",
+        product: "",
+        pan: "",
+        message: "",
+      });
+    } catch (err) {
+      console.error("❌ Contact form error:", err);
+      alert("❌ Failed to send message. Please try again later.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
-    // OUTERMOST WRAPPER → must clip horizontal overflow (fix horizontal scroll)
     <div className="flex flex-col min-h-screen bg-[#EFF3F6] text-gray-900 relative overflow-x-hidden">
 
-      {/* SAFE BACKGROUND BLOBS — wrapped to prevent overflow in all directions */}
+      {/* SAFE BACKGROUND BLOBS */}
       <div className="absolute inset-0 overflow-hidden -z-10 pointer-events-none">
         <div className="absolute top-[-120px] left-[-80px] w-[300px] h-[300px] bg-[#1F5E3C]/20 blur-[90px] rounded-full" />
         <div className="absolute bottom-[-120px] right-[-80px] w-[300px] h-[300px] bg-[#124434]/20 blur-[90px] rounded-full" />
       </div>
 
-      {/* FIXED NAVBAR */}
+      {/* NAVBAR */}
       <div className="fixed top-2 w-full flex justify-center z-[9999] px-4">
         <div className="w-full max-w-screen-xl">
           <Navbar />
         </div>
       </div>
 
-      {/* MAIN CONTENT */}
       <main className="flex-grow pt-[120px] sm:pt-[140px] lg:pt-[160px] pb-20">
 
-        {/* HERO SECTION */}
+        {/* HERO */}
         <section className="relative flex justify-center items-center pt-12 pb-20 px-4 sm:pb-24">
           <div className="w-full max-w-5xl rounded-3xl mx-auto">
             <SpotlightCard
@@ -54,22 +99,22 @@ export default function ContactPage() {
               spotlightColor="rgba(177,237,103,0.22)"
             >
               <div className="flex justify-center w-full">
-              <motion.h1
-                className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-6 leading-tight text-center"
-                initial={{ opacity: 0, y: 40 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7 }}
-              >
-                <span className="inline-block w-full text-center">
-                <BlurText
-                  text="Let’s Connect with CompareFi"
-                  delay={80}
-                  animateBy="words"
-                  direction="top"
-                  onAnimationComplete={handleAnimationComplete}
-                />
-                </span>
-              </motion.h1>
+                <motion.h1
+                  className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-6 leading-tight text-center"
+                  initial={{ opacity: 0, y: 40 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.7 }}
+                >
+                  <span className="inline-block w-full text-center">
+                    <BlurText
+                      text="Let’s Connect with CompareFi"
+                      delay={80}
+                      animateBy="words"
+                      direction="top"
+                      onAnimationComplete={handleAnimationComplete}
+                    />
+                  </span>
+                </motion.h1>
               </div>
               <motion.p
                 className="text-lg sm:text-xl text-gray-100 max-w-3xl mx-auto leading-relaxed text-center"
@@ -80,12 +125,11 @@ export default function ContactPage() {
                 Have a question, partnership idea, or want to collaborate?
                 <br /> We’re always excited to hear from you.
               </motion.p>
-              
             </SpotlightCard>
           </div>
         </section>
 
-        {/* CONTACT SECTION */}
+        {/* CONTACT */}
         <section className="py-12 sm:py-16 relative px-4">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -164,23 +208,7 @@ export default function ContactPage() {
                   Send Us a Message
                 </h3>
 
-                <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    const subject = encodeURIComponent(`Enquiry from ${formData.name}`);
-                    const body = encodeURIComponent(
-                      `Hello CompareFi Team,%0D%0A%0D%0A` +
-                      `I would like to enquire about: ${formData.product}%0D%0A%0D%0A` +
-                      `Message:%0D%0A${formData.message}%0D%0A%0D%0A` +
-                      `Contact Details:%0D%0A` +
-                      `Name: ${formData.name}%0D%0A` +
-                      `Email: ${formData.email}%0D%0A` +
-                      `Mobile: ${formData.mobile}`
-                    );
-                    window.location.href = `mailto:comparefi12@gmail.com?subject=${subject}&body=${body}`;
-                  }}
-                  className="flex flex-col gap-4 w-full"
-                >
+                <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full">
                   {["name", "mobile", "email"].map((field) => (
                     <input
                       key={field}
@@ -194,7 +222,9 @@ export default function ContactPage() {
                           : "Email Address"
                       }
                       value={formData[field]}
-                      onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}
+                      onChange={(e) =>
+                        setFormData({ ...formData, [e.target.name]: e.target.value })
+                      }
                       className="
                         w-full p-4 rounded-xl 
                         border border-green-400/40 
@@ -209,7 +239,9 @@ export default function ContactPage() {
                   <select
                     name="product"
                     value={formData.product}
-                    onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, product: e.target.value })
+                    }
                     className="
                       w-full p-4 rounded-xl 
                       border border-green-400/40 
@@ -225,11 +257,31 @@ export default function ContactPage() {
                     <option value="Margin Trading Facility (MTF)">Margin Trading Facility (MTF)</option>
                   </select>
 
+                  {/* OPTIONAL PAN */}
+                  <input
+                    type="text"
+                    name="pan"
+                    placeholder="PAN (Optional)"
+                    value={formData.pan}
+                    onChange={(e) =>
+                      setFormData({ ...formData, pan: e.target.value })
+                    }
+                    className="
+                      w-full p-4 rounded-xl 
+                      border border-green-400/40 
+                      bg-white/60
+                      focus:outline-none focus:ring-2 focus:ring-green-600
+                      placeholder-gray-400 text-gray-800 transition
+                    "
+                  />
+
                   <textarea
                     name="message"
                     placeholder="Your Message"
                     value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, message: e.target.value })
+                    }
                     className="
                       w-full p-4 rounded-xl 
                       border border-green-400/40 
@@ -244,6 +296,7 @@ export default function ContactPage() {
                   <Button
                     type="submit"
                     size="lg"
+                    disabled={submitting}
                     className="
                       bg-gradient-to-r from-[#10B981] to-[#047857]
                       text-white rounded-2xl px-6 py-4 text-lg
@@ -251,7 +304,7 @@ export default function ContactPage() {
                       transition
                     "
                   >
-                    Send Message
+                    {submitting ? "Sending..." : "Send Message"}
                   </Button>
                 </form>
               </SpotlightCard>

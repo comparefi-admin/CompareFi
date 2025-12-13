@@ -6,6 +6,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import Navbar from "../../components/navbar";
 import Footer from "../../components/footer";
 import SpotlightCard from "@/components/SpotlightCard.jsx";
+import EnquiryModal from "../../components/EnquiryModal.jsx";
 import { faqData } from "./faqdata";
 import { fetchLAS, DEFAULT_NULL_TEXT } from "@/lib/fetchData";
 
@@ -21,6 +22,10 @@ import { fetchLAS, DEFAULT_NULL_TEXT } from "@/lib/fetchData";
 export default function LASPage() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  // For enquiry form
+  const [enquiryOpen, setEnquiryOpen] = useState(false);
+  const [enquiryInstitution, setEnquiryInstitution] = useState(null);
 
   const [sortFieldFunding, setSortFieldFunding] = useState(null);
   const [sortOrderFunding, setSortOrderFunding] = useState("asc");
@@ -562,21 +567,20 @@ export default function LASPage() {
                       </>
                     </a>
                     <div className="mt-3">
-                      <a
-                        href={row.google_form_link || "#"}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="
-      inline-flex items-center justify-center gap-2
-      bg-gradient-to-b from-[#5e009c] to-[#c401ff]
-      text-white px-4 py-2 rounded-lg
-      shadow-[0_10px_30px_rgba(0,0,0,0.20)]
-      hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
-      transition-all duration-300 transform hover:-translate-y-0.5
-    "
+                      <button
+                        onClick={() => {
+                          setEnquiryInstitution(row.institution_name);
+                          setEnquiryOpen(true);
+                        }}
+                        className="inline-flex items-center justify-center gap-2
+                          bg-gradient-to-b from-[#5e009c] to-[#c401ff]
+                          text-white px-4 py-2 rounded-lg
+                          shadow-[0_10px_30px_rgba(0,0,0,0.20)]
+                          hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
+                          transition-all duration-300 transform hover:-translate-y-0.5"
                       >
                         <FileText className="w-4 h-4" /> Fill Enquiry
-                      </a>
+                      </button>
                     </div>
                   </td>
                 </tr>
@@ -861,25 +865,21 @@ export default function LASPage() {
                         </>
                       </a>
                       <div className="mt-3">
-                        <a
-                          href={
-                            row.google_form_link ||
-                            "https://forms.gle/yourfallback"
-                          }
-                          target="_blank"
-                          rel="noreferrer"
-                          className="
-      inline-flex items-center justify-center gap-2
-      bg-gradient-to-b from-[#5e009c] to-[#c401ff]
-      text-white px-1 py-2 rounded-lg
-      shadow-[0_10px_30px_rgba(0,0,0,0.20)]
-      hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
-      transition-all duration-300 transform hover:-translate-y-0.5
-    "
-                        >
-                          <FileText className="w-4 h-4" /> Fill Enquiry
-                        </a>
-                      </div>
+                      <button
+                        onClick={() => {
+                          setEnquiryInstitution(row.institution_name);
+                          setEnquiryOpen(true);
+                        }}
+                        className="inline-flex items-center justify-center gap-2
+                          bg-gradient-to-b from-[#5e009c] to-[#c401ff]
+                          text-white px-4 py-2 rounded-lg
+                          shadow-[0_10px_30px_rgba(0,0,0,0.20)]
+                          hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
+                          transition-all duration-300 transform hover:-translate-y-0.5"
+                      >
+                        <FileText className="w-4 h-4" /> Fill Enquiry
+                      </button>
+                    </div>
                     </td>
                   </tr>
                 ))}
@@ -957,33 +957,14 @@ export default function LASPage() {
               href="https://wa.me/919930584020?text=Hi! I need help choosing the best LAS provider."
               target="_blank"
               rel="noreferrer"
-              className="
-          inline-flex items-center justify-center gap-2
-          bg-gradient-to-b from-[#1F5E3C] to-[#124434]
-          text-white px-8 py-4 rounded-2xl text-lg font-semibold
-          shadow-[0_16px_38px_rgba(0,0,0,0.26)]
-          hover:shadow-[0_18px_42px_rgba(0,0,0,0.30)]
-          transition-all duration-300 hover:-translate-y-1
-        "
+              className="inline-flex items-center justify-center gap-2
+                bg-gradient-to-b from-[#1F5E3C] to-[#124434]
+                text-white px-8 py-4 rounded-2xl text-lg font-semibold
+                shadow-[0_16px_38px_rgba(0,0,0,0.26)]
+                hover:shadow-[0_18px_42px_rgba(0,0,0,0.30)]
+                transition-all duration-300 hover:-translate-y-1"
             >
               <MessageCircle className="w-5 h-5" /> Chat on WhatsApp
-            </a>
-
-            {/* Google Form Button */}
-            <a
-              href="https://forms.gle/yourformlink"
-              target="_blank"
-              rel="noreferrer"
-              className="
-          inline-flex items-center justify-center gap-2
-          bg-gradient-to-b from-[#5e009c] to-[#c401ff]
-          text-white px-8 py-4 rounded-2xl text-lg font-semibold
-          shadow-[0_16px_38px_rgba(0,0,0,0.26)]
-          hover:shadow-[0_18px_42px_rgba(0,0,0,0.30)]
-          transition-all duration-300 hover:-translate-y-1
-        "
-            >
-              <FileText className="w-5 h-5" /> Submit Form
             </a>
           </div>
 
@@ -1174,6 +1155,13 @@ export default function LASPage() {
           Contact Us
         </button>
       </section>
+      
+      <EnquiryModal
+        open={enquiryOpen}
+        onClose={() => setEnquiryOpen(false)}
+        product="Loan Against Shares (LAS)"
+        institution={enquiryInstitution}
+      />
 
       <Footer />
     </div>

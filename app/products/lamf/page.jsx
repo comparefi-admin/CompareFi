@@ -5,6 +5,7 @@ import { MessageCircle, FileText } from "lucide-react";
 import Navbar from "../../components/navbar";
 import Footer from "../../components/footer";
 import SpotlightCard from "@/components/SpotlightCard.jsx";
+import EnquiryModal from "../../components/EnquiryModal.jsx";
 import { faqData } from "./faqdata";
 import { fetchLAMF, DEFAULT_NULL_TEXT } from "@/lib/fetchData";
 
@@ -20,6 +21,10 @@ export default function LAMFPage() {
   // main data
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  // For enquiry form
+  const [enquiryOpen, setEnquiryOpen] = useState(false);
+  const [enquiryInstitution, setEnquiryInstitution] = useState(null);
 
   // sorting
   const [sortFieldFunding, setSortFieldFunding] = useState(null);
@@ -611,22 +616,21 @@ export default function LAMFPage() {
                         </a>
 
                         <div className="mt-3">
-                          <a
-                            href={row.google_form_link || "#"}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="
-      inline-flex items-center justify-center gap-2
-      bg-gradient-to-b from-[#5e009c] to-[#c401ff]
-      text-white px-4 py-2 rounded-lg
-      shadow-[0_10px_30px_rgba(0,0,0,0.20)]
-      hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
-      transition-all duration-300 transform hover:-translate-y-0.5
-    "
+                          <button
+                            onClick={() => {
+                              setEnquiryInstitution(row.institution_name);
+                              setEnquiryOpen(true);
+                            }}
+                            className="inline-flex items-center justify-center gap-2
+                              bg-gradient-to-b from-[#5e009c] to-[#c401ff]
+                              text-white px-4 py-2 rounded-lg
+                              shadow-[0_10px_30px_rgba(0,0,0,0.20)]
+                              hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
+                              transition-all duration-300 transform hover:-translate-y-0.5"
                           >
                             <FileText className="w-4 h-4" /> Fill Enquiry
-                          </a>
-                        </div>
+                          </button>
+                       </div>
                       </td>
                     </tr>
                   ))}
@@ -920,23 +924,21 @@ export default function LAMFPage() {
                           </a>
 
                           <div className="mt-3">
-                            <a
-                              href={row.google_form_link || "#"}
-                              target="_blank"
-                              rel="noreferrer"
-                              className="
-      inline-flex items-center justify-center gap-2
-      bg-gradient-to-b from-[#5e009c] to-[#c401ff]
-      text-white px-4 py-2 rounded-lg
-      shadow-[0_10px_30px_rgba(0,0,0,0.20)]
-      hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
-      transition-all duration-300 transform hover:-translate-y-0.5
-      whitespace-nowrap
-    "
-                            >
-                              <FileText className="w-4 h-4" /> Fill Enquiry
-                            </a>
-                          </div>
+                                                <button
+                                                  onClick={() => {
+                                                    setEnquiryInstitution(row.institution_name);
+                                                    setEnquiryOpen(true);
+                                                  }}
+                                                  className="inline-flex items-center justify-center gap-2
+                                                    bg-gradient-to-b from-[#5e009c] to-[#c401ff]
+                                                    text-white px-4 py-2 rounded-lg
+                                                    shadow-[0_10px_30px_rgba(0,0,0,0.20)]
+                                                    hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
+                                                    transition-all duration-300 transform hover:-translate-y-0.5"
+                                                >
+                                                  <FileText className="w-4 h-4" /> Fill Enquiry
+                                                </button>
+                                              </div>
                         </td>
                       </tr>
                     ))}
@@ -1026,23 +1028,6 @@ export default function LAMFPage() {
         "
                 >
                   <MessageCircle className="w-5 h-5" /> Chat on WhatsApp
-                </a>
-
-                {/* Google Form Button */}
-                <a
-                  href="https://forms.gle/yourformlink"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="
-          inline-flex items-center justify-center gap-2
-          bg-gradient-to-b from-[#5e009c] to-[#c401ff]
-          text-white px-8 py-4 rounded-2xl text-lg font-semibold
-          shadow-[0_16px_38px_rgba(0,0,0,0.26)]
-          hover:shadow-[0_18px_42px_rgba(0,0,0,0.30)]
-          transition-all duration-300 hover:-translate-y-1
-        "
-                >
-                  <FileText className="w-5 h-5" /> Submit Form
                 </a>
               </div>
 
@@ -1218,6 +1203,13 @@ export default function LAMFPage() {
           </section>
         </>
       )}
+
+      <EnquiryModal
+        open={enquiryOpen}
+        onClose={() => setEnquiryOpen(false)}
+        product="Loan Against Mutual Funds (LAMF)"
+        institution={enquiryInstitution}
+      />
 
       <Footer />
     </div>
