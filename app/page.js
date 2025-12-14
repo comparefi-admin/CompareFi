@@ -200,7 +200,7 @@ export default function HomePage() {
         className={`${workSans.variable} ${inter.variable} font-sans min-h-screen flex flex-col bg-slate-50 text-slate-900 overflow-x-hidden`}
         onMouseMove={handleMouseMove}
       >
-        <div className="fixed top-2 left-1/2 transform -translate-x-1/2 z-[9999] w-full max-w-screen-xl px-4 pt-4">
+        <div className="fixed top-2 left-1/2 transform -translate-x-1/2 z-[9999] w-full max-w-screen-xl px-4 pt-6">
           <Navbar />
         </div>
 
@@ -461,13 +461,13 @@ export default function HomePage() {
           {/* COMPARE PRODUCTS */}
           <section
             id="compare"
-            className="relative flex justify-center items-center mb-[2%] pb-[5%] mt-[2%] min-h-[80vh] overflow-hidden px-4 sm:px-6 lg:px-10"
+            className="relative flex justify-center items-center mb-[2%] pb-[5%] mt-[2%] min-h-[80vh] overflow-hidden px-0 sm:px-6 lg:px-10"
           >
             <div className="absolute inset-0 bg-white bg-opacity-0 pointer-events-none"></div>
 
             <SpotlightCard
               className="relative z-10 w-[90%] rounded-3xl bg-white backdrop-blur-lg 
-                p-6 sm:p-10 md:p-14 flex flex-col drop-shadow-2xl shadow-2xl 
+                p-4 sm:p-10 md:p-14 flex flex-col drop-shadow-2xl shadow-2xl 
                 border-none bg-opacity-100"
               spotlightColor="rgba(177,237,103,0)"
             >
@@ -476,19 +476,19 @@ export default function HomePage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
               >
-                <h2 className="text-3xl sm:text-4xl md:text-5xl mb-10 sm:mb-12 text-center text-black">
-                  Compare Products
-                </h2>
-
-                <Tabs defaultValue="las">
+                <div className="pb-8 sm:pb-10">
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl text-center text-black">
+                    Compare Products
+                  </h2>
+                </div>
+                <Tabs defaultValue="las" className="relative">
                   <TabsList
-                    className="
-                      mb-10 
-                      flex flex-col justify-start gap-2 sm:gap-3 
-                      sm:flex-row sm:flex-wrap bg-transparent shadow-none border-none
-                      -mx-6 px-6 
-                      sm:-mx-10 sm:px-10 w-full 
-                    "
+                    className="mt-6 mb-10
+                    flex flex-col gap-2
+                    sm:flex-row sm:flex-wrap
+                    bg-transparent shadow-none border-none
+                    w-full
+                    relative z-10"
                   >
                     {PRODUCTS.map((p) => (
                       <TabsTrigger
@@ -575,16 +575,10 @@ export default function HomePage() {
                           </div>
 
                           {/* RIGHT SIDE TABLE */}
-                          <div
-                            className="
-                              p-3 sm:p-4 rounded-lg
-                              md:ml-[-20px] 
-                              lg:ml-[-30px]
-                              overflow-x-auto md:overflow-visible
-                              w-full
-                            "
-                          >
-                            <CompareProductsTable productType={p.id} />
+                          <div className="sm:p-4 rounded-lg md:ml-[-20px] lg:ml-[-30px] w-full">
+                            <div className="-mx-4 sm:mx-0 overflow-x-auto">
+                              <CompareProductsTable productType={p.id} />
+                            </div>
                           </div>
                         </div>
                       </motion.div>

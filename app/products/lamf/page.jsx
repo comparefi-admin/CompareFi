@@ -188,7 +188,7 @@ export default function LAMFPage() {
            * ---------------------------------------------------*/}
 
           {/* HERO */}
-          <section className="w-[90%] mx-auto px-2 pt-32 pb-20 flex flex-col items-center">
+          <section className="w-[90%] mx-auto px-2 pt-24 pb-12 sm:pt-32 sm:pb-20 flex flex-col items-center">
             <SpotlightCard
               className="
                 relative z-10 w-[90%] rounded-3xl
@@ -216,7 +216,7 @@ export default function LAMFPage() {
           </section>
 
           {/* ========== INFO CARDS (LAS-THEME EXACT) ========== */}
-          <section className="max-w-[90%] mx-auto px-6 pb-16">
+          <section className="max-w-[90%] mx-auto px-3 sm:px-6 pb-10 sm:pb-16">
             <h2 className="text-4xl font-bold text-center mb-14 text-[#0A0F2C]">
               Understanding Loan Against Mutual Funds (LAMF)
             </h2>
@@ -266,7 +266,7 @@ export default function LAMFPage() {
                   key={i}
                   className="
           bg-white/18 backdrop-blur-xl border border-[rgba(35,104,126,0.2)]
-          rounded-3xl p-8
+          rounded-3xl p-5 sm:p-8
           bg-[#e8feff3f]
           shadow-[0_16px_38px_rgba(0,0,0,0.12)]
           transition-all duration-500
@@ -302,7 +302,7 @@ export default function LAMFPage() {
                     key={i}
                     className="
             bg-white/22 backdrop-blur-md border border-[rgba(255,255,255,0.06)]
-            rounded-2xl p-4
+            rounded-2xl p-3 sm:p-4
             transition-all
             bg-[#20463B]
             shadow-[0_16px_38px_rgba(0,0,0,0.05)]
@@ -319,7 +319,7 @@ export default function LAMFPage() {
           </section>
 
           {/* PRE–COST SUMMARY INFO CARDS (LAMF) */}
-          <section className="max-w-[90%] mx-auto px-6 mt-10 mb-4">
+          <section className="max-w-[90%] mx-auto px-3 sm:px-6 mt-6 sm:mt-10 mb-4">
             <h3 className="text-4xl font-bold text-center mb-10 text-[#0A0F2C]">
               Before You Compare LAMF Costs
             </h3>
@@ -330,7 +330,7 @@ export default function LAMFPage() {
                 className="
         bg-white/18 backdrop-blur-xl 
         border border-[rgba(35,104,126,0.2)]
-        rounded-3xl p-8 shadow-[0_16px_38px_rgba(0,0,0,0.12)]
+        rounded-3xl p-5 sm:p-8 shadow-[0_16px_38px_rgba(0,0,0,0.12)]
         transition-all duration-500 hover:-translate-y-3
         hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
       "
@@ -361,7 +361,7 @@ export default function LAMFPage() {
                 className="
         bg-white/18 backdrop-blur-xl 
         border border-[rgba(35,104,126,0.2)]
-        rounded-3xl p-8 shadow-[0_16px_38px_rgba(0,0,0,0.12)]
+        rounded-3xl p-5 sm:p-8 shadow-[0_16px_38px_rgba(0,0,0,0.12)]
         transition-all duration-500 hover:-translate-y-3
         hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
       "
@@ -394,7 +394,7 @@ export default function LAMFPage() {
           </section>
 
           {/* =============== COST SUMMARY TABLE (LAMF — EXACT LAS THEME) =============== */}
-          <section className="max-w-[90%] mx-auto px-6 py-10 flex flex-col items-center">
+          <section className="max-w-[90%] mx-auto px-2 sm:px-6 py-6 sm:py-10 flex flex-col items-center">
             <h3 className="text-4xl font-bold mb-10 text-[#0A0F2C]">
               Cost Summary
             </h3>
@@ -404,7 +404,7 @@ export default function LAMFPage() {
     w-full bg-white backdrop-blur-2xl 
     border border-[rgba(255,255,255,0.06)]
     shadow-[0_12px_32px_rgba(0,0,0,0.22)]
-    rounded-2xl overflow-x-auto
+    rounded-xl overflow-x-auto p-0
   "
             >
               <table className="w-full border-collapse text-gray-800 text-[16px] leading-[1.35] table-highlight">
@@ -647,7 +647,7 @@ export default function LAMFPage() {
           </section>
 
           {/* PRE–DETAILED COST SUMMARY INFO CARDS (LAMF) */}
-          <section className="max-w-[90%] mx-auto px-6 mt-10 mb-6">
+          <section className="max-w-[90%] mx-auto px-3 sm:px-6 mt-6 sm:mt-10 mb-6">
             <h3 className="text-4xl font-bold text-center mb-10 text-[#0A0F2C]">
               Understanding the Full LAMF Cost Breakdown
             </h3>
@@ -658,7 +658,7 @@ export default function LAMFPage() {
                 className="
         bg-white/18 backdrop-blur-xl 
         border border-[rgba(35,104,126,0.2)]
-        rounded-3xl p-8 shadow-[0_16px_38px_rgba(0,0,0,0.12)]
+        rounded-3xl p-5 sm:p-8 shadow-[0_16px_38px_rgba(0,0,0,0.12)]
         transition-all duration-500 hover:-translate-y-3
         hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
       "
@@ -686,7 +686,7 @@ export default function LAMFPage() {
                 className="
         bg-white/18 backdrop-blur-xl 
         border border-[rgba(35,104,126,0.2)]
-        rounded-3xl p-8 shadow-[0_16px_38px_rgba(0,0,0,0.12)]
+        rounded-3xl p-5 sm:p-8 shadow-[0_16px_38px_rgba(0,0,0,0.12)]
         transition-all duration-500 hover:-translate-y-3
         hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
       "
@@ -725,7 +725,7 @@ export default function LAMFPage() {
           {/* =====================================================
            *  DETAILED LAMF COST SUMMARY — EXACT LAS THEME
            * ===================================================== */}
-          <section className="max-w-[90%] mx-auto px-6 py-10 flex flex-col items-center">
+          <section className="max-w-[90%] mx-auto px-2 sm:px-6 py-6 sm:py-10 flex flex-col items-center">
             <h3 className="text-4xl font-bold mb-8 text-[#0A0F2C]">
               Detailed LAMF Cost Summary
             </h3>
@@ -735,7 +735,7 @@ export default function LAMFPage() {
       w-full bg-white backdrop-blur-xl 
       border border-[rgba(255,255,255,0.06)]
       shadow-[0_12px_32px_rgba(0,0,0,0.22)]
-      rounded-2xl p-6
+      rounded-2xl p-3 sm:p-6
     "
             >
               {/* CATEGORY BUTTONS (Exact LAS style) */}
@@ -949,7 +949,7 @@ export default function LAMFPage() {
           </section>
 
           {/* LAMF Summary — Before FAQ */}
-          <section className="max-w-[90%] mx-auto px-6 py-16">
+          <section className="max-w-[90%] mx-auto px-3 sm:px-6 py-10 sm:py-16">
             <h2 className="text-4xl font-bold text-center mb-10 text-[#0A0F2C]">
               Key Takeaways to Guide Your LAMF Decision
             </h2>
@@ -959,7 +959,7 @@ export default function LAMFPage() {
       bg-white/20 backdrop-blur-xl
       border border-[rgba(255,255,255,0.10)]
       shadow-[0_16px_38px_rgba(0,0,0,0.15)]
-      rounded-3xl p-10
+      rounded-3xl p-6 sm:p-10
       leading-relaxed text-gray-900
     "
             >
@@ -1039,11 +1039,11 @@ export default function LAMFPage() {
           </section>
 
           {/* HOW TO APPLY & KEY FACTORS */}
-          <section className="max-w-[90%] mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 gap-10">
+          <section className="max-w-[90%] mx-auto px-3 sm:px-6 py-10 sm:py-16 grid grid-cols-1 md:grid-cols-2 gap-10">
             {/* Card 1 */}
             <div
               className="backdrop-blur-xl border bg-[#e8feff3f]
-          shadow-[0_16px_38px_rgba(0,0,0,0.05)] border-[rgba(35,104,126,0.2)] rounded-3xl p-10 transition-all duration-500 hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)] hover:-translate-y-2"
+          shadow-[0_16px_38px_rgba(0,0,0,0.05)] border-[rgba(35,104,126,0.2)] rounded-3xl p-6 sm:p-10 transition-all duration-500 hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)] hover:-translate-y-2"
             >
               <h3 className="text-2xl font-bold mb-6 text-[#0D3A27]">
                 How to Apply for LAMF in 2025: Step-by-Step Guide
@@ -1079,7 +1079,7 @@ export default function LAMFPage() {
             {/* Card 3 */}
             <div
               className="bg-[#C0CDCF]
-          shadow-[0_16px_38px_rgba(0,0,0,0.05) backdrop-blur-xl border border-[rgba(255,255,255,0.2)] rounded-3xl p-10 transition-all duration-500 hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)] hover:-translate-y-2"
+          shadow-[0_16px_38px_rgba(0,0,0,0.05) backdrop-blur-xl border border-[rgba(255,255,255,0.2)] rounded-3xl p-6 sm:p-10 transition-all duration-500 hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)] hover:-translate-y-2"
             >
               <h3 className="text-2xl font-bold mb-6 text-black">
                 Key Factors: Choosing the Best LAMF Provider
@@ -1108,13 +1108,13 @@ export default function LAMFPage() {
           </section>
 
           {/* ================ FAQ SECTION ================ */}
-          <section className="relative max-w-[90%] mx-auto px-6 py-20">
+          <section className="relative max-w-[90%] mx-auto px-3 sm:px-6 py-12 sm:py-20">
             <h2 className="text-4xl font-bold text-center mb-12">
               Frequently Asked Questions about LAMF
             </h2>
 
             {/* Categories */}
-            <div className="bg-white/20 backdrop-blur-xl p-8 rounded-3xl shadow mb-10">
+            <div className="bg-white/20 backdrop-blur-xl p-5 sm:p-8 rounded-3xl shadow mb-10">
               <div className="flex flex-wrap justify-center gap-6">
                 {allCategories.map((cat) => (
                   <button
@@ -1134,7 +1134,7 @@ export default function LAMFPage() {
             </div>
 
             {/* FAQ list */}
-            <div className="bg-white/20 backdrop-blur-xl p-10 rounded-3xl shadow">
+            <div className="bg-white/20 backdrop-blur-xl p-6 sm:p-10 rounded-3xl shadow">
               <div className="space-y-4">
                 {filteredFaqs.map((faq, idx) => (
                   <div
@@ -1176,7 +1176,7 @@ export default function LAMFPage() {
           </section>
 
           {/* ================ ENQUIRE NOW ================ */}
-          <section className="max-w-[85%] mx-auto px-6 py-12 text-center">
+          <section className="max-w-[85%] mx-auto px-3 sm:px-6 py-8 sm:py-12 text-center flex flex-col items-center">
             <h2 className="text-3xl font-bold mb-4 text-[#0A0F2C]">
               Enquire Now
             </h2>
