@@ -85,29 +85,38 @@ export default function LASPage() {
 
     otherMiscCost: [{ key: "other_expenses", label: "Other Expenses" }],
   };
-  const normalizeDefaultCharges = (val) => {
-    if (!val || typeof val !== "object") {
-      return {
-        penal: null,
-        base: null,
-        collection: null,
-      };
+ const normalizeDefaultCharges = (val) => {
+  if (!val || typeof val !== "object") {
+    return { penal: null, base: null, collection: null };
+  }
+
+  let penal = null;
+  let base = null;
+  let collection = null;
+
+  Object.entries(val).forEach(([key, value]) => {
+    const k = key.toLowerCase().replace(/\s+/g, " ").trim();
+
+    if (k.includes("penal")) {
+      penal = value;
     }
 
-    return {
-      penal: val.penal_charges ?? val.penal ?? val["Penal Charges"] ?? null,
+    if (k === "default charges") {
+      base = value;
+    }
 
-      base:
-        val.default_charges ?? val.default ?? val["Default Charges"] ?? null,
+    if (
+      k.includes("collection") ||
+      k.includes("legal") ||
+      k.includes("voluntary")
+    ) {
+      collection = value;
+    }
+  });
 
-      collection:
-        val.collection_legal_voluntary_sale_charges ??
-        val.collection_legal_voluntary_sale ??
-        val.collection_charges ??
-        val["Collection / Legal / Voluntary Sale Charges"] ??
-        null,
-    };
-  };
+  return { penal, base, collection };
+};
+
 
   const SORTABLE_DYNAMIC_COLUMNS = {
     interest_rate: "interestMedian",
