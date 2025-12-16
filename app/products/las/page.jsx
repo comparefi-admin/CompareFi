@@ -85,9 +85,40 @@ export default function LASPage() {
 
     otherMiscCost: [{ key: "other_expenses", label: "Other Expenses" }],
   };
+  const normalizeDefaultCharges = (val) => {
+    if (!val || typeof val !== "object") {
+      return {
+        penal: null,
+        base: null,
+        collection: null,
+      };
+    }
+
+    return {
+      penal: val.penal_charges ?? val.penal ?? val["Penal Charges"] ?? null,
+
+      base:
+        val.default_charges ?? val.default ?? val["Default Charges"] ?? null,
+
+      collection:
+        val.collection_legal_voluntary_sale_charges ??
+        val.collection_legal_voluntary_sale ??
+        val.collection_charges ??
+        val["Collection / Legal / Voluntary Sale Charges"] ??
+        null,
+    };
+  };
+
+  const SORTABLE_DYNAMIC_COLUMNS = {
+    interest_rate: "interestMedian",
+  };
 
   const [activeTableCategory, setActiveTableCategory] =
     useState("fundingDetails");
+  const [sortConfig, setSortConfig] = useState({
+    key: null,
+    order: "asc", // asc | desc
+  });
 
   // fetch
   useEffect(() => {
@@ -110,6 +141,57 @@ export default function LASPage() {
       return parseFloat(val.replace(/[₹,%]/g, "")) || val;
     return val;
   };
+  const getSortableValue = (row, key) => {
+    switch (key) {
+      case "institution":
+        return row.institution_name ?? "";
+
+      case "firstYear":
+        return clean(row.cost_first_year?.percent);
+
+      case "secondYear":
+        return clean(row.cost_second_year?.percent);
+
+      case "interestMedian":
+        return clean(row.interest_rate?.median);
+
+      default:
+        return null;
+    }
+  };
+  const sortedDetailedData = useMemo(() => {
+    if (!sortConfig.key) return data;
+
+    return [...data].sort((a, b) => {
+      const valA = getSortableValue(a, sortConfig.key);
+      const valB = getSortableValue(b, sortConfig.key);
+
+      if (typeof valA === "number" && typeof valB === "number") {
+        return sortConfig.order === "asc" ? valA - valB : valB - valA;
+      }
+
+      return sortConfig.order === "asc"
+        ? String(valA).localeCompare(String(valB))
+        : String(valB).localeCompare(String(valA));
+    });
+  }, [data, sortConfig]);
+
+  const sortedTableData = useMemo(() => {
+    if (!sortConfig.key) return data;
+
+    return [...data].sort((a, b) => {
+      const valA = getSortableValue(a, sortConfig.key);
+      const valB = getSortableValue(b, sortConfig.key);
+
+      if (typeof valA === "number" && typeof valB === "number") {
+        return sortConfig.order === "asc" ? valA - valB : valB - valA;
+      }
+
+      return sortConfig.order === "asc"
+        ? String(valA).localeCompare(String(valB))
+        : String(valB).localeCompare(String(valA));
+    });
+  }, [data, sortConfig]);
 
   const sortedCostData = useMemo(() => {
     return [...data].sort((a, b) => {
@@ -130,6 +212,24 @@ export default function LASPage() {
         Loading data...
       </div>
     );
+  const SortButton = ({ columnKey }) => {
+    const active = sortConfig.key === columnKey;
+
+    return (
+      <button
+        onClick={() =>
+          setSortConfig((prev) => ({
+            key: columnKey,
+            order:
+              prev.key === columnKey && prev.order === "asc" ? "desc" : "asc",
+          }))
+        }
+        className="ml-2 text-xs text-white/80 hover:text-white transition"
+      >
+        {active ? (sortConfig.order === "asc" ? "▲" : "▼") : "⇅"}
+      </button>
+    );
+  };
 
   return (
     <div className="bg-[#EFF3F6] min-h-screen">
@@ -227,7 +327,7 @@ export default function LASPage() {
                 bg-[#e8feff3f]
                 shadow-[0_16px_38px_rgba(0,0,0,0.12)]
                 transition-all duration-500
-                hover:-translate-y-3
+                  hover:-translate-y-3
                 hover:shadow-[0_16px_38px_rgba(0,0,0,0.26),0_6px_18px_rgba(0,0,0,0.08)]
                 will-change-transform
               "
@@ -235,9 +335,9 @@ export default function LASPage() {
               <h3 className="text-2xl font-bold mb-4 text-[#0D3A27]">
                 {card.title}
               </h3>
-              <p className="text-gray-800 leading-relaxed text-lg">
+              <div className="text-gray-800 leading-relaxed text-lg">
                 {card.text}
-              </p>
+              </div>
             </div>
           ))}
         </div>
@@ -362,7 +462,10 @@ export default function LASPage() {
                   style={{ background: "#124434", color: "#FFFFFF" }}
                   className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
                 >
-                  Institution
+                  <div className="flex items-center">
+                    Institution
+                    <SortButton columnKey="institution" />
+                  </div>
                 </th>
 
                 {/* 1st Year */}
@@ -370,7 +473,10 @@ export default function LASPage() {
                   style={{ background: "#124434", color: "#FFFFFF" }}
                   className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
                 >
-                  1st Year (₹1L LAS)
+                  <div className="flex items-center justify-center">
+                    1st Year (₹1L LAS)
+                    <SortButton columnKey="firstYear" />
+                  </div>
                 </th>
 
                 {/* 2nd Year */}
@@ -378,7 +484,10 @@ export default function LASPage() {
                   style={{ background: "#124434", color: "#FFFFFF" }}
                   className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
                 >
-                  2nd Year (₹1L LAS)
+                  <div className="flex items-center justify-center">
+                    2nd Year (₹1L LAS)
+                    <SortButton columnKey="secondYear" />
+                  </div>
                 </th>
 
                 {/* Dynamic main columns */}
@@ -408,7 +517,10 @@ export default function LASPage() {
                   className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
                 >
                   <div className="flex flex-col items-center gap-2">
-                    <span>Interest Rate</span>
+                    <div className="flex items-center gap-2">
+                      <span>Interest Rate</span>
+                      <SortButton columnKey="interestMedian" />
+                    </div>
 
                     {/* Sub header */}
                     <div className="grid grid-cols-3 w-full text-xs font-medium border-t border-white/30 pt-2 px-2">
@@ -441,7 +553,7 @@ export default function LASPage() {
             </thead>
 
             <tbody>
-              {data.map((row, index) => (
+              {sortedTableData.map((row, index) => (
                 <tr
                   key={row.id}
                   className={`
@@ -743,7 +855,10 @@ export default function LASPage() {
                     style={{ background: "#124434", color: "#FFFFFF" }}
                     className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
                   >
-                    Institution
+                    <div className="flex items-center gap-2">
+                      Institution
+                      <SortButton columnKey="institution" />
+                    </div>
                   </th>
 
                   {/* 1st Year */}
@@ -751,7 +866,10 @@ export default function LASPage() {
                     style={{ background: "#124434", color: "#FFFFFF" }}
                     className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide w-[200px]"
                   >
-                    1st Year
+                    <div className="flex items-center justify-center gap-2">
+                      1st Year(₹1L LAS)
+                      <SortButton columnKey="firstYear" />
+                    </div>
                   </th>
 
                   {/* 2nd Year */}
@@ -759,19 +877,55 @@ export default function LASPage() {
                     style={{ background: "#124434", color: "#FFFFFF" }}
                     className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide w-[200px]"
                   >
-                    2nd Year
+                    <div className="flex items-center justify-center gap-2">
+                      2nd Year(₹1L LAS)
+                      <SortButton columnKey="secondYear" />
+                    </div>
                   </th>
 
                   {/* Dynamic Columns */}
-                  {rightTableColumns[activeTableCategory].map((col) => (
-                    <th
-                      key={col.key}
-                      style={{ background: "#124434", color: "#FFFFFF" }}
-                      className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
-                    >
-                      {col.label}
-                    </th>
-                  ))}
+                  {rightTableColumns[activeTableCategory].map((col) => {
+                    const sortKey = SORTABLE_DYNAMIC_COLUMNS[col.key];
+
+                    if (col.key === "default_charges") {
+                      return (
+                        <th
+                          key={col.key}
+                          style={{ background: "#124434", color: "#FFFFFF" }}
+                          className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+                        >
+                          <div className="flex flex-col items-center gap-2">
+                            <span>Default Charges</span>
+
+                            <div className="grid grid-cols-3 w-full text-xs font-medium border-t border-white/30 pt-2 px-2">
+                              <span className="text-center">Penal Charges</span>
+                              <span className="text-center border-l border-r border-white/30">
+                                Default Charges
+                              </span>
+                              <span className="text-center">
+                                Collection / Legal / Voluntary Sale
+                              </span>
+                            </div>
+                          </div>
+                        </th>
+                      );
+                    }
+                    /* ================= NORMAL DYNAMIC COLUMNS ================= */
+                    return (
+                      <th
+                        key={col.key}
+                        style={{ background: "#124434", color: "#FFFFFF" }}
+                        className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+                      >
+                        <div className="flex items-center justify-center gap-2">
+                          {col.label}
+
+                          {/* ONLY interest_rate gets sorting */}
+                          {sortKey && <SortButton columnKey={sortKey} />}
+                        </div>
+                      </th>
+                    );
+                  })}
 
                   {/* Contact */}
                   <th
@@ -784,7 +938,7 @@ export default function LASPage() {
               </thead>
 
               <tbody>
-                {sortedCostData.map((row, index) => (
+                {sortedDetailedData.map((row, index) => (
                   <tr
                     key={row.id}
                     className={`transition-all duration-300 ${
@@ -848,6 +1002,31 @@ export default function LASPage() {
                     {/* Dynamic columns */}
                     {rightTableColumns[activeTableCategory].map((col) => {
                       const val = row[col.key];
+
+                      if (col.key === "default_charges") {
+                        const charges = normalizeDefaultCharges(val);
+
+                        return (
+                          <td
+                            key={col.key}
+                            className="px-5 py-4 border border-gray-300"
+                          >
+                            <div className="grid grid-cols-3 text-center text-sm">
+                              {/* Penal Charges */}
+                              <div>{charges.penal ?? "—"}</div>
+
+                              {/* Default Charges */}
+                              <div className="border-l border-r border-gray-300">
+                                {charges.base ?? "—"}
+                              </div>
+
+                              {/* Collection / Legal / Voluntary Sale */}
+                              <div>{charges.collection ?? "—"}</div>
+                            </div>
+                          </td>
+                        );
+                      }
+
                       return (
                         <td
                           key={col.key}
