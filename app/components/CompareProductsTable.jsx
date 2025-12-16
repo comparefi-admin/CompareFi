@@ -93,6 +93,7 @@ export default function CompareProductsTable({ productType }) {
     <div className="bg-white rounded-xl shadow-lg p-6 md:p-8 mx-auto border-2 border-[#2b7146]">
       {/* ---------------- HIGHLIGHT STYLE BLOCK ---------------- */}
       <style jsx>{`
+        /* ================= HIGHLIGHT COLUMN ================= */
         .highlight-col {
           position: relative;
           background: linear-gradient(
@@ -100,68 +101,79 @@ export default function CompareProductsTable({ productType }) {
             rgba(242, 255, 245, 0.92),
             rgba(225, 245, 230, 0.85)
           );
-          border-radius: 14px;
-          box-shadow: 0 0 6px rgba(0, 0, 0, 0.06);
-          transition: 0.25s ease;
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.14),
+            inset 0 1px 0 rgba(255, 255, 255, 0.45);
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .highlight-col:hover {
-          background: rgba(210, 240, 215, 0.9);
-          transform: translateY(-2px);
+        /* LEFT GREEN ACCENT */
+        .highlight-col::before {
+          content: "";
+          position: absolute;
+          left: 6px;
+          top: 12px;
+          bottom: 12px;
+          width: 4px;
+          border-radius: 6px;
+          background: linear-gradient(180deg, #b1ed67, #1f5e3c);
         }
-
-        /* REMOVE DECORATIVE LEFT LINE */
-        .highlight-col::before,
-        .highlight-head::before {
-          content: none !important;
-        }
-
+        /* ================= HEADER GREEN ACCENT ================= */
         .highlight-head {
-          border-radius: 14px;
+          position: relative; /* required for ::before */
         }
 
+        /* Green accent line for header (same as body) */
+        .highlight-head::before {
+          content: "";
+          position: absolute;
+          left: 6px;
+          top: 10px;
+          bottom: 10px;
+          width: 4px;
+          border-radius: 6px;
+          background: linear-gradient(180deg, #b1ed67, #1f5e3c);
+          box-shadow: 0 3px 8px rgba(177, 237, 103, 0.25);
+        }
+
+        /* Row lift – more noticeable */
+        .row-hover:hover {
+          transform: translateY(-3px);
+          transition: transform 0.25s ease;
+        }
+
+        /* Base hover background for entire row */
         .row-hover:hover td {
-          background: rgba(230, 245, 235, 0.55) !important;
-          transform: scale(1.01);
-          transition: 0.25s ease;
+          background: rgba(16, 185, 129, 0.06); /* soft green wash */
+          transition: background 0.25s ease, box-shadow 0.25s ease;
         }
 
+        /* SUBTLE hover */
         .row-hover:hover .highlight-col {
-          background: rgba(210, 240, 215, 0.9) !important;
+          background: linear-gradient(
+            180deg,
+            rgba(242, 255, 245, 0.98),
+            rgba(225, 245, 230, 0.92)
+          );
+          box-shadow: 0 14px 34px rgba(0, 0, 0, 0.22),
+            inset 0 1px 0 rgba(255, 255, 255, 0.6);
+          z-index: 3;
         }
 
-        .wide-table {
-          width: 1500px;
+        /* Keep other columns unchanged */
+        .row-hover:hover td:not(.highlight-col) {
+          background: #ffffff;
+          box-shadow: 0 10px 26px rgba(0, 0, 0, 0.14);
+          z-index: 1;
         }
 
-        /* Remove inner vertical borders for first 3 columns */
-        table th:nth-child(-n + 3),
-        table td:nth-child(-n + 3) {
-          border-right: none !important;
-          border-left: none !important;
+        /* Header rounding only */
+        .highlight-head {
+          border-radius: 9px;
         }
 
-        /* Also remove the top/bottom line inside these cells */
-        table th:nth-child(-n + 3),
-        table td:nth-child(-n + 3) {
-          border-top: none !important;
-          border-bottom: none !important;
-        }
-        /* Add light vertical divider between first 3 columns */
-        table td:nth-child(1),
-        table th:nth-child(1) {
-          border-right: 1px solid rgba(0, 0, 0, 0.12) !important;
-        }
-
-        table td:nth-child(2),
-        table th:nth-child(2) {
-          border-right: 1px solid rgba(0, 0, 0, 0.12) !important;
-        }
-
-        @media (max-width: 768px) {
-          .wide-table {
-            width: 1200px;
-          }
+        /* Do NOT add row spacing */
+        table {
+          border-collapse: collapse;
         }
       `}</style>
 

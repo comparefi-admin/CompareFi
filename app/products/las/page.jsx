@@ -407,7 +407,20 @@ export default function LASPage() {
                   style={{ background: "#124434", color: "#FFFFFF" }}
                   className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
                 >
-                  Interest Rate
+                  <div className="flex flex-col items-center gap-2">
+                    <span>Interest Rate</span>
+
+                    {/* Sub header */}
+                    <div className="grid grid-cols-3 w-full text-xs font-medium border-t border-white/30 pt-2 px-2">
+                      <span className="text-center px-2">Min</span>
+
+                      <span className="text-center px-3 border-l border-r border-white/30">
+                        Max
+                      </span>
+
+                      <span className="text-center px-2">Median</span>
+                    </div>
+                  </div>
                 </th>
 
                 <th
@@ -517,12 +530,29 @@ export default function LASPage() {
                   </td>
 
                   {/* Interest Rate */}
-                  <td className="px-5 py-4 border border-gray-300 text-center">
+                  <td className="px-5 py-4 border border-gray-300">
                     {row.interest_rate ? (
-                      <div>
-                        <div>Min: {row.interest_rate.min ?? "—"}</div>
-                        <div>Max: {row.interest_rate.max ?? "—"}</div>
-                        <div>Median: {row.interest_rate.median ?? "—"}</div>
+                      <div className="grid grid-cols-3 text-center text-sm">
+                        {/* Min */}
+                        <div className="flex flex-col">
+                          <span className="font-semibold text-gray-900">
+                            {row.interest_rate.min ?? "—"}
+                          </span>
+                        </div>
+
+                        {/* Max */}
+                        <div className="flex flex-col border-l border-r border-gray-300">
+                          <span className="font-semibold text-gray-900">
+                            {row.interest_rate.max ?? "—"}
+                          </span>
+                        </div>
+
+                        {/* Median */}
+                        <div className="flex flex-col">
+                          <span className="font-semibold text-[#1F5E3C]">
+                            {row.interest_rate.median ?? "—"}
+                          </span>
+                        </div>
                       </div>
                     ) : (
                       DEFAULT_NULL_TEXT
@@ -865,21 +895,21 @@ export default function LASPage() {
                         </>
                       </a>
                       <div className="mt-3">
-                      <button
-                        onClick={() => {
-                          setEnquiryInstitution(row.institution_name);
-                          setEnquiryOpen(true);
-                        }}
-                        className="inline-flex items-center justify-center gap-2
+                        <button
+                          onClick={() => {
+                            setEnquiryInstitution(row.institution_name);
+                            setEnquiryOpen(true);
+                          }}
+                          className="inline-flex items-center justify-center gap-2
                           bg-gradient-to-b from-[#5e009c] to-[#c401ff]
                           text-white px-4 py-2 rounded-lg
                           shadow-[0_10px_30px_rgba(0,0,0,0.20)]
                           hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
                           transition-all duration-300 transform hover:-translate-y-0.5"
-                      >
-                        <FileText className="w-4 h-4" /> Fill Enquiry
-                      </button>
-                    </div>
+                        >
+                          <FileText className="w-4 h-4" /> Fill Enquiry
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}
@@ -1155,7 +1185,7 @@ export default function LASPage() {
           Contact Us
         </button>
       </section>
-      
+
       <EnquiryModal
         open={enquiryOpen}
         onClose={() => setEnquiryOpen(false)}
