@@ -680,14 +680,15 @@ export default function LASPage() {
                   <td className="px-5 py-4 border border-gray-300 text-center">
                     {row.tenure_months ?? DEFAULT_NULL_TEXT}
                   </td>
+
                   {/* Loan Amount */}
                   <td className="px-3 sm:px-5 py-3 sm:py-4 border border-gray-300">
                     {row.loan_amount ? (
                       <div
                         className="
-        grid grid-cols-1 gap-1 text-sm
-        sm:grid-cols-2 sm:gap-0 sm:text-center
-      "
+                        grid grid-cols-1 gap-1 text-sm
+                        sm:grid-cols-2 sm:gap-0 sm:text-center
+                      "
                       >
                         {/* Min */}
                         <div className="flex justify-between sm:flex-col sm:justify-center">
@@ -702,9 +703,9 @@ export default function LASPage() {
                         {/* Max */}
                         <div
                           className="
-          flex justify-between sm:flex-col sm:justify-center
-          sm:border-l border-gray-300
-        "
+                        flex justify-between sm:flex-col sm:justify-center
+                        sm:border-l border-gray-300
+                      "
                         >
                           <span className="sm:hidden text-xs text-gray-500">
                             Max
@@ -965,6 +966,41 @@ export default function LASPage() {
                   {rightTableColumns[activeTableCategory].map((col) => {
                     const sortKey = SORTABLE_DYNAMIC_COLUMNS[col.key];
 
+                    /* ================= LOAN AMOUNT (MIN | MAX) ================= */
+                    if (col.key === "loan_amount") {
+                      return (
+                        <th
+                          key={col.key}
+                          style={{
+                            background: "#124434",
+                            color: "#FFFFFF",
+                            minWidth: "220px", // keeps Min | Max readable
+                          }}
+                          className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+                        >
+                          <div className="flex flex-col items-center gap-2">
+                            {/* Main title */}
+                            <span>Loan Amount</span>
+
+                            {/* Sub header */}
+                            <div
+                              className="
+                              hidden sm:grid
+                              grid-cols-2 w-full text-xs font-medium
+                              border-t border-white/30 pt-2 px-2
+                            "
+                            >
+                              <span className="text-center px-2">Min</span>
+
+                              <span className="text-center px-3 border-l border-white/30">
+                                Max
+                              </span>
+                            </div>
+                          </div>
+                        </th>
+                      );
+                    }
+
                     /* ================= DEFAULT CHARGES (PENAL | DEFAULT | LEGAL) ================= */
                     if (col.key === "default_charges") {
                       return (
@@ -1067,8 +1103,6 @@ export default function LASPage() {
                       );
                     }
 
-                    
-
                     /* ================= NORMAL DYNAMIC COLUMNS ================= */
                     return (
                       <th
@@ -1161,6 +1195,55 @@ export default function LASPage() {
                     {/* Dynamic columns */}
                     {rightTableColumns[activeTableCategory].map((col) => {
                       const val = row[col.key];
+
+                      /* ================= LOAN AMOUNT (MIN | MAX) ================= */
+                      if (col.key === "loan_amount") {
+                        const loan = row.loan_amount;
+
+                        return (
+                          <td
+                            key={col.key}
+                            className="px-3 sm:px-5 py-3 sm:py-4 border border-gray-300 text-center"
+                            style={{ minWidth: "220px" }}
+                          >
+                            {loan && typeof loan === "object" ? (
+                              <div
+                                className="
+                              grid grid-cols-1 gap-1 text-sm
+                              sm:grid-cols-2 sm:gap-0 sm:text-center
+                            "
+                              >
+                                {/* Min */}
+                                <div className="flex justify-between sm:flex-col sm:justify-center">
+                                  <span className="sm:hidden text-xs text-gray-500">
+                                    Min
+                                  </span>
+                                  <span className="font-semibold text-gray-900">
+                                    {formatLoanAmount(loan.min) ?? "—"}
+                                  </span>
+                                </div>
+
+                                {/* Max */}
+                                <div
+                                  className="
+              flex justify-between sm:flex-col sm:justify-center
+              sm:border-l border-gray-300
+            "
+                                >
+                                  <span className="sm:hidden text-xs text-gray-500">
+                                    Max
+                                  </span>
+                                  <span className="font-semibold text-gray-900">
+                                    {formatLoanAmount(loan.max) ?? "—"}
+                                  </span>
+                                </div>
+                              </div>
+                            ) : (
+                              DEFAULT_NULL_TEXT
+                            )}
+                          </td>
+                        );
+                      }
 
                       /* ================= DEFAULT CHARGES ================= */
                       if (col.key === "default_charges") {
