@@ -78,48 +78,66 @@ export default function LASPage() {
       { key: "processing_fee", label: "Processing Fee" },
       { key: "prepayment_charges", label: "Pre-payment Charges" },
       { key: "annual_maintenance", label: "Annual Maintenance / Renewal Fees" },
-      { key: "penal_charges", label: "Penal Charges (%)" },
     ],
 
     defaultCharges: [{ key: "default_charges", label: "Default Charges" }],
 
     otherMiscCost: [{ key: "other_expenses", label: "Other Expenses" }],
   };
- const normalizeDefaultCharges = (val) => {
-  if (!val || typeof val !== "object") {
-    return { penal: null, base: null, collection: null };
-  }
-
-  let penal = null;
-  let base = null;
-  let collection = null;
-
-  Object.entries(val).forEach(([key, value]) => {
-    const k = key.toLowerCase().replace(/\s+/g, " ").trim();
-
-    if (k.includes("penal")) {
-      penal = value;
+  const normalizeDefaultCharges = (val) => {
+    if (!val || typeof val !== "object") {
+      return { penal: null, base: null, collection: null };
     }
 
-    if (k === "default charges") {
-      base = value;
+    let penal = null;
+    let base = null;
+    let collection = null;
+
+    Object.entries(val).forEach(([key, value]) => {
+      const k = key.toLowerCase().replace(/\s+/g, " ").trim();
+
+      if (k.includes("penal")) {
+        penal = value;
+      }
+
+      if (k === "default charges") {
+        base = value;
+      }
+
+      if (
+        k.includes("collection") ||
+        k.includes("legal") ||
+        k.includes("voluntary")
+      ) {
+        collection = value;
+      }
+    });
+
+    return { penal, base, collection };
+  };
+  const formatLoanAmount = (value) => {
+    if (!value || typeof value !== "string") return value;
+
+    const v = value.toLowerCase().replace(/\s+/g, "");
+
+    if (v.includes("thousand")) {
+      return value.replace(/thousand/i, "K").replace(/\s+/g, "");
     }
 
-    if (
-      k.includes("collection") ||
-      k.includes("legal") ||
-      k.includes("voluntary")
-    ) {
-      collection = value;
+    if (v.includes("lakh") || v.includes("lac")) {
+      return value.replace(/lakh|lac/i, "L").replace(/\s+/g, "");
     }
-  });
 
-  return { penal, base, collection };
-};
+    if (v.includes("crore")) {
+      return value.replace(/crore/i, "Cr").replace(/\s+/g, "");
+    }
 
+    return value; // fallback
+  };
 
   const SORTABLE_DYNAMIC_COLUMNS = {
     interest_rate: "interestMedian",
+    ltv: "ltv.min",
   };
 
   const [activeTableCategory, setActiveTableCategory] =
@@ -150,6 +168,7 @@ export default function LASPage() {
       return parseFloat(val.replace(/[₹,%]/g, "")) || val;
     return val;
   };
+
   const getSortableValue = (row, key) => {
     switch (key) {
       case "institution":
@@ -164,6 +183,13 @@ export default function LASPage() {
       case "interestMedian":
         return clean(row.interest_rate?.median);
 
+      /* ✅ LTV SORT (MIN) */
+      case "ltv.min":
+        return clean(row.ltv?.min);
+
+      /* (optional) */
+      case "ltv.max":
+        return clean(row.ltv?.max);
       default:
         return null;
     }
@@ -463,9 +489,9 @@ export default function LASPage() {
         </h3>
 
         <div className="w-full bg-white backdrop-blur-2xl border border-[rgba(255,255,255,0.06)] shadow-[0_12px_32px_rgba(0,0,0,0.22)] rounded-2xl overflow-x-auto">
-          <table className="w-full border-collapse text-gray-800 text-[16px] leading-[1.35] table-highlight">
+          <table className="w-full border-collapse text-gray-800 text-[16px] leading-[1.35] table-highlight text-center">
             <thead>
-              <tr className="text-left font-semibold border-b border-gray-300">
+              <tr className="text-center font-semibold border-b border-gray-300">
                 {/* Institution */}
                 <th
                   style={{ background: "#124434", color: "#FFFFFF" }}
@@ -518,7 +544,24 @@ export default function LASPage() {
                   style={{ background: "#124434", color: "#FFFFFF" }}
                   className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
                 >
-                  Min–Max Loan
+                  <div className="flex flex-col items-center gap-2">
+                    <span>Loan Amount</span>
+
+                    {/* Sub header */}
+                    <div
+                      className="
+      hidden sm:grid
+      grid-cols-2 w-full text-xs font-medium
+      border-t border-white/30 pt-2 px-2
+    "
+                    >
+                      <span className="text-center px-2">Min</span>
+
+                      <span className="text-center px-3 border-l border-white/30">
+                        Max
+                      </span>
+                    </div>
+                  </div>
                 </th>
 
                 <th
@@ -572,7 +615,7 @@ export default function LASPage() {
                     hover:shadow-[0_14px_36px_rgba(0,0,0,0.22)]
                   `}
                 >
-                  <td className="px-5 py-4 border border-gray-300 font-semibold text-[#0A0F2C] bg-gradient-to-br from-[#FBFCFD] to-[#F3FFF5]">
+                  <td className="px-5 py-4 border border-gray-300 font-semibold text-[#0A0F2C] text-center bg-gradient-to-br from-[#FBFCFD] to-[#F3FFF5]">
                     {row.institution_name ?? DEFAULT_NULL_TEXT}
                   </td>
 
@@ -627,7 +670,7 @@ export default function LASPage() {
                   </td>
 
                   {/* Approved Shares */}
-                  <td className="px-5 py-4 border border-gray-300 text-gray-800 whitespace-pre-wrap">
+                  <td className="px-5 py-4 border border-gray-300 text-gray-800 whitespace-pre-wrap text-center">
                     {row.approved_shares
                       ? `~ ${row.approved_shares}`
                       : DEFAULT_NULL_TEXT}
@@ -637,13 +680,39 @@ export default function LASPage() {
                   <td className="px-5 py-4 border border-gray-300 text-center">
                     {row.tenure_months ?? DEFAULT_NULL_TEXT}
                   </td>
-
                   {/* Loan Amount */}
-                  <td className="px-5 py-4 border border-gray-300 text-center">
+                  <td className="px-3 sm:px-5 py-3 sm:py-4 border border-gray-300">
                     {row.loan_amount ? (
-                      <div>
-                        <div>Min: {row.loan_amount.min ?? "—"}</div>
-                        <div>Max: {row.loan_amount.max ?? "—"}</div>
+                      <div
+                        className="
+        grid grid-cols-1 gap-1 text-sm
+        sm:grid-cols-2 sm:gap-0 sm:text-center
+      "
+                      >
+                        {/* Min */}
+                        <div className="flex justify-between sm:flex-col sm:justify-center">
+                          <span className="sm:hidden text-xs text-gray-500">
+                            Min
+                          </span>
+                          <span className="font-semibold text-gray-900">
+                            {formatLoanAmount(row.loan_amount.min) ?? "—"}
+                          </span>
+                        </div>
+
+                        {/* Max */}
+                        <div
+                          className="
+          flex justify-between sm:flex-col sm:justify-center
+          sm:border-l border-gray-300
+        "
+                        >
+                          <span className="sm:hidden text-xs text-gray-500">
+                            Max
+                          </span>
+                          <span className="font-semibold text-gray-900">
+                            {formatLoanAmount(row.loan_amount.max) ?? "—"}
+                          </span>
+                        </div>
                       </div>
                     ) : (
                       DEFAULT_NULL_TEXT
@@ -856,9 +925,9 @@ export default function LASPage() {
 
           {/* TABLE */}
           <div className="overflow-x-auto">
-            <table className="w-full border-collapse text-base text-gray-900 table-highlight">
+            <table className="w-full border-collapse text-base text-gray-900 table-highlight text-center">
               <thead>
-                <tr className="text-left font-semibold border-b border-gray-300">
+                <tr className="text-center font-semibold border-b border-gray-300">
                   {/* Institution */}
                   <th
                     style={{ background: "#124434", color: "#FFFFFF" }}
@@ -896,6 +965,7 @@ export default function LASPage() {
                   {rightTableColumns[activeTableCategory].map((col) => {
                     const sortKey = SORTABLE_DYNAMIC_COLUMNS[col.key];
 
+                    /* ================= DEFAULT CHARGES (PENAL | DEFAULT | LEGAL) ================= */
                     if (col.key === "default_charges") {
                       return (
                         <th
@@ -919,6 +989,86 @@ export default function LASPage() {
                         </th>
                       );
                     }
+                    /* ================= INTEREST RATE (MIN | MAX | MEDIAN) ================= */
+                    if (col.key === "interest_rate") {
+                      return (
+                        <th
+                          key={col.key}
+                          style={{
+                            background: "#124434",
+                            color: "#FFFFFF",
+                            minWidth: "260px",
+                          }}
+                          className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+                        >
+                          <div className="flex flex-col items-center gap-2">
+                            {/* Main title + sort */}
+                            <div className="flex items-center gap-2">
+                              <span>Interest Rate</span>
+                              {sortKey && <SortButton columnKey={sortKey} />}
+                            </div>
+
+                            {/* Sub header */}
+                            <div
+                              className="
+                              hidden sm:grid
+                              grid-cols-3 w-full text-xs font-medium
+                              border-t border-white/30 pt-2 px-2
+                            "
+                            >
+                              <span className="text-center px-2">Min</span>
+
+                              <span className="text-center px-3 border-l border-r border-white/30">
+                                Max
+                              </span>
+
+                              <span className="text-center px-2">Median</span>
+                            </div>
+                          </div>
+                        </th>
+                      );
+                    }
+
+                    /* ================= LTV (MIN | MAX) ================= */
+                    if (col.key === "ltv") {
+                      return (
+                        <th
+                          key={col.key}
+                          style={{
+                            background: "#124434",
+                            color: "#FFFFFF",
+                            minWidth: "220px",
+                          }}
+                          className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+                        >
+                          <div className="flex flex-col items-center gap-2">
+                            {/* Main title + sort */}
+                            <div className="flex items-center gap-2">
+                              <span>LTV</span>
+                              {sortKey && <SortButton columnKey={sortKey} />}
+                            </div>
+
+                            {/* Sub header */}
+                            <div
+                              className="
+                            hidden sm:grid
+                            grid-cols-2 w-full text-xs font-medium
+                            border-t border-white/30 pt-2 px-2
+                            "
+                            >
+                              <span className="text-center px-2">Min</span>
+
+                              <span className="text-center px-3 border-l border-white/30">
+                                Max
+                              </span>
+                            </div>
+                          </div>
+                        </th>
+                      );
+                    }
+
+                    
+
                     /* ================= NORMAL DYNAMIC COLUMNS ================= */
                     return (
                       <th
@@ -954,7 +1104,7 @@ export default function LASPage() {
                       index % 2 === 0 ? "bg-white/55" : "bg-white/36"
                     } hover:bg-[#B1ED67]/22 hover:shadow-[0_14px_36px_rgba(0,0,0,0.22)]`}
                   >
-                    <td className="px-5 py-4 border border-gray-300 font-semibold text-[#0A0F2C] bg-gradient-to-br from-[#FBFCFD] to-[#F3FFF5] rounded-md">
+                    <td className="px-5 py-4 border border-gray-300 font-semibold text-[#0A0F2C] text-center bg-gradient-to-br from-[#FBFCFD] to-[#F3FFF5] rounded-md">
                       {row.institution_name ?? DEFAULT_NULL_TEXT}
                     </td>
 
@@ -1012,6 +1162,7 @@ export default function LASPage() {
                     {rightTableColumns[activeTableCategory].map((col) => {
                       const val = row[col.key];
 
+                      /* ================= DEFAULT CHARGES ================= */
                       if (col.key === "default_charges") {
                         const charges = normalizeDefaultCharges(val);
 
@@ -1036,10 +1187,114 @@ export default function LASPage() {
                         );
                       }
 
+                      /* ================= INTEREST RATE (MIN | MAX | MEDIAN) ================= */
+                      if (col.key === "interest_rate") {
+                        return (
+                          <td
+                            key={col.key}
+                            className="px-3 sm:px-5 py-3 sm:py-4 border border-gray-300"
+                            style={{ minWidth: "260px" }} // 👈 FIXES CRAMPING
+                          >
+                            {val ? (
+                              <div
+                                className="
+                              grid grid-cols-1 gap-1 text-sm
+                              sm:grid-cols-3 sm:gap-0 sm:text-center
+                            "
+                              >
+                                {/* Min */}
+                                <div className="flex justify-between sm:flex-col sm:justify-center">
+                                  <span className="sm:hidden text-xs text-gray-500">
+                                    Min
+                                  </span>
+                                  <span className="font-semibold text-gray-900">
+                                    {val.min ?? "—"}
+                                  </span>
+                                </div>
+
+                                {/* Max */}
+                                <div
+                                  className="
+                              flex justify-between sm:flex-col sm:justify-center
+                              sm:border-l sm:border-r border-gray-300
+                            "
+                                >
+                                  <span className="sm:hidden text-xs text-gray-500">
+                                    Max
+                                  </span>
+                                  <span className="font-semibold text-gray-900">
+                                    {val.max ?? "—"}
+                                  </span>
+                                </div>
+
+                                {/* Median */}
+                                <div className="flex justify-between sm:flex-col sm:justify-center">
+                                  <span className="sm:hidden text-xs text-gray-500">
+                                    Median
+                                  </span>
+                                  <span className="font-semibold text-[#1F5E3C]">
+                                    {val.median ?? "—"}
+                                  </span>
+                                </div>
+                              </div>
+                            ) : (
+                              DEFAULT_NULL_TEXT
+                            )}
+                          </td>
+                        );
+                      }
+
+                      /* ================= LTV (MIN | MAX) ================= */
+                      if (col.key === "ltv") {
+                        return (
+                          <td
+                            key={col.key}
+                            className="px-3 sm:px-5 py-3 sm:py-4 border border-gray-300"
+                            style={{ minWidth: "220px" }} // 👈 width for clean layout
+                          >
+                            {val ? (
+                              <div
+                                className="
+            grid grid-cols-1 gap-1 text-sm
+            sm:grid-cols-2 sm:gap-0 sm:text-center
+          "
+                              >
+                                {/* Min */}
+                                <div className="flex justify-between sm:flex-col sm:justify-center">
+                                  <span className="sm:hidden text-xs text-gray-500">
+                                    Min
+                                  </span>
+                                  <span className="font-semibold text-gray-900">
+                                    {val.min ?? "—"}
+                                  </span>
+                                </div>
+
+                                {/* Max */}
+                                <div
+                                  className="
+                              flex justify-between sm:flex-col sm:justify-center
+                              sm:border-l border-gray-300
+                            "
+                                >
+                                  <span className="sm:hidden text-xs text-gray-500">
+                                    Max
+                                  </span>
+                                  <span className="font-semibold text-gray-900">
+                                    {val.max ?? "—"}
+                                  </span>
+                                </div>
+                              </div>
+                            ) : (
+                              DEFAULT_NULL_TEXT
+                            )}
+                          </td>
+                        );
+                      }
+
                       return (
                         <td
                           key={col.key}
-                          className="px-5 py-4 border border-gray-300 whitespace-pre-wrap"
+                          className="px-5 py-4 border border-gray-300 whitespace-pre-wrap text-center"
                         >
                           {val == null
                             ? DEFAULT_NULL_TEXT
