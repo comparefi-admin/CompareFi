@@ -56,6 +56,95 @@ export default function LAMFPage() {
     return val;
   };
 
+  const formatLoanAmount = (value) => {
+    if (!value || typeof value !== "string") return value;
+
+    const v = value.toLowerCase().replace(/\s+/g, " ").trim();
+
+    if (v.includes("thousand")) {
+      return v.replace(/thousand/i, "K").replace(/\s/g, "");
+    }
+    if (v.includes("lakh") || v.includes("lac")) {
+      return v.replace(/lakh|lac/i, "L").replace(/\s/g, "");
+    }
+    if (v.includes("crore")) {
+      return v.replace(/crore/i, "Cr").replace(/\s/g, "");
+    }
+
+    return value;
+  };
+
+  const SORTABLE_DYNAMIC_COLUMNS = {
+    interest_rate: "interestMedian",
+    ltv: "ltv.min",
+  };
+
+  const [sortConfig, setSortConfig] = useState({
+    key: null,
+    order: "asc", // asc | desc
+  });
+
+  const getSortableValue = (row, key) => {
+    switch (key) {
+      case "institution":
+        return row.institution_name ?? "";
+
+      case "firstYear":
+        return clean(row.cost_first_year?.percent);
+
+      case "secondYear":
+        return clean(row.cost_second_year?.percent);
+
+      case "interestMedian":
+        return clean(row.interest_rate?.median);
+
+      case "ltv.min":
+        return clean(row.ltv?.min);
+
+      case "ltv.max":
+        return clean(row.ltv?.max);
+
+      default:
+        return null;
+    }
+  };
+
+  const sortedTableData = useMemo(() => {
+    if (!sortConfig.key) return data;
+
+    return [...data].sort((a, b) => {
+      const valA = getSortableValue(a, sortConfig.key);
+      const valB = getSortableValue(b, sortConfig.key);
+
+      if (typeof valA === "number" && typeof valB === "number") {
+        return sortConfig.order === "asc" ? valA - valB : valB - valA;
+      }
+
+      return sortConfig.order === "asc"
+        ? String(valA).localeCompare(String(valB))
+        : String(valB).localeCompare(String(valA));
+    });
+  }, [data, sortConfig]);
+
+  const SortButton = ({ columnKey }) => {
+    const active = sortConfig.key === columnKey;
+
+    return (
+      <button
+        onClick={() =>
+          setSortConfig((prev) => ({
+            key: columnKey,
+            order:
+              prev.key === columnKey && prev.order === "asc" ? "desc" : "asc",
+          }))
+        }
+        className="ml-2 text-xs text-white/80 hover:text-white transition"
+      >
+        {active ? (sortConfig.order === "asc" ? "▲" : "▼") : "⇅"}
+      </button>
+    );
+  };
+
   /** ----------------------
    *  Fetch Data
    * ----------------------*/
@@ -155,7 +244,6 @@ export default function LAMFPage() {
       { key: "loan_debt", label: "Debt MF Loan" },
       { key: "ltv", label: "LTV - Funding (Debt/Equity %)" },
       { key: "interest_rate", label: "Interest Rate (Min / Max / Median %)" },
-      
     ],
     majorCost: [
       { key: "regularization_period", label: "Margin Call Period (Days)" },
@@ -265,15 +353,15 @@ export default function LAMFPage() {
                 <div
                   key={i}
                   className="
-          bg-white/18 backdrop-blur-xl border border-[rgba(35,104,126,0.2)]
-          rounded-3xl p-5 sm:p-8
-          bg-[#e8feff3f]
-          shadow-[0_16px_38px_rgba(0,0,0,0.12)]
-          transition-all duration-500
-          hover:-translate-y-3
-          hover:shadow-[0_16px_38px_rgba(0,0,0,0.26),0_6px_18px_rgba(0,0,0,0.08)]
-          will-change-transform
-        "
+                    bg-white/18 backdrop-blur-xl border border-[rgba(35,104,126,0.2)]
+                    rounded-3xl p-5 sm:p-8
+                    bg-[#e8feff3f]
+                    shadow-[0_16px_38px_rgba(0,0,0,0.12)]
+                    transition-all duration-500
+                    hover:-translate-y-3
+                    hover:shadow-[0_16px_38px_rgba(0,0,0,0.26),0_6px_18px_rgba(0,0,0,0.08)]
+                    will-change-transform
+                  "
                 >
                   <h3 className="text-2xl font-bold mb-4 text-[#0D3A27]">
                     {card.title}
@@ -301,14 +389,14 @@ export default function LAMFPage() {
                   <div
                     key={i}
                     className="
-            bg-white/22 backdrop-blur-md border border-[rgba(255,255,255,0.06)]
-            rounded-2xl p-3 sm:p-4
-            transition-all
-            bg-[#20463B]
-            shadow-[0_16px_38px_rgba(0,0,0,0.05)]
-            hover:-translate-y-2
-            hover:shadow-[0_14px_36px_rgba(0,0,0,0.22),inset_0_0_18px_rgba(255,255,255,0.06)]
-          "
+                    bg-white/22 backdrop-blur-md border border-[rgba(255,255,255,0.06)]
+                    rounded-2xl p-3 sm:p-4
+                    transition-all
+                    bg-[#20463B]
+                    shadow-[0_16px_38px_rgba(0,0,0,0.05)]
+                    hover:-translate-y-2
+                    hover:shadow-[0_14px_36px_rgba(0,0,0,0.22),inset_0_0_18px_rgba(255,255,255,0.06)]
+                  "
                   >
                     <p className="text-gray-100 text-sm">{label}</p>
                     <p className="text-2xl font-bold text-[#AFE619]">{value}</p>
@@ -328,12 +416,12 @@ export default function LAMFPage() {
               {/* Card 1 */}
               <div
                 className="
-        bg-white/18 backdrop-blur-xl 
-        border border-[rgba(35,104,126,0.2)]
-        rounded-3xl p-5 sm:p-8 shadow-[0_16px_38px_rgba(0,0,0,0.12)]
-        transition-all duration-500 hover:-translate-y-3
-        hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
-      "
+                bg-white/18 backdrop-blur-xl 
+                border border-[rgba(35,104,126,0.2)]
+                rounded-3xl p-5 sm:p-8 shadow-[0_16px_38px_rgba(0,0,0,0.12)]
+                transition-all duration-500 hover:-translate-y-3
+                hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
+              "
               >
                 <h4 className="text-2xl font-bold mb-4 text-[#0D3A27]">
                   How the Cost Summary Is Calculated
@@ -359,12 +447,12 @@ export default function LAMFPage() {
               {/* Card 2 */}
               <div
                 className="
-        bg-white/18 backdrop-blur-xl 
-        border border-[rgba(35,104,126,0.2)]
-        rounded-3xl p-5 sm:p-8 shadow-[0_16px_38px_rgba(0,0,0,0.12)]
-        transition-all duration-500 hover:-translate-y-3
-        hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
-      "
+                  bg-white/18 backdrop-blur-xl 
+                  border border-[rgba(35,104,126,0.2)]
+                  rounded-3xl p-5 sm:p-8 shadow-[0_16px_38px_rgba(0,0,0,0.12)]
+                  transition-all duration-500 hover:-translate-y-3
+                  hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
+                "
               >
                 <h4 className="text-2xl font-bold mb-4 text-[#0D3A27]">
                   What You Can Quickly Compare
@@ -401,21 +489,24 @@ export default function LAMFPage() {
 
             <div
               className="
-    w-full bg-white backdrop-blur-2xl 
-    border border-[rgba(255,255,255,0.06)]
-    shadow-[0_12px_32px_rgba(0,0,0,0.22)]
-    rounded-xl overflow-x-auto p-0
-  "
+                  w-full bg-white backdrop-blur-2xl 
+                  border border-[rgba(255,255,255,0.06)]
+                  shadow-[0_12px_32px_rgba(0,0,0,0.22)]
+                  rounded-xl overflow-x-auto p-0
+                "
             >
-              <table className="w-full border-collapse text-gray-800 text-[16px] leading-[1.35] table-highlight">
+              <table className="w-full border-collapse text-gray-800 text-[16px] leading-[1.35] table-highlight text-center">
                 <thead>
-                  <tr className="text-left font-semibold border-b border-gray-300">
+                  <tr className="text-center font-semibold border-b border-gray-300">
                     {/* Institution */}
                     <th
                       style={{ background: "#124434", color: "#FFFFFF" }}
                       className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
                     >
-                      Institution
+                      <div className="flex items-center gap-2">
+                        Institution
+                        <SortButton columnKey="institution" />
+                      </div>
                     </th>
 
                     {/* 1st Year */}
@@ -423,7 +514,10 @@ export default function LAMFPage() {
                       style={{ background: "#124434", color: "#FFFFFF" }}
                       className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
                     >
-                      1st Year
+                      <div className="flex items-center justify-center gap-2">
+                        1st Year
+                        <SortButton columnKey="firstYear" />
+                      </div>
                     </th>
 
                     {/* 2nd Year */}
@@ -431,19 +525,134 @@ export default function LAMFPage() {
                       style={{ background: "#124434", color: "#FFFFFF" }}
                       className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
                     >
-                      2nd Year
+                      <div className="flex items-center justify-center gap-2">
+                        2nd Year
+                        <SortButton columnKey="secondYear" />
+                      </div>
                     </th>
 
                     {/* Dynamic columns */}
-                    {rightTableColumns[activeTableCategory].map((col) => (
-                      <th
-                        key={col.key}
-                        style={{ background: "#124434", color: "#FFFFFF" }}
-                        className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
-                      >
-                        {col.label}
-                      </th>
-                    ))}
+                    {rightTableColumns[activeTableCategory].map((col) => {
+                      /* ================= EQUITY MF LOAN (MIN | MAX) ================= */
+                      if (col.key === "loan_equity") {
+                        return (
+                          <th
+                            key={col.key}
+                            style={{
+                              background: "#124434",
+                              color: "#FFFFFF",
+                              minWidth: "220px",
+                            }}
+                            className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+                          >
+                            <div className="flex flex-col items-center gap-2">
+                              <span>Equity MF Loan</span>
+
+                              <div className="hidden sm:grid grid-cols-2 w-full text-xs border-t border-white/30 pt-2">
+                                <span className="text-center">Min</span>
+                                <span className="text-center border-l border-white/30">
+                                  Max
+                                </span>
+                              </div>
+                            </div>
+                          </th>
+                        );
+                      }
+
+                      /* ================= DEBT MF LOAN (MIN | MAX) ================= */
+                      if (col.key === "loan_debt") {
+                        return (
+                          <th
+                            key={col.key}
+                            style={{
+                              background: "#124434",
+                              color: "#FFFFFF",
+                              minWidth: "220px",
+                            }}
+                            className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+                          >
+                            <div className="flex flex-col items-center gap-2">
+                              <span>Debt MF Loan</span>
+
+                              <div className="hidden sm:grid grid-cols-2 w-full text-xs border-t border-white/30 pt-2">
+                                <span className="text-center">Min</span>
+                                <span className="text-center border-l border-white/30">
+                                  Max
+                                </span>
+                              </div>
+                            </div>
+                          </th>
+                        );
+                      }
+
+                      /* ================= LTV (DEBT | EQUITY %) ================= */
+                      if (col.key === "ltv") {
+                        return (
+                          <th
+                            key={col.key}
+                            style={{
+                              background: "#124434",
+                              color: "#FFFFFF",
+                              minWidth: "220px",
+                            }}
+                            className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+                          >
+                            <div className="flex flex-col items-center gap-2">
+                              <span>LTV (%)</span>
+
+                              <div className="hidden sm:grid grid-cols-2 w-full text-xs border-t border-white/30 pt-2">
+                                <span className="text-center">Debt</span>
+                                <span className="text-center border-l border-white/30">
+                                  Equity
+                                </span>
+                              </div>
+                            </div>
+                          </th>
+                        );
+                      }
+
+                      /* ================= INTEREST RATE (MIN | MAX | MEDIAN) ================= */
+                      if (col.key === "interest_rate") {
+                        return (
+                          <th
+                            style={{
+                              background: "#124434",
+                              color: "#FFFFFF",
+                              minWidth: "260px",
+                            }}
+                            className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+                          >
+                            <div className="flex flex-col items-center gap-2">
+                              {/* 🔹 Title + Sort Button */}
+                              <div className="flex items-center gap-2">
+                                <span>Interest Rate</span>
+                                <SortButton columnKey="interestMedian" />
+                              </div>
+
+                              {/* 🔹 Sub header */}
+                              <div className="grid grid-cols-3 w-full text-xs font-medium border-t border-white/30 pt-2 px-2">
+                                <span className="text-center">Min</span>
+                                <span className="text-center border-l border-r border-white/30">
+                                  Max
+                                </span>
+                                <span className="text-center">Median</span>
+                              </div>
+                            </div>
+                          </th>
+                        );
+                      }
+
+                      /* ================= DEFAULT FALLBACK ================= */
+                      return (
+                        <th
+                          key={col.key}
+                          style={{ background: "#124434", color: "#FFFFFF" }}
+                          className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+                        >
+                          {col.label}
+                        </th>
+                      );
+                    })}
 
                     {/* Contact */}
                     <th
@@ -456,7 +665,7 @@ export default function LAMFPage() {
                 </thead>
 
                 <tbody>
-                  {data.map((row, index) => (
+                  {sortedTableData.map((row, index) => (
                     <tr
                       key={row.id}
                       className={`
@@ -539,49 +748,63 @@ export default function LAMFPage() {
                       </td>
 
                       {/* Loan Equity */}
-                      <td className="px-5 py-4 border border-gray-300 text-center">
+                      <td className="px-5 py-4 border border-gray-300">
                         {row.loan_equity ? (
-                          <>
-                            <div>Min: {row.loan_equity.min ?? "—"}</div>
-                            <div>Max: {row.loan_equity.max ?? "—"}</div>
-                          </>
+                          <div className="grid sm:grid-cols-2 text-sm text-center">
+                            <div className="font-semibold">
+                              {formatLoanAmount(row.loan_equity.min) ?? "—"}
+                            </div>
+                            <div className="font-semibold sm:border-l border-gray-300">
+                              {formatLoanAmount(row.loan_equity.max) ?? "—"}
+                            </div>
+                          </div>
                         ) : (
                           DEFAULT_NULL_TEXT
                         )}
                       </td>
 
                       {/* Loan Debt */}
-                      <td className="px-5 py-4 border border-gray-300 text-center">
+                      <td className="px-5 py-4 border border-gray-300">
                         {row.loan_debt ? (
-                          <>
-                            <div>Min: {row.loan_debt.min ?? "—"}</div>
-                            <div>Max: {row.loan_debt.max ?? "—"}</div>
-                          </>
+                          <div className="grid sm:grid-cols-2 text-sm text-center">
+                            <div className="font-semibold">
+                              {formatLoanAmount(row.loan_debt.min) ?? "—"}
+                            </div>
+                            <div className="font-semibold sm:border-l border-gray-300">
+                              {formatLoanAmount(row.loan_debt.max) ?? "—"}
+                            </div>
+                          </div>
                         ) : (
                           DEFAULT_NULL_TEXT
                         )}
                       </td>
 
                       {/* LTV Funding */}
-                      <td className="px-5 py-4 border border-gray-300 text-center">
+                      <td className="px-5 py-4 border border-gray-300">
                         {row.ltv ? (
-                          <>
-                            <div>Debt: {row.ltv.debt ?? "—"}</div>
-                            <div>Equity: {row.ltv.equity ?? "—"}</div>
-                          </>
+                          <div className="grid sm:grid-cols-2 text-sm text-center">
+                            <div>{row.ltv.debt ?? "—"}</div>
+                            <div className="sm:border-l border-gray-300">
+                              {row.ltv.equity ?? "—"}
+                            </div>
+                          </div>
                         ) : (
                           DEFAULT_NULL_TEXT
                         )}
                       </td>
 
                       {/* Interest */}
-                      <td className="px-5 py-4 border border-gray-300 text-center">
+                      <td className="px-5 py-4 border border-gray-300">
                         {row.interest_rate ? (
-                          <>
-                            <div>Min: {row.interest_rate.min ?? "—"}</div>
-                            <div>Max: {row.interest_rate.max ?? "—"}</div>
-                            <div>Median: {row.interest_rate.median ?? "—"}</div>
-                          </>
+                          <div className="grid grid-cols-3 text-center text-sm">
+                            <span>{row.interest_rate.min ?? "—"}</span>
+                            <span className="border-l border-r border-gray-300">
+                              {row.interest_rate.max ?? "—"}
+                            </span>
+                            <span className="font-semibold text-[#1F5E3C]">
+                              {row.interest_rate.median ?? "—"}
+                            </span>
+                          </div>
                         ) : (
                           DEFAULT_NULL_TEXT
                         )}
@@ -630,7 +853,7 @@ export default function LAMFPage() {
                           >
                             <FileText className="w-4 h-4" /> Fill Enquiry
                           </button>
-                       </div>
+                        </div>
                       </td>
                     </tr>
                   ))}
@@ -924,21 +1147,21 @@ export default function LAMFPage() {
                           </a>
 
                           <div className="mt-3">
-                                                <button
-                                                  onClick={() => {
-                                                    setEnquiryInstitution(row.institution_name);
-                                                    setEnquiryOpen(true);
-                                                  }}
-                                                  className="inline-flex items-center justify-center gap-2
+                            <button
+                              onClick={() => {
+                                setEnquiryInstitution(row.institution_name);
+                                setEnquiryOpen(true);
+                              }}
+                              className="inline-flex items-center justify-center gap-2
                                                     bg-gradient-to-b from-[#5e009c] to-[#c401ff]
                                                     text-white px-4 py-2 rounded-lg
                                                     shadow-[0_10px_30px_rgba(0,0,0,0.20)]
                                                     hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
                                                     transition-all duration-300 transform hover:-translate-y-0.5"
-                                                >
-                                                  <FileText className="w-4 h-4" /> Fill Enquiry
-                                                </button>
-                                              </div>
+                            >
+                              <FileText className="w-4 h-4" /> Fill Enquiry
+                            </button>
+                          </div>
                         </td>
                       </tr>
                     ))}
