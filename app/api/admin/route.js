@@ -2,6 +2,17 @@ export const runtime = 'nodejs';
 
 export async function POST(req) {
   try {
+    if (!process.env.ADMIN_UID) {
+      console.error('❌ ADMIN_UID is not set');
+      return new Response(
+        JSON.stringify({
+          isAdmin: false,
+          error: 'Server misconfigured',
+        }),
+        { status: 500, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+    
     const { uid } = await req.json();
 
     if (!uid) {

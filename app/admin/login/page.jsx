@@ -42,7 +42,7 @@ export default function AdminLogin() {
       }
 
       // Server-side admin check
-      const res = await fetch('/api', {
+      const res = await fetch('/api/admin', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ uid: user.id }),

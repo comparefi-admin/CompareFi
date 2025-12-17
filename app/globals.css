@@ -13,9 +13,14 @@ p {
 }
 
 /* Make 1st three columns look elevated + important */
+/* Thin green accent strip on left */
 .table-highlight th:nth-child(-n+3),
 .table-highlight td:nth-child(-n+3) {
-  background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(246,255,246,0.85));
+  background: linear-gradient(
+    180deg,
+    rgba(242, 255, 245, 0.92),
+    rgba(225, 245, 230, 0.85)
+  );
   border-radius: 12px;
   box-shadow: 0 12px 32px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.5);
   position: relative;
@@ -23,7 +28,7 @@ p {
   transition: transform .25s ease, box-shadow .25s ease;
 }
 
-/* Thin green accent strip on left */
+/* ✅ LEFT ACCENT GREEN STRIP — ADDED BACK */
 .table-highlight th:nth-child(-n+3)::before,
 .table-highlight td:nth-child(-n+3)::before {
   content: "";
@@ -37,6 +42,8 @@ p {
   box-shadow: 0 4px 12px rgba(177,237,103,0.2);
 }
 
+
+
 /* Hover lift for important columns */
 .table-highlight tbody tr:hover td:nth-child(-n+3) {
   transform: translateY(-4px) scale(1.01);
@@ -48,6 +55,15 @@ p {
   opacity: 0.85;
 }
 
+
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 
 /* From Uiverse.io by Li-Deheng */ 
 .button1 {

@@ -96,7 +96,7 @@ export default function DisplayCards() {
     ],
   },
   {
-    title: "Loan Against Securities (LAS)",
+    title: "Loan Against Shares (LAS)",
     data: [
       { label: "Interest Rate", value: "8–20%" },
       { label: "Funding Amount", value: "20–80%" },

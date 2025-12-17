@@ -18,35 +18,41 @@ const navItems = [
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeTab, setActiveTab] = useState(null);
 
-  // 🆕 We track active manually — NOT from URL
-const [activeTab, setActiveTab] = useState(null);
+  const pathname = usePathname();
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
-const pathname = usePathname();
 
-useEffect(() => {
-  if (!pathname) return;
+  useEffect(() => {
+    if (!pathname) return;
 
-  if (pathname === "/about") {
-    setActiveTab("About");
-  } else if (pathname === "/contact") {
-    setActiveTab("Contact");
-  } else if (pathname === "/" && window.location.hash === "#featured") {
-    setActiveTab("Products");
-  } else {
-    setActiveTab("Home");
-  }
-}, [pathname]);
+    if (pathname === "/about") setActiveTab("About");
+    else if (pathname === "/contact") setActiveTab("Contact");
+    else if (pathname === "/" && window.location.hash === "#featured") {
+      setActiveTab("Products");
+    } else {
+      setActiveTab("Home");
+    }
+  }, [pathname]);
 
   return (
-    <div className="fixed top-4 left-0 w-full z-50 flex items-center justify-center px-4">
+    <div className="fixed top-4 left-0 w-full z-50 flex justify-center px-4 pt-2">
 
-      <div className="absolute left-4 top-1/2 -translate-y-1/2">
+      {/* LEFT: MOBILE HAMBURGER */}
+      <button
+        className="absolute left-4 top-[60%] -translate-y-1/2 md:hidden p-2 bg-white rounded-full shadow hover:bg-gray-100 transition"
+        onClick={() => setMobileOpen(!mobileOpen)}
+      >
+        {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+      </button>
+
+      {/* CENTER LOGO */}
+      <div className="absolute md:left-4 top-1/2 -translate-y-1/2">
         <Link
           href="/"
           onClick={() => setActiveTab('Home')}
@@ -62,14 +68,15 @@ useEffect(() => {
         </Link>
       </div>
 
+      {/* DESKTOP NAV */}
       <nav
-        className={`h-16 pointer-events-auto rounded-full border px-6 py-3 transition-all duration-300 flex justify-center
+        className={`hidden md:flex h-16 pointer-events-auto rounded-full border px-6 py-3 transition-all duration-300 items-center
           ${isScrolled
             ? 'bg-white/70 backdrop-blur-sm shadow-md border-gray-200'
             : 'bg-white/60 backdrop-blur-md border-gray-100'
           }`}
       >
-        <ul className="hidden md:flex items-center space-x-2">
+        <ul className="flex items-center space-x-2">
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = activeTab === item.baseLabel;
@@ -90,47 +97,48 @@ useEffect(() => {
             );
           })}
         </ul>
-
-        <div className="md:hidden flex items-center justify-end">
-          <button
-            className="p-2 rounded-md hover:bg-gray-100"
-            onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Toggle Menu"
-          >
-            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
-          </button>
-        </div>
-
-        {mobileOpen && (
-          <div className="absolute top-16 left-0 w-full bg-white border-t border-gray-200 rounded-b-2xl shadow-md md:hidden">
-            <ul className="flex flex-col space-y-1 p-3">
-              {navItems.map((item) => {
-                const Icon = item.icon;
-                const isActive = activeTab === item.baseLabel;
-
-                return (
-                  <li key={item.baseLabel}>
-                    <Link
-                      href={item.path}
-                      onClick={() => {
-                        setActiveTab(item.baseLabel);
-                        setMobileOpen(false);
-                      }}
-                      className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition
-                        ${isActive ? 'bg-gray-900 text-white' : 'text-gray-700 hover:bg-gray-100'}
-                      `}
-                    >
-                      <Icon size={16} />
-                      <span className="font-medium">{item.baseLabel}</span>
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        )}
       </nav>
 
+      {/* MOBILE DROPDOWN MENU */}
+      {mobileOpen && (
+        <div className="absolute top-16 left-0 w-full bg-white/95 backdrop-blur-xl border-t border-gray-200 shadow-lg rounded-b-2xl md:hidden animate-slideDown">
+          <ul className="flex flex-col p-4 space-y-2">
+            {navItems.map((item) => {
+              const Icon = item.icon;
+              const isActive = activeTab === item.baseLabel;
+
+              return (
+                <li key={item.baseLabel}>
+                  <Link
+                    href={item.path}
+                    onClick={() => {
+                      setActiveTab(item.baseLabel);
+                      setMobileOpen(false);
+                    }}
+                    className={`flex items-center space-x-3 px-4 py-3 rounded-xl text-base font-medium transition
+                      ${isActive ? 'bg-gray-900 text-white' : 'text-gray-800 hover:bg-gray-100'}
+                    `}
+                  >
+                    <Icon size={18} />
+                    <span>{item.baseLabel}</span>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      )}
+
+      {/* Animation */}
+      <style jsx>{`
+        @keyframes slideDown {
+          from { opacity: 0; transform: translateY(-10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-slideDown {
+          animation: slideDown 0.25s ease-out;
+        }
+      `}</style>
     </div>
   );
 }
