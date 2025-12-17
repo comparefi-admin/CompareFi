@@ -366,9 +366,9 @@ export default function LAMFPage() {
                   <h3 className="text-2xl font-bold mb-4 text-[#0D3A27]">
                     {card.title}
                   </h3>
-                  <p className="text-gray-800 leading-relaxed text-lg">
+                  <div className="text-gray-800 leading-relaxed text-lg">
                     {card.text}
-                  </p>
+                  </div>
                 </div>
               ))}
             </div>
