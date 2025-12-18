@@ -1,15 +1,10 @@
 "use client";
 import Image from "next/image";
 import globe from "./images/globe.png";
-import pc from "./images/pc.png";
 import TiltedCard from "@/components/TiltedCard";
 import BlurText from "@/components/BlurText";
 import { DollarSign, PieChart, BarChart } from "lucide-react";
 import { Link as ScrollLink } from "react-scroll";
-
-const handleAnimationComplete = () => {
-  console.log("Animation completed!");
-};
 
 import { Work_Sans, Inter } from "next/font/google";
 
@@ -48,54 +43,18 @@ import CompareProductsTable from "./components/CompareProductsTable";
 
 import { Button } from "@/components/ui/button";
 import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+} from "@/components/ui/tabs";
 import { TooltipProvider } from "@/components/ui/tooltip";
-
-const defaultCards = [
-  {
-    icon: <Sparkles className="size-4 text-black" />,
-    title: "LAS",
-    description: "Discover amazing content",
-    date: "Just now",
-    iconClassName: "text-blue-500",
-    titleClassName: "text-[#FF5732]",
-    className:
-      "[grid-area:stack] hover:-translate-y-10 before:absolute before:w-[100%] before:outline-1 before:rounded-xl before:outline-border before:h-[100%] before:content-[''] before:bg-blend-overlay before:bg-background/50 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration-700 hover:grayscale-0 before:left-0 before:top-0",
-  },
-  {
-    icon: <Sparkles className="size-6 text-black" />,
-    title: "LAMF",
-    description: "Trending this week",
-    date: "2 days ago",
-    iconClassName: "text-blue-500",
-    titleClassName: "text-[#FF5732]",
-    className:
-      "[grid-area:stack] translate-x-12 translate-y-10 hover:-translate-y-1 before:absolute before:w-[100%] before:outline-1 before:rounded-xl before:outline-border before:h-[100%] before:content-[''] before:bg-blend-overlay before:bg-background/50 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration-700 hover:grayscale-0 before:left-0 before:top-0",
-  },
-  {
-    icon: <Sparkles className="size-4 text-black" />,
-    title: "MTF",
-    description: "Latest updates and features",
-    date: "Today",
-    iconClassName: "text-blue-500",
-    titleClassName: "text-[#FF5732]",
-    className:
-      "[grid-area:stack] translate-x-24 translate-y-20 hover:translate-y-10",
-  },
-];
 
 const PRODUCTS = [
   {
     id: "las",
     title: "Loan Against Securities (LAS)",
-    blurb:
-      "Unlock liquidity from your portfolio without selling core holdings.",
+    blurb: "Unlock liquidity from your portfolio without selling core holdings.",
     bullets: [
       "Borrow up to 70% of eligible securities",
       "Minimal documentation",
@@ -103,12 +62,6 @@ const PRODUCTS = [
     ],
     icon: <Briefcase className="w-6 h-6" />,
     color: "from-emerald-400 to-emerald-600",
-    metrics: [
-      { name: "Liquidity", value: 80, color: "#10B981" },
-      { name: "Cost", value: 40, color: "#34D399" },
-      { name: "Complexity", value: 30, color: "#6EE7B7" },
-      { name: "Turnaround", value: 70, color: "#A7F3D0" },
-    ],
   },
   {
     id: "lamf",
@@ -121,12 +74,6 @@ const PRODUCTS = [
     ],
     icon: <LineChart className="w-6 h-6" />,
     color: "from-pink-400 to-pink-600",
-    metrics: [
-      { name: "Liquidity", value: 70, color: "#F472B6" },
-      { name: "Cost", value: 50, color: "#F9A8D4" },
-      { name: "Complexity", value: 35, color: "#FBCFE8" },
-      { name: "Turnaround", value: 80, color: "#FEE2E2" },
-    ],
   },
   {
     id: "mtf",
@@ -139,17 +86,10 @@ const PRODUCTS = [
     ],
     icon: <BarChart3 className="w-6 h-6" />,
     color: "from-indigo-400 to-indigo-600",
-    metrics: [
-      { name: "Liquidity", value: 60, color: "#6366F1" },
-      { name: "Cost", value: 30, color: "#818CF8" },
-      { name: "Complexity", value: 60, color: "#A5B4FC" },
-      { name: "Turnaround", value: 50, color: "#C7D2FE" },
-    ],
   },
 ];
 
 export default function HomePage() {
-  const heroRef = useRef(null);
   const [parallaxIcons, setParallaxIcons] = useState([]);
 
   useEffect(() => {
@@ -174,12 +114,6 @@ export default function HomePage() {
     setParallaxIcons(icons);
   }, []);
 
-  const features = [
-    "Transparent Comparisons",
-    "Independent & Unbiased",
-    "Smart, Simple Insights",
-  ];
-
   const handleMouseMove = (e) => {
     parallaxIcons.forEach((icon) => {
       const el = document.getElementById(icon.id);
@@ -187,8 +121,7 @@ export default function HomePage() {
         const moveX = (e.clientX - window.innerWidth / 2) * icon.speed;
         const moveY = (e.clientY - window.innerHeight / 2) * icon.speed;
         el.style.transform = `translate(${moveX}px, ${
-          moveY +
-          Math.sin((Date.now() / 1000) * icon.floatSpeed) * icon.floatOffset
+          moveY + Math.sin((Date.now() / 1000) * icon.floatSpeed) * icon.floatOffset
         }px)`;
       }
     });
@@ -197,15 +130,28 @@ export default function HomePage() {
   return (
     <TooltipProvider>
       <div
-        className={`${workSans.variable} ${inter.variable} font-sans min-h-screen flex flex-col bg-slate-50 text-slate-900 overflow-x-hidden`}
+        className={`${workSans.variable} ${inter.variable} font-sans min-h-screen bg-[#EFF3F6] text-[#0A0F2C] relative overflow-x-hidden selection:bg-green-200 selection:text-green-900`}
         onMouseMove={handleMouseMove}
       >
+        {/* --- SHARED BACKGROUND LAYER (From About Page) --- */}
+        <div className="fixed inset-0 z-0 pointer-events-none">
+          {/* Technical Grid Pattern */}
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
+          
+          {/* Ambient Blobs */}
+          <div className="absolute top-[20%] right-[-5%] w-[40vw] h-[40vw] bg-[#1F5E3C]/5 blur-[120px] rounded-full" />
+          <div className="absolute bottom-[10%] left-[-10%] w-[35vw] h-[35vw] bg-[#10B981]/5 blur-[120px] rounded-full" />
+        </div>
+
+        {/* NAVBAR */}
         <div className="fixed top-2 left-1/2 transform -translate-x-1/2 z-[9999] w-full max-w-screen-xl px-4 pt-6">
           <Navbar />
         </div>
 
-        <main className="flex-grow bg-[#EFF3F6]">
-          {/* HERO SECTION */}
+        {/* CONTENT WRAPPER */}
+        <main className="relative z-10 flex-grow">
+          
+          {/* HERO SECTION - Keep as is, it has its own background logic */}
           <section
             id="hero"
             className="relative flex flex-col items-center justify-center min-h-[100vh] overflow-visible text-center text-white"
@@ -218,125 +164,34 @@ export default function HomePage() {
             }}
           >
             {/* DOTTED BACKGROUND (LEFT + RIGHT) */}
-            <img
-              src="/icons/Group 23 (2).svg"
-              alt=""
-              className="
-                absolute 
-                bottom-[-1rem] 
-                left-[18%] 
-                w-[500px] 
-                opacity-[1] 
-                pointer-events-none 
-                rotate-[-10deg] 
-                scale-x-[-1]
-                z-[3]
-              "
-            />
-
-            <img
-              src="/icons/Group 23 (2).svg"
-              alt=""
-              className="
-                absolute 
-                bottom-[-1rem] 
-                right-[18%] 
-                w-[500px] 
-                opacity-[1] 
-                pointer-events-none 
-                rotate-[10deg] 
-                scale-x-[-1]
-                z-[3]
-              "
-            />
+            <img src="/icons/Group 23 (2).svg" alt="" className="absolute bottom-[-1rem] left-[18%] w-[500px] opacity-[1] pointer-events-none rotate-[-10deg] scale-x-[-1] z-[3]" />
+            <img src="/icons/Group 23 (2).svg" alt="" className="absolute bottom-[-1rem] right-[18%] w-[500px] opacity-[1] pointer-events-none rotate-[10deg] scale-x-[-1] z-[3]" />
 
             {/* MASK */}
-            <div
-              className="absolute inset-0 pointer-events-none z-[15]"
-              style={{
-                WebkitMaskImage:
-                  "radial-gradient(circle at center 60%, transparent 25%, black 55%)",
-                maskImage:
-                  "radial-gradient(circle at center 60%, transparent 25%, black 55%)",
-              }}
-            />
+            <div className="absolute inset-0 pointer-events-none z-[15]" style={{ WebkitMaskImage: "radial-gradient(circle at center 60%, transparent 25%, black 55%)", maskImage: "radial-gradient(circle at center 60%, transparent 25%, black 55%)" }} />
 
             <div className="mt-[-20%]"></div>
 
-            {/* Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="flex items-center space-x-2 mb-4 relative z-10"
-            >
-              <div className="bg-[#B1ED67]/20 text-[#B1ED67] px-3 py-1 rounded-full text-md font-medium">
-                Backed by CompareFi
-              </div>
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="flex items-center space-x-2 mb-4 relative z-10">
+              <div className="bg-[#B1ED67]/20 text-[#B1ED67] px-3 py-1 rounded-full text-md font-medium">Backed by CompareFi</div>
             </motion.div>
 
-            {/* Title */}
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="text-6xl sm:text-6xl md:text-7xl leading-tight tracking-tight text-white max-w-5xl relative z-10"
-            >
-              Compare Right →{" "}
-              <span className="text-[#B1ED67]">Choose Right.</span>
+            <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-6xl sm:text-6xl md:text-7xl leading-tight tracking-tight text-white max-w-5xl relative z-10">
+              Compare Right → <span className="text-[#B1ED67]">Choose Right.</span>
             </motion.h1>
 
-            {/* Subtext */}
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.7 }}
-              className="text-slate-300 mt-6 text-lg max-w-xl relative z-10"
-            >
-              No hidden charges. No jargon. No biased recommendations.
-              <br />
-              Just clear, side-by-side comparisons of financial products so you
-              make confident decisions every time.
+            <motion.p initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.7 }} className="text-slate-300 mt-6 text-lg max-w-xl relative z-10">
+              No hidden charges. No jargon. No biased recommendations.<br />Just clear, side-by-side comparisons of financial products.
             </motion.p>
 
-            {/* CTA */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.7 }}
-              className="mt-10 relative z-10"
-            >
-              <Button
-                size="lg"
-                onClick={() => {
-                  const el = document.getElementById("featured");
-                  if (el) {
-                    el.scrollIntoView({ behavior: "smooth" });
-                    window.history.pushState(null, "", "/#featured");
-                  }
-                }}
-                className="bg-[#B1ED67] hover:bg-[#9CDA59] text-black font-semibold px-8 py-4 rounded-full shadow-lg hover:shadow-[#B1ED67]/30 transition-all duration-300"
-              >
+            <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 0.7 }} className="mt-10 relative z-10">
+              <Button size="lg" onClick={() => document.getElementById("featured")?.scrollIntoView({ behavior: "smooth" })} className="bg-[#B1ED67] hover:bg-[#9CDA59] text-black font-semibold px-8 py-4 rounded-full shadow-lg transition-all duration-300">
                 Get Started →
               </Button>
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 60, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ delay: 0.8, duration: 0.8 }}
-              className="absolute bottom-[-18rem] inset-x-0 flex justify-center z-20"
-            >
-              <div
-                className="relative flex justify-center w-full max-w-[1200px] pointer-events-none"
-                style={{
-                  height: "900px",
-                  WebkitMaskImage:
-                    "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 66%)",
-                  maskImage:
-                    "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 66%)",
-                }}
-              >
+            <motion.div initial={{ opacity: 0, y: 60, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ delay: 0.8, duration: 0.8 }} className="absolute bottom-[-18rem] inset-x-0 flex justify-center z-20">
+              <div className="relative flex justify-center w-full max-w-[1200px] pointer-events-none" style={{ height: "900px", WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 66%)", maskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 66%)" }}>
                 <div className="relative z-10 mt-[-32%] flex justify-center w-full pointer-events-auto">
                   <DisplayCards />
                 </div>
@@ -344,7 +199,8 @@ export default function HomePage() {
             </motion.div>
           </section>
 
-          {/* PRODUCT HIGHLIGHTS */}
+          {/* ALL SUBSEQUENT SECTIONS NOW SHOW THE GRID BACKGROUND */}
+          
           <section
             id="featured"
             className="relative z-[40] w-full bg-[#EEF1FA] bg-opacity-0 py-20 px-4 sm:px-6 lg:px-20 flex flex-col lg:flex-row justify-between items-center lg:items-start gap-10 lg:gap-0"
@@ -756,7 +612,7 @@ export default function HomePage() {
           </section>
 
         </main>
-        {/* FOOTER */}
+        
         <Footer />
       </div>
     </TooltipProvider>
