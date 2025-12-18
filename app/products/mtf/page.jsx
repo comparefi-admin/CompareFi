@@ -90,6 +90,14 @@ export default function MTFPage() {
 
   return (
     <div className="bg-[#EFF3F6] min-h-screen text-[#0A0F2C]">
+      <div className="fixed inset-0 z-0 pointer-events-none">
+          {/* Technical Grid Pattern */}
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
+          
+          {/* Ambient Blobs */}
+          <div className="absolute top-[20%] right-[-5%] w-[40vw] h-[40vw] bg-[#1F5E3C]/5 blur-[120px] rounded-full" />
+          <div className="absolute bottom-[10%] left-[-10%] w-[35vw] h-[35vw] bg-[#10B981]/5 blur-[120px] rounded-full" />
+        </div>
       <Navbar />
 
       {/* HERO */}
