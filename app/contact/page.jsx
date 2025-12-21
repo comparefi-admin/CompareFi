@@ -91,13 +91,13 @@ export default function ContactPage() {
                     We are currently accepting new enquiries
                 </motion.div>
 
-                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-[#0A0F2C] tracking-tight mb-6 max-w-4xl">
+                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-[#0A0F2C] tracking-tight mb-6  max-w-4xl">
                    <BlurText
                       text="Let's build your wealth,"
                       delay={50}
                       animateBy="words"
                       direction="top"
-                      className="inline-block"
+                      className="inline-block mb-[-5%]"
                    />
                    <br />
                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1F5E3C] to-[#10B981]">
@@ -106,8 +106,7 @@ export default function ContactPage() {
                 </h1>
 
                 <p className="text-xl text-gray-600 max-w-2xl leading-relaxed">
-                    Have questions about Loan Against Shares or Mutual Funds? 
-                    Our experts are ready to provide you with a tailored financial roadmap.
+                    Whether you’re comparing financial products, exploring partnerships, or have a question we’re open to conversations.
                 </p>
             </div>
         </section>
@@ -127,9 +126,9 @@ export default function ContactPage() {
                 >
                     <h3 className="text-2xl font-bold text-[#0A0F2C] mb-6">Contact Channels</h3>
                     <div className="space-y-5">
-                        <ContactItem icon={Phone} label="Call directly" value="+91 99999 99999" href="tel:+919999999999" />
-                        <ContactItem icon={Mail} label="Email support" value="comparefi12@gmail.com" href="mailto:comparefi12@gmail.com" />
-                        <ContactItem icon={MapPin} label="Headquarters" value="Mumbai, Maharashtra" />
+                        <ContactItem icon={Phone} label="Call directly" value="+91 9082930770" href="tel:+919082930770" />
+                        <ContactItem icon={Mail} label="Email support" value="hetdoshi@comparefi.in" href="mailto:hetdoshi@comparefi.in" />
+                        <ContactItem icon={MapPin} label="Headquarters" value="Fatima Mansion, Station Road, Wadala west, Mumbai 400031" />
                     </div>
                 </motion.div>
 

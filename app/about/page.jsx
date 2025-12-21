@@ -142,13 +142,18 @@ export default function AboutPage() {
                 </h2>
 
                 <p className="text-gray-600 text-lg leading-relaxed mb-8">
-                  "I’m Het Doshi. Having worked across NBFCs, stock brokers, wealth managers, and mutual funds, I realized one thing: 
+                  I’m Het Doshi, a Chartered Accountant by qualification and an auditor by experience. Over years, I’ve worked across some of the most regulated sectors in India, including NBFCs, stock brokers, wealth managers, and mutual funds. 
+
+My career in consulting has given me a front row seat to the inner workings of the financial services industry both its strengths and its hidden complexities. <br></br>
+<br></br>
+
                   <span className="font-semibold text-gray-800"> The industry is complex by design.</span>"
                 </p>
 
                 <p className="text-gray-600 text-lg leading-relaxed mb-8">
-                  My goal isn't just to compare rates—it's to decode the fine print. CompareFi is built on the belief that 
-                  financial transparency shouldn't be a luxury; it should be the standard.
+                  My goal isn't just to compare rates, it's to decode the fine print. 
+                  <br></br>
+                  CompareFi is built on the belief that financial transparency shouldn't be a luxury; it should be the standard. 
                 </p>
 
                 <div className="flex items-center gap-4 pt-6 border-t border-gray-200">
@@ -182,8 +187,7 @@ export default function AboutPage() {
                         </div>
                         <h3 className="text-2xl font-bold mb-4">The Complexity Trap</h3>
                         <p className="text-gray-300 leading-relaxed text-lg max-w-xl">
-                            Financial products like Loan Against Shares (LAS) or MTF are often wrapped in jargon. 
-                            Hidden charges, floating rates, and opaque terms make it impossible for a regular investor to know the <i>true</i> cost of borrowing.
+                            Financial products are often wrapped in jargon. Hidden charges, floating rates, and opaque terms make it impossible for a regular investor to know the true cost of borrowing. 
                         </p>
                     </div>
                 </SpotlightCard>
@@ -254,8 +258,8 @@ export default function AboutPage() {
                         <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#1F5E3C] to-[#10B981] flex items-center justify-center text-white mb-4">
                             {item.icon}
                         </div>
-                        <h4 className="font-bold text-[#0A0F2C] mb-2">{item.title}</h4>
-                        <p className="text-sm text-gray-600 leading-relaxed">{item.desc}</p>
+                        <h4 className="font-bold text-[#0A0F2C] mb-2 text-2xl">{item.title}</h4>
+                        <p className="text-lg text-gray-600 leading-relaxed">{item.desc}</p>
                     </motion.div>
                 ))}
              </div>
