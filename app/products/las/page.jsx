@@ -63,7 +63,7 @@ export default function LASPage() {
 
   const rightTableColumns = {
     fundingDetails: [
-      { key: "approved_shares", label: "Approved List of Shares" },
+      { key: "approved_shares", label: "Approved List of Stocks" },
       { key: "tenure_months", label: "Tenure (Months)" },
       { key: "loan_amount", label: "Minimum & Maximum Loan" },
       {
@@ -84,6 +84,16 @@ export default function LASPage() {
 
     otherMiscCost: [{ key: "other_expenses", label: "Other Expenses" }],
   };
+
+  const formatPercent1Dec = (val) => {
+    if (val === null || val === undefined || val === "") return "—";
+
+    const num = parseFloat(String(val).replace("%", ""));
+    if (Number.isNaN(num)) return val;
+
+    return `${num.toFixed(1)}%`;
+  };
+
   const normalizeDefaultCharges = (val) => {
     if (!val || typeof val !== "object") {
       return { penal: null, base: null, collection: null };
@@ -421,7 +431,7 @@ export default function LASPage() {
       {/* PRE–COST SUMMARY INFO CARDS */}
       <section className="max-w-[90%] mx-auto px-6 mt-10 mb-4">
         <h3 className="text-4xl font-bold text-center mb-10 text-[#0A0F2C]">
-          Before You Compare Costs
+          Before You Compare LAS Costs
         </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -545,7 +555,7 @@ export default function LASPage() {
                   style={{ background: "#124434", color: "#FFFFFF" }}
                   className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
                 >
-                  Tenure
+                  Tenure (Months)
                 </th>
 
                 <th
@@ -600,6 +610,38 @@ export default function LASPage() {
                   className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
                 >
                   Margin Period
+                </th>
+
+                <th
+                  style={{
+                    background: "#124434",
+                    color: "#FFFFFF",
+                    minWidth: "220px",
+                  }}
+                  className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+                >
+                  <div className="flex flex-col items-center gap-2">
+                    {/* Main title */}
+                    <div className="flex items-center gap-2">
+                      <span>LTV</span>
+                      <SortButton columnKey="ltv.min" />
+                    </div>
+
+                    {/* Sub header (Min / Max) */}
+                    <div
+                      className="
+                      hidden sm:grid
+                      grid-cols-2 w-full text-xs font-medium
+                      border-t border-white/30 pt-2 px-2
+                    "
+                    >
+                      <span className="text-center px-2">Min</span>
+
+                      <span className="text-center px-3 border-l border-white/30">
+                        Max
+                      </span>
+                    </div>
+                  </div>
                 </th>
 
                 {/* Contact */}
@@ -729,27 +771,30 @@ export default function LASPage() {
                   </td>
 
                   {/* Interest Rate */}
-                  <td className="px-5 py-4 border border-gray-300">
+                  <td
+                    className="px-5 py-4 border border-gray-300"
+                    style={{ minWidth: "220px" }}
+                  >
                     {row.interest_rate ? (
                       <div className="grid grid-cols-3 text-center text-sm">
                         {/* Min */}
                         <div className="flex flex-col">
                           <span className="font-semibold text-gray-900">
-                            {row.interest_rate.min ?? "—"}
+                            {formatPercent1Dec(row.interest_rate.min) ?? "—"}
                           </span>
                         </div>
 
                         {/* Max */}
                         <div className="flex flex-col border-l border-r border-gray-300">
                           <span className="font-semibold text-gray-900">
-                            {row.interest_rate.max ?? "—"}
+                            {formatPercent1Dec(row.interest_rate.max) ?? "—"}
                           </span>
                         </div>
 
                         {/* Median */}
                         <div className="flex flex-col">
                           <span className="font-semibold text-[#1F5E3C]">
-                            {row.interest_rate.median ?? "—"}
+                            {formatPercent1Dec(row.interest_rate.median) ?? "—"}
                           </span>
                         </div>
                       </div>
@@ -761,6 +806,47 @@ export default function LASPage() {
                   {/* Margin Period */}
                   <td className="px-5 py-4 border border-gray-300 text-center">
                     {row.regularization_period ?? DEFAULT_NULL_TEXT}
+                  </td>
+
+                  <td
+                    className="px-3 sm:px-5 py-3 sm:py-4 border border-gray-300"
+                    style={{ minWidth: "220px" }}
+                  >
+                    {row.ltv && typeof row.ltv === "object" ? (
+                      <div
+                        className="
+        grid grid-cols-1 gap-1 text-sm
+        sm:grid-cols-2 sm:gap-0 sm:text-center
+      "
+                      >
+                        {/* Min */}
+                        <div className="flex justify-between sm:flex-col sm:justify-center">
+                          <span className="sm:hidden text-xs text-gray-500">
+                            Min
+                          </span>
+                          <span className="font-semibold text-gray-900">
+                            {row.ltv.min ?? "—"}
+                          </span>
+                        </div>
+
+                        {/* Max */}
+                        <div
+                          className="
+                      flex justify-between sm:flex-col sm:justify-center
+                      sm:border-l border-gray-300
+                    "
+                        >
+                          <span className="sm:hidden text-xs text-gray-500">
+                            Max
+                          </span>
+                          <span className="font-semibold text-gray-900">
+                            {row.ltv.max ?? "—"}
+                          </span>
+                        </div>
+                      </div>
+                    ) : (
+                      DEFAULT_NULL_TEXT
+                    )}
                   </td>
 
                   {/* Contact */}
@@ -1234,9 +1320,9 @@ export default function LASPage() {
                                 {/* Max */}
                                 <div
                                   className="
-              flex justify-between sm:flex-col sm:justify-center
-              sm:border-l border-gray-300
-            "
+                                      flex justify-between sm:flex-col sm:justify-center
+                                      sm:border-l border-gray-300
+                                    "
                                 >
                                   <span className="sm:hidden text-xs text-gray-500">
                                     Max
@@ -1299,22 +1385,22 @@ export default function LASPage() {
                                     Min
                                   </span>
                                   <span className="font-semibold text-gray-900">
-                                    {val.min ?? "—"}
+                                    {formatPercent1Dec(val.min ?? "—")}
                                   </span>
                                 </div>
 
                                 {/* Max */}
                                 <div
                                   className="
-                              flex justify-between sm:flex-col sm:justify-center
-                              sm:border-l sm:border-r border-gray-300
-                            "
+                                      flex justify-between sm:flex-col sm:justify-center
+                                      sm:border-l sm:border-r border-gray-300
+                                    "
                                 >
                                   <span className="sm:hidden text-xs text-gray-500">
                                     Max
                                   </span>
                                   <span className="font-semibold text-gray-900">
-                                    {val.max ?? "—"}
+                                    {formatPercent1Dec(val.max ?? "—")}
                                   </span>
                                 </div>
 
@@ -1324,9 +1410,50 @@ export default function LASPage() {
                                     Median
                                   </span>
                                   <span className="font-semibold text-[#1F5E3C]">
-                                    {val.median ?? "—"}
+                                    {formatPercent1Dec(val.median ?? "—")}
                                   </span>
                                 </div>
+                              </div>
+                            ) : (
+                              DEFAULT_NULL_TEXT
+                            )}
+                          </td>
+                        );
+                      }
+
+                      /* ================= OTHER EXPENSES (MATCH TABLE FONT STYLE) ================= */
+                      if (col.key === "other_expenses") {
+                        return (
+                          <td
+                            key={col.key}
+                            className="px-5 py-4 border border-gray-300 text-left"
+                            style={{ minWidth: "280px" }}
+                          >
+                            {val && typeof val === "object" ? (
+                              <div className="flex flex-col text-sm text-gray-800">
+                                {Object.entries(val).map(
+                                  ([label, value], index, arr) => (
+                                    <div key={label} className="flex flex-col">
+                                      {/* Label + Value */}
+                                      <div className="flex justify-between gap-4">
+                                        <span>{label}</span>
+                                        <span className="text-gray-600 text-right">
+                                          {value ?? "—"}
+                                        </span>
+                                      </div>
+
+                                      {/* Soft Divider (not after last item) */}
+                                      {index !== arr.length - 1 && (
+                                        <div
+                                          className="w-full border-t my-2"
+                                          style={{
+                                            borderColor: "rgba(0,0,0,0.12)",
+                                          }}
+                                        />
+                                      )}
+                                    </div>
+                                  )
+                                )}
                               </div>
                             ) : (
                               DEFAULT_NULL_TEXT
@@ -1346,9 +1473,9 @@ export default function LASPage() {
                             {val ? (
                               <div
                                 className="
-            grid grid-cols-1 gap-1 text-sm
-            sm:grid-cols-2 sm:gap-0 sm:text-center
-          "
+                                grid grid-cols-1 gap-1 text-sm
+                                sm:grid-cols-2 sm:gap-0 sm:text-center
+                              "
                               >
                                 {/* Min */}
                                 <div className="flex justify-between sm:flex-col sm:justify-center">
@@ -1378,6 +1505,79 @@ export default function LASPage() {
                             ) : (
                               DEFAULT_NULL_TEXT
                             )}
+                          </td>
+                        );
+                      }
+
+                      /* ================= PROCESSING FEE (LOGIC SAME, TABLE STYLE MATCH) ================= */
+                      if (col.key === "processing_fee") {
+                        const text = typeof val === "string" ? val : "";
+
+                        const lines = text
+                          .split(/\n+/)
+                          .map((l) => l.trim())
+                          .filter(Boolean);
+
+                        const hasDigital = lines.some(
+                          (l) =>
+                            l.toLowerCase().includes("digital") &&
+                            !l.toLowerCase().includes("non")
+                        );
+                        const hasNonDigital = lines.some((l) =>
+                          l.toLowerCase().includes("non digital")
+                        );
+                        const hasMin = lines.some((l) =>
+                          l.toLowerCase().startsWith("min")
+                        );
+                        const hasMax = lines.some((l) =>
+                          l.toLowerCase().startsWith("max")
+                        );
+
+                        return (
+                          <td
+                            key={col.key}
+                            className="px-5 py-4 border border-gray-300 text-center"
+                            style={{ minWidth: "260px" }}
+                          >
+                            <div className="flex flex-col text-sm text-gray-900">
+                              {lines.map((line, index) => {
+                                const isDigital =
+                                  line.toLowerCase().includes("digital") &&
+                                  !line.toLowerCase().includes("non");
+                                const isMin = line
+                                  .toLowerCase()
+                                  .startsWith("min");
+
+                                return (
+                                  <div key={index} className="flex flex-col">
+                                    {/* VALUE LINE — SAME WEIGHT AS OTHER TABLE CELLS */}
+                                    <div className="text-gray-900">{line}</div>
+
+                                    {/* Divider ONLY between Digital → Non-Digital */}
+                                    {isDigital &&
+                                      hasDigital &&
+                                      hasNonDigital && (
+                                        <div
+                                          className="w-full border-t my-1"
+                                          style={{
+                                            borderColor: "rgba(0,0,0,0.12)",
+                                          }}
+                                        />
+                                      )}
+
+                                    {/* Divider ONLY between Min → Max */}
+                                    {isMin && hasMin && hasMax && (
+                                      <div
+                                        className="w-full border-t my-1"
+                                        style={{
+                                          borderColor: "rgba(0,0,0,0.12)",
+                                        }}
+                                      />
+                                    )}
+                                  </div>
+                                );
+                              })}
+                            </div>
                           </td>
                         );
                       }

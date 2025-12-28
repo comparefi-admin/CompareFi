@@ -68,6 +68,16 @@ export default function MTFPage() {
       </div>
     );
 
+  function formatLoanRangeMTF(label) {
+    if (!label || typeof label !== "string") return label;
+
+    return label
+      .replace(/Lakhs?/gi, "L")
+      .replace(/Crores?/gi, "Cr")
+      .replace(/\s+L\b/g, "L")
+      .replace(/\s+Cr\b/g, "Cr");
+  }
+
   const getActiveColumns = () => {
     if (activeTableCategory === "marginDetails")
       return ["margin_requirement", "approved_stocks"];
@@ -91,13 +101,13 @@ export default function MTFPage() {
   return (
     <div className="bg-[#EFF3F6] min-h-screen text-[#0A0F2C]">
       <div className="fixed inset-0 z-0 pointer-events-none">
-          {/* Technical Grid Pattern */}
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
-          
-          {/* Ambient Blobs */}
-          <div className="absolute top-[20%] right-[-5%] w-[40vw] h-[40vw] bg-[#1F5E3C]/5 blur-[120px] rounded-full" />
-          <div className="absolute bottom-[10%] left-[-10%] w-[35vw] h-[35vw] bg-[#10B981]/5 blur-[120px] rounded-full" />
-        </div>
+        {/* Technical Grid Pattern */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
+
+        {/* Ambient Blobs */}
+        <div className="absolute top-[20%] right-[-5%] w-[40vw] h-[40vw] bg-[#1F5E3C]/5 blur-[120px] rounded-full" />
+        <div className="absolute bottom-[10%] left-[-10%] w-[35vw] h-[35vw] bg-[#10B981]/5 blur-[120px] rounded-full" />
+      </div>
       <Navbar />
 
       {/* HERO */}
@@ -128,7 +138,7 @@ export default function MTFPage() {
         </SpotlightCard>
       </section>
 
-      {/* ===== INFO CARDS (unchanged) ===== */}
+      {/* ===== INFO CARDS (MTF — MATCH LAMF STYLING) ===== */}
       <section className="max-w-[90%] mx-auto px-6 pb-16">
         <h2 className="text-4xl font-bold text-center mb-14 text-[#0A0F2C]">
           Understanding Margin Trading Facility (MTF)
@@ -138,8 +148,7 @@ export default function MTFPage() {
           {[
             {
               title: "What is MTF?",
-              text: `MTF allows investors to trade with borrowed capital against holdings
-keeping positions overnight while following SEBI-regulated margin rules.`,
+              text: `MTF allows investors to trade with borrowed capital against holdings,keeping positions overnight while following SEBI-regulated margin rules.`,
             },
             {
               title: "Key Benefits",
@@ -147,7 +156,7 @@ keeping positions overnight while following SEBI-regulated margin rules.`,
                 <ul className="list-disc list-inside space-y-2">
                   <li>Higher leveraged exposure for positional trades</li>
                   <li>Efficient margin usage</li>
-                  <li>Subscription/carry based pricing</li>
+                  <li>Subscription / carry based pricing</li>
                 </ul>
               ),
             },
@@ -156,13 +165,18 @@ keeping positions overnight while following SEBI-regulated margin rules.`,
               text: (
                 <ul className="space-y-2">
                   <li>
-                    <strong>MTF:</strong> Carry overnight positions
+                    <span className="font-semibold text-[#0D3A27]">MTF:</span>{" "}
+                    Carry overnight positions
                   </li>
                   <li>
-                    <strong>MIS:</strong> Intraday only
+                    <span className="font-semibold text-[#0D3A27]">MIS:</span>{" "}
+                    Intraday only
                   </li>
                   <li>
-                    <strong>Exposure:</strong> Higher under MTF
+                    <span className="font-semibold text-[#0D3A27]">
+                      Exposure:
+                    </span>{" "}
+                    Higher under MTF
                   </li>
                 </ul>
               ),
@@ -175,118 +189,144 @@ keeping positions overnight while following SEBI-regulated margin rules.`,
             <div
               key={i}
               className="
-                bg-white/18 backdrop-blur-xl border border-[rgba(35,104,126,0.2)]
-                rounded-3xl
-                p-8
-                bg-[#e8feff3f]
-                shadow-[0_16px_38px_rgba(0,0,0,0.12)]
-                transition-all duration-500
-                hover:-translate-y-3
-                hover:shadow-[0_16px_38px_rgba(0,0,0,0.26),0_6px_18px_rgba(0,0,0,0.08)]
-                will-change-transform
-              "
+          bg-white/18 backdrop-blur-xl border border-[rgba(35,104,126,0.2)]
+          rounded-3xl p-5 sm:p-8
+          bg-[#e8feff3f]
+          shadow-[0_16px_38px_rgba(0,0,0,0.12)]
+          transition-all duration-500
+          hover:-translate-y-3
+          hover:shadow-[0_16px_38px_rgba(0,0,0,0.26),0_6px_18px_rgba(0,0,0,0.08)]
+          will-change-transform
+        "
             >
               <h3 className="text-2xl font-bold mb-4 text-[#0D3A27]">
                 {card.title}
               </h3>
-              <p className="text-gray-800 leading-relaxed text-lg">
+
+              {/* 🔑 MATCHES LAMF TEXT STYLE */}
+              <div className="text-gray-800 leading-relaxed text-base">
                 {card.text}
-              </p>
+              </div>
             </div>
           ))}
         </div>
-      </section>
 
-      {/* PRE–COST SUMMARY INFO CARDS (MTF) */}
-      <section className="max-w-[90%] mx-auto px-6 mt-10 mb-4">
-        <h3 className="text-4xl font-bold text-center mb-10 text-[#0A0F2C]">
-          Before You Compare MTF Costs
-        </h3>
+        {/* ===== SNAPSHOT (MTF — SAME STYLE AS LAMF) ===== */}
+        <div className="mt-16 text-center">
+          <h3 className="text-4xl font-bold mb-8 text-[#0A0F2C]">
+            Quick Snapshot
+          </h3>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Card 1 */}
-          <div
-            className="
-      bg-white/18 backdrop-blur-xl 
-      border border-[rgba(35,104,126,0.2)]
-      rounded-3xl p-8 shadow-[0_16px_38px_rgba(0,0,0,0.12)]
-      transition-all duration-500 hover:-translate-y-3
-      hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
-    "
-          >
-            <h4 className="text-2xl font-bold mb-4 text-[#0D3A27]">
-              Understanding MTF Cost Summary
-            </h4>
-
-            <p className="text-gray-800 leading-relaxed text-lg">
-              The table below shows the total annual cost of using Margin
-              Trading Facility (MTF) across different brokers. Unlike intraday,
-              MTF allows you to carry positions overnight, which makes the
-              funding cost the most important factor.
-            </p>
-
-            <p className="mt-3 text-gray-700 text-[1rem] leading-relaxed">
-              The summary table converts each broker’s{" "}
-              <strong>
-                subscription fee + interest + daily/annual carry charges +
-                platform-specific components
-              </strong>{" "}
-              into one comparable cost figure. This lets you instantly see:
-            </p>
-
-            <ul className="list-disc list-inside space-y-2 text-gray-800 text-lg mt-4">
-              <li>Which broker is cheapest overall</li>
-              <li>
-                How much you would pay yearly for the same funded exposure
-              </li>
-              <li>Differences in approved stocks</li>
-              <li>Margin requirement variations that affect usable leverage</li>
-            </ul>
-
-            <p className="mt-4 text-gray-700 text-[1rem] leading-relaxed">
-              This helps you compare MTF pricing{" "}
-              <strong>without manually calculating interest</strong> or needing
-              to understand individual broker policies.
-            </p>
-          </div>
-
-          {/* Card 2 */}
-          <div
-            className="
-      bg-white/18 backdrop-blur-xl 
-      border border-[rgba(35,104,126,0.2)]
-      rounded-3xl p-8 shadow-[0_16px_38px_rgba(0,0,0,0.12)]
-      transition-all duration-500 hover:-translate-y-3
-      hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
-    "
-          >
-            <h4 className="text-2xl font-bold mb-4 text-[#0D3A27]">
-              What You Can Quickly Understand
-            </h4>
-
-            <ul className="list-disc list-inside space-y-2 text-gray-800 text-lg">
-              <li>Overall yearly MTF cost</li>
-              <li>Which broker offers the best leverage at the lowest cost</li>
-              <li>Stock eligibility differences for leveraged positions</li>
-              <li>Margin requirement differences across brokers</li>
-            </ul>
-
-            <p className="mt-4 text-gray-700 text-[1rem] leading-relaxed">
-              Most users rely on this summary to identify the most
-              cost-efficient and flexible MTF provider.
-            </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+            {[
+              ["Interest", "7–19%"],
+              ["Type of Collateral", "Cash + Stocks"],
+              ["Holding Period", "365 Days / Unlimited"],
+              ["Facility Type", "Margin Trading (MTF)"],
+            ].map(([label, value], i) => (
+              <div
+                key={i}
+                className="
+          bg-white/22 backdrop-blur-md border border-[rgba(255,255,255,0.06)]
+          rounded-2xl p-3 sm:p-4
+          transition-all
+          bg-[#20463B]
+          shadow-[0_16px_38px_rgba(0,0,0,0.05)]
+          hover:-translate-y-2
+          hover:shadow-[0_14px_36px_rgba(0,0,0,0.22),
+                       inset_0_0_18px_rgba(255,255,255,0.06)]
+        "
+              >
+                <p className="text-gray-100 text-sm mb-1">{label}</p>
+                <p className="text-2xl font-bold text-[#AFE619]">{value}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
+
+    {/* PRE–COST SUMMARY INFO CARDS — MTF */}
+<section className="max-w-[90%] mx-auto px-6 mt-10 mb-4">
+  <h3 className="text-4xl font-bold text-center mb-10 text-[#0A0F2C]">
+    Before You Compare MTF Costs
+  </h3>
+
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+    {/* Card 1 */}
+    <div
+      className="
+        bg-white/18 backdrop-blur-xl 
+        border border-[rgba(35,104,126,0.2)]
+        rounded-3xl p-8
+        shadow-[0_16px_38px_rgba(0,0,0,0.12)]
+        transition-all duration-500
+        hover:-translate-y-3
+        hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
+      "
+    >
+      <h4 className="text-2xl font-bold mb-4 text-[#0D3A27]">
+        Before Cost Summary
+      </h4>
+
+      <p className="text-gray-800 leading-relaxed text-lg">
+        The table below shows the total cost of a ₹5,00,000 Margin Trading
+        Facility (MTF) position in Reliance Stock held over 12 months.
+        Collateral given is ₹4,00,000 in approved stocks, zero cash collateral
+        and broker specific haircuts/charges.
+      </p>
+
+      <p className="mt-3 text-gray-700 text-[1rem]">
+        We convert Year-1 interest rates, broker charges, into a single
+        comparable number, so you instantly understand who is cheapest overall.
+      </p>
+    </div>
+
+    {/* Card 2 */}
+    <div
+      className="
+        bg-white/18 backdrop-blur-xl 
+        border border-[rgba(35,104,126,0.2)]
+        rounded-3xl p-8
+        shadow-[0_16px_38px_rgba(0,0,0,0.12)]
+        transition-all duration-500
+        hover:-translate-y-3
+        hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
+      "
+    >
+      <h4 className="text-2xl font-bold mb-4 text-[#0D3A27]">
+        This helps you easily compare:
+      </h4>
+
+      <ul className="list-disc list-inside space-y-2 text-gray-800 text-lg">
+        <li>Which broker is cheapest overall</li>
+        <li>How much yearly cost you would pay for the same funded exposure</li>
+        <li>Differences in approved stocks</li>
+        <li>
+          Margin requirement variations that affect your usable leverage t
+          during NAV drops)
+        </li>
+      </ul>
+
+      <p className="mt-3 text-gray-700 text-[1rem]">
+        Most users only need this summary to choose the most cost-effective
+        lender.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
 
       {/* MTF COST SUMMARY */}
       <section className="max-w-[90%] mx-auto px-6 py-8 flex flex-col items-center">
         <h3 className="text-4xl font-bold mb-8 text-[#0A0F2C]">Cost Summary</h3>
 
         <div className="w-full bg-white backdrop-blur-2xl border border-[rgba(255,255,255,0.06)] shadow-[0_12px_32px_rgba(0,0,0,0.22)] rounded-2xl overflow-x-auto">
-          <table className="w-full border-collapse text-gray-800 text-[16px] leading-[1.35] table-highlight">
+          <table className="w-full border-collapse text-gray-800 text-[16px] leading-[1.35] table-highlight-2 text-center">
             <thead>
-              <tr className="text-left font-semibold border-b border-gray-300">
+              <tr className="text-center font-semibold border-b border-gray-300">
                 {/* Broker */}
                 <th
                   style={{ background: "#124434", color: "#FFFFFF" }}
@@ -319,12 +359,33 @@ keeping positions overnight while following SEBI-regulated margin rules.`,
                   Approved Stocks
                 </th>
 
-                {/* Interest Slabs (UPDATED) */}
+                {/* Interest Slabs */}
                 <th
-                  style={{ background: "#124434", color: "#FFFFFF" }}
+                  style={{
+                    background: "#124434",
+                    color: "#FFFFFF",
+                    minWidth: "260px",
+                  }}
                   className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
                 >
-                  Interest Slabs
+                  <div className="flex flex-col items-center gap-2">
+                    {/* Main title */}
+                    <span>Interest Slabs</span>
+
+                    {/* Sub headers */}
+                    <div
+                      className="
+                        hidden sm:grid
+                        grid-cols-2 w-full text-xs font-medium
+                        border-t border-white/30 pt-2 px-2
+                      "
+                    >
+                      <span className="text-center px-2">Loan Amount</span>
+                      <span className="text-center px-3 border-l border-white/30">
+                        ROI
+                      </span>
+                    </div>
+                  </div>
                 </th>
 
                 {/* Contact */}
@@ -384,23 +445,47 @@ keeping positions overnight while following SEBI-regulated margin rules.`,
                   {/* Approved Stocks */}
                   <td className="px-5 py-4 border border-gray-300 whitespace-pre-wrap">
                     {row.approved_stocks
-                      ? `~ ${row.approved_stocks}`
+                      ? `~ ${row.approved_stocks} Stocks`
                       : DEFAULT_NULL_TEXT}
                   </td>
 
-                  {/* Interest Slabs (UPDATED) */}
-                  <td className="px-5 py-4 border border-gray-300 whitespace-pre-line">
-                    {row.interest_slabs
-                      ? typeof row.interest_slabs === "object"
-                        ? Object.entries(row.interest_slabs).map(
-                            ([k, v], i) => (
-                              <div key={i}>
-                                {k}: {v ?? "—"}
+                  {/* Interest Slabs — rows only (STYLE MATCHED) */}
+                  <td
+                    className="px-5 py-4 border border-gray-300"
+                    style={{ minWidth: "260px" }}
+                  >
+                    {row.interest_slabs &&
+                    typeof row.interest_slabs === "object" ? (
+                      <div className="flex flex-col text-gray-900">
+                        {Object.entries(row.interest_slabs).map(
+                          ([loanAmount, roi], index, arr) => (
+                            <div key={index} className="flex flex-col">
+                              <div className="grid grid-cols-2 text-center">
+                                {/* Loan Amount */}
+                                <span className="font-semibold">
+                                  {formatLoanRangeMTF(loanAmount)}
+                                </span>
+
+                                {/* ROI */}
+                                <span className="font-semibold text-[#1F5E3C] border-l border-gray-300">
+                                  {roi ?? "—"}
+                                </span>
                               </div>
-                            )
+
+                              {/* Soft divider (not after last row) */}
+                              {index !== arr.length - 1 && (
+                                <div
+                                  className="w-full border-t my-2"
+                                  style={{ borderColor: "rgba(0,0,0,0.12)" }}
+                                />
+                              )}
+                            </div>
                           )
-                        : row.interest_slabs
-                      : DEFAULT_NULL_TEXT}
+                        )}
+                      </div>
+                    ) : (
+                      DEFAULT_NULL_TEXT
+                    )}
                   </td>
 
                   {/* Contact */}
@@ -412,13 +497,13 @@ keeping positions overnight while following SEBI-regulated margin rules.`,
                       target="_blank"
                       rel="noreferrer"
                       className="
-    inline-flex items-center justify-center gap-2
-    bg-gradient-to-b from-[#1F5E3C] to-[#124434]
-    text-white px-4 py-2 rounded-lg
-    shadow-[0_10px_30px_rgba(0,0,0,0.20)]
-    hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
-    transition-all duration-300 transform hover:-translate-y-0.5
-  "
+                        inline-flex items-center justify-center gap-2
+                        bg-gradient-to-b from-[#1F5E3C] to-[#124434]
+                        text-white px-4 py-2 rounded-lg
+                        shadow-[0_10px_30px_rgba(0,0,0,0.20)]
+                        hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
+                        transition-all duration-300 transform hover:-translate-y-0.5
+                        "
                     >
                       <>
                         {/* WhatsApp Icon */}
@@ -435,21 +520,21 @@ keeping positions overnight while following SEBI-regulated margin rules.`,
                     </a>
 
                     <div className="mt-3">
-                                          <button
-                                            onClick={() => {
-                                              setEnquiryInstitution(row.broker_name);
-                                              setEnquiryOpen(true);
-                                            }}
-                                            className="inline-flex items-center justify-center gap-2
+                      <button
+                        onClick={() => {
+                          setEnquiryInstitution(row.broker_name);
+                          setEnquiryOpen(true);
+                        }}
+                        className="inline-flex items-center justify-center gap-2
                                               bg-gradient-to-b from-[#5e009c] to-[#c401ff]
                                               text-white px-4 py-2 rounded-lg
                                               shadow-[0_10px_30px_rgba(0,0,0,0.20)]
                                               hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
                                               transition-all duration-300 transform hover:-translate-y-0.5"
-                                          >
-                                            <FileText className="w-4 h-4" /> Fill Enquiry
-                                          </button>
-                                        </div>
+                      >
+                        <FileText className="w-4 h-4" /> Fill Enquiry
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}
@@ -468,13 +553,13 @@ keeping positions overnight while following SEBI-regulated margin rules.`,
           {/* Card 1 */}
           <div
             className="
-      bg-white/18 backdrop-blur-xl 
-      border border-[rgba(35,104,126,0.2)]
-      rounded-3xl p-8 
-      shadow-[0_16px_38px_rgba(0,0,0,0.12)]
-      transition-all duration-500 hover:-translate-y-3
-      hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
-    "
+                  bg-white/18 backdrop-blur-xl 
+                  border border-[rgba(35,104,126,0.2)]
+                  rounded-3xl p-8 
+                  shadow-[0_16px_38px_rgba(0,0,0,0.12)]
+                  transition-all duration-500 hover:-translate-y-3
+                  hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
+                "
           >
             <h4 className="text-2xl font-bold mb-4 text-[#0D3A27]">
               What This Section Shows
@@ -497,13 +582,13 @@ keeping positions overnight while following SEBI-regulated margin rules.`,
           {/* Card 2 */}
           <div
             className="
-      bg-white/18 backdrop-blur-xl 
-      border border-[rgba(35,104,126,0.2)]
-      rounded-3xl p-8 
-      shadow-[0_16px_38px_rgba(0,0,0,0.12)]
-      transition-all duration-500 hover:-translate-y-3
-      hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
-    "
+                bg-white/18 backdrop-blur-xl 
+                border border-[rgba(35,104,126,0.2)]
+                rounded-3xl p-8 
+                shadow-[0_16px_38px_rgba(0,0,0,0.12)]
+                transition-all duration-500 hover:-translate-y-3
+                hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
+              "
           >
             <h4 className="text-2xl font-bold mb-4 text-[#0D3A27]">
               How to Use the Tabs Above
@@ -551,14 +636,14 @@ keeping positions overnight while following SEBI-regulated margin rules.`,
         {/* MAIN WHITE CONTAINER */}
         <div
           className="
-    w-full 
-    bg-white backdrop-blur-xl 
-    border border-[rgba(255,255,255,0.06)]
-    shadow-[0_12px_32px_rgba(0,0,0,0.22)]
-    rounded-2xl 
-    overflow-x-auto 
-    p-6
-  "
+              w-full 
+              bg-white backdrop-blur-xl 
+              border border-[rgba(255,255,255,0.06)]
+              shadow-[0_12px_32px_rgba(0,0,0,0.22)]
+              rounded-2xl 
+              overflow-x-auto 
+              p-6
+            "
         >
           {/* CATEGORY BUTTONS INSIDE CARD NOW */}
           <div className="flex flex-wrap justify-center gap-4 mb-6">
@@ -586,9 +671,9 @@ keeping positions overnight while following SEBI-regulated margin rules.`,
           </div>
 
           {/* TABLE */}
-          <table className="w-full border-collapse text-gray-800 text-[16px] leading-[1.35] table-highlight">
+          <table className="w-full border-collapse text-gray-800 text-[16px] leading-[1.35] text-center table-highlight-2">
             <thead>
-              <tr className="text-left font-semibold border-b border-gray-300">
+              <tr className="text-center font-semibold border-b border-gray-300">
                 {/* Broker */}
                 <th
                   style={{ background: "#124434", color: "#FFFFFF" }}
@@ -606,17 +691,52 @@ keeping positions overnight while following SEBI-regulated margin rules.`,
                 </th>
 
                 {/* Dynamic Columns */}
-                {activeCols.map((colKey) => (
-                  <th
-                    key={colKey}
-                    style={{ background: "#124434", color: "#FFFFFF" }}
-                    className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
-                  >
-                    {colKey
-                      .replace(/_/g, " ")
-                      .replace(/\b\w/g, (c) => c.toUpperCase())}
-                  </th>
-                ))}
+                {activeCols.map((colKey) => {
+                  if (colKey === "interest_slabs") {
+                    return (
+                      <th
+                        key={colKey}
+                        style={{
+                          background: "#124434",
+                          color: "#FFFFFF",
+                          minWidth: "260px",
+                        }}
+                        className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+                      >
+                        <div className="flex flex-col items-center gap-2">
+                          <span>Interest Slabs</span>
+
+                          <div
+                            className="
+              hidden sm:grid
+              grid-cols-2 w-full text-xs font-medium
+              border-t border-white/30 pt-2 px-2
+            "
+                          >
+                            <span className="text-center px-2">
+                              Loan Amount
+                            </span>
+                            <span className="text-center px-3 border-l border-white/30">
+                              ROI
+                            </span>
+                          </div>
+                        </div>
+                      </th>
+                    );
+                  }
+
+                  return (
+                    <th
+                      key={colKey}
+                      style={{ background: "#124434", color: "#FFFFFF" }}
+                      className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+                    >
+                      {colKey
+                        .replace(/_/g, " ")
+                        .replace(/\b\w/g, (c) => c.toUpperCase())}
+                    </th>
+                  );
+                })}
 
                 {/* Contact */}
                 <th
@@ -670,25 +790,72 @@ keeping positions overnight while following SEBI-regulated margin rules.`,
                   </td>
 
                   {/* Dynamic Columns */}
-                  {activeCols.map((colKey) => (
-                    <td
-                      key={colKey}
-                      className="px-5 py-4 border border-gray-300 whitespace-pre-wrap"
-                    >
-                      {(() => {
-                        const v = row[colKey];
-                        if (v == null || v === "") return DEFAULT_NULL_TEXT;
-                        if (typeof v === "object") {
-                          return Object.entries(v).map(([k, val], j) => (
-                            <div key={j}>
-                              {k}: {val ?? "—"}
+                  {activeCols.map((colKey) => {
+                    const v = row[colKey];
+
+                    /* ===== INTEREST SLABS (Loan Amount | ROI) ===== */
+                    if (colKey === "interest_slabs") {
+                      return (
+                        <td
+                          key={colKey}
+                          className="px-5 py-4 border border-gray-300"
+                          style={{ minWidth: "260px" }}
+                        >
+                          {v && typeof v === "object" ? (
+                            <div className="flex flex-col text-gray-900">
+                              {Object.entries(v).map(
+                                ([loanAmount, roi], index, arr) => (
+                                  <div key={index} className="flex flex-col">
+                                    <div className="grid grid-cols-2 text-center">
+                                      <span className="font-semibold">
+                                        {formatLoanRangeMTF(loanAmount)}
+                                      </span>
+                                      <span className="font-semibold text-[#1F5E3C] border-l border-gray-300">
+                                        {roi ?? "—"}
+                                      </span>
+                                    </div>
+
+                                    {index !== arr.length - 1 && (
+                                      <div
+                                        className="w-full border-t my-2"
+                                        style={{
+                                          borderColor: "rgba(0,0,0,0.12)",
+                                        }}
+                                      />
+                                    )}
+                                  </div>
+                                )
+                              )}
                             </div>
-                          ));
-                        }
-                        return v;
-                      })()}
-                    </td>
-                  ))}
+                          ) : (
+                            DEFAULT_NULL_TEXT
+                          )}
+                        </td>
+                      );
+                    }
+
+                    /* ===== ALL OTHER DYNAMIC COLUMNS (UPDATED) ===== */
+                    return (
+                      <td
+                        key={colKey}
+                        className="px-5 py-4 border border-gray-300 whitespace-pre-wrap text-center"
+                      >
+                        {v == null || v === ""
+                          ? DEFAULT_NULL_TEXT
+                          : colKey === "approved_stocks"
+                          ? `~ ${v} Stocks`
+                          : colKey === "unpaid_mtf_interest"
+                          ? `${v}%`
+                          : typeof v === "object"
+                          ? Object.entries(v).map(([k, val], j) => (
+                              <div key={j}>
+                                {k}: {val ?? "—"}
+                              </div>
+                            ))
+                          : v}
+                      </td>
+                    );
+                  })}
 
                   {/* Contact */}
                   <td className="px-5 py-4 border border-gray-300 text-center">
@@ -699,13 +866,13 @@ keeping positions overnight while following SEBI-regulated margin rules.`,
                       target="_blank"
                       rel="noreferrer"
                       className="
-      inline-flex items-center justify-center gap-2
-      bg-gradient-to-b from-[#1F5E3C] to-[#124434]
-      text-white px-4 py-2 rounded-lg
-      shadow-[0_10px_30px_rgba(0,0,0,0.20)]
-      hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
-      transition-all duration-300 transform hover:-translate-y-0.5
-    "
+                        inline-flex items-center justify-center gap-2
+                        bg-gradient-to-b from-[#1F5E3C] to-[#124434]
+                        text-white px-4 py-2 rounded-lg
+                        shadow-[0_10px_30px_rgba(0,0,0,0.20)]
+                        hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
+                        transition-all duration-300 transform hover:-translate-y-0.5
+                        "
                     >
                       {/* WhatsApp icon */}
                       <svg
@@ -720,21 +887,21 @@ keeping positions overnight while following SEBI-regulated margin rules.`,
                     </a>
 
                     <div className="mt-3">
-                                          <button
-                                            onClick={() => {
-                                              setEnquiryInstitution(row.broker_name);
-                                              setEnquiryOpen(true);
-                                            }}
-                                            className="inline-flex items-center justify-center gap-2
+                      <button
+                        onClick={() => {
+                          setEnquiryInstitution(row.broker_name);
+                          setEnquiryOpen(true);
+                        }}
+                        className="inline-flex items-center justify-center gap-2
                                               bg-gradient-to-b from-[#5e009c] to-[#c401ff]
                                               text-white px-4 py-2 rounded-lg
                                               shadow-[0_10px_30px_rgba(0,0,0,0.20)]
                                               hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
                                               transition-all duration-300 transform hover:-translate-y-0.5"
-                                          >
-                                            <FileText className="w-4 h-4" /> Fill Enquiry
-                                          </button>
-                                        </div>
+                      >
+                        <FileText className="w-4 h-4" /> Fill Enquiry
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}
@@ -838,57 +1005,67 @@ keeping positions overnight while following SEBI-regulated margin rules.`,
         </div>
       </section>
 
-      {/* EXTRA SECTIONS (unchanged) */}
-      <section className="max-w-[90%] mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-3 gap-10">
-        <div
-          className="backdrop-blur-xl border bg-[#e8feff3f]
-                shadow-[0_16px_38px_rgba(0,0,0,0.05)] border-[rgba(35,104,126,0.2)] rounded-3xl p-10 transition-all duration-500 hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)] hover:-translate-y-2"
-        >
-          <h3 className="text-2xl font-bold mb-6 text-[#0D3A27]">
-            How to Apply for MTF
-          </h3>
-          <ol className="list-decimal list-inside space-y-3 leading-relaxed text-[1.05rem] mb-6">
-            <li>
-              <strong>Check eligibility</strong> with your broker
-            </li>
-            <li>
-              <strong>Compare subscription & carry fees</strong>
-            </li>
-            <li>
-              <strong>Submit pledge</strong> for approved stocks
-            </li>
-            <li>
-              <strong>Monitor margins</strong> to avoid auto square-off
-            </li>
-          </ol>
-        </div>
+      {/* EXTRA SECTIONS */}
+<section className="max-w-[90%] mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 gap-10">
 
-        <div
-          className="bg-[#C0CDCF]
-                shadow-[0_16px_38px_rgba(0,0,0,0.05)] backdrop-blur-xl border border-[rgba(35,104,126,0.2)] rounded-3xl p-10 transition-all duration-500 hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)] hover:-translate-y-2"
-        >
-          <h3 className="text-2xl font-bold mb-6 text-[#0D3A27]">
-            Why Our MTF Comparison
-          </h3>
-          <ul className="list-disc list-inside space-y-3 text-gray-800 leading-relaxed text-[1.05rem]">
-            <li>Accurate verified data</li>
-            <li>Mobile-first UI/UX</li>
-            <li>Transparent cost comparison</li>
-          </ul>
-        </div>
+  {/* Card 1 — How to Apply for MTF */}
+  <div
+    className="
+      backdrop-blur-xl border bg-[#e8feff3f]
+      shadow-[0_16px_38px_rgba(0,0,0,0.05)]
+      border-[rgba(35,104,126,0.2)]
+      rounded-3xl p-10
+      transition-all duration-500
+      hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
+      hover:-translate-y-2
+    "
+  >
+    <h3 className="text-2xl font-bold mb-6 text-[#0D3A27]">
+      How to Apply for MTF
+    </h3>
 
-        <div
-          className="bg-[#2E494D]
-                shadow-[0_16px_38px_rgba(0,0,0,0.05)] backdrop-blur-xl border border-[rgba(255,255,255,0.2)] rounded-3xl p-10 transition-all duration-500 hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)] hover:-translate-y-2"
-        >
-          <h3 className="text-2xl font-bold mb-6 text-white">Key Factors</h3>
-          <ul className="list-disc list-inside space-y-3 text-white leading-relaxed text-[1.05rem]">
-            <li>Approved stock list</li>
-            <li>Subscription & carry fees</li>
-            <li>Margin rules & auto-square-off policies</li>
-          </ul>
-        </div>
-      </section>
+    <ol className="list-decimal list-inside space-y-3 leading-relaxed text-[1.05rem] mb-6">
+      <li>
+        <strong>Check eligibility</strong> with your broker
+      </li>
+      <li>
+        <strong>Compare subscription & carry fees</strong>
+      </li>
+      <li>
+        <strong>Submit pledge</strong> for approved stocks
+      </li>
+      <li>
+        <strong>Monitor margins</strong> to avoid auto square-off
+      </li>
+    </ol>
+  </div>
+
+  {/* Card 2 — Key Factors */}
+  <div
+    className="
+      bg-[#C0CDCF]
+      shadow-[0_16px_38px_rgba(0,0,0,0.05)]
+      backdrop-blur-xl
+      border border-[rgba(255,255,255,0.2)]
+      rounded-3xl p-10
+      transition-all duration-500
+      hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
+      hover:-translate-y-2
+    "
+  >
+    <h3 className="text-2xl font-bold mb-6 text-black">
+      Key Factors
+    </h3>
+
+    <ul className="list-disc list-inside space-y-3 text-black leading-relaxed text-[1.05rem]">
+      <li>Approved stock list</li>
+      <li>Subscription & carry fees</li>
+      <li>Margin rules & auto-square-off policies</li>
+    </ul>
+  </div>
+
+</section>
+
 
       {/* ========================= MTF FAQ SECTION ========================= */}
       <section className="relative max-w-[90%] mx-auto px-6 py-20">

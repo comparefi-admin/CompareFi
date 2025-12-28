@@ -42,6 +42,53 @@ p {
   box-shadow: 0 4px 12px rgba(177,237,103,0.2);
 }
 
+/* =========================================
+   MTF — Highlight ONLY first 2 columns
+   (EXACT SAME STYLE as other pages)
+   ========================================= */
+
+/* Make 1st two columns look elevated + important */
+.table-highlight-2 th:nth-child(-n+2),
+.table-highlight-2 td:nth-child(-n+2) {
+  background: linear-gradient(
+    180deg,
+    rgba(242, 255, 245, 0.92),
+    rgba(225, 245, 230, 0.85)
+  );
+  border-radius: 12px;
+  box-shadow:
+    0 12px 32px rgba(0,0,0,0.18),
+    inset 0 1px 0 rgba(255,255,255,0.5);
+  position: relative;
+  z-index: 10;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* ✅ LEFT ACCENT GREEN STRIP — SAME AS OTHER PAGES */
+.table-highlight-2 th:nth-child(-n+2)::before,
+.table-highlight-2 td:nth-child(-n+2)::before {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 10px;
+  bottom: 10px;
+  width: 4px;
+  border-radius: 6px;
+  background: linear-gradient(180deg, #B1ED67, #1F5E3C);
+  box-shadow: 0 4px 12px rgba(177,237,103,0.2);
+}
+
+/* Hover lift for important columns (SAME EFFECT) */
+.table-highlight-2 tbody tr:hover td:nth-child(-n+2) {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+}
+
+/* Slight dimming of all other columns when hovering */
+.table-highlight-2 tbody tr:hover td:nth-child(n+3) {
+  opacity: 0.85;
+}
+
 
 
 /* Hover lift for important columns */

@@ -64,7 +64,7 @@ export default function CompareProductsTable({ productType }) {
             ? ["mirae asset", "zerodha", "kotak", "bajaj"]
             : type === "lamf"
             ? ["bank of baroda", "mirae asset", "kotak", "sbi"]
-            : ["kotak", "kotak - trade free youth plan", "hdfc sky", "dhan"];
+            : ["kotak - trade free pro plan", "hdfc sky", "dhan"];
 
         const filtered = clean.filter((r) =>
           filterNames.includes((r.name || "").trim().toLowerCase())
