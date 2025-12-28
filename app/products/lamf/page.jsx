@@ -44,17 +44,28 @@ export default function LAMFPage() {
   /** ----------------------
    *  Helper Functions
    * ----------------------*/
-  const clean = (val) => {
-    if (!val) return val;
-    if (typeof val === "number") return val > 0 && val <= 1 ? val * 100 : val;
-    if (typeof val === "string") {
-      const cleaned = val.replace(/[₹,%]/g, "").replace(/,/g, "").trim();
-      const parsed = parseFloat(cleaned);
-      if (!isNaN(parsed)) return parsed;
-      return val.toLowerCase();
-    }
-    return val;
-  };
+ const clean = (val) => {
+  if (!val) return Infinity;
+
+  const str = String(val).toLowerCase();
+
+  // hard stop for non-numeric disclosures
+  if (
+    str.includes("data not") ||
+    str.includes("not disclosed") ||
+    str.includes("na") ||
+    str.includes("n/a")
+  ) {
+    return Infinity;
+  }
+
+  // extract first valid number
+  const match = str.match(/[\d,.]+/);
+
+  if (!match) return Infinity;
+
+  return Number(match[0].replace(/,/g, ""));
+};
 
   const formatLoanAmount = (value) => {
     if (!value || typeof value !== "string") return value;
@@ -80,9 +91,9 @@ export default function LAMFPage() {
   };
 
   const [sortConfig, setSortConfig] = useState({
-    key: null,
-    order: "asc", // asc | desc
-  });
+  key: "firstYear",
+  order: "asc",
+});
 
   const getSortableValue = (row, key) => {
     switch (key) {
@@ -90,10 +101,11 @@ export default function LAMFPage() {
         return row.institution_name ?? "";
 
       case "firstYear":
-        return clean(row.cost_first_year?.percent);
+  return clean(row.cost_first_year?.amount);
 
-      case "secondYear":
-        return clean(row.cost_second_year?.percent);
+case "secondYear":
+  return clean(row.cost_second_year?.amount);
+
 
       case "interestMedian":
         return clean(row.interest_rate?.median);
@@ -1134,7 +1146,7 @@ export default function LAMFPage() {
                   </thead>
 
                   <tbody>
-                    {sortedCostData.map((row, index) => (
+                    {sortedTableData.map((row, index) => (
                       <tr
                         key={row.id}
                         className={`

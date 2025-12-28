@@ -153,8 +153,8 @@ export default function LASPage() {
   const [activeTableCategory, setActiveTableCategory] =
     useState("fundingDetails");
   const [sortConfig, setSortConfig] = useState({
-    key: null,
-    order: "asc", // asc | desc
+    key: "firstYear",
+    order: "asc",
   });
 
   // fetch
@@ -174,9 +174,26 @@ export default function LASPage() {
   }, []);
 
   const clean = (val) => {
-    if (typeof val === "string")
-      return parseFloat(val.replace(/[₹,%]/g, "")) || val;
-    return val;
+    if (!val) return Infinity;
+
+    const str = String(val).toLowerCase();
+
+    // hard stop for non-numeric disclosures
+    if (
+      str.includes("data not") ||
+      str.includes("not disclosed") ||
+      str.includes("na") ||
+      str.includes("n/a")
+    ) {
+      return Infinity;
+    }
+
+    // extract FIRST valid number from string
+    const match = str.match(/[\d,.]+/);
+
+    if (!match) return Infinity;
+
+    return Number(match[0].replace(/,/g, ""));
   };
 
   const getSortableValue = (row, key) => {
@@ -185,10 +202,10 @@ export default function LASPage() {
         return row.institution_name ?? "";
 
       case "firstYear":
-        return clean(row.cost_first_year?.percent);
+        return clean(row.cost_first_year?.amount);
 
       case "secondYear":
-        return clean(row.cost_second_year?.percent);
+        return clean(row.cost_second_year?.amount);
 
       case "interestMedian":
         return clean(row.interest_rate?.median);

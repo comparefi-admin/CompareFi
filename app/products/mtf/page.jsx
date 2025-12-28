@@ -13,8 +13,7 @@ export default function MTFPage() {
   // For enquiry form
   const [enquiryOpen, setEnquiryOpen] = useState(false);
   const [enquiryInstitution, setEnquiryInstitution] = useState(null);
-
-  const [sortField, setSortField] = useState(null);
+  const [sortField, setSortField] = useState("cost_summary");
   const [sortOrder, setSortOrder] = useState("asc");
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -40,26 +39,90 @@ export default function MTFPage() {
     load();
   }, []);
 
+  const [sortConfig, setSortConfig] = useState({
+    key: "cost_summary", // DEFAULT sort
+    order: "asc",
+  });
+
+  const getSortableValue = (row, key) => {
+    switch (key) {
+      case "broker":
+        return row.broker_name ?? "";
+
+      case "cost_summary":
+        return clean(row.cost_summary?.amount);
+
+      default:
+        return null;
+    }
+  };
+  const handleSort = (key) => {
+    setSortConfig((prev) => {
+      if (prev.key === key) {
+        return {
+          key,
+          order: prev.order === "asc" ? "desc" : "asc",
+        };
+      }
+      return { key, order: "asc" };
+    });
+  };
+
   const clean = (val) => {
-    if (typeof val === "string")
-      return parseFloat(val.replace(/[₹,%]/g, "")) || val;
-    return val;
+    if (!val) return Infinity;
+
+    const str = String(val).toLowerCase();
+
+    if (
+      str.includes("data not") ||
+      str.includes("not disclosed") ||
+      str.includes("na") ||
+      str.includes("n/a")
+    ) {
+      return Infinity;
+    }
+
+    const match = str.match(/[\d,.]+/);
+    if (!match) return Infinity;
+
+    return Number(match[0].replace(/,/g, ""));
   };
 
   const sortedData = useMemo(() => {
-    if (!sortField) return [...data];
+    if (!sortConfig.key) return [...data];
+
     return [...data].sort((a, b) => {
-      let valA = clean(a[sortField]);
-      let valB = clean(b[sortField]);
+      const valA = getSortableValue(a, sortConfig.key);
+      const valB = getSortableValue(b, sortConfig.key);
 
       if (typeof valA === "number" && typeof valB === "number") {
-        return sortOrder === "asc" ? valA - valB : valB - valA;
+        return sortConfig.order === "asc" ? valA - valB : valB - valA;
       }
-      return sortOrder === "asc"
+
+      return sortConfig.order === "asc"
         ? String(valA).localeCompare(String(valB))
         : String(valB).localeCompare(String(valA));
     });
-  }, [data, sortField, sortOrder]);
+  }, [data, sortConfig]);
+
+  const SortButton = ({ columnKey }) => {
+    const active = sortConfig.key === columnKey;
+
+    return (
+      <button
+        onClick={() =>
+          setSortConfig((prev) => ({
+            key: columnKey,
+            order:
+              prev.key === columnKey && prev.order === "asc" ? "desc" : "asc",
+          }))
+        }
+        className="ml-2 text-xs text-white/80 hover:text-white transition"
+      >
+        {active ? (sortConfig.order === "asc" ? "▲" : "▼") : "⇅"}
+      </button>
+    );
+  };
 
   if (loading)
     return (
@@ -245,17 +308,16 @@ export default function MTFPage() {
         </div>
       </section>
 
-    {/* PRE–COST SUMMARY INFO CARDS — MTF */}
-<section className="max-w-[90%] mx-auto px-6 mt-10 mb-4">
-  <h3 className="text-4xl font-bold text-center mb-10 text-[#0A0F2C]">
-    Before You Compare MTF Costs
-  </h3>
+      {/* PRE–COST SUMMARY INFO CARDS — MTF */}
+      <section className="max-w-[90%] mx-auto px-6 mt-10 mb-4">
+        <h3 className="text-4xl font-bold text-center mb-10 text-[#0A0F2C]">
+          Before You Compare MTF Costs
+        </h3>
 
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-
-    {/* Card 1 */}
-    <div
-      className="
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Card 1 */}
+          <div
+            className="
         bg-white/18 backdrop-blur-xl 
         border border-[rgba(35,104,126,0.2)]
         rounded-3xl p-8
@@ -264,27 +326,28 @@ export default function MTFPage() {
         hover:-translate-y-3
         hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
       "
-    >
-      <h4 className="text-2xl font-bold mb-4 text-[#0D3A27]">
-        Before Cost Summary
-      </h4>
+          >
+            <h4 className="text-2xl font-bold mb-4 text-[#0D3A27]">
+              Before Cost Summary
+            </h4>
 
-      <p className="text-gray-800 leading-relaxed text-lg">
-        The table below shows the total cost of a ₹5,00,000 Margin Trading
-        Facility (MTF) position in Reliance Stock held over 12 months.
-        Collateral given is ₹4,00,000 in approved stocks, zero cash collateral
-        and broker specific haircuts/charges.
-      </p>
+            <p className="text-gray-800 leading-relaxed text-lg">
+              The table below shows the total cost of a ₹5,00,000 Margin Trading
+              Facility (MTF) position in Reliance Stock held over 12 months.
+              Collateral given is ₹4,00,000 in approved stocks, zero cash
+              collateral and broker specific haircuts/charges.
+            </p>
 
-      <p className="mt-3 text-gray-700 text-[1rem]">
-        We convert Year-1 interest rates, broker charges, into a single
-        comparable number, so you instantly understand who is cheapest overall.
-      </p>
-    </div>
+            <p className="mt-3 text-gray-700 text-[1rem]">
+              We convert Year-1 interest rates, broker charges, into a single
+              comparable number, so you instantly understand who is cheapest
+              overall.
+            </p>
+          </div>
 
-    {/* Card 2 */}
-    <div
-      className="
+          {/* Card 2 */}
+          <div
+            className="
         bg-white/18 backdrop-blur-xl 
         border border-[rgba(35,104,126,0.2)]
         rounded-3xl p-8
@@ -293,31 +356,30 @@ export default function MTFPage() {
         hover:-translate-y-3
         hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
       "
-    >
-      <h4 className="text-2xl font-bold mb-4 text-[#0D3A27]">
-        This helps you easily compare:
-      </h4>
+          >
+            <h4 className="text-2xl font-bold mb-4 text-[#0D3A27]">
+              This helps you easily compare:
+            </h4>
 
-      <ul className="list-disc list-inside space-y-2 text-gray-800 text-lg">
-        <li>Which broker is cheapest overall</li>
-        <li>How much yearly cost you would pay for the same funded exposure</li>
-        <li>Differences in approved stocks</li>
-        <li>
-          Margin requirement variations that affect your usable leverage t
-          during NAV drops)
-        </li>
-      </ul>
+            <ul className="list-disc list-inside space-y-2 text-gray-800 text-lg">
+              <li>Which broker is cheapest overall</li>
+              <li>
+                How much yearly cost you would pay for the same funded exposure
+              </li>
+              <li>Differences in approved stocks</li>
+              <li>
+                Margin requirement variations that affect your usable leverage t
+                during NAV drops
+              </li>
+            </ul>
 
-      <p className="mt-3 text-gray-700 text-[1rem]">
-        Most users only need this summary to choose the most cost-effective
-        lender.
-      </p>
-    </div>
-
-  </div>
-</section>
-
-
+            <p className="mt-3 text-gray-700 text-[1rem]">
+              Most users only need this summary to choose the most
+              cost-effective lender.
+            </p>
+          </div>
+        </div>
+      </section>
 
       {/* MTF COST SUMMARY */}
       <section className="max-w-[90%] mx-auto px-6 py-8 flex flex-col items-center">
@@ -332,7 +394,10 @@ export default function MTFPage() {
                   style={{ background: "#124434", color: "#FFFFFF" }}
                   className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
                 >
-                  Broker
+                  <div className="flex items-center justify-center gap-2">
+                    Broker
+                    <SortButton columnKey="broker" />
+                  </div>
                 </th>
 
                 {/* Cost Summary */}
@@ -340,7 +405,10 @@ export default function MTFPage() {
                   style={{ background: "#124434", color: "#FFFFFF" }}
                   className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
                 >
-                  Cost Summary
+                  <div className="flex items-center justify-center gap-2">
+                    Cost Summary
+                    <SortButton columnKey="cost_summary" />
+                  </div>
                 </th>
 
                 {/* Margin Requirement */}
@@ -679,7 +747,10 @@ export default function MTFPage() {
                   style={{ background: "#124434", color: "#FFFFFF" }}
                   className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
                 >
-                  Broker
+                  <div className="flex items-center justify-center gap-2">
+                    Broker
+                    <SortButton columnKey="broker" />
+                  </div>
                 </th>
 
                 {/* Cost Summary */}
@@ -687,7 +758,10 @@ export default function MTFPage() {
                   style={{ background: "#124434", color: "#FFFFFF" }}
                   className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
                 >
-                  Cost Summary
+                  <div className="flex items-center justify-center gap-2">
+                    Cost Summary
+                    <SortButton columnKey="cost_summary" />
+                  </div>
                 </th>
 
                 {/* Dynamic Columns */}
@@ -1006,11 +1080,10 @@ export default function MTFPage() {
       </section>
 
       {/* EXTRA SECTIONS */}
-<section className="max-w-[90%] mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 gap-10">
-
-  {/* Card 1 — How to Apply for MTF */}
-  <div
-    className="
+      <section className="max-w-[90%] mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 gap-10">
+        {/* Card 1 — How to Apply for MTF */}
+        <div
+          className="
       backdrop-blur-xl border bg-[#e8feff3f]
       shadow-[0_16px_38px_rgba(0,0,0,0.05)]
       border-[rgba(35,104,126,0.2)]
@@ -1019,30 +1092,30 @@ export default function MTFPage() {
       hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
       hover:-translate-y-2
     "
-  >
-    <h3 className="text-2xl font-bold mb-6 text-[#0D3A27]">
-      How to Apply for MTF
-    </h3>
+        >
+          <h3 className="text-2xl font-bold mb-6 text-[#0D3A27]">
+            How to Apply for MTF
+          </h3>
 
-    <ol className="list-decimal list-inside space-y-3 leading-relaxed text-[1.05rem] mb-6">
-      <li>
-        <strong>Check eligibility</strong> with your broker
-      </li>
-      <li>
-        <strong>Compare subscription & carry fees</strong>
-      </li>
-      <li>
-        <strong>Submit pledge</strong> for approved stocks
-      </li>
-      <li>
-        <strong>Monitor margins</strong> to avoid auto square-off
-      </li>
-    </ol>
-  </div>
+          <ol className="list-decimal list-inside space-y-3 leading-relaxed text-[1.05rem] mb-6">
+            <li>
+              <strong>Check eligibility</strong> with your broker
+            </li>
+            <li>
+              <strong>Compare subscription & carry fees</strong>
+            </li>
+            <li>
+              <strong>Submit pledge</strong> for approved stocks
+            </li>
+            <li>
+              <strong>Monitor margins</strong> to avoid auto square-off
+            </li>
+          </ol>
+        </div>
 
-  {/* Card 2 — Key Factors */}
-  <div
-    className="
+        {/* Card 2 — Key Factors */}
+        <div
+          className="
       bg-[#C0CDCF]
       shadow-[0_16px_38px_rgba(0,0,0,0.05)]
       backdrop-blur-xl
@@ -1052,20 +1125,16 @@ export default function MTFPage() {
       hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
       hover:-translate-y-2
     "
-  >
-    <h3 className="text-2xl font-bold mb-6 text-black">
-      Key Factors
-    </h3>
+        >
+          <h3 className="text-2xl font-bold mb-6 text-black">Key Factors</h3>
 
-    <ul className="list-disc list-inside space-y-3 text-black leading-relaxed text-[1.05rem]">
-      <li>Approved stock list</li>
-      <li>Subscription & carry fees</li>
-      <li>Margin rules & auto-square-off policies</li>
-    </ul>
-  </div>
-
-</section>
-
+          <ul className="list-disc list-inside space-y-3 text-black leading-relaxed text-[1.05rem]">
+            <li>Approved stock list</li>
+            <li>Subscription & carry fees</li>
+            <li>Margin rules & auto-square-off policies</li>
+          </ul>
+        </div>
+      </section>
 
       {/* ========================= MTF FAQ SECTION ========================= */}
       <section className="relative max-w-[90%] mx-auto px-6 py-20">
