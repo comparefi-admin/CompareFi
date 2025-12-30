@@ -84,6 +84,22 @@ export default function LASPage() {
 
     otherMiscCost: [{ key: "other_expenses", label: "Other Expenses" }],
   };
+  const formatRupees = (value) => {
+    if (value === null || value === undefined || value === "") return "—";
+
+    const num =
+      typeof value === "number"
+        ? value
+        : Number(
+            String(value)
+              .replace(/₹|rs\.?|,/gi, "")
+              .trim()
+          );
+
+    if (isNaN(num)) return value;
+
+    return `₹${num.toLocaleString("en-IN")}`;
+  };
 
   const formatPercent1Dec = (val) => {
     if (val === null || val === undefined || val === "") return "—";
@@ -560,7 +576,6 @@ export default function LASPage() {
                   </div>
                 </th>
 
-                {/* Dynamic main columns */}
                 <th
                   style={{ background: "#124434", color: "#FFFFFF" }}
                   className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
@@ -692,7 +707,7 @@ export default function LASPage() {
                       <div className="flex flex-col items-center gap-1">
                         {/* Percent */}
                         <div className="font-semibold text-green-700 text-base">
-                          {row.cost_first_year.percent ?? "—"}
+                          {formatPercent1Dec(row.cost_first_year.percent)}
                         </div>
 
                         {/* Soft Divider Line */}
@@ -703,7 +718,7 @@ export default function LASPage() {
 
                         {/* Amount */}
                         <div className="text-sm text-gray-600">
-                          {row.cost_first_year.amount ?? "—"}
+                          {formatRupees(row.cost_first_year.amount ?? "—")}
                         </div>
                       </div>
                     ) : (
@@ -717,7 +732,9 @@ export default function LASPage() {
                       <div className="flex flex-col items-center gap-1">
                         {/* Percent */}
                         <div className="font-semibold text-green-700 text-base">
-                          {row.cost_second_year.percent ?? "—"}
+                          {formatPercent1Dec(
+                            row.cost_second_year.percent ?? "—"
+                          )}
                         </div>
 
                         {/* Soft Divider Line */}
@@ -728,7 +745,7 @@ export default function LASPage() {
 
                         {/* Amount (NO comma formatting) */}
                         <div className="text-sm text-gray-600">
-                          {row.cost_second_year.amount ?? "—"}
+                          {formatRupees(row.cost_second_year.amount ?? "—")}
                         </div>
                       </div>
                     ) : (
@@ -1259,7 +1276,9 @@ export default function LASPage() {
                         <div className="flex flex-col items-center gap-1">
                           {/* Percent */}
                           <div className="font-semibold text-green-700 text-base">
-                            {row.cost_first_year.percent ?? "—"}
+                            {formatPercent1Dec(
+                              row.cost_first_year.percent ?? "—"
+                            )}
                           </div>
 
                           {/* Soft Divider Line */}
@@ -1270,7 +1289,7 @@ export default function LASPage() {
 
                           {/* Amount (NO comma formatting) */}
                           <div className="text-sm text-gray-600">
-                            {row.cost_first_year.amount ?? "—"}
+                            {formatRupees(row.cost_first_year.amount ?? "—")}
                           </div>
                         </div>
                       ) : (
@@ -1284,7 +1303,9 @@ export default function LASPage() {
                         <div className="flex flex-col items-center gap-1">
                           {/* Percent */}
                           <div className="font-semibold text-green-700 text-base">
-                            {row.cost_second_year.percent ?? "—"}
+                            {formatPercent1Dec(
+                              row.cost_second_year.percent ?? "—"
+                            )}
                           </div>
 
                           {/* Soft Divider Line */}
@@ -1295,7 +1316,7 @@ export default function LASPage() {
 
                           {/* Amount (NO comma formatting) */}
                           <div className="text-sm text-gray-600">
-                            {row.cost_second_year.amount ?? "—"}
+                            {formatRupees(row.cost_second_year.amount ?? "—")}
                           </div>
                         </div>
                       ) : (

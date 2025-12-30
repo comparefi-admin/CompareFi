@@ -88,6 +88,35 @@ export default function MTFPage() {
     return Number(match[0].replace(/,/g, ""));
   };
 
+  // ================= PERCENT FORMATTER (LAMF) =================
+  const formatPercent1Dec = (val) => {
+    if (val === null || val === undefined || val === "") return "—";
+
+    const num = parseFloat(String(val).replace("%", "").trim());
+    if (Number.isNaN(num)) return val;
+
+    return `${num.toFixed(1)}%`;
+  };
+
+  // ================= RUPEE FORMATTER (LAMF) =================
+  const formatRupees = (val) => {
+    if (val === null || val === undefined || val === "") return "—";
+
+    // Handle numbers + strings like "Rs 100000", "INR 2,50,000", "₹300000"
+    const num =
+      typeof val === "number"
+        ? val
+        : parseFloat(
+            String(val)
+              .replace(/₹|rs\.?|inr|,/gi, "")
+              .trim()
+          );
+
+    if (Number.isNaN(num)) return val;
+
+    return `₹${num.toLocaleString("en-IN")}`;
+  };
+
   const sortedData = useMemo(() => {
     if (!sortConfig.key) return [...data];
 
@@ -486,7 +515,7 @@ export default function MTFPage() {
                       <div className="flex flex-col items-center gap-1">
                         {/* Percent */}
                         <div className="font-semibold text-green-700 text-base">
-                          {row.cost_summary.percent ?? "—"}
+                          {formatPercent1Dec(row.cost_summary.percent ?? "—")}
                         </div>
 
                         {/* Soft Divider Line */}
@@ -497,7 +526,7 @@ export default function MTFPage() {
 
                         {/* Amount */}
                         <div className="text-sm text-gray-600">
-                          {row.cost_summary.amount ?? "—"}
+                          {formatRupees(row.cost_summary.amount ?? "—")}
                         </div>
                       </div>
                     ) : (
@@ -536,7 +565,7 @@ export default function MTFPage() {
 
                                 {/* ROI */}
                                 <span className="font-semibold text-[#1F5E3C] border-l border-gray-300">
-                                  {roi ?? "—"}
+                                  {formatPercent1Dec(roi ?? "—")}
                                 </span>
                               </div>
 
@@ -782,10 +811,10 @@ export default function MTFPage() {
 
                           <div
                             className="
-              hidden sm:grid
-              grid-cols-2 w-full text-xs font-medium
-              border-t border-white/30 pt-2 px-2
-            "
+                                        hidden sm:grid
+                                        grid-cols-2 w-full text-xs font-medium
+                                        border-t border-white/30 pt-2 px-2
+                                      "
                           >
                             <span className="text-center px-2">
                               Loan Amount
@@ -844,7 +873,7 @@ export default function MTFPage() {
                       <div className="flex flex-col items-center gap-1">
                         {/* Percent */}
                         <div className="font-semibold text-green-700 text-base">
-                          {row.cost_summary.percent ?? "—"}
+                          {formatPercent1Dec(row.cost_summary.percent ?? "—")}
                         </div>
 
                         {/* Soft Divider Line */}
@@ -855,7 +884,7 @@ export default function MTFPage() {
 
                         {/* Amount (NO comma formatting) */}
                         <div className="text-sm text-gray-600">
-                          {row.cost_summary.amount ?? "—"}
+                          {formatRupees(row.cost_summary.amount ?? "—")}
                         </div>
                       </div>
                     ) : (
@@ -866,6 +895,18 @@ export default function MTFPage() {
                   {/* Dynamic Columns */}
                   {activeCols.map((colKey) => {
                     const v = row[colKey];
+
+                    /* ================= UNPAID MTF INTEREST (FORMAT LIKE OTHER DYNAMIC COLUMNS) ================= */
+                    if (colKey === "unpaid_mtf_interest") {
+                      return (
+                        <td
+                          key={`${row.id}-${colKey}`}
+                          className="px-3 py-3 border border-gray-300 text-center"
+                        >
+                          {formatPercent1Dec(v)}
+                        </td>
+                      );
+                    }
 
                     /* ===== INTEREST SLABS (Loan Amount | ROI) ===== */
                     if (colKey === "interest_slabs") {
@@ -885,7 +926,7 @@ export default function MTFPage() {
                                         {formatLoanRangeMTF(loanAmount)}
                                       </span>
                                       <span className="font-semibold text-[#1F5E3C] border-l border-gray-300">
-                                        {roi ?? "—"}
+                                        {formatPercent1Dec(roi ?? "—")}
                                       </span>
                                     </div>
 

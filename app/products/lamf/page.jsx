@@ -44,27 +44,56 @@ export default function LAMFPage() {
   /** ----------------------
    *  Helper Functions
    * ----------------------*/
- const clean = (val) => {
-  if (!val) return Infinity;
+  const clean = (val) => {
+    if (!val) return Infinity;
 
-  const str = String(val).toLowerCase();
+    const str = String(val).toLowerCase();
 
-  // hard stop for non-numeric disclosures
-  if (
-    str.includes("data not") ||
-    str.includes("not disclosed") ||
-    str.includes("na") ||
-    str.includes("n/a")
-  ) {
-    return Infinity;
-  }
+    // hard stop for non-numeric disclosures
+    if (
+      str.includes("data not") ||
+      str.includes("not disclosed") ||
+      str.includes("na") ||
+      str.includes("n/a")
+    ) {
+      return Infinity;
+    }
 
-  // extract first valid number
-  const match = str.match(/[\d,.]+/);
+    // extract first valid number
+    const match = str.match(/[\d,.]+/);
 
-  if (!match) return Infinity;
+    if (!match) return Infinity;
 
-  return Number(match[0].replace(/,/g, ""));
+    return Number(match[0].replace(/,/g, ""));
+  };
+
+  // ================= PERCENT FORMATTER (LAMF) =================
+const formatPercent1Dec = (val) => {
+  if (val === null || val === undefined || val === "") return "—";
+
+  const num = parseFloat(String(val).replace("%", "").trim());
+  if (Number.isNaN(num)) return val;
+
+  return `${num.toFixed(1)}%`;
+};
+
+// ================= RUPEE FORMATTER (LAMF) =================
+const formatRupees = (val) => {
+  if (val === null || val === undefined || val === "") return "—";
+
+  // Handle numbers + strings like "Rs 100000", "INR 2,50,000", "₹300000"
+  const num =
+    typeof val === "number"
+      ? val
+      : parseFloat(
+          String(val)
+            .replace(/₹|rs\.?|inr|,/gi, "")
+            .trim()
+        );
+
+  if (Number.isNaN(num)) return val;
+
+  return `₹${num.toLocaleString("en-IN")}`;
 };
 
   const formatLoanAmount = (value) => {
@@ -91,9 +120,9 @@ export default function LAMFPage() {
   };
 
   const [sortConfig, setSortConfig] = useState({
-  key: "firstYear",
-  order: "asc",
-});
+    key: "firstYear",
+    order: "asc",
+  });
 
   const getSortableValue = (row, key) => {
     switch (key) {
@@ -101,11 +130,10 @@ export default function LAMFPage() {
         return row.institution_name ?? "";
 
       case "firstYear":
-  return clean(row.cost_first_year?.amount);
+        return clean(row.cost_first_year?.amount);
 
-case "secondYear":
-  return clean(row.cost_second_year?.amount);
-
+      case "secondYear":
+        return clean(row.cost_second_year?.amount);
 
       case "interestMedian":
         return clean(row.interest_rate?.median);
@@ -370,7 +398,6 @@ case "secondYear":
                       <li>Liquidity without redeeming MF units.</li>
                       <li>Lower interest vs personal loan.</li>
                       <li>Continue earning returns on portfolio.</li>
-                      <li>Fast approval via CAMS / KFintech.</li>
                     </ul>
                   ),
                 },
@@ -432,19 +459,19 @@ case "secondYear":
                   ["Interest Range", "8–18% p.a."],
                   ["Tenure", "Up to 36 months"],
                   ["Collateral Type", "Mutual Funds"],
-                  ["Approval", "CAMS / KFintech"],
+                  ["Disbursal", "CAMS / KFintech"], // ← changed here
                 ].map(([label, value], i) => (
                   <div
                     key={i}
                     className="
-                    bg-white/22 backdrop-blur-md border border-[rgba(255,255,255,0.06)]
-                    rounded-2xl p-3 sm:p-4
-                    transition-all
-                    bg-[#20463B]
-                    shadow-[0_16px_38px_rgba(0,0,0,0.05)]
-                    hover:-translate-y-2
-                    hover:shadow-[0_14px_36px_rgba(0,0,0,0.22),inset_0_0_18px_rgba(255,255,255,0.06)]
-                  "
+                        bg-white/22 backdrop-blur-md border border-[rgba(255,255,255,0.06)]
+                        rounded-2xl p-3 sm:p-4
+                        transition-all
+                        bg-[#20463B]
+                        shadow-[0_16px_38px_rgba(0,0,0,0.05)]
+                        hover:-translate-y-2
+                        hover:shadow-[0_14px_36px_rgba(0,0,0,0.22),inset_0_0_18px_rgba(255,255,255,0.06)]
+                      "
                   >
                     <p className="text-gray-100 text-sm">{label}</p>
                     <p className="text-2xl font-bold text-[#AFE619]">{value}</p>
@@ -580,17 +607,17 @@ case "secondYear":
                     </th>
 
                     {/* Approved Funds */}
-                    <th className="px-5 py-4 border bg-[#124434] text-white uppercase text-sm">
+                    <th className="px-3 py-3 border bg-[#124434] text-white uppercase text-sm">
                       Approved Funds
                     </th>
 
                     {/* Tenure */}
-                    <th className="px-5 py-4 border bg-[#124434] text-white uppercase text-sm">
-                      Tenure
+                    <th className="px-2 py-2 border bg-[#124434] text-white uppercase text-sm">
+                      Tenure (Months)
                     </th>
 
                     {/* Equity MF Loan */}
-                    <th className="px-5 py-4 border bg-[#124434] text-white uppercase text-sm min-w-[220px]">
+                    <th className="px-3 py-3 border bg-[#124434] text-white uppercase text-sm min-w-[160px]">
                       <div className="flex flex-col items-center gap-2">
                         <span>Equity MF Loan</span>
                         <div className="grid grid-cols-2 w-full text-xs border-t border-white/30 pt-2">
@@ -601,7 +628,7 @@ case "secondYear":
                     </th>
 
                     {/* Debt MF Loan */}
-                    <th className="px-5 py-4 border bg-[#124434] text-white uppercase text-sm min-w-[220px]">
+                    <th className="px-3 py-3 border bg-[#124434] text-white uppercase text-sm min-w-[160px]">
                       <div className="flex flex-col items-center gap-2">
                         <span>Debt MF Loan</span>
                         <div className="grid grid-cols-2 w-full text-xs border-t border-white/30 pt-2">
@@ -612,7 +639,7 @@ case "secondYear":
                     </th>
 
                     {/* LTV */}
-                    <th className="px-5 py-4 border bg-[#124434] text-white uppercase text-sm min-w-[220px]">
+                    <th className="px-3 py-3 border bg-[#124434] text-white uppercase text-sm min-w-[200px]">
                       <div className="flex flex-col items-center gap-2">
                         <span>LTV (%)</span>
                         <div className="grid grid-cols-2 w-full text-xs border-t border-white/30 pt-2">
@@ -625,7 +652,7 @@ case "secondYear":
                     </th>
 
                     {/* Interest Rate */}
-                    <th className="px-5 py-4 border bg-[#124434] text-white uppercase text-sm min-w-[260px]">
+                    <th className="px-3 py-3 border bg-[#124434] text-white uppercase text-sm min-w-[220px]">
                       <div className="flex flex-col items-center gap-2">
                         <div className="flex items-center gap-2">
                           <span>Interest Rate</span>
@@ -644,7 +671,7 @@ case "secondYear":
                     {/* Contact */}
                     <th
                       style={{ background: "#124434", color: "#FFFFFF" }}
-                      className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+                      className="px-3 py-3 border border-gray-300 uppercase text-sm tracking-wide"
                     >
                       Contact
                     </th>
@@ -678,7 +705,7 @@ case "secondYear":
                           <div className="flex flex-col items-center gap-1">
                             {/* Percent */}
                             <div className="font-semibold text-green-700 text-base">
-                              {row.cost_first_year.percent ?? "—"}
+                              {formatPercent1Dec(row.cost_first_year.percent ?? "—")}
                             </div>
 
                             {/* Soft Divider Line */}
@@ -689,7 +716,7 @@ case "secondYear":
 
                             {/* Amount (NO comma formatting) */}
                             <div className="text-sm text-gray-600">
-                              {row.cost_first_year.amount ?? "—"}
+                              {formatRupees(row.cost_first_year.amount ?? "—")}
                             </div>
                           </div>
                         ) : (
@@ -703,7 +730,7 @@ case "secondYear":
                           <div className="flex flex-col items-center gap-1">
                             {/* Percent */}
                             <div className="font-semibold text-green-700 text-base">
-                              {row.cost_second_year.percent ?? "—"}
+                              {formatPercent1Dec(row.cost_second_year.percent ?? "—")}
                             </div>
 
                             {/* Soft Divider Line */}
@@ -714,7 +741,7 @@ case "secondYear":
 
                             {/* Amount (NO comma formatting) */}
                             <div className="text-sm text-gray-600">
-                              {row.cost_second_year.amount ?? "—"}
+                              {formatRupees(row.cost_second_year.amount ?? "—")}
                             </div>
                           </div>
                         ) : (
@@ -723,19 +750,19 @@ case "secondYear":
                       </td>
 
                       {/* Approved Funds */}
-                      <td className="px-5 py-4 border border-gray-300 text-gray-800 whitespace-pre-wrap text-center">
+                      <td className="px-3 py-3 border border-gray-300 text-gray-800 whitespace-pre-wrap text-center">
                         {row.approved_funds
                           ? `~ ${row.approved_funds}`
                           : DEFAULT_NULL_TEXT}
                       </td>
 
                       {/* Tenure */}
-                      <td className="px-5 py-4 border border-gray-300 text-center">
+                      <td className="px-3 py-3 border border-gray-300 text-center">
                         {row.tenure_months ?? DEFAULT_NULL_TEXT}
                       </td>
 
                       {/* Loan Equity */}
-                      <td className="px-5 py-4 border border-gray-300">
+                      <td className="px-3 py-3 border border-gray-300">
                         {row.loan_equity ? (
                           <div className="grid sm:grid-cols-2 text-sm text-center">
                             <div className="font-semibold">
@@ -751,7 +778,7 @@ case "secondYear":
                       </td>
 
                       {/* Loan Debt */}
-                      <td className="px-5 py-4 border border-gray-300">
+                      <td className="px-3 py-3 border border-gray-300">
                         {row.loan_debt ? (
                           <div className="grid sm:grid-cols-2 text-sm text-center">
                             <div className="font-semibold">
@@ -767,12 +794,12 @@ case "secondYear":
                       </td>
 
                       {/* LTV Funding */}
-                      <td className="px-5 py-4 border border-gray-300">
+                      <td className="px-3 py-3 border border-gray-300">
                         {row.ltv ? (
                           <div className="grid sm:grid-cols-2 text-sm text-center">
-                            <div>{row.ltv.debt ?? "—"}</div>
+                            <div>{formatPercent1Dec(row.ltv.debt ?? "—")}</div>
                             <div className="sm:border-l border-gray-300">
-                              {row.ltv.equity ?? "—"}
+                              {formatPercent1Dec(row.ltv.equity ?? "—")}
                             </div>
                           </div>
                         ) : (
@@ -781,15 +808,15 @@ case "secondYear":
                       </td>
 
                       {/* Interest */}
-                      <td className="px-5 py-4 border border-gray-300">
+                      <td className="px-3 py-3 border border-gray-300">
                         {row.interest_rate ? (
                           <div className="grid grid-cols-3 text-center text-sm">
-                            <span>{row.interest_rate.min ?? "—"}</span>
+                            <span>{formatPercent1Dec(row.interest_rate.min ?? "—" )}</span>
                             <span className="border-l border-r border-gray-300">
-                              {row.interest_rate.max ?? "—"}
+                              {formatPercent1Dec(row.interest_rate.max ?? "—")}
                             </span>
                             <span className="font-semibold text-[#1F5E3C]">
-                              {row.interest_rate.median ?? "—"}
+                              {formatPercent1Dec(row.interest_rate.median ?? "—")}
                             </span>
                           </div>
                         ) : (
@@ -798,7 +825,7 @@ case "secondYear":
                       </td>
 
                       {/* Contact Buttons */}
-                      <td className="px-5 py-4 border border-gray-300 text-center">
+                      <td className="px-3 py-3 border border-gray-300 text-center">
                         <a
                           href={`https://wa.me/919930584020?text=Hi! I’m interested in LAMF by ${encodeURIComponent(
                             row.institution_name || "this institution"
@@ -866,12 +893,12 @@ case "secondYear":
               {/* Card 1 */}
               <div
                 className="
-        bg-white/18 backdrop-blur-xl 
-        border border-[rgba(35,104,126,0.2)]
-        rounded-3xl p-5 sm:p-8 shadow-[0_16px_38px_rgba(0,0,0,0.12)]
-        transition-all duration-500 hover:-translate-y-3
-        hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
-      "
+                    bg-white/18 backdrop-blur-xl 
+                    border border-[rgba(35,104,126,0.2)]
+                    rounded-3xl p-5 sm:p-8 shadow-[0_16px_38px_rgba(0,0,0,0.12)]
+                    transition-all duration-500 hover:-translate-y-3
+                    hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
+                  "
               >
                 <h4 className="text-2xl font-bold mb-4 text-[#0D3A27]">
                   What This Section Shows
@@ -894,12 +921,12 @@ case "secondYear":
               {/* Card 2 */}
               <div
                 className="
-        bg-white/18 backdrop-blur-xl 
-        border border-[rgba(35,104,126,0.2)]
-        rounded-3xl p-5 sm:p-8 shadow-[0_16px_38px_rgba(0,0,0,0.12)]
-        transition-all duration-500 hover:-translate-y-3
-        hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
-      "
+                    bg-white/18 backdrop-blur-xl 
+                    border border-[rgba(35,104,126,0.2)]
+                    rounded-3xl p-5 sm:p-8 shadow-[0_16px_38px_rgba(0,0,0,0.12)]
+                    transition-all duration-500 hover:-translate-y-3
+                    hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
+                  "
               >
                 <h4 className="text-2xl font-bold mb-4 text-[#0D3A27]">
                   How to Use the Tabs Above
@@ -945,7 +972,7 @@ case "secondYear":
                   w-full bg-white backdrop-blur-xl 
                   border border-[rgba(255,255,255,0.06)]
                   shadow-[0_12px_32px_rgba(0,0,0,0.22)]
-                  rounded-2xl p-3 sm:p-6
+                  rounded-xl overflow-x-auto p-4
                 "
             >
               {/* CATEGORY BUTTONS (Exact LAS style) */}
@@ -970,7 +997,7 @@ case "secondYear":
 
               {/* TABLE */}
               <div className="overflow-x-auto">
-                <table className="w-full border-collapse text-base text-gray-900 table-highlight">
+                <table className="w-full border-collapse text-[15px] text-gray-900 table-highlight text-center">
                   <thead>
                     <tr className="font-semibold border-b border-gray-300">
                       {/* Institution */}
@@ -1016,7 +1043,7 @@ case "secondYear":
                           return (
                             <th
                               key={col.key}
-                              className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+                              className="px-3 py-3 border border-gray-300 uppercase text-sm tracking-wide"
                               style={{
                                 background: "#124434",
                                 color: "#fff",
@@ -1042,7 +1069,7 @@ case "secondYear":
                           return (
                             <th
                               key={col.key}
-                              className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+                              className="px-3 py-3 border border-gray-300 uppercase text-sm tracking-wide"
                               style={{
                                 background: "#124434",
                                 color: "#fff",
@@ -1068,7 +1095,7 @@ case "secondYear":
                           return (
                             <th
                               key={col.key}
-                              className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+                              className="px-3 py-3 border border-gray-300 uppercase text-sm tracking-wide"
                               style={{
                                 background: "#124434",
                                 color: "#fff",
@@ -1099,7 +1126,7 @@ case "secondYear":
                           return (
                             <th
                               key={col.key}
-                              className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+                              className="px-3 py-3 border border-gray-300 uppercase text-sm tracking-wide"
                               style={{
                                 background: "#124434",
                                 color: "#fff",
@@ -1127,7 +1154,7 @@ case "secondYear":
                         return (
                           <th
                             key={col.key}
-                            className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide text-center"
+                            className="px-3 py-3 border border-gray-300 uppercase text-sm tracking-wide text-center"
                             style={{ background: "#124434", color: "#fff" }}
                           >
                             {col.label}
@@ -1137,7 +1164,7 @@ case "secondYear":
 
                       {/* Contact */}
                       <th
-                        className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide text-center"
+                        className="px-3 py-3 border border-gray-300 uppercase text-sm tracking-wide text-center"
                         style={{ background: "#124434", color: "#fff" }}
                       >
                         Contact
@@ -1167,7 +1194,7 @@ case "secondYear":
                             <div className="flex flex-col items-center gap-1">
                               {/* Percent */}
                               <div className="font-semibold text-green-700 text-base">
-                                {row.cost_first_year.percent ?? "—"}
+                                {formatPercent1Dec(row.cost_first_year.percent ?? "—")}
                               </div>
 
                               {/* Soft Divider Line */}
@@ -1178,7 +1205,7 @@ case "secondYear":
 
                               {/* Amount (NO comma formatting) */}
                               <div className="text-sm text-gray-600">
-                                {row.cost_first_year.amount ?? "—"}
+                                {formatRupees(row.cost_first_year.amount ?? "—")}
                               </div>
                             </div>
                           ) : (
@@ -1192,7 +1219,7 @@ case "secondYear":
                             <div className="flex flex-col items-center gap-1">
                               {/* Percent */}
                               <div className="font-semibold text-green-700 text-base">
-                                {row.cost_second_year.percent ?? "—"}
+                                {formatPercent1Dec(row.cost_second_year.percent ?? "—")}
                               </div>
 
                               {/* Soft Divider Line */}
@@ -1203,7 +1230,7 @@ case "secondYear":
 
                               {/* Amount (NO comma formatting) */}
                               <div className="text-sm text-gray-600">
-                                {row.cost_second_year.amount ?? "—"}
+                                {formatRupees(row.cost_second_year.amount ?? "—")}
                               </div>
                             </div>
                           ) : (
@@ -1220,8 +1247,8 @@ case "secondYear":
                             return (
                               <td
                                 key={`${row.id}-${c.key}`}
-                                className="px-5 py-4 border border-gray-300 text-center"
-                                style={{ minWidth: "220px" }}
+                                className="px-3 py-3 border border-gray-300 text-center"
+                                style={{ minWidth: "160px" }}
                               >
                                 {val ? (
                                   <div className="grid sm:grid-cols-2 text-sm">
@@ -1244,8 +1271,8 @@ case "secondYear":
                             return (
                               <td
                                 key={`${row.id}-${c.key}`}
-                                className="px-5 py-4 border border-gray-300 text-center"
-                                style={{ minWidth: "220px" }}
+                                className="px-3 py-3 border border-gray-300 text-center"
+                                style={{ minWidth: "160px" }}
                               >
                                 {val ? (
                                   <div className="grid sm:grid-cols-2 text-sm">
@@ -1268,14 +1295,14 @@ case "secondYear":
                             return (
                               <td
                                 key={`${row.id}-${c.key}`}
-                                className="px-5 py-4 border border-gray-300 text-center"
-                                style={{ minWidth: "220px" }}
+                                className="px-3 py-3 border border-gray-300 text-center"
+                                style={{ minWidth: "160px" }}
                               >
                                 {val ? (
                                   <div className="grid sm:grid-cols-2 text-sm">
-                                    <div>{val.debt ?? "—"}</div>
+                                    <div>{formatPercent1Dec(val.debt ?? "—")}</div>
                                     <div className="sm:border-l border-gray-300">
-                                      {val.equity ?? "—"}
+                                      {formatPercent1Dec(val.equity ?? "—")}
                                     </div>
                                   </div>
                                 ) : (
@@ -1290,22 +1317,142 @@ case "secondYear":
                             return (
                               <td
                                 key={`${row.id}-${c.key}`}
-                                className="px-5 py-4 border border-gray-300 text-center"
-                                style={{ minWidth: "260px" }}
+                                className="px-3 py-3 border border-gray-300 text-center"
+                                style={{ minWidth: "220px" }}
                               >
                                 {val ? (
                                   <div className="grid grid-cols-3 text-sm">
-                                    <span>{val.min ?? "—"}</span>
+                                    <span>{formatPercent1Dec(val.min ?? "—")}</span>
                                     <span className="border-l border-r border-gray-300">
-                                      {val.max ?? "—"}
+                                      {formatPercent1Dec(val.max ?? "—")}
                                     </span>
                                     <span className="font-semibold text-[#1F5E3C]">
-                                      {val.median ?? "—"}
+                                      {formatPercent1Dec(val.median ?? "—")}
                                     </span>
                                   </div>
                                 ) : (
                                   DEFAULT_NULL_TEXT
                                 )}
+                              </td>
+                            );
+                          }
+
+                          /* ================= OTHER EXPENSES (LAMF — SAME TABLE STYLE) ================= */
+                          if (c.key === "other_expenses") {
+                            return (
+                              <td
+                                key={`${row.id}-${c.key}`}
+                                className="px-3 py-3 border border-gray-300 text-left"
+                                style={{ minWidth: "220px" }}
+                              >
+                                {val && typeof val === "object" ? (
+                                  <div className="flex flex-col">
+                                    {Object.entries(val).map(
+                                      ([label, value], index, arr) => (
+                                        <div
+                                          key={label}
+                                          className="flex flex-col"
+                                        >
+                                          {/* Label + Value */}
+                                          <div className="flex justify-between gap-4">
+                                            <span>{label}</span>
+                                            <span className="text-gray-600 text-right">
+                                              {value ?? "—"}
+                                            </span>
+                                          </div>
+
+                                          {/* Soft Divider (not after last item) */}
+                                          {index !== arr.length - 1 && (
+                                            <div
+                                              className="w-full border-t my-1"
+                                              style={{
+                                                borderColor: "rgba(0,0,0,0.12)",
+                                              }}
+                                            />
+                                          )}
+                                        </div>
+                                      )
+                                    )}
+                                  </div>
+                                ) : (
+                                  DEFAULT_NULL_TEXT
+                                )}
+                              </td>
+                            );
+                          }
+
+                          /* ================= PROCESSING FEE (LAMF — FINAL CORRECT DIVIDER POSITION) ================= */
+                          if (c.key === "processing_fee") {
+                            const raw = typeof val === "string" ? val : "";
+
+                            const lines = raw
+                              .split(/\n+/)
+                              .map((l) => l.trim())
+                              .filter(Boolean);
+
+                            const hasDigital = lines.some(
+                              (l) =>
+                                l.toLowerCase().includes("digital") &&
+                                !l.toLowerCase().includes("non")
+                            );
+
+                            const hasNonDigital = lines.some((l) =>
+                              l.toLowerCase().includes("non digital")
+                            );
+
+                            const hasMin = lines.some((l) =>
+                              l.toLowerCase().startsWith("min")
+                            );
+
+                            return (
+                              <td
+                                key={`${row.id}-${c.key}`}
+                                className="px-3 py-3 border border-gray-300 text-center"
+                                style={{ minWidth: "220px" }}
+                              >
+                                <div className="flex flex-col">
+                                  {lines.map((line, index) => {
+                                    const lower = line.toLowerCase();
+
+                                    const isDigital =
+                                      lower.includes("digital") &&
+                                      !lower.includes("non");
+
+                                    const isMin = lower.startsWith("min");
+
+                                    return (
+                                      <div
+                                        key={index}
+                                        className="flex flex-col"
+                                      >
+                                        {/* Divider ABOVE Min block (once) */}
+                                        {isMin && hasMin && (
+                                          <div
+                                            className="w-full border-t my-1"
+                                            style={{
+                                              borderColor: "rgba(0,0,0,0.12)",
+                                            }}
+                                          />
+                                        )}
+
+                                        {/* VALUE LINE — font unchanged */}
+                                        <div>{line}</div>
+
+                                        {/* Divider BETWEEN Digital → Non-Digital (AFTER Digital) */}
+                                        {isDigital &&
+                                          hasDigital &&
+                                          hasNonDigital && (
+                                            <div
+                                              className="w-full border-t my-1"
+                                              style={{
+                                                borderColor: "rgba(0,0,0,0.12)",
+                                              }}
+                                            />
+                                          )}
+                                      </div>
+                                    );
+                                  })}
+                                </div>
                               </td>
                             );
                           }
@@ -1317,8 +1464,8 @@ case "secondYear":
                             return (
                               <td
                                 key={`${row.id}-${c.key}`}
-                                className="px-5 py-4 border border-gray-300 text-center"
-                                style={{ minWidth: "260px" }}
+                                className="px-3 py-3 border border-gray-300 text-center"
+                                style={{ minWidth: "220px" }}
                               >
                                 <div className="grid grid-cols-3 text-sm">
                                   {/* Penal */}
@@ -1360,7 +1507,7 @@ case "secondYear":
                         })}
 
                         {/* Contact */}
-                        <td className="px-5 py-4 border border-gray-300 text-center">
+                        <td className="px-3 py-3 border border-gray-300 text-center">
                           <a
                             href={`https://wa.me/919930584020?text=Hi! I'm interested in LAMF by ${encodeURIComponent(
                               row.institution_name || "this institution"
