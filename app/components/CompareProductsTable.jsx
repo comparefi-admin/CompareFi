@@ -6,6 +6,32 @@ import { fetchLAS, fetchLAMF, fetchMTF } from "../../lib/fetchData";
 const renderValue = (value) =>
   value === null || value === undefined || value === "" ? "—" : value;
 
+const formatRupees = (value) => {
+    if (value === null || value === undefined || value === "") return "—";
+
+    const num =
+      typeof value === "number"
+        ? value
+        : Number(
+            String(value)
+              .replace(/₹|rs\.?|,/gi, "")
+              .trim()
+          );
+
+    if (isNaN(num)) return value;
+
+    return `₹${num.toLocaleString("en-IN")}`;
+  };
+
+  const formatPercent1Dec = (val) => {
+    if (val === null || val === undefined || val === "") return "—";
+
+    const num = parseFloat(String(val).replace("%", ""));
+    if (Number.isNaN(num)) return val;
+
+    return `${num.toFixed(1)}%`;
+  };
+  
 export default function CompareProductsTable({ productType }) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -350,12 +376,12 @@ export default function CompareProductsTable({ productType }) {
                         {row.cost_first_year ? (
                           <div className="flex flex-col items-center gap-1">
                             <div className="font-bold text-green-600 text-base">
-                              {row.cost_first_year.percent ?? "—"}
+                              {formatPercent1Dec(row.cost_first_year.percent ?? "—")}
                             </div>
                             <div className="w-full border-t border-gray-300 my-1"></div>
                             <div className="text-sm text-gray-700">
                               {row.cost_first_year.amount
-                                ? ` ${row.cost_first_year.amount.toLocaleString()}`
+                                ? ` ${formatRupees(row.cost_first_year.amount)}`
                                 : "—"}
                             </div>
                           </div>
@@ -377,12 +403,12 @@ export default function CompareProductsTable({ productType }) {
                         {row.cost_second_year ? (
                           <div className="flex flex-col items-center gap-1">
                             <div className="font-bold text-green-600 text-base">
-                              {row.cost_second_year.percent ?? "—"}
+                              {formatPercent1Dec(row.cost_second_year.percent ?? "—")}
                             </div>
                             <div className="w-full border-t border-gray-300 my-1"></div>
                             <div className="text-sm text-gray-700">
                               {row.cost_second_year.amount
-                                ? ` ${row.cost_second_year.amount.toLocaleString()}`
+                                ? ` ${formatRupees(row.cost_second_year.amount)}`
                                 : "—"}
                             </div>
                           </div>
@@ -460,12 +486,12 @@ export default function CompareProductsTable({ productType }) {
                         {row.cost_summary ? (
                           <div className="flex flex-col items-center gap-1">
                             <div className="font-bold text-green-600 text-base">
-                              {row.cost_summary.percent ?? "—"}
+                              {formatPercent1Dec(row.cost_summary.percent ?? "—")}
                             </div>
                             <div className="w-full border-t border-gray-300 my-1"></div>
                             <div className="text-sm text-gray-700">
                               {row.cost_summary.amount
-                                ? ` ${row.cost_summary.amount.toLocaleString()}`
+                                ? ` ${formatRupees(row.cost_summary.amount)}`
                                 : "—"}
                             </div>
                           </div>
