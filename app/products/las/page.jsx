@@ -360,7 +360,7 @@ export default function LASPage() {
           {[
             {
               title: "What is Loan Against Shares?",
-              text: `Loan Against Shares (LAS), a type of Loan Against Securities, is a secured overdraft facility where you pledge listed shares as collateral to borrow funds without selling them.Retain ownership, earn dividends, and access liquidity at lower rates (8-20% p.a.) than personal loans. Ideal for emergencies, business needs, or investments excluding speculative trading.`,
+              text: `Loan Against Shares (LAS), is a secured overdraft facility where you pledge listed shares as collateral to borrow funds without selling them. You retain ownership, earn dividends, and access liquidity at lower interest rates (8-20% p.a.) than personal loans. Ideal for emergencies, business needs, or investments excluding speculative trading.`,
             },
             {
               title: "Key Benefits",
@@ -388,7 +388,7 @@ export default function LASPage() {
                     personal loans are unsecured.
                   </li>
                   <li>
-                    <strong>Interest:</strong> LAS: 8–15%; Personal: 10–24%.
+                    <strong>Interest:</strong> LAS: 8–20%; Personal: 10–24%.
                   </li>
                   <li>
                     <strong>Tenure:</strong> Up to 36 months
@@ -490,9 +490,11 @@ export default function LASPage() {
               <strong> 50% funding ratio</strong> across all financial
               institutions including interest + all associated charges.
             </p>
-            <p className="mt-3 text-gray-700 text-[1rem]">
-              You don’t have to calculate APR year-wise the{" "}
-              <strong>“Overall Cost” already includes it</strong>.
+            <p className="mt-3 text-black-700 text-[1rem]">
+              We convert Year-1 and Year-2 interest rates, lender fees, and all
+              charges into <strong>a single comparable number</strong> so you
+              instantly understand which lender is{" "}
+              <strong>cheapest overall</strong>.
             </p>
           </div>
 
@@ -1685,93 +1687,122 @@ export default function LASPage() {
                           .map((l) => l.trim())
                           .filter(Boolean);
 
-                        const isDigital = (l) =>
-                          l.toLowerCase().includes("digital") &&
-                          !l.toLowerCase().includes("non");
+                        const hasMin = lines.some((l) =>
+                          l.toLowerCase().startsWith("min")
+                        );
+                        const hasMax = lines.some((l) =>
+                          l.toLowerCase().startsWith("max")
+                        );
 
-                        const isNonDigital = (l) =>
-                          l.toLowerCase().includes("non digital");
+                        const hasDigital = lines.some(
+                          (l) =>
+                            l.toLowerCase().includes("digital") &&
+                            !l.toLowerCase().includes("non")
+                        );
+                        const hasNonDigital = lines.some((l) =>
+                          l.toLowerCase().includes("non digital")
+                        );
 
-                        const isMin = (l) => l.toLowerCase().startsWith("min");
-                        const isMax = (l) => l.toLowerCase().startsWith("max");
-
-                        const isStatement = (l) =>
-                          !isDigital(l) &&
-                          !isNonDigital(l) &&
-                          !isMin(l) &&
-                          !isMax(l);
-
-                        const hasStatement = lines.some(isStatement);
-                        const hasMinMax =
-                          lines.some(isMin) || lines.some(isMax);
-                        const hasDigital = lines.some(isDigital);
-                        const hasNonDigital = lines.some(isNonDigital);
+                        const isSpecialDigitalCase =
+                          lines.length === 2 &&
+                          lines[0].startsWith("₹") &&
+                          lines[1].toLowerCase().includes("digital");
 
                         return (
                           <td
                             key={col.key}
                             className="px-5 py-4 border border-gray-300 text-center"
-                            style={{ minWidth: "200px" }}
+                            style={{ minWidth: "260px" }}
                           >
-                            <div className="flex flex-col text-sm text-gray-900 space-y-1">
+                            <div className="flex flex-col text-sm text-gray-900">
                               {lines.map((line, index) => {
-                                /* ---------- STATEMENT ---------- */
-                                if (isStatement(line)) {
-                                  return (
-                                    <div key={index}>
-                                      <div>{line}</div>
+                                const lower = line.toLowerCase();
+                                const isMin = lower.startsWith("min");
+                                const isMax = lower.startsWith("max");
+                                const isDigital =
+                                  lower.includes("digital") &&
+                                  !lower.includes("non");
+                                const isNonDigital =
+                                  lower.includes("non digital");
 
-                                      {/* Divider ONLY between statement ↔ Min/Max */}
-                                      {hasMinMax && (
-                                        <div
-                                          className="w-full border-t mt-2"
-                                          style={{
-                                            borderColor: "rgba(0,0,0,0.12)",
-                                          }}
-                                        />
+                                // ----- Split label & value -----
+                                const parts = line.split(/[:–-]/);
+                                const label = parts[0]?.trim();
+                                const value = parts.slice(1).join(":").trim();
+
+                                return (
+                                  <div key={index} className="flex flex-col">
+                                    {/* ===== STATEMENT LINE ===== */}
+                                    {!isMin &&
+                                      !isMax &&
+                                      !isDigital &&
+                                      !isNonDigital && (
+                                        <>
+                                          <div className="text-gray-900">
+                                            {line}
+                                          </div>
+
+                                          {/* Divider ONLY if Min/Max exists */}
+                                          {(hasMin || hasMax) &&
+                                            index === 0 && (
+                                              <div
+                                                className="w-full border-t my-2"
+                                                style={{
+                                                  borderColor:
+                                                    "rgba(0,0,0,0.12)",
+                                                }}
+                                              />
+                                            )}
+                                        </>
                                       )}
-                                    </div>
-                                  );
-                                }
 
-                                /* ---------- DIGITAL / NON-DIGITAL (TEXT ONLY) ---------- */
-                                if (isDigital(line) || isNonDigital(line)) {
-                                  return (
-                                    <div key={index}>
-                                      <div>{line}</div>
+                                    {/* ===== MIN / MAX (NO divider between them) ===== */}
+                                    {(isMin || isMax) && (
+                                      <div className="flex justify-between gap-4">
+                                        <span className="font-medium capitalize">
+                                          {label}
+                                        </span>
+                                        <span className="text-right">
+                                          {value}
+                                        </span>
+                                      </div>
+                                    )}
 
-                                      {/* Divider ONLY between Digital ↔ Non-Digital */}
-                                      {isDigital(line) && hasNonDigital && (
-                                        <div
-                                          className="w-full border-t mt-1"
-                                          style={{
-                                            borderColor: "rgba(0,0,0,0.12)",
-                                          }}
-                                        />
+                                    {/* ===== DIGITAL / NON-DIGITAL ===== */}
+                                    {!isSpecialDigitalCase &&
+                                      (isDigital || isNonDigital) && (
+                                        <>
+                                          <div className="flex justify-between gap-4">
+                                            <span className="font-medium">
+                                              {isDigital
+                                                ? "Digital"
+                                                : "Non Digital"}
+                                            </span>
+                                            <span className="text-right">
+                                              {value}
+                                            </span>
+                                          </div>
+
+                                          {/* Divider ONLY between Digital ↔ Non-Digital */}
+                                          {isDigital && hasNonDigital && (
+                                            <div
+                                              className="w-full border-t my-2"
+                                              style={{
+                                                borderColor: "rgba(0,0,0,0.12)",
+                                              }}
+                                            />
+                                          )}
+                                        </>
                                       )}
-                                    </div>
-                                  );
-                                }
 
-                                /* ---------- MIN / MAX (LABEL LEFT, VALUE RIGHT) ---------- */
-                                if (isMin(line) || isMax(line)) {
-                                  const [label, ...rest] = line.split(":");
-                                  const value = rest.join(":").trim();
-
-                                  return (
-                                    <div
-                                      key={index}
-                                      className="flex justify-between"
-                                    >
-                                      <span className="font-medium">
-                                        {label}
-                                      </span>
-                                      <span>{value}</span>
-                                    </div>
-                                  );
-                                }
-
-                                return null;
+                                    {/* ===== SPECIAL DIGITAL CASE (NO formatting) ===== */}
+                                    {isSpecialDigitalCase && (
+                                      <div className="text-gray-900">
+                                        {line}
+                                      </div>
+                                    )}
+                                  </div>
+                                );
                               })}
                             </div>
                           </td>
@@ -1885,7 +1916,7 @@ export default function LASPage() {
             In 2025, <strong>Mirae</strong> ranks as the most cost-efficient
             option overall.
             <strong> HDFC</strong> offers the highest LTV (65–80%), while{" "}
-            <strong>Bajaj</strong> provides the broadest approved shares list
+            <strong>Bajaj & Mirae Asset</strong> provides the broadest approved shares list
             (~1000) and the longest 7-day margin-call buffer giving borrowers
             more flexibility and lower liquidation risk.
           </p>
@@ -1952,7 +1983,7 @@ export default function LASPage() {
             </li>
             <li>
               <strong>Compare & Shortlist:</strong> Use our tables/filters for
-              interest rate, LTV (HDFC up to 80%).
+              interest rate, LTV.
             </li>
             <li>
               <strong>Gather Documents:</strong> PAN, Aadhaar, demat statement,
@@ -1983,20 +2014,19 @@ export default function LASPage() {
           </h3>
           <ul className="list-disc list-inside space-y-3 text-black leading-relaxed text-[1.05rem]">
             <li>
-              <strong>LTV Ratio:</strong> Higher LTV (HDFC 65–80%) → more
+              <strong>LTV Ratio:</strong> Choose funds that offer a higher LTV, as this allows you to borrow a larger loan amount against the same value of pledged securities.
               borrowing power.
             </li>
             <li>
-              <strong>Approved Shares:</strong> Broader lists (Tata Capital
-              ~1004+) give flexibility.
+              <strong>Approved Shares:</strong> Broader approved lists gives greater flexibility.
+
             </li>
             <li>
-              <strong>Margin Call Period:</strong> Longer (7 days - Bajaj/Mirae)
-              = more buffer time.
+              <strong>Margin Call Period:</strong> Longer periods (e.g., 7 days with certain lenders) provide more time to regularize positions.
+
             </li>
             <li>
-              <strong>Total Costs:</strong> Consider renewal & penal charges
-              (BoB ~10.23% Yr 2).
+              <strong>Total Costs:</strong> Make your decision based on the <strong>“Overall Cost”</strong> column to know the detailed cost across years to find the lenders with cheapest cost.
             </li>
           </ul>
         </div>

@@ -1138,7 +1138,7 @@ export default function MTFPage() {
     "
         >
           <h3 className="text-2xl font-bold mb-6 text-[#0D3A27]">
-            How to Apply for MTF
+            How to Apply for MTF in 2025: Step-by-Step Guide
           </h3>
 
           <ol className="list-decimal list-inside space-y-3 leading-relaxed text-[1.05rem] mb-6">
@@ -1160,22 +1160,38 @@ export default function MTFPage() {
         {/* Card 2 — Key Factors */}
         <div
           className="
-      bg-[#C0CDCF]
-      shadow-[0_16px_38px_rgba(0,0,0,0.05)]
-      backdrop-blur-xl
-      border border-[rgba(255,255,255,0.2)]
-      rounded-3xl p-10
-      transition-all duration-500
-      hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
-      hover:-translate-y-2
-    "
+    bg-[#C0CDCF]
+    shadow-[0_16px_38px_rgba(0,0,0,0.05)]
+    backdrop-blur-xl
+    border border-[rgba(255,255,255,0.2)]
+    rounded-3xl p-10
+    transition-all duration-500
+    hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
+    hover:-translate-y-2
+  "
         >
-          <h3 className="text-2xl font-bold mb-6 text-black">Key Factors</h3>
+          <h3 className="text-2xl font-bold mb-6 text-black">
+            Key Factors: Choosing the Best MTF Provider
+          </h3>
 
           <ul className="list-disc list-inside space-y-3 text-black leading-relaxed text-[1.05rem]">
-            <li>Approved stock list</li>
-            <li>Subscription & carry fees</li>
-            <li>Margin rules & auto-square-off policies</li>
+            <li>
+              <strong>Approved Stock List:</strong> Broader approved lists give
+              greater flexibility.
+            </li>
+
+            <li>
+              <strong>Margin Rules & Auto Square-Off Policies:</strong> When
+              brokers apply margin requirements that are higher than
+              exchange-prescribed norms, the effective exposure offered is lower
+              than what the exchange allows.
+            </li>
+
+            <li>
+              <strong>Total Cost:</strong> Make your decision based on the{" "}
+              <strong>“Overall Cost”</strong> column to know the detailed cost
+              across years to find the lenders with cheapest cost.
+            </li>
           </ul>
         </div>
       </section>

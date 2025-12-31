@@ -63,7 +63,7 @@ export default function Footer() {
           <div className="text-center sm:text-left">
             <h4 className="font-bold text-lg mb-4 flex items-center justify-center sm:justify-start gap-2 text-[#1e2e2b]">
               <LifeBuoy size={18} />
-              Disclaimer
+              Disclaimers
             </h4>
             <ul className="space-y-2 text-[#1e2e2b]/80">
               <li><a href="/privacy" className="hover:text-[#1e2e2b]">Privacy Policy</a></li>

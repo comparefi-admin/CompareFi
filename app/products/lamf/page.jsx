@@ -456,7 +456,7 @@ export default function LAMFPage() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
                 {[
-                  ["Interest Range", "8–18% p.a."],
+                  ["Interest Range", "8–20% p.a."],
                   ["Tenure", "Up to 36 months"],
                   ["Collateral Type", "Mutual Funds"],
                   ["Disbursal", "1-2 Days"], // ← changed here
@@ -1430,78 +1430,273 @@ export default function LAMFPage() {
                             );
                           }
 
-                          /* ================= PROCESSING FEE (LAMF — FINAL CORRECT DIVIDER POSITION) ================= */
+                          /* ================= PROCESSING FEE (LAMF — LAS STYLE MATCHED) ================= */
                           if (c.key === "processing_fee") {
-                            const raw = typeof val === "string" ? val : "";
+                            const text = typeof val === "string" ? val : "";
 
-                            const lines = raw
+                            const lines = text
                               .split(/\n+/)
                               .map((l) => l.trim())
                               .filter(Boolean);
+
+                            const hasMin = lines.some((l) =>
+                              l.toLowerCase().startsWith("min")
+                            );
+                            const hasMax = lines.some((l) =>
+                              l.toLowerCase().startsWith("max")
+                            );
 
                             const hasDigital = lines.some(
                               (l) =>
                                 l.toLowerCase().includes("digital") &&
                                 !l.toLowerCase().includes("non")
                             );
-
                             const hasNonDigital = lines.some((l) =>
                               l.toLowerCase().includes("non digital")
                             );
 
-                            const hasMin = lines.some((l) =>
-                              l.toLowerCase().startsWith("min")
-                            );
+                            // SPECIAL CASE: ₹1,499 - Digital Cases (leave untouched)
+                            const isSpecialDigitalCase =
+                              lines.length === 2 &&
+                              lines[0].startsWith("₹") &&
+                              lines[1].toLowerCase().includes("digital") &&
+                              !lines[1].toLowerCase().includes("non");
 
                             return (
                               <td
                                 key={`${row.id}-${c.key}`}
-                                className="px-3 py-3 border border-gray-300 text-center"
-                                style={{ minWidth: "220px" }}
+                                className="px-5 py-4 border border-gray-300 text-center"
+                                style={{ minWidth: "260px" }}
                               >
-                                <div className="flex flex-col">
+                                <div className="flex flex-col text-sm text-gray-900">
                                   {lines.map((line, index) => {
                                     const lower = line.toLowerCase();
 
+                                    const isMin = lower.startsWith("min");
+                                    const isMax = lower.startsWith("max");
                                     const isDigital =
                                       lower.includes("digital") &&
                                       !lower.includes("non");
+                                    const isNonDigital =
+                                      lower.includes("non digital");
 
-                                    const isMin = lower.startsWith("min");
+                                    // Split label & value
+                                    const parts = line.split(/[:–-]/);
+                                    const label = parts[0]?.trim();
+                                    const value = parts
+                                      .slice(1)
+                                      .join(":")
+                                      .trim();
+
+                                    /* ===== SPECIAL DIGITAL CASE (NO FORMATTING) ===== */
+                                    if (isSpecialDigitalCase) {
+                                      return (
+                                        <div
+                                          key={index}
+                                          className="text-gray-900"
+                                        >
+                                          {line}
+                                        </div>
+                                      );
+                                    }
 
                                     return (
                                       <div
                                         key={index}
                                         className="flex flex-col"
                                       >
-                                        {/* Divider ABOVE Min block (once) */}
-                                        {isMin && hasMin && (
-                                          <div
-                                            className="w-full border-t my-1"
-                                            style={{
-                                              borderColor: "rgba(0,0,0,0.12)",
-                                            }}
-                                          />
+                                        {/* ===== STATEMENT LINE ===== */}
+                                        {!isMin &&
+                                          !isMax &&
+                                          !isDigital &&
+                                          !isNonDigital && (
+                                            <>
+                                              <div className="text-gray-900">
+                                                {line}
+                                              </div>
+
+                                              {/* Divider ONLY if Min / Max exists */}
+                                              {(hasMin || hasMax) &&
+                                                index === 0 && (
+                                                  <div
+                                                    className="w-full border-t my-2"
+                                                    style={{
+                                                      borderColor:
+                                                        "rgba(0,0,0,0.12)",
+                                                    }}
+                                                  />
+                                                )}
+                                            </>
+                                          )}
+
+                                        {/* ===== MIN / MAX (NO divider between them) ===== */}
+                                        {(isMin || isMax) && (
+                                          <div className="flex justify-between gap-4">
+                                            <span className="font-medium capitalize">
+                                              {label}
+                                            </span>
+                                            <span className="text-right">
+                                              {value}
+                                            </span>
+                                          </div>
                                         )}
 
-                                        {/* VALUE LINE — font unchanged */}
-                                        <div>{line}</div>
+                                        {/* ===== DIGITAL / NON-DIGITAL ===== */}
+                                        {(isDigital || isNonDigital) && (
+                                          <>
+                                            <div className="flex justify-between gap-4">
+                                              <span className="font-medium">
+                                                {isDigital
+                                                  ? "Digital"
+                                                  : "Non Digital"}
+                                              </span>
+                                              <span className="text-right">
+                                                {value}
+                                              </span>
+                                            </div>
 
-                                        {/* Divider BETWEEN Digital → Non-Digital (AFTER Digital) */}
-                                        {isDigital &&
-                                          hasDigital &&
-                                          hasNonDigital && (
-                                            <div
-                                              className="w-full border-t my-1"
-                                              style={{
-                                                borderColor: "rgba(0,0,0,0.12)",
-                                              }}
-                                            />
-                                          )}
+                                            {/* Divider ONLY between Digital ↔ Non-Digital */}
+                                            {isDigital && hasNonDigital && (
+                                              <div
+                                                className="w-full border-t my-2"
+                                                style={{
+                                                  borderColor:
+                                                    "rgba(0,0,0,0.12)",
+                                                }}
+                                              />
+                                            )}
+                                          </>
+                                        )}
                                       </div>
                                     );
                                   })}
                                 </div>
+                              </td>
+                            );
+                          }
+
+                          if (
+                            ["processing_fee", "annual_maintenance"].includes(
+                              c.key
+                            )
+                          ) {
+                            const raw = typeof val === "string" ? val : "";
+
+                            // 🚨 IMPORTANT: handle null / empty explicitly
+                            if (
+                              !raw ||
+                              raw.toLowerCase().includes("not available")
+                            ) {
+                              return (
+                                <td
+                                  key={`${row.id}-${c.key}`}
+                                  className="px-3 py-3 border border-gray-300 text-center text-gray-700"
+                                  style={{ minWidth: "240px" }}
+                                >
+                                  {raw || "Data publicly not available"}
+                                </td>
+                              );
+                            }
+
+                            const lines = raw
+                              .split(/\n+/)
+                              .map((l) => l.trim())
+                              .filter(Boolean);
+
+                            const hasMin = lines.some((l) =>
+                              l.toLowerCase().startsWith("min")
+                            );
+                            const hasMax = lines.some((l) =>
+                              l.toLowerCase().startsWith("max")
+                            );
+
+                            return (
+                              <td
+                                key={`${row.id}-${c.key}`}
+                                className="px-3 py-3 border border-gray-300 text-center"
+                                style={{ minWidth: "240px" }}
+                              >
+                                <div className="flex flex-col text-sm text-gray-900 gap-1">
+                                  {lines.map((line, index) => {
+                                    const lower = line.toLowerCase();
+
+                                    const isMin = lower.startsWith("min");
+                                    const isMax = lower.startsWith("max");
+
+                                    const hasLabelSeparator = /[:–-]/.test(
+                                      line
+                                    );
+
+                                    // Split label & value safely
+                                    const parts = line.split(/[:–-]/);
+                                    const label = parts[0]?.trim();
+                                    const value = parts
+                                      .slice(1)
+                                      .join(":")
+                                      .trim();
+
+                                    /* ================= STATEMENT ================= */
+                                    if (
+                                      !isMin &&
+                                      !isMax &&
+                                      !hasLabelSeparator
+                                    ) {
+                                      return (
+                                        <div key={index}>
+                                          <div>{line}</div>
+
+                                          {/* Divider ONLY if Min/Max exists later */}
+                                          {(hasMin || hasMax) &&
+                                            index === 0 && (
+                                              <div
+                                                className="w-full border-t my-2"
+                                                style={{
+                                                  borderColor:
+                                                    "rgba(0,0,0,0.12)",
+                                                }}
+                                              />
+                                            )}
+                                        </div>
+                                      );
+                                    }
+
+                                    /* ================= LABEL : VALUE ================= */
+                                    if (hasLabelSeparator) {
+                                      return (
+                                        <div
+                                          key={index}
+                                          className="flex justify-between gap-4"
+                                        >
+                                          <span className="font-medium">
+                                            {label}
+                                          </span>
+                                          <span className="text-right">
+                                            {value}
+                                          </span>
+                                        </div>
+                                      );
+                                    }
+
+                                    return null;
+                                  })}
+                                </div>
+                              </td>
+                            );
+                          }
+
+                          /* ================= PENAL CHARGES (%) ================= */
+                          if (c.key === "penal_charges") {
+                            return (
+                              <td
+                                key={`${row.id}-${c.key}`}
+                                className="px-3 py-3 border border-gray-300 text-center"
+                                style={{ minWidth: "160px" }}
+                              >
+                                {val == null || val === ""
+                                  ? DEFAULT_NULL_TEXT
+                                  : String(val).includes("%")
+                                  ? val
+                                  : `${val}%`}
                               </td>
                             );
                           }
@@ -1711,7 +1906,7 @@ export default function LAMFPage() {
               <ol className="list-decimal list-inside space-y-3 leading-relaxed text-[1.05rem] mb-6 text-gray-800">
                 <li>
                   <strong>Select Eligible Funds:</strong> Verify mutual funds
-                  are on the lender’s approved list (via CAMS / KFintech).
+                  are on the lender’s approved list.
                 </li>
                 <li>
                   <strong>Compare Lenders:</strong> Use our tables to shortlist
@@ -1723,7 +1918,7 @@ export default function LAMFPage() {
                 </li>
                 <li>
                   <strong>Complete KYC & Lien Marking:</strong> Provide PAN,
-                  Aadhaar, MF statement, bank proof; pledge via CAMS / KFintech.
+                  Aadhaar, MF statement, bank proof; pledge marking.
                 </li>
                 <li>
                   <strong>Disbursal:</strong> Funds credited in{" "}
@@ -1739,29 +1934,35 @@ export default function LAMFPage() {
             {/* Card 3 */}
             <div
               className="bg-[#C0CDCF]
-          shadow-[0_16px_38px_rgba(0,0,0,0.05) backdrop-blur-xl border border-[rgba(255,255,255,0.2)] rounded-3xl p-6 sm:p-10 transition-all duration-500 hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)] hover:-translate-y-2"
+  shadow-[0_16px_38px_rgba(0,0,0,0.05) backdrop-blur-xl border border-[rgba(255,255,255,0.2)] rounded-3xl p-6 sm:p-10 transition-all duration-500 hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)] hover:-translate-y-2"
             >
               <h3 className="text-2xl font-bold mb-6 text-black">
                 Key Factors: Choosing the Best LAMF Provider
               </h3>
+
               <ul className="list-disc list-inside space-y-3 text-black leading-relaxed text-[1.05rem]">
                 <li>
-                  <strong>LTV Ratio:</strong> Up to <strong>90%</strong> for
-                  debt funds (example: some lenders); ~50–60% for
-                  equity-oriented funds.
+                  <strong>LTV Ratio:</strong> Choose funds that offer a higher
+                  LTV, as this allows you to borrow a larger loan amount against
+                  the same value of pledged securities.
                 </li>
+
                 <li>
-                  <strong>Approved Funds:</strong> Broader approved lists (e.g.,
-                  Tata Capital, HDFC ~1000+ funds) give greater flexibility.
+                  <strong>Approved MF:</strong> Broader approved lists give
+                  greater flexibility.
                 </li>
+
                 <li>
                   <strong>Margin Call Period:</strong> Longer periods (e.g., 7
                   days with certain lenders) provide more time to regularize
                   positions.
                 </li>
+
                 <li>
-                  <strong>Total Costs:</strong> Watch renewal & penal fees low
-                  renewal fees (e.g., SBI ~₹550) reduce long-term expense.
+                  <strong>Total Costs:</strong> Make your decision based on the{" "}
+                  <strong>“Overall Cost”</strong> column to know the
+                  detailed cost across years to find the lenders with cheapest
+                  cost.
                 </li>
               </ul>
             </div>
