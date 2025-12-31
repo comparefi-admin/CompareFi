@@ -28,7 +28,6 @@ export default function ContactPage() {
     mobile: "",
     email: "",
     product: "",
-    pan: "",
     message: "",
   });
 
@@ -64,7 +63,6 @@ export default function ContactPage() {
         mobile: "",
         email: "",
         product: "",
-        pan: "",
         message: "",
       });
     } catch (err) {
@@ -286,14 +284,6 @@ export default function ContactPage() {
                     </div>
                   </div>
                 </div>
-
-                <InputGroup
-                  icon={FileText}
-                  name="pan"
-                  placeholder="PAN Number (Optional)"
-                  value={formData.pan}
-                  onChange={handleChange}
-                />
 
                 <div className="relative group">
                   <MessageSquare className="absolute left-4 top-5 text-gray-400 w-5 h-5 group-focus-within:text-[#10B981] transition-colors" />

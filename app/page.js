@@ -42,19 +42,15 @@ import "./globals.css";
 import CompareProductsTable from "./components/CompareProductsTable";
 
 import { Button } from "@/components/ui/button";
-import {
-  Tabs,
-  TabsList,
-  TabsTrigger,
-  TabsContent,
-} from "@/components/ui/tabs";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
 const PRODUCTS = [
   {
     id: "las",
     title: "Loan Against Securities (LAS)",
-    blurb: "Unlock liquidity from your portfolio without selling core holdings.",
+    blurb:
+      "Unlock liquidity from your portfolio without selling core holdings.",
     bullets: [
       "Borrow up to 70% of eligible securities",
       "Minimal documentation",
@@ -121,7 +117,8 @@ export default function HomePage() {
         const moveX = (e.clientX - window.innerWidth / 2) * icon.speed;
         const moveY = (e.clientY - window.innerHeight / 2) * icon.speed;
         el.style.transform = `translate(${moveX}px, ${
-          moveY + Math.sin((Date.now() / 1000) * icon.floatSpeed) * icon.floatOffset
+          moveY +
+          Math.sin((Date.now() / 1000) * icon.floatSpeed) * icon.floatOffset
         }px)`;
       }
     });
@@ -137,7 +134,7 @@ export default function HomePage() {
         <div className="fixed inset-0 z-0 pointer-events-none">
           {/* Technical Grid Pattern */}
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
-          
+
           {/* Ambient Blobs */}
           <div className="absolute top-[20%] right-[-5%] w-[40vw] h-[40vw] bg-[#1F5E3C]/5 blur-[120px] rounded-full" />
           <div className="absolute bottom-[10%] left-[-10%] w-[35vw] h-[35vw] bg-[#10B981]/5 blur-[120px] rounded-full" />
@@ -150,7 +147,6 @@ export default function HomePage() {
 
         {/* CONTENT WRAPPER */}
         <main className="relative z-10 flex-grow">
-          
           {/* HERO SECTION - Keep as is, it has its own background logic */}
           <section
             id="hero"
@@ -164,34 +160,96 @@ export default function HomePage() {
             }}
           >
             {/* DOTTED BACKGROUND (LEFT + RIGHT) */}
-            <img src="/icons/Group 23 (2).svg" alt="" className="absolute bottom-[-1rem] left-[18%] w-[500px] opacity-[1] pointer-events-none rotate-[-10deg] scale-x-[-1] z-[3]" />
-            <img src="/icons/Group 23 (2).svg" alt="" className="absolute bottom-[-1rem] right-[18%] w-[500px] opacity-[1] pointer-events-none rotate-[10deg] scale-x-[-1] z-[3]" />
+            <img
+              src="/icons/Group 23 (2).svg"
+              alt=""
+              className="absolute bottom-[-1rem] left-[18%] w-[500px] opacity-[1] pointer-events-none rotate-[-10deg] scale-x-[-1] z-[3]"
+            />
+            <img
+              src="/icons/Group 23 (2).svg"
+              alt=""
+              className="absolute bottom-[-1rem] right-[18%] w-[500px] opacity-[1] pointer-events-none rotate-[10deg] scale-x-[-1] z-[3]"
+            />
 
             {/* MASK */}
-            <div className="absolute inset-0 pointer-events-none z-[15]" style={{ WebkitMaskImage: "radial-gradient(circle at center 60%, transparent 25%, black 55%)", maskImage: "radial-gradient(circle at center 60%, transparent 25%, black 55%)" }} />
+            <div
+              className="absolute inset-0 pointer-events-none z-[15]"
+              style={{
+                WebkitMaskImage:
+                  "radial-gradient(circle at center 60%, transparent 25%, black 55%)",
+                maskImage:
+                  "radial-gradient(circle at center 60%, transparent 25%, black 55%)",
+              }}
+            />
 
             <div className="mt-[-20%]"></div>
 
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="flex items-center space-x-2 mb-4 relative z-10">
+            {/* <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="flex items-center space-x-2 mb-4 relative z-10">
               <div className="bg-[#B1ED67]/20 text-[#B1ED67] px-3 py-1 rounded-full text-md font-medium">Backed by CompareFi</div>
-            </motion.div>
+            </motion.div> */}
 
-            <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-6xl sm:text-6xl md:text-7xl leading-tight tracking-tight text-white max-w-5xl relative z-10">
-              Compare Right → <span className="text-[#B1ED67]">Choose Right.</span>
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="text-6xl sm:text-6xl md:text-7xl leading-tight tracking-tight text-white max-w-5xl relative z-10"
+            >
+              Compare Right →{" "}
+              <span className="text-[#B1ED67]">Choose Right.</span>
             </motion.h1>
 
-            <motion.p initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.7 }} className="text-slate-300 mt-6 text-lg max-w-xl relative z-10">
-              No hidden charges. No jargon. No biased recommendations.<br />Just clear, side-by-side comparisons of financial products.
+            <motion.p
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.7 }}
+              className="text-slate-300 mt-6 text-lg max-w-xl relative z-10"
+            >
+              No hidden charges. No jargon. No biased recommendations.
+              <br />
+              Just clear, side by side comparisons of financial products.
             </motion.p>
 
-            <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 0.7 }} className="mt-10 relative z-10">
-              <Button size="lg" onClick={() => document.getElementById("featured")?.scrollIntoView({ behavior: "smooth" })} className="bg-[#B1ED67] hover:bg-[#9CDA59] text-black font-semibold px-8 py-4 rounded-full shadow-lg transition-all duration-300">
-                Get Started →
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.7 }}
+              className="mt-10 relative z-[30] pointer-events-auto"
+            >
+              <Button
+                size="lg"
+                onClick={() =>
+                  document
+                    .getElementById("featured")
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
+                className="green-cta pointer-events-auto"
+              >
+                <span>Get Started</span>
+
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 66 43">
+                  <polygon points="39.58,4.46 44.11,0 66,21.5 44.11,43 39.58,38.54 56.94,21.5" />
+                  <polygon points="19.79,4.46 24.32,0 46.21,21.5 24.32,43 19.79,38.54 37.15,21.5" />
+                  <polygon points="0,4.46 4.53,0 26.42,21.5 4.53,43 0,38.54 17.36,21.5" />
+                </svg>
               </Button>
             </motion.div>
 
-            <motion.div initial={{ opacity: 0, y: 60, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ delay: 0.8, duration: 0.8 }} className="absolute bottom-[-18rem] inset-x-0 flex justify-center z-20">
-              <div className="relative flex justify-center w-full max-w-[1200px] pointer-events-none" style={{ height: "900px", WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 66%)", maskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 66%)" }}>
+            <motion.div
+              initial={{ opacity: 0, y: 60, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ delay: 0.8, duration: 0.8 }}
+              className="absolute bottom-[-18rem] inset-x-0 flex justify-center z-20"
+            >
+              <div
+                className="relative flex justify-center w-full max-w-[1200px] pointer-events-none"
+                style={{
+                  height: "900px",
+                  WebkitMaskImage:
+                    "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 66%)",
+                  maskImage:
+                    "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 66%)",
+                }}
+              >
                 <div className="relative z-10 mt-[-32%] flex justify-center w-full pointer-events-auto">
                   <DisplayCards />
                 </div>
@@ -200,10 +258,10 @@ export default function HomePage() {
           </section>
 
           {/* ALL SUBSEQUENT SECTIONS NOW SHOW THE GRID BACKGROUND */}
-          
+
           <section
             id="featured"
-            className="relative z-[40] w-full bg-[#EEF1FA] bg-opacity-0 py-20 px-4 sm:px-6 lg:px-20 flex flex-col lg:flex-row justify-between items-center lg:items-start gap-10 lg:gap-0"
+            className="scroll-mt-[140px] relative z-[40] w-full bg-[#EEF1FA] bg-opacity-0 py-20 px-4 sm:px-6 lg:px-20 flex flex-col lg:flex-row justify-between items-center lg:items-start gap-10 lg:gap-0"
           >
             {/* Left Section - Title */}
             <div className="w-full lg:w-1/3 flex flex-col items-center lg:items-start text-center lg:text-left lg:pr-10">
@@ -419,13 +477,19 @@ export default function HomePage() {
                             </ul>
 
                             <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row gap-4 sm:gap-6 justify-start">
-                              <Link href={`/products/${p.id}`}>
-                                <Button
-                                  size="lg"
-                                  className="text-lg px-8 py-4 bg-[#FF5732] hover:bg-[#FF5732] w-full sm:w-auto"
+                              <Link
+                                href={`/products/${p.id}`}
+                                className="button1 inline-flex"
+                              >
+                                <span>Deep Dive</span>
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  viewBox="0 0 66 43"
                                 >
-                                  Deep Dive
-                                </Button>
+                                  <polygon points="39.58,4.46 44.11,0 66,21.5 44.11,43 39.58,38.54 56.94,21.5" />
+                                  <polygon points="19.79,4.46 24.32,0 46.21,21.5 24.32,43 19.79,38.54 37.15,21.5" />
+                                  <polygon points="0,4.46 4.53,0 26.42,21.5 4.53,43 0,38.54 17.36,21.5" />
+                                </svg>
                               </Link>
                             </div>
                           </div>
@@ -482,7 +546,7 @@ export default function HomePage() {
                   CompareFi is an independent platform built to bring
                   transparency and clarity to finance. We simplify complex
                   financial decisions by helping you compare loans, investments,
-                  and other products side by side — so you can understand true
+                  and other products side by side so you can understand true
                   costs, uncover hidden charges, and choose what’s genuinely
                   right for you. Our mission is to make financial
                   decision-making clear, confident, and fair for everyone.
@@ -547,7 +611,6 @@ export default function HomePage() {
 
               {/* CTA CONTENT */}
               <div className="relative z-10 text-center flex flex-col items-center gap-4 sm:gap-6">
-                
                 {/* Responsive Heading */}
                 <h2
                   className="
@@ -571,7 +634,7 @@ export default function HomePage() {
                     leading-relaxed
                   "
                 >
-                  Talk to us — we will help you compare options
+                  Talk to us we will help you compare options
                   <br className="hidden sm:block" />
                   and choose what saves you the most.
                 </p>
@@ -610,9 +673,8 @@ export default function HomePage() {
               </div>
             </div>
           </section>
-
         </main>
-        
+
         <Footer />
       </div>
     </TooltipProvider>

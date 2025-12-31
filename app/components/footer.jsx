@@ -51,11 +51,11 @@ export default function Footer() {
           <div className="text-center sm:text-left">
             <h4 className="font-bold text-lg mb-4 flex items-center justify-center sm:justify-start gap-2 text-[#1e2e2b]">
               <Building2 size={18} />
-              Company
+              Company And Support
             </h4>
             <ul className="space-y-2 text-[#1e2e2b]/80">
               <li><a href="/about" className="hover:text-[#1e2e2b]">About Us</a></li>
-              <li><a href="/contact" className="hover:text-[#1e2e2b]">Contact</a></li>
+              <li><a href="/contact" className="hover:text-[#1e2e2b]">Contact Us</a></li>
             </ul>
           </div>
 
@@ -63,10 +63,9 @@ export default function Footer() {
           <div className="text-center sm:text-left">
             <h4 className="font-bold text-lg mb-4 flex items-center justify-center sm:justify-start gap-2 text-[#1e2e2b]">
               <LifeBuoy size={18} />
-              Support
+              Disclaimer
             </h4>
             <ul className="space-y-2 text-[#1e2e2b]/80">
-              <li><a href="/help" className="hover:text-[#1e2e2b]">Contact Us</a></li>
               <li><a href="/privacy" className="hover:text-[#1e2e2b]">Privacy Policy</a></li>
               <li><a href="/terms" className="hover:text-[#1e2e2b]">Terms of Service</a></li>
             </ul>

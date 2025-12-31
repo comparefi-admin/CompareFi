@@ -68,33 +68,33 @@ export default function LAMFPage() {
   };
 
   // ================= PERCENT FORMATTER (LAMF) =================
-const formatPercent1Dec = (val) => {
-  if (val === null || val === undefined || val === "") return "—";
+  const formatPercent1Dec = (val) => {
+    if (val === null || val === undefined || val === "") return "—";
 
-  const num = parseFloat(String(val).replace("%", "").trim());
-  if (Number.isNaN(num)) return val;
+    const num = parseFloat(String(val).replace("%", "").trim());
+    if (Number.isNaN(num)) return val;
 
-  return `${num.toFixed(1)}%`;
-};
+    return `${num.toFixed(1)}%`;
+  };
 
-// ================= RUPEE FORMATTER (LAMF) =================
-const formatRupees = (val) => {
-  if (val === null || val === undefined || val === "") return "—";
+  // ================= RUPEE FORMATTER (LAMF) =================
+  const formatRupees = (val) => {
+    if (val === null || val === undefined || val === "") return "—";
 
-  // Handle numbers + strings like "Rs 100000", "INR 2,50,000", "₹300000"
-  const num =
-    typeof val === "number"
-      ? val
-      : parseFloat(
-          String(val)
-            .replace(/₹|rs\.?|inr|,/gi, "")
-            .trim()
-        );
+    // Handle numbers + strings like "Rs 100000", "INR 2,50,000", "₹300000"
+    const num =
+      typeof val === "number"
+        ? val
+        : parseFloat(
+            String(val)
+              .replace(/₹|rs\.?|inr|,/gi, "")
+              .trim()
+          );
 
-  if (Number.isNaN(num)) return val;
+    if (Number.isNaN(num)) return val;
 
-  return `₹${num.toLocaleString("en-IN")}`;
-};
+    return `₹${num.toLocaleString("en-IN")}`;
+  };
 
   const formatLoanAmount = (value) => {
     if (!value || typeof value !== "string") return value;
@@ -373,7 +373,7 @@ const formatRupees = (val) => {
 
               <p className="mt-6 text-lg md:text-xl text-gray-100 text-center max-w-2xl leading-relaxed">
                 Compare interest rates, LTV for debt & equity funds, and the
-                true overall cost — with clear, unbiased data to help you choose
+                true overall cost with clear, unbiased data to help you choose
                 the best LAMF provider confidently.
               </p>
             </SpotlightCard>
@@ -422,7 +422,7 @@ const formatRupees = (val) => {
                 },
                 {
                   title: "Why Choose LAMF?",
-                  text: `Ideal when you want liquidity without interrupting compounding—MF NAV volatility is lower than stocks.`,
+                  text: `Ideal when you want liquidity without interrupting compounding MF NAV volatility is lower than stocks.`,
                 },
               ].map((card, i) => (
                 <div
@@ -459,7 +459,7 @@ const formatRupees = (val) => {
                   ["Interest Range", "8–18% p.a."],
                   ["Tenure", "Up to 36 months"],
                   ["Collateral Type", "Mutual Funds"],
-                  ["Disbursal", "CAMS / KFintech"], // ← changed here
+                  ["Disbursal", "1-2 Days"], // ← changed here
                 ].map(([label, value], i) => (
                   <div
                     key={i}
@@ -499,7 +499,8 @@ const formatRupees = (val) => {
               "
               >
                 <h4 className="text-2xl font-bold mb-4 text-[#0D3A27]">
-                  How the Cost Summary Is Calculated
+                  How the Cost Summary Is Calculated{" "}
+                  <span className="text-red-500 font-bold">*</span>
                 </h4>
 
                 <p className="text-gray-800 leading-relaxed text-lg">
@@ -512,7 +513,7 @@ const formatRupees = (val) => {
                 </p>
 
                 <p className="mt-3 text-gray-700 text-[1rem]">
-                  We convert Year-1 and Year-2 interest rates, lender fees, and
+                  We convert Year 1 and Year 2 interest rates, lender fees, and
                   all charges into <strong>a single comparable number</strong>{" "}
                   so you instantly understand which lender is{" "}
                   <strong>cheapest overall</strong>.
@@ -587,10 +588,17 @@ const formatRupees = (val) => {
                     {/* 1st Year */}
                     <th
                       style={{ background: "#124434", color: "#FFFFFF" }}
-                      className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+                      className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide min-w-[140px]"
                     >
-                      <div className="flex items-center justify-center gap-2">
-                        1st Year
+                      <div className="flex items-center justify-center">
+                        <div className="leading-tight text-center">
+                          <div>1st Year</div>
+                          <div>
+                            (₹1L LAS)
+                            <span className="text-red-500 font-bold">*</span>
+                          </div>
+                        </div>
+
                         <SortButton columnKey="firstYear" />
                       </div>
                     </th>
@@ -598,10 +606,17 @@ const formatRupees = (val) => {
                     {/* 2nd Year */}
                     <th
                       style={{ background: "#124434", color: "#FFFFFF" }}
-                      className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+                      className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide min-w-[140px]"
                     >
-                      <div className="flex items-center justify-center gap-2">
-                        2nd Year
+                      <div className="flex items-center justify-center">
+                        <div className="leading-tight text-center">
+                          <div>2nd Year</div>
+                          <div>
+                            (₹1L LAS)
+                            <span className="text-red-500 font-bold">*</span>
+                          </div>
+                        </div>
+
                         <SortButton columnKey="secondYear" />
                       </div>
                     </th>
@@ -671,7 +686,7 @@ const formatRupees = (val) => {
                     {/* Contact */}
                     <th
                       style={{ background: "#124434", color: "#FFFFFF" }}
-                      className="px-3 py-3 border border-gray-300 uppercase text-sm tracking-wide"
+                      className="px-3 py-3 border border-gray-300 uppercase text-sm tracking-wide min-w-[190px]"
                     >
                       Contact
                     </th>
@@ -705,7 +720,9 @@ const formatRupees = (val) => {
                           <div className="flex flex-col items-center gap-1">
                             {/* Percent */}
                             <div className="font-semibold text-green-700 text-base">
-                              {formatPercent1Dec(row.cost_first_year.percent ?? "—")}
+                              {formatPercent1Dec(
+                                row.cost_first_year.percent ?? "—"
+                              )}
                             </div>
 
                             {/* Soft Divider Line */}
@@ -730,7 +747,9 @@ const formatRupees = (val) => {
                           <div className="flex flex-col items-center gap-1">
                             {/* Percent */}
                             <div className="font-semibold text-green-700 text-base">
-                              {formatPercent1Dec(row.cost_second_year.percent ?? "—")}
+                              {formatPercent1Dec(
+                                row.cost_second_year.percent ?? "—"
+                              )}
                             </div>
 
                             {/* Soft Divider Line */}
@@ -811,12 +830,16 @@ const formatRupees = (val) => {
                       <td className="px-3 py-3 border border-gray-300">
                         {row.interest_rate ? (
                           <div className="grid grid-cols-3 text-center text-sm">
-                            <span>{formatPercent1Dec(row.interest_rate.min ?? "—" )}</span>
+                            <span>
+                              {formatPercent1Dec(row.interest_rate.min ?? "—")}
+                            </span>
                             <span className="border-l border-r border-gray-300">
                               {formatPercent1Dec(row.interest_rate.max ?? "—")}
                             </span>
                             <span className="font-semibold text-[#1F5E3C]">
-                              {formatPercent1Dec(row.interest_rate.median ?? "—")}
+                              {formatPercent1Dec(
+                                row.interest_rate.median ?? "—"
+                              )}
                             </span>
                           </div>
                         ) : (
@@ -827,7 +850,7 @@ const formatRupees = (val) => {
                       {/* Contact Buttons */}
                       <td className="px-3 py-3 border border-gray-300 text-center">
                         <a
-                          href={`https://wa.me/919930584020?text=Hi! I’m interested in LAMF by ${encodeURIComponent(
+                          href={`https://wa.me/919082930770?text=Hi! I’m interested in LAMF by ${encodeURIComponent(
                             row.institution_name || "this institution"
                           )}`}
                           target="_blank"
@@ -865,7 +888,7 @@ const formatRupees = (val) => {
                               hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
                               transition-all duration-300 transform hover:-translate-y-0.5"
                           >
-                            <FileText className="w-4 h-4" /> Fill Enquiry
+                            <FileText className="w-4 h-4" /> Enquiry Form
                           </button>
                         </div>
                       </td>
@@ -906,7 +929,7 @@ const formatRupees = (val) => {
 
                 <p className="text-gray-800 leading-relaxed text-lg">
                   The detailed cost tables below show the complete pricing
-                  structure for every lender — including year-wise interest,
+                  structure for every lender including year-wise interest,
                   approved fund lists, loan limits, LTV levels for debt and
                   equity funds, and margin-call periods.
                 </p>
@@ -1017,7 +1040,14 @@ const formatRupees = (val) => {
                         style={{ background: "#124434", color: "#fff" }}
                       >
                         <div className="flex items-center justify-center gap-2">
-                          1st Year
+                          <div className="leading-tight text-center">
+                            <div>1st Year</div>
+                            <div>
+                              (₹1L LAS){" "}
+                              <span className="text-red-500 font-bold">*</span>
+                            </div>
+                          </div>
+
                           <SortButton columnKey="firstYear" />
                         </div>
                       </th>
@@ -1028,7 +1058,14 @@ const formatRupees = (val) => {
                         style={{ background: "#124434", color: "#fff" }}
                       >
                         <div className="flex items-center justify-center gap-2">
-                          2nd Year
+                          <div className="leading-tight text-center">
+                            <div>2nd Year</div>
+                            <div>
+                              (₹1L LAS)
+                              <span className="text-red-500 font-bold">*</span>
+                            </div>
+                          </div>
+
                           <SortButton columnKey="secondYear" />
                         </div>
                       </th>
@@ -1164,7 +1201,7 @@ const formatRupees = (val) => {
 
                       {/* Contact */}
                       <th
-                        className="px-3 py-3 border border-gray-300 uppercase text-sm tracking-wide text-center"
+                        className="px-3 py-3 border border-gray-300 uppercase text-sm tracking-wide text-center min-w-[180px]"
                         style={{ background: "#124434", color: "#fff" }}
                       >
                         Contact
@@ -1194,7 +1231,9 @@ const formatRupees = (val) => {
                             <div className="flex flex-col items-center gap-1">
                               {/* Percent */}
                               <div className="font-semibold text-green-700 text-base">
-                                {formatPercent1Dec(row.cost_first_year.percent ?? "—")}
+                                {formatPercent1Dec(
+                                  row.cost_first_year.percent ?? "—"
+                                )}
                               </div>
 
                               {/* Soft Divider Line */}
@@ -1205,7 +1244,9 @@ const formatRupees = (val) => {
 
                               {/* Amount (NO comma formatting) */}
                               <div className="text-sm text-gray-600">
-                                {formatRupees(row.cost_first_year.amount ?? "—")}
+                                {formatRupees(
+                                  row.cost_first_year.amount ?? "—"
+                                )}
                               </div>
                             </div>
                           ) : (
@@ -1219,7 +1260,9 @@ const formatRupees = (val) => {
                             <div className="flex flex-col items-center gap-1">
                               {/* Percent */}
                               <div className="font-semibold text-green-700 text-base">
-                                {formatPercent1Dec(row.cost_second_year.percent ?? "—")}
+                                {formatPercent1Dec(
+                                  row.cost_second_year.percent ?? "—"
+                                )}
                               </div>
 
                               {/* Soft Divider Line */}
@@ -1230,7 +1273,9 @@ const formatRupees = (val) => {
 
                               {/* Amount (NO comma formatting) */}
                               <div className="text-sm text-gray-600">
-                                {formatRupees(row.cost_second_year.amount ?? "—")}
+                                {formatRupees(
+                                  row.cost_second_year.amount ?? "—"
+                                )}
                               </div>
                             </div>
                           ) : (
@@ -1300,7 +1345,9 @@ const formatRupees = (val) => {
                               >
                                 {val ? (
                                   <div className="grid sm:grid-cols-2 text-sm">
-                                    <div>{formatPercent1Dec(val.debt ?? "—")}</div>
+                                    <div>
+                                      {formatPercent1Dec(val.debt ?? "—")}
+                                    </div>
                                     <div className="sm:border-l border-gray-300">
                                       {formatPercent1Dec(val.equity ?? "—")}
                                     </div>
@@ -1322,7 +1369,9 @@ const formatRupees = (val) => {
                               >
                                 {val ? (
                                   <div className="grid grid-cols-3 text-sm">
-                                    <span>{formatPercent1Dec(val.min ?? "—")}</span>
+                                    <span>
+                                      {formatPercent1Dec(val.min ?? "—")}
+                                    </span>
                                     <span className="border-l border-r border-gray-300">
                                       {formatPercent1Dec(val.max ?? "—")}
                                     </span>
@@ -1470,7 +1519,7 @@ const formatRupees = (val) => {
                                 <div className="grid grid-cols-3 text-sm">
                                   {/* Penal */}
                                   <span className="font-semibold text-gray-900">
-                                    {charges.penal ?? "—"}
+                                    {formatPercent1Dec(charges.penal ?? "—")}
                                   </span>
 
                                   {/* Default */}
@@ -1509,7 +1558,7 @@ const formatRupees = (val) => {
                         {/* Contact */}
                         <td className="px-3 py-3 border border-gray-300 text-center">
                           <a
-                            href={`https://wa.me/919930584020?text=Hi! I'm interested in LAMF by ${encodeURIComponent(
+                            href={`https://wa.me/919082930770?text=Hi! I'm interested in LAMF by ${encodeURIComponent(
                               row.institution_name || "this institution"
                             )}`}
                             target="_blank"
@@ -1547,7 +1596,7 @@ const formatRupees = (val) => {
                                                     hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
                                                     transition-all duration-300 transform hover:-translate-y-0.5"
                             >
-                              <FileText className="w-4 h-4" /> Fill Enquiry
+                              <FileText className="w-4 h-4" /> Enquiry Form
                             </button>
                           </div>
                         </td>
@@ -1587,9 +1636,9 @@ const formatRupees = (val) => {
               <p className="text-[1.15rem] mb-6">
                 CompareFi calculates the <strong>true overall cost</strong> of a
                 ₹1,00,000 LAMF (based on ₹2,00,000 pledged MF units at ~50%
-                funding) across lenders — including interest, charges, and
-                taxes. This removes the confusion around different APR
-                structures and allows you to see which lender is genuinely{" "}
+                funding) across lenders including interest, charges, and taxes.
+                This removes the confusion around different APR structures and
+                allows you to see which lender is genuinely{" "}
                 <strong>most cost-effective</strong>.
               </p>
 
@@ -1613,11 +1662,11 @@ const formatRupees = (val) => {
             {/* CTA Block */}
             <div className="mt-12 flex flex-col items-center text-center">
               <h3 className="text-3xl font-bold text-[#0A0F2C] mb-4">
-                Enquire Now — We’ll Suggest the Best LAMF Provider for You
+                Enquire Now We’ll Suggest the Best LAMF Provider for You
               </h3>
 
               <p className="text-gray-700 max-w-2xl mb-8">
-                Chat on WhatsApp or submit a short form — we’ll analyse your
+                Chat on WhatsApp or submit a short form we’ll analyse your
                 mutual funds and recommend the{" "}
                 <strong>lowest-cost LAMF option</strong> based on your
                 portfolio.
@@ -1626,7 +1675,7 @@ const formatRupees = (val) => {
               <div className="flex flex-wrap justify-center gap-6">
                 {/* WhatsApp Button */}
                 <a
-                  href="https://wa.me/919930584020?text=Hi! I need help choosing the best LAMF provider."
+                  href="https://wa.me/919082930770?text=Hi! I need help choosing the best LAMF provider."
                   target="_blank"
                   rel="noreferrer"
                   className="
@@ -1711,7 +1760,7 @@ const formatRupees = (val) => {
                   positions.
                 </li>
                 <li>
-                  <strong>Total Costs:</strong> Watch renewal & penal fees — low
+                  <strong>Total Costs:</strong> Watch renewal & penal fees low
                   renewal fees (e.g., SBI ~₹550) reduce long-term expense.
                 </li>
               </ul>
@@ -1799,7 +1848,7 @@ const formatRupees = (val) => {
             <button
               onClick={() =>
                 window.open(
-                  "https://wa.me/919930584020?text=Hi! I’m interested in learning more about LAMF options.",
+                  "https://wa.me/919082930770?text=Hi! I’m interested in learning more about LAMF options.",
                   "_blank"
                 )
               }

@@ -22,6 +22,7 @@ import { fetchLAS, DEFAULT_NULL_TEXT } from "@/lib/fetchData";
 export default function LASPage() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const WHATSAPP_NUMBER = "919082930770";
 
   // For enquiry form
   const [enquiryOpen, setEnquiryOpen] = useState(false);
@@ -343,7 +344,7 @@ export default function LASPage() {
 
           <p className="mt-6 text-lg md:text-xl text-gray-100 text-center max-w-2xl leading-relaxed">
             Compare interest rates, charges, LTV, and the true overall cost
-            across all providers — with transparent, unbiased data to help you
+            across all providers with transparent, unbiased data to help you
             choose the lowest-cost LAS option confidently.
           </p>
         </SpotlightCard>
@@ -439,7 +440,7 @@ export default function LASPage() {
               ["Interest Range", "8–20% p.a."],
               ["Tenure", "Up to 36 months"],
               ["Disbursal", "1–2 Days"],
-              ["Collateral", "Listed Shares"],
+              ["Funding Amount", "8-20%"],
             ].map(([label, value], i) => (
               <div
                 key={i}
@@ -479,17 +480,18 @@ export default function LASPage() {
     "
           >
             <h4 className="text-2xl font-bold mb-4 text-[#0D3A27]">
-              How This Summary Works
+              How This Summary Works{" "}
+              <span className="text-red-500 font-bold">*</span>
             </h4>
             <p className="text-gray-800 leading-relaxed text-lg">
               The table below shows calculations for a{" "}
               <strong>₹1,00,000 LAS over 12 months</strong>. Collateral given is{" "}
               <strong>₹2,00,000</strong> and an assumed
               <strong> 50% funding ratio</strong> across all financial
-              institutions — including interest + all associated charges.
+              institutions including interest + all associated charges.
             </p>
             <p className="mt-3 text-gray-700 text-[1rem]">
-              You don’t have to calculate APR year-wise — the{" "}
+              You don’t have to calculate APR year-wise the{" "}
               <strong>“Overall Cost” already includes it</strong>.
             </p>
           </div>
@@ -557,10 +559,17 @@ export default function LASPage() {
                 {/* 1st Year */}
                 <th
                   style={{ background: "#124434", color: "#FFFFFF" }}
-                  className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+                  className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide min-w-[160px]"
                 >
                   <div className="flex items-center justify-center">
-                    1st Year (₹1L LAS)
+                    <div className="flex flex-col items-center leading-tight">
+                      <span>1st Year</span>
+                      <span>
+                        (₹1L LAS)
+                        <span className="text-red-500 font-bold ml-0.5">*</span>
+                      </span>
+                    </div>
+
                     <SortButton columnKey="firstYear" />
                   </div>
                 </th>
@@ -568,10 +577,16 @@ export default function LASPage() {
                 {/* 2nd Year */}
                 <th
                   style={{ background: "#124434", color: "#FFFFFF" }}
-                  className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+                  className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide min-w-[160px]"
                 >
                   <div className="flex items-center justify-center">
-                    2nd Year (₹1L LAS)
+                    <div className="flex flex-col items-center leading-tight">
+                      <span>2nd Year</span>
+                      <span>
+                        (₹1L LAS)
+                        <span className="text-red-500 font-bold ml-0.5">*</span>
+                      </span>
+                    </div>
                     <SortButton columnKey="secondYear" />
                   </div>
                 </th>
@@ -592,7 +607,7 @@ export default function LASPage() {
 
                 <th
                   style={{ background: "#124434", color: "#FFFFFF" }}
-                  className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+                  className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide min-w-[160px]"
                 >
                   <div className="flex flex-col items-center gap-2">
                     <span>Loan Amount</span>
@@ -679,7 +694,7 @@ export default function LASPage() {
                 {/* Contact */}
                 <th
                   style={{ background: "#124434", color: "#FFFFFF" }}
-                  className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+                  className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide min-w-[220px]"
                 >
                   Contact
                 </th>
@@ -886,7 +901,7 @@ export default function LASPage() {
                   {/* Contact */}
                   <td className="px-5 py-4 border border-gray-300 text-center">
                     <a
-                      href={`https://wa.me/919930584020?text=Hi! I’m interested in learning more about LAS by ${encodeURIComponent(
+                      href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hi! I’m interested in learning more about LAS by ${encodeURIComponent(
                         row.institution_name || "this institution"
                       )}`}
                       target="_blank"
@@ -928,7 +943,7 @@ export default function LASPage() {
                           hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
                           transition-all duration-300 transform hover:-translate-y-0.5"
                       >
-                        <FileText className="w-4 h-4" /> Fill Enquiry
+                        <FileText className="w-4 h-4" /> Enquiry Form
                       </button>
                     </div>
                   </td>
@@ -1074,7 +1089,13 @@ export default function LASPage() {
                     className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide w-[200px]"
                   >
                     <div className="flex items-center justify-center gap-2">
-                      1st Year(₹1L LAS)
+                      <div className="leading-tight">
+                        <div>1st Year</div>
+                        <div>
+                          (₹1L LAS){" "}
+                          <span className="text-red-500 font-bold">*</span>
+                        </div>
+                      </div>
                       <SortButton columnKey="firstYear" />
                     </div>
                   </th>
@@ -1085,7 +1106,13 @@ export default function LASPage() {
                     className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide w-[200px]"
                   >
                     <div className="flex items-center justify-center gap-2">
-                      2nd Year(₹1L LAS)
+                      <div className="leading-tight">
+                        <div>2nd Year</div>
+                        <div>
+                          (₹1L LAS){" "}
+                          <span className="text-red-500 font-bold">*</span>
+                        </div>
+                      </div>
                       <SortButton columnKey="secondYear" />
                     </div>
                   </th>
@@ -1251,7 +1278,7 @@ export default function LASPage() {
                   {/* Contact */}
                   <th
                     style={{ background: "#124434", color: "#FFFFFF" }}
-                    className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+                    className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide min-w-[220px]"
                   >
                     Contact
                   </th>
@@ -1388,7 +1415,9 @@ export default function LASPage() {
                           >
                             <div className="grid grid-cols-3 text-center text-sm">
                               {/* Penal Charges */}
-                              <div>{charges.penal ?? "—"}</div>
+                              <div>
+                                {formatPercent1Dec(charges.penal ?? "—")}
+                              </div>
 
                               {/* Default Charges */}
                               <div className="border-l border-r border-gray-300">
@@ -1547,7 +1576,107 @@ export default function LASPage() {
                         );
                       }
 
-                      /* ================= PROCESSING FEE (LOGIC SAME, TABLE STYLE MATCH) ================= */
+                      /* ================= ANNUAL MAINTENANCE / RENEWAL FEES ================= */
+                      if (col.key === "annual_maintenance") {
+                        const text = typeof val === "string" ? val : "";
+
+                        const lines = text
+                          .split(/\n+/)
+                          .map((l) => l.trim())
+                          .filter(Boolean);
+
+                        const isDigital = (l) =>
+                          l.toLowerCase().includes("digital") &&
+                          !l.toLowerCase().includes("non");
+
+                        const isNonDigital = (l) =>
+                          l.toLowerCase().includes("non digital");
+
+                        const isMin = (l) => l.toLowerCase().startsWith("min");
+                        const isMax = (l) => l.toLowerCase().startsWith("max");
+
+                        const isStatement = (l) =>
+                          !isDigital(l) &&
+                          !isNonDigital(l) &&
+                          !isMin(l) &&
+                          !isMax(l);
+
+                        const hasMinMax =
+                          lines.some(isMin) || lines.some(isMax);
+                        const hasNonDigital = lines.some(isNonDigital);
+
+                        return (
+                          <td
+                            key={col.key}
+                            className="px-5 py-4 border border-gray-300 text-center"
+                            style={{ minWidth: "210px" }}
+                          >
+                            <div className="flex flex-col text-sm text-gray-900 space-y-1">
+                              {lines.map((line, index) => {
+                                /* ---------- STATEMENT ---------- */
+                                if (isStatement(line)) {
+                                  return (
+                                    <div key={index}>
+                                      <div>{line}</div>
+
+                                      {/* Divider ONLY between statement ↔ Min/Max */}
+                                      {hasMinMax && (
+                                        <div
+                                          className="w-full border-t mt-2"
+                                          style={{
+                                            borderColor: "rgba(0,0,0,0.12)",
+                                          }}
+                                        />
+                                      )}
+                                    </div>
+                                  );
+                                }
+
+                                /* ---------- DIGITAL / NON-DIGITAL (TEXT ONLY) ---------- */
+                                if (isDigital(line) || isNonDigital(line)) {
+                                  return (
+                                    <div key={index}>
+                                      <div>{line}</div>
+
+                                      {/* Divider ONLY between Digital ↔ Non-Digital */}
+                                      {isDigital(line) && hasNonDigital && (
+                                        <div
+                                          className="w-full border-t mt-1"
+                                          style={{
+                                            borderColor: "rgba(0,0,0,0.12)",
+                                          }}
+                                        />
+                                      )}
+                                    </div>
+                                  );
+                                }
+
+                                /* ---------- MIN / MAX ---------- */
+                                if (isMin(line) || isMax(line)) {
+                                  const [label, ...rest] = line.split(":");
+                                  const value = rest.join(":").trim();
+
+                                  return (
+                                    <div
+                                      key={index}
+                                      className="flex justify-between"
+                                    >
+                                      <span className="font-medium">
+                                        {label}
+                                      </span>
+                                      <span>{value}</span>
+                                    </div>
+                                  );
+                                }
+
+                                return null;
+                              })}
+                            </div>
+                          </td>
+                        );
+                      }
+
+                      /* ================= PROCESSING FEE (FINAL CLEAN VERSION) ================= */
                       if (col.key === "processing_fee") {
                         const text = typeof val === "string" ? val : "";
 
@@ -1556,64 +1685,93 @@ export default function LASPage() {
                           .map((l) => l.trim())
                           .filter(Boolean);
 
-                        const hasDigital = lines.some(
-                          (l) =>
-                            l.toLowerCase().includes("digital") &&
-                            !l.toLowerCase().includes("non")
-                        );
-                        const hasNonDigital = lines.some((l) =>
-                          l.toLowerCase().includes("non digital")
-                        );
-                        const hasMin = lines.some((l) =>
-                          l.toLowerCase().startsWith("min")
-                        );
-                        const hasMax = lines.some((l) =>
-                          l.toLowerCase().startsWith("max")
-                        );
+                        const isDigital = (l) =>
+                          l.toLowerCase().includes("digital") &&
+                          !l.toLowerCase().includes("non");
+
+                        const isNonDigital = (l) =>
+                          l.toLowerCase().includes("non digital");
+
+                        const isMin = (l) => l.toLowerCase().startsWith("min");
+                        const isMax = (l) => l.toLowerCase().startsWith("max");
+
+                        const isStatement = (l) =>
+                          !isDigital(l) &&
+                          !isNonDigital(l) &&
+                          !isMin(l) &&
+                          !isMax(l);
+
+                        const hasStatement = lines.some(isStatement);
+                        const hasMinMax =
+                          lines.some(isMin) || lines.some(isMax);
+                        const hasDigital = lines.some(isDigital);
+                        const hasNonDigital = lines.some(isNonDigital);
 
                         return (
                           <td
                             key={col.key}
                             className="px-5 py-4 border border-gray-300 text-center"
-                            style={{ minWidth: "260px" }}
+                            style={{ minWidth: "200px" }}
                           >
-                            <div className="flex flex-col text-sm text-gray-900">
+                            <div className="flex flex-col text-sm text-gray-900 space-y-1">
                               {lines.map((line, index) => {
-                                const isDigital =
-                                  line.toLowerCase().includes("digital") &&
-                                  !line.toLowerCase().includes("non");
-                                const isMin = line
-                                  .toLowerCase()
-                                  .startsWith("min");
+                                /* ---------- STATEMENT ---------- */
+                                if (isStatement(line)) {
+                                  return (
+                                    <div key={index}>
+                                      <div>{line}</div>
 
-                                return (
-                                  <div key={index} className="flex flex-col">
-                                    {/* VALUE LINE — SAME WEIGHT AS OTHER TABLE CELLS */}
-                                    <div className="text-gray-900">{line}</div>
-
-                                    {/* Divider ONLY between Digital → Non-Digital */}
-                                    {isDigital &&
-                                      hasDigital &&
-                                      hasNonDigital && (
+                                      {/* Divider ONLY between statement ↔ Min/Max */}
+                                      {hasMinMax && (
                                         <div
-                                          className="w-full border-t my-1"
+                                          className="w-full border-t mt-2"
                                           style={{
                                             borderColor: "rgba(0,0,0,0.12)",
                                           }}
                                         />
                                       )}
+                                    </div>
+                                  );
+                                }
 
-                                    {/* Divider ONLY between Min → Max */}
-                                    {isMin && hasMin && hasMax && (
-                                      <div
-                                        className="w-full border-t my-1"
-                                        style={{
-                                          borderColor: "rgba(0,0,0,0.12)",
-                                        }}
-                                      />
-                                    )}
-                                  </div>
-                                );
+                                /* ---------- DIGITAL / NON-DIGITAL (TEXT ONLY) ---------- */
+                                if (isDigital(line) || isNonDigital(line)) {
+                                  return (
+                                    <div key={index}>
+                                      <div>{line}</div>
+
+                                      {/* Divider ONLY between Digital ↔ Non-Digital */}
+                                      {isDigital(line) && hasNonDigital && (
+                                        <div
+                                          className="w-full border-t mt-1"
+                                          style={{
+                                            borderColor: "rgba(0,0,0,0.12)",
+                                          }}
+                                        />
+                                      )}
+                                    </div>
+                                  );
+                                }
+
+                                /* ---------- MIN / MAX (LABEL LEFT, VALUE RIGHT) ---------- */
+                                if (isMin(line) || isMax(line)) {
+                                  const [label, ...rest] = line.split(":");
+                                  const value = rest.join(":").trim();
+
+                                  return (
+                                    <div
+                                      key={index}
+                                      className="flex justify-between"
+                                    >
+                                      <span className="font-medium">
+                                        {label}
+                                      </span>
+                                      <span>{value}</span>
+                                    </div>
+                                  );
+                                }
+
+                                return null;
                               })}
                             </div>
                           </td>
@@ -1640,7 +1798,7 @@ export default function LASPage() {
 
                     <td className="px-5 py-4 border border-gray-300 text-center">
                       <a
-                        href={`https://wa.me/919930584020?text=Hi! I’m interested in learning more about LAS by ${encodeURIComponent(
+                        href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hi! I’m interested in learning more about LAS by ${encodeURIComponent(
                           row.institution_name || "this institution"
                         )}`}
                         target="_blank"
@@ -1679,7 +1837,7 @@ export default function LASPage() {
                           hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
                           transition-all duration-300 transform hover:-translate-y-0.5"
                         >
-                          <FileText className="w-4 h-4" /> Fill Enquiry
+                          <FileText className="w-4 h-4" /> Enquiry Form
                         </button>
                       </div>
                     </td>
@@ -1728,7 +1886,7 @@ export default function LASPage() {
             option overall.
             <strong> HDFC</strong> offers the highest LTV (65–80%), while{" "}
             <strong>Bajaj</strong> provides the broadest approved shares list
-            (~1000) and the longest 7-day margin-call buffer — giving borrowers
+            (~1000) and the longest 7-day margin-call buffer giving borrowers
             more flexibility and lower liquidation risk.
           </p>
 
@@ -1743,7 +1901,7 @@ export default function LASPage() {
         {/* CTA Block */}
         <div className="mt-12 flex flex-col items-center text-center">
           <h3 className="text-3xl font-bold text-[#0A0F2C] mb-4">
-            Enquire Now — CompareFi Does the Calculation For You
+            Enquire Now CompareFi Does the Calculation For You
           </h3>
 
           <p className="text-gray-700 max-w-2xl mb-8">
@@ -1756,7 +1914,7 @@ export default function LASPage() {
           <div className="flex flex-wrap justify-center gap-6">
             {/* WhatsApp Button */}
             <a
-              href="https://wa.me/919930584020?text=Hi! I need help choosing the best LAS provider."
+              href="https://wa.me/${WHATSAPP_NUMBER}?text=Hi! I need help choosing the best LAS provider."
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center justify-center gap-2
@@ -1833,7 +1991,7 @@ export default function LASPage() {
               ~1004+) give flexibility.
             </li>
             <li>
-              <strong>Margin Call Period:</strong> Longer (7 days — Bajaj/Mirae)
+              <strong>Margin Call Period:</strong> Longer (7 days - Bajaj/Mirae)
               = more buffer time.
             </li>
             <li>
@@ -1941,7 +2099,7 @@ export default function LASPage() {
         <button
           onClick={() =>
             window.open(
-              "https://wa.me/919930584020?text=Hi! I want help choosing the best LAS provider.",
+              `https://wa.me/${WHATSAPP_NUMBER}?text=Hi! I want help choosing the best LAS provider.`,
               "_blank"
             )
           }

@@ -7,31 +7,43 @@ const renderValue = (value) =>
   value === null || value === undefined || value === "" ? "—" : value;
 
 const formatRupees = (value) => {
-    if (value === null || value === undefined || value === "") return "—";
+  if (value === null || value === undefined || value === "") return "—";
 
-    const num =
-      typeof value === "number"
-        ? value
-        : Number(
-            String(value)
-              .replace(/₹|rs\.?|,/gi, "")
-              .trim()
-          );
+  const num =
+    typeof value === "number"
+      ? value
+      : Number(
+          String(value)
+            .replace(/₹|rs\.?|,/gi, "")
+            .trim()
+        );
 
-    if (isNaN(num)) return value;
+  if (isNaN(num)) return value;
+  return `₹${num.toLocaleString("en-IN")}`;
+};
 
-    return `₹${num.toLocaleString("en-IN")}`;
-  };
+const formatPercent1Dec = (val) => {
+  if (val === null || val === undefined || val === "") return "—";
+  const num = parseFloat(String(val).replace("%", ""));
+  if (Number.isNaN(num)) return val;
+  return `${num.toFixed(1)}%`;
+};
 
-  const formatPercent1Dec = (val) => {
-    if (val === null || val === undefined || val === "") return "—";
+const getNumericAmount = (obj) => {
+  if (!obj || obj.amount === null || obj.amount === undefined) return Infinity;
 
-    const num = parseFloat(String(val).replace("%", ""));
-    if (Number.isNaN(num)) return val;
+  const num =
+    typeof obj.amount === "number"
+      ? obj.amount
+      : Number(
+          String(obj.amount)
+            .replace(/₹|rs\.?|,/gi, "")
+            .trim()
+        );
 
-    return `${num.toFixed(1)}%`;
-  };
-  
+  return Number.isNaN(num) ? Infinity : num;
+};
+
 export default function CompareProductsTable({ productType }) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -96,7 +108,26 @@ export default function CompareProductsTable({ productType }) {
           filterNames.includes((r.name || "").trim().toLowerCase())
         );
 
-        setData(filtered);
+        // ✅ DEFAULT ASCENDING SORT
+        const sorted = [...filtered].sort((a, b) => {
+          if (type === "las" || type === "lamf") {
+            return (
+              getNumericAmount(a.cost_first_year) -
+              getNumericAmount(b.cost_first_year)
+            );
+          }
+
+          if (type === "mtf") {
+            return (
+              getNumericAmount(a.cost_summary) -
+              getNumericAmount(b.cost_summary)
+            );
+          }
+
+          return 0;
+        });
+
+        setData(sorted);
       } catch (err) {
         console.error("Comparison Table Error:", err);
       } finally {
@@ -209,7 +240,7 @@ export default function CompareProductsTable({ productType }) {
         </h2>
       </div>
 
-      <div className=" rounded-lg overflow-x-auto">
+      <div className="rounded-2xl overflow-hidden border border-gray-200/80">
         <table className="w-full divide-y divide-gray-200 text-sm text-center">
           <thead>
             <tr>
@@ -229,7 +260,14 @@ export default function CompareProductsTable({ productType }) {
                         className="px-4 py-3 border-r leading-tight min-w-[150px] highlight-head"
                       >
                         <div>~Overall Cost</div>
-                        <div>over 1 lakh LAS</div>
+
+                        <div>
+                          over 1 lakh LAS
+                          <span className="text-red-500 font-bold ml-0.5">
+                            *
+                          </span>
+                        </div>
+
                         <div className="text-xs mt-1">(1st Year Cost)</div>
                       </th>
 
@@ -238,7 +276,12 @@ export default function CompareProductsTable({ productType }) {
                         className="px-4 py-3 border-r leading-tight min-w-[150px] highlight-head"
                       >
                         <div>~Overall Cost</div>
-                        <div>over 1 lakh LAS</div>
+                        <div>
+                          over 1 lakh LAS
+                          <span className="text-red-500 font-bold ml-0.5">
+                            *
+                          </span>
+                        </div>
                         <div className="text-xs mt-1">(2nd Year Cost)</div>
                       </th>
                     </>
@@ -251,7 +294,12 @@ export default function CompareProductsTable({ productType }) {
                         className="px-4 py-3 border-r leading-tight highlight-head"
                       >
                         <div>~Overall Cost</div>
-                        <div>over 1 lakh LAMF**</div>
+                        <div>
+                          over 1 lakh LAMF
+                          <span className="text-red-500 font-bold ml-0.5">
+                            *
+                          </span>
+                        </div>
                         <div className="text-xs mt-1">(1st Year Cost)</div>
                       </th>
 
@@ -260,7 +308,12 @@ export default function CompareProductsTable({ productType }) {
                         className="px-4 py-3 border-r leading-tight highlight-head"
                       >
                         <div>~Overall Cost</div>
-                        <div>over 1 lakh LAMF**</div>
+                        <div>
+                          over 1 lakh LAMF
+                          <span className="text-red-500 font-bold ml-0.5">
+                            *
+                          </span>
+                        </div>
                         <div className="text-xs mt-1">(2nd Year Cost)</div>
                       </th>
                     </>
@@ -270,7 +323,7 @@ export default function CompareProductsTable({ productType }) {
                     style={{ background: "#124434", color: "#FFF" }}
                     className="px-4 py-3 border-r"
                   >
-                    Approved Assets
+                    {type === "lamf" ? "Approved MF" : "Approved Shares"}
                   </th>
 
                   <th
@@ -317,7 +370,10 @@ export default function CompareProductsTable({ productType }) {
                   >
                     <div>~Overall MTF Cost of</div>
                     <div className="font-semibold">5 lakh</div>
-                    <div className="text-xs">(1st Year Cost)***</div>
+                    <div className="text-xs">
+                      (1st Year Cost)
+                      <span className="text-red-500 font-bold ml-0.5">*</span>
+                    </div>
                   </th>
 
                   <th
@@ -376,7 +432,9 @@ export default function CompareProductsTable({ productType }) {
                         {row.cost_first_year ? (
                           <div className="flex flex-col items-center gap-1">
                             <div className="font-bold text-green-600 text-base">
-                              {formatPercent1Dec(row.cost_first_year.percent ?? "—")}
+                              {formatPercent1Dec(
+                                row.cost_first_year.percent ?? "—"
+                              )}
                             </div>
                             <div className="w-full border-t border-gray-300 my-1"></div>
                             <div className="text-sm text-gray-700">
@@ -403,12 +461,16 @@ export default function CompareProductsTable({ productType }) {
                         {row.cost_second_year ? (
                           <div className="flex flex-col items-center gap-1">
                             <div className="font-bold text-green-600 text-base">
-                              {formatPercent1Dec(row.cost_second_year.percent ?? "—")}
+                              {formatPercent1Dec(
+                                row.cost_second_year.percent ?? "—"
+                              )}
                             </div>
                             <div className="w-full border-t border-gray-300 my-1"></div>
                             <div className="text-sm text-gray-700">
                               {row.cost_second_year.amount
-                                ? ` ${formatRupees(row.cost_second_year.amount)}`
+                                ? ` ${formatRupees(
+                                    row.cost_second_year.amount
+                                  )}`
                                 : "—"}
                             </div>
                           </div>
@@ -486,7 +548,9 @@ export default function CompareProductsTable({ productType }) {
                         {row.cost_summary ? (
                           <div className="flex flex-col items-center gap-1">
                             <div className="font-bold text-green-600 text-base">
-                              {formatPercent1Dec(row.cost_summary.percent ?? "—")}
+                              {formatPercent1Dec(
+                                row.cost_summary.percent ?? "—"
+                              )}
                             </div>
                             <div className="w-full border-t border-gray-300 my-1"></div>
                             <div className="text-sm text-gray-700">
@@ -532,13 +596,25 @@ export default function CompareProductsTable({ productType }) {
         </table>
       </div>
 
-      <div className="text-center mt-6">
+      <div className="text-center mt-6 flex flex-col items-center gap-3">
         <a
           href={`/products/${type}`}
           className="px-6 py-2 bg-green-600 hover:bg-green-700 text-white rounded-full font-semibold text-sm tracking-wide"
         >
           View All {productType.toUpperCase()}
         </a>
+
+        {/* --------- EXPLANATORY NOTE --------- */}
+        <p className="max-w-3xl text-xs md:text-sm text-gray-600 leading-relaxed text-center">
+          {type === "las" &&
+            "*Example calculation is based on: Rs. 1,00,000 LAS position held for 12 months. Collateral given is Rs. 2,00,000 LAS and assumed 50% funding across Financial Institutions."}
+
+          {type === "lamf" &&
+            "*Example calculation is based on: Rs. 1,00,000 LAMF position held for 12 months. Collateral given is Rs. 2,00,000 LAMF and assumed 50% funding across Financial Institutions."}
+
+          {type === "mtf" &&
+            "*Example calculation is based on: Rs. 5,00,000 Reliance position held for 12 months, collateral of Rs. 4,00,000 in approved shares, zero cash collateral and broker specific haircuts/charges including GST."}
+        </p>
       </div>
     </div>
   );

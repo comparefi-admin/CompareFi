@@ -4,17 +4,11 @@ import React, { useEffect, useState } from "react";
 import { X, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-export default function EnquiryModal({
-  open,
-  onClose,
-  product,
-  institution,
-}) {
+export default function EnquiryModal({ open, onClose, product, institution }) {
   const [formData, setFormData] = useState({
     name: "",
     mobile: "",
     email: "",
-    pan: "",
     message: "",
   });
 
@@ -61,43 +55,43 @@ export default function EnquiryModal({
     setLoading(true);
 
     try {
-    const res = await fetch("/api/contact", {
+      const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-        ...formData,
-        product,
-        institution,
-        source: "comparison-table",
+          ...formData,
+          product,
+          institution,
+          source: "comparison-table",
         }),
-    });
+      });
 
-    let result = null;
-    const text = await res.text();
+      let result = null;
+      const text = await res.text();
 
-    try {
+      try {
         result = text ? JSON.parse(text) : null;
-    } catch {
+      } catch {
         throw new Error(
-        "Service is temporarily unavailable. Please try again later."
+          "Service is temporarily unavailable. Please try again later."
         );
-    }
+      }
 
-    if (!res.ok) {
+      if (!res.ok) {
         throw new Error(
-        result?.error ||
+          result?.error ||
             "Unable to send enquiry right now. Please try again later."
         );
-    }
+      }
 
-    setSuccess(true);
+      setSuccess(true);
     } catch (err) {
-    setError(
+      setError(
         err.message ||
-        "Something went wrong while sending your enquiry. Please try again."
-    );
+          "Something went wrong while sending your enquiry. Please try again."
+      );
     } finally {
-    setLoading(false);
+      setLoading(false);
     }
   };
 
@@ -195,7 +189,7 @@ export default function EnquiryModal({
               required
             />
 
-            {/* PAN (optional) */}
+            {/* PAN (optional)
             <input
               type="text"
               name="pan"
@@ -203,7 +197,7 @@ export default function EnquiryModal({
               value={formData.pan}
               onChange={handleChange}
               className="w-full p-4 rounded-xl border focus:ring-2 focus:ring-green-600"
-            />
+            /> */}
 
             {/* Message */}
             <textarea

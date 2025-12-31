@@ -224,7 +224,7 @@ export default function MTFPage() {
 
           <p className="mt-6 text-lg md:text-xl text-gray-100 text-center max-w-2xl leading-relaxed">
             Compare margin requirements, approved stocks, interest slabs and the
-            true overall annual MTF cost — explained simply with transparent,
+            true overall annual MTF cost explained simply with transparent,
             unbiased data.
           </p>
         </SpotlightCard>
@@ -358,6 +358,7 @@ export default function MTFPage() {
           >
             <h4 className="text-2xl font-bold mb-4 text-[#0D3A27]">
               Before Cost Summary
+              <span className="text-red-500 font-bold">*</span>
             </h4>
 
             <p className="text-gray-800 leading-relaxed text-lg">
@@ -436,6 +437,7 @@ export default function MTFPage() {
                 >
                   <div className="flex items-center justify-center gap-2">
                     Cost Summary
+                    <span className="text-red-500 font-bold">*</span>
                     <SortButton columnKey="cost_summary" />
                   </div>
                 </th>
@@ -488,7 +490,7 @@ export default function MTFPage() {
                 {/* Contact */}
                 <th
                   style={{ background: "#124434", color: "#FFFFFF" }}
-                  className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
+                  className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide min-w-[200px]"
                 >
                   Contact
                 </th>
@@ -588,7 +590,7 @@ export default function MTFPage() {
                   {/* Contact */}
                   <td className="px-5 py-4 border border-gray-300 text-center">
                     <a
-                      href={`https://wa.me/919930584020?text=Hi! I’m interested in MTF by ${encodeURIComponent(
+                      href={`https://wa.me/919082930770?text=Hi! I’m interested in MTF by ${encodeURIComponent(
                         row.broker_name || "this broker"
                       )}`}
                       target="_blank"
@@ -629,7 +631,7 @@ export default function MTFPage() {
                                               hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
                                               transition-all duration-300 transform hover:-translate-y-0.5"
                       >
-                        <FileText className="w-4 h-4" /> Fill Enquiry
+                        <FileText className="w-4 h-4" /> Enquiry Form
                       </button>
                     </div>
                   </td>
@@ -712,8 +714,8 @@ export default function MTFPage() {
 
             <p className="mt-4 text-gray-700 text-[1rem]">
               This section lets advanced traders compare risk rules, operational
-              experiences, and hidden cost components — offering full
-              transparency into how each MTF provider operates.
+              experiences, and hidden cost components offering full transparency
+              into how each MTF provider operates.
             </p>
 
             <p className="mt-3 text-gray-700 text-[1rem]">
@@ -788,7 +790,8 @@ export default function MTFPage() {
                   className="px-5 py-4 border border-gray-300 uppercase text-sm tracking-wide"
                 >
                   <div className="flex items-center justify-center gap-2">
-                    Cost Summary
+                    Cost Summary{" "}
+                    <span className="text-red-500 font-bold">*</span>
                     <SortButton columnKey="cost_summary" />
                   </div>
                 </th>
@@ -975,7 +978,7 @@ export default function MTFPage() {
                   {/* Contact */}
                   <td className="px-5 py-4 border border-gray-300 text-center">
                     <a
-                      href={`https://wa.me/919930584020?text=Hi! I’m interested in learning more about MTF by ${encodeURIComponent(
+                      href={`https://wa.me/919082930770?text=Hi! I’m interested in learning more about MTF by ${encodeURIComponent(
                         row.broker_name || "this broker"
                       )}`}
                       target="_blank"
@@ -1014,7 +1017,7 @@ export default function MTFPage() {
                                               hover:shadow-[0_16px_38px_rgba(0,0,0,0.26)]
                                               transition-all duration-300 transform hover:-translate-y-0.5"
                       >
-                        <FileText className="w-4 h-4" /> Fill Enquiry
+                        <FileText className="w-4 h-4" /> Enquiry Form
                       </button>
                     </div>
                   </td>
@@ -1056,9 +1059,9 @@ export default function MTFPage() {
           </p>
 
           <p className="text-[1.15rem] mb-6">
-            CompareFi simplifies this complexity by converting all charges —
+            CompareFi simplifies this complexity by converting all charges
             subscription, interest slabs, carry fees, pledging charges and
-            operational costs — into one{" "}
+            operational costs into one{" "}
             <strong>single comparable yearly cost</strong> for the same notional
             funded exposure. This allows you to understand instantly which
             broker is most cost-efficient for your trading style.
@@ -1069,7 +1072,7 @@ export default function MTFPage() {
             <strong>margin requirements</strong> (affecting usable leverage),
             <strong>approved stocks lists</strong>, auto square-off policies,
             and penalty structures. These differences influence not just cost
-            but also risk and convenience — especially for active positional
+            but also risk and convenience especially for active positional
             traders.
           </p>
 
@@ -1084,7 +1087,7 @@ export default function MTFPage() {
         {/* CTA Block */}
         <div className="mt-12 flex flex-col items-center text-center">
           <h3 className="text-3xl font-bold text-[#0A0F2C] mb-4">
-            Enquire Now — Get a Personalised MTF Suggestion
+            Enquire Now Get a Personalised MTF Suggestion
           </h3>
 
           <p className="text-gray-700 max-w-2xl mb-8">
@@ -1097,7 +1100,7 @@ export default function MTFPage() {
           <div className="flex flex-wrap justify-center gap-6">
             {/* WhatsApp Button */}
             <a
-              href="https://wa.me/919930584020?text=Hi! I need help choosing the best MTF provider."
+              href="https://wa.me/919082930770?text=Hi! I need help choosing the best MTF provider."
               target="_blank"
               rel="noreferrer"
               className="
@@ -1280,7 +1283,7 @@ export default function MTFPage() {
         </p>
 
         <a
-          href="https://wa.me/919930584020?text=Hi!%20I%20am%20interested%20in%20MTF%20options"
+          href="https://wa.me/919082930770?text=Hi!%20I%20am%20interested%20in%20MTF%20options"
           target="_blank"
           rel="noreferrer"
           className="
