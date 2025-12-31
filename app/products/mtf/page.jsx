@@ -964,6 +964,8 @@ export default function MTFPage() {
                           ? `~ ${v} Stocks`
                           : colKey === "unpaid_mtf_interest"
                           ? `${v}%`
+                          : colKey === "feedback_rating"
+                          ? `${v}⭐`
                           : typeof v === "object"
                           ? Object.entries(v).map(([k, val], j) => (
                               <div key={j}>

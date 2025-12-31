@@ -104,23 +104,23 @@ export default function AboutPage() {
           >
             <div className="grid lg:grid-cols-2 gap-0">
               {/* Image Side */}
-              <div className="relative h-[400px] lg:h-auto overflow-hidden group">
-                {/* 
-                    NOTE: Ensure 'het.jpg' is high res. 
-                    Added a slight zoom effect on hover.
-                 */}
+              <div className="relative w-full aspect-[4/5] sm:aspect-square md:aspect-video lg:aspect-auto lg:h-full overflow-hidden group">
                 <Image
                   src={Het}
                   alt="Het Doshi - Founder"
-                  className="object-cover object-[100%_center] w-full h-full transition-transform duration-1000 group-hover:scale-105 filter grayscale-[20%] group-hover:grayscale-0"
+                  fill
+                  priority
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover object-[100%_center] transition-transform duration-1000 group-hover:scale-105 filter grayscale-[20%] group-hover:grayscale-0"
                   placeholder="blur"
                 />
+                {/* Overlay Gradients */}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0A0F2C]/80 via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-[#0A0F2C]/5" />
 
                 {/* Floating Name Tag */}
                 <div className="absolute bottom-6 left-6 text-white z-10">
-                  <h3 className="text-3xl font-bold">Het Doshi</h3>
-                  <p className="text-green-300 font-medium tracking-wide">
+                  <h3 className="text-2xl sm:text-3xl font-bold">Het Doshi</h3>
+                  <p className="text-green-300 text-sm sm:text-base font-medium tracking-wide">
                     Chartered Accountant & Founder
                   </p>
                 </div>
@@ -156,15 +156,12 @@ export default function AboutPage() {
                     {" "}
                     "The industry is complex by design."
                   </span>
-                  
                 </p>
 
                 <p className="text-gray-600 text-lg leading-relaxed mb-8">
-                  My goal isn't just to compare rates, it's to decode the fine
-                  print.
-                  <br></br>
-                  CompareFi is built on the belief that financial transparency
-                  shouldn't be a luxury; it should be the standard.
+                  My goal is to bring clarity to financial decisions by
+                  identifying hidden costs, critical caveats, and overlooked
+                  terms so users can make truly informed choices.
                 </p>
 
                 <div className="flex items-center gap-4 pt-6 border-t border-gray-200">
@@ -204,7 +201,7 @@ export default function AboutPage() {
                 <p className="text-gray-300 leading-relaxed text-lg max-w-xl">
                   Financial products are often wrapped in jargon. Hidden
                   charges, floating rates, and opaque terms make it impossible
-                  for a regular borrower  to know the true cost of borrowing.
+                  for a regular borrower to know the true cost of borrowing.
                 </p>
               </div>
             </SpotlightCard>
