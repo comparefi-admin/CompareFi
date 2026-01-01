@@ -608,13 +608,13 @@ export default function CompareProductsTable({ productType }) {
         <p className="max-w-3xl text-xs md:text-sm text-gray-600 leading-relaxed text-center">
   <span className="text-red-500 font-bold">*</span>
   {type === "las" &&
-    "Example calculation is based on: Rs. 1,00,000 LAS position held for 12 months. Collateral given is Rs. 2,00,000 LAS and assumed 50% funding across Financial Institutions."}
+    "Example calculation is based on: ₹1,00,000 LAS position held for 12 months. Collateral given is ₹2,00,000 LAS and assumed 50% funding across Financial Institutions."}
 
   {type === "lamf" &&
-    "Example calculation is based on: Rs. 1,00,000 LAMF position held for 12 months. Collateral given is Rs. 2,00,000 LAMF and assumed 50% funding across Financial Institutions."}
+    "Example calculation is based on: ₹1,00,000 LAMF position held for 12 months. Collateral given is ₹2,00,000 LAMF and assumed 50% funding across Financial Institutions."}
 
   {type === "mtf" &&
-    "Example calculation is based on: Rs. 5,00,000 Reliance position held for 12 months, collateral of Rs. 4,00,000 in approved shares, zero cash collateral and broker specific haircuts/charges including GST."}
+    "Example calculation is based on: ₹5,00,000 Reliance position held for 12 months, collateral of ₹4,00,000 in approved shares, zero cash collateral and broker specific haircuts/charges including GST."}
 </p>
 
       </div>
