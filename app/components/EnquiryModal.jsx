@@ -189,16 +189,6 @@ export default function EnquiryModal({ open, onClose, product, institution }) {
               required
             />
 
-            {/* PAN (optional)
-            <input
-              type="text"
-              name="pan"
-              placeholder="PAN (Optional)"
-              value={formData.pan}
-              onChange={handleChange}
-              className="w-full p-4 rounded-xl border focus:ring-2 focus:ring-green-600"
-            /> */}
-
             {/* Message */}
             <textarea
               name="message"

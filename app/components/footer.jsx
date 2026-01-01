@@ -66,8 +66,8 @@ export default function Footer() {
               Disclaimers
             </h4>
             <ul className="space-y-2 text-[#1e2e2b]/80">
-              <li><a href="/privacy" className="hover:text-[#1e2e2b]">Privacy Policy</a></li>
-              <li><a href="/terms" className="hover:text-[#1e2e2b]">Terms of Service</a></li>
+              <li><a href="/" className="hover:text-[#1e2e2b]">Privacy Policy</a></li>
+              <li><a href="/" className="hover:text-[#1e2e2b]">Terms of Service</a></li>
             </ul>
           </div>
 
