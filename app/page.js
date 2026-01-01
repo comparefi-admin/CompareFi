@@ -643,7 +643,7 @@ export default function HomePage() {
                 <button
                   onClick={() => {
                     window.open(
-                      "https://wa.me/919930584020?text=Hi! I would like to know more about your financial products and get help choosing the best option.",
+                      "https://wa.me/919082930770?text=Hi! I would like to know more about your financial products and get help choosing the best option.",
                       "_blank"
                     );
                   }}
