@@ -147,6 +147,20 @@ export default function HomePage() {
 
         {/* CONTENT WRAPPER */}
         <main className="relative z-10 flex-grow">
+          <h1 className="sr-only">
+            CompareFi – Compare LAS, LAMF & Financial Products in India
+          </h1>
+
+          <section className="sr-only">
+            <p>
+              CompareFi is a financial comparison platform that helps users
+              compare Loan Against Shares (LAS), Loan Against Mutual Funds
+              (LAMF), Margin Trading Facility (MTF) and other financial products
+              in India. Compare interest rates, charges, eligibility and
+              features side by side.
+            </p>
+          </section>
+
           {/* HERO SECTION - Keep as is, it has its own background logic */}
           <section
             id="hero"

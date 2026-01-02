@@ -2,8 +2,21 @@ import './globals.css';
 import { Inter, Work_Sans } from "next/font/google";
 
 export const metadata = {
-  title: 'CompareFi - Compare Financial Products',
-  description: 'Compare credit cards, savings accounts, loans, and more. Find the best financial products for your needs.',
+  title: "CompareFi – Compare LAS, LAMF & Financial Products in India",
+  description:
+    "CompareFi is an independent financial comparison platform to compare Loan Against Shares (LAS), Loan Against Mutual Funds (LAMF), Margin Trading Facility (MTF) and more in India.",
+  keywords: [
+    "CompareFi",
+    "compare loans India",
+    "loan against shares",
+    "loan against mutual funds",
+    "LAS comparison",
+    "LAMF comparison",
+    "MTF comparison",
+  ],
+  alternates: {
+    canonical: "https://comparefi.in",
+  },
 };
 
 export const workSans = Work_Sans({
@@ -20,7 +33,22 @@ export const inter = Inter({
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${workSans.variable} ${inter.variable}`}>
+    <html lang="en">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "CompareFi",
+              url: "https://comparefi.in",
+              description:
+                "Independent financial comparison platform for LAS, LAMF and investment products in India",
+            }),
+          }}
+        />
+      </head>
       <body>{children}</body>
     </html>
   );
