@@ -190,9 +190,10 @@ export default function HomePage() {
               className="absolute inset-0 pointer-events-none z-[15]"
               style={{
                 WebkitMaskImage:
-                  "radial-gradient(circle at center 60%, transparent 25%, black 55%)",
+                  "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 70%)",
                 maskImage:
-                  "radial-gradient(circle at center 60%, transparent 25%, black 55%)",
+                  "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 70%)",
+
               }}
             />
 
@@ -203,50 +204,69 @@ export default function HomePage() {
             </motion.div> */}
 
             <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="text-6xl sm:text-6xl md:text-7xl leading-tight tracking-tight text-white max-w-5xl relative z-10"
-            >
-              Compare Right →{" "}
-              <span className="text-[#B1ED67]">Choose Right.</span>
-            </motion.h1>
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="
+              text-[clamp(2.25rem,5.2vw,4.5rem)]
+              leading-[1.08]
+              tracking-tight
+              text-white
+              max-w-[clamp(22rem,85vw,64rem)]
+              relative z-10
+            "
+          >
+            Compare Right →{" "}
+            <span className="text-[#B1ED67]">Choose Right.</span>
+          </motion.h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.7 }}
-              className="text-slate-300 mt-6 text-lg max-w-xl relative z-10"
-            >
-              No hidden charges. No jargon. No biased recommendations.
-              <br />
-              Just clear, side by side comparisons of financial products.
-            </motion.p>
+<motion.p
+  initial={{ opacity: 0, y: 30 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ delay: 0.3, duration: 0.7 }}
+  className="
+    text-slate-300
+    mt-[clamp(0.75rem,2vw,1.5rem)]
+    text-[clamp(0.95rem,1.7vw,1.125rem)]
+    leading-relaxed
+    max-w-[clamp(18rem,70vw,36rem)]
+    relative z-10
+  "
+>
+  No hidden charges. No jargon. No biased recommendations.
+  <br />
+  Just clear, side by side comparisons of financial products.
+</motion.p>
 
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.7 }}
-              className="mt-10 relative z-[30] pointer-events-auto"
-            >
-              <Button
-                size="lg"
-                onClick={() =>
-                  document
-                    .getElementById("featured")
-                    ?.scrollIntoView({ behavior: "smooth" })
-                }
-                className="green-cta pointer-events-auto"
-              >
-                <span>Get Started</span>
+<motion.div
+  initial={{ opacity: 0, y: 30 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ delay: 0.5, duration: 0.7 }}
+  className="
+    mt-[clamp(1.5rem,4vw,2.5rem)]
+    relative z-[30]
+    pointer-events-auto
+  "
+>
+  <Button
+    size="lg"
+    onClick={() =>
+      document
+        .getElementById("featured")
+        ?.scrollIntoView({ behavior: "smooth" })
+    }
+    className="green-cta pointer-events-auto"
+  >
+    <span>Get Started</span>
 
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 66 43">
-                  <polygon points="39.58,4.46 44.11,0 66,21.5 44.11,43 39.58,38.54 56.94,21.5" />
-                  <polygon points="19.79,4.46 24.32,0 46.21,21.5 24.32,43 19.79,38.54 37.15,21.5" />
-                  <polygon points="0,4.46 4.53,0 26.42,21.5 4.53,43 0,38.54 17.36,21.5" />
-                </svg>
-              </Button>
-            </motion.div>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 66 43">
+      <polygon points="39.58,4.46 44.11,0 66,21.5 44.11,43 39.58,38.54 56.94,21.5" />
+      <polygon points="19.79,4.46 24.32,0 46.21,21.5 24.32,43 19.79,38.54 37.15,21.5" />
+      <polygon points="0,4.46 4.53,0 26.42,21.5 4.53,43 0,38.54 17.36,21.5" />
+    </svg>
+  </Button>
+</motion.div>
+
 
             <motion.div
               initial={{ opacity: 0, y: 60, scale: 0.95 }}
@@ -264,7 +284,7 @@ export default function HomePage() {
                     "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 66%)",
                 }}
               >
-                <div className="relative z-10 mt-[-32%] flex justify-center w-full pointer-events-auto">
+                <div className="relative z-10 mt-[-10%] flex justify-center w-full pointer-events-auto">
                   <DisplayCards />
                 </div>
               </div>
