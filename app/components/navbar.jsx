@@ -62,7 +62,7 @@ export default function Navbar() {
                 rounded-full
                 bg-white/60 backdrop-blur-md
                 border border-white/40
-                shadow-lg
+                shadow-lgg
                 transition-all duration-300
                 hover:bg-white/70
               "
