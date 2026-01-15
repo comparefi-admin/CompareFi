@@ -15,7 +15,7 @@ export const metadata = {
     "MTF comparison",
   ],
   alternates: {
-    canonical: "https://comparefi.in",
+    canonical: "https://www.comparefi.in",
   },
 };
 

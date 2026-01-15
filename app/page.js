@@ -162,115 +162,61 @@ export default function HomePage() {
           </section>
 
           {/* HERO SECTION - Keep as is, it has its own background logic */}
-          <section
-            id="hero"
-            className="relative flex flex-col items-center justify-center min-h-[100vh] overflow-visible text-center text-white"
-            style={{
-              backgroundImage: `url("/images/grid-new.png"), linear-gradient(to bottom, #0B1120 0%, #0E1A2B 45%, #173B38 75%, #EFF3F6 100%)`,
-              backgroundRepeat: "no-repeat, no-repeat",
-              backgroundPosition: "center -100px, center top",
-              backgroundSize: "1920px auto, cover",
-              backgroundBlendMode: "overlay, normal",
-            }}
-          >
-            {/* DOTTED BACKGROUND (LEFT + RIGHT) */}
-            <img
-              src="/icons/Group 23 (2).svg"
-              alt=""
-              className="absolute bottom-[-1rem] left-[18%] w-[500px] opacity-[1] pointer-events-none rotate-[-10deg] scale-x-[-1] z-[3]"
-            />
-            <img
-              src="/icons/Group 23 (2).svg"
-              alt=""
-              className="absolute bottom-[-1rem] right-[18%] w-[500px] opacity-[1] pointer-events-none rotate-[10deg] scale-x-[-1] z-[3]"
-            />
+       <section
+  id="hero"
+  className="relative flex flex-col items-center min-h-screen overflow-visible text-center text-white"
+  style={{
+    backgroundImage: `url("/images/grid-new.png"), linear-gradient(to bottom, #0B1120 0%, #0E1A2B 45%, #173B38 75%, #EFF3F6 100%)`,
+    backgroundRepeat: "no-repeat, no-repeat",
+    backgroundPosition: "center -100px, center top",
+    backgroundSize: "1920px auto, cover",
+    backgroundBlendMode: "overlay, normal",
+  }}
+>
+  {/* TOP GAP INCREASED: Added pt-40 for more space from Navbar */}
+  <div className="pt-40 lg:pt-52 relative z-30 flex flex-col items-center px-4">
+    <motion.h1
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="text-[clamp(2.25rem,5.2vw,4.5rem)] leading-[1.08] tracking-tight text-white max-w-[64rem]"
+    >
+      Compare Right → <span className="text-[#B1ED67]">Choose Right.</span>
+    </motion.h1>
 
-            {/* MASK */}
-            <div
-              className="absolute inset-0 pointer-events-none z-[15]"
-              style={{
-                WebkitMaskImage:
-                  "radial-gradient(circle at center 60%, transparent 25%, black 55%)",
-                maskImage:
-                  "radial-gradient(circle at center 60%, transparent 25%, black 55%)",
-              }}
-            />
+    <motion.p
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.3 }}
+      className="text-slate-300 mt-6 text-[clamp(0.95rem,1.7vw,1.125rem)] leading-relaxed max-w-[36rem]"
+    >
+      No hidden charges. No jargon. No biased recommendations.
+      <br />
+      Just clear, side by side comparisons of financial products.
+    </motion.p>
 
-            <div className="mt-[-20%]"></div>
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.5 }}
+      className="mt-10"
+    >
+      {/* Button z-index increased to stay on top if needed */}
+      <Button className="green-cta px-8 py-6 text-lg relative z-[100]">
+        <span>Get Started</span>
+      </Button>
+    </motion.div>
+  </div>
 
-            {/* <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="flex items-center space-x-2 mb-4 relative z-10">
-              <div className="bg-[#B1ED67]/20 text-[#B1ED67] px-3 py-1 rounded-full text-md font-medium">Backed by CompareFi</div>
-            </motion.div> */}
-
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="text-6xl sm:text-6xl md:text-7xl leading-tight tracking-tight text-white max-w-5xl relative z-10"
-            >
-              Compare Right →{" "}
-              <span className="text-[#B1ED67]">Choose Right.</span>
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.7 }}
-              className="text-slate-300 mt-6 text-lg max-w-xl relative z-10"
-            >
-              No hidden charges. No jargon. No biased recommendations.
-              <br />
-              Just clear, side by side comparisons of financial products.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.7 }}
-              className="mt-10 relative z-[30] pointer-events-auto"
-            >
-              <Button
-                size="lg"
-                onClick={() =>
-                  document
-                    .getElementById("featured")
-                    ?.scrollIntoView({ behavior: "smooth" })
-                }
-                className="green-cta pointer-events-auto"
-              >
-                <span>Get Started</span>
-
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 66 43">
-                  <polygon points="39.58,4.46 44.11,0 66,21.5 44.11,43 39.58,38.54 56.94,21.5" />
-                  <polygon points="19.79,4.46 24.32,0 46.21,21.5 24.32,43 19.79,38.54 37.15,21.5" />
-                  <polygon points="0,4.46 4.53,0 26.42,21.5 4.53,43 0,38.54 17.36,21.5" />
-                </svg>
-              </Button>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 60, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ delay: 0.8, duration: 0.8 }}
-              className="absolute bottom-[-18rem] inset-x-0 flex justify-center z-20"
-            >
-              <div
-                className="relative flex justify-center w-full max-w-[1200px] pointer-events-none"
-                style={{
-                  height: "900px",
-                  WebkitMaskImage:
-                    "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 66%)",
-                  maskImage:
-                    "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 66%)",
-                }}
-              >
-                <div className="relative z-10 mt-[-32%] flex justify-center w-full pointer-events-auto">
-                  <DisplayCards />
-                </div>
-              </div>
-            </motion.div>
-          </section>
-
+  {/* CARDS WRAPPER: Added mt-20 to ensure no overlap on hover */}
+  <motion.div
+    initial={{ opacity: 0, y: 60 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: 0.8 }}
+    className="relative w-full z-20 mt-20 overflow-visible"
+  >
+    <DisplayCards />
+  </motion.div>
+</section>
           {/* ALL SUBSEQUENT SECTIONS NOW SHOW THE GRID BACKGROUND */}
 
           <section

@@ -355,6 +355,12 @@ export default function LASPage() {
         <h2 className="text-4xl font-bold text-center mb-14 text-[#0A0F2C]">
           Understanding Loan Against Shares (LAS)
         </h2>
+        <p className="sr-only">
+          CompareFi provides an unbiased comparison of Loan Against Shares (LAS)
+          in India, including interest rates, loan-to-value ratios, margin call
+          periods, approved shares list, and total borrowing cost across banks
+          and NBFCs.
+        </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           {[
@@ -1916,9 +1922,9 @@ export default function LASPage() {
             In 2025, <strong>Mirae</strong> ranks as the most cost-efficient
             option overall.
             <strong> HDFC</strong> offers the highest LTV (65–80%), while{" "}
-            <strong>Bajaj & Mirae Asset</strong> provides the broadest approved shares list
-            (~1000) and the longest 7-day margin-call buffer giving borrowers
-            more flexibility and lower liquidation risk.
+            <strong>Bajaj & Mirae Asset</strong> provides the broadest approved
+            shares list (~1000) and the longest 7-day margin-call buffer giving
+            borrowers more flexibility and lower liquidation risk.
           </p>
 
           <p className="text-[1.15rem]">
@@ -2014,19 +2020,22 @@ export default function LASPage() {
           </h3>
           <ul className="list-disc list-inside space-y-3 text-black leading-relaxed text-[1.05rem]">
             <li>
-              <strong>LTV Ratio:</strong> Choose funds that offer a higher LTV, as this allows you to borrow a larger loan amount against the same value of pledged securities.
-              borrowing power.
+              <strong>LTV Ratio:</strong> Choose funds that offer a higher LTV,
+              as this allows you to borrow a larger loan amount against the same
+              value of pledged securities. borrowing power.
             </li>
             <li>
-              <strong>Approved Shares:</strong> Broader approved lists gives greater flexibility.
-
+              <strong>Approved Shares:</strong> Broader approved lists gives
+              greater flexibility.
             </li>
             <li>
-              <strong>Margin Call Period:</strong> Longer periods (e.g., 7 days with certain lenders) provide more time to regularize positions.
-
+              <strong>Margin Call Period:</strong> Longer periods (e.g., 7 days
+              with certain lenders) provide more time to regularize positions.
             </li>
             <li>
-              <strong>Total Costs:</strong> Make your decision based on the <strong>“Overall Cost”</strong> column to know the detailed cost across years to find the lenders with cheapest cost.
+              <strong>Total Costs:</strong> Make your decision based on the{" "}
+              <strong>“Overall Cost”</strong> column to know the detailed cost
+              across years to find the lenders with cheapest cost.
             </li>
           </ul>
         </div>
