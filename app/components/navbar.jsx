@@ -61,7 +61,7 @@ export default function Navbar() {
                 px-10
                 rounded-full
                 bg-white/60 backdrop-blur-md
-                border border-white/40
+                border border-white/30
                 shadow-lgg
                 transition-all duration-300
                 hover:bg-white/70
