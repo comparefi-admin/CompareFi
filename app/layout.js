@@ -1,5 +1,6 @@
 import './globals.css';
 import { Inter, Work_Sans } from "next/font/google";
+import Script from "next/script";
 
 export const metadata = {
   title: "CompareFi – Compare LAS, LAMF & Financial Products in India",
@@ -48,6 +49,15 @@ export default function RootLayout({ children }) {
             }),
           }}
         />
+        {/* Google tag (gtag.js) */}
+        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-X5TB7LB6SB"></Script>
+        <Script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments)}
+          gtag('js', new Date());
+
+          gtag('config', 'G-X5TB7LB6SB');
+        </Script>
       </head>
       <body>{children}</body>
     </html>
