@@ -11,6 +11,7 @@ export const metadata = {
     "compare loans India",
     "loan against shares",
     "loan against mutual funds",
+    "margin trading facility",
     "LAS comparison",
     "LAMF comparison",
     "MTF comparison",
@@ -36,6 +37,21 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-X5TB7LB6SB"
+          strategy="afterInteractive"
+        />
+        <Script id="ga4" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-X5TB7LB6SB');
+          `}
+        </Script>
+
+        {/* Structured Data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -49,17 +65,10 @@ export default function RootLayout({ children }) {
             }),
           }}
         />
-        {/* Google tag (gtag.js) */}
-        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-X5TB7LB6SB"></Script>
-        <Script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments)}
-          gtag('js', new Date());
-
-          gtag('config', 'G-X5TB7LB6SB');
-        </Script>
       </head>
-      <body>{children}</body>
+      <body className={`${inter.variable} ${workSans.variable}`}>
+        {children}
+      </body>
     </html>
   );
 }
