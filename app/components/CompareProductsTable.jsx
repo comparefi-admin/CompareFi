@@ -13,10 +13,10 @@ const formatRupees = (value) => {
     typeof value === "number"
       ? value
       : Number(
-          String(value)
-            .replace(/₹|rs\.?|,/gi, "")
-            .trim()
-        );
+        String(value)
+          .replace(/₹|rs\.?|,/gi, "")
+          .trim()
+      );
 
   if (isNaN(num)) return value;
   return `₹${num.toLocaleString("en-IN")}`;
@@ -36,10 +36,10 @@ const getNumericAmount = (obj) => {
     typeof obj.amount === "number"
       ? obj.amount
       : Number(
-          String(obj.amount)
-            .replace(/₹|rs\.?|,/gi, "")
-            .trim()
-        );
+        String(obj.amount)
+          .replace(/₹|rs\.?|,/gi, "")
+          .trim()
+      );
 
   return Number.isNaN(num) ? Infinity : num;
 };
@@ -58,8 +58,8 @@ export default function CompareProductsTable({ productType }) {
           type === "las"
             ? await fetchLAS()
             : type === "lamf"
-            ? await fetchLAMF()
-            : await fetchMTF();
+              ? await fetchLAMF()
+              : await fetchMTF();
 
         const clean = rows.map((d) => {
           if (type === "mtf") {
@@ -101,8 +101,8 @@ export default function CompareProductsTable({ productType }) {
           type === "las"
             ? ["mirae asset", "zerodha", "kotak", "bajaj"]
             : type === "lamf"
-            ? ["bank of baroda", "mirae asset", "kotak", "sbi"]
-            : ["kotak - trade free pro plan", "hdfc sky", "dhan"];
+              ? ["bank of baroda", "mirae asset", "kotak", "sbi"]
+              : ["kotak - trade free pro plan", "hdfc sky", "dhan"];
 
         const filtered = clean.filter((r) =>
           filterNames.includes((r.name || "").trim().toLowerCase())
@@ -240,8 +240,8 @@ export default function CompareProductsTable({ productType }) {
         </h2>
       </div>
 
-      <div className="rounded-2xl overflow-hidden border border-gray-200/80">
-        <table className="w-full divide-y divide-gray-200 text-sm text-center">
+      <div className="rounded-2xl overflow-x-auto border border-gray-200/80">
+        <table className="min-w-[800px] w-full divide-y divide-gray-200 text-sm text-center">
           <thead>
             <tr>
               <th
@@ -408,9 +408,8 @@ export default function CompareProductsTable({ productType }) {
                   cells.push(
                     <td
                       key={col}
-                      className={`px-4 py-4 border-r font-medium ${
-                        type !== "mtf" ? "highlight-col" : "highlight-col"
-                      }`}
+                      className={`px-4 py-4 border-r font-medium ${type !== "mtf" ? "highlight-col" : "highlight-col"
+                        }`}
                     >
                       {renderValue(row.name)}
                     </td>
@@ -425,9 +424,8 @@ export default function CompareProductsTable({ productType }) {
                     cells.push(
                       <td
                         key={col}
-                        className={`px-4 py-4 border-r text-center ${
-                          important.includes(col) ? "highlight-col" : ""
-                        }`}
+                        className={`px-4 py-4 border-r text-center ${important.includes(col) ? "highlight-col" : ""
+                          }`}
                       >
                         {row.cost_first_year ? (
                           <div className="flex flex-col items-center gap-1">
@@ -454,9 +452,8 @@ export default function CompareProductsTable({ productType }) {
                     cells.push(
                       <td
                         key={col}
-                        className={`px-4 py-4 border-r text-center ${
-                          important.includes(col) ? "highlight-col" : ""
-                        }`}
+                        className={`px-4 py-4 border-r text-center ${important.includes(col) ? "highlight-col" : ""
+                          }`}
                       >
                         {row.cost_second_year ? (
                           <div className="flex flex-col items-center gap-1">
@@ -469,8 +466,8 @@ export default function CompareProductsTable({ productType }) {
                             <div className="text-sm text-gray-700">
                               {row.cost_second_year.amount
                                 ? ` ${formatRupees(
-                                    row.cost_second_year.amount
-                                  )}`
+                                  row.cost_second_year.amount
+                                )}`
                                 : "—"}
                             </div>
                           </div>
@@ -503,8 +500,8 @@ export default function CompareProductsTable({ productType }) {
                         <td key={col} className="px-4 py-4 whitespace-nowrap">
                           {row.ltv
                             ? `${renderValue(row.ltv.min)}–${renderValue(
-                                row.ltv.max
-                              )}`
+                              row.ltv.max
+                            )}`
                             : "—"}
                         </td>
                       );
@@ -541,9 +538,8 @@ export default function CompareProductsTable({ productType }) {
                     cells.push(
                       <td
                         key={col}
-                        className={`px-4 py-4 border-r text-center ${
-                          important.includes(col) ? "highlight-col" : ""
-                        }`}
+                        className={`px-4 py-4 border-r text-center ${important.includes(col) ? "highlight-col" : ""
+                          }`}
                       >
                         {row.cost_summary ? (
                           <div className="flex flex-col items-center gap-1">
@@ -570,9 +566,8 @@ export default function CompareProductsTable({ productType }) {
                     cells.push(
                       <td
                         key={col}
-                        className={`px-4 py-4 border-r ${
-                          important.includes(col) ? "highlight-col" : ""
-                        }`}
+                        className={`px-4 py-4 border-r ${important.includes(col) ? "highlight-col" : ""
+                          }`}
                       >
                         {renderValue(row.margin_requirement)}
                       </td>
@@ -606,16 +601,16 @@ export default function CompareProductsTable({ productType }) {
 
         {/* --------- EXPLANATORY NOTE --------- */}
         <p className="max-w-3xl text-xs md:text-sm text-gray-600 leading-relaxed text-center">
-  <span className="text-red-500 font-bold">*</span>
-  {type === "las" &&
-    "Example calculation is based on: ₹1,00,000 LAS position held for 12 months. Collateral given is ₹2,00,000 LAS and assumed 50% funding across Financial Institutions."}
+          <span className="text-red-500 font-bold">*</span>
+          {type === "las" &&
+            "Example calculation is based on: ₹1,00,000 LAS position held for 12 months. Collateral given is ₹2,00,000 LAS and assumed 50% funding across Financial Institutions."}
 
-  {type === "lamf" &&
-    "Example calculation is based on: ₹1,00,000 LAMF position held for 12 months. Collateral given is ₹2,00,000 LAMF and assumed 50% funding across Financial Institutions."}
+          {type === "lamf" &&
+            "Example calculation is based on: ₹1,00,000 LAMF position held for 12 months. Collateral given is ₹2,00,000 LAMF and assumed 50% funding across Financial Institutions."}
 
-  {type === "mtf" &&
-    "Example calculation is based on: ₹5,00,000 Reliance position held for 12 months, collateral of ₹4,00,000 in approved shares, zero cash collateral and broker specific haircuts/charges including GST."}
-</p>
+          {type === "mtf" &&
+            "Example calculation is based on: ₹5,00,000 Reliance position held for 12 months, collateral of ₹4,00,000 in approved shares, zero cash collateral and broker specific haircuts/charges including GST."}
+        </p>
 
       </div>
     </div>
