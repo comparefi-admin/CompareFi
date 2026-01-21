@@ -39,41 +39,70 @@ export default function ContactPage() {
     if (status.type === "error") setStatus({ type: null, message: "" });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setSubmitting(true);
-    setStatus({ type: null, message: "" });
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setSubmitting(true);
+  setStatus({ type: null, message: "" });
+
+  // Basic client-side validation
+  if (!formData.name || !formData.mobile || !formData.email || !formData.product) {
+    setStatus({
+      type: "error",
+      message: "Please fill all required fields.",
+    });
+    setSubmitting(false);
+    return;
+  }
+
+  try {
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    });
+
+    const text = await res.text();
+    let result = null;
 
     try {
-      // Simulate API call delay for UX feel
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-
-      // Actual logic would go here...
-      /* 
-      const res = await fetch("/api/contact", { ... });
-      if (!res.ok) throw new Error("Failed");
-      */
-
-      setStatus({
-        type: "success",
-        message: "Request received! We'll call you shortly.",
-      });
-      setFormData({
-        name: "",
-        mobile: "",
-        email: "",
-        product: "",
-        message: "",
-      });
-    } catch (err) {
-      setStatus({
-        type: "error",
-        message: "Something went wrong. Please try again.",
-      });
-    } finally {
-      setSubmitting(false);
+      result = text ? JSON.parse(text) : null;
+    } catch {
+      throw new Error(
+        "Service is temporarily unavailable. Please try again later."
+      );
     }
-  };
+
+    if (!res.ok || !result?.success) {
+      throw new Error(
+        result?.error ||
+          "Unable to send your request right now. Please try again."
+      );
+    }
+
+    setStatus({
+      type: "success",
+      message: "Request received! We’ll contact you shortly.",
+    });
+
+    setFormData({
+      name: "",
+      mobile: "",
+      email: "",
+      product: "",
+      message: "",
+    });
+  } catch (err) {
+    setStatus({
+      type: "error",
+      message:
+        err.message ||
+        "Something went wrong while submitting the form. Please try again.",
+    });
+  } finally {
+    setSubmitting(false);
+  }
+};
+
 
   return (
     <div className="flex flex-col min-h-screen bg-[#EFF3F6] text-gray-900 relative selection:bg-green-200 selection:text-green-900">
