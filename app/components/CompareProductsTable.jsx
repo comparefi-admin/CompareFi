@@ -158,9 +158,9 @@ export default function CompareProductsTable({ productType }) {
             rgba(242, 255, 245, 0.92),
             rgba(225, 245, 230, 0.85)
           );
-          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.14),
-            inset 0 1px 0 rgba(255, 255, 255, 0.45);
-          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Simplified base shadow */
+          transition: transform 0.2s ease;
+          will-change: transform;
         }
 
         /* LEFT GREEN ACCENT */
@@ -174,12 +174,12 @@ export default function CompareProductsTable({ productType }) {
           border-radius: 6px;
           background: linear-gradient(180deg, #b1ed67, #1f5e3c);
         }
+
         /* ================= HEADER GREEN ACCENT ================= */
         .highlight-head {
-          position: relative; /* required for ::before */
+          position: relative;
         }
 
-        /* Green accent line for header (same as body) */
         .highlight-head::before {
           content: "";
           position: absolute;
@@ -189,38 +189,39 @@ export default function CompareProductsTable({ productType }) {
           width: 4px;
           border-radius: 6px;
           background: linear-gradient(180deg, #b1ed67, #1f5e3c);
-          box-shadow: 0 3px 8px rgba(177, 237, 103, 0.25);
         }
 
-        /* Row lift – more noticeable */
+        /* Row lift – Optimized */
+        .row-hover {
+          transition: transform 0.2s ease, background-color 0.2s ease;
+          will-change: transform;
+          transform: translateZ(0); /* Hardware Acceleration */
+        }
+
         .row-hover:hover {
-          transform: translateY(-3px);
-          transition: transform 0.25s ease;
+          transform: translateY(-2px) translateZ(0);
+          z-index: 10;
         }
 
-        /* Base hover background for entire row */
+        /* Base hover background for entire row - Simplified */
         .row-hover:hover td {
-          background: rgba(16, 185, 129, 0.06); /* soft green wash */
-          transition: background 0.25s ease, box-shadow 0.25s ease;
+          background: rgba(16, 185, 129, 0.04);
         }
 
-        /* SUBTLE hover */
+        /* SUBTLE hover for highlight column */
         .row-hover:hover .highlight-col {
           background: linear-gradient(
             180deg,
             rgba(242, 255, 245, 0.98),
             rgba(225, 245, 230, 0.92)
           );
-          box-shadow: 0 14px 34px rgba(0, 0, 0, 0.22),
-            inset 0 1px 0 rgba(255, 255, 255, 0.6);
-          z-index: 3;
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12); /* Balanced shadow */
         }
 
-        /* Keep other columns unchanged */
+        /* Optimization: Remove expensive shadow from all other columns */
         .row-hover:hover td:not(.highlight-col) {
           background: #ffffff;
-          box-shadow: 0 10px 26px rgba(0, 0, 0, 0.14);
-          z-index: 1;
+          /* Removed box-shadow from every cell to fix lag */
         }
 
         /* Header rounding only */
@@ -228,9 +229,9 @@ export default function CompareProductsTable({ productType }) {
           border-radius: 9px;
         }
 
-        /* Do NOT add row spacing */
         table {
           border-collapse: collapse;
+          table-layout: auto;
         }
       `}</style>
 
