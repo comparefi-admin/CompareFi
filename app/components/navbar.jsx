@@ -51,7 +51,7 @@ export default function Navbar() {
       </button>
 
       {/* CENTER LOGO */}
-      <div className="absolute md:left-4 top-1/2 -translate-y-1/2">
+      <div className="absolute md:left-4 top-1/2 -translate-y-1/2 mt-3 md:mt-0">
         <Link
           href="/"
           onClick={() => setActiveTab("Home")}
