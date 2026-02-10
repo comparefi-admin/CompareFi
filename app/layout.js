@@ -4,6 +4,9 @@ import Script from "next/script";
 
 export const metadata = {
   title: "CompareFi – Compare LAS, LAMF & Financial Products in India",
+  icons: {
+    icon: '/favicon.ico',
+  },
   description:
     "CompareFi is an independent financial comparison platform to compare Loan Against Shares (LAS), Loan Against Mutual Funds (LAMF), Margin Trading Facility (MTF) and more in India.",
   keywords: [
