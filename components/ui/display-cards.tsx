@@ -41,7 +41,7 @@ function DisplayCard({ title, data, isMasked = true, isDimmed = false, isCenter 
 export default function DisplayCards() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
-   const cards = [
+  const cards = [
     {
       title: "Margin Trading Facility (MTF)",
       data: [
@@ -83,23 +83,34 @@ export default function DisplayCards() {
         className="absolute bottom-20 right-[10%] w-[500px] opacity-100 pointer-events-none rotate-[10deg] scale-x-[-1] z-0"
       />
 
-      {/* CARDS CONTAINER: MASK REMOVED to prevent top clipping */}
+      {/* SAME LAYOUT ALL SCREENS — ONLY SCALE CHANGES */}
       <div className="relative z-10 w-full flex justify-center pt-10 pb-32 overflow-visible">
-        <div className="hidden lg:flex justify-center items-center -space-x-20 scale-[1.1] transition-all duration-500 origin-center overflow-visible">
+        
+        <div className="
+          flex justify-center items-center
+          -space-x-20
+          scale-[0.65] xs:scale-[0.72] sm:scale-[0.85] md:scale-[0.95] lg:scale-[1.1]
+          transition-all duration-500 origin-center
+          overflow-visible
+        ">
           {cards.map((card, i) => {
             const isHovered = hoveredIndex === i;
+
             return (
               <div
                 key={i}
                 onMouseEnter={() => setHoveredIndex(i)}
                 onMouseLeave={() => setHoveredIndex(null)}
                 className={cn(
-                  "transition-all duration-700 ease-out transform-gpu",
+                  "transition-all duration-700 ease-out transform-gpu will-change-transform",
+
+                  // CONSTANT TILT + POSITION (All Screens)
                   i === 0 && !isHovered && "rotate-[-12deg] translate-y-6 translate-x-12 z-10",
-                  i === 1 && !isHovered && "rotate-0 -translate-y-6 z-20",
+                  i === 1 && !isHovered && "-translate-y-6 z-20",
                   i === 2 && !isHovered && "rotate-[12deg] translate-y-6 -translate-x-12 z-10",
-                  // Hover lift is now safe from button and clipping
-                  isHovered && "z-[150] rotate-0 -translate-y-20 scale-110" 
+
+                  // Hover stays same
+                  isHovered && "z-[150] rotate-0 -translate-y-20 scale-110"
                 )}
               >
                 <DisplayCard 
@@ -113,15 +124,9 @@ export default function DisplayCards() {
           })}
         </div>
 
-        {/* MOBILE STACK */}
-        <div className="flex flex-col gap-8 lg:hidden w-full max-w-[320px]">
-          {cards.map((card, i) => (
-            <DisplayCard key={i} {...card} isMasked={false} className="w-full" />
-          ))}
-        </div>
       </div>
 
-      {/* THE FADE EFFECT: This overlay creates the "fade out" at the bottom */}
+      {/* FADE OVERLAY */}
       <div 
         className="absolute bottom-0 inset-x-0 h-64 pointer-events-none z-[40]"
         style={{
