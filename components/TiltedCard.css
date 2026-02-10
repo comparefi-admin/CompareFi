@@ -17,14 +17,7 @@
   display: none;
 }
 
-@media (max-width: 640px) {
-  .tilted-card-mobile-alert {
-    display: block;
-  }
-  .tilted-card-caption {
-    display: none;
-  }
-}
+
 
 .tilted-card-inner {
   position: relative;
