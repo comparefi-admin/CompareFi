@@ -446,7 +446,7 @@ export default function LASPage() {
               ["Interest Range", "8–20% p.a."],
               ["Tenure", "Up to 36 months"],
               ["Disbursal", "1–2 Days"],
-              ["Funding Amount", "8-20%"],
+              ["Funding Amount", "20-80%"],
             ].map(([label, value], i) => (
               <div
                 key={i}
